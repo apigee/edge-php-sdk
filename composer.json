@@ -1,0 +1,29 @@
+{
+    "name": "apigee/apilib",
+    "type": "library",
+    "description": "Apigee API Library is a set of objects abstracting various internal REST API calls.",
+    "keywords": ["http", "rest", "web service", "curl"],
+    "homepage": "http://apigee.com/",
+    "license": "unknown",
+
+    "authors": [
+        {
+            "name": "Apigee Corporation",
+            "homepage": "http://apigee.com/"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.3",
+        "guzzle/guzzle": ">=3.7",
+        "symfony/yaml": ">=2.1",
+        "psr/log": "1.*"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Apigee": "./"
+        }
+    }
+
+}
