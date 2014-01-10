@@ -7,7 +7,7 @@
   </target>
   
   <target name="build-docs" depends="clean">
-    <exec command="/usr/bin/apigen '${project.basedir}/Apigee' '${project.basedir}/docs'" logoutput="true" />
+    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" logoutput="true" />
   </target>
   
 </project>
