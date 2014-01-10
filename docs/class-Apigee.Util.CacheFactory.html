@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 3.0dev" />
+
+	<title>Class Apigee\Util\CacheFactory</title>
+
+	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
+	<script type="text/javascript" src="elementlist.js?2533977299"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
+						</li>
+				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
+						</li>
+				<li><a href="namespace-Apigee.Exceptions.html">Exceptions</a>
+						</li>
+				<li><a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.html">Mint<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Mint.Base.html">Base</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.DataStructures.html">DataStructures</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Exceptions.html">Exceptions</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Types.html">Types</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Apigee.Util.html">Util</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Apigee.Util.APIObject.html">APIObject</a></li>
+				<li><a href="class-Apigee.Util.Cache.html">Cache</a></li>
+				<li class="active"><a href="class-Apigee.Util.CacheFactory.html">CacheFactory</a></li>
+				<li><a href="class-Apigee.Util.CacheManager.html">CacheManager</a></li>
+				<li><a href="class-Apigee.Util.Crypto.html">Crypto</a></li>
+				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
+				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
+				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
+				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
+				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Apigee.Util.html" title="Summary of Apigee\Util"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class CacheFactory</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
+		
+
+		<b>Located at</b> <a href="source-class-Apigee.Util.CacheFactory.html#7-93" title="Go to source code">Util/CacheFactory.php</a><br />
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="setDefault" id="_setDefault">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDefault">#</a>
+		<code><a href="source-class-Apigee.Util.CacheFactory.html#29-38" title="Go to source code">setDefault</a>( <span><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code> <var>$cache_manager</var></span> )</code>
+
+		<div class="description short">
+			
+<p>If a cache manager is set with this method, then when getCacheManager is
+invoked with $cache_manager_class_name as NULL it will return this cache
+manager</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>If a cache manager is set with this method, then when getCacheManager is
+invoked with $cache_manager_class_name as NULL it will return this cache
+manager</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$cache_manager</var></dt>
+					<dd>$cacheManager</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCacheManager" id="_getCacheManager">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCacheManager">#</a>
+		<code><a href="source-class-Apigee.Util.CacheFactory.html#46-92" title="Go to source code">getCacheManager</a>( <span>string <var>$cache_manager_class_name</var> = <span class="php-quote">'Apigee\Util\CacheManager'</span></span>, <span>Psr\Log\LoggerInterface|null <var>$logger</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>It will lookup for a cache manager of class given by
+$cache_manager_class_name, if $cache_manager_class_name is NULL then it will
+attempt to return the default cache manager set by setDefault(), it no default
+manager has been set then an Apigee\Exceptions\ParameterException will be
+thrown</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>It will lookup for a cache manager of class given by
+$cache_manager_class_name, if $cache_manager_class_name is NULL then it will
+attempt to return the default cache manager set by setDefault(), it no default
+manager has been set then an Apigee\Exceptions\ParameterException will be
+thrown</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$cache_manager_class_name</var></dt>
+					<dd>Class name of the cache manager to retrieve. This class name must be of a class
+that extends CacheManager, otherwise it will thrown a
+Apigee\Exceptions\ParameterException</dd>
+					<dt><var>$logger</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code></code><br>\Apigee\Util\CacheManager<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

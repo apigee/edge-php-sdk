@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 3.0dev" />
+
+	<title>Class Apigee\Util\APIObject</title>
+
+	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
+	<script type="text/javascript" src="elementlist.js?2533977299"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
+						</li>
+				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
+						</li>
+				<li><a href="namespace-Apigee.Exceptions.html">Exceptions</a>
+						</li>
+				<li><a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.html">Mint<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Mint.Base.html">Base</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.DataStructures.html">DataStructures</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Exceptions.html">Exceptions</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Types.html">Types</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Apigee.Util.html">Util</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Apigee.Util.APIObject.html">APIObject</a></li>
+				<li><a href="class-Apigee.Util.Cache.html">Cache</a></li>
+				<li><a href="class-Apigee.Util.CacheFactory.html">CacheFactory</a></li>
+				<li><a href="class-Apigee.Util.CacheManager.html">CacheManager</a></li>
+				<li><a href="class-Apigee.Util.Crypto.html">Crypto</a></li>
+				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
+				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
+				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
+				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
+				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Apigee.Util.html" title="Summary of Apigee\Util"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class APIObject</h1>
+
+
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Apigee.DocGen.DocGenDoc.html">Apigee\DocGen\DocGenDoc</a>, 
+			<a href="class-Apigee.DocGen.DocGenModel.html">Apigee\DocGen\DocGenModel</a>, 
+			<a href="class-Apigee.DocGen.DocGenOperation.html">Apigee\DocGen\DocGenOperation</a>, 
+			<a href="class-Apigee.DocGen.DocGenResource.html">Apigee\DocGen\DocGenResource</a>, 
+			<a href="class-Apigee.DocGen.DocGenRevision.html">Apigee\DocGen\DocGenRevision</a>, 
+			<a href="class-Apigee.DocGen.DocGenTemplate.html">Apigee\DocGen\DocGenTemplate</a>, 
+			<a href="class-Apigee.ManagementAPI.Base.html">Apigee\ManagementAPI\Base</a>, 
+			<a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a>
+	</div>
+
+	<div>
+		<h4>Indirect known subclasses</h4>
+			<a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>, 
+			<a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>, 
+			<a href="class-Apigee.Mint.BillingAdjustment.html">Apigee\Mint\BillingAdjustment</a>, 
+			<a href="class-Apigee.Mint.BillingDocument.html">Apigee\Mint\BillingDocument</a>, 
+			<a href="class-Apigee.Mint.Developer.html">Apigee\Mint\Developer</a>, 
+			<a href="class-Apigee.Mint.DeveloperBalance.html">Apigee\Mint\DeveloperBalance</a>, 
+			<a href="class-Apigee.Mint.DeveloperCategory.html">Apigee\Mint\DeveloperCategory</a>, 
+			<a href="class-Apigee.Mint.DeveloperRatePlan.html">Apigee\Mint\DeveloperRatePlan</a>, 
+			<a href="class-Apigee.Mint.DeveloperRateplanCounter.html">Apigee\Mint\DeveloperRateplanCounter</a>, 
+			<a href="class-Apigee.Mint.DeveloperSubscription.html">Apigee\Mint\DeveloperSubscription</a>, 
+			<a href="class-Apigee.Mint.DeveloperSubscriptionDetail.html">Apigee\Mint\DeveloperSubscriptionDetail</a>, 
+			<a href="class-Apigee.Mint.Limit.html">Apigee\Mint\Limit</a>, 
+			<a href="class-Apigee.ManagementAPI.DeveloperApp.html">Apigee\ManagementAPI\DeveloperApp</a>, 
+			<a href="class-Apigee.Mint.ManagementAPIOrganization.html">Apigee\Mint\ManagementAPIOrganization</a>, 
+			<a href="class-Apigee.Mint.MonetizationPackage.html">Apigee\Mint\MonetizationPackage</a>, 
+			<a href="class-Apigee.Mint.Organization.html">Apigee\Mint\Organization</a>, 
+			<a href="class-Apigee.Mint.PricePoint.html">Apigee\Mint\PricePoint</a>, 
+			<a href="class-Apigee.Mint.Product.html">Apigee\Mint\Product</a>, 
+			<a href="class-Apigee.Mint.Provider.html">Apigee\Mint\Provider</a>, 
+			<a href="class-Apigee.Mint.RatePlan.html">Apigee\Mint\RatePlan</a>, 
+			<a href="class-Apigee.Mint.ReportDefinition.html">Apigee\Mint\ReportDefinition</a>, 
+			<a href="class-Apigee.Mint.SuborgProduct.html">Apigee\Mint\SuborgProduct</a>, 
+			<a href="class-Apigee.Mint.TermAndCondition.html">Apigee\Mint\TermAndCondition</a>, 
+			<a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">Apigee\ManagementAPI\DeveloperAppAnalytics</a>, 
+			<a href="class-Apigee.Mint.Transaction.html">Apigee\Mint\Transaction</a>, 
+			<a href="class-Apigee.ManagementAPI.KeyValueMap.html">Apigee\ManagementAPI\KeyValueMap</a>, 
+			<a href="class-Apigee.ManagementAPI.Organization.html">Apigee\ManagementAPI\Organization</a>, 
+			<a href="class-Apigee.ManagementAPI.UserRole.html">Apigee\ManagementAPI\UserRole</a>, 
+			<a href="class-Apigee.Mint.Application.html">Apigee\Mint\Application</a>, 
+			<a href="class-Apigee.Mint.ApplicationCategory.html">Apigee\Mint\ApplicationCategory</a>, 
+			<a href="class-Apigee.Mint.BankDetail.html">Apigee\Mint\BankDetail</a>
+	</div>
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
+		
+
+		<b>Located at</b> <a href="source-class-Apigee.Util.APIObject.html#15-491" title="Go to source code">Util/APIObject.php</a><br />
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="init" id="_init">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_init">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#66-82" title="Go to source code">init</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$base_url</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Initializes the APIClient for this class.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initializes the APIClient for this class.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$config</var></dt>
+					<dd></dd>
+					<dt><var>$base_url</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setBaseUrl" id="_setBaseUrl">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setBaseUrl">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#84-88" title="Go to source code">setBaseUrl</a>( <span>mixed <var>$base_url</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="restoreBaseUrl" id="_restoreBaseUrl">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_restoreBaseUrl">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#90-92" title="Go to source code">restoreBaseUrl</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getConfig" id="_getConfig">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getConfig">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#94-102" title="Go to source code">getConfig</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the OrgConfig in use by this class, so it can be reused by other
+instances of Base.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the OrgConfig in use by this class, so it can be reused by other
+instances of Base.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>\Apigee\Util\OrgConfig<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#182-198" title="Go to source code">get</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Performs an HTTP GET on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs an HTTP GET on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd></dd>
+					<dt><var>$accept_mime_type</var></dt>
+					<dd></dd>
+					<dt><var>$custom_headers</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="post" id="_post">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_post">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#200-225" title="Go to source code">post</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>string <var>$accept_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Performs an HTTP POST on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs an HTTP POST on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd></dd>
+					<dt><var>$payload</var></dt>
+					<dd></dd>
+					<dt><var>$content_type</var></dt>
+					<dd></dd>
+					<dt><var>$accept_type</var></dt>
+					<dd></dd>
+					<dt><var>$custom_headers</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="http_delete" id="_http_delete">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_http_delete">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#227-246" title="Go to source code">http_delete</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Performs an HTTP DELETE on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs an HTTP DELETE on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+<p>This is named http_delete to avoid a name clash with objects that inherit
+from this one, which usually have a delete() method.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd></dd>
+					<dt><var>$accept</var></dt>
+					<dd></dd>
+					<dt><var>$custom_headers</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="put" id="_put">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_put">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#248-269" title="Go to source code">put</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Performs an HTTP PUT on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs an HTTP PUT on a URI. The result can be read from
+$this-&gt;response* variables.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd></dd>
+					<dt><var>$payload</var></dt>
+					<dd></dd>
+					<dt><var>$content_type</var></dt>
+					<dd></dd>
+					<dt><var>$custom_headers</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="head" id="_head">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_head">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#271-288" title="Go to source code">head</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Performs an HTTP HEAD on a URI. $this-&gt;responseText and
+$this-&gt;responseObj will be empty, but the content-length may be read from
+$this-&gt;responseLength.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Performs an HTTP HEAD on a URI. $this-&gt;responseText and
+$this-&gt;responseObj will be empty, but the content-length may be read from
+$this-&gt;responseLength.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd></dd>
+					<dt><var>$accept_mime_type</var></dt>
+					<dd></dd>
+					<dt><var>$custom_headers</var></dt>
+					<dd></dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#290-321" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Intercepts any snake_case method invocations that aren't already defined,
+turns them into camelCase, and tries to invoke them.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Intercepts any snake_case method invocations that aren't already defined,
+turns them into camelCase, and tries to invoke them.</p>
+
+<p>Incoming snake_case method names must contain no uppercase to qualify for
+this transmogrification. In the interest of efficiency, we also don't process
+any method names not containing an underscore.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd></dd>
+					<dt><var>$args</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>mixed<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Exceptions.IllegalMethodException.html">Apigee\Exceptions\IllegalMethodException</a></code></code><br>\Apigee\Exceptions\IllegalMethodException<br />
+				</div>
+
+				<h4>TODO</h4>
+				<div class="list">
+						When we require PHP 5.4, make this a mix-in.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__callstatic" id="___callstatic">
+
+		<td class="attributes"><code>
+			 public static
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___callstatic">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#323-347" title="Go to source code">__callstatic</a>( <span>mixed <var>$method</var></span>, <span>mixed <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Same as above, except for static methods</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Same as above, except for static methods</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$method</var></dt>
+					<dd></dd>
+					<dt><var>$args</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>mixed<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Exceptions.IllegalMethodException.html">Apigee\Exceptions\IllegalMethodException</a></code></code><br>\Apigee\Exceptions\IllegalMethodException<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="preparePayload" id="_preparePayload">
+
+		<td class="attributes"><code>
+			 protected static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_preparePayload">#</a>
+		<code><a href="source-class-Apigee.Util.APIObject.html#450-477" title="Go to source code">preparePayload</a>( <span>mixed <var>$content_type</var></span>, <span>mixed <var>&amp; $payload</var></span> )</code>
+
+		<div class="description short">
+			
+<p>If payload is not already a string, stringify it (based on its
+content-type).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>If payload is not already a string, stringify it (based on its
+content-type).</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$content_type</var></dt>
+					<dd></dd>
+					<dt><var>$payload</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="config" id="$config">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#17-20" title="Go to source code"><var>$config</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$config" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="client" id="$client">
+		<td class="attributes"><code>
+			protected  
+			Guzzle\Http\Client
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#22-25" title="Go to source code"><var>$client</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$client" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="debugData" id="$debugData">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#27-32" title="Go to source code"><var>$debugData</var></a>
+
+			<div class="description short">
+				
+<p>Contains raw data from Management API in a format compatible with older PHP
+implementations of this library.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Contains raw data from Management API in a format compatible with older PHP
+implementations of this library.</p>
+
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$debugData" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="responseCode" id="$responseCode">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#34-37" title="Go to source code"><var>$responseCode</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$responseCode" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="responseText" id="$responseText">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#39-42" title="Go to source code"><var>$responseText</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$responseText" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="responseObj" id="$responseObj">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#44-47" title="Go to source code"><var>$responseObj</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$responseObj" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="responseLength" id="$responseLength">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#49-52" title="Go to source code"><var>$responseLength</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$responseLength" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="responseMimeType" id="$responseMimeType">
+		<td class="attributes"><code>
+			protected  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#54-57" title="Go to source code"><var>$responseMimeType</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$responseMimeType" class="anchor">#</a><code></code></div></td>
+	</tr>
+	<tr data-order="logger" id="$logger">
+		<td class="attributes"><code>
+			public static 
+			Psr\Log\LoggerInterface
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.Util.APIObject.html#59-62" title="Go to source code"><var>$logger</var></a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</td>
+		<td class="value"><div><a href="#$logger" class="anchor">#</a><code></code></div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="robots" content="noindex" />
+
+	<title>File ManagementAPI/UserRole.php</title>
+
+	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
+	<script type="text/javascript" src="elementlist.js?2533977299"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
+						</li>
+				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
+						</li>
+				<li><a href="namespace-Apigee.Exceptions.html">Exceptions</a>
+						</li>
+				<li class="active"><a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.html">Mint<span></span></a>
+						<ul>
+				<li><a href="namespace-Apigee.Mint.Base.html">Base</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.DataStructures.html">DataStructures</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Exceptions.html">Exceptions</a>
+						</li>
+				<li><a href="namespace-Apigee.Mint.Types.html">Types</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Apigee.Util.html">Util</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
+				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
+				<li><a href="class-Apigee.ManagementAPI.KeyValueMap.html">KeyValueMap</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Organization.html">Organization</a></li>
+				<li class="active"><a href="class-Apigee.ManagementAPI.UserRole.html">UserRole</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.UserRoleInterface.html">UserRoleInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Apigee.ManagementAPI.html" title="Summary of Apigee\ManagementAPI"><span>Namespace</span></a>
+			</li>
+			<li>
+				<a href="class-Apigee.ManagementAPI.UserRole.html" title="Summary of Apigee\ManagementAPI\UserRole"><span>Class</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<pre><code><span id="1" class="l"><a class="l" href="#1"> 1: </a><span class="xlang">&lt;?php</span>
+</span><span id="2" class="l"><a class="l" href="#2"> 2: </a><span class="php-keyword1">namespace</span> Apigee\ManagementAPI;
+</span><span id="3" class="l"><a class="l" href="#3"> 3: </a>
+</span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">class</span> <a id="UserRole" href="#UserRole">UserRole</a> <span class="php-keyword1">extends</span> Base <span class="php-keyword1">implements</span> UserRoleInterface {
+</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>
+</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(\Apigee\Util\OrgConfig <span class="php-var">$config</span>) {
+</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>    <span class="php-var">$this</span>-&gt;init(<span class="php-var">$config</span>, <span class="php-quote">'/o/'</span> . <span class="php-var">$this</span>-&gt;<span class="php-keyword2">urlEncode</span>(<span class="php-var">$config</span>-&gt;orgName) . <span class="php-quote">'/userroles'</span>);
+</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>  }
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getUsersByRole" href="#_getUsersByRole">getUsersByRole</a>(<span class="php-var">$role</span>) {
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>    <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$role</span>, <span class="php-var">$this</span>-&gt;listRoles())) {
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>      <span class="php-keyword1">return</span> <span class="php-keyword1">array</span>();
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>    }
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>    <span class="php-var">$this</span>-&gt;get(<span class="php-var">$this</span>-&gt;<span class="php-keyword2">urlEncode</span>(<span class="php-var">$role</span>) . <span class="php-quote">'/users'</span>);
+</span><span id="15" class="l"><a class="l" href="#15">15: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;responseObj;
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>  }
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_listRoles" href="#_listRoles">listRoles</a>() {
+</span><span id="19" class="l"><a class="l" href="#19">19: </a>    <span class="php-keyword1">static</span> <span class="php-var"><a id="$roles" href="#$roles">$roles</a></span>;
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>    <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$roles</span>)) {
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>      <span class="php-var">$this</span>-&gt;get();
+</span><span id="22" class="l"><a class="l" href="#22">22: </a>      <span class="php-var">$roles</span> = <span class="php-var">$this</span>-&gt;responseObj;
+</span><span id="23" class="l"><a class="l" href="#23">23: </a>    }
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>    <span class="php-keyword1">return</span> <span class="php-var">$roles</span>;
+</span><span id="25" class="l"><a class="l" href="#25">25: </a>  }
+</span><span id="26" class="l"><a class="l" href="#26">26: </a>}
+</span><span id="27" class="l"><a class="l" href="#27">27: </a></span></code></pre>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
