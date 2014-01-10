@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<project name="php-sdk" default="build-docs" description="Apigee PHP SDK Documentation build">
+  
+  <target name="clean">
+    <delete dir="${project.basedir}/docs" quiet="true" failonerror="false" includeemptydirs="true" />
+    <mkdir dir="${project.basedir}/docs" />
+  </target>
+  
+  <target name="build-docs" depends="clean">
+    <exec command="/usr/bin/apigen '${project.basedir}/Apigee' '${project.basedir}/docs'" logoutput="true" />
+  </target>
+  
+</project>
