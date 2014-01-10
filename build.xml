@@ -18,8 +18,9 @@
 		</phingcall>
     <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" checkreturn="true" logoutput="true" />
     <exec command="git add docs/*" dir="${project.basedir}" logoutput="true" checkreturn="true" />
-    <exec command="git commit -m 'adding docs ${env.BUILD_ID}" dir="${project.basedir}" logoutput="true" checkreturn="true" />
+    <exec command="git commit -m 'adding docs ${env.BUILD_ID}'" dir="${project.basedir}" logoutput="true" checkreturn="true" />
     <exec command="git push origin master" dir="${project.basedir}" logoutput="true" checkreturn="true" />
+    <delete dir="${project.basedir}" quiet="true" failonerror="false" includeemptydirs="true" />
   </target>
   
 	<target name="display-step">
