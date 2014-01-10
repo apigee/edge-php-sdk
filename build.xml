@@ -14,7 +14,7 @@
 		<phingcall target="display-step">
 			<param name="message" value="Generating docs: /usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" />
 		</phingcall>
-    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" logoutput="true" />
+    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" logoutput="true" />
   </target>
   
 	<target name="display-step">
