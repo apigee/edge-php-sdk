@@ -5,6 +5,8 @@
 		<phingcall target="display-step">
 			<param name="message" value="Cleaning docs directories" />
 		</phingcall>
+    <exec command="git checkout master" dir="${project.basedir}" logoutput="true" />
+    <exec command="git pull" dir="${project.basedir}"  logoutput="true" />
     <delete dir="${project.basedir}/docs" quiet="true" failonerror="false" includeemptydirs="true" />
     <mkdir dir="${project.basedir}/docs" />
   </target>
@@ -14,7 +16,10 @@
 		<phingcall target="display-step">
 			<param name="message" value="Generating docs: /usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" />
 		</phingcall>
-    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" logoutput="true" />
+    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" checkreturn="true" logoutput="true" />
+    <exec command="git add docs/*" dir="${project.basedir}" logoutput="true" checkreturn="true" />
+    <exec command="git commit -m 'adding docs ${env.BUILD_ID}" dir="${project.basedir}" logoutput="true" checkreturn="true" />
+    <exec command="git push origin master" dir="${project.basedir}" logoutput="true" checkreturn="true" />
   </target>
   
 	<target name="display-step">
