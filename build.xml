@@ -2,12 +2,33 @@
 <project name="php-sdk" default="build-docs" description="Apigee PHP SDK Documentation build">
   
   <target name="clean">
+		<phingcall target="display-step">
+			<param name="message" value="Cleaning docs directories" />
+		</phingcall>
     <delete dir="${project.basedir}/docs" quiet="true" failonerror="false" includeemptydirs="true" />
     <mkdir dir="${project.basedir}/docs" />
   </target>
   
   <target name="build-docs" depends="clean">
+		<!-- Entity Migration Fixes -->
+		<phingcall target="display-step">
+			<param name="message" value="Generating docs: /usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" />
+		</phingcall>
     <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" logoutput="true" />
   </target>
   
+	<target name="display-step">
+		<echo> </echo>
+		<echo> </echo>
+		<echo>/** </echo>
+		<echo>* -------------------------------------------------</echo>
+		<echo>*</echo>
+		<echo>* =&gt; ${message}</echo>
+		<echo>*</echo>
+		<echo>* -------------------------------------------------</echo>
+		<echo>*/</echo>
+		<echo> </echo>
+		<echo> </echo>
+	</target>
+
 </project>
