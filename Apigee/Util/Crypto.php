@@ -12,10 +12,10 @@ namespace Apigee\Util;
 
 class Crypto {
 
-  private static $crypto_key;
+  private static $cryptoKey;
 
   public static function setKey($key) {
-    self::$crypto_key = $key;
+    self::$cryptoKey = $key;
   }
 
   /**
@@ -39,7 +39,7 @@ class Crypto {
     $iv_base64 = rtrim(base64_encode($iv), '='); // Guaranteed to be 22 char long
     // Store password length so we can accurately trim in case of NULL-padding
     $encrypt = strlen($string) . "\n" . $string;
-    $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::$crypto_key, $encrypt, MCRYPT_MODE_CBC, $iv);
+    $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, $encrypt, MCRYPT_MODE_CBC, $iv);
     $encrypted_strings[$string] = $iv_base64 . base64_encode($encrypted);
     return $encrypted_strings[$string];
   }
@@ -56,10 +56,10 @@ class Crypto {
     $string_encrypted = substr($scrambled, 22);
 
     $iv = base64_decode($iv_base64);
-    if ($iv === FALSE) {
+    if ($iv === FALSE || strlen($iv) < 16) {
       throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
     }
-    $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$crypto_key, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
+    $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
     list ($length, $password) = explode("\n", $decrypted, 2);
     return substr($password, 0, intval($length));
   }

@@ -15,6 +15,7 @@
 
     "require": {
         "php": ">=5.3.3",
+        "ext-mcrypt": "*",
         "guzzle/guzzle": ">=3.7",
         "symfony/yaml": ">=2.1",
         "psr/log": "1.*"
