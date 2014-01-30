@@ -18,7 +18,7 @@ class ManagementAPIOrganization extends \Apigee\ManagementAPI\Organization {
     $cache_manager = CacheFactory::getCacheManager(NULL);
     $organization = $cache_manager->get('mngmt_organization:' . $org, NULL);
     if (!isset($organization)) {
-      $url = $this->urlEncode($org);
+      $url = rawurlencode($org);
       $this->get($url);
       $organization = $this->responseObj;
       $cache_manager->set('mngmt_organization:' . $org, $organization);

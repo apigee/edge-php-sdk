@@ -145,6 +145,11 @@ class APIObject {
       'request_headers' => $request->getRawHeaders(),
       'response_headers' => $response->getRawHeaders()
     );
+
+    if ($request instanceof \Guzzle\Http\Message\EntityEnclosingRequestInterface) {
+      DebugData::$opts['request_body'] = (string) $request->getBody();
+    }
+    DebugData::$opts['request_type'] = class_implements($request);
     DebugData::$data = $this->responseObj;
     DebugData::$code = $this->responseCode;
     DebugData::$code_status = $status;
