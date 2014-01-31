@@ -727,9 +727,14 @@ class DeveloperApp extends Base implements DeveloperAppInterface
 
             // If there are credential attributes, merge them in.
             $credential_attributes += $this->credentialAttributes;
+            $ca_copy = $credential_attributes;
+            if (array_key_exists('create_date', $ca_copy)) {
+                unset ($ca_copy['create_date']);
+            }
+            $other_attrib_count = count($ca_copy);
 
             // If any credential attributes are present, save them
-            if (count($credential_attributes) > 0) {
+            if ($created_new_key || $other_attrib_count > 0) {
                 $payload = $current_credential;
                 $payload['attributes'] = array();
                 foreach ($credential_attributes as $name => $val) {
