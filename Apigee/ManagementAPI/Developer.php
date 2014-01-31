@@ -277,7 +277,7 @@ class Developer extends Base implements DeveloperInterface
         }
 
         if (!$this->validateUser()) {
-            throw new ParameterException('Invalid email address; cannot save user.');
+            throw new ParameterException('Developer requires valid-looking email address, firstName, lastName and userName.');
         }
 
         $payload = array(
@@ -305,6 +305,8 @@ class Developer extends Base implements DeveloperInterface
         } else {
             $this->post($url, $payload);
         }
+
+        self::loadFromResponse($this, $this->responseObj);
     }
 
     /**
@@ -372,10 +374,8 @@ class Developer extends Base implements DeveloperInterface
             if (empty($this->lastName)) {
                 $this->lastName = $name[1];
             }
-            return TRUE;
-        } else {
-            return FALSE;
         }
+        return (!empty($this->firstName) && !empty($this->lastName) && !empty($this->userName) && !empty($this->email) && strpos($this->email, '@') > 0);
     }
 
     /**
