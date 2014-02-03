@@ -18,6 +18,7 @@ class DocGenDoc extends APIObject implements DocGenDocInterface {
    * Constructs the proper values for the Apigee DocGen API
    *
    * @param \Apigee\Util\OrgConfig $config
+   * @internal
    */
   public function __construct(OrgConfig $config) {
     $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');

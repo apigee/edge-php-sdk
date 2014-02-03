@@ -306,6 +306,7 @@ class APIObject {
    * @param array $args
    * @return mixed
    * @throws \Apigee\Exceptions\IllegalMethodException
+   * @internal
    */
   public function __call($method, $args) {
     $class = get_class();
@@ -332,6 +333,7 @@ class APIObject {
    * @param $args
    * @return mixed
    * @throws \Apigee\Exceptions\IllegalMethodException
+   * @internal
    */
   public static function __callstatic($method, $args) {
     $class = get_class();
