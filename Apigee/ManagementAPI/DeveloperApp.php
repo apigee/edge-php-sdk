@@ -734,7 +734,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
             $other_attrib_count = count($ca_copy);
 
             // If any credential attributes are present, save them
-            if ($created_new_key || $other_attrib_count > 0) {
+            if ($current_credential && ($created_new_key || $other_attrib_count > 0)) {
                 $payload = $current_credential;
                 $payload['attributes'] = array();
                 foreach ($credential_attributes as $name => $val) {
