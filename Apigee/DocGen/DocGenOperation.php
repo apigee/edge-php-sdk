@@ -4,7 +4,7 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
- * @author Brian Hasselbeck <bhasselbeck@apigee.com>
+ * @author Brian Hasselbeck
  */
 
 namespace Apigee\DocGen;
@@ -15,7 +15,7 @@ use Apigee\Util\OrgConfig;
 class DocGenOperation extends APIObject implements DocGenOperationInterface {
 
   /**
-   * Constructs the proper values for the Apigee DocGen API
+   * Constructs the proper values for the Apigee DocGen API.
    *
    * @param \Apigee\Util\OrgConfig $config
    */

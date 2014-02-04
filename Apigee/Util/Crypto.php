@@ -1,15 +1,22 @@
 <?php
+
 /**
  * @file
- * Utility library for cryptological functionality.
+ * Utility class for cryptological functionality.
  *
  * All methods are declared static.
  *
  * @author djohnson
  */
-
 namespace Apigee\Util;
 
+/**
+ * Utility class for cryptological functionality.
+ *
+ * All methods are declared static.
+ *
+ * @author djohnson
+ */
 class Crypto {
 
   private static $cryptoKey;

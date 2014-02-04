@@ -4,7 +4,7 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
- * @author Brian Hasselbeck <bhasselbeck@apigee.com>
+ * @author Brian Hasselbeck
  */
 
 namespace Apigee\DocGen;
@@ -15,7 +15,7 @@ use Apigee\Util\OrgConfig;
 class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
 
   /**
-   * Constructs the proper values for the Apigee DocGen API
+   * Constructs the proper values for the Apigee DocGen API.
    *
    * @param \Apigee\Util\OrgConfig $config
    */
@@ -24,10 +24,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
-   * Gets Index Template
-   *
-   * @param $apiId
-   * @return array|string
+   * {@inheritDoc}
    */
   public function getIndexTemplate($apiId) {
     $this->get(rawurlencode($apiId) . '/docTemplate?type=index', 'text/html');
@@ -35,10 +32,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
-   * Gets Operation HTML
-   *
-   * @param $apiId
-   * @return array|string
+   * {@inheritDoc}
    */
   public function getOperationTemplate($apiId) {
     $this->get(rawurlencode($apiId) . '/docTemplate?type=method', 'text/html');
@@ -46,7 +40,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
-   * Saves the template back to the modeling API
+   * {@inheritDoc}
    */
   public function saveTemplate($apiId, $type, $html) {
     $headers = array();

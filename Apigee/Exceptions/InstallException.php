@@ -35,6 +35,9 @@ class InstallException extends \Exception {
     return $this->response_body;
   }
   
+  /**
+   * @internal
+   */
   function __toString() {
     $params = "";
     foreach ($this->getParams() as $key => $value){

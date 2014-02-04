@@ -8,15 +8,23 @@ class ResponseException extends \Exception {
   private $responseBody;
 
   /**
+   * The request object as an instance of the 
+   * {@link http://api.guzzlephp.org/class-Guzzle.Http.Message.RequestInterface.html \Guzzle\Http\Message\RequestInterface}. 
+   *
    * @var \Guzzle\Http\Message\RequestInterface
    */
   public $requestObj;
 
   /**
+   * The response object as an instance of 
+   * {@link http://api.guzzlephp.org/class-Guzzle.Http.Message.Response.html \Guzzle\Http\Message\Response}.
+   * 
    * @var \Guzzle\Http\Message\Response
    */
   public $responseObj;
 
+  /**
+   */
   public function __construct($message, $code = 0, $uri = NULL, $params = NULL, $response_body = NULL) {
     parent::__construct($message, $code);
 
@@ -50,6 +58,7 @@ class ResponseException extends \Exception {
    * Returns an HTML-formatted string representation of the exception.
    * 
    * @return string
+   * @internal
    */
   public function __toString() {
     $msg = $this->getMessage();

@@ -4,6 +4,10 @@ namespace Apigee\Util;
 
 use Apigee\Exceptions\ParameterException;
 
+/**
+ * Factory class used to set the default cache manager and to create 
+ * an instance of a cache manager.
+ */
 class CacheFactory {
 
   /**
@@ -27,9 +31,10 @@ class CacheFactory {
   private static $default_cache_manager;
 
   /**
-   * If a cache manager is set with this method, then when
-   * getCacheManager is invoked with $cache_manager_class_name as NULL
-   * it will return this cache manager
+   * Sets the default cache manager.
+   * If a default cache manager is set with this method, then when
+   * getCacheManager() is called with $cache_manager_class_name as NULL
+   * it returns this cache manager
    *
    * @param \Apigee\Util\CacheManager $cacheManager
    */
@@ -44,14 +49,14 @@ class CacheFactory {
   }
 
   /**
-   * It will lookup for a cache manager of class given by $cache_manager_class_name,
-   * if $cache_manager_class_name is NULL then it will attempt to return the default
-   * cache manager set by setDefault(), it no default manager has been set
-   * then an Apigee\Exceptions\ParameterException will be thrown
+   * Returns a cache manager of the class specified by $cache_manager_class_name.
+   * If $cache_manager_class_name is NULL, then return the default
+   * cache manager as set by setDefault().
+   * If no default cache manager has been set, then throw an {@link Apigee\Exceptions\ParameterException}.
    *
    * @param string $cache_manager_class_name
    *   Class name of the cache manager to retrieve. This class name must be of a class
-   *   that extends CacheManager, otherwise it will thrown a Apigee\Exceptions\ParameterException
+   *   that extends CacheManager, otherwise thrown an {@link Apigee\Exceptions\ParameterException}.
    * @param \Psr\Log\LoggerInterface|null $logger
    * @return \Apigee\Util\CacheManager
    */

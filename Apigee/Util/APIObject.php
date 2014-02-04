@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Base class for API object classes. Handles a bit of the APIClient
+ * Base class for API object classes. Handles some of the OrgConfig
  * invocation, which makes the actual HTTP calls.
  *
  * @author djohnson
@@ -12,46 +13,61 @@ namespace Apigee\Util;
 use Apigee\Exceptions\ResponseException as ResponseException;
 use Apigee\Exceptions\IllegalMethodException as IllegalMethodException;
 
+/**
+ * Base class for API object classes. Handles some of the OrgConfig
+ * invocation, which makes the actual HTTP calls.
+ *
+ * @author djohnson
+ */
 class APIObject {
 
   /**
+   * The OrgConfig object.
    * @var \Apigee\Util\OrgConfig
    */
   protected $config;
 
   /**
+   * The client object as an instance of 
+   * {@link http://api.guzzlephp.org/class-Guzzle.Http.Client.html \Guzzle\Http\Client}. 
+   * 
    * @var \Guzzle\Http\Client
    */
   protected $client;
 
   /**
    * @var array
-   * Contains raw data from Management API in a format compatible with older
+   * Contains raw data from the Management API in a format compatible with older
    * PHP implementations of this library.
    */
   protected $debugData;
 
   /**
+   * The HTTP response code returned by the request.
    * @var int
    */
   protected $responseCode;
 
   /**
+   * The response body as a string.
    * @var string
    */
   protected $responseText;
 
   /**
+   * The response object. 
    * @var array
    */
   protected $responseObj;
 
   /**
+   * The response length.
    * @var int
    */
   protected $responseLength;
 
   /**
+   * The response MIME type.
    * @var string
    */
   protected $responseMimeType;
@@ -64,7 +80,7 @@ class APIObject {
   private $cachedBaseUrl;
 
   /**
-   * Initializes the APIClient for this class.
+   * Initializes the OrgConfig for this class.
    *
    * @param \Apigee\Util\OrgConfig $config
    * @param string $base_url
@@ -81,12 +97,21 @@ class APIObject {
     self::$logger = $config->logger;
   }
 
+  /**
+   * Overwrites the base URL defined in $client.
+   * You can restore the base URL by calling restoreBaseUrl().
+   *
+   * @param string $base_url
+   */
   protected function setBaseUrl($base_url) {
     $this->cachedBaseUrl = $this->client->getBaseUrl();
     $base_url = rtrim($this->config->endpoint, '/') . '/' . ltrim($base_url, '/');
     $this->client->setBaseUrl($base_url);
   }
 
+  /**
+   * Restores the base URL in $client after a cal to setBaseUrl().
+   */
   protected function restoreBaseUrl() {
     $this->client->setBaseUrl($this->cachedBaseUrl);
   }
@@ -96,6 +121,8 @@ class APIObject {
    * instances of Base.
    *
    * @return \Apigee\Util\OrgConfig
+   * @see OrgConfig
+   * @see Apigee\ManagementAPI\Base
    */
   public function getConfig() {
     return $this->config;
@@ -233,7 +260,7 @@ class APIObject {
    * Performs an HTTP DELETE on a URI. The result can be read from
    * $this->response* variables.
    *
-   * This is named http_delete to avoid a name clash with objects that inherit
+   * This method is named http_delete() to avoid a name clash with objects that inherit
    * from this one, which usually have a delete() method.
    *
    * @param string $uri
@@ -275,7 +302,7 @@ class APIObject {
 
   /**
    * Performs an HTTP HEAD on a URI. $this->responseText and $this->responseObj
-   * will be empty, but the content-length may be read from
+   * empty after this call, but you can read the content-length from
    * $this->responseLength.
    *
    * @param string $uri
@@ -306,7 +333,6 @@ class APIObject {
    * @param array $args
    * @return mixed
    * @throws \Apigee\Exceptions\IllegalMethodException
-   * @internal
    */
   public function __call($method, $args) {
     $class = get_class();
@@ -455,7 +481,7 @@ class APIObject {
 
 
   /**
-   * If payload is not already a string, stringify it (based on its content-type).
+   * If payload is not already a string, convert it to a string based on its content-type.
    *
    * @static
    * @param $content_type
