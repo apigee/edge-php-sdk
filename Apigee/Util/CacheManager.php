@@ -3,13 +3,17 @@
 namespace Apigee\Util;
 
 /**
- * Cache classes must extend this class and provide
- * a default constructor, Factory class will create an
- * instance of such class and then invoke setup method,
- * setup method is passed as arguments what is returned
- * by getConfig method, setup logic can then be performed
- * out of the constructor. Notice that setup should only be
- * invoked once and only by the Factory class
+ * The base class for a cache manager. 
+ * Cache classes must extend this class and provide a default constructor.
+ *
+ * <p>A Factory class creates an instance of the class and 
+ * then invokes the setup() method.
+ * The setup() method is passed an argument that is returned
+ * by the getConfig() method, which means setup logic can be performed
+ * outside of the constructor. </p>
+ *
+ * <p>Note that the setup() method should be
+ * invoked once and only once by the Factory class.</p>
  *
  * @author isaias
  *
@@ -18,14 +22,17 @@ class CacheManager {
 
   private $config;
 
+  /**
+   * @internal
+   */
   public function __construct() {
     $GLOBALS['ApigeeMintCache'] = array();
   }
 
   /**
-   * Since static methods are not overriden, then Factory class
-   * invokes this method right after cache manager is created, thus
-   * setup logic can be executed here instead of on the constructor
+   * Since static methods are not overridden, the Factory class
+   * invokes this method right after the cache manager is created. 
+   * That means setup logic can be executed here instead of in the constructor.
    *
    * @param array $config
    */
@@ -34,8 +41,8 @@ class CacheManager {
   }
 
   /**
-   * This method returns a config array that is later
-   * passed to setup method by Factory class
+   * Returns a config array that is later
+   * passed to the setup() method by the Factory class.
    *
    * @return array
    */
@@ -44,7 +51,7 @@ class CacheManager {
   }
 
   /**
-   * Cache a value given $data and identifing it by $cid
+   * Cache a value given $data and identifying it by $cid
    *
    * @param string $cid
    * @param mixed $data
@@ -54,9 +61,10 @@ class CacheManager {
   }
 
   /**
-   * Attempt to get a value from cache given the id specified by $cid
-   * if no value is found in cache, then value specified by $data is
-   * returned. if no $data is specified it will return NULL
+   * Attempt to get a value from cache given the ID specified by $cid.
+   * If no value is found in the cache, then value specified by $data is
+   * returned. 
+   * If no $data is specified, return NULL.
    *
    * @param string $cid
    * @param mixed $data

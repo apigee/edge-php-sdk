@@ -4,7 +4,7 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
- * @author Brian Hasselbeck <bhasselbeck@apigee.com>
+ * @author Brian Hasselbeck
  */
 
 namespace Apigee\DocGen;
@@ -15,7 +15,7 @@ use Apigee\Util\OrgConfig;
 class DocGenModel extends APIObject implements DocGenModelInterface {
 
   /**
-   * Constructs the proper values for the Apigee DocGen API
+   * Constructs the proper values for the Apigee DocGen API.
    *
    * @param \Apigee\Util\OrgConfig $config
    */
@@ -24,12 +24,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Adds an API resource, with a name and a description.
-   * The actual API description is added using a different set of methods
-   * that are described in the following sections.
-   *
-   * @param array $payload
-   * @return array
+   * {@inheritDoc}
    */
   public function createModel($payload = array()) {
     $this->post(NULL, $payload);
@@ -37,9 +32,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Returns the descriptions of all APIs in the organization.
-   *
-   * @return array
+   * {@inheritDoc}
    */
   public function getModels() {
     $this->get();
@@ -47,11 +40,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Imports the given API description to apihub repository.
-   *
-   * @param string $apiId
-   * @param string $xml
-   * @return array
+   * {@inheritDoc}
    */
   public function importWADL($apiId, $xml) {
     $this->post(rawurlencode($apiId) . '/revisions?action=import&format=WADL', $xml, 'application/xml; charset=utf-8');
@@ -59,10 +48,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Returns the details of an API, such as its name, description, list of revisions and metadata.
-   *
-   * @param string $apiId
-   * @return array
+   * {@inheritDoc}
    */
   public function getModel($apiId) {
     $this->get(rawurlencode($apiId));
@@ -70,11 +56,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Updates an API resource.
-   *
-   * @param $apiId
-   * @param $update
-   * @return array
+   * {@inheritDoc}
    */
   public function updateModel($apiId, $update) {
     $this->put(rawurlencode($apiId), $update);
@@ -82,10 +64,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
-   * Deletes an API resource and all its associated data.
-   *
-   * @param $apiId
-   * @return array
+   * {@inheritDoc}
    */
   public function deleteModel($apiId) {
     $this->http_delete(rawurlencode($apiId));

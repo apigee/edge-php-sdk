@@ -51,6 +51,10 @@ class CommerceCriteria extends DataStructure {
    */
   private $toDate;
 
+  /**
+   * @var string
+   *   Date value formatted as YYYY-mm-dd
+   */
   public function __construct($data = NULL) {
     if (is_array($data)) {
       // TODO FIXME loadFromRawData is not defined

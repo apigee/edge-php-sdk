@@ -4,7 +4,7 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
- * @author Brian Hasselbeck <bhasselbeck@apigee.com>
+ * @author Brian Hasselbeck
  */
 
 namespace Apigee\DocGen;
@@ -15,7 +15,7 @@ use Apigee\Util\OrgConfig;
 class DocGenDoc extends APIObject implements DocGenDocInterface {
 
   /**
-   * Constructs the proper values for the Apigee DocGen API
+   * Constructs the proper values for the Apigee DocGen API.
    *
    * @param \Apigee\Util\OrgConfig $config
    */
@@ -24,12 +24,7 @@ class DocGenDoc extends APIObject implements DocGenDocInterface {
   }
 
   /**
-   * Grabs the html of a given operation
-   *
-   * @param $data = array('nid', 'revision', 'resource', 'operation')
-   *     Revision, Resource, and Operation should all be UUIDs
-   * @param $mid
-   * @return array
+   * {@inheritDoc}
    */
   public function requestOperation($data, $mid) {
     $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'] . '/doc';

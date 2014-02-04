@@ -1,10 +1,13 @@
 <?php
 namespace Apigee\Util;
 
+/**
+ * Class to read from cache and write to cache a persistent name/value pair.
+ */
 class Cache {
   /**
    * Reads a persistent name/value pair from cache. Mostly this is a wrapper
-   * around Drupal's variable_get() to make tests and scripts not dependent
+   * around Drupal's variable_get() method to make tests and scripts not dependent
    * on Drupal's environment.
    *
    * @static
@@ -27,7 +30,7 @@ class Cache {
 
   /**
    * Writes a persistent name/value pair to cache. Mostly this is a wrapper
-   * around Drupal's variable_set().
+   * around Drupal's variable_set() method.
    *
    * @static
    * @param $name

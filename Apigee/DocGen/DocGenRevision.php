@@ -15,7 +15,7 @@ use Apigee\Util\OrgConfig;
 class DocGenRevision extends APIObject implements DocGenRevisionInterface {
 
   /**
-   * Constructs the proper values for the Apigee DocGen API
+   * Constructs the proper values for the Apigee DocGen API.
    *
    * @param \Apigee\Util\OrgConfig $config
    */
@@ -23,6 +23,9 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface {
     $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function loadVerbose($apiId, $revId) {
     $this->get(rawurlencode($apiId) . '/revisions/' . $revId .'?expand=yes');
     return $this->responseObj;
