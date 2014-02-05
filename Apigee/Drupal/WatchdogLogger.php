@@ -3,6 +3,9 @@
 namespace Apigee\Drupal;
 use Psr\Log\LogLevel;
 
+/**
+ * A logger class that implements Psr\Log\LoggerInterface. 
+ */
 class WatchdogLogger extends \Psr\Log\AbstractLogger {
 
   private static $logThreshold = -1; // Log everything
@@ -18,7 +21,7 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger {
   }
 
   /**
-   * Logs an event to watchdog
+   * Logs an event to watchdog.
    *
    * @param string $level
    * @param mixed $message

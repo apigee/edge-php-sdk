@@ -11,6 +11,19 @@
 
 namespace Apigee\Util;
 
+/**
+ * Provides a common logging mechanism.
+ *
+ * <p><b>Note:</b> This class has been deprecated. 
+ * Use Psr\Log\LoggerInterface implementations instead.
+ * See the {@link Apigee\Drupal\WatchdogLogger} class for an example that 
+ * implements the Psr\Log\LoggerInterface.</p>
+ *
+ * @author djohnson
+ *
+ * @deprecated
+ * Use Psr\Log\LoggerInterface implementations instead.
+ */
 class Log {
 
   // NOTE: these constants are the same values as Drupal's corresponding

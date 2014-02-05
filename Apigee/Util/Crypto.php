@@ -21,12 +21,21 @@ class Crypto {
 
   private static $cryptoKey;
 
+  /**
+   * Sets the encryption key. 
+   * Set the key before you call encrypt().
+   * You must call decrypt() with the same value as used for encrypt().
+   *
+   * @static
+   * @param string $key
+   */
   public static function setKey($key) {
     self::$cryptoKey = $key;
   }
 
   /**
-   * Encrypts a string. Caches the result so that expensive encryption does
+   * Encrypts a string using the specified key. 
+   * Caches the result so that expensive encryption does
    * not need to happen more often than necessary.
    *
    * @static

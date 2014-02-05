@@ -2,6 +2,13 @@
 
 namespace Apigee\Util;
 
+/**
+ * Contains raw debug data from the Management API 
+ * passed to the calling client.
+ * Access this data through the $debugData property of APIObject.
+ *
+ * @see APIObject::$debugData
+ */
 class DebugData {
   public static $raw;
   public static $opts;
