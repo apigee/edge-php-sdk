@@ -11,12 +11,18 @@ namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ResponseException;
 
+/**
+ * Base class for Management API classes. Handles a bit of the APIClient
+ * invocation, which makes the actual HTTP calls.
+ *
+ * @author djohnson
+ */
 class Base extends \Apigee\Util\APIObject
 {
     /**
-     * Returns data from the last API call in a backwards-compatible way.
+     * Returns debug data from the last API call in a backwards-compatible way.
      *
-     * @return array
+     * @return array 
      */
     public function getDebugData()
     {
@@ -24,7 +30,7 @@ class Base extends \Apigee\Util\APIObject
     }
 
     /**
-     * Reads the 'attributes' member of the Base subclass, and adds properly-
+     * Reads the $attributes member of the Base subclass, and adds properly-
      * formatted members to the passed-by-reference $payload array. Note
      * that $this->attributes must be in scope (protected or public).
      *
@@ -44,7 +50,7 @@ class Base extends \Apigee\Util\APIObject
     }
 
     /**
-     * Reads the response from the Management API and populates the 'attributes'
+     * Reads the response from the Management API and populates the $attributes
      * member of the Base subclass. Note that $this->attributes must be in scope
      * (protected or public).
      *

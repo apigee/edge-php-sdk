@@ -12,16 +12,23 @@ namespace Apigee\ManagementAPI;
 use \Apigee\Exceptions\ResponseException;
 use \Apigee\Exceptions\ParameterException;
 
-class Developer extends Base implements DeveloperInterface
+/**
+ * Abstracts the Developer object in the Management API and allows clients to
+ * manipulate it.
+ *
+ * @author djohnson
+ */
+ class Developer extends Base implements DeveloperInterface
 {
 
     /**
+     * The apps associated with the developer.
      * @var array
      */
     protected $apps;
     /**
      * @var string
-     * This is actually the unique-key (within the org) for the Developer
+     * The developer's email, used to unique identify the developer in Edge.
      */
     protected $email;
     /**
@@ -31,110 +38,154 @@ class Developer extends Base implements DeveloperInterface
     protected $developerId;
     /**
      * @var string
+     * The first name of the developer.
      */
     protected $firstName;
     /**
+     * The last name of the developer.
      * @var string
      */
     protected $lastName;
     /**
      * @var string
+     * The developer's username.
      */
     protected $userName;
     /**
      * @var string
-     * Read-only
+     * The Apigee organization where the developer is regsitered.
+     * This property is read-only.
      */
     protected $organizationName;
     /**
      * @var string
-     * Should be either 'active' or 'inactive'.
+     * The developer status: 'active' or 'inactive'.
      */
     protected $status;
     /**
      * @var array
-     * This must be protected because Base wants to twiddle with it.
+     * Name/value pairs used to extend the default profile.
      */
     protected $attributes;
     /**
      * @var int
-     * Read-only
+     * Unix time when the developer was created.
+     * This property is read-only.
      */
     protected $createdAt;
     /**
      * @var string
-     * Read-only
+     * Username of the user who created the developer.
+     * This property is read-only.
      */
     protected $createdBy;
     /**
      * @var int
-     * Read-only
+     * Unix time when the developer was last modified.
+     * This property is read-only.
      */
     protected $modifiedAt;
     /**
      * @var string
-     * Read-only
+     * Username of the user who last modified the developer.
+     * This property is read-only.
      */
     protected $modifiedBy;
 
     protected $baseUrl;
 
     /* Accessors (getters/setters) */
+    /**
+     * {@inheritDoc}
+     */
     public function getApps()
     {
         return $this->apps;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getDeveloperId()
     {
         return $this->developerId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getFirstName()
     {
         return $this->firstName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setFirstName($fname)
     {
         $this->firstName = $fname;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getLastName()
     {
         return $this->lastName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setLastName($lname)
     {
         $this->lastName = $lname;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getUserName()
     {
         return $this->userName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setUserName($uname)
     {
         $this->userName = $uname;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getStatus()
     {
         return $this->status;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setStatus($status)
     {
         if ($status === 0 || $status === FALSE) {
@@ -148,6 +199,9 @@ class Developer extends Base implements DeveloperInterface
         $this->status = $status;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getAttribute($attr)
     {
         if (array_key_exists($attr, $this->attributes)) {
@@ -156,16 +210,25 @@ class Developer extends Base implements DeveloperInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setAttribute($attr, $value)
     {
         $this->attributes[$attr] = $value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getModifiedAt()
     {
         return $this->modifiedAt;
@@ -174,7 +237,7 @@ class Developer extends Base implements DeveloperInterface
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $client
+     * @param \Apigee\Util\OrgConfig $config
      */
     public function __construct(\Apigee\Util\OrgConfig $config)
     {
@@ -183,11 +246,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Loads a developer from the Management API using $email as the unique key.
-     *
-     * @param string $email
-     *    This can be either the developer's email address or the unique
-     *    developerId.
+     * {@inheritDoc}
      */
     public function load($email)
     {
@@ -219,16 +278,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Attempts to load developer from Management API. Returns TRUE if load was
-     * successful.
-     *
-     * If $email is not supplied, the result will always be FALSE.
-     *
-     * As a bit of trivia, the $email parameter may either be the actual
-     * developer email, or it can be a developer_id.
-     *
-     * @param null|string $email
-     * @return bool
+     * {@inheritDoc}
      */
     public function validate($email = NULL)
     {
@@ -243,18 +293,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Saves user data to the Management API. This operates as both insert and
-     * update.
-     *
-     * If user's email doesn't look valid (must contain @), a
-     * ParameterException is thrown.
-     *
-     * @var bool|null $force_update
-     *   If FALSE, assume that this is a new instance.
-     *   If TRUE, assume that this is an update to an existing instance.
-     *   If NULL, try an update, and if that fails, try an insert.
-     *
-     * @throws \Apigee\Exceptions\ParameterException
+     * {@inheritDoc}
      */
     public function save($force_update = FALSE)
     {
@@ -310,11 +349,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Deletes a developer.
-     *
-     * If $email is not supplied, $this->email is used.
-     *
-     * @param null|string $email
+     * {@inheritDoc}
      */
     public function delete($email = NULL)
     {
@@ -326,9 +361,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Returns an array of all developer emails for this org.
-     *
-     * @return array
+     * {@inheritDoc}
      */
     public function listDevelopers()
     {
@@ -356,13 +389,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Ensures that current developer's email looks at least sort of valid.
-     *
-     * If first name and/or last name are not supplied, they are auto-
-     * populated based on email. This is kind of shoddy but it's the best we can
-     * do.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function validateUser()
     {
@@ -379,7 +406,7 @@ class Developer extends Base implements DeveloperInterface
     }
 
     /**
-     * Restores this object's properties to their pristine state.
+     * {@inheritDoc}
      */
     public function blankValues()
     {
@@ -400,7 +427,7 @@ class Developer extends Base implements DeveloperInterface
 
 
     /**
-     * Turns this object's properties into an array for external use.
+     * Converts this object's properties into an array for external use.
      *
      * @return array
      */

@@ -14,82 +14,110 @@ namespace Apigee\ManagementAPI;
 
 use Apigee\Util\Cache as Cache;
 
+/**
+ * Abstracts the API Product object in the Management API and allows clients
+ * to manipulate it.
+ *
+ * Write support is purely experimental and is not recommended.
+ *
+ * @author djohnson
+ */
 class APIProduct extends Base implements APIProductInterface
 {
 
     /**
+     * Array of API resources bundled in the API Product.
      * @var array
      */
     protected $apiResources;
     /**
      * @var string
-     * 'manual' or 'auto'
+     * The API product approval type as 'manual' or 'auto'.
      */
     protected $approvalType;
     /**
+     * UNIX time when the API Product was created.
      * @var int
      */
     protected $createdAt;
     /**
      * @var string
-     * read-only
+     * The username of the user who created the API Product. 
+     * This property is read-only.
      */
     protected $createdBy;
     /**
      * @var int
-     * read-only
+     * UNIX time when the API Product was most recently updated.
+     * This property is read-only.
      */
     protected $modifiedAt;
     /**
-     * @var string
-     * read-only
+     * @var string 
+     * The username of the user who most recently updated the API Product.
+     * This property is read-only.
      */
     protected $modifiedBy;
     /**
      * @var string
-     * read-only
+     * A string describing the API Product.
+     * This property is read-only.
      */
     protected $description;
     /**
      * @var string
+     * The name to be displayed in the UI or developer portal to developers 
+     * registering for API access.
      */
     protected $displayName;
     /**
      * @var array
+     * Array of environment names in an organization. 
+     * Requests to environments not listed are rejected.
      */
     protected $environments;
     /**
      * @var string
+     * The internal name of the API Product.
      */
     protected $name;
     /**
      * @var array
+     * Array of API proxy names in an organization. 
+     * Requests to API proxies not listed are rejected.
      * FIXME: the purpose of this member is unknown
      */
     protected $proxies;
     /**
      * @var int
-     * Quota limit. It's safer to use attributes['developer.quota.limit'] instead.
+     * The number of request messages permitted by this API product.
+     * It's safer to use attributes['developer.quota.limit'] instead.
      */
     protected $quota;
     /**
      * @var int
+     * The time interval over which the number of request messages is calculated.
      * It's safer to use attributes['developer.quota.interval'] instead.
      */
     protected $quotaInterval;
     /**
      * @var string
+     * The time unit defined for the $quotaInterval.
      * It's safer to use attributes['developer.quota.timeunit'] instead.
      */
     protected $quotaTimeUnit;
     /**
      * @var array
+     * Array of scopes. 
+     * These must map to the scopes defined in an Oauth policy associated 
+     * with the API Product.
      * FIXME: the purpose of this member is unknown
      */
     protected $scopes;
 
     /**
      * @var array
+     * Arbitrary name/value pairs.
      * Attributes must be protected because Base wants to twiddle with it.
      */
     protected $attributes;
@@ -111,16 +139,7 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * Queries the Management API and populates self's properties from
-     * the result.
-     *
-     * If neither $name nor $result is passed, tries to load from $this->name.
-     * If $name is passed, loads from $name instead of $this->name.
-     * If $response is passed, bypasses API query and uses the given array
-     * instead.
-     *
-     * @param null|string $name
-     * @param null|array $response
+     * {@inheritDoc}
      */
     public function load($name = NULL, $response = NULL)
     {
@@ -150,8 +169,7 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * POSTs self's properties to Management API. This handles both
-     * inserts and updates.
+     * {@inheritDoc}
      */
     public function save()
     {
@@ -177,11 +195,7 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * Deletes an API Product.
-     *
-     * If $name is not passed, uses $this->name.
-     *
-     * @param null|string $name
+     * {@inheritDoc}
      */
     public function delete($name = NULL)
     {
@@ -198,7 +212,7 @@ class APIProduct extends Base implements APIProductInterface
      * If $product is passed, we expect it to be a raw response array as returned
      * from the Management API, and determination is based on those contents.
      *
-     * If $product is NOT passed, we assume that $this is already loaded, and we
+     * If $product is not passed, we assume that $this is already loaded, and we
      * make the determination based on self's properties.
      *
      * @param null|array $product
@@ -241,14 +255,7 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * Returns a detailed list of all products. This list may have been cached
-     * from a previous call.
-     *
-     * If $show_nonpublic is TRUE, even API Products which are marked as hidden
-     * or internal are returned.
-     *
-     * @param bool $show_nonpublic
-     * @return array
+     * {@inheritDoc}
      */
     public function listProducts($show_nonpublic = FALSE)
     {
@@ -264,16 +271,25 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /* Accessors (getters/setters) */
+    /**
+     * {@inheritDoc}
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function clearAttributes()
     {
         $this->attributes = array();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getAttribute($name)
     {
         if (isset($this->attributes[$name])) {
@@ -282,6 +298,9 @@ class APIProduct extends Base implements APIProductInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setAttribute($name, $value)
     {
         if (isset($value) || !isset($this->attributes[$name])) {
@@ -291,41 +310,65 @@ class APIProduct extends Base implements APIProductInterface
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getCreatedBy()
     {
         return $this->createdBy;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getModifiedAt()
     {
         return $this->modifiedAt;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getModifiedBy()
     {
         return $this->modifiedBy;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getEnvironments()
     {
         return $this->environments;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getProxies()
     {
         return $this->proxies;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getQuotaLimit()
     {
         if (isset($this->attributes['developer.quota.limit'])) {
@@ -336,6 +379,9 @@ class APIProduct extends Base implements APIProductInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getQuotaInterval()
     {
         if (isset($this->attributes['developer.quota.interval'])) {
@@ -346,6 +392,9 @@ class APIProduct extends Base implements APIProductInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getQuotaTimeUnit()
     {
         if (isset($this->attributes['developer.quota.timeunit'])) {
@@ -356,11 +405,17 @@ class APIProduct extends Base implements APIProductInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getDisplayName()
     {
         return $this->displayName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getDescription()
     {
         if (!empty($this->description)) {
@@ -372,11 +427,17 @@ class APIProduct extends Base implements APIProductInterface
         return NULL;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function addApiResource($resource)
     {
         $this->apiResources[] = $resource;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function removeApiResource($resource)
     { // was delApiResource
         $index = array_search($resource, $this->apiResources);
@@ -387,16 +448,25 @@ class APIProduct extends Base implements APIProductInterface
         }
     }
 
+    /**
+     * {{@inheritDoc}}
+     */
     public function getApiResources()
     {
         return $this->apiResources;
     }
 
-    public function getApprovalType()
+    /**
+     * {@inheritDoc}
+     */
+   public function getApprovalType()
     {
         return $this->approvalType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setApprovalType($type)
     {
         if ($type != 'auto' && $type != 'manual') {
@@ -409,7 +479,7 @@ class APIProduct extends Base implements APIProductInterface
 
 
     /**
-     * Initializes this object to its pristine blank state.
+     * Initializes this object to a blank state.
      */
     protected function blankValues()
     {
@@ -477,7 +547,7 @@ class APIProduct extends Base implements APIProductInterface
 
     /**
      * Populates this object based on an incoming array generated by the
-     * toArray() method above.
+     * toArray() method.
      *
      * @param $array
      */
