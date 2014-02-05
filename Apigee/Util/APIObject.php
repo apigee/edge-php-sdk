@@ -37,7 +37,9 @@ class APIObject {
 
   /**
    * @var array
-   * Contains raw data from the Management API in a format compatible with older
+   * Contains raw data from the Management API in a format defined by 
+   * {@link Apigee\Util\DebugData}.
+   * This format is compatible with older
    * PHP implementations of this library.
    */
   protected $debugData;
@@ -73,6 +75,9 @@ class APIObject {
   protected $responseMimeType;
 
   /**
+   * A logger that implements the \Psr\Log\LoggerInterface interface.
+   * See the {@link Apigee\Drupal\WatchdogLogger} class for an example that 
+   * implements the Psr\Log\LoggerInterface.
    * @var \Psr\Log\LoggerInterface
    */
   public static $logger;
@@ -333,6 +338,7 @@ class APIObject {
    * @param array $args
    * @return mixed
    * @throws \Apigee\Exceptions\IllegalMethodException
+   * @internal
    */
   public function __call($method, $args) {
     $class = get_class();
