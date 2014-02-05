@@ -522,7 +522,13 @@ class APIProduct extends Base implements APIProductInterface
         return $output;
     }
 
-    public static function getAPIProductProperties()
+  /**
+   * Returns an array of all property names that can be returned from a call to
+   * self::toArray().
+   *
+   * @return array
+   */
+  public static function getAPIProductProperties()
     {
         $properties = array_keys(get_class_vars(__CLASS__));
 

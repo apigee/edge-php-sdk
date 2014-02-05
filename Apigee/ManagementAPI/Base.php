@@ -34,9 +34,9 @@ class Base extends \Apigee\Util\APIObject
      * formatted members to the passed-by-reference $payload array. Note
      * that $this->attributes must be in scope (protected or public).
      *
-     * @param $payload
+     * @param array $payload
      */
-    protected function writeAttributes(&$payload)
+    protected function writeAttributes(array &$payload)
     {
         if (property_exists($this, 'attributes') && !empty($this->attributes)) {
             $payload['attributes'] = array();
