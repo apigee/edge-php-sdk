@@ -34,7 +34,9 @@ class Log {
   const LOGLEVEL_ERROR = 3;
   const LOGLEVEL_CRITICAL = 2;
 
-  // Callable
+  /**
+   * @var callable
+   */
   public static $logCallback = 'watchdog';
 
   /**

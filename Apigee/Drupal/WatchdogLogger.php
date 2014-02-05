@@ -4,7 +4,8 @@ namespace Apigee\Drupal;
 use Psr\Log\LogLevel;
 
 /**
- * A logger class that implements Psr\Log\LoggerInterface. 
+ * A logger class that implements Psr\Log\LoggerInterface. This class writes
+ * log data to Drupal's watchdog table.
  */
 class WatchdogLogger extends \Psr\Log\AbstractLogger {
 

@@ -82,6 +82,9 @@ class APIObject {
    */
   public static $logger;
 
+  /**
+   * @var string
+   */
   private $cachedBaseUrl;
 
   /**
