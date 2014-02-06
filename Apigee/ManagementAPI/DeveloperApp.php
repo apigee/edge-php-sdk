@@ -126,10 +126,6 @@ class DeveloperApp extends Base implements DeveloperAppInterface
      * @var array
      */
     protected $cachedApiProducts;
-    /**
-     * @var string
-     */
-    protected $baseUrl;
 
     /* Accessors (getters/setters) */
     public function getApiProducts()
@@ -1042,6 +1038,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->consumerSecret = NULL;
         $this->credentialScopes = array();
         $this->credentialStatus = NULL;
+        $this->credentialAttributes = array();
 
         $this->cachedApiProducts = array();
     }
