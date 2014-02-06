@@ -19,12 +19,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
     }
 
     /**
-     * Fetches a value from a named map/key. If no such map or key is found,
-     * returns NULL.
-     *
-     * @param $map_name
-     * @param $key_name
-     * @return null|string
+     * {@inheritDoc}
      */
     public function getEntryValue($map_name, $key_name)
     {
@@ -40,13 +35,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
     }
 
     /**
-     * Fetches all entries for a named map and returns them as an associative
-     * array.
-     *
-     * @throws \Apigee\Exceptions\ResponseException
-     *
-     * @param $map_name
-     * @return array
+     * {@inheritDoc}
      */
     public function getAllEntries($map_name)
     {
@@ -61,14 +50,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
     }
 
     /**
-     * Sets a value for a named map/key. This performs both inserts and updates;
-     * that is, if the key does not yet exist, it will create it.
-     *
-     * @throws \Apigee\Exceptions\ResponseException
-     *
-     * @param $map_name
-     * @param $key_name
-     * @param $value
+     * {@inheritDoc}
      */
     public function setEntryValue($map_name, $key_name, $value)
     {
@@ -86,6 +68,9 @@ class KeyValueMap extends Base implements KeyValueMapInterface
         $this->put($url, $payload);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function deleteEntry($map_name, $key_name)
     {
         $url = rawurlencode($map_name) . '/entries/' . rawurlencode($key_name);
@@ -93,6 +78,9 @@ class KeyValueMap extends Base implements KeyValueMapInterface
         $this->http_delete($url);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function create($map_name, $entries = NULL)
     {
         $payload = array(
@@ -108,6 +96,9 @@ class KeyValueMap extends Base implements KeyValueMapInterface
         $this->post(NULL, $payload);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function delete($map_name)
     {
         // If something went wrong, the following line will throw a ResponseException.

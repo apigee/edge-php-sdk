@@ -3,17 +3,49 @@ namespace Apigee\ManagementAPI;
 
 interface UserRoleInterface
 {
+     /**
+      * Returns a list of all system users associated with a role.
+      * @param string
+      * @return array
+      */
     public function getUsersByRole($role);
 
+     /**
+      * Adds users to a role.
+      * @param array
+      * @param string
+      */
     public function addUsersToRole(array $users, $role);
 
+     /**
+      * Removes users from a role.
+      * @param array
+      * @return string
+      */
     public function removeUsersFromRole(array $users, $role);
 
+     /**
+      * @param string
+      * @return array
+      */
     public function setRoleUsers(array $users, $role);
 
+     /**
+      * Returns a list of all system roles.
+      * @param bool
+      * @return array
+      */
     public function listRoles($reset = FALSE);
 
+     /**
+      * Adds a role.
+      * @param string
+      */
     public function addRole($role_name);
 
+     /**
+      * Deletes a role.
+      * @param string
+      */
     public function deleteRole($role_name);
 }

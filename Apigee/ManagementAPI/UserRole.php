@@ -4,11 +4,19 @@ namespace Apigee\ManagementAPI;
 class UserRole extends Base implements UserRoleInterface
 {
 
+    /**
+     * Initializes default values of all member variables.
+     *
+     * @param \Apigee\Util\OrgConfig $config
+     */
     public function __construct(\Apigee\Util\OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/userroles');
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function getUsersByRole($role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -18,6 +26,9 @@ class UserRole extends Base implements UserRoleInterface
         return $this->responseObj;
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function addUsersToRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -34,6 +45,9 @@ class UserRole extends Base implements UserRoleInterface
         return TRUE;
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function removeUsersFromRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -49,6 +63,9 @@ class UserRole extends Base implements UserRoleInterface
         return TRUE;
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function setRoleUsers(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -73,6 +90,9 @@ class UserRole extends Base implements UserRoleInterface
         }
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function listRoles($reset = FALSE)
     {
         static $roles;
@@ -91,6 +111,9 @@ class UserRole extends Base implements UserRoleInterface
         return $roles;
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function addRole($role_name)
     {
         $roles = $this->listRoles();
@@ -103,6 +126,9 @@ class UserRole extends Base implements UserRoleInterface
         }
     }
 
+     /**
+      * {@inheritDoc}
+      */
     public function deleteRole($role_name)
     {
         $roles = $this->listRoles();
@@ -114,6 +140,11 @@ class UserRole extends Base implements UserRoleInterface
         }
     }
 
+     /**
+      * Returns TRUE if the role exists.
+      * @param string
+      * @return bool
+      */
     public function roleExists($role_name)
     {
         return in_array($role_name, $this->listRoles());

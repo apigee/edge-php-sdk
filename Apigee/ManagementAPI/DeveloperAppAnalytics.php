@@ -12,18 +12,25 @@ use Apigee\Exceptions\ParameterException;
 use Apigee\Exceptions\EnvironmentException;
 use Apigee\Util\Cache;
 
+/**
+ * Exposes Developer App Analytics data from the Management API.
+ *
+ * @author djohnson
+ */
 class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterface
 {
     /**
      * @var string
+     * The environment of the app, such as 'test'or 'prod'.
      */
     protected $environment;
 
     /**
-     * Initializes the environment and sets up the APIClient.
+     * Initializes the environment and sets up the OrgConfig object.
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param string $env
+     * @param string The environment, such as 'test'or 'prod'.
+     * A value of the asterisk, &#42;, wildcard means all environments.
      */
     public function __construct(\Apigee\Util\OrgConfig $config, $env = '*')
     {
@@ -31,12 +38,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         $this->setEnvironment($env);
     }
 
-    /**
-     * Validates and sets the environment. The asterisk wildcard is allowed.
-     *
-     * @param string $env
-     * @throws \Apigee\Exceptions\EnvironmentException
-     */
+     /**
+      * {@inheritDoc}
+      */
     public function setEnvironment($env)
     {
         if ($env != '*') {
@@ -50,21 +54,17 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         $this->setBaseUrl($environment_url);
     }
 
-    /**
-     * Gets the current environment.
-     *
-     * @return string
-     */
+     /**
+      * {@inheritDoc}
+      */
     public function getEnvironment()
     {
         return $this->environment;
     }
 
-    /**
-     * Returns a list of all environments for this org.
-     *
-     * @return array
-     */
+     /**
+      * {@inheritDoc}
+      */
     public function getAllEnvironments()
     {
         $env = Cache::get('devconnect_org_environments', array());
@@ -75,19 +75,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $env;
     }
 
-    /**
-     * After ensuring params are valid, fetches analytics data.
-     *
-     * @param string $developer_id
-     * @param string $app_name
-     * @param string $metric
-     * @param string $time_start
-     * @param string $time_end
-     * @param string $time_unit
-     * @param string $sort_by
-     * @param string $sort_order
-     * @return array
-     */
+     /**
+      * {@inheritDoc}
+      */
     public function getByAppName($developer_id, $app_name, $metric, $time_start, $time_end, $time_unit, $sort_by, $sort_order = 'ASC')
     {
         $params = self::validateParameters($metric, $time_start, $time_end, $time_unit, $sort_by, $sort_order);
@@ -137,11 +127,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $datapoints;
     }
 
-    /**
-     * Queries Management API to get a list of all environments configured for the org.
-     *
-     * @return array
-     */
+     /**
+      * {@inheritDoc}
+      */
     public function queryEnvironments()
     {
         $env_url = '/o/' . rawurlencode($this->config->orgName) . '/environments';
@@ -151,12 +139,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $this->responseObj;
     }
 
-    /**
-     * Lists all metrics valid for Developer Apps.
-     *
-     * @static
-     * @return array
-     */
+     /**
+      * {@inheritDoc}
+      */
     public static function getMetrics()
     {
         return array(
@@ -174,12 +159,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         );
     }
 
-    /**
-     * Returns a keyed array of allowable time units. Array keys are machine names
-     * and values are human-readable names.
-     *
-     * @return array
-     */
+     /**
+      * {@inheritDoc}
+      */
     public static function getTimeUnits()
     {
         return array(
@@ -210,7 +192,7 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
      * @param string $time_end
      * @param string $time_unit
      * @param string $sort_by
-     * @param string $sort_order
+     * @param string $sort_order Either 'ASC' or 'DESC'.
      * @return array
      * @throws ParameterException
      */
