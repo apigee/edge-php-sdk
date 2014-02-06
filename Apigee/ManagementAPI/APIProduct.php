@@ -85,7 +85,6 @@ class APIProduct extends Base implements APIProductInterface
      * @var array
      * Array of API proxy names in an organization. 
      * Requests to API proxies not listed are rejected.
-     * FIXME: the purpose of this member is unknown
      */
     protected $proxies;
     /**
@@ -111,7 +110,6 @@ class APIProduct extends Base implements APIProductInterface
      * Array of scopes. 
      * These must map to the scopes defined in an Oauth policy associated 
      * with the API Product.
-     * FIXME: the purpose of this member is unknown
      */
     protected $scopes;
 
@@ -123,6 +121,7 @@ class APIProduct extends Base implements APIProductInterface
     protected $attributes;
     /**
      * @var bool
+     * Indicate whether an API Product's details have been loaded from KMS.
      */
     protected $loaded;
 

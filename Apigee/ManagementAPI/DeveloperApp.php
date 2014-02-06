@@ -11,6 +11,12 @@ namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ParameterException as ParameterException;
 
+/**
+ * Abstracts the Developer App object in the Management API and allows clients
+ * to manipulate it.
+ *
+ * @author djohnson
+ */
 class DeveloperApp extends Base implements DeveloperAppInterface
 {
 
@@ -22,56 +28,68 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $accessType;
     /**
      * @var array
+     * An array of API products with which the app is associated.
      */
     protected $apiProducts;
     /**
      * @var string.
-     * Read-only. Purpose of this field is unknown at this time.
+     * The app family containing the app.
+     * This property is read-only. 
      */
     protected $appFamily;
     /**
      * @var string
-     * Read-only. GUID of this app.
+     * GUID of this app.
+     * This property is read-only. 
      */
     protected $appId;
     /**
      * @var array
+     * Name/value pairs used to extend the default app profile.
      * This is protected because Base wants to twiddle with it.
      */
     protected $attributes;
     /**
      * @var string
+     * The callbackUrl is used by OAuth 2.0 authorization servers to 
+     * communicate authorization codes back to apps.
      */
     protected $callbackUrl;
     /**
      * @var int
-     * Read-only.
+     * Unix time when the app was created.
+     * This property is read-only. 
      */
     protected $createdAt;
     /**
      * @var string
-     * Read-only.
+     * Username of the Apigee developer who created the app.
+     * This property is read-only. 
      */
     protected $createdBy;
     /**
      * @var int
-     * Read-only.
+     * Unix time when the app was last modified.
+     * This property is read-only. 
      */
     protected $modifiedAt;
     /**
      * @var string
-     * Read-only.
+     * Username of the Apigee developer who last modified the app.
+     * This property is read-only. 
      */
     protected $modifiedBy;
     /**
      * @var string
-     * Read-only. Corresponds to the developer_id attribute of the developer who
+     * The developer_id attribute of the developer who
      * owns this app.
+     * This property is read-only. 
      */
     protected $developerId;
     /**
      * @var string
-     * Primary key (within this org/developer's app list)
+     * The app name.
+     * The primary key within this org/developer's app list.
      */
     protected $name;
     /**
@@ -81,27 +99,30 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $scopes;
     /**
      * @var string
-     * There is probably a finite number of possible values, but I haven't found
-     * a definitive list yet.
+     * Status of the app: 'approved' or 'unapproved'.
      */
     protected $status;
     /**
      * @var string
+     * The description of the app.
      */
     protected $description;
 
     /**
      * @var array
+     * The status of the consumer key for each API Product: 'approved' or 'pending'.
      * Each member of this array is itself an associative array, with keys of
      * 'apiproduct' and 'status'.
      */
     protected $credentialApiProducts;
     /**
      * @var string
+     * The value of the consumer key for the app.
      */
     protected $consumerKey;
     /**
      * @var string
+     * The value of the consumer secret for the app.
      */
     protected $consumerSecret;
     /**
@@ -111,15 +132,18 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $credentialScopes;
     /**
      * @var string
+     * The status of the consumer key for the app: 'approved' or 'pending'.
      */
     protected $credentialStatus;
     /**
      * @var array
+     * Name/value pairs used to extend the default credential's profile.
      */
     protected $credentialAttributes;
 
     /**
      * @var string
+     * The email address of the developer who created the app. 
      */
     protected $developer;
     /**
@@ -132,11 +156,17 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $baseUrl;
 
     /* Accessors (getters/setters) */
+     /**
+      * {@inheritDOc}
+      */
     public function getApiProducts()
     {
         return $this->apiProducts;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setApiProducts($products)
     {
         if (!is_array($products)) {
@@ -146,57 +176,90 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->apiProducts = $products;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function hasAttribute($attr)
     {
         return array_key_exists($attr, $this->attributes);
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getAttribute($attr)
     {
         return (array_key_exists($attr, $this->attributes) ? $this->attributes[$attr] : NULL);
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setAttribute($attr, $value)
     {
         $this->attributes[$attr] = $value;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getName()
     {
         return $this->name;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setCallbackUrl($url)
     {
         $this->callbackUrl = $url;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCallbackUrl()
     {
         return $this->callbackUrl;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setDescription($descr)
     {
         $this->description = $descr;
         $this->attributes['description'] = $descr;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getDescription()
     {
         return $this->description;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setAccessType($type)
     {
         if ($type != 'read' && $type != 'write' && $type != 'both') {
@@ -205,121 +268,206 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->accessType = $type;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getAccessType()
     {
         return $this->accessType;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getStatus()
     {
         return $this->status;
     }
 
+     /**
+      * Sets the app access type as 'read', 'write', or 'both'.
+      * @param string
+      */
     protected function setStatus($status)
     {
         $this->status = $status;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getDeveloperId()
     {
         return $this->developerId;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getDeveloperMail()
     {
         return $this->developer;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCredentialApiProducts()
     {
         return $this->credentialApiProducts;
     }
 
+     /**
+      * Sets the status of the consumer key for each API Product: 
+      * 'approved' or 'pending'. 
+      * Each member of this array is itself an associative array, with keys 
+      * of 'apiproduct' and 'status'.
+      * @param array
+      */
     protected function setCredentialApiProducts(array $list)
     {
         $this->credentialApiProducts = $list;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getConsumerKey()
     {
         return $this->consumerKey;
     }
 
+     /**
+      * Sets the value of the consumer key for the app.
+      * @param string
+      */
     public function setConsumerKey($key)
     {
         $this->consumerKey = $key;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getConsumerSecret()
     {
         return $this->consumerSecret;
     }
 
+     /**
+      * Sets the value of the consumer secret for the app.
+      * @param string
+      */
     public function setConsumerSecret($secret)
     {
         $this->consumerSecret = $secret;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCredentialScopes()
     {
         return $this->credentialScopes;
     }
 
+     /**
+      * Sets the value of the credential's scope.
+      * @param array
+      */
     protected function setCredentialScopes(array $scopes)
     {
         $this->credentialScopes = $scopes;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCredentialStatus()
     {
         return $this->credentialStatus;
     }
 
+     /**
+      * Sets the status of the consumer key for the app: 'approved' or 'pending'.
+      * @param string
+      */
     protected function setCredentialStatus($status)
     {
         $this->credentialStatus = $status;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+     /**
+      * Sets the Unix time when the app was created.
+      * @param integer
+      */
     protected function setCreatedAt($time_in_milliseconds)
     {
         $this->createdAt = floatval($time_in_milliseconds);
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCreatedBy()
     {
         return $this->createdBy;
     }
 
+     /**
+      * Sets the username of the developer who created the app.
+      * @param string
+      */
     public function setCreatedBy($who)
     {
         $this->createdBy = $who;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getModifiedAt()
     {
         return $this->modifiedAt;
     }
 
+     /**
+      * Sets the Unix time when the app was last modified.
+      * @param integer
+      */
     protected function setModifiedAt($time_in_milliseconds)
     {
         $this->modifiedAt = $time_in_milliseconds;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getModifiedBy()
     {
         return $this->modifiedBy;
     }
 
+     /**
+      * Sets the username of the developer who last modified the app.
+      * @param string
+      */
     public function setModifiedBy($who)
     {
         $this->modifiedBy = $who;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCredentialAttribute($attr_name)
     {
         if (isset($this->credentialAttributes[$attr_name])) {
@@ -328,53 +476,85 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return NULL;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setCredentialAttribute($name, $value)
     {
         $this->credentialAttributes[$name] = $value;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getCredentialAttributes()
     {
         return $this->credentialAttributes;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function clearCredentialAttributes()
     {
         $this->credentialAttributes = array();
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getAppId()
     {
         return $this->appId;
     }
 
+     /**
+      * Sets the GUID of this app.
+      * @param string
+      */
     protected function setAppId($id)
     {
         $this->appId = $id;
     }
 
 
+     /**
+      * {@inheritDOc}
+      */
     public function getAppFamily()
     {
         return $this->appFamily;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function setAppFamily($family)
     {
         $this->appFamily = $family;
     }
 
+     /**
+      * {@inheritDOc}
+      */
     public function getScopes()
     {
         return $this->scopes;
     }
 
+     /**
+      * Sets the scope of the app.
+      * @param string
+      */
     protected function setScopes(array $scopes)
     {
         $this->scopes = $scopes;
     }
 
 
+     /**
+      * {@inheritDOc}
+      */
     public function hasCredentialInfo()
     {
         $credential_fields = array(
@@ -511,10 +691,10 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     }
 
     /**
-     * Finds the overall status of this app. We first check app status, then
+     * Finds the overall status of this app. First check app status, then
      * credential status, then credential->apiproduct status. If any are
-     * 'revoked', we return revoked; otherwise if any are 'pending', that's what
-     * we return; else we return 'approved'.
+     * 'revoked', return 'revoked'; if any are 'pending', return 'pending; 
+     * else return 'approved'.
      *
      * @return string
      */
@@ -546,13 +726,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return array_search($current_status, $statuses);
     }
 
-    /**
-     * Populates this object with information retrieved from the Management API.
-     *
-     * If $name is not passed, $this->name is used.
-     *
-     * @param null|string $name
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function load($name = NULL)
     {
         $name = $name ? : $this->name;
@@ -561,14 +737,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         self::loadFromResponse($this, $response, $this->developer);
     }
 
-    /**
-     * Checks to see if an app with the given name exists for this developer.
-     *
-     * If $name is not passed, $this->name is used.
-     *
-     * @param null|string $name
-     * @return bool
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function validate($name = NULL)
     {
         $name = $name ? : $this->name;
@@ -608,15 +779,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return (object)array('to_delete' => $to_delete, 'to_add' => $to_add);
     }
 
-    /**
-     * Write this app's data to the Management API, preserving client key/secret.
-     *
-     * The function attempts to determine if this should be an insert or an
-     * update automagically. However, when $force_update is set to TRUE, this
-     * determination is short-circuited and an update is assumed.
-     *
-     * @param bool $force_update
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function save($force_update = FALSE)
     {
         $is_update = ($force_update || $this->modifiedAt);
@@ -794,15 +959,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return ($a_create_date > $b_create_date) ? -1 : 1;
     }
 
-    /**
-     * Approves or revokes a client key for an app, and optionally also for all
-     * API Products associated with that app.
-     *
-     * @param mixed $status
-     *        May be TRUE, FALSE, 0, 1, 'approve' or 'revoke'
-     * @param bool $also_set_apiproduct
-     * @throws \Apigee\Exceptions\ParameterException
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function setKeyStatus($status, $also_set_apiproduct = TRUE)
     {
         if ($status === 0 || $status === FALSE) {
@@ -837,13 +996,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         }
     }
 
-    /**
-     * Deletes a developer app from the Management API.
-     *
-     * If $name is not passed, $this->name is used.
-     *
-     * @param null|string $name
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function delete($name = NULL)
     {
         $name = $name ? : $this->name;
@@ -853,23 +1008,18 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         }
     }
 
-    /**
-     * Returns names of all apps belonging to this developer.
-     *
-     * @return array
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function getList()
     {
         $this->get();
         return $this->responseObj;
     }
 
-    /**
-     * Returns array of all DeveloperApp objects belonging to this developer.
-     *
-     * @param string|NULL $developer_mail
-     * @return array
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function getListDetail($developer_mail = NULL)
     {
         $developer_mail = $developer_mail ? : $this->developer;
@@ -892,15 +1042,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return $app_list;
     }
 
-    /**
-     * Creates a key/secret pair for this app against its component APIProducts.
-     *
-     * @todo Find out if we need to individually set the key on each APIProduct.
-     *
-     * @param string $consumer_key
-     * @param string $consumer_secret
-     * @throws \Apigee\Exceptions\ParameterException
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function createKey($consumer_key, $consumer_secret)
     {
         if (strlen($consumer_key) < 5 || strlen($consumer_secret) < 5) {
@@ -944,11 +1088,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         }
     }
 
-    /**
-     * Deletes a given key from a developer app.
-     *
-     * @param string $consumer_key
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function deleteKey($consumer_key)
     {
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($consumer_key);
@@ -963,12 +1105,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->load();
     }
 
-    /**
-     * Lists all apps within the org. Each member of the returned array is a
-     * fully-populated DeveloperApp product.
-     *
-     * @return array
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function listAllOrgApps()
     {
         $url = '/o/' . rawurlencode($this->config->orgName);
@@ -1016,9 +1155,9 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return $devs[$id];
     }
 
-    /**
-     * Restores this object to its pristine state.
-     */
+     /**
+      * {@inheritDOc}
+      */
     public function blankValues()
     {
         $this->accessType = 'read';
@@ -1070,6 +1209,12 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return $output;
     }
 
+    /**
+     * Returns an array of all property names that can be returned 
+     * from a call to self::toArray().
+     *
+     * @return array
+     */
     public static function getAppProperties()
     {
         $properties = array_keys(get_class_vars(__CLASS__));
@@ -1097,7 +1242,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
 
     /**
      * Populates this object based on an incoming array generated by the
-     * toArray() method above.
+     * toArray() method.
      *
      * @param $array
      */
