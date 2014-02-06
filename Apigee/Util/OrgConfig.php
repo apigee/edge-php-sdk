@@ -48,24 +48,49 @@ class OrgConfig {
   public $user_mail;
 
   /**
-   * @var array Elements are implementors of 
+   * @var array 
+   * Array of objects that may subscribe to receive events that various 
+   * objects may fire.
+   * Elements are implementors of 
    * Symfony\Component\EventDispatcher\EventSubscriberInterface
    */
   public $subscribers;
 
   /**
    * @var array
+   * Array of HTTP options. The only options currently supported are 
+   * 'connection_timeout' and 'timeout'.
    */
   public $http_options;
 
   /**
    * Create an instance of OrgConfig.
+   * 
+   * <p>The $options argument is an array containing the fields 'logger', 'user_email', 
+   * 'subscribers', and 'http_options'. </p>
+   * 
+   * <p>For example:</p>
+   * <pre>
+   *   $logger = new Apigee\Drupal\WatchdogLogger();
+   *   $logger::setLogThreshold($log_threshold);
+   *   $user_mail = "me@myCo.com";
+   * 
+   *   $options = array(
+   *     'logger' => $logger,
+   *     'user_mail' => $user_mail,
+   *     'subscribers' => NULL,
+   *     'http_options' => array(
+   *       'connection_timeout' => 10,
+   *       'timeout' => 50
+   *     )
+   *   );
+   * </pre>
    *
    * @param string $org_name
    * @param string $endpoint
    * @param string $user
    * @param string $pass
-   * @param array $options
+   * @param array $options 
    */
   public function __construct($org_name, $endpoint, $user, $pass, $options = array()) {
     $this->orgName = $org_name;

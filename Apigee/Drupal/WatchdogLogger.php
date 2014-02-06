@@ -13,7 +13,19 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger {
 
   /**
    * Sets the logging threshold, below which log entries will be dropped
-   * rather than logged. This should be a WATCHDOG_* constant.
+   * rather than logged, as definedby RFC 3164: 
+   * {@link http://www.faqs.org/rfcs/rfc3164.html}.
+   * These values are implemented by Psr\Log\LogLevel as:
+   * <ul>
+   *   <li>LogLevel::EMERGENCY</li>
+   *   <li>LogLevel::ALERT</li>
+   *   <li>LogLevel::CRITICAL</li>
+   *   <li>LogLevel::ERROR</li>
+   *   <li>LogLevel::WARNING</li>
+   *   <li>LogLevel::NOTICE</li>
+   *   <li>LogLevel::INFO</li>
+   *   <li>LogLevel::DEBUG</li>
+   * </ul>
    *
    * @param int $threshold
    */
@@ -23,6 +35,8 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger {
 
   /**
    * Logs an event to watchdog.
+   * This method is called automatically but you can call it 
+   * from your own code as well.
    *
    * @param string $level
    * @param mixed $message

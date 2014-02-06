@@ -1,59 +1,79 @@
 <?php
-
+/**
+ * @file
+ * Abstracts the Organization object in the Management API and allows clients to
+ * manipulate it.
+ *
+ * @author djohnson
+ */
 namespace Apigee\ManagementAPI;
 
+/**
+ * Abstracts the Organization object in the Management API and allows clients to
+ * manipulate it.
+ *
+ * @author djohnson
+ */
 class Organization extends Base implements OrganizationInterface
 {
 
     /**
      * @var string
+     * The internal name of the organization.
      */
     protected $name;
 
     /**
      * @var string
+     * The dispaly name of the organization.
      */
     protected $displayName;
 
     /**
      * @var array
+     * Environments available in the organization. By default 'test' and 'prod' 
+     * environments are available.
      */
     protected $environments;
 
     /**
      * @var array
+     * A list of descriptors used internally by Apigee.
      */
     protected $properties;
 
     /**
      * @var string
+     * Organization type. Currently 'trial' and 'paid' are valid.
      */
     protected $type;
 
     /**
      * @var int
-     * Unix timestamp in milliseconds
+     * Unix time when the organization was created.
      */
     protected $createdAt;
 
     /**
      * @var string
+     * Username of the Apigee user who created the organization.
      */
     protected $createdBy;
 
     /**
      * @var int
-     * Unix timestamp in milliseconds
+     * Unix time when the organization was last modified.
      */
     protected $lastModifiedAt;
 
     /**
      * @var string
+     * Username of the Apigee user who last modified the organization.
      */
     protected $lastModifiedBy;
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function getName()
     {
@@ -61,7 +81,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function getDisplayName()
     {
@@ -69,7 +89,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getEnvironments()
     {
@@ -77,7 +97,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getProperties()
     {
@@ -85,8 +105,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @param string $name
-     * @return string|null
+     * {@inheritDoc}
      */
     public function getProperty($name)
     {
@@ -94,7 +113,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function getType()
     {
@@ -102,7 +121,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return int
+     * {@inheritDoc}
      */
     public function getCreatedAt()
     {
@@ -110,7 +129,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function getCreatedBy()
     {
@@ -118,7 +137,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return int
+     * {@inheritDoc}
      */
     public function getLastModifiedAt()
     {
@@ -126,7 +145,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * @return string
+     * {@inheritDoc}
      */
     public function getLastModifiedBy()
     {
