@@ -119,6 +119,16 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $credentialAttributes;
 
     /**
+     * @var int
+     */
+    protected $credentialIssuedAt;
+
+    /**
+     * @var int
+     */
+    protected $credentialExpiresAt;
+
+    /**
      * @var string
      */
     protected $developer;
@@ -274,6 +284,23 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected function setCredentialStatus($status)
     {
         $this->credentialStatus = $status;
+    }
+
+    public function getCredentialIssueDate()
+    {
+        return $this->credentialIssuedAt;
+    }
+    protected function setCredentialIssueDate($timestamp)
+    {
+        $this->credentialIssuedAt = intval($timestamp);
+    }
+    public function getCredentialExpiryDate()
+    {
+        return $this->credentialExpiresAt;
+    }
+    protected function setCredentialExpiryDate($timestamp)
+    {
+        $this->credentialExpiresAt = intval($timestamp);
     }
 
     public function getCreatedAt()
@@ -463,20 +490,25 @@ class DeveloperApp extends Base implements DeveloperAppInterface
      * Reads the credentials array from the API response and sets object
      * properties.
      *
+     * We try to find the approved credential with the most recent issued-at
+     * timestamp that is not also expired. Failing that, we return the
+     * earliest-issued credential in the list.
+     *
      * @static
      * @param DeveloperApp $obj
      * @param $credentials
      */
     protected static function loadCredentials(DeveloperApp &$obj, $credentials)
     {
-        // Find the credential with the max create_date attribute.
+        // Find the credential with the max issuedAt attribute which isn't expired.
         if (count($credentials) > 0) {
             $credential = NULL;
-            // Sort credentials by create_date descending.
+            // Sort credentials by issuedAt descending.
             usort($credentials, array(__CLASS__, 'sortCredentials'));
             // Look for the first member of the array that is approved.
+            $m_now = time() * 1000;
             foreach ($credentials as $c) {
-                if ($c['status'] == 'approved') {
+                if ($c['status'] == 'approved' && ($c['expiresAt'] == -1 || $c['expiresAt'] > $m_now)) {
                     $credential = $c;
                     break;
                 }
@@ -490,6 +522,8 @@ class DeveloperApp extends Base implements DeveloperAppInterface
             $obj->consumerSecret = $credential['consumerSecret'];
             $obj->credentialScopes = $credential['scopes'];
             $obj->credentialStatus = $credential['status'];
+            $obj->credentialExpiresAt = $credential['expiresAt'];
+            $obj->credentialIssuedAt = $credential['issuedAt'];
 
             $obj->credentialAttributes = array();
             foreach ($credential['attributes'] as $attribute) {
@@ -680,60 +714,26 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         if (count($response['credentials']) > 0) {
             $credential_attributes = array();
             $current_credential = NULL;
-            // If we created a new key, find it and add a create_date attribute to it.
-            if ($created_new_key) {
-                // Look for the first credential that has no create_date timestamp.
-                $no_timestamp_index = NULL;
-                foreach ($credentials as $i => $cred) {
-                    $attrs = $cred['attributes'];
-                    $found_create_date = FALSE;
-                    foreach ($attrs as $attr) {
-                        if ($attr['name'] == 'create_date') {
-                            $found_create_date = TRUE;
-                            break;
-                        }
-                    }
-                    if (!$found_create_date) {
-                        $no_timestamp_index = $i;
-                        break;
-                    }
+            // Find credential -- it should have the maximum issuedAt date.
+            $max_issued_at = -1;
+            $credential_index = NULL;
+            foreach ($response['credentials'] as $i => $cred) {
+                $issued_at = (array_key_exists('issuedAt', $cred) ? intval($cred['issuedAt']) : 0);
+                if ($max_issued_at == -1 || $issued_at > $max_issued_at) {
+                    $max_issued_at = $issued_at;
+                    $credential_index = $i;
                 }
-                if (isset($no_timestamp_index)) {
-                    $current_credential =& $response['credentials'][$no_timestamp_index];
-                    $credential_attributes['create_date'] = strval(time());
-                    $consumer_key = $current_credential['consumerKey'];
-                }
-            } else {
-                // Find latest timestamped credential
-                $max_created = 0;
-                $max_created_index = 0;
-                foreach ($response['credentials'] as $i => $cred) {
-                    foreach ($credentials as $i => $cred) {
-                        $attrs = $cred['attributes'];
-                        foreach ($attrs as $attr) {
-                            if ($attr['name'] == 'create_date' && $attr['value'] > $max_created) {
-                                $max_created = intval($attr['value']);
-                                $max_created_index = $i;
-                            }
-                        }
-                    }
-                }
-                $current_credential =& $response['credentials'][$max_created_index];
             }
-
-            // If there are credential attributes, merge them in.
-            $credential_attributes += $this->credentialAttributes;
-            $ca_copy = $credential_attributes;
-            if (array_key_exists('create_date', $ca_copy)) {
-                unset ($ca_copy['create_date']);
+            if (isset($credential_index)) {
+                $current_credential =& $response['credentials'][$credential_index];
+                $consumer_key = $current_credential['consumerKey'];
             }
-            $other_attrib_count = count($ca_copy);
 
             // If any credential attributes are present, save them
-            if ($current_credential && ($created_new_key || $other_attrib_count > 0)) {
+            if ($current_credential && count($this->credentialAttributes) > 0) {
                 $payload = $current_credential;
                 $payload['attributes'] = array();
-                foreach ($credential_attributes as $name => $val) {
+                foreach ($this->credentialAttributes as $name => $val) {
                     $payload['attributes'][] = array('name' => $name, 'value' => $val);
                 }
                 // Payload only has to send bare minimum for update.
@@ -770,24 +770,10 @@ class DeveloperApp extends Base implements DeveloperAppInterface
      */
     protected static function sortCredentials($a, $b)
     {
-        $a_create_date = 0;
-        foreach ($a['attributes'] as $attr) {
-            if ($attr['name'] == 'create_date') {
-                $a_create_date = intval($attr['value']);
-                break;
-            }
-        }
-        $b_create_date = 0;
-        foreach ($b['attributes'] as $attr) {
-            if ($attr['name'] == 'create_date') {
-                $b_create_date = intval($attr['value']);
-                break;
-            }
-        }
-        if ($a_create_date == $b_create_date) {
+        if ($a['issuedAt'] == $b['issuedAt']) {
             return 0;
         }
-        return ($a_create_date > $b_create_date) ? -1 : 1;
+        return ($a['issuedAt'] > $b['issuedAt']) ? -1 : 1;
     }
 
     /**
@@ -904,9 +890,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         }
         // This is by nature a two-step process. API Products cannot be added
         // to a new key at the time of key creation, for some reason.
-        $create_date = strval(time());
         $payload = array(
-            'attributes' => array(array('name' => 'create_date', 'value' => $create_date)),
             'consumerKey' => $consumer_key,
             'consumerSecret' => $consumer_secret,
             'scopes' => $this->getCredentialScopes(),
@@ -921,8 +905,6 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $key = $new_credential['consumerKey'];
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($key);
         $this->post($url, $new_credential);
-        // The following line may throw an exception if the POST was unsuccessful
-        // (e.g. consumer_key already exists, etc.)
         $credential = $this->responseObj;
 
         if ($credential['status'] == 'approved' || empty($this->consumerKey)) {
@@ -933,6 +915,8 @@ class DeveloperApp extends Base implements DeveloperAppInterface
             $this->setConsumerSecret($credential['consumerSecret']);
             $this->setCredentialScopes($credential['scopes']);
             $this->setCredentialStatus($credential['status']);
+            $this->setCredentialIssueDate($credential['issuedAt']);
+            $this->setCredentialExpiryDate($credential['expiresAt']);
             $this->clearCredentialAttributes();
             foreach ($credential['attributes'] as $attribute) {
                 $this->setCredentialAttribute($attribute['name'], $attribute['value']);
@@ -982,6 +966,20 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         return $app_list;
     }
 
+    /**
+     * Loads a developer app, given its appId (which is a UUID).
+     *
+     * Normally you'd find an app by listing its developer's apps and looking
+     * for the name you want. However, if you already know the app's unique id,
+     * you can load without knowing its developer.
+     *
+     * If you pass TRUE as the second parameter here, the DeveloperApp object
+     * will be changed so that it pulls apps from this developer by default.
+     *
+     * @param string $appId
+     * @param bool $reset_developer
+     * @throws \Apigee\Exceptions\ParameterException
+     */
     public function loadByAppId($appId, $reset_developer = FALSE)
     {
         if (!preg_match('!^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$!', $appId)) {
@@ -1039,6 +1037,8 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->credentialScopes = array();
         $this->credentialStatus = NULL;
         $this->credentialAttributes = array();
+        $this->credentialIssuedAt = 0;
+        $this->credentialExpiresAt = -1;
 
         $this->cachedApiProducts = array();
     }
