@@ -35,7 +35,7 @@ interface UserRoleInterface
       * Replaces the users in a role with $users.
       * @param array An array of email addresses of the users.
       * @param string
-      * @return array
+      * @return bool TRUE if the set was successful, and FALSE if not.
       */
     public function setRoleUsers(array $users, $role);
 
