@@ -230,7 +230,7 @@ interface DeveloperAppInterface
     public function getConsumerSecret();
 
      /**
-      * Returns the value of the consumer secret for the app.
+      * Returns the scope of the active credentials.
       * @return string
       */
     public function getCredentialScopes();
