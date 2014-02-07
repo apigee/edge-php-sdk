@@ -22,8 +22,8 @@ class DeveloperApp extends Base implements DeveloperAppInterface
 
     /**
      * @var string
-     * 'read', 'write', or 'both' (empty is also valid). This property doesn't
-     * appear to ever be used.
+     * Contains 'read', 'write', or 'both' (empty is also valid). 
+     * This property doesn't appear to ever be used.
      */
     protected $accessType;
     /**
@@ -94,7 +94,6 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $name;
     /**
      * @var array
-     * The purpose of this field remains unknown.
      */
     protected $scopes;
     /**
@@ -127,7 +126,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $consumerSecret;
     /**
      * @var array
-     * The purpose of this field is unknown at this time.
+     * The scope of the active credentials.
      */
     protected $credentialScopes;
     /**
@@ -143,11 +142,13 @@ class DeveloperApp extends Base implements DeveloperAppInterface
 
     /**
      * @var int
+     * Unix time when the credentials were issued.
      */
     protected $credentialIssuedAt;
 
     /**
      * @var int
+     * Unix time when the credentials expire.
      */
     protected $credentialExpiresAt;
 
@@ -158,6 +159,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     protected $developer;
     /**
      * @var array
+     * Used internally to compare an old API product with a new one.
      */
     protected $cachedApiProducts;
 
@@ -403,21 +405,37 @@ class DeveloperApp extends Base implements DeveloperAppInterface
         $this->credentialStatus = $status;
     }
 
+    /**
+     * Returns the Unix time when the credentials were created.
+     * @return integer
+     */
     public function getCredentialIssueDate()
     {
         return $this->credentialIssuedAt;
     }
 
+    /**
+     * Sets the Unix time when the credentials were created.
+     * @param integer
+     */
     protected function setCredentialIssueDate($timestamp)
     {
         $this->credentialIssuedAt = intval($timestamp);
     }
 
+    /**
+     * Returns the Unix time when the credentials expire.
+     * @return integer
+     */
     public function getCredentialExpiryDate()
     {
         return $this->credentialExpiresAt;
     }
 
+    /**
+     * Sets the Unix time when the credentials expire.
+     * @param integer
+     */
     protected function setCredentialExpiryDate($timestamp)
     {
         $this->credentialExpiresAt = intval($timestamp);

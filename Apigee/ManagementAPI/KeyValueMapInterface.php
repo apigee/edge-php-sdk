@@ -10,8 +10,8 @@ interface KeyValueMapInterface
      * Fetches a value from a named map/key. If no such map or key is found,
      * returns NULL.
      *
-     * @param $map_name
-     * @param $key_name
+     * @param string $map_name
+     * @param string $key_name
      * @return null|string
      */
     public function getEntryValue($map_name, $key_name);
@@ -22,7 +22,7 @@ interface KeyValueMapInterface
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param $map_name
+     * @param string $map_name
      * @return array
      */
     public function getAllEntries($map_name);
@@ -34,8 +34,8 @@ interface KeyValueMapInterface
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param $map_name
-     * @param $key_name
+     * @param string $map_name
+     * @param string $key_name
      * @param $value
      */
     public function setEntryValue($map_name, $key_name, $value);
@@ -45,8 +45,8 @@ interface KeyValueMapInterface
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param $map_name
-     * @param $key_name
+     * @param string $map_name
+     * @param string $key_name
      * @param $value
      */
     public function deleteEntry($map_name, $key_name);
@@ -56,8 +56,8 @@ interface KeyValueMapInterface
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param $map_name
-     * @param $entries
+     * @param string $map_name
+     * @param array $entries An optional array of key/value pairs for the map.
      */
     public function create($map_name, $entries = NULL);
 
@@ -66,7 +66,7 @@ interface KeyValueMapInterface
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param $map_name
+     * @param string $map_name
      */
     public function delete($map_name);
 }

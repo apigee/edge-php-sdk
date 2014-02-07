@@ -6,25 +6,29 @@ interface UserRoleInterface
      /**
       * Returns a list of all system users associated with a role.
       * @param string
-      * @return array
+      * @return array An array of email addresses of the users.
       */
     public function getUsersByRole($role);
 
      /**
       * Adds users to a role.
-      * @param array
-      * @param string
+      * @param array An array of email addresses of the users.
+      * @param string 
+      * @return bool TRUE if the users are added, and FALSE if not.
       */
     public function addUsersToRole(array $users, $role);
 
      /**
       * Removes users from a role.
-      * @param array
-      * @return string
+      * @param array An array of email addresses of the users.
+      * @param string 
+      * @return bool TRUE if the users are removed, and FALSE if not.
       */
     public function removeUsersFromRole(array $users, $role);
 
      /**
+      * Replaces the users in a role with $users.
+      * @param array An array of email addresses of the users.
       * @param string
       * @return array
       */
@@ -32,8 +36,8 @@ interface UserRoleInterface
 
      /**
       * Returns a list of all system roles.
-      * @param bool
-      * @return array
+      * @param bool Internal use only.
+      * @return array 
       */
     public function listRoles($reset = FALSE);
 

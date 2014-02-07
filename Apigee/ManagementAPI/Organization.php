@@ -164,6 +164,7 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
+     * Loads the organization specified by $org.
      * @param string|null $org
      */
     public function load($org = NULL)
