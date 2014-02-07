@@ -34,6 +34,7 @@ class ResponseException extends \Exception
     public $responseObj;
 
     /**
+     * Creates an exception object.
      */
     public function __construct($message, $code = 0, $uri = NULL, $params = NULL, $response_body = NULL)
     {

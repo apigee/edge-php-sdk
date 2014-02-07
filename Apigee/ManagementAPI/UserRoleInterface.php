@@ -1,6 +1,11 @@
 <?php
 namespace Apigee\ManagementAPI;
 
+/**
+ * The interface that an UserRole object must implement.
+ *
+ * @author djohnson
+ */
 interface UserRoleInterface
 {
      /**

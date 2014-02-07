@@ -2,7 +2,12 @@
 
 namespace Apigee\ManagementAPI;
 
-interface DeveloperAppInterface
+/**
+ * The interface that an DeveloperApp object must implement.
+ *
+ * @author djohnson
+ */
+ interface DeveloperAppInterface
 {
 
 
