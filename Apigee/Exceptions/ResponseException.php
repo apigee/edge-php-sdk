@@ -24,6 +24,7 @@ class ResponseException extends \Exception {
   public $responseObj;
 
   /**
+   * Creates an exception object.
    */
   public function __construct($message, $code = 0, $uri = NULL, $params = NULL, $response_body = NULL) {
     parent::__construct($message, $code);
@@ -44,12 +45,26 @@ class ResponseException extends \Exception {
     $this->requestObj = NULL;
   }
 
+  /**
+   * Returns the URI of the request.
+   * @return string
+   */
   public function getUri() {
     return $this->uri;
   }
+
+  /**
+   * Returns the HTTP params in the request.
+   * @return 
+   */
   public function getParams() {
     return $this->params;
   }
+
+  /**
+   * Returns the response body of the request.
+   * @return 
+   */
   public function getResponse() {
     return $this->responseBody;
   }
