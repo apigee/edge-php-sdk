@@ -13,11 +13,12 @@ use Apigee\ManagementAPI\Developer;
 
 class DeveloperTest extends \Apigee\test\AbstractAPITest
 {
-    
-    public function testDeveloperCRUD() {
+
+    public function testDeveloperCRUD()
+    {
         $developer = new Developer(self::$orgConfig);
         $mail = 'phpunit-' . $this->randomString() . '@example.com';
-        
+
         // Begin creation
         $developer->blankValues();
 
@@ -30,7 +31,6 @@ class DeveloperTest extends \Apigee\test\AbstractAPITest
         try {
             $developer->save();
         } catch (\Exception $e) {
-            file_put_contents('/tmp/phpunit-debug.log', $e->getMessage());
             $this->fail('Cannot save developer at create time: [' . $e->getCode() . '] ' . $e->getMessage());
         }
         $this->assertNotEmpty($developer->getDeveloperId());
