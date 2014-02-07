@@ -17,67 +17,79 @@ namespace Apigee\Util;
  *
  * @author djohnson
  */
-class Crypto {
+class Crypto
+{
 
-  private static $cryptoKey;
+    private static $cryptoKey;
 
-  /**
-   * Sets the encryption key. 
-   * Set the key before you call encrypt().
-   * You must call decrypt() with the same value as used for encrypt().
-   *
-   * @static
-   * @param string $key
-   */
-  public static function setKey($key) {
-    self::$cryptoKey = $key;
-  }
+    private static $encryptedStrings;
 
-  /**
-   * Encrypts a string using the specified key. 
-   * Caches the result so that expensive encryption does
-   * not need to happen more often than necessary.
-   *
-   * @static
-   * @param string $string
-   * @return string
-   */
-  public static function encrypt($string) {
-    static $encrypted_strings = array();
+    const MAX_KEY_LENGTH = 32;
 
-    if (isset($encrypted_strings[$string])) {
-      // Already encrypted this one once; use cached version.
-      return $encrypted_strings[$string];
+    /**
+     * Sets the encryption key.
+     *
+     * Set the key before you call encrypt(). You must call decrypt() with the
+     * same value as used for encrypt(). If the key length exceeds the maximum
+     * (defined in the class constant MAX_KEY_LENGTH) it will be truncated.
+     *
+     * @static
+     * @param string $key
+     */
+    public static function setKey($key)
+    {
+        if (strlen($key) > self::MAX_KEY_LENGTH) {
+            $key = substr($key, 0, self::MAX_KEY_LENGTH);
+        }
+        self::$cryptoKey = $key;
+        self::$encryptedStrings = array();
     }
 
-    srand();
-    $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
-    $iv_base64 = rtrim(base64_encode($iv), '='); // Guaranteed to be 22 char long
-    // Store password length so we can accurately trim in case of NULL-padding
-    $encrypt = strlen($string) . "\n" . $string;
-    $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, $encrypt, MCRYPT_MODE_CBC, $iv);
-    $encrypted_strings[$string] = $iv_base64 . base64_encode($encrypted);
-    return $encrypted_strings[$string];
-  }
-
-  /**
-   * Decrypts a string which was encrypted with Crypto::encrypt().
-   *
-   * @static
-   * @param string $scrambled
-   * @return string
-   */
-  public static function decrypt($scrambled) {
-    $iv_base64 = substr($scrambled, 0, 22) . '==';
-    $string_encrypted = substr($scrambled, 22);
-
-    $iv = base64_decode($iv_base64);
-    if ($iv === FALSE || strlen($iv) < 16) {
-      throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
+    /**
+     * Encrypts a string using the specified key.
+     * Caches the result so that expensive encryption does
+     * not need to happen more often than necessary.
+     *
+     * @static
+     * @param string $string
+     * @return string
+     */
+    public static function encrypt($string)
+    {
+        if (!isset(self::$encryptedStrings)) {
+            self::$encryptedStrings = array();
+        }
+        if (!array_key_exists($string, self::$encryptedStrings)) {
+            srand();
+            $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
+            $iv_base64 = rtrim(base64_encode($iv), '='); // Guaranteed to be 22 char long
+            // Store password length so we can accurately trim in case of NULL-padding
+            $encrypt = strlen($string) . "\n" . $string;
+            $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, $encrypt, MCRYPT_MODE_CBC, $iv);
+            self::$encryptedStrings[$string] = $iv_base64 . base64_encode($encrypted);
+        }
+        return self::$encryptedStrings[$string];
     }
-    $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
-    list ($length, $password) = explode("\n", $decrypted, 2);
-    return substr($password, 0, intval($length));
-  }
+
+    /**
+     * Decrypts a string which was encrypted with Crypto::encrypt().
+     *
+     * @static
+     * @param string $scrambled
+     * @return string
+     */
+    public static function decrypt($scrambled)
+    {
+        $iv_base64 = substr($scrambled, 0, 22) . '==';
+        $string_encrypted = substr($scrambled, 22);
+
+        $iv = base64_decode($iv_base64);
+        if ($iv === FALSE || strlen($iv) < 16) {
+            throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
+        }
+        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
+        list ($length, $password) = explode("\n", $decrypted, 2);
+        return substr($password, 0, intval($length));
+    }
 
 }
