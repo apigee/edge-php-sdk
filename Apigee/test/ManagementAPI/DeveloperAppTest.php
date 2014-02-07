@@ -105,7 +105,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
             $this->fail('Failed to update API Products list');
         }
         if (count($cred_api_products) != 1 || $cred_api_products[0]['apiproduct'] != $new_product_name) {
-             $this->fail('Failed to update Credential API Products list');
+            $this->fail('Failed to update Credential API Products list');
         }
         $this->assertEquals($key, $app->getConsumerKey(), 'Consumer Key changed when API Product changed.');
         // End update key

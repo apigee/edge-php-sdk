@@ -88,6 +88,7 @@ class UserRole extends Base implements UserRoleInterface
         if (!empty($to_del)) {
             $this->removeUsersFromRole($to_del, $role);
         }
+        return TRUE;
     }
 
      /**
