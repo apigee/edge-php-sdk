@@ -44,7 +44,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
         // Begin create
         $app = new DeveloperApp(self::$orgConfig, $mail);
 
-        $app->setName('phpunit-test');
+        $app->setName('phpunit test');
         $app->setAccessType('read');
         $app->setCallbackUrl('http://example.com/');
         $app->setApiProducts(array($product->getName()));
