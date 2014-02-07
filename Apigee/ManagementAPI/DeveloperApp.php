@@ -706,7 +706,18 @@ class DeveloperApp extends Base implements DeveloperAppInterface
             $obj->credentialScopes = $credential['scopes'];
             $obj->credentialStatus = $credential['status'];
             $obj->credentialExpiresAt = $credential['expiresAt'];
-            $obj->credentialIssuedAt = $credential['issuedAt'];
+            $obj->credentialIssuedAt = 0;
+            if (isset($credential['issuedAt'])) {
+                $obj->credentialIssuedAt = $credential['issuedAt'];
+            }
+            elseif (!empty($credential['attributes'])) {
+                foreach ($credential['attributes'] as $attrib) {
+                    if ($attrib['name'] == 'create_date') {
+                        $obj->credentialIssuedAt = intval($attrib['value']) * 1000;
+                        break;
+                    }
+                }
+            }
 
             $obj->credentialAttributes = array();
             foreach ($credential['attributes'] as $attribute) {
@@ -793,19 +804,25 @@ class DeveloperApp extends Base implements DeveloperAppInterface
      */
     protected function apiProductsDiff()
     {
+        $cache = $this->cachedApiProducts;
+        for ($i = 0; $i < count($cache); $i++) {
+            if (is_array($cache[$i]) && array_key_exists('apiproduct', $cache[$i])) {
+                $cache[$i] = $cache[$i]['apiproduct'];
+            }
+        }
         // Find apiproducts that we will have to delete.  These are found in the
         // cached list but not in the live list.
         $to_delete = array();
-        foreach ($this->cachedApiProducts as $api_product) {
-            if (!in_array($api_product['apiproduct'], $this->apiProducts)) {
-                $to_delete[] = $api_product['apiproduct'];
+        foreach ($cache as $api_product) {
+            if (!in_array($api_product, $this->apiProducts)) {
+                $to_delete[] = $api_product;
             }
         }
         // Find apiproducts that we will have to add. These are found in the
         // live list but not in the cached list.
         $to_add = array();
         foreach ($this->apiProducts as $api_product) {
-            if (!in_array($api_product, $this->cachedApiProducts)) {
+            if (!in_array($api_product, $cache)) {
                 $to_add[] = $api_product;
             }
         }
@@ -813,7 +830,7 @@ class DeveloperApp extends Base implements DeveloperAppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * {@inheritDoc}
      */
     public function save($force_update = FALSE)
     {
@@ -938,10 +955,34 @@ class DeveloperApp extends Base implements DeveloperAppInterface
      */
     protected static function sortCredentials($a, $b)
     {
-        if ($a['issuedAt'] == $b['issuedAt']) {
+        $a_issued_at = 0;
+        if (array_key_exists('issuedAt', $a)) {
+            $a_issued_at = $a['issuedAt'];
+        }
+        elseif (!empty($a['attributes'])) {
+            foreach ($a['attributes'] as $attrib) {
+                if ($attrib['name'] == 'create_date') {
+                    $a_issued_at = intval($attrib['value']) * 1000;
+                    break;
+                }
+            }
+        }
+        $b_issued_at = 0;
+        if (array_key_exists('issuedAt', $b)) {
+            $b_issued_at = $b['issuedAt'];
+        }
+        elseif (!empty($b['attributes'])) {
+            foreach ($b['attributes'] as $attrib) {
+                if ($attrib['name'] == 'create_date') {
+                    $b_issued_at = intval($attrib['value']) * 1000;
+                    break;
+                }
+            }
+        }
+        if ($a_issued_at == $b_issued_at) {
             return 0;
         }
-        return ($a['issuedAt'] > $b['issuedAt']) ? -1 : 1;
+        return ($a_issued_at > $b_issued_at) ? -1 : 1;
     }
 
     /**
