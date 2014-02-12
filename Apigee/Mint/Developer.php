@@ -10,8 +10,8 @@ use Apigee\Mint\DataStructures\TransactionBrokerage;
 use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Types\DeveloperType;
 use Apigee\Mint\Types\DeveloperStatusType;
-use Apigee\Mint\DataStructures\DeveloperBalance as DeveloperBalance;
-use Apigee\Exceptions\ParameterException as ParameterException;
+use Apigee\Mint\DeveloperBalance;
+use Apigee\Exceptions\ParameterException;
 
 class Developer extends Base\BaseObject {
 
@@ -274,7 +274,8 @@ class Developer extends Base\BaseObject {
     $response = $this->responseObj;
     $return_objects = array();
     foreach ($response['developerBalance'] as $response_data) {
-      $obj = new DeveloperBalance($response_data);
+      $obj = new DeveloperBalance($this->email, $this->getConfig());
+      $obj->loadFromRawData($response_data);
       $return_objects[] = $obj;
     }
     return $return_objects;

@@ -69,10 +69,54 @@ class DeveloperBalance extends Base\BaseObject {
   private $chargePerUsage;
 
   /**
+   * @var double
+   */
+  private $approxTaxRate;
+
+  /**
+   * This is balance (prepaid) or credit limit (postpaid)
+   * @var double
+   */
+  private $currentBalance;
+
+  /**
+   * @var string
+   */
+  private $id;
+
+  /**
+   * @var string
+   */
+  private $month;
+
+  /**
+   * @var double
+   */
+  private $previousBalance;
+
+  /**
+   * @var double
+   */
+  private $tax;
+
+  /**
+   * @var double
+   */
+  private $topups;
+
+  /**
+   * @var int
+   */
+  private $year;
+
+  /**
    * @param string $dev
    * @param \Apigee\Util\OrgConfig $config
    */
-  public function __construct($dev, \Apigee\Util\OrgConfig $config) {
+  public function __construct($dev = NULL, \Apigee\Util\OrgConfig $config = NULL) {
+    if ($dev == NULL) {
+      return;
+    }
     $base_url = '/mint/organizations/' . $config->orgName . '/developers/' . rawurlencode($dev) . '/developer-balances';
     $this->dev = $dev;
     $this->init($config, $base_url);
@@ -311,26 +355,175 @@ class DeveloperBalance extends Base\BaseObject {
    * Update recurring setup
    *
    * @param $supportedCurrencyId
-   * @param $isRecurring
+   * @param $recurring
    * @param $replenishAmount
    * @param $recurringAmount
    * @param $provider
    */
-  public function updateRecurringSetup($supportedCurrencyId, $isRecurring, $replenishAmount, $recurringAmount, $provider) {
+  public function updateRecurringSetup($supportedCurrencyId, $recurring, $replenishAmount, $recurringAmount, $provider) {
     $options = array(
       'query' => array(
         'supportedCurrencyId' => strtolower($supportedCurrencyId),
       ),
     );
-    $payload = array(
-      'providerId' => $provider,
-      'chargePerUsage' => !$isRecurring ? true : false,
-      'isRecurring' => $isRecurring ? true : false,
-      'recurringAmount' => $recurringAmount,
-      'replenishAmount' => $replenishAmount,
-    );
+
+    $payload = array('providerId' => $provider);
+    if (!$recurring['isRecurring'] && !$recurring['chargePerUsage']) {
+      $payload += array(
+        'recurringAmount' => 2,
+        'replenishAmount' => 1,
+      );
+    }
+    else {
+      $payload += array(
+        'recurringAmount' => $recurringAmount,
+        'replenishAmount' => $replenishAmount,
+      );
+    }
+
+    $payload += $recurring;
 
     $this->post('recurring-setup', $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
+  }
+
+  /**
+   * @param float $approxTaxRate
+   */
+  public function setApproxTaxRate($approxTaxRate) {
+    $this->approxTaxRate = $approxTaxRate;
+  }
+
+  /**
+   * @return float
+   */
+  public function getApproxTaxRate() {
+    return $this->approxTaxRate;
+  }
+
+  /**
+   * @param mixed $cachedBaseUrl
+   */
+  public function setCachedBaseUrl($cachedBaseUrl) {
+    $this->cachedBaseUrl = $cachedBaseUrl;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCachedBaseUrl() {
+    return $this->cachedBaseUrl;
+  }
+
+  /**
+   * @param float $currentBalance
+   */
+  public function setCurrentBalance($currentBalance) {
+    $this->currentBalance = $currentBalance;
+  }
+
+  /**
+   * @return float
+   */
+  public function getCurrentBalance() {
+    return $this->currentBalance;
+  }
+
+  /**
+   * @param string $dev
+   */
+  public function setDev($dev) {
+    $this->dev = $dev;
+  }
+
+  /**
+   * @return string
+   */
+  public function getDev() {
+    return $this->dev;
+  }
+
+  /**
+   * @param string $id
+   */
+  public function setId($id) {
+    $this->id = $id;
+  }
+
+  /**
+   * @return string
+   */
+  public function getId() {
+    return $this->id;
+  }
+
+  /**
+   * @param string $month
+   */
+  public function setMonth($month) {
+    $this->month = $month;
+  }
+
+  /**
+   * @return string
+   */
+  public function getMonth() {
+    return $this->month;
+  }
+
+  /**
+   * @param float $previousBalance
+   */
+  public function setPreviousBalance($previousBalance) {
+    $this->previousBalance = $previousBalance;
+  }
+
+  /**
+   * @return float
+   */
+  public function getPreviousBalance() {
+    return $this->previousBalance;
+  }
+
+  /**
+   * @param float $tax
+   */
+  public function setTax($tax) {
+    $this->tax = $tax;
+  }
+
+  /**
+   * @return float
+   */
+  public function getTax() {
+    return $this->tax;
+  }
+
+  /**
+   * @param float $topups
+   */
+  public function setTopups($topups) {
+    $this->topups = $topups;
+  }
+
+  /**
+   * @return float
+   */
+  public function getTopups() {
+    return $this->topups;
+  }
+
+  /**
+   * @param int $year
+   */
+  public function setYear($year) {
+    $this->year = $year;
+  }
+
+  /**
+   * @return int
+   */
+  public function getYear() {
+    return $this->year;
   }
 
   /**

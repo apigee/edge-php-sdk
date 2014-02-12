@@ -533,10 +533,16 @@ class Organization extends Base\BaseObject {
       )
     );
     $url = rawurlencode($id) . '/supported-currencies';
-    $this->get($url, 'application/json; charset=utf-8', array(), $options);
-    $list = $this->responseObj;
+    $cache_manager = CacheFactory::getCacheManager(NULL);
+    $data = $cache_manager->get('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), NULL);
+
+    if ($data == NULL) {
+      $this->get($url, 'application/json; charset=utf-8', array(), $options);
+      $data = $this->responseObj;
+      $cache_manager->set('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), $data);
+    }
     $currencies = array();
-    foreach ($list['supportedCurrency'] as $currency_item) {
+    foreach ($data['supportedCurrency'] as $currency_item) {
       $currencies[] = new SupportedCurrency($currency_item);
     }
     return $currencies;

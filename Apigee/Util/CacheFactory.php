@@ -28,6 +28,9 @@ class CacheFactory {
    */
   private static $is_setup = FALSE;
 
+  /**
+   * @var \Apigee\Util\CacheManager
+   */
   private static $default_cache_manager;
 
   /**
@@ -40,6 +43,16 @@ class CacheFactory {
    */
   public static function setDefault(CacheManager $cache_manager) {
     self::$default_cache_manager = $cache_manager;
+  }
+
+  /**
+   * Returns the default cache manager if there is one,
+   * otherwise it returns NULL
+   *
+   * @return CacheManager
+   */
+  public static function getDefault() {
+    return self::$default_cache_manager;
   }
 
   private static function setup() {
@@ -56,7 +69,7 @@ class CacheFactory {
    *
    * @param string $cache_manager_class_name
    *   Class name of the cache manager to retrieve. This class name must be of a class
-   *   that extends CacheManager, otherwise thrown an {@link Apigee\Exceptions\ParameterException}.
+   *   that extends CacheManager, otherwise an {@link Apigee\Exceptions\ParameterException} is thrown.
    * @param \Psr\Log\LoggerInterface|null $logger
    * @return \Apigee\Util\CacheManager
    */
