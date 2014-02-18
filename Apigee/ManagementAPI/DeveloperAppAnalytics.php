@@ -38,9 +38,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         $this->setEnvironment($env);
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function setEnvironment($env)
     {
         if ($env != '*') {
@@ -54,17 +54,17 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         $this->setBaseUrl($environment_url);
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getEnvironment()
     {
         return $this->environment;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getAllEnvironments()
     {
         $env = Cache::get('devconnect_org_environments', array());
@@ -75,9 +75,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $env;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getByAppName($developer_id, $app_name, $metric, $time_start, $time_end, $time_unit, $sort_by, $sort_order = 'ASC')
     {
         $params = self::validateParameters($metric, $time_start, $time_end, $time_unit, $sort_by, $sort_order);
@@ -127,9 +127,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $datapoints;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function queryEnvironments()
     {
         $env_url = '/o/' . rawurlencode($this->config->orgName) . '/environments';
@@ -139,9 +139,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         return $this->responseObj;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public static function getMetrics()
     {
         return array(
@@ -159,9 +159,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         );
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public static function getTimeUnits()
     {
         return array(

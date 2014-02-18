@@ -5,8 +5,8 @@ namespace Apigee\ManagementAPI;
 use Apigee\Exceptions\ResponseException;
 
 /**
- * The KeyValueMap class implements a general-purpose datastore. 
- * The class can contain multiple maps, where each map has a name and can 
+ * The KeyValueMap class implements a general-purpose datastore.
+ * The class can contain multiple maps, where each map has a name and can
  * have multiple key-value pairs stored in it.
  */
 class KeyValueMap extends Base implements KeyValueMapInterface

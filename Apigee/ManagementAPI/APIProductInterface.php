@@ -6,7 +6,7 @@ namespace Apigee\ManagementAPI;
  *
  * @author djohnson
  */
- interface APIProductInterface
+interface APIProductInterface
 {
     /**
      * Queries the Management API and populates self's properties from
@@ -50,130 +50,130 @@ namespace Apigee\ManagementAPI;
     public function listProducts();
 
     /**
-     * Returns the attributes array of name/value pairs. 
+     * Returns the attributes array of name/value pairs.
      * @return array
      */
     public function getAttributes();
 
     /**
-     * Returns a specific attribute value, or NULL if the attribute does not exist. 
+     * Returns a specific attribute value, or NULL if the attribute does not exist.
      *
      * @param $name
      */
     public function getAttribute($name);
 
     /**
-     * Sets an attribute value. 
+     * Sets an attribute value.
      * @param $name
      * @param $value
      */
     public function setAttribute($name, $value);
 
     /**
-     * Clears the attributes array. 
+     * Clears the attributes array.
      */
     public function clearAttributes();
 
     /**
-     * Returns the UNIX time when the API Product was created. 
+     * Returns the UNIX time when the API Product was created.
      * @return integer
      */
     public function getCreatedAt();
 
     /**
-     * Returns the username of the user who created the API Product. 
+     * Returns the username of the user who created the API Product.
      * @return string
      */
     public function getCreatedBy();
 
     /**
-     * Returns the UNIX time when the API Product was most recently updated. 
+     * Returns the UNIX time when the API Product was most recently updated.
      * @return integer
      */
     public function getModifiedAt();
 
     /**
-     * Returns the username of the user who most recently updated the API Product. 
+     * Returns the username of the user who most recently updated the API Product.
      * @return string
      */
     public function getModifiedBy();
 
     /**
-     * Returns the array of environment names in an organization. 
+     * Returns the array of environment names in an organization.
      * @return array
      */
     public function getEnvironments();
 
     /**
-     * Returns the internal name of the API Product. 
+     * Returns the internal name of the API Product.
      * @return string
      */
     public function getName();
 
     /**
-     * Returns the array of API proxy names in an organization. 
+     * Returns the array of API proxy names in an organization.
      * @return array
      */
     public function getProxies();
 
     /**
-     * Returns the number of request messages permitted by this API product. 
+     * Returns the number of request messages permitted by this API product.
      * @return integer
      */
     public function getQuotaLimit();
 
     /**
-     * Returns the time interval over which the number of request messages is calculated. 
+     * Returns the time interval over which the number of request messages is calculated.
      * @return integer
      */
     public function getQuotaInterval();
 
     /**
-     * Returns the time unit defined for the quota interval. 
+     * Returns the time unit defined for the quota interval.
      * @return string
      */
     public function getQuotaTimeUnit();
 
     /**
-     * Returns the name to be displayed in the UI or developer portal to 
-     * developers registering for API access.. 
+     * Returns the name to be displayed in the UI or developer portal to
+     * developers registering for API access..
      * @return string
      */
     public function getDisplayName();
 
     /**
-     * Returns the string describing the API Product. 
+     * Returns the string describing the API Product.
      * @return string
      */
     public function getDescription();
 
     /**
-     * Adds an API resource to the API Product. 
+     * Adds an API resource to the API Product.
      * @param $resource
      */
     public function addApiResource($resource);
 
     /**
-     * Removes an API resource from the API Product. 
+     * Removes an API resource from the API Product.
      * @param $resource
      */
     public function removeApiResource($resource);
 
     /**
-     * Returns the array of API resources. 
+     * Returns the array of API resources.
      * @return array
      */
     public function getApiResources();
 
-     /**
-      * Returns the API product approval type as 'manual' or 'auto'. 
-      * @return string
-      */
+    /**
+     * Returns the API product approval type as 'manual' or 'auto'.
+     * @return string
+     */
     public function getApprovalType();
 
-     /**
-      * Sets the API product approval type as 'manual' or 'auto'. 
-      * @param string $type
-      */
+    /**
+     * Sets the API product approval type as 'manual' or 'auto'.
+     * @param string $type
+     */
     public function setApprovalType($type);
 }

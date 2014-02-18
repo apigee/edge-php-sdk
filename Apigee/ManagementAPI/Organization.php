@@ -31,7 +31,7 @@ class Organization extends Base implements OrganizationInterface
 
     /**
      * @var array
-     * Environments available in the organization. By default 'test' and 'prod' 
+     * Environments available in the organization. By default 'test' and 'prod'
      * environments are available.
      */
     protected $environments;

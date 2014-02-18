@@ -9,8 +9,6 @@
 
 namespace Apigee\ManagementAPI;
 
-use Apigee\Exceptions\ResponseException;
-
 /**
  * Base class for Management API classes. Handles a bit of the APIClient
  * invocation, which makes the actual HTTP calls.
@@ -22,7 +20,7 @@ class Base extends \Apigee\Util\APIObject
     /**
      * Returns debug data from the last API call in a backwards-compatible way.
      *
-     * @return array 
+     * @return array
      */
     public function getDebugData()
     {

@@ -42,7 +42,7 @@ class APIProduct extends Base implements APIProductInterface
     protected $createdAt;
     /**
      * @var string
-     * The username of the user who created the API Product. 
+     * The username of the user who created the API Product.
      * This property is read-only.
      */
     protected $createdBy;
@@ -53,7 +53,7 @@ class APIProduct extends Base implements APIProductInterface
      */
     protected $modifiedAt;
     /**
-     * @var string 
+     * @var string
      * The username of the user who most recently updated the API Product.
      * This property is read-only.
      */
@@ -66,13 +66,13 @@ class APIProduct extends Base implements APIProductInterface
     protected $description;
     /**
      * @var string
-     * The name to be displayed in the UI or developer portal to developers 
+     * The name to be displayed in the UI or developer portal to developers
      * registering for API access.
      */
     protected $displayName;
     /**
      * @var array
-     * Array of environment names in an organization. 
+     * Array of environment names in an organization.
      * Requests to environments not listed are rejected.
      */
     protected $environments;
@@ -83,7 +83,7 @@ class APIProduct extends Base implements APIProductInterface
     protected $name;
     /**
      * @var array
-     * Array of API proxy names in an organization. 
+     * Array of API proxy names in an organization.
      * Requests to API proxies not listed are rejected.
      */
     protected $proxies;
@@ -107,8 +107,8 @@ class APIProduct extends Base implements APIProductInterface
     protected $quotaTimeUnit;
     /**
      * @var array
-     * Array of scopes. 
-     * These must map to the scopes defined in an Oauth policy associated 
+     * Array of scopes.
+     * These must map to the scopes defined in an Oauth policy associated
      * with the API Product.
      */
     protected $scopes;
@@ -458,7 +458,7 @@ class APIProduct extends Base implements APIProductInterface
     /**
      * {@inheritDoc}
      */
-   public function getApprovalType()
+    public function getApprovalType()
     {
         return $this->approvalType;
     }
@@ -521,13 +521,13 @@ class APIProduct extends Base implements APIProductInterface
         return $output;
     }
 
-  /**
-   * Returns an array of all property names that can be returned from a call to
-   * self::toArray().
-   *
-   * @return array
-   */
-  public static function getAPIProductProperties()
+    /**
+     * Returns an array of all property names that can be returned from a call to
+     * self::toArray().
+     *
+     * @return array
+     */
+    public static function getAPIProductProperties()
     {
         $properties = array_keys(get_class_vars(__CLASS__));
 

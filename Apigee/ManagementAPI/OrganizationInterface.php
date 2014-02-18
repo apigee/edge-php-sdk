@@ -23,7 +23,7 @@ interface OrganizationInterface
     public function getDisplayName();
 
     /**
-     * Returns the environments available in the organization. 
+     * Returns the environments available in the organization.
      * By default 'test' and 'prod' environments are available.
      * @return array
      */
@@ -43,7 +43,7 @@ interface OrganizationInterface
     public function getProperty($name);
 
     /**
-     * Returns the organization type. 
+     * Returns the organization type.
      * Currently 'trial' and 'paid' are valid.
      * @return string
      */
@@ -68,7 +68,7 @@ interface OrganizationInterface
     public function getLastModifiedAt();
 
     /**
-     * Returns the username of the Apigee user who last modified 
+     * Returns the username of the Apigee user who last modified
      * the organization.
      * @return string
      */

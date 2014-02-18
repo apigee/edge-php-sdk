@@ -2,12 +2,12 @@
 namespace Apigee\ManagementAPI;
 
 /**
- * The interface that must beimplementd by DeveloperAppAnalytics objects, 
- which exposes data from the Management API.
+ * The interface that must beimplementd by DeveloperAppAnalytics objects,
+ * which exposes data from the Management API.
  *
  * @author djohnson
  */
- interface DeveloperAppAnalyticsInterface
+interface DeveloperAppAnalyticsInterface
 {
     /**
      * Validates and sets the environment.
@@ -37,32 +37,32 @@ namespace Apigee\ManagementAPI;
      *
      * @param string $developer_id The ID of the developer who owns the app.
      * @param string $app_name The name of the app.
-     * @param string $metric A value of 'message_count', 
-     * 'message_count-first24hrs', 'message_count-second24hrs', 'error_count', 
-     * 'error_count-first24hrs', 'user_count', 'user_count-first24hrs', 
-     * 'total_response_time', 'max_response_time', 'min_response_time', or 
+     * @param string $metric A value of 'message_count',
+     * 'message_count-first24hrs', 'message_count-second24hrs', 'error_count',
+     * 'error_count-first24hrs', 'user_count', 'user_count-first24hrs',
+     * 'total_response_time', 'max_response_time', 'min_response_time', or
      * 'end_point_response_time'.
      * @param string $time_start Expressed as:
      * <ul>
      *   <li>UNIX timestamp</li>
      *   <li>mm/dd/YYYY hh:ii</li>
-     *   <li>Any other format that the underlying strtotime() PHP function 
+     *   <li>Any other format that the underlying strtotime() PHP function
      *     can parse. See {@link http://php.net/strtotime}.
-     *     It parses them out to a UNIX timestamp if possible, otherwise 
+     *     It parses them out to a UNIX timestamp if possible, otherwise
      *     it throws an exception.</li>
      * </ul>
      * @param string $time_end Expressed as:
      * <ul>
      *   <li>UNIX timestamp</li>
      *   <li>mm/dd/YYYY hh:ii</li>
-     *   <li>Any other format that the underlying strtotime() PHP function 
+     *   <li>Any other format that the underlying strtotime() PHP function
      *     can parse. See {@link http://php.net/strtotime}.
-     *     It parses them out to a UNIX timestamp if possible, otherwise 
+     *     It parses them out to a UNIX timestamp if possible, otherwise
      *     it throws an exception.</li>
      * </ul>
-     * @param string $time_unit A value of 'second', 'minute', 'hour', 'day', 
+     * @param string $time_unit A value of 'second', 'minute', 'hour', 'day',
      * 'week', 'month', 'quarter', or 'year'.
-     * @param string $sort_by A comma separated list of the same values 
+     * @param string $sort_by A comma separated list of the same values
      * as $metric.
      * @param string $sort_order Either 'ASC' or 'DESC'.
      * @return array

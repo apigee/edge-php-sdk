@@ -63,7 +63,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
         // Begin load
         $app->blankValues();
         try {
-            $app->load('phpunit-test');
+            $app->load('phpunit test');
         } catch (\Exception $e) {
             $this->fail('Cannot load app.');
             return;
@@ -82,7 +82,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
         }
         $app->blankValues();
         try {
-            $app->load('phpunit-test');
+            $app->load('phpunit test');
         } catch (\Exception $e) {
             $this->fail('Cannot reload app after update');
             return;
@@ -138,7 +138,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
         $app = new DeveloperApp(self::$orgConfig, '');
         $list = NULL;
         try {
-            $list = $app->listAllOrgApps();
+            $list = $app->listAllApps();
         } catch (\Exception $e) {
             $this->fail('Could not list all org apps: ' . get_class($e) . ' [' . $e->getCode() . '] ' . $e->getMessage() . "\n" . $e->getTraceAsString());
         }
@@ -151,7 +151,7 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
     public function testAppListByDeveloper()
     {
         $app = new DeveloperApp(self::$orgConfig, '');
-        $list = $app->listAllOrgApps();
+        $list = $app->listAllApps();
         shuffle($list);
         $item = reset($list);
 

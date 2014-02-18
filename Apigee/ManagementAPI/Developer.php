@@ -18,7 +18,7 @@ use \Apigee\Exceptions\ParameterException;
  *
  * @author djohnson
  */
- class Developer extends Base implements DeveloperInterface
+class Developer extends Base implements DeveloperInterface
 {
 
     /**
@@ -253,14 +253,14 @@ use \Apigee\Exceptions\ParameterException;
         self::loadFromResponse($this, $developer);
     }
 
-   /**
-    * Takes the raw KMS response and populates the member variables of the
-    * passed-in Developer object from it.
-    *
-    * @param Apigee\ManagementAPI\Developer $developer
-    * @param array $response
-    */
-   protected static function loadFromResponse(Developer &$developer, array $response)
+    /**
+     * Takes the raw KMS response and populates the member variables of the
+     * passed-in Developer object from it.
+     *
+     * @param Apigee\ManagementAPI\Developer $developer
+     * @param array $response
+     */
+    protected static function loadFromResponse(Developer &$developer, array $response)
     {
         $developer->apps = $response['apps'];
         $developer->email = $response['email'];
@@ -463,7 +463,6 @@ use \Apigee\Exceptions\ParameterException;
                 $this->{$key} = $value;
             }
         }
-        $this->loaded = TRUE;
     }
 
 }

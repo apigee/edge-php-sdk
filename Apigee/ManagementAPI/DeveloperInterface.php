@@ -7,7 +7,7 @@ namespace Apigee\ManagementAPI;
  *
  * @author djohnson
  */
- interface DeveloperInterface
+interface DeveloperInterface
 {
     /**
      * Loads a developer from the Management API using $email as the unique key.
@@ -68,7 +68,7 @@ namespace Apigee\ManagementAPI;
      * Ensures that current developer's email is valid.
      *
      * If first name and/or last name are not supplied, they are auto-
-     * populated based on email. 
+     * populated based on email.
      *
      * @return bool
      */
@@ -152,7 +152,7 @@ namespace Apigee\ManagementAPI;
     public function setStatus($status);
 
     /**
-     * Returns an attribute associated with the developer, 
+     * Returns an attribute associated with the developer,
      * or NULL if the attribute does not exist.
      * @return array
      */

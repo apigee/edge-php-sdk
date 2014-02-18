@@ -28,7 +28,7 @@ interface KeyValueMapInterface
     public function getAllEntries($map_name);
 
     /**
-     * Sets a value for a named map/key. 
+     * Sets a value for a named map/key.
      * This method performs both inserts and updates;
      * that is, if the key does not yet exist, it will create it.
      *
@@ -41,7 +41,7 @@ interface KeyValueMapInterface
     public function setEntryValue($map_name, $key_name, $value);
 
     /**
-     * Deletes a key and value from a map. 
+     * Deletes a key and value from a map.
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
@@ -52,7 +52,7 @@ interface KeyValueMapInterface
     public function deleteEntry($map_name, $key_name);
 
     /**
-     * Creates a map. 
+     * Creates a map.
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
@@ -62,7 +62,7 @@ interface KeyValueMapInterface
     public function create($map_name, $entries = NULL);
 
     /**
-     * Deletes a map. 
+     * Deletes a map.
      *
      * @throws \Apigee\Exceptions\ResponseException
      *

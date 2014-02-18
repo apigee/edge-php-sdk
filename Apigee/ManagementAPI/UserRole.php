@@ -14,9 +14,9 @@ class UserRole extends Base implements UserRoleInterface
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/userroles');
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getUsersByRole($role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -26,9 +26,9 @@ class UserRole extends Base implements UserRoleInterface
         return $this->responseObj;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function addUsersToRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -45,9 +45,9 @@ class UserRole extends Base implements UserRoleInterface
         return TRUE;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function removeUsersFromRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -63,9 +63,9 @@ class UserRole extends Base implements UserRoleInterface
         return TRUE;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function setRoleUsers(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
@@ -91,9 +91,9 @@ class UserRole extends Base implements UserRoleInterface
         return TRUE;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function listRoles($reset = FALSE)
     {
         static $roles;
@@ -112,9 +112,9 @@ class UserRole extends Base implements UserRoleInterface
         return $roles;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function addRole($role_name)
     {
         $roles = $this->listRoles();
@@ -127,9 +127,9 @@ class UserRole extends Base implements UserRoleInterface
         }
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function deleteRole($role_name)
     {
         $roles = $this->listRoles();
@@ -141,11 +141,11 @@ class UserRole extends Base implements UserRoleInterface
         }
     }
 
-     /**
-      * Returns TRUE if the role exists.
-      * @param string
-      * @return bool
-      */
+    /**
+     * Returns TRUE if the role exists.
+     * @param string
+     * @return bool
+     */
     public function roleExists($role_name)
     {
         return in_array($role_name, $this->listRoles());
