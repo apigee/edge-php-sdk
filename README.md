@@ -1,5 +1,4 @@
 # How to use the Apigee Edge PHP SDK
----
 ## Prerequisites and Installation Requirements
 ### PHP Requirements
 The Edge PHP SDK has the following prerequisites:
