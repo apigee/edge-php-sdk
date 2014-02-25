@@ -22,4 +22,9 @@ interface DocGenTemplateInterface {
    * Saves the template back to the modeling API.
    */
   public function saveTemplate($apiId, $type, $html);
+
+  /**
+   * Updates the template back to the modeling API.
+   */
+  public function updateTemplate($apiId, $type, $html);
 }

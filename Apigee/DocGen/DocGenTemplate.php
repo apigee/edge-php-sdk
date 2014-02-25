@@ -27,7 +27,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
    * {@inheritDoc}
    */
   public function getIndexTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/docTemplate?type=index', 'text/html');
+    $this->get(rawurlencode($apiId) . '/templates/drupal-cms?type=index', 'text/html');
     return $this->responseText;
   }
 
@@ -35,7 +35,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
    * {@inheritDoc}
    */
   public function getOperationTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/docTemplate?type=method', 'text/html');
+    $this->get(rawurlencode($apiId) . '/templates/drupal-cms?type=method', 'text/html');
     return $this->responseText;
   }
 
@@ -44,7 +44,16 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
    */
   public function saveTemplate($apiId, $type, $html) {
     $headers = array();
-    $this->post(rawurlencode($apiId) . '/docTemplate?type=' . $type, $html, 'text/html', 'text/html', $headers);
+    $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=drupal-cms', $html, 'text/html', 'text/html', $headers);
+    return $this->responseText;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function updateTemplate($apiId, $type, $html) {
+    $headers = array();
+    $this->put(rawurlencode($apiId) . '/templates/drupal-cms?type=' . $type, $html, 'text/html', 'text/html', $headers);
     return $this->responseText;
   }
 
