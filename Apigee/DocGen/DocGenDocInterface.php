@@ -10,5 +10,5 @@ interface DocGenDocInterface {
    * @param $mid
    * @return array
    */
-  public function requestOperation($data, $mid);
+  public function requestOperation($data, $mid, $name);
 }

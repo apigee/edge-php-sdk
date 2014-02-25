@@ -58,8 +58,11 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   /**
    * {@inheritDoc}
    */
-  public function updateModel($apiId, $update) {
-    $this->put(rawurlencode($apiId), $update);
+  public function updateModel($apiId, $update, $headers) {
+    if (is_null($headers)) {
+      $headers = array();
+    }
+    $this->put(rawurlencode($apiId), $update, 'text/html', 'text/html', $headers);
     return $this->responseObj;
   }
 
