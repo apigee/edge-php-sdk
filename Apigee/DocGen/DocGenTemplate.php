@@ -34,7 +34,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
-   * Gets
+   * Gets the operation template for a specific model and template name
    *
    * {@inheritDoc}
    */
@@ -44,6 +44,8 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
+   * Saves a type of template for a specific model
+   *
    * {@inheritDoc}
    */
   public function saveTemplate($apiId, $type, $name, $html) {
@@ -53,6 +55,8 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
+   * Updates a type of template for a specific model
+   *
    * {@inheritDoc}
    */
   public function updateTemplate($apiId, $type, $name, $html) {
