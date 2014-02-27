@@ -24,6 +24,8 @@ class DocGenDoc extends APIObject implements DocGenDocInterface {
   }
 
   /**
+   * Requests the specific operation, returns HTML.
+   *
    * {@inheritDoc}
    */
   public function requestOperation($data, $mid, $name) {

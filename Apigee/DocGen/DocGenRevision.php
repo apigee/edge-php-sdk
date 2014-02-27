@@ -24,6 +24,8 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface {
   }
 
   /**
+   * Loads a verbose object of a revision.
+   *
    * {@inheritDoc}
    */
   public function loadVerbose($apiId, $revId) {

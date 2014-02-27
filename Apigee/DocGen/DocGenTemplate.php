@@ -24,36 +24,40 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
+   * Gets the template HTML that lists all of the operations of a given model.
+   *
    * {@inheritDoc}
    */
-  public function getIndexTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/templates/drupal-cms?type=index', 'text/html');
+  public function getIndexTemplate($apiId, $name) {
+    $this->get(rawurlencode($apiId) . '/templates/' . $name .'?type=index', 'text/html');
+    return $this->responseText;
+  }
+
+  /**
+   * Gets
+   *
+   * {@inheritDoc}
+   */
+  public function getOperationTemplate($apiId, $name) {
+    $this->get(rawurlencode($apiId) . '/templates/' . $name .'?type=method', 'text/html');
     return $this->responseText;
   }
 
   /**
    * {@inheritDoc}
    */
-  public function getOperationTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/templates/drupal-cms?type=method', 'text/html');
-    return $this->responseText;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public function saveTemplate($apiId, $type, $html) {
+  public function saveTemplate($apiId, $type, $name, $html) {
     $headers = array();
-    $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=drupal-cms', $html, 'text/html', 'text/html', $headers);
+    $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=' . $name, $html, 'text/html', 'text/html', $headers);
     return $this->responseText;
   }
 
   /**
    * {@inheritDoc}
    */
-  public function updateTemplate($apiId, $type, $html) {
+  public function updateTemplate($apiId, $type, $name, $html) {
     $headers = array();
-    $this->put(rawurlencode($apiId) . '/templates/drupal-cms?type=' . $type, $html, 'text/html', 'text/html', $headers);
+    $this->put(rawurlencode($apiId) . '/templates/' . $name . '?type=' . $type, $html, 'text/html', 'text/html', $headers);
     return $this->responseText;
   }
 
