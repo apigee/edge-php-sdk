@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Util\Cache</title>
+	<title>Class Apigee\Util\Cache | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -69,7 +69,7 @@
 				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
 				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
 				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
-				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.Log.html" class="deprecated">Log</a></li>
 				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
 			</ul>
@@ -108,6 +108,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -117,6 +120,11 @@
 	<h1>Class Cache</h1>
 
 
+	<div class="description">
+	
+<p>Class to read from cache and write to cache a persistent name/value pair.</p>
+
+	</div>
 
 
 
@@ -132,12 +140,12 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.Util.Cache.html#4-109" title="Go to source code">Util/Cache.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Util.Cache.html#4-112" title="Go to source code">Util/Cache.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="get" id="_get">
 
@@ -150,12 +158,12 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Apigee.Util.Cache.html#5-26" title="Go to source code">get</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$default</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.Cache.html#8-29" title="Go to source code">get</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$default</var></span> )</code>
 
 		<div class="description short">
 			
 <p>Reads a persistent name/value pair from cache. Mostly this is a wrapper
-around Drupal's variable_get() to make tests and scripts not dependent on
+around Drupal's variable_get() method to make tests and scripts not dependent on
 Drupal's environment.</p>
 
 		</div>
@@ -163,7 +171,7 @@ Drupal's environment.</p>
 		<div class="description detailed hidden">
 			
 <p>Reads a persistent name/value pair from cache. Mostly this is a wrapper
-around Drupal's variable_get() to make tests and scripts not dependent on
+around Drupal's variable_get() method to make tests and scripts not dependent on
 Drupal's environment.</p>
 
 
@@ -171,14 +179,14 @@ Drupal's environment.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$name</dd>
 					<dt><var>$default</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$default</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed|null</code><br>mixed|null<br />
+					<code>mixed|null</code><br />
 				</div>
 
 
@@ -198,28 +206,28 @@ Drupal's environment.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Apigee.Util.Cache.html#28-44" title="Go to source code">set</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.Cache.html#31-47" title="Go to source code">set</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
 <p>Writes a persistent name/value pair to cache. Mostly this is a wrapper around
-Drupal's variable_set().</p>
+Drupal's variable_set() method.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
 <p>Writes a persistent name/value pair to cache. Mostly this is a wrapper around
-Drupal's variable_set().</p>
+Drupal's variable_set() method.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$name</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$name</dd>
 					<dt><var>$value</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$value</dd>
 				</dl></div>
 
 
@@ -251,7 +259,7 @@ Drupal's variable_set().</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

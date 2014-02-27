@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\DocGen\DocGenModel</title>
+	<title>Class Apigee\DocGen\DocGenModel | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -112,6 +112,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -121,6 +124,12 @@
 	<h1>Class DocGenModel</h1>
 
 
+	<div class="description">
+	
+<p>Base class for API object classes. Handles some of the OrgConfig invocation,
+which makes the actual HTTP calls.</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -152,12 +161,14 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.DocGen.html">DocGen</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenModel.html#15-95" title="Go to source code">DocGen/DocGenModel.php</a><br />
+				<b>Author:</b>
+				djohnson<br />
+		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenModel.html#15-89" title="Go to source code">DocGen/DocGenModel.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
 
@@ -174,20 +185,20 @@
 
 		<div class="description short">
 			
-<p>Constructs the proper values for the Apigee DocGen API</p>
+<p>Constructs the proper values for the Apigee DocGen API.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Constructs the proper values for the Apigee DocGen API</p>
+<p>Constructs the proper values for the Apigee DocGen API.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
-					<dd></dd>
+					<dd><code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>$config</dd>
 				</dl></div>
 
 
@@ -208,33 +219,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#26-37" title="Go to source code">createModel</a>( <span>array <var>$payload</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#26-34" title="Go to source code">createModel</a>( <span>array <var>$payload</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
-<p>Adds an API resource, with a name and a description. The actual API
-description is added using a different set of methods that are described in the
-following sections.</p>
+<p>Creates a model with the given payload.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Adds an API resource, with a name and a description. The actual API
-description is added using a different set of methods that are described in the
-following sections.</p>
+<p>Creates a model with the given payload.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$payload</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$payload</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -256,24 +263,24 @@ following sections.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModels">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#39-47" title="Go to source code">getModels</a>( )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#36-44" title="Go to source code">getModels</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns the descriptions of all APIs in the organization.</p>
+<p>Gets all of the models for the given org</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns the descriptions of all APIs in the organization.</p>
+<p>Gets all of the models for the given org</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -295,31 +302,31 @@ following sections.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_importWADL">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#49-59" title="Go to source code">importWADL</a>( <span>string <var>$apiId</var></span>, <span>string <var>$xml</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#46-54" title="Go to source code">importWADL</a>( <span>string <var>$apiId</var></span>, <span>string <var>$xml</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Imports the given API description to apihub repository.</p>
+<p>Imports a WADL to a given model, returns JSON representation of the model</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Imports the given API description to apihub repository.</p>
+<p>Imports a WADL to a given model, returns JSON representation of the model</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$apiId</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$apiId</dd>
 					<dt><var>$xml</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$xml</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -341,31 +348,29 @@ following sections.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#61-70" title="Go to source code">getModel</a>( <span>string <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#56-64" title="Go to source code">getModel</a>( <span>string <var>$apiId</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Returns the details of an API, such as its name, description, list of
-revisions and metadata.</p>
+<p>Gets a specific Model</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns the details of an API, such as its name, description, list of
-revisions and metadata.</p>
+<p>Gets a specific Model</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$apiId</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$apiId</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -387,31 +392,33 @@ revisions and metadata.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#72-82" title="Go to source code">updateModel</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$update</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#66-77" title="Go to source code">updateModel</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$update</var></span>, <span>mixed <var>$headers</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Updates an API resource.</p>
+<p>Updates a specific model</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Updates an API resource.</p>
+<p>Updates a specific model</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$apiId</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$apiId</dd>
 					<dt><var>$update</var></dt>
+					<dd><code>mixed</code><br>$update</dd>
+					<dt><var>$headers</var></dt>
 					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -433,29 +440,29 @@ revisions and metadata.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#84-93" title="Go to source code">deleteModel</a>( <span>mixed <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModel.html#79-87" title="Go to source code">deleteModel</a>( <span>mixed <var>$apiId</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Deletes an API resource and all its associated data.</p>
+<p>Deletes a specific model</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Deletes an API resource and all its associated data.</p>
+<p>Deletes a specific model</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$apiId</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$apiId</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -472,8 +479,6 @@ revisions and metadata.</p>
 	<caption>Methods inherited from <a href="class-Apigee.Util.APIObject.html#methods">Apigee\Util\APIObject</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Apigee.Util.APIObject.html#___call">__call()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#___callstatic">__callstatic()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
@@ -523,7 +528,7 @@ revisions and metadata.</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

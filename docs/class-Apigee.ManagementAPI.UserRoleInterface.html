@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Interface Apigee\ManagementAPI\UserRoleInterface</title>
+	<title>Interface Apigee\ManagementAPI\UserRoleInterface | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -61,8 +61,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Apigee.ManagementAPI.AbstractApp.html">AbstractApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -74,8 +77,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.AppInterface.html">AppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></li>
-				<li><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></li>
@@ -115,6 +118,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -124,6 +130,11 @@
 	<h1>Interface UserRoleInterface</h1>
 
 
+	<div class="description">
+	
+<p>The interface that an UserRole object must implement.</p>
+
+	</div>
 
 
 
@@ -143,14 +154,232 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#4-6" title="Go to source code">ManagementAPI/UserRoleInterface.php</a><br />
+				<b>Author:</b>
+				djohnson<br />
+		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#4-60" title="Go to source code">ManagementAPI/UserRoleInterface.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="getUsersByRole" id="_getUsersByRole">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUsersByRole">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#11-16" title="Go to source code">getUsersByRole</a>( <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a list of all system users associated with a role.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a list of all system users associated with a role.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array of email addresses of the users.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addUsersToRole" id="_addUsersToRole">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addUsersToRole">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#18-24" title="Go to source code">addUsersToRole</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds users to a role.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds users to a role.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$users</var></dt>
+					<dd><code>array</code><br>An array of email addresses of the users.</dd>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if the users are added, and FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeUsersFromRole" id="_removeUsersFromRole">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeUsersFromRole">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#26-32" title="Go to source code">removeUsersFromRole</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes users from a role.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes users from a role.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$users</var></dt>
+					<dd><code>array</code><br>An array of email addresses of the users.</dd>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if the users are removed, and FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRoleUsers" id="_setRoleUsers">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRoleUsers">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#34-40" title="Go to source code">setRoleUsers</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Replaces the users in a role with $users.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Replaces the users in a role with $users.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$users</var></dt>
+					<dd><code>array</code><br>An array of email addresses of the users.</dd>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>TRUE if the set was successful, and FALSE if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="listRoles" id="_listRoles">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_listRoles">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#42-47" title="Go to source code">listRoles</a>( <span>boolean <var>$reset</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns a list of all system roles.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a list of all system roles.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$reset</var></dt>
+					<dd><code>boolean</code><br>Internal use only.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addRole" id="_addRole">
 
 		<td class="attributes"><code>
 			 public 
@@ -160,17 +389,64 @@
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_getUsersByRole">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#5" title="Go to source code">getUsersByRole</a>( <span>mixed <var>$role</var></span> )</code>
+		<a class="anchor" href="#_addRole">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#49-53" title="Go to source code">addRole</a>( <span>string <var>$role_name</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Adds a role.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Adds a role.</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role_name</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteRole" id="_deleteRole">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteRole">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRoleInterface.html#55-59" title="Go to source code">deleteRole</a>( <span>string <var>$role_name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Deletes a role.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Deletes a role.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role_name</var></dt>
+					<dd><code>string</code></dd>
+				</dl></div>
 
 
 
@@ -201,7 +477,7 @@
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Drupal\WatchdogLogger</title>
+	<title>Class Apigee\Drupal\WatchdogLogger | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -98,6 +98,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -107,6 +110,12 @@
 	<h1>Class WatchdogLogger</h1>
 
 
+	<div class="description">
+	
+<p>A logger class that implements Psr\Log\LoggerInterface. This class writes log
+data to Drupal's watchdog table.</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -135,12 +144,12 @@ Psr\Log\AbstractLogger
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Drupal.html">Drupal</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.Drupal.WatchdogLogger.html#6-120" title="Go to source code">Drupal/WatchdogLogger.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Drupal.WatchdogLogger.html#6-138" title="Go to source code">Drupal/WatchdogLogger.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="setLogThreshold" id="_setLogThreshold">
 
@@ -153,26 +162,60 @@ Psr\Log\AbstractLogger
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setLogThreshold">#</a>
-		<code><a href="source-class-Apigee.Drupal.WatchdogLogger.html#10-18" title="Go to source code">setLogThreshold</a>( <span>integer <var>$threshold</var></span> )</code>
+		<code><a href="source-class-Apigee.Drupal.WatchdogLogger.html#14-34" title="Go to source code">setLogThreshold</a>( <span>integer <var>$threshold</var></span> )</code>
 
 		<div class="description short">
-			
-<p>Sets the logging threshold, below which log entries will be dropped rather
-than logged. This should be a WATCHDOG_* constant.</p>
+			Sets the logging threshold, below which log entries will be dropped rather than
+logged, as definedby RFC 3164: <a href="http://www.faqs.org/rfcs/rfc3164.html">http://www.faqs.org/rfcs/rfc3164.html</a>.
+These values are implemented by Psr\Log\LogLevel as:
+<ul>
+	<li>LogLevel::EMERGENCY</li>
+
+	<li>LogLevel::ALERT</li>
+
+	<li>LogLevel::CRITICAL</li>
+
+	<li>LogLevel::ERROR</li>
+
+	<li>LogLevel::WARNING</li>
+
+	<li>LogLevel::NOTICE</li>
+
+	<li>LogLevel::INFO</li>
+
+	<li>LogLevel::DEBUG</li>
+</ul>
 
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Sets the logging threshold, below which log entries will be dropped rather
-than logged. This should be a WATCHDOG_* constant.</p>
+			Sets the logging threshold, below which log entries will be dropped rather than
+logged, as definedby RFC 3164: <a href="http://www.faqs.org/rfcs/rfc3164.html">http://www.faqs.org/rfcs/rfc3164.html</a>.
+These values are implemented by Psr\Log\LogLevel as:
+<ul>
+	<li>LogLevel::EMERGENCY</li>
+
+	<li>LogLevel::ALERT</li>
+
+	<li>LogLevel::CRITICAL</li>
+
+	<li>LogLevel::ERROR</li>
+
+	<li>LogLevel::WARNING</li>
+
+	<li>LogLevel::NOTICE</li>
+
+	<li>LogLevel::INFO</li>
+
+	<li>LogLevel::DEBUG</li>
+</ul>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$threshold</var></dt>
-					<dd></dd>
+					<dd><code>integer</code><br>$threshold</dd>
 				</dl></div>
 
 
@@ -193,28 +236,30 @@ than logged. This should be a WATCHDOG_* constant.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_log">#</a>
-		<code><a href="source-class-Apigee.Drupal.WatchdogLogger.html#20-81" title="Go to source code">log</a>( <span>string <var>$level</var></span>, <span>mixed <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Drupal.WatchdogLogger.html#36-99" title="Go to source code">log</a>( <span>string <var>$level</var></span>, <span>mixed <var>$message</var></span>, <span>array <var>$context</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
-<p>Logs an event to watchdog</p>
+<p>Logs an event to watchdog. This method is called automatically but you can
+call it from your own code as well.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Logs an event to watchdog</p>
+<p>Logs an event to watchdog. This method is called automatically but you can
+call it from your own code as well.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$level</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$level</dd>
 					<dt><var>$message</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$message</dd>
 					<dt><var>$context</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$context</dd>
 				</dl></div>
 
 
@@ -246,7 +291,7 @@ than logged. This should be a WATCHDOG_* constant.</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

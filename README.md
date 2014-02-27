@@ -1,4 +1,5 @@
 # How to use the Apigee Edge PHP SDK
+The Apigee Edge Management PHP SDK makes it easy to write PHP modules that use the Apigee Edge management API. By using the Management PHP SDK, you can communicate with Apigee Edge to manage developers, apps, roles, and permissions in the same way as the Apigee Developer Services portal.
 ## Prerequisites and Installation Requirements
 ### PHP Requirements
 The Edge PHP SDK has the following prerequisites:

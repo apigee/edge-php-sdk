@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Namespace Apigee\ManagementAPI</title>
+	<title>Namespace Apigee\ManagementAPI | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -61,8 +61,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Apigee.ManagementAPI.AbstractApp.html">AbstractApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -74,8 +77,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.AppInterface.html">AppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></li>
-				<li><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></li>
@@ -114,6 +117,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -127,36 +133,58 @@
 <table class="summary" id="classes">
 <caption>Classes summary</caption>
 <tr>
+	<td class="name"><a href="class-Apigee.ManagementAPI.AbstractApp.html">AbstractApp</a></td>
+	<td>Superclass of DeveloperApps and CompanyApps.</td>
+</tr>
+<tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></td>
-	<td></td>
+	<td>Abstracts the API Product object in the Management API and allows clients to
+manipulate it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.Base.html">Base</a></td>
-	<td></td>
+	<td>Base class for Management API classes. Handles a bit of the APIClient
+invocation, which makes the actual HTTP calls.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Apigee.ManagementAPI.Company.html">Company</a></td>
+	<td>Abstracts the Company object in the Management API and allows clients to
+manipulate it.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></td>
+	<td>Abstracts the Developer App object in the Management API and allows clients to
+manipulate it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></td>
-	<td></td>
+	<td>Abstracts the Developer object in the Management API and allows clients to
+manipulate it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></td>
-	<td></td>
+	<td>Abstracts the Developer App object in the Management API and allows clients to
+manipulate it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></td>
-	<td></td>
+	<td>Exposes Developer App Analytics data from the Management API.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.KeyValueMap.html">KeyValueMap</a></td>
-	<td></td>
+	<td>The KeyValueMap class implements a general-purpose datastore. The class can
+contain multiple maps, where each map has a name and can have multiple key-value
+pairs stored in it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.Organization.html">Organization</a></td>
-	<td></td>
+	<td>Abstracts the Organization object in the Management API and allows clients to
+manipulate it.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.UserRole.html">UserRole</a></td>
-	<td></td>
+	<td>Base class for Management API classes. Handles a bit of the APIClient
+invocation, which makes the actual HTTP calls.</td>
 </tr>
 </table>
 
@@ -164,31 +192,32 @@
 <caption>Interfaces summary</caption>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></td>
-	<td></td>
+	<td>The interface that an API Product object in the Management API must implement.</td>
+</tr>
+<tr>
+	<td class="name"><a href="class-Apigee.ManagementAPI.AppInterface.html">AppInterface</a></td>
+	<td>The interface that an DeveloperApp or CompanyApp object must implement.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></td>
-	<td></td>
-</tr>
-<tr>
-	<td class="name"><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></td>
-	<td></td>
+	<td>The interface that must beimplementd by DeveloperAppAnalytics objects, which
+exposes data from the Management API.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></td>
-	<td></td>
+	<td>The interface that a Developer object in the Management API must implement.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></td>
-	<td></td>
+	<td>The interface that a key/value map class must implement.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></td>
-	<td></td>
+	<td>The interface that an Organization object must implement.</td>
 </tr>
 <tr>
 	<td class="name"><a href="class-Apigee.ManagementAPI.UserRoleInterface.html">UserRoleInterface</a></td>
-	<td></td>
+	<td>The interface that an UserRole object must implement.</td>
 </tr>
 </table>
 
@@ -198,7 +227,7 @@
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>
