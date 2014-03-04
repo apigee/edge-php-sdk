@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Interface Apigee\DocGen\DocGenTemplateInterface</title>
+	<title>Interface Apigee\DocGen\DocGenTemplateInterface | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -112,6 +112,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -140,35 +143,50 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.DocGen.html">DocGen</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#4-8" title="Go to source code">DocGen/DocGenTemplateInterface.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#4-30" title="Go to source code">DocGen/DocGenTemplateInterface.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="getIndexTemplate" id="_getIndexTemplate">
 
 		<td class="attributes"><code>
 			 public 
-			
+			array|string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getIndexTemplate">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#5" title="Go to source code">getIndexTemplate</a>( <span>mixed <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#5-11" title="Go to source code">getIndexTemplate</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Gets the inndex template.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Gets the inndex template.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiId</var></dt>
+					<dd><code>mixed</code><br>$apiId</dd>
+					<dt><var>$name</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|string</code><br />
+				</div>
 
 
 
@@ -180,24 +198,39 @@
 
 		<td class="attributes"><code>
 			 public 
-			
+			array|string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOperationTemplate">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#6" title="Go to source code">getOperationTemplate</a>( <span>mixed <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#13-19" title="Go to source code">getOperationTemplate</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Gets the operation HTML.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Gets the operation HTML.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiId</var></dt>
+					<dd><code>mixed</code><br>$apiId</dd>
+					<dt><var>$name</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array|string</code><br />
+				</div>
 
 
 
@@ -216,14 +249,51 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_saveTemplate">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#7" title="Go to source code">saveTemplate</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$html</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#21-24" title="Go to source code">saveTemplate</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$html</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Saves the template back to the modeling API.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Saves the template back to the modeling API.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateTemplate" id="_updateTemplate">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateTemplate">#</a>
+		<code><a href="source-class-Apigee.DocGen.DocGenTemplateInterface.html#26-29" title="Go to source code">updateTemplate</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$html</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Updates the template back to the modeling API.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates the template back to the modeling API.</p>
+
 
 
 
@@ -256,7 +326,7 @@
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

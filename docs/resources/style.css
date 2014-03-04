@@ -1,5 +1,5 @@
 /*!
- * ApiGen 3.0dev - API documentation generator for PHP 5.3+
+ * ApiGen 2.8.0 - API documentation generator for PHP 5.3+
  *
  * Copyright (c) 2010-2011 David Grudl (http://davidgrudl.com)
  * Copyright (c) 2011-2012 Jaroslav Hanslík (https://github.com/kukulich)
@@ -413,24 +413,24 @@ dl.tree dd {
 	white-space: pre-wrap;
 }
 
-td.attributes {
+td.name, td.attributes {
 	width: 1%;
 }
 
-.class .methods .name, .class .properties .name, .class .constants .name {
+.class #methods .name {
 	width: auto;
 	white-space: normal;
 }
 
-.class .methods .name > div > code {
+.class #methods .name > div > code {
 	white-space: pre-wrap;
 }
 
-.class .methods .name > div > code span, .function .value > code {
+.class #methods .name > div > code span, .function .value > code {
 	white-space: nowrap;
 }
 
-.class .methods td.name > div, .class td.value > div {
+.class #methods td.name > div, .class td.description > div {
 	position: relative;
 	padding-right: 1em;
 }

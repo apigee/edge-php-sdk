@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Util\APIObject</title>
+	<title>Class Apigee\Util\APIObject | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -69,7 +69,7 @@
 				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
 				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
 				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
-				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.Log.html" class="deprecated">Log</a></li>
 				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
 			</ul>
@@ -108,6 +108,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -117,6 +120,12 @@
 	<h1>Class APIObject</h1>
 
 
+	<div class="description">
+	
+<p>Base class for API object classes. Handles some of the OrgConfig invocation,
+which makes the actual HTTP calls.</p>
+
+	</div>
 
 
 
@@ -134,8 +143,11 @@
 
 	<div>
 		<h4>Indirect known subclasses</h4>
+			<a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a>, 
 			<a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>, 
-			<a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>, 
+			<a href="class-Apigee.Mint.Application.html">Apigee\Mint\Application</a>, 
+			<a href="class-Apigee.Mint.ApplicationCategory.html">Apigee\Mint\ApplicationCategory</a>, 
+			<a href="class-Apigee.Mint.BankDetail.html">Apigee\Mint\BankDetail</a>, 
 			<a href="class-Apigee.Mint.BillingAdjustment.html">Apigee\Mint\BillingAdjustment</a>, 
 			<a href="class-Apigee.Mint.BillingDocument.html">Apigee\Mint\BillingDocument</a>, 
 			<a href="class-Apigee.Mint.Developer.html">Apigee\Mint\Developer</a>, 
@@ -143,10 +155,10 @@
 			<a href="class-Apigee.Mint.DeveloperCategory.html">Apigee\Mint\DeveloperCategory</a>, 
 			<a href="class-Apigee.Mint.DeveloperRatePlan.html">Apigee\Mint\DeveloperRatePlan</a>, 
 			<a href="class-Apigee.Mint.DeveloperRateplanCounter.html">Apigee\Mint\DeveloperRateplanCounter</a>, 
+			<a href="class-Apigee.ManagementAPI.Company.html">Apigee\ManagementAPI\Company</a>, 
 			<a href="class-Apigee.Mint.DeveloperSubscription.html">Apigee\Mint\DeveloperSubscription</a>, 
 			<a href="class-Apigee.Mint.DeveloperSubscriptionDetail.html">Apigee\Mint\DeveloperSubscriptionDetail</a>, 
 			<a href="class-Apigee.Mint.Limit.html">Apigee\Mint\Limit</a>, 
-			<a href="class-Apigee.ManagementAPI.DeveloperApp.html">Apigee\ManagementAPI\DeveloperApp</a>, 
 			<a href="class-Apigee.Mint.ManagementAPIOrganization.html">Apigee\Mint\ManagementAPIOrganization</a>, 
 			<a href="class-Apigee.Mint.MonetizationPackage.html">Apigee\Mint\MonetizationPackage</a>, 
 			<a href="class-Apigee.Mint.Organization.html">Apigee\Mint\Organization</a>, 
@@ -154,17 +166,17 @@
 			<a href="class-Apigee.Mint.Product.html">Apigee\Mint\Product</a>, 
 			<a href="class-Apigee.Mint.Provider.html">Apigee\Mint\Provider</a>, 
 			<a href="class-Apigee.Mint.RatePlan.html">Apigee\Mint\RatePlan</a>, 
+			<a href="class-Apigee.ManagementAPI.CompanyApp.html">Apigee\ManagementAPI\CompanyApp</a>, 
 			<a href="class-Apigee.Mint.ReportDefinition.html">Apigee\Mint\ReportDefinition</a>, 
 			<a href="class-Apigee.Mint.SuborgProduct.html">Apigee\Mint\SuborgProduct</a>, 
 			<a href="class-Apigee.Mint.TermAndCondition.html">Apigee\Mint\TermAndCondition</a>, 
-			<a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">Apigee\ManagementAPI\DeveloperAppAnalytics</a>, 
 			<a href="class-Apigee.Mint.Transaction.html">Apigee\Mint\Transaction</a>, 
+			<a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>, 
+			<a href="class-Apigee.ManagementAPI.DeveloperApp.html">Apigee\ManagementAPI\DeveloperApp</a>, 
+			<a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">Apigee\ManagementAPI\DeveloperAppAnalytics</a>, 
 			<a href="class-Apigee.ManagementAPI.KeyValueMap.html">Apigee\ManagementAPI\KeyValueMap</a>, 
 			<a href="class-Apigee.ManagementAPI.Organization.html">Apigee\ManagementAPI\Organization</a>, 
-			<a href="class-Apigee.ManagementAPI.UserRole.html">Apigee\ManagementAPI\UserRole</a>, 
-			<a href="class-Apigee.Mint.Application.html">Apigee\Mint\Application</a>, 
-			<a href="class-Apigee.Mint.ApplicationCategory.html">Apigee\Mint\ApplicationCategory</a>, 
-			<a href="class-Apigee.Mint.BankDetail.html">Apigee\Mint\BankDetail</a>
+			<a href="class-Apigee.ManagementAPI.UserRole.html">Apigee\ManagementAPI\UserRole</a>
 	</div>
 
 
@@ -177,12 +189,14 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.Util.APIObject.html#15-491" title="Go to source code">Util/APIObject.php</a><br />
+				<b>Author:</b>
+				djohnson<br />
+		<b>Located at</b> <a href="source-class-Apigee.Util.APIObject.html#16-533" title="Go to source code">Util/APIObject.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="init" id="_init">
 
@@ -195,26 +209,26 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_init">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#66-82" title="Go to source code">init</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$base_url</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#90-106" title="Go to source code">init</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$base_url</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Initializes the APIClient for this class.</p>
+<p>Initializes the OrgConfig for this class.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Initializes the APIClient for this class.</p>
+<p>Initializes the OrgConfig for this class.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
-					<dd></dd>
+					<dd><code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>$config</dd>
 					<dt><var>$base_url</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$base_url</dd>
 				</dl></div>
 
 
@@ -235,16 +249,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setBaseUrl">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#84-88" title="Go to source code">setBaseUrl</a>( <span>mixed <var>$base_url</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#108-118" title="Go to source code">setBaseUrl</a>( <span>string <var>$base_url</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Overwrites the base URL defined in $client. You can restore the base URL by
+calling restoreBaseUrl().</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Overwrites the base URL defined in $client. You can restore the base URL by
+calling restoreBaseUrl().</p>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$base_url</var></dt>
+					<dd><code>string</code><br>$base_url</dd>
+				</dl></div>
 
 
 
@@ -264,14 +289,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_restoreBaseUrl">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#90-92" title="Go to source code">restoreBaseUrl</a>( )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#120-125" title="Go to source code">restoreBaseUrl</a>( )</code>
 
 		<div class="description short">
 			
+<p>Restores the base URL in $client after a cal to setBaseUrl().</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Restores the base URL in $client after a cal to setBaseUrl().</p>
+
 
 
 
@@ -293,7 +322,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConfig">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#94-102" title="Go to source code">getConfig</a>( )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#127-137" title="Go to source code">getConfig</a>( )</code>
 
 		<div class="description short">
 			
@@ -312,10 +341,15 @@ instances of Base.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>\Apigee\Util\OrgConfig<br />
+					<code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br />
 				</div>
 
 
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br />
+						<code><code><a href="class-Apigee.ManagementAPI.Base.html">Apigee\ManagementAPI\Base</a></code></code><br />
+				</div>
 
 
 		</div>
@@ -332,7 +366,7 @@ instances of Base.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#182-198" title="Go to source code">get</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#222-238" title="Go to source code">get</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -351,11 +385,11 @@ $this-&gt;response* variables.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uri</var></dt>
-					<dd></dd>
+					<dd><code>string|null</code><br>$uri</dd>
 					<dt><var>$accept_mime_type</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$accept_mime_type</dd>
 					<dt><var>$custom_headers</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$custom_headers</dd>
 					<dt><var>$options</var></dt>
 					<dd></dd>
 				</dl></div>
@@ -378,7 +412,7 @@ $this-&gt;response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_post">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#200-225" title="Go to source code">post</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>string <var>$accept_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#240-265" title="Go to source code">post</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>string <var>$accept_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -397,15 +431,15 @@ $this-&gt;response* variables.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uri</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$uri</dd>
 					<dt><var>$payload</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$payload</dd>
 					<dt><var>$content_type</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$content_type</dd>
 					<dt><var>$accept_type</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$accept_type</dd>
 					<dt><var>$custom_headers</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$custom_headers</dd>
 					<dt><var>$options</var></dt>
 					<dd></dd>
 				</dl></div>
@@ -428,7 +462,7 @@ $this-&gt;response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_http_delete">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#227-246" title="Go to source code">http_delete</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#267-286" title="Go to source code">http_delete</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -442,19 +476,19 @@ $this-&gt;response* variables.</p>
 <p>Performs an HTTP DELETE on a URI. The result can be read from
 $this-&gt;response* variables.</p>
 
-<p>This is named http_delete to avoid a name clash with objects that inherit
-from this one, which usually have a delete() method.</p>
+<p>This method is named http_delete() to avoid a name clash with objects that
+inherit from this one, which usually have a delete() method.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uri</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$uri</dd>
 					<dt><var>$accept</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$accept</dd>
 					<dt><var>$custom_headers</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$custom_headers</dd>
 					<dt><var>$options</var></dt>
 					<dd></dd>
 				</dl></div>
@@ -477,7 +511,7 @@ from this one, which usually have a delete() method.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_put">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#248-269" title="Go to source code">put</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#288-309" title="Go to source code">put</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -496,13 +530,13 @@ $this-&gt;response* variables.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uri</var></dt>
-					<dd></dd>
+					<dd><code>string|null</code><br>$uri</dd>
 					<dt><var>$payload</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$payload</dd>
 					<dt><var>$content_type</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$content_type</dd>
 					<dt><var>$custom_headers</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$custom_headers</dd>
 					<dt><var>$options</var></dt>
 					<dd></dd>
 				</dl></div>
@@ -525,143 +559,37 @@ $this-&gt;response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_head">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#271-288" title="Go to source code">head</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#311-328" title="Go to source code">head</a>( <span>string <var>$uri</var> = <span class="php-keyword1">NULL</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
 <p>Performs an HTTP HEAD on a URI. $this-&gt;responseText and
-$this-&gt;responseObj will be empty, but the content-length may be read from
-$this-&gt;responseLength.</p>
+$this-&gt;responseObj empty after this call, but you can read the content-length
+from $this-&gt;responseLength.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
 <p>Performs an HTTP HEAD on a URI. $this-&gt;responseText and
-$this-&gt;responseObj will be empty, but the content-length may be read from
-$this-&gt;responseLength.</p>
+$this-&gt;responseObj empty after this call, but you can read the content-length
+from $this-&gt;responseLength.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$uri</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$uri</dd>
 					<dt><var>$accept_mime_type</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$accept_mime_type</dd>
 					<dt><var>$custom_headers</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$custom_headers</dd>
 					<dt><var>$options</var></dt>
 					<dd></dd>
 				</dl></div>
 
 
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="__call" id="___call">
-
-		<td class="attributes"><code>
-			 public 
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#___call">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#290-321" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$args</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Intercepts any snake_case method invocations that aren't already defined,
-turns them into camelCase, and tries to invoke them.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Intercepts any snake_case method invocations that aren't already defined,
-turns them into camelCase, and tries to invoke them.</p>
-
-<p>Incoming snake_case method names must contain no uppercase to qualify for
-this transmogrification. In the interest of efficiency, we also don't process
-any method names not containing an underscore.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$method</var></dt>
-					<dd></dd>
-					<dt><var>$args</var></dt>
-					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br>mixed<br />
-				</div>
-
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-Apigee.Exceptions.IllegalMethodException.html">Apigee\Exceptions\IllegalMethodException</a></code></code><br>\Apigee\Exceptions\IllegalMethodException<br />
-				</div>
-
-				<h4>TODO</h4>
-				<div class="list">
-						When we require PHP 5.4, make this a mix-in.<br />
-				</div>
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="__callstatic" id="___callstatic">
-
-		<td class="attributes"><code>
-			 public static
-			mixed
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#___callstatic">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#323-347" title="Go to source code">__callstatic</a>( <span>mixed <var>$method</var></span>, <span>mixed <var>$args</var></span> )</code>
-
-		<div class="description short">
-			
-<p>Same as above, except for static methods</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>Same as above, except for static methods</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$method</var></dt>
-					<dd></dd>
-					<dt><var>$args</var></dt>
-					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br>mixed<br />
-				</div>
-
-				<h4>Throws</h4>
-				<div class="list">
-					<code><code><a href="class-Apigee.Exceptions.IllegalMethodException.html">Apigee\Exceptions\IllegalMethodException</a></code></code><br>\Apigee\Exceptions\IllegalMethodException<br />
-				</div>
 
 
 
@@ -679,28 +607,28 @@ any method names not containing an underscore.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_preparePayload">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#450-477" title="Go to source code">preparePayload</a>( <span>mixed <var>$content_type</var></span>, <span>mixed <var>&amp; $payload</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#492-519" title="Go to source code">preparePayload</a>( <span>mixed <var>$content_type</var></span>, <span>mixed <var>&amp; $payload</var></span> )</code>
 
 		<div class="description short">
 			
-<p>If payload is not already a string, stringify it (based on its
-content-type).</p>
+<p>If payload is not already a string, convert it to a string based on its
+content-type.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>If payload is not already a string, stringify it (based on its
-content-type).</p>
+<p>If payload is not already a string, convert it to a string based on its
+content-type.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$content_type</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$content_type</dd>
 					<dt><var>$payload</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$payload</dd>
 				</dl></div>
 
 
@@ -723,7 +651,7 @@ content-type).</p>
 
 
 
-	<table class="summary properties" id="properties">
+	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
 	<tr data-order="config" id="$config">
 		<td class="attributes"><code>
@@ -732,18 +660,25 @@ content-type).</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#17-20" title="Go to source code"><var>$config</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#24-28" title="Go to source code"><var>$config</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$config" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The OrgConfig object.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The OrgConfig object.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$config" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="client" id="$client">
 		<td class="attributes"><code>
@@ -752,18 +687,25 @@ content-type).</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#22-25" title="Go to source code"><var>$client</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#30-36" title="Go to source code"><var>$client</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$client" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The client object as an instance of <a href="http://api.guzzlephp.org/class-Guzzle.Http.Client.html">\Guzzle\Http\Client</a>.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The client object as an instance of <a href="http://api.guzzlephp.org/class-Guzzle.Http.Client.html">\Guzzle\Http\Client</a>.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$client" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="debugData" id="$debugData">
 		<td class="attributes"><code>
@@ -772,24 +714,27 @@ content-type).</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#27-32" title="Go to source code"><var>$debugData</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#38-45" title="Go to source code"><var>$debugData</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$debugData" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>Contains raw data from Management API in a format compatible with older PHP
-implementations of this library.</p>
+<p>Contains raw data from the Management API in a format defined by <code><a href="class-Apigee.Util.DebugData.html">Apigee\Util\DebugData</a></code>. This format is compatible with older PHP implementations
+of this library.</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Contains raw data from Management API in a format compatible with older PHP
-implementations of this library.</p>
+<p>Contains raw data from the Management API in a format defined by <code><a href="class-Apigee.Util.DebugData.html">Apigee\Util\DebugData</a></code>. This format is compatible with older PHP implementations
+of this library.</p>
 
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$debugData" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="responseCode" id="$responseCode">
 		<td class="attributes"><code>
@@ -798,18 +743,25 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#34-37" title="Go to source code"><var>$responseCode</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#47-51" title="Go to source code"><var>$responseCode</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseCode" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The HTTP response code returned by the request.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The HTTP response code returned by the request.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$responseCode" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="responseText" id="$responseText">
 		<td class="attributes"><code>
@@ -818,18 +770,25 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#39-42" title="Go to source code"><var>$responseText</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#53-57" title="Go to source code"><var>$responseText</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseText" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The response body as a string.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The response body as a string.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$responseText" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="responseObj" id="$responseObj">
 		<td class="attributes"><code>
@@ -838,18 +797,25 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#44-47" title="Go to source code"><var>$responseObj</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#59-63" title="Go to source code"><var>$responseObj</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseObj" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The response object.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The response object.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$responseObj" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="responseLength" id="$responseLength">
 		<td class="attributes"><code>
@@ -858,18 +824,25 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#49-52" title="Go to source code"><var>$responseLength</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#65-69" title="Go to source code"><var>$responseLength</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseLength" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The response length.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The response length.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$responseLength" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="responseMimeType" id="$responseMimeType">
 		<td class="attributes"><code>
@@ -878,18 +851,25 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#54-57" title="Go to source code"><var>$responseMimeType</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#71-75" title="Go to source code"><var>$responseMimeType</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$responseMimeType" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The response MIME type.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The response MIME type.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$responseMimeType" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="logger" id="$logger">
 		<td class="attributes"><code>
@@ -898,18 +878,29 @@ implementations of this library.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.APIObject.html#59-62" title="Go to source code"><var>$logger</var></a>
+				<a href="source-class-Apigee.Util.APIObject.html#77-83" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$logger" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>A logger that implements the \Psr\Log\LoggerInterface interface. See the
+<code><a href="class-Apigee.Drupal.WatchdogLogger.html">Apigee\Drupal\WatchdogLogger</a></code> class for an example that implements the
+Psr\Log\LoggerInterface.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>A logger that implements the \Psr\Log\LoggerInterface interface. See the
+<code><a href="class-Apigee.Drupal.WatchdogLogger.html">Apigee\Drupal\WatchdogLogger</a></code> class for an example that implements the
+Psr\Log\LoggerInterface.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$logger" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	</table>
 
@@ -921,7 +912,7 @@ implementations of this library.</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

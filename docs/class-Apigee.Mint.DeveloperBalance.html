@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Mint\DeveloperBalance</title>
+	<title>Class Apigee\Mint\DeveloperBalance | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -66,7 +66,6 @@
 				<li><a href="class-Apigee.Mint.BankDetail.html">BankDetail</a></li>
 				<li><a href="class-Apigee.Mint.BillingAdjustment.html">BillingAdjustment</a></li>
 				<li><a href="class-Apigee.Mint.BillingDocument.html">BillingDocument</a></li>
-				<li><a href="class-Apigee.Mint.CurrencyISO4217.html">CurrencyISO4217</a></li>
 				<li><a href="class-Apigee.Mint.Developer.html">Developer</a></li>
 				<li class="active"><a href="class-Apigee.Mint.DeveloperBalance.html">DeveloperBalance</a></li>
 				<li><a href="class-Apigee.Mint.DeveloperCategory.html">DeveloperCategory</a></li>
@@ -122,6 +121,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -175,12 +177,12 @@ their constructor.</p>
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Mint.html">Mint</a><br />
 		<b>Package:</b> Apigee\Mint\Base<br />
 
-		<b>Located at</b> <a href="source-class-Apigee.Mint.DeveloperBalance.html#14-344" title="Go to source code">Mint/DeveloperBalance.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Mint.DeveloperBalance.html#14-537" title="Go to source code">Mint/DeveloperBalance.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
 
@@ -193,7 +195,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#71-83" title="Go to source code">__construct</a>( <span>string <var>$dev</var></span>, <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#112-127" title="Go to source code">__construct</a>( <span>string <var>$dev</var> = <span class="php-keyword1">NULL</span></span>, <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -206,9 +208,9 @@ their constructor.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$dev</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$dev</dd>
 					<dt><var>$config</var></dt>
-					<dd></dd>
+					<dd><code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>$config</dd>
 				</dl></div>
 
 
@@ -229,7 +231,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_instantiateNew">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#85-93" title="Go to source code">instantiateNew</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#129-137" title="Go to source code">instantiateNew</a>( )</code>
 
 		<div class="description short">
 			
@@ -248,7 +250,7 @@ the class that is doing the instantiation.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Mint.DeveloperBalance.html">Apigee\Mint\DeveloperBalance</a></code></code><br>\Apigee\Mint\DeveloperBalance<br />
+					<code><code><a href="class-Apigee.Mint.DeveloperBalance.html">Apigee\Mint\DeveloperBalance</a></code></code><br />
 				</div>
 
 
@@ -268,7 +270,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromRawData">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#95-127" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#139-171" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">FALSE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -287,9 +289,9 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$data</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$data</dd>
 					<dt><var>$reset</var></dt>
-					<dd></dd>
+					<dd><code>boolean</code><br>$reset</dd>
 				</dl></div>
 
 
@@ -310,7 +312,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_initValues">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#129-148" title="Go to source code">initValues</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#173-192" title="Go to source code">initValues</a>( )</code>
 
 		<div class="description short">
 			
@@ -327,7 +329,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>mixed<br />
+					<code>mixed</code><br />
 				</div>
 
 
@@ -347,7 +349,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#150-155" title="Go to source code">getAmount</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#194-199" title="Go to source code">getAmount</a>( )</code>
 
 		<div class="description short">
 			
@@ -360,7 +362,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>float</code><br>float<br />
+					<code>float</code><br />
 				</div>
 
 
@@ -380,7 +382,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getGatewayTxReference">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#157-162" title="Go to source code">getGatewayTxReference</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#201-206" title="Go to source code">getGatewayTxReference</a>( )</code>
 
 		<div class="description short">
 			
@@ -393,7 +395,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>string<br />
+					<code>string</code><br />
 				</div>
 
 
@@ -413,7 +415,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isRecurring">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#164-169" title="Go to source code">isRecurring</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#208-213" title="Go to source code">isRecurring</a>( )</code>
 
 		<div class="description short">
 			
@@ -426,7 +428,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>boolean<br />
+					<code>boolean</code><br />
 				</div>
 
 
@@ -446,7 +448,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRecurringAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#171-176" title="Go to source code">getRecurringAmount</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#215-220" title="Go to source code">getRecurringAmount</a>( )</code>
 
 		<div class="description short">
 			
@@ -459,7 +461,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>float</code><br>float<br />
+					<code>float</code><br />
 				</div>
 
 
@@ -479,7 +481,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProviderId">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#178-183" title="Go to source code">getProviderId</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#222-227" title="Go to source code">getProviderId</a>( )</code>
 
 		<div class="description short">
 			
@@ -492,7 +494,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>string<br />
+					<code>string</code><br />
 				</div>
 
 
@@ -512,7 +514,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getReplenishAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#185-190" title="Go to source code">getReplenishAmount</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#229-234" title="Go to source code">getReplenishAmount</a>( )</code>
 
 		<div class="description short">
 			
@@ -525,7 +527,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>float</code><br>float<br />
+					<code>float</code><br />
 				</div>
 
 
@@ -545,7 +547,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSupportedCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#192-197" title="Go to source code">getSupportedCurrency</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#236-241" title="Go to source code">getSupportedCurrency</a>( )</code>
 
 		<div class="description short">
 			
@@ -558,7 +560,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Mint.DataStructures.SupportedCurrency.html">Apigee\Mint\DataStructures\SupportedCurrency</a></code></code><br>\Apigee\Mint\DataStructures\SupportedCurrency<br />
+					<code><code><a href="class-Apigee.Mint.DataStructures.SupportedCurrency.html">Apigee\Mint\DataStructures\SupportedCurrency</a></code></code><br />
 				</div>
 
 
@@ -578,7 +580,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTxReference">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#199-204" title="Go to source code">getTxReference</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#243-248" title="Go to source code">getTxReference</a>( )</code>
 
 		<div class="description short">
 			
@@ -591,7 +593,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>string</code><br>string<br />
+					<code>string</code><br />
 				</div>
 
 
@@ -611,7 +613,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUsage">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#206-211" title="Go to source code">getUsage</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#250-255" title="Go to source code">getUsage</a>( )</code>
 
 		<div class="description short">
 			
@@ -624,7 +626,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>float</code><br>float<br />
+					<code>float</code><br />
 				</div>
 
 
@@ -644,7 +646,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#213-218" title="Go to source code">setAmount</a>( <span>float <var>$amount</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#257-262" title="Go to source code">setAmount</a>( <span>float <var>$amount</var></span> )</code>
 
 		<div class="description short">
 			
@@ -657,7 +659,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$amount</var></dt>
-					<dd></dd>
+					<dd><code>float</code><br>$amount</dd>
 				</dl></div>
 
 
@@ -678,7 +680,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setGatewayTxReference">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#220-225" title="Go to source code">setGatewayTxReference</a>( <span>string <var>$gatewayTxReference</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#264-269" title="Go to source code">setGatewayTxReference</a>( <span>string <var>$gatewayTxReference</var></span> )</code>
 
 		<div class="description short">
 			
@@ -691,7 +693,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$gatewayTxReference</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$gatewayTxReference</dd>
 				</dl></div>
 
 
@@ -712,7 +714,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setIsRecurring">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#227-232" title="Go to source code">setIsRecurring</a>( <span>boolean <var>$isRecurring</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#271-276" title="Go to source code">setIsRecurring</a>( <span>boolean <var>$isRecurring</var></span> )</code>
 
 		<div class="description short">
 			
@@ -725,7 +727,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$isRecurring</var></dt>
-					<dd></dd>
+					<dd><code>boolean</code><br>$isRecurring</dd>
 				</dl></div>
 
 
@@ -746,7 +748,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setProviderId">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#234-239" title="Go to source code">setProviderId</a>( <span>string <var>$providerId</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#278-283" title="Go to source code">setProviderId</a>( <span>string <var>$providerId</var></span> )</code>
 
 		<div class="description short">
 			
@@ -759,7 +761,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$providerId</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$providerId</dd>
 				</dl></div>
 
 
@@ -780,7 +782,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRecurringAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#241-246" title="Go to source code">setRecurringAmount</a>( <span>float <var>$recurringAmount</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#285-290" title="Go to source code">setRecurringAmount</a>( <span>float <var>$recurringAmount</var></span> )</code>
 
 		<div class="description short">
 			
@@ -793,7 +795,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$recurringAmount</var></dt>
-					<dd></dd>
+					<dd><code>float</code><br>$recurringAmount</dd>
 				</dl></div>
 
 
@@ -814,7 +816,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setReplenishAmount">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#248-253" title="Go to source code">setReplenishAmount</a>( <span>float <var>$replenishAmount</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#292-297" title="Go to source code">setReplenishAmount</a>( <span>float <var>$replenishAmount</var></span> )</code>
 
 		<div class="description short">
 			
@@ -827,7 +829,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$replenishAmount</var></dt>
-					<dd></dd>
+					<dd><code>float</code><br>$replenishAmount</dd>
 				</dl></div>
 
 
@@ -848,7 +850,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSupportedCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#255-260" title="Go to source code">setSupportedCurrency</a>( <span><code><a href="class-Apigee.Mint.DataStructures.SupportedCurrency.html">Apigee\Mint\DataStructures\SupportedCurrency</a></code> <var>$supportedCurrency</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#299-304" title="Go to source code">setSupportedCurrency</a>( <span><code><a href="class-Apigee.Mint.DataStructures.SupportedCurrency.html">Apigee\Mint\DataStructures\SupportedCurrency</a></code> <var>$supportedCurrency</var></span> )</code>
 
 		<div class="description short">
 			
@@ -861,7 +863,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$supportedCurrency</var></dt>
-					<dd></dd>
+					<dd><code><code><a href="class-Apigee.Mint.DataStructures.SupportedCurrency.html">Apigee\Mint\DataStructures\SupportedCurrency</a></code></code><br>$supportedCurrency</dd>
 				</dl></div>
 
 
@@ -882,7 +884,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTxReference">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#262-267" title="Go to source code">setTxReference</a>( <span>string <var>$txReference</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#306-311" title="Go to source code">setTxReference</a>( <span>string <var>$txReference</var></span> )</code>
 
 		<div class="description short">
 			
@@ -895,7 +897,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$txReference</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$txReference</dd>
 				</dl></div>
 
 
@@ -916,7 +918,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setUsage">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#269-274" title="Go to source code">setUsage</a>( <span>float <var>$usage</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#313-318" title="Go to source code">setUsage</a>( <span>float <var>$usage</var></span> )</code>
 
 		<div class="description short">
 			
@@ -929,7 +931,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$usage</var></dt>
-					<dd></dd>
+					<dd><code>float</code><br>$usage</dd>
 				</dl></div>
 
 
@@ -950,7 +952,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setChargePerUsage">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#276-281" title="Go to source code">setChargePerUsage</a>( <span>boolean <var>$chargePerUsage</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#320-325" title="Go to source code">setChargePerUsage</a>( <span>boolean <var>$chargePerUsage</var></span> )</code>
 
 		<div class="description short">
 			
@@ -963,7 +965,7 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$chargePerUsage</var></dt>
-					<dd></dd>
+					<dd><code>boolean</code><br>$chargePerUsage</dd>
 				</dl></div>
 
 
@@ -984,7 +986,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isChargePerUsage">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#283-288" title="Go to source code">isChargePerUsage</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#327-332" title="Go to source code">isChargePerUsage</a>( )</code>
 
 		<div class="description short">
 			
@@ -997,7 +999,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean</code><br>bool<br />
+					<code>boolean</code><br />
 				</div>
 
 
@@ -1017,7 +1019,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getByCurrencyId">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#290-308" title="Go to source code">getByCurrencyId</a>( <span>mixed <var>$currencyId</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#334-352" title="Go to source code">getByCurrencyId</a>( <span>mixed <var>$currencyId</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1030,12 +1032,12 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$currencyId</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$currencyId</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Mint.DeveloperBalance.html">Apigee\Mint\DeveloperBalance</a></code></code><br>\Apigee\Mint\DeveloperBalance<br />
+					<code><code><a href="class-Apigee.Mint.DeveloperBalance.html">Apigee\Mint\DeveloperBalance</a></code></code><br />
 				</div>
 
 
@@ -1055,7 +1057,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateRecurringSetup">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#310-334" title="Go to source code">updateRecurringSetup</a>( <span>mixed <var>$supportedCurrencyId</var></span>, <span>mixed <var>$isRecurring</var></span>, <span>mixed <var>$replenishAmount</var></span>, <span>mixed <var>$recurringAmount</var></span>, <span>mixed <var>$provider</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#354-387" title="Go to source code">updateRecurringSetup</a>( <span>mixed <var>$supportedCurrencyId</var></span>, <span>mixed <var>$recurring</var></span>, <span>mixed <var>$replenishAmount</var></span>, <span>mixed <var>$recurringAmount</var></span>, <span>mixed <var>$provider</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1072,17 +1074,687 @@ with that data.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$supportedCurrencyId</var></dt>
-					<dd></dd>
-					<dt><var>$isRecurring</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$supportedCurrencyId</dd>
+					<dt><var>$recurring</var></dt>
+					<dd><code>mixed</code><br>$recurring</dd>
 					<dt><var>$replenishAmount</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$replenishAmount</dd>
 					<dt><var>$recurringAmount</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$recurringAmount</dd>
 					<dt><var>$provider</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$provider</dd>
 				</dl></div>
 
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setApproxTaxRate" id="_setApproxTaxRate">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setApproxTaxRate">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#389-394" title="Go to source code">setApproxTaxRate</a>( <span>float <var>$approxTaxRate</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$approxTaxRate</var></dt>
+					<dd><code>float</code><br>$approxTaxRate</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getApproxTaxRate" id="_getApproxTaxRate">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getApproxTaxRate">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#396-401" title="Go to source code">getApproxTaxRate</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCachedBaseUrl" id="_setCachedBaseUrl">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCachedBaseUrl">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#403-408" title="Go to source code">setCachedBaseUrl</a>( <span>mixed <var>$cachedBaseUrl</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$cachedBaseUrl</var></dt>
+					<dd><code>mixed</code><br>$cachedBaseUrl</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCachedBaseUrl" id="_getCachedBaseUrl">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCachedBaseUrl">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#410-415" title="Go to source code">getCachedBaseUrl</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCurrentBalance" id="_setCurrentBalance">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCurrentBalance">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#417-422" title="Go to source code">setCurrentBalance</a>( <span>float <var>$currentBalance</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$currentBalance</var></dt>
+					<dd><code>float</code><br>$currentBalance</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCurrentBalance" id="_getCurrentBalance">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCurrentBalance">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#424-429" title="Go to source code">getCurrentBalance</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDev" id="_setDev">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDev">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#431-436" title="Go to source code">setDev</a>( <span>string <var>$dev</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dev</var></dt>
+					<dd><code>string</code><br>$dev</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDev" id="_getDev">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDev">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#438-443" title="Go to source code">getDev</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setId" id="_setId">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setId">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#445-450" title="Go to source code">setId</a>( <span>string <var>$id</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd><code>string</code><br>$id</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getId" id="_getId">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getId">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#452-457" title="Go to source code">getId</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMonth" id="_setMonth">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMonth">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#459-464" title="Go to source code">setMonth</a>( <span>string <var>$month</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$month</var></dt>
+					<dd><code>string</code><br>$month</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMonth" id="_getMonth">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMonth">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#466-471" title="Go to source code">getMonth</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPreviousBalance" id="_setPreviousBalance">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPreviousBalance">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#473-478" title="Go to source code">setPreviousBalance</a>( <span>float <var>$previousBalance</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$previousBalance</var></dt>
+					<dd><code>float</code><br>$previousBalance</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPreviousBalance" id="_getPreviousBalance">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPreviousBalance">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#480-485" title="Go to source code">getPreviousBalance</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setTax" id="_setTax">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setTax">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#487-492" title="Go to source code">setTax</a>( <span>float <var>$tax</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tax</var></dt>
+					<dd><code>float</code><br>$tax</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTax" id="_getTax">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTax">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#494-499" title="Go to source code">getTax</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setTopups" id="_setTopups">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setTopups">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#501-506" title="Go to source code">setTopups</a>( <span>float <var>$topups</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$topups</var></dt>
+					<dd><code>float</code><br>$topups</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTopups" id="_getTopups">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTopups">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#508-513" title="Go to source code">getTopups</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setYear" id="_setYear">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setYear">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#515-520" title="Go to source code">setYear</a>( <span>integer <var>$year</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$year</var></dt>
+					<dd><code>integer</code><br>$year</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getYear" id="_getYear">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getYear">#</a>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#522-527" title="Go to source code">getYear</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br />
+				</div>
 
 
 
@@ -1101,7 +1773,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#336-343" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.DeveloperBalance.html#529-536" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -1118,7 +1790,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br>mixed<br />
+					<code>mixed</code><br />
 				</div>
 
 
@@ -1145,8 +1817,6 @@ with that data.</p>
 	<caption>Methods inherited from <a href="class-Apigee.Util.APIObject.html#methods">Apigee\Util\APIObject</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Apigee.Util.APIObject.html#___call">__call()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#___callstatic">__callstatic()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
@@ -1206,7 +1876,7 @@ with that data.</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

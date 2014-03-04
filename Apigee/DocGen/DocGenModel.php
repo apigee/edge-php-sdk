@@ -24,6 +24,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
+   * Creates a model with the given payload.
+   *
    * {@inheritDoc}
    */
   public function createModel($payload = array()) {
@@ -32,6 +34,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
+   * Gets all of the models for the given org
+   *
    * {@inheritDoc}
    */
   public function getModels() {
@@ -40,6 +44,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
+   * Imports a WADL to a given model, returns JSON representation of the model
+   *
    * {@inheritDoc}
    */
   public function importWADL($apiId, $xml) {
@@ -48,6 +54,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
+   * Gets a specific Model
+   *
    * {@inheritDoc}
    */
   public function getModel($apiId) {
@@ -56,14 +64,21 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
   }
 
   /**
+   * Updates a specific model
+   *
    * {@inheritDoc}
    */
-  public function updateModel($apiId, $update) {
-    $this->put(rawurlencode($apiId), $update);
+  public function updateModel($apiId, $update, $headers) {
+    if (is_null($headers)) {
+      $headers = array();
+    }
+    $this->put(rawurlencode($apiId), $update, 'text/html', 'text/html', $headers);
     return $this->responseObj;
   }
 
   /**
+   * Deletes a specific model
+   *
    * {@inheritDoc}
    */
   public function deleteModel($apiId) {

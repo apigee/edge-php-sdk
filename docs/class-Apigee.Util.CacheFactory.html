@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Util\CacheFactory</title>
+	<title>Class Apigee\Util\CacheFactory | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -69,7 +69,7 @@
 				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
 				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
 				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
-				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.Log.html" class="deprecated">Log</a></li>
 				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
 			</ul>
@@ -108,6 +108,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -117,6 +120,12 @@
 	<h1>Class CacheFactory</h1>
 
 
+	<div class="description">
+	
+<p>Factory class used to set the default cache manager and to create an instance
+of a cache manager.</p>
+
+	</div>
 
 
 
@@ -132,12 +141,12 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.Util.CacheFactory.html#7-93" title="Go to source code">Util/CacheFactory.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Util.CacheFactory.html#7-111" title="Go to source code">Util/CacheFactory.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="setDefault" id="_setDefault">
 
@@ -150,30 +159,69 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDefault">#</a>
-		<code><a href="source-class-Apigee.Util.CacheFactory.html#29-38" title="Go to source code">setDefault</a>( <span><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code> <var>$cache_manager</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheFactory.html#36-46" title="Go to source code">setDefault</a>( <span><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code> <var>$cache_manager</var></span> )</code>
 
 		<div class="description short">
 			
-<p>If a cache manager is set with this method, then when getCacheManager is
-invoked with $cache_manager_class_name as NULL it will return this cache
-manager</p>
+<p>Sets the default cache manager. If a default cache manager is set with this
+method, then when getCacheManager() is called with $cache_manager_class_name as
+NULL it returns this cache manager</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>If a cache manager is set with this method, then when getCacheManager is
-invoked with $cache_manager_class_name as NULL it will return this cache
-manager</p>
+<p>Sets the default cache manager. If a default cache manager is set with this
+method, then when getCacheManager() is called with $cache_manager_class_name as
+NULL it returns this cache manager</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$cache_manager</var></dt>
-					<dd>$cacheManager</dd>
+					<dd><code><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code></code><br>$cacheManager</dd>
 				</dl></div>
 
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDefault" id="_getDefault">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDefault">#</a>
+		<code><a href="source-class-Apigee.Util.CacheFactory.html#48-56" title="Go to source code">getDefault</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the default cache manager if there is one, otherwise it returns
+NULL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the default cache manager if there is one, otherwise it returns
+NULL</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code></code><br />
+				</div>
 
 
 
@@ -192,41 +240,38 @@ manager</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCacheManager">#</a>
-		<code><a href="source-class-Apigee.Util.CacheFactory.html#46-92" title="Go to source code">getCacheManager</a>( <span>string <var>$cache_manager_class_name</var> = <span class="php-quote">'Apigee\Util\CacheManager'</span></span>, <span>Psr\Log\LoggerInterface|null <var>$logger</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheFactory.html#64-110" title="Go to source code">getCacheManager</a>( <span>string <var>$cache_manager_class_name</var> = <span class="php-quote">'Apigee\Util\CacheManager'</span></span>, <span>Psr\Log\LoggerInterface|null <var>$logger</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
-<p>It will lookup for a cache manager of class given by
-$cache_manager_class_name, if $cache_manager_class_name is NULL then it will
-attempt to return the default cache manager set by setDefault(), it no default
-manager has been set then an Apigee\Exceptions\ParameterException will be
-thrown</p>
+<p>Returns a cache manager of the class specified by $cache_manager_class_name.
+If $cache_manager_class_name is NULL, then return the default cache manager as
+set by setDefault(). If no default cache manager has been set, then throw an
+<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code>.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>It will lookup for a cache manager of class given by
-$cache_manager_class_name, if $cache_manager_class_name is NULL then it will
-attempt to return the default cache manager set by setDefault(), it no default
-manager has been set then an Apigee\Exceptions\ParameterException will be
-thrown</p>
+<p>Returns a cache manager of the class specified by $cache_manager_class_name.
+If $cache_manager_class_name is NULL, then return the default cache manager as
+set by setDefault(). If no default cache manager has been set, then throw an
+<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code>.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$cache_manager_class_name</var></dt>
-					<dd>Class name of the cache manager to retrieve. This class name must be of a class
-that extends CacheManager, otherwise it will thrown a
-Apigee\Exceptions\ParameterException</dd>
+					<dd><code>string</code><br>$cache_manager_class_name Class name of the cache manager to retrieve. This
+class name must be of a class that extends CacheManager, otherwise an <code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code> is thrown.</dd>
 					<dt><var>$logger</var></dt>
-					<dd></dd>
+					<dd><code>Psr\Log\LoggerInterface|null</code><br>$logger</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code></code><br>\Apigee\Util\CacheManager<br />
+					<code><code><a href="class-Apigee.Util.CacheManager.html">Apigee\Util\CacheManager</a></code></code><br />
 				</div>
 
 
@@ -257,7 +302,7 @@ Apigee\Exceptions\ParameterException</dd>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

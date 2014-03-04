@@ -24,27 +24,44 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface {
   }
 
   /**
+   * Gets the template HTML that lists all of the operations of a given model.
+   *
    * {@inheritDoc}
    */
-  public function getIndexTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/docTemplate?type=index', 'text/html');
+  public function getIndexTemplate($apiId, $name) {
+    $this->get(rawurlencode($apiId) . '/templates/' . $name .'?type=index', 'text/html');
     return $this->responseText;
   }
 
   /**
+   * Gets the operation template for a specific model and template name
+   *
    * {@inheritDoc}
    */
-  public function getOperationTemplate($apiId) {
-    $this->get(rawurlencode($apiId) . '/docTemplate?type=method', 'text/html');
+  public function getOperationTemplate($apiId, $name) {
+    $this->get(rawurlencode($apiId) . '/templates/' . $name .'?type=method', 'text/html');
     return $this->responseText;
   }
 
   /**
+   * Saves a type of template for a specific model
+   *
    * {@inheritDoc}
    */
-  public function saveTemplate($apiId, $type, $html) {
+  public function saveTemplate($apiId, $type, $name, $html) {
     $headers = array();
-    $this->post(rawurlencode($apiId) . '/docTemplate?type=' . $type, $html, 'text/html', 'text/html', $headers);
+    $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=' . $name, $html, 'text/html', 'text/html', $headers);
+    return $this->responseText;
+  }
+
+  /**
+   * Updates a type of template for a specific model
+   *
+   * {@inheritDoc}
+   */
+  public function updateTemplate($apiId, $type, $name, $html) {
+    $headers = array();
+    $this->put(rawurlencode($apiId) . '/templates/' . $name . '?type=' . $type, $html, 'text/html', 'text/html', $headers);
     return $this->responseText;
   }
 

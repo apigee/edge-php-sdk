@@ -24,10 +24,12 @@ class DocGenDoc extends APIObject implements DocGenDocInterface {
   }
 
   /**
+   * Requests the specific operation, returns HTML.
+   *
    * {@inheritDoc}
    */
-  public function requestOperation($data, $mid) {
-    $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'] . '/doc';
+  public function requestOperation($data, $mid, $name) {
+    $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'] . '/doc?template=' . $name;
     $this->get($path, 'text/html');
     return $this->responseText;
   }

@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\ManagementAPI\KeyValueMap</title>
+	<title>Class Apigee\ManagementAPI\KeyValueMap | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -61,8 +61,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Apigee.ManagementAPI.AbstractApp.html">AbstractApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -74,8 +77,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.AppInterface.html">AppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></li>
-				<li><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></li>
@@ -115,6 +118,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -124,6 +130,13 @@
 	<h1>Class KeyValueMap</h1>
 
 
+	<div class="description">
+	
+<p>The KeyValueMap class implements a general-purpose datastore. The class can
+contain multiple maps, where each map has a name and can have multiple key-value
+pairs stored in it.</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -162,12 +175,12 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#7-108" title="Go to source code">ManagementAPI/KeyValueMap.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#7-112" title="Go to source code">ManagementAPI/KeyValueMap.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
 
@@ -180,7 +193,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#9-17" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#15-24" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			
@@ -197,7 +210,7 @@
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
-					<dd></dd>
+					<dd><code><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code></code><br>$config</dd>
 				</dl></div>
 
 
@@ -218,7 +231,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEntryValue">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#19-37" title="Go to source code">getEntryValue</a>( <span>mixed <var>$map_name</var></span>, <span>mixed <var>$key_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#26-40" title="Go to source code">getEntryValue</a>( <span>string <var>$map_name</var></span>, <span>string <var>$key_name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -237,14 +250,14 @@ NULL.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$map_name</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$map_name</dd>
 					<dt><var>$key_name</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$key_name</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>null|string</code><br>null|string<br />
+					<code>null|string</code><br />
 				</div>
 
 
@@ -266,7 +279,7 @@ NULL.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAllEntries">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#39-57" title="Go to source code">getAllEntries</a>( <span>mixed <var>$map_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#42-55" title="Go to source code">getAllEntries</a>( <span>string <var>$map_name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -285,17 +298,17 @@ array.</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$map_name</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$map_name</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br>\Apigee\Exceptions\ResponseException<br />
+					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br />
 				</div>
 
 
@@ -316,36 +329,36 @@ array.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setEntryValue">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#59-82" title="Go to source code">setEntryValue</a>( <span>mixed <var>$map_name</var></span>, <span>mixed <var>$key_name</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#57-74" title="Go to source code">setEntryValue</a>( <span>string <var>$map_name</var></span>, <span>string <var>$key_name</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Sets a value for a named map/key. This performs both inserts and updates;
-that is, if the key does not yet exist, it will create it.</p>
+<p>Sets a value for a named map/key. This method performs both inserts and
+updates; that is, if the key does not yet exist, it will create it.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Sets a value for a named map/key. This performs both inserts and updates;
-that is, if the key does not yet exist, it will create it.</p>
+<p>Sets a value for a named map/key. This method performs both inserts and
+updates; that is, if the key does not yet exist, it will create it.</p>
 
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$map_name</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$map_name</dd>
 					<dt><var>$key_name</var></dt>
-					<dd></dd>
+					<dd><code>string</code><br>$key_name</dd>
 					<dt><var>$value</var></dt>
-					<dd></dd>
+					<dd><code>mixed</code><br>$value</dd>
 				</dl></div>
 
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br>\Apigee\Exceptions\ResponseException<br />
+					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br />
 				</div>
 
 
@@ -366,18 +379,33 @@ that is, if the key does not yet exist, it will create it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteEntry">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#84-88" title="Go to source code">deleteEntry</a>( <span>mixed <var>$map_name</var></span>, <span>mixed <var>$key_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#76-84" title="Go to source code">deleteEntry</a>( <span>string <var>$map_name</var></span>, <span>string <var>$key_name</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Deletes a key and value from a map.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes a key and value from a map.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$map_name</var></dt>
+					<dd><code>string</code><br>$map_name</dd>
+					<dt><var>$key_name</var></dt>
+					<dd><code>string</code><br>$key_name</dd>
+				</dl></div>
 
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br />
+				</div>
 
 
 
@@ -397,18 +425,33 @@ that is, if the key does not yet exist, it will create it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#90-102" title="Go to source code">create</a>( <span>mixed <var>$map_name</var></span>, <span>mixed <var>$entries</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#86-102" title="Go to source code">create</a>( <span>string <var>$map_name</var></span>, <span>array <var>$entries</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
+<p>Creates a map.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Creates a map.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$map_name</var></dt>
+					<dd><code>string</code><br>$map_name</dd>
+					<dt><var>$entries</var></dt>
+					<dd><code>array</code><br>$entries An optional array of key/value pairs for the map.</dd>
+				</dl></div>
 
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br />
+				</div>
 
 
 
@@ -428,18 +471,31 @@ that is, if the key does not yet exist, it will create it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#104-107" title="Go to source code">delete</a>( <span>mixed <var>$map_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.KeyValueMap.html#104-111" title="Go to source code">delete</a>( <span>string <var>$map_name</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Deletes a map.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Deletes a map.</p>
 
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$map_name</var></dt>
+					<dd><code>string</code><br>$map_name</dd>
+				</dl></div>
 
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code></code><br />
+				</div>
 
 
 
@@ -456,7 +512,6 @@ that is, if the key does not yet exist, it will create it.</p>
 		<td><code>
 			<a href="class-Apigee.ManagementAPI.Base.html#_getDebugData">getDebugData()</a>, 
 			<a href="class-Apigee.ManagementAPI.Base.html#_readAttributes">readAttributes()</a>, 
-			<a href="class-Apigee.ManagementAPI.Base.html#_urlEncode">urlEncode()</a>, 
 			<a href="class-Apigee.ManagementAPI.Base.html#_writeAttributes">writeAttributes()</a>
 		</code></td>
 	</tr>
@@ -465,8 +520,6 @@ that is, if the key does not yet exist, it will create it.</p>
 	<caption>Methods inherited from <a href="class-Apigee.Util.APIObject.html#methods">Apigee\Util\APIObject</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Apigee.Util.APIObject.html#___call">__call()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#___callstatic">__callstatic()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
@@ -516,7 +569,7 @@ that is, if the key does not yet exist, it will create it.</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

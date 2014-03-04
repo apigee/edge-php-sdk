@@ -1,6 +1,6 @@
 
 var ApiGen = ApiGen || {};
-ApiGen.config = {"require":{"min":"2.8.0"},"resources":{"resources":"resources"},"templates":{"common":{"overview.latte":"index.html","combined.js.latte":"resources\/combined.js","elementlist.js.latte":"elementlist.js","404.latte":"404.html"},"optional":{"sitemap":{"filename":"sitemap.xml","template":"sitemap.xml.latte"},"opensearch":{"filename":"opensearch.xml","template":"opensearch.xml.latte"},"robots":{"filename":"robots.txt","template":"robots.txt.latte"}},"main":{"package":{"filename":"package-%s.html","template":"package.latte"},"namespace":{"filename":"namespace-%s.html","template":"namespace.latte"},"class":{"filename":"class-%s.html","template":"class.latte"},"constant":{"filename":"constant-%s.html","template":"constant.latte"},"function":{"filename":"function-%s.html","template":"function.latte"},"source":{"filename":"source-%s.html","template":"source.latte"},"tree":{"filename":"tree.html","template":"tree.latte"},"deprecated":{"filename":"deprecated.html","template":"deprecated.latte"},"todo":{"filename":"todo.html","template":"todo.latte"}}},"options":{"elementDetailsCollapsed":true,"elementsOrder":"natural"}};
+ApiGen.config = {"require":{"min":"2.8.0"},"resources":{"resources":"resources"},"templates":{"common":{"overview.latte":"index.html","combined.js.latte":"resources\/combined.js","elementlist.js.latte":"elementlist.js","404.latte":"404.html"},"optional":{"sitemap":{"filename":"sitemap.xml","template":"sitemap.xml.latte"},"opensearch":{"filename":"opensearch.xml","template":"opensearch.xml.latte"},"robots":{"filename":"robots.txt","template":"robots.txt.latte"}},"main":{"package":{"filename":"package-%s.html","template":"package.latte"},"namespace":{"filename":"namespace-%s.html","template":"namespace.latte"},"class":{"filename":"class-%s.html","template":"class.latte"},"constant":{"filename":"constant-%s.html","template":"constant.latte"},"function":{"filename":"function-%s.html","template":"function.latte"},"source":{"filename":"source-%s.html","template":"source.latte"},"tree":{"filename":"tree.html","template":"tree.latte"},"deprecated":{"filename":"deprecated.html","template":"deprecated.latte"},"todo":{"filename":"todo.html","template":"todo.latte"}}},"options":{"elementDetailsCollapsed":true,"elementsOrder":"natural"},"config":"\/Users\/ApigeeCorporation\/stephen\/php\/apigen\/templates\/default\/config.neon"};
 
 
 /*! jQuery v1.7 jquery.com | jquery.org/license */
@@ -981,7 +981,7 @@ jQuery.fn.sortElements = (function(){
 
 })();
 /*!
- * ApiGen 3.0dev - API documentation generator for PHP 5.3+
+ * ApiGen 2.8.0 - API documentation generator for PHP 5.3+
  *
  * Copyright (c) 2010-2011 David Grudl (http://davidgrudl.com)
  * Copyright (c) 2011-2012 Jaroslav Hanslík (https://github.com/kukulich)
@@ -1063,7 +1063,7 @@ $(function() {
 			var location = window.location.href.split('/');
 			location.pop();
 			var parts = data[1].split(/::|$/);
-			var file = $.sprintf(ApiGen.config.templates.main[autocompleteFiles[data[0]]].filename, parts[0].replace(/\(\)/, '').replace(/[^\w]/g, '.'));
+			var file = $.sprintf(ApiGen.config.templates.main[autocompleteFiles[data[0]]].filename, parts[0].replace(/[^\w]/g, '.'));
 			if (parts[1]) {
 				file += '#' + ('mm' === data[0] || 'mp' === data[0] ? 'm' : '') + parts[1].replace(/([\w]+)\(\)/, '_$1');
 			}
@@ -1132,17 +1132,13 @@ $(function() {
 
 	// Splitter
 	var splitterWidth = $splitter.width();
-	var splitterPosition = $.cookie('splitter') ? parseInt($.cookie('splitter')) : null;
-	var splitterPositionBackup = $.cookie('splitterBackup') ? parseInt($.cookie('splitterBackup')) : null;
 	function setSplitterPosition(position)
 	{
-		splitterPosition = position;
-
 		$left.width(position);
 		$right.css('margin-left', position + splitterWidth);
 		$splitter.css('left', position);
 	}
-	function setContentWidth()
+	function setNavigationPosition()
 	{
 		var width = $rightInner.width();
 		$rightInner
@@ -1155,7 +1151,7 @@ $(function() {
 			$document.mousemove(function(event) {
 				if (event.pageX >= 230 && $document.width() - event.pageX >= 600 + splitterWidth) {
 					setSplitterPosition(event.pageX);
-					setContentWidth();
+					setNavigationPosition();
 				}
 			});
 
@@ -1170,30 +1166,17 @@ $(function() {
 							.unbind('mousemove')
 							.unbind('mouseup');
 
-						$.cookie('splitter', splitterPosition, {expires: 365});
+						$.cookie('splitter', parseInt($splitter.css('left')), {expires: 365});
 					});
 
 			return false;
 		});
-	$splitter.dblclick(function() {
-		if (splitterPosition) {
-			splitterPositionBackup = $left.width();
-			setSplitterPosition(0);
-		} else {
-			setSplitterPosition(splitterPositionBackup);
-			splitterPositionBackup = null;
-		}
-
-		setContentWidth();
-
-		$.cookie('splitter', splitterPosition, {expires: 365});
-		$.cookie('splitterBackup', splitterPositionBackup, {expires: 365});
-	});
+	var splitterPosition = $.cookie('splitter');
 	if (null !== splitterPosition) {
-		setSplitterPosition(splitterPosition);
+		setSplitterPosition(parseInt(splitterPosition));
 	}
-	setContentWidth();
-	$(window).resize(setContentWidth);
+	setNavigationPosition();
+	$(window).resize(setNavigationPosition);
 
 	// Select selected lines
 	var matches = window.location.hash.substr(1).match(/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/);

@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\Util\OrgConfig</title>
+	<title>Class Apigee\Util\OrgConfig | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -69,7 +69,7 @@
 				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
 				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
 				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
-				<li><a href="class-Apigee.Util.Log.html">Log</a></li>
+				<li><a href="class-Apigee.Util.Log.html" class="deprecated">Log</a></li>
 				<li class="active"><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
 			</ul>
@@ -108,6 +108,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -117,6 +120,11 @@
 	<h1>Class OrgConfig</h1>
 
 
+	<div class="description">
+	
+<p>A class that represents infomration about an Edge organization.</p>
+
+	</div>
 
 
 
@@ -132,12 +140,12 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.Util.OrgConfig.html#4-67" title="Go to source code">Util/OrgConfig.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Util.OrgConfig.html#4-116" title="Go to source code">Util/OrgConfig.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="__construct" id="___construct">
 
@@ -150,16 +158,54 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.Util.OrgConfig.html#46-66" title="Go to source code">__construct</a>( <span>mixed <var>$org_name</var></span>, <span>mixed <var>$endpoint</var></span>, <span>mixed <var>$user</var></span>, <span>mixed <var>$pass</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.OrgConfig.html#66-115" title="Go to source code">__construct</a>( <span>string <var>$org_name</var></span>, <span>string <var>$endpoint</var></span>, <span>string <var>$user</var></span>, <span>string <var>$pass</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
+<p>Create an instance of OrgConfig.</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Create an instance of OrgConfig.</p>
+
+<p>The $options argument is an array containing the fields 'logger',
+'user_email', 'subscribers', and 'http_options'.</p>
+
+<p>For example:</p>
+
+<pre>
+  $logger = new Apigee\Drupal\WatchdogLogger();
+  $logger::setLogThreshold($log_threshold);
+  $user_mail = &quot;me@myCo.com&quot;;
+
+  $options = array(
+    'logger' =&gt; $logger,
+    'user_mail' =&gt; $user_mail,
+    'subscribers' =&gt; NULL,
+    'http_options' =&gt; array(
+      'connection_timeout' =&gt; 10,
+      'timeout' =&gt; 50
+    )
+  );
+</pre>
 
 
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$org_name</var></dt>
+					<dd><code>string</code><br>$org_name</dd>
+					<dt><var>$endpoint</var></dt>
+					<dd><code>string</code><br>$endpoint</dd>
+					<dt><var>$user</var></dt>
+					<dd><code>string</code><br>$user</dd>
+					<dt><var>$pass</var></dt>
+					<dd><code>string</code><br>$pass</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>$options</dd>
+				</dl></div>
 
 
 
@@ -181,7 +227,7 @@
 
 
 
-	<table class="summary properties" id="properties">
+	<table class="summary" id="properties">
 	<caption>Properties summary</caption>
 	<tr data-order="orgName" id="$orgName">
 		<td class="attributes"><code>
@@ -190,18 +236,25 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#6-9" title="Go to source code"><var>$orgName</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#9-13" title="Go to source code"><var>$orgName</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$orgName" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The organization name.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The organization name.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$orgName" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="endpoint" id="$endpoint">
 		<td class="attributes"><code>
@@ -210,18 +263,27 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#11-14" title="Go to source code"><var>$endpoint</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#15-20" title="Go to source code"><var>$endpoint</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$endpoint" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The endpoint URL of the organization. This is the URL to which you make API
+calls.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The endpoint URL of the organization. This is the URL to which you make API
+calls.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$endpoint" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="user" id="$user">
 		<td class="attributes"><code>
@@ -230,18 +292,27 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#16-19" title="Go to source code"><var>$user</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#22-27" title="Go to source code"><var>$user</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$user" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The username of an authenticated user in the organization when making API
+calls to the endpoint URL.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The username of an authenticated user in the organization when making API
+calls to the endpoint URL.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$user" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="pass" id="$pass">
 		<td class="attributes"><code>
@@ -250,18 +321,27 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#21-24" title="Go to source code"><var>$pass</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#29-34" title="Go to source code"><var>$pass</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$pass" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The password of the authenticated user in the organization when making API
+calls to the endpoint URL.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The password of the authenticated user in the organization when making API
+calls to the endpoint URL.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$pass" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="logger" id="$logger">
 		<td class="attributes"><code>
@@ -270,18 +350,29 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#26-29" title="Go to source code"><var>$logger</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#36-42" title="Go to source code"><var>$logger</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$logger" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>A logger that implements the \Psr\Log\LoggerInterface interface. See the
+<code><a href="class-Apigee.Drupal.WatchdogLogger.html">Apigee\Drupal\WatchdogLogger</a></code> class for an example that implements the
+Psr\Log\LoggerInterface.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>A logger that implements the \Psr\Log\LoggerInterface interface. See the
+<code><a href="class-Apigee.Drupal.WatchdogLogger.html">Apigee\Drupal\WatchdogLogger</a></code> class for an example that implements the
+Psr\Log\LoggerInterface.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$logger" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="user_mail" id="$user_mail">
 		<td class="attributes"><code>
@@ -290,18 +381,25 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#31-34" title="Go to source code"><var>$user_mail</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#44-48" title="Go to source code"><var>$user_mail</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$user_mail" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>The email address of the authenticated user in the organization.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>The email address of the authenticated user in the organization.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$user_mail" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="subscribers" id="$subscribers">
 		<td class="attributes"><code>
@@ -310,24 +408,29 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#36-39" title="Go to source code"><var>$subscribers</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#50-57" title="Go to source code"><var>$subscribers</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$subscribers" class="anchor">#</a>
 
 			<div class="description short">
 				
-<p>of Symfony\Component\EventDispatcher\EventSubscriberInterface
-implementors</p>
+<p>Array of objects that may subscribe to receive events that various objects
+may fire. Elements are implementors of
+Symfony\Component\EventDispatcher\EventSubscriberInterface</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>of Symfony\Component\EventDispatcher\EventSubscriberInterface
-implementors</p>
+<p>Array of objects that may subscribe to receive events that various objects
+may fire. Elements are implementors of
+Symfony\Component\EventDispatcher\EventSubscriberInterface</p>
 
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$subscribers" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	<tr data-order="http_options" id="$http_options">
 		<td class="attributes"><code>
@@ -336,18 +439,27 @@ implementors</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Util.OrgConfig.html#41-44" title="Go to source code"><var>$http_options</var></a>
+				<a href="source-class-Apigee.Util.OrgConfig.html#59-64" title="Go to source code"><var>$http_options</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$http_options" class="anchor">#</a>
 
 			<div class="description short">
 				
+<p>Array of HTTP options. The only options currently supported are
+'connection_timeout' and 'timeout'.</p>
+
 			</div>
 
 			<div class="description detailed hidden">
 				
+<p>Array of HTTP options. The only options currently supported are
+'connection_timeout' and 'timeout'.</p>
+
 
 			</div>
-		</td>
-		<td class="value"><div><a href="#$http_options" class="anchor">#</a><code></code></div></td>
+		</div></td>
 	</tr>
 	</table>
 
@@ -359,7 +471,7 @@ implementors</p>
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

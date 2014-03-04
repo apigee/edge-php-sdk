@@ -43,7 +43,7 @@ interface DocGenModelInterface {
    * @param $update
    * @return array
    */
-  public function updateModel($apiId, $update);
+  public function updateModel($apiId, $update, $headers);
 
   /**
    * Deletes an API resource and all its associated data.

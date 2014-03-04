@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 3.0dev" />
+	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Apigee\ManagementAPI\Base</title>
+	<title>Class Apigee\ManagementAPI\Base | API Reference for the Apigee Edge PHP Management SDK</title>
 
-	<script type="text/javascript" src="resources/combined.js?3569753172"></script>
-	<script type="text/javascript" src="elementlist.js?2533977299"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4214719069" />
+	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
+	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
 
@@ -61,8 +61,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
+				<li><a href="class-Apigee.ManagementAPI.AbstractApp.html">AbstractApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.APIProduct.html">APIProduct</a></li>
 				<li class="active"><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
+				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -74,8 +77,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.ManagementAPI.APIProductInterface.html">APIProductInterface</a></li>
+				<li><a href="class-Apigee.ManagementAPI.AppInterface.html">AppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalyticsInterface.html">DeveloperAppAnalyticsInterface</a></li>
-				<li><a href="class-Apigee.ManagementAPI.DeveloperAppInterface.html">DeveloperAppInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperInterface.html">DeveloperInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.KeyValueMapInterface.html">KeyValueMapInterface</a></li>
 				<li><a href="class-Apigee.ManagementAPI.OrganizationInterface.html">OrganizationInterface</a></li>
@@ -115,6 +118,9 @@
 			<li>
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -124,6 +130,12 @@
 	<h1>Class Base</h1>
 
 
+	<div class="description">
+	
+<p>Base class for Management API classes. Handles a bit of the APIClient
+invocation, which makes the actual HTTP calls.</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -143,9 +155,10 @@
 
 	<div>
 		<h4>Direct known subclasses</h4>
+			<a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a>, 
 			<a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>, 
+			<a href="class-Apigee.ManagementAPI.Company.html">Apigee\ManagementAPI\Company</a>, 
 			<a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>, 
-			<a href="class-Apigee.ManagementAPI.DeveloperApp.html">Apigee\ManagementAPI\DeveloperApp</a>, 
 			<a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">Apigee\ManagementAPI\DeveloperAppAnalytics</a>, 
 			<a href="class-Apigee.ManagementAPI.KeyValueMap.html">Apigee\ManagementAPI\KeyValueMap</a>, 
 			<a href="class-Apigee.ManagementAPI.Organization.html">Apigee\ManagementAPI\Organization</a>, 
@@ -154,6 +167,8 @@
 
 	<div>
 		<h4>Indirect known subclasses</h4>
+			<a href="class-Apigee.ManagementAPI.CompanyApp.html">Apigee\ManagementAPI\CompanyApp</a>, 
+			<a href="class-Apigee.ManagementAPI.DeveloperApp.html">Apigee\ManagementAPI\DeveloperApp</a>, 
 			<a href="class-Apigee.Mint.ManagementAPIOrganization.html">Apigee\Mint\ManagementAPIOrganization</a>
 	</div>
 
@@ -167,57 +182,15 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Base.html#14-95" title="Go to source code">ManagementAPI/Base.php</a><br />
+				<b>Author:</b>
+				djohnson<br />
+		<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Base.html#12-88" title="Go to source code">ManagementAPI/Base.php</a><br />
 	</div>
 
 
 
-	<table class="summary methods" id="methods">
+	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
-	<tr data-order="urlEncode" id="_urlEncode">
-
-		<td class="attributes"><code>
-			 public 
-			string
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_urlEncode">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.Base.html#16-27" title="Go to source code">urlEncode</a>( <span>mixed <var>$string</var></span> )</code>
-
-		<div class="description short">
-			
-<p>URL-encodes parts of a KMS path.</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>URL-encodes parts of a KMS path.</p>
-
-<p>Historically (and hysterically) we had to perform the URL encoding twice.</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$string</var></dt>
-					<dd></dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code>string</code><br>string<br />
-				</div>
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="getDebugData" id="_getDebugData">
 
 		<td class="attributes"><code>
@@ -229,26 +202,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDebugData">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.Base.html#29-37" title="Go to source code">getDebugData</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#20-28" title="Go to source code">getDebugData</a>( )</code>
 
 		<div class="description short">
 			
-<p>Returns data from the last API call in a way that clients of the old versions
-of the devconnect_apigee classes can handle.</p>
+<p>Returns debug data from the last API call in a backwards-compatible way.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Returns data from the last API call in a way that clients of the old versions
-of the devconnect_apigee classes can handle.</p>
+<p>Returns debug data from the last API call in a backwards-compatible way.</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br>array<br />
+					<code>array</code><br />
 				</div>
 
 
@@ -268,11 +239,11 @@ of the devconnect_apigee classes can handle.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.Base.html#39-56" title="Go to source code">writeAttributes</a>( <span>mixed <var>&amp; $payload</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#30-48" title="Go to source code">writeAttributes</a>( <span>array <var>&amp; $payload</var></span> )</code>
 
 		<div class="description short">
 			
-<p>Reads the 'attributes' member of the Base subclass, and adds properly-
+<p>Reads the $attributes member of the Base subclass, and adds properly-
 formatted members to the passed-by-reference $payload array. Note that
 $this-&gt;attributes must be in scope (protected or public).</p>
 
@@ -280,7 +251,7 @@ $this-&gt;attributes must be in scope (protected or public).</p>
 
 		<div class="description detailed hidden">
 			
-<p>Reads the 'attributes' member of the Base subclass, and adds properly-
+<p>Reads the $attributes member of the Base subclass, and adds properly-
 formatted members to the passed-by-reference $payload array. Note that
 $this-&gt;attributes must be in scope (protected or public).</p>
 
@@ -289,7 +260,7 @@ $this-&gt;attributes must be in scope (protected or public).</p>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$payload</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$payload</dd>
 				</dl></div>
 
 
@@ -310,11 +281,11 @@ $this-&gt;attributes must be in scope (protected or public).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_readAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.Base.html#58-94" title="Go to source code">readAttributes</a>( <span>array <var>$response</var></span>, <span>boolean <var>$return</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#50-87" title="Go to source code">readAttributes</a>( <span>array <var>$response</var></span>, <span>boolean <var>$return</var> = <span class="php-keyword1">FALSE</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Reads the response from the Management API and populates the 'attributes'
+<p>Reads the response from the Management API and populates the $attributes
 member of the Base subclass. Note that $this-&gt;attributes must be in scope
 (protected or public).</p>
 
@@ -322,7 +293,7 @@ member of the Base subclass. Note that $this-&gt;attributes must be in scope
 
 		<div class="description detailed hidden">
 			
-<p>Reads the response from the Management API and populates the 'attributes'
+<p>Reads the response from the Management API and populates the $attributes
 member of the Base subclass. Note that $this-&gt;attributes must be in scope
 (protected or public).</p>
 
@@ -331,14 +302,14 @@ member of the Base subclass. Note that $this-&gt;attributes must be in scope
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$response</var></dt>
-					<dd></dd>
+					<dd><code>array</code><br>$response</dd>
 					<dt><var>$return</var></dt>
-					<dd></dd>
+					<dd><code>boolean</code><br>$return</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array|</code><br>array|void<br />
+					<code>array|</code><br />
 				</div>
 
 
@@ -353,8 +324,6 @@ member of the Base subclass. Note that $this-&gt;attributes must be in scope
 	<caption>Methods inherited from <a href="class-Apigee.Util.APIObject.html#methods">Apigee\Util\APIObject</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Apigee.Util.APIObject.html#___call">__call()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#___callstatic">__callstatic()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
@@ -404,7 +373,7 @@ member of the Base subclass. Note that $this-&gt;attributes must be in scope
 </div>
 
 	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen 3.0dev</a>
+		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>
