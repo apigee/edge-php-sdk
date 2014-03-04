@@ -1012,11 +1012,6 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDoc}
      */
-    public abstract function getListDetail($owner_identifier = NULL);
-
-    /**
-     * {@inheritDoc}
-     */
     public function createKey($consumer_key, $consumer_secret)
     {
         if (strlen($consumer_key) < 5 || strlen($consumer_secret) < 5) {
@@ -1154,6 +1149,7 @@ abstract class AbstractApp extends Base implements AppInterface
         }
         $excluded_properties[] = 'cachedApiProducts';
         $excluded_properties[] = 'baseUrl';
+        $excluded_properties[] = 'ownerIdentifierField';
 
         $count = count($properties);
         for ($i = 0; $i < $count; $i++) {

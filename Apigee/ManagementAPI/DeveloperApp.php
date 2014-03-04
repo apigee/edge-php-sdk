@@ -211,4 +211,12 @@ class DeveloperApp extends AbstractApp
     {
         $this->attributes['Developer'] = $this->developer;
     }
+
+    public static function getAppProperties()
+    {
+        $properties = parent::getAppProperties();
+        $properties[] = 'developerId';
+        $properties[] = 'developer';
+        return $properties;
+    }
 }

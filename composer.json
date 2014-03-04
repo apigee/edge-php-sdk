@@ -1,5 +1,5 @@
 {
-    "name": "apigee/apilib",
+    "name": "apigee/edge-sdk",
     "type": "library",
     "description": "Apigee API Library is a set of objects abstracting various internal REST API calls.",
     "keywords": ["http", "rest", "web service", "curl"],
