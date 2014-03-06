@@ -208,7 +208,7 @@ class Company extends Base
         $list = $this->responseObj;
         $companies = array();
         foreach ($list['company'] as $response) {
-            $company = new Company($this->client);
+            $company = new Company($this->config);
             self::loadFromResponse($company, $response);
             $companies[] = $company;
         }
