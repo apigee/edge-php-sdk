@@ -13,43 +13,146 @@ use \Apigee\Exceptions\ParameterException;
  */
 class Company extends Base
 {
+    /**
+     * @var string
+     */
     private $name;
+    /**
+     * @var string
+     */
     private $displayName;
+    /**
+     * @var string
+     */
     private $status;
+    /**
+     * @var array
+     */
     private $attributes;
+    /**
+     * @var int
+     */
     private $createdAt;
+    /**
+     * @var string
+     */
     private $createdBy;
+    /**
+     * @var int
+     */
     private $lastModifiedAt;
+    /**
+     * @var string
+     */
     private $lastModifiedBy;
+    /**
+     * @var array
+     */
     private $apps;
+    /**
+     * @var string
+     */
     private $organization;
 
+    /**
+     * Gets the company's internal name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Sets the company's internal name.
+     *
+     * It is advisable (but not required) that the name consist of alphanumeric
+     * characters, hyphens and underscores only.
+     *
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Gets the human-readable company name.
+     *
+     * @return mixed
+     */
     public function getDisplayName()
     {
         return $this->displayName;
     }
 
-    public function getStatus()
+    /**
+     * Sets the human-readable company name. This may consist of any
+     * characters.
+     *
+     * @param $name
+     */
+    public function setDisplayName($name)
     {
-        return $this->status;
+        $this->displayName = $name;
     }
 
+    /**
+     * Gets the company status as a string. Valid values are 'active' or
+     * 'inactive'. It is possible
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return (string)$this->status;
+    }
+
+    /**
+     * Sets the company status. Valid values are 'active' or 'inactive', though
+     * boolean or 0|1 values are also accepted.
+     *
+     * @param mixed $status
+     */
+    public function setStatus($status) {
+        if ($status === 0 || $status === FALSE) {
+            $status = 'inactive';
+        }
+        elseif ($status === 1 || $status === TRUE) {
+            $status = 'active';
+        }
+        if ($status == 'active' || $status == 'inactive') {
+            $this->status = $status;
+        }
+    }
+
+    /**
+     * Returns all defined attributes as an array of key-value pairs.
+     *
+     * @return array
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * Returns a named attribute, or NULL if it does not exist.
+     *
+     * @param string $name
+     * @return string|null
+     */
     public function getAttribute($name)
     {
         if (!array_key_exists($name, $this->attributes)) {
             return NULL;
         }
         return $this->attributes[$name];
+    }
+    public function setAttribute($name, $value)
+    {
+      $this->attributes[$name] = $value;
     }
     // TODO: other accessors
 
@@ -64,6 +167,9 @@ class Company extends Base
         $this->blankValues();
     }
 
+    /**
+     * Sets all member variables to their pristine state.
+     */
     public function blankValues()
     {
         $this->name = '';
@@ -79,7 +185,9 @@ class Company extends Base
     }
 
     /**
-     * {@inheritDoc}
+     * Returns an array of all internal company names defined for this org.
+     *
+     * @return array
      */
     public function listCompanies()
     {
@@ -88,12 +196,50 @@ class Company extends Base
         return $companies;
     }
 
+    /**
+     * Returns an array of Company objects representing all companies defined
+     * for this org.
+     *
+     * @return array
+     */
+    public function listCompaniesDetail()
+    {
+        $this->get('?expand=true');
+        $list = $this->responseObj;
+        $companies = array();
+        foreach ($list['company'] as $response) {
+            $company = new Company($this->client);
+            self::loadFromResponse($company, $response);
+            $companies[] = $company;
+        }
+        return $companies;
+    }
+
+    /**
+     * Given a valid internal company name, populates this object with
+     * its properties as fetched from the Edge server.
+     *
+     * @param string $name
+     */
     public function load($name)
     {
         $this->get(rawurlencode($name));
         self::loadFromResponse($this, $this->responseObj);
     }
 
+    /**
+     * Saves this object's properties to the Edge server.
+     *
+     * If $force_update is set to TRUE, we assume that this is an update call.
+     * If it is FALSE, we assume that it is an insert. If NULL is passed in,
+     * we attempt an update, and if it fails we attempt an insert. This is
+     * much less efficient, so declaring $force_update as a boolean will yield
+     * faster response times.
+     *
+     * @param bool|null $force_update
+     * @throws \Apigee\Exceptions\ResponseException
+     * @throws \Exception
+     */
     public function save($force_update = FALSE)
     {
         // See if we need to brute-force this.
@@ -137,17 +283,36 @@ class Company extends Base
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a company from the org on the Edge server.
+     *
+     * If no $name value is passed in, the company represented by current
+     * object state is assumed.
+     *
+     * @param string|null $name
+     * @throws \Apigee\Exceptions\ParameterException
      */
     public function delete($name = NULL)
     {
         $name = $name ? : $this->name;
+        if (empty($name)) {
+            throw new ParameterException('No company name given.');
+        }
         $this->http_delete(rawurlencode($name));
         if ($name == $this->name) {
             $this->blankValues();
         }
     }
 
+    /**
+     * Fetches a list of developer emails, organized by role.
+     *
+     * Return value is an associative array whose keys are role names, and
+     * whose values are arrays of developer emails.
+     *
+     * @param null|string $company_name
+     * @return array
+     * @throws \Apigee\Exceptions\ParameterException
+     */
     public function listDevelopers($company_name = NULL)
     {
         $company_name = $company_name ? : $this->name;
@@ -166,6 +331,14 @@ class Company extends Base
         return $devs;
     }
 
+    /**
+     * Adds or updates a developer (and the dev's role) on the Edge server.
+     *
+     * @param string $dev_email
+     * @param string $role
+     * @param null|string $company_name
+     * @throws \Apigee\Exceptions\ParameterException
+     */
     public function updateDeveloper($dev_email, $role = 'developer', $company_name = NULL)
     {
         $company_name = $company_name ? : $this->name;
@@ -181,6 +354,13 @@ class Company extends Base
         $this->post($url, $payload);
     }
 
+    /**
+     * Removes a developer from a company.
+     *
+     * @param string $dev_email
+     * @param null|string $company_name
+     * @throws \Apigee\Exceptions\ParameterException
+     */
     public function removeDeveloper($dev_email, $company_name = NULL)
     {
         $company_name = $company_name ? : $this->name;
@@ -191,6 +371,13 @@ class Company extends Base
         $this->http_delete($url);
     }
 
+    /**
+     * Parses an Edge response array and populates a given Company object
+     * accordingly.
+     *
+     * @param Company $company
+     * @param array $response
+     */
     private static function loadFromResponse(Company &$company, array $response)
     {
         foreach ($response as $key => $value) {
@@ -229,7 +416,7 @@ class Company extends Base
     {
         foreach ($array as $key => $value) {
             if (property_exists($this, $key) && $key != 'debugData') {
-                $this->{$key} = $value;
+                $this->$key = $value;
             }
         }
     }
