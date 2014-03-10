@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Isaias Arellano
+ * @author isaias
  * @since 6 November 2013
  */
 

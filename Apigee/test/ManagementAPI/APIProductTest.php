@@ -3,7 +3,7 @@
  * @file
  * Unit test for \Apigee\ManagementAPI\APIProduct.
  *
- * @author Daniel Johnson <djohnson@apigee.com>
+ * @author djohnson
  * @since 30-Jan-2014
  */
 

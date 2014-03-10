@@ -3,7 +3,7 @@
  * @file
  * Superclass of all independent API objects in the Mint hierarchy.
  *
- * @author Daniel Johnson
+ * @author djohnson
  * @since 10 May 2013
  */
 

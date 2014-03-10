@@ -4,7 +4,7 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
- * @author Brian Hasselbeck <bhasselbeck@apigee.com>
+ * @author bhasselbeck
  */
 
 namespace Apigee\DocGen;
