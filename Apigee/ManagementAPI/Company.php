@@ -115,11 +115,11 @@ class Company extends Base
      *
      * @param mixed $status
      */
-    public function setStatus($status) {
-        if ($status === 0 || $status === FALSE) {
+    public function setStatus($status)
+    {
+        if ($status === 0 || $status === false) {
             $status = 'inactive';
-        }
-        elseif ($status === 1 || $status === TRUE) {
+        } elseif ($status === 1 || $status === true) {
             $status = 'active';
         }
         if ($status == 'active' || $status == 'inactive') {
@@ -138,7 +138,7 @@ class Company extends Base
     }
 
     /**
-     * Returns a named attribute, or NULL if it does not exist.
+     * Returns a named attribute, or null if it does not exist.
      *
      * @param string $name
      * @return string|null
@@ -146,13 +146,14 @@ class Company extends Base
     public function getAttribute($name)
     {
         if (!array_key_exists($name, $this->attributes)) {
-            return NULL;
+            return null;
         }
         return $this->attributes[$name];
     }
+
     public function setAttribute($name, $value)
     {
-      $this->attributes[$name] = $value;
+        $this->attributes[$name] = $value;
     }
     // TODO: other accessors
 
@@ -230,8 +231,8 @@ class Company extends Base
     /**
      * Saves this object's properties to the Edge server.
      *
-     * If $force_update is set to TRUE, we assume that this is an update call.
-     * If it is FALSE, we assume that it is an insert. If NULL is passed in,
+     * If $force_update is set to true, we assume that this is an update call.
+     * If it is false, we assume that it is an insert. If null is passed in,
      * we attempt an update, and if it fails we attempt an insert. This is
      * much less efficient, so declaring $force_update as a boolean will yield
      * faster response times.
@@ -240,17 +241,17 @@ class Company extends Base
      * @throws \Apigee\Exceptions\ResponseException
      * @throws \Exception
      */
-    public function save($force_update = FALSE)
+    public function save($force_update = false)
     {
         // See if we need to brute-force this.
-        if ($force_update === NULL) {
+        if ($force_update === null) {
             try {
-                $this->save(TRUE);
+                $this->save(true);
             } catch (ResponseException $e) {
                 if ($e->getCode() == 404) {
                     // Update failed because company doesn't exist.
                     // Try insert instead.
-                    $this->save(FALSE);
+                    $this->save(false);
                 } else {
                     // Some other response error.
                     throw $e;
@@ -270,7 +271,7 @@ class Company extends Base
                 $payload['attributes'][] = array('name' => $name, 'value' => $value);
             }
         }
-        $url = NULL;
+        $url = null;
         if ($force_update || $this->createdAt) {
             $url = rawurlencode($this->name);
         }
@@ -291,7 +292,7 @@ class Company extends Base
      * @param string|null $name
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function delete($name = NULL)
+    public function delete($name = null)
     {
         $name = $name ? : $this->name;
         if (empty($name)) {
@@ -313,7 +314,7 @@ class Company extends Base
      * @return array
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function listDevelopers($company_name = NULL)
+    public function listDevelopers($company_name = null)
     {
         $company_name = $company_name ? : $this->name;
         if (empty($company_name)) {
@@ -339,7 +340,7 @@ class Company extends Base
      * @param null|string $company_name
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function updateDeveloper($dev_email, $role = 'developer', $company_name = NULL)
+    public function updateDeveloper($dev_email, $role = 'developer', $company_name = null)
     {
         $company_name = $company_name ? : $this->name;
         if (empty($company_name)) {
@@ -361,7 +362,7 @@ class Company extends Base
      * @param null|string $company_name
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function removeDeveloper($dev_email, $company_name = NULL)
+    public function removeDeveloper($dev_email, $company_name = null)
     {
         $company_name = $company_name ? : $this->name;
         if (empty($company_name)) {

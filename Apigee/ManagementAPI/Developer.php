@@ -186,9 +186,9 @@ class Developer extends Base implements DeveloperInterface
      */
     public function setStatus($status)
     {
-        if ($status === 0 || $status === FALSE) {
+        if ($status === 0 || $status === false) {
             $status = 'inactive';
-        } elseif ($status === 1 || $status === TRUE) {
+        } elseif ($status === 1 || $status === true) {
             $status = 'active';
         }
         if ($status != 'active' && $status != 'inactive') {
@@ -205,7 +205,7 @@ class Developer extends Base implements DeveloperInterface
         if (array_key_exists($attr, $this->attributes)) {
             return $this->attributes[$attr];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -285,33 +285,33 @@ class Developer extends Base implements DeveloperInterface
     /**
      * {@inheritDoc}
      */
-    public function validate($email = NULL)
+    public function validate($email = null)
     {
         if (!empty($email)) {
             try {
                 $this->get(rawurlencode($email));
-                return TRUE;
+                return true;
             } catch (ResponseException $e) {
             }
         }
-        return FALSE;
+        return false;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function save($force_update = FALSE)
+    public function save($force_update = false)
     {
 
         // See if we need to brute-force this.
-        if ($force_update === NULL) {
+        if ($force_update === null) {
             try {
-                $this->save(TRUE);
+                $this->save(true);
             } catch (ResponseException $e) {
                 if ($e->getCode() == 404) {
                     // Update failed because dev doesn't exist.
                     // Try insert instead.
-                    $this->save(FALSE);
+                    $this->save(false);
                 } else {
                     // Some other response error.
                     throw $e;
@@ -337,7 +337,7 @@ class Developer extends Base implements DeveloperInterface
                 $payload['attributes'][] = array('name' => $name, 'value' => $value);
             }
         }
-        $url = NULL;
+        $url = null;
         if ($force_update || $this->createdAt) {
             if ($this->developerId) {
                 $payload['developerId'] = $this->developerId;
@@ -356,7 +356,7 @@ class Developer extends Base implements DeveloperInterface
     /**
      * {@inheritDoc}
      */
-    public function delete($email = NULL)
+    public function delete($email = null)
     {
         $email = $email ? : $this->email;
         $this->http_delete(rawurlencode($email));
@@ -416,18 +416,18 @@ class Developer extends Base implements DeveloperInterface
     public function blankValues()
     {
         $this->apps = array();
-        $this->email = NULL;
-        $this->developerId = NULL;
-        $this->firstName = NULL;
-        $this->lastName = NULL;
-        $this->userName = NULL;
-        $this->organizationName = NULL;
-        $this->status = NULL;
+        $this->email = null;
+        $this->developerId = null;
+        $this->firstName = null;
+        $this->lastName = null;
+        $this->userName = null;
+        $this->organizationName = null;
+        $this->status = null;
         $this->attributes = array();
-        $this->createdAt = NULL;
-        $this->createdBy = NULL;
-        $this->modifiedAt = NULL;
-        $this->modifiedBy = NULL;
+        $this->createdAt = null;
+        $this->createdBy = null;
+        $this->modifiedAt = null;
+        $this->modifiedBy = null;
     }
 
 

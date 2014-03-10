@@ -68,7 +68,7 @@ class DeveloperApp extends AbstractApp
     /**
      * {@inheritDoc}
      */
-    public function getListDetail($developer_mail = NULL)
+    public function getListDetail($developer_mail = null)
     {
         $developer_mail = $developer_mail ? : $this->developer;
 
@@ -96,7 +96,8 @@ class DeveloperApp extends AbstractApp
      * @deprecated
      * @return array
      */
-    public function listAllOrgApps() {
+    public function listAllOrgApps()
+    {
         return $this->listAllApps();
     }
 
@@ -118,8 +119,7 @@ class DeveloperApp extends AbstractApp
             if (array_key_exists('developerId', $app_detail)) {
                 $owner_id = $this->getDeveloperMailById($app_detail['developerId']);
                 $app = new self($this->config, $owner_id);
-            }
-            else {
+            } else {
                 $owner_id = $app_detail['companyName'];
                 $app = new CompanyApp($this->config, $owner_id);
             }
@@ -136,7 +136,7 @@ class DeveloperApp extends AbstractApp
      * for the name you want. However, if you already know the app's unique id,
      * you can load without knowing its owner.
      *
-     * If you pass TRUE as the second parameter here, the DeveloperApp/CompanyApp
+     * If you pass true as the second parameter here, the DeveloperApp/CompanyApp
      * object will be changed so that it pulls apps from this developer/company
      * by default.
      *
@@ -146,7 +146,7 @@ class DeveloperApp extends AbstractApp
      *
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function loadByAppId($appId, $reset_developer = FALSE)
+    public function loadByAppId($appId, $reset_developer = false)
     {
         if (!preg_match('!^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$!', $appId)) {
             throw new ParameterException('Invalid UUID passed as appId.');
@@ -160,12 +160,11 @@ class DeveloperApp extends AbstractApp
         if (array_key_exists('developerId', $response)) {
             $owner_id = $this->getDeveloperMailById($response['developerId']);
             $obj =& $this;
-            $reset_eligible = TRUE;
-        }
-        else {
+            $reset_eligible = true;
+        } else {
             $owner_id = $response['companyName'];
             $obj = new CompanyApp($this->getConfig(), $owner_id);
-            $reset_eligible = FALSE;
+            $reset_eligible = false;
         }
 
         self::loadFromResponse($obj, $response, $owner_id);
@@ -191,7 +190,7 @@ class DeveloperApp extends AbstractApp
      */
     public function blankValues()
     {
-        $this->developerId = NULL;
+        $this->developerId = null;
         parent::blankValues();
     }
 

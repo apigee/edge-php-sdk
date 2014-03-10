@@ -2,26 +2,28 @@
 
 namespace Apigee\Util;
 
-class RequestInputReader {
+class RequestInputReader
+{
 
-  public static function readRequest() {
-    static $request;
-    if (!isset($request)) {
-      $request['headers'] = getallheaders();
-      $handle = fopen('php://input', 'r');
-      $buffer = NULL;
-      $chunk_size = isset($request['headers']['Content-Length']) ? $request['headers']['Content-Length'] : 1025;
-      while(!feof($handle)) {
-        $chunk = fread($handle, $chunk_size);
-        $buffer = isset($buffer) ? $buffer . $chunk : $chunk;
-      }
-      fclose($handle);
-      $request['data'] = $buffer;
-      $request['url'] = $_SERVER['SCRIPT_URL'];
-      $request['query.params'] = $_GET;
-      $request['query.string'] = $_SERVER['QUERY_STRING'];
-      $request['http.method'] = $_SERVER['REQUEST_METHOD'];
+    public static function readRequest()
+    {
+        static $request;
+        if (!isset($request)) {
+            $request['headers'] = getallheaders();
+            $handle = fopen('php://input', 'r');
+            $buffer = null;
+            $chunk_size = isset($request['headers']['Content-Length']) ? $request['headers']['Content-Length'] : 1025;
+            while (!feof($handle)) {
+                $chunk = fread($handle, $chunk_size);
+                $buffer = isset($buffer) ? $buffer . $chunk : $chunk;
+            }
+            fclose($handle);
+            $request['data'] = $buffer;
+            $request['url'] = $_SERVER['SCRIPT_URL'];
+            $request['query.params'] = $_GET;
+            $request['query.string'] = $_SERVER['QUERY_STRING'];
+            $request['http.method'] = $_SERVER['REQUEST_METHOD'];
+        }
+        return $request;
     }
-    return $request;
-  }
 }

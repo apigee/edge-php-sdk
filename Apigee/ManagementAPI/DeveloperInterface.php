@@ -19,10 +19,10 @@ interface DeveloperInterface
     public function load($email);
 
     /**
-     * Attempts to load developer from Management API. Returns TRUE if load was
+     * Attempts to load developer from Management API. Returns true if load was
      * successful.
      *
-     * If $email is not supplied, the result will always be FALSE.
+     * If $email is not supplied, the result will always be false.
      *
      * The $email parameter may either be the actual
      * developer email, or it can be a developer_id.
@@ -30,7 +30,7 @@ interface DeveloperInterface
      * @param null|string $email
      * @return bool
      */
-    public function validate($email = NULL);
+    public function validate($email = null);
 
     /**
      * Saves user data to the Management API. This operates as both insert and
@@ -40,13 +40,13 @@ interface DeveloperInterface
      * ParameterException is thrown.
      *
      * @param bool|null $force_update
-     *   If FALSE, assume that this is a new instance.
-     *   If TRUE, assume that this is an update to an existing instance.
-     *   If NULL, try an update, and if that fails, try an insert.
+     *   If false, assume that this is a new instance.
+     *   If true, assume that this is an update to an existing instance.
+     *   If null, try an update, and if that fails, try an insert.
      *
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function save($force_update = FALSE);
+    public function save($force_update = false);
 
     /**
      * Deletes a developer.
@@ -55,7 +55,7 @@ interface DeveloperInterface
      *
      * @param null|string $email
      */
-    public function delete($email = NULL);
+    public function delete($email = null);
 
     /**
      * Returns an array of all developer emails for this org.
@@ -75,7 +75,7 @@ interface DeveloperInterface
     public function validateUser();
 
     /**
-     * Resets this object's properties to NULL or to empty arrays based on type.
+     * Resets this object's properties to null or to empty arrays based on type.
      */
     public function blankValues();
 
@@ -153,7 +153,7 @@ interface DeveloperInterface
 
     /**
      * Returns an attribute associated with the developer,
-     * or NULL if the attribute does not exist.
+     * or null if the attribute does not exist.
      * @return array
      */
     public function getAttribute($name);

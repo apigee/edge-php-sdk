@@ -12,25 +12,28 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
-class DocGenResource extends APIObject implements DocGenResourceInterface {
+class DocGenResource extends APIObject implements DocGenResourceInterface
+{
 
-  /**
-   * Constructs the proper values for the Apigee DocGen API.
-   *
-   * @param \Apigee\Util\OrgConfig $config
-   */
-  public function __construct(OrgCOnfig $config) {
-    $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');
-  }
+    /**
+     * Constructs the proper values for the Apigee DocGen API.
+     *
+     * @param \Apigee\Util\OrgConfig $config
+     */
+    public function __construct(OrgCOnfig $config)
+    {
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');
+    }
 
-  /**
-   * Loads all of the resources of a given revision with a model.
-   *
-   * {@inheritDoc}
-   */
-  public function loadResources($apiId, $revId) {
-    $this->get(rawurlencode($apiId) . '/revisions/' . $revId . '/resources?expand=yes');
-    return $this->responseObj;
-  }
+    /**
+     * Loads all of the resources of a given revision with a model.
+     *
+     * {@inheritDoc}
+     */
+    public function loadResources($apiId, $revId)
+    {
+        $this->get(rawurlencode($apiId) . '/revisions/' . $revId . '/resources?expand=yes');
+        return $this->responseObj;
+    }
 
 }

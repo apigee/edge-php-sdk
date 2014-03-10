@@ -3,7 +3,7 @@
  * @file
  * Unit test for \Apigee\ManagementAPI\Developer.
  *
- * @author Daniel Johnson <djohnson@apigee.com>
+ * @author djohnson
  * @since 31-Jan-2014
  */
 
@@ -54,7 +54,7 @@ class DeveloperTest extends \Apigee\test\AbstractAPITest
         // Begin update
         $developer->setAttribute('foo', 'baz');
         try {
-            $developer->save(FALSE);
+            $developer->save(false);
         } catch (\Exception $e) {
             $this->fail('Cannot save developer at update time');
             return;

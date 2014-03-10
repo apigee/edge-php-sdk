@@ -20,7 +20,7 @@ interface APIProductInterface
      * @param null|string $name
      * @param null|array $response
      */
-    public function load($name = NULL, $response = NULL);
+    public function load($name = null, $response = null);
 
     /**
      * POSTs self's properties to Management API. This handles both
@@ -35,13 +35,13 @@ interface APIProductInterface
      *
      * @param null|string $name
      */
-    public function delete($name = NULL);
+    public function delete($name = null);
 
     /**
      * Returns a detailed list of all products. This list may have been cached
      * from a previous call.
      *
-     * If $show_nonpublic is TRUE, even API Products which are marked as hidden
+     * If $show_nonpublic is true, even API Products which are marked as hidden
      * or internal are returned.
      *
      * @param bool $show_nonpublic
@@ -56,7 +56,7 @@ interface APIProductInterface
     public function getAttributes();
 
     /**
-     * Returns a specific attribute value, or NULL if the attribute does not exist.
+     * Returns a specific attribute value, or null if the attribute does not exist.
      *
      * @param $name
      */

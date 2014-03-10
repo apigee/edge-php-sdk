@@ -89,10 +89,10 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
         $params['developer_app'] = $app_name;
 
         $url = 'apps?';
-        $first = TRUE;
+        $first = true;
         foreach ($params as $name => $val) {
             if ($first) {
-                $first = FALSE;
+                $first = false;
             } else {
                 $url .= '&';
             }
@@ -249,7 +249,7 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
      */
     protected static function parseTime($time)
     {
-        $int_time = FALSE;
+        $int_time = false;
         if (is_int($time)) {
             $int_time = $time;
         }
@@ -259,10 +259,10 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
                 $int_time = mktime($h, $i, 0, $m, $d, $y);
             }
         }
-        if ($int_time === FALSE) {
+        if ($int_time === false) {
             $int_time = @strtotime($time);
         }
-        if ($int_time === FALSE) {
+        if ($int_time === false) {
             throw new ParameterException('Invalid time format.');
         }
         return date('m/d/Y H:i', $int_time);

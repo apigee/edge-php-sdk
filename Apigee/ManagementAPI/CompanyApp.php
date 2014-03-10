@@ -50,7 +50,7 @@ class CompanyApp extends AbstractApp
     /**
      * {@inheritDoc}
      */
-    public function getListDetail($company_name = NULL)
+    public function getListDetail($company_name = null)
     {
         $company_name = $company_name ? : $this->companyName;
 

@@ -8,7 +8,7 @@ interface KeyValueMapInterface
 {
     /**
      * Fetches a value from a named map/key. If no such map or key is found,
-     * returns NULL.
+     * returns null.
      *
      * @param string $map_name
      * @param string $key_name
@@ -59,7 +59,7 @@ interface KeyValueMapInterface
      * @param string $map_name
      * @param array $entries An optional array of key/value pairs for the map.
      */
-    public function create($map_name, $entries = NULL);
+    public function create($map_name, $entries = null);
 
     /**
      * Deletes a map.

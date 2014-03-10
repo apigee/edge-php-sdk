@@ -2,4 +2,6 @@
 
 namespace Apigee\Exceptions;
 
-class NotImplementedException extends \Exception {}
+class NotImplementedException extends \Exception
+{
+}

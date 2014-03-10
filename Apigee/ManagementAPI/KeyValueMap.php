@@ -29,7 +29,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
     public function getEntryValue($map_name, $key_name)
     {
         $url = rawurlencode($map_name) . '/entries/' . rawurlencode($key_name);
-        $value = NULL;
+        $value = null;
         try {
             $this->get($url);
             $response_obj = $this->responseObj;
@@ -86,7 +86,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
     /**
      * {@inheritDoc}
      */
-    public function create($map_name, $entries = NULL)
+    public function create($map_name, $entries = null)
     {
         $payload = array(
             'entry' => array(),
@@ -98,7 +98,7 @@ class KeyValueMap extends Base implements KeyValueMapInterface
             }
         }
         // If something went wrong, the following line will throw a ResponseException.
-        $this->post(NULL, $payload);
+        $this->post(null, $payload);
     }
 
     /**

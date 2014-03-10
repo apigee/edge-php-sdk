@@ -2,6 +2,7 @@
 
 namespace Apigee\DocGen;
 
-interface DocGenResourceInterface {
-
+interface DocGenResourceInterface
+{
+    public function loadResources($apiId, $revId);
 }

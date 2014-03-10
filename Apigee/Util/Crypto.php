@@ -63,7 +63,7 @@ class Crypto
             srand();
             $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
             $iv_base64 = rtrim(base64_encode($iv), '='); // Guaranteed to be 22 char long
-            // Store password length so we can accurately trim in case of NULL-padding
+            // Store password length so we can accurately trim in case of null-padding
             $encrypt = strlen($string) . "\n" . $string;
             $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, $encrypt, MCRYPT_MODE_CBC, $iv);
             self::$encryptedStrings[$string] = $iv_base64 . base64_encode($encrypted);
@@ -84,7 +84,7 @@ class Crypto
         $string_encrypted = substr($scrambled, 22);
 
         $iv = base64_decode($iv_base64);
-        if ($iv === FALSE || strlen($iv) < 16) {
+        if ($iv === false || strlen($iv) < 16) {
             throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
         }
         $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);

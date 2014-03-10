@@ -18,7 +18,7 @@ interface AppInterface
      *
      * @param null|string $name
      */
-    public function load($name = NULL);
+    public function load($name = null);
 
     /**
      * Checks to see if an app with the given name exists for this
@@ -29,29 +29,29 @@ interface AppInterface
      * @param null|string $name
      * @return bool
      */
-    public function validate($name = NULL);
+    public function validate($name = null);
 
     /**
      * Write this app's data to the Management API, preserving client key/secret.
      *
      * The function attempts to determine if this should be an insert or an
-     * update automagically. However, when $force_update is set to TRUE, this
+     * update automagically. However, when $force_update is set to true, this
      * determination is short-circuited and an update is assumed.
      *
      * @param bool $force_update
      */
-    public function save($force_update = FALSE);
+    public function save($force_update = false);
 
     /**
      * Approves or revokes a client key for an app, and optionally also for all
      * API Products associated with that app.
      *
      * @param mixed $status
-     *        May be TRUE, FALSE, 0, 1, 'approve' or 'revoke'.
+     *        May be true, false, 0, 1, 'approve' or 'revoke'.
      * @param bool $also_set_apiproduct
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function setKeyStatus($status, $also_set_apiproduct = TRUE);
+    public function setKeyStatus($status, $also_set_apiproduct = true);
 
     /**
      * Deletes an app from the Management API.
@@ -60,7 +60,7 @@ interface AppInterface
      *
      * @param null|string $name
      */
-    public function delete($name = NULL);
+    public function delete($name = null);
 
     /**
      * Returns names of all apps belonging to this developer/company.
@@ -73,11 +73,11 @@ interface AppInterface
      * Returns array of all DeveloperApp/CompanyApp objects belonging to this
      * developer or company.
      *
-     * @param string|NULL $owner
+     * @param string|null $owner
      *   refers to the developerId or company name owning the app
      * @return array
      */
-    public function getListDetail($owner = NULL);
+    public function getListDetail($owner = null);
 
     /**
      * Creates a key/secret pair for this app against its component APIProducts.
@@ -120,14 +120,14 @@ interface AppInterface
     public function getAttributes();
 
     /**
-     * Returns TRUE if the app attributes array contains $attr.
+     * Returns true if the app attributes array contains $attr.
      * @param string $attr
      * @return bool
      */
     public function hasAttribute($attr);
 
     /**
-     * Returns the value of the specified app attribute, or NULL if the
+     * Returns the value of the specified app attribute, or null if the
      * attribute does not exist.
      * @param string $attr
      */
@@ -304,10 +304,10 @@ interface AppInterface
     public function getScopes();
 
     /**
-     * Returns TRUE if the $credentialApiproducts, $consumerKey, $consumerSecret,
+     * Returns true if the $credentialApiproducts, $consumerKey, $consumerSecret,
      * $credentialScopes, and $credentialStatus properties are all set
-     * to nonNULL values.
-     * Otherwise, returns FALSE.
+     * to nonnull values.
+     * Otherwise, returns false.
      */
     public function hasCredentialInfo();
 

@@ -32,7 +32,7 @@ class UserRole extends Base implements UserRoleInterface
     public function addUsersToRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
-            return FALSE;
+            return false;
         }
         $existing_users = $this->getUsersByRole($role);
         foreach ($users as $user) {
@@ -42,7 +42,7 @@ class UserRole extends Base implements UserRoleInterface
                 $this->post(rawurlencode($role) . '/users', $payload, 'application/x-www-form-urlencoded');
             }
         }
-        return TRUE;
+        return true;
     }
 
     /**
@@ -51,7 +51,7 @@ class UserRole extends Base implements UserRoleInterface
     public function removeUsersFromRole(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
-            return FALSE;
+            return false;
         }
         $existing_users = $this->getUsersByRole($role);
         foreach ($users as $user) {
@@ -60,7 +60,7 @@ class UserRole extends Base implements UserRoleInterface
                 $this->http_delete(rawurlencode($role) . '/users/' . rawurlencode($user));
             }
         }
-        return TRUE;
+        return true;
     }
 
     /**
@@ -69,7 +69,7 @@ class UserRole extends Base implements UserRoleInterface
     public function setRoleUsers(array $users, $role)
     {
         if (!in_array($role, $this->listRoles())) {
-            return FALSE;
+            return false;
         }
         $existing_users = $this->getUsersByRole($role);
         $to_add = array();
@@ -88,13 +88,13 @@ class UserRole extends Base implements UserRoleInterface
         if (!empty($to_del)) {
             $this->removeUsersFromRole($to_del, $role);
         }
-        return TRUE;
+        return true;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function listRoles($reset = FALSE)
+    public function listRoles($reset = false)
     {
         static $roles;
 
@@ -102,7 +102,7 @@ class UserRole extends Base implements UserRoleInterface
             if (is_array($reset)) {
                 $roles = $reset;
             } else {
-                $roles = NULL;
+                $roles = null;
             }
         }
         if (empty($roles)) {
@@ -121,7 +121,7 @@ class UserRole extends Base implements UserRoleInterface
         if (!in_array($role_name, $roles)) {
             $roles[] = $role_name;
             $payload = array('role' => array(array('name' => $role_name)));
-            $this->post(NULL, $payload);
+            $this->post(null, $payload);
             // Reset the cache
             $this->listRoles($roles);
         }
@@ -133,7 +133,7 @@ class UserRole extends Base implements UserRoleInterface
     public function deleteRole($role_name)
     {
         $roles = $this->listRoles();
-        if (($i = array_search($role_name, $roles)) !== FALSE) {
+        if (($i = array_search($role_name, $roles)) !== false) {
             unset($roles[$i]);
             $this->http_delete(rawurlencode($role_name));
             // Reset the cache
@@ -142,7 +142,7 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * Returns TRUE if the role exists.
+     * Returns true if the role exists.
      * @param string
      * @return bool
      */

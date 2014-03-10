@@ -193,7 +193,7 @@ abstract class AbstractApp extends Base implements AppInterface
      */
     public function getAttribute($attr)
     {
-        return (array_key_exists($attr, $this->attributes) ? $this->attributes[$attr] : NULL);
+        return (array_key_exists($attr, $this->attributes) ? $this->attributes[$attr] : null);
     }
 
     /**
@@ -489,7 +489,7 @@ abstract class AbstractApp extends Base implements AppInterface
         if (isset($this->credentialAttributes[$attr_name])) {
             return $this->credentialAttributes[$attr_name];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -582,10 +582,10 @@ abstract class AbstractApp extends Base implements AppInterface
         );
         foreach ($credential_fields as $field) {
             if (!empty($this->$field)) {
-                return TRUE;
+                return true;
             }
         }
-        return FALSE;
+        return false;
     }
 
     public function setApiProductCache(array $cache)
@@ -606,10 +606,10 @@ abstract class AbstractApp extends Base implements AppInterface
      * @param AppInterface $obj
      * @param array $response
      */
-    protected static function loadFromResponse(AppInterface &$obj, array $response, $owner_identifier = NULL)
+    protected static function loadFromResponse(AppInterface &$obj, array $response, $owner_identifier = null)
     {
         $obj->accessType = $response['accessType'];
-        $obj->appFamily = (isset($response['appFamily']) ? $response['appFamily'] : NULL);
+        $obj->appFamily = (isset($response['appFamily']) ? $response['appFamily'] : null);
         $obj->appId = $response['appId'];
         $obj->callbackUrl = $response['callbackUrl'];
         $obj->createdAt = $response['createdAt'];
@@ -627,7 +627,7 @@ abstract class AbstractApp extends Base implements AppInterface
         } elseif (isset($obj->attributes['description'])) {
             $obj->description = $obj->getAttribute('description');
         } else {
-            $obj->description = NULL;
+            $obj->description = null;
         }
 
         self::loadCredentials($obj, $response['credentials']);
@@ -653,7 +653,7 @@ abstract class AbstractApp extends Base implements AppInterface
     {
         // Find the credential with the max issuedAt attribute which isn't expired.
         if (count($credentials) > 0) {
-            $credential = NULL;
+            $credential = null;
             // Sort credentials by issuedAt descending.
             usort($credentials, array(__CLASS__, 'sortCredentials'));
             // Look for the first member of the array that is approved.
@@ -740,7 +740,7 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDoc}
      */
-    public function load($name = NULL)
+    public function load($name = null)
     {
         $name = $name ? : $this->name;
         $this->get(rawurlencode($name));
@@ -751,15 +751,15 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDoc}
      */
-    public function validate($name = NULL)
+    public function validate($name = null)
     {
         $name = $name ? : $this->name;
         try {
             $this->get(rawurlencode($name));
-            return FALSE;
+            return false;
         } catch (\Apigee\Exceptions\ResponseException $e) {
         }
-        return TRUE;
+        return true;
     }
 
     /**
@@ -799,7 +799,7 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDoc}
      */
-    public function save($force_update = FALSE)
+    public function save($force_update = false)
     {
         $is_update = ($force_update || $this->modifiedAt);
 
@@ -812,7 +812,7 @@ abstract class AbstractApp extends Base implements AppInterface
         // expected on the Enterprise UI.
         if (!array_key_exists('DisplayName', $this->attributes)) {
             $display_name = $this->name;
-            if (strpos($display_name, ' ') === FALSE) {
+            if (strpos($display_name, ' ') === false) {
                 $display_name = ucwords(str_replace(array('_', '-'), ' ', $display_name));
             }
             $this->attributes['DisplayName'] = $display_name;
@@ -828,11 +828,11 @@ abstract class AbstractApp extends Base implements AppInterface
 
         $this->alterAttributes($payload);
 
-        $url = NULL;
+        $url = null;
         if ($is_update) {
             $url = rawurlencode($this->getName());
         }
-        $created_new_key = FALSE;
+        $created_new_key = false;
         // NOTE: On update, we send APIProduct information separately from other
         // fields, in order to preserve the client-key/secret pair. Updates to
         // APIProducts must be made separately against the app's client-key,
@@ -853,7 +853,7 @@ abstract class AbstractApp extends Base implements AppInterface
             }
         } else {
             $payload['apiProducts'] = $this->getApiProducts();
-            $created_new_key = TRUE;
+            $created_new_key = true;
         }
 
         // Let subclasses fiddle with the payload here
@@ -862,14 +862,14 @@ abstract class AbstractApp extends Base implements AppInterface
         $this->post($url, $payload);
         $response = $this->responseObj;
 
-        $credential_response = NULL;
+        $credential_response = null;
 
         if (count($response['credentials']) > 0) {
             $credential_attributes = array();
-            $current_credential = NULL;
+            $current_credential = null;
             // Find credential -- it should have the maximum issuedAt date.
             $max_issued_at = -1;
-            $credential_index = NULL;
+            $credential_index = null;
             foreach ($response['credentials'] as $i => $cred) {
                 $issued_at = (array_key_exists('issuedAt', $cred) ? intval($cred['issuedAt']) : 0);
                 if ($max_issued_at == -1 || $issued_at > $max_issued_at) {
@@ -954,11 +954,11 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDOc}
      */
-    public function setKeyStatus($status, $also_set_apiproduct = TRUE)
+    public function setKeyStatus($status, $also_set_apiproduct = true)
     {
-        if ($status === 0 || $status === FALSE) {
+        if ($status === 0 || $status === false) {
             $status = 'revoke';
-        } elseif ($status === 1 || $status === TRUE) {
+        } elseif ($status === 1 || $status === true) {
             $status = 'approve';
         } elseif ($status != 'revoke' && $status != 'approve') {
             throw new ParameterException('Invalid key status ' . $status);
@@ -991,7 +991,7 @@ abstract class AbstractApp extends Base implements AppInterface
     /**
      * {@inheritDOc}
      */
-    public function delete($name = NULL)
+    public function delete($name = null)
     {
         $name = $name ? : $this->name;
         $this->http_delete(rawurlencode($name));
@@ -1077,24 +1077,24 @@ abstract class AbstractApp extends Base implements AppInterface
     {
         $this->accessType = 'read';
         $this->apiProducts = array();
-        $this->appFamily = NULL;
-        $this->appId = NULL;
+        $this->appFamily = null;
+        $this->appId = null;
         $this->attributes = array();
         $this->callbackUrl = '';
-        $this->createdAt = NULL;
-        $this->createdBy = NULL;
-        $this->modifiedAt = NULL;
-        $this->modifiedBy = NULL;
-        $this->name = NULL;
+        $this->createdAt = null;
+        $this->createdBy = null;
+        $this->modifiedAt = null;
+        $this->modifiedBy = null;
+        $this->name = null;
         $this->scopes = array();
         $this->status = 'pending';
-        $this->description = NULL;
+        $this->description = null;
 
         $this->credentialApiProducts = array();
-        $this->consumerKey = NULL;
-        $this->consumerSecret = NULL;
+        $this->consumerKey = null;
+        $this->consumerSecret = null;
         $this->credentialScopes = array();
-        $this->credentialStatus = NULL;
+        $this->credentialStatus = null;
         $this->credentialAttributes = array();
         $this->credentialIssuedAt = 0;
         $this->credentialExpiresAt = -1;

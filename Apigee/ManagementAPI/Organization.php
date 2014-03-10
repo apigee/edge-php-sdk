@@ -109,7 +109,7 @@ class Organization extends Base implements OrganizationInterface
      */
     public function getProperty($name)
     {
-        return isset($this->properties[$name]) ? $this->properties[$name] : NULL;
+        return isset($this->properties[$name]) ? $this->properties[$name] : null;
     }
 
     /**
@@ -167,7 +167,7 @@ class Organization extends Base implements OrganizationInterface
      * Loads the organization specified by $org.
      * @param string|null $org
      */
-    public function load($org = NULL)
+    public function load($org = null)
     {
         $org = $org ? : $this->name;
         $this->get(rawurlencode($org));

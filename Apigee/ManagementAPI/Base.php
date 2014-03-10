@@ -56,7 +56,7 @@ class Base extends \Apigee\Util\APIObject
      * @param bool $return
      * @return array|void
      */
-    protected function readAttributes($response, $return = FALSE)
+    protected function readAttributes($response, $return = false)
     {
         $attributes = array();
 
@@ -72,7 +72,7 @@ class Base extends \Apigee\Util\APIObject
                         continue;
                     }
                     if ($attrib['name'] == 'apiResourcesInfo') {
-                        $attrib['value'] = @json_decode($attrib['value'], TRUE);
+                        $attrib['value'] = @json_decode($attrib['value'], true);
                     }
                     $attributes[$attrib['name']] = $attrib['value'];
                 }

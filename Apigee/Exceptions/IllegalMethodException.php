@@ -1,4 +1,6 @@
 <?php
 namespace Apigee\Exceptions;
 
-class IllegalMethodException extends \Exception {}
+class IllegalMethodException extends \Exception
+{
+}

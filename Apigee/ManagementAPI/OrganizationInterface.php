@@ -8,7 +8,7 @@ namespace Apigee\ManagementAPI;
  */
 interface OrganizationInterface
 {
-    public function load($org = NULL);
+    public function load($org = null);
 
     /**
      * Returns the internal name of the organization.

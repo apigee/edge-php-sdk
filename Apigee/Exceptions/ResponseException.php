@@ -36,11 +36,11 @@ class ResponseException extends \Exception
     /**
      * Creates an exception object.
      */
-    public function __construct($message, $code = 0, $uri = NULL, $params = NULL, $response_body = NULL)
+    public function __construct($message, $code = 0, $uri = null, $params = null, $response_body = null)
     {
         parent::__construct($message, $code);
 
-        if (strpos($uri, '@') !== FALSE) {
+        if (strpos($uri, '@') !== false) {
             // strip out username/password
             $components = parse_url($uri);
             unset ($components['user']);
@@ -52,8 +52,8 @@ class ResponseException extends \Exception
         $this->uri = $uri;
         $this->params = $params;
         $this->responseBody = $response_body;
-        $this->responseObj = NULL;
-        $this->requestObj = NULL;
+        $this->responseObj = null;
+        $this->requestObj = null;
     }
 
     /**
@@ -113,7 +113,7 @@ class ResponseException extends \Exception
                 $request['content-length'] = $request_body->getContentLength();
                 $request['body'] = $request_body->__toString();
             }
-            $msg .= "\n\nRequest: <pre>" . htmlspecialchars(print_r($request, TRUE)) . '</pre>';
+            $msg .= "\n\nRequest: <pre>" . htmlspecialchars(print_r($request, true)) . '</pre>';
         }
 
         if (is_object($this->responseObj) && $this->responseObj instanceof \Guzzle\Http\Message\Response) {
@@ -122,7 +122,7 @@ class ResponseException extends \Exception
                 'headers' => $this->responseObj->getRawHeaders(),
                 'body' => $this->responseBody
             );
-            $msg .= "\n\nResponse: <pre>" . htmlspecialchars(print_r($response, TRUE)) . '</pre>';
+            $msg .= "\n\nResponse: <pre>" . htmlspecialchars(print_r($response, true)) . '</pre>';
         }
 
         return $msg;

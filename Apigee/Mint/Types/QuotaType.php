@@ -2,13 +2,11 @@
 
 namespace Apigee\Mint\Types;
 
-final class QuotaType extends Type {
-  const Transactions = 'Transactions';
-  const CreditLimit = 'CreditLimit';
-  const SpendLimit = 'SpendLimit';
-  const FeeExposure = 'FeeExposure';
-  const Balance = 'Balance';
-
-  private function __construct() {
-  }
+final class QuotaType extends Type
+{
+    const TRANSACTIONS = 'Transactions';
+    const CREDIT_LIMIT = 'CreditLimit';
+    const SPEND_LIMIT = 'SpendLimit';
+    const FEE_EXPOSURE = 'FeeExposure';
+    const BALANCE = 'Balance';
 }

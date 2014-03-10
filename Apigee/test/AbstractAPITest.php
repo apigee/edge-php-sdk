@@ -24,9 +24,9 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
         if (!isset(self::$orgConfig)) {
             $config_file = __DIR__ . DIRECTORY_SEPARATOR . 'config.yml';
             if (!file_exists($config_file)) {
-                throw new \Exception("Required config file $config_file does not exist.");
+                throw new \Exception("Required config file $config_file does not exist. Try copying example.config.yml to config.yml and editing it with your authentication details.");
             }
-            $config = Yaml::parse($config_file, TRUE);
+            $config = Yaml::parse($config_file, true);
             $missing_keys = array();
             $org = $endpoint = $user = $pass = '';
             foreach (array('org', 'endpoint', 'user', 'pass') as $key) {

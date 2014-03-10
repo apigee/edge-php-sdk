@@ -1,0 +1,9 @@
+org: my-org
+endpoint: https://api.enterprise.apigee.com/v1
+user: dc_devportal+myorg@apigee.com
+pass: I<3apis
+options:
+  http_options:
+    connection_timeout: 4
+    timeout: 4
+

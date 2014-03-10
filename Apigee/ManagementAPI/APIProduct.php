@@ -140,7 +140,7 @@ class APIProduct extends Base implements APIProductInterface
     /**
      * {@inheritDoc}
      */
-    public function load($name = NULL, $response = NULL)
+    public function load($name = null, $response = null)
     {
         $name = $name ? : $this->name;
         if (!isset($response)) {
@@ -159,12 +159,12 @@ class APIProduct extends Base implements APIProductInterface
         $this->environments = $response['environments'];
         $this->name = $response['name'];
         $this->proxies = $response['proxies'];
-        $this->quota = isset($response['quota']) ? $response['quota'] : NULL;
-        $this->quotaInterval = isset($response['quotaInterval']) ? $response['quotaInterval'] : NULL;
-        $this->quotaTimeUnit = isset($response['quotaTimeUnit']) ? $response['quotaTimeUnit'] : NULL;
+        $this->quota = isset($response['quota']) ? $response['quota'] : null;
+        $this->quotaInterval = isset($response['quotaInterval']) ? $response['quotaInterval'] : null;
+        $this->quotaTimeUnit = isset($response['quotaTimeUnit']) ? $response['quotaTimeUnit'] : null;
         $this->scopes = $response['scopes'];
 
-        $this->loaded = TRUE;
+        $this->loaded = true;
     }
 
     /**
@@ -186,7 +186,7 @@ class APIProduct extends Base implements APIProductInterface
             'scopes' => $this->scopes
         );
         $this->writeAttributes($payload);
-        $url = NULL;
+        $url = null;
         if ($this->modifiedBy) {
             $url = $this->name;
         }
@@ -196,7 +196,7 @@ class APIProduct extends Base implements APIProductInterface
     /**
      * {@inheritDoc}
      */
-    public function delete($name = NULL)
+    public function delete($name = null)
     {
         $name = $name ? : $this->name;
         $this->delete(rawurlencode($name));
@@ -217,11 +217,11 @@ class APIProduct extends Base implements APIProductInterface
      * @param null|array $product
      * @return bool
      */
-    public function isPublic($product = NULL)
+    public function isPublic($product = null)
     {
         if (!isset($product)) {
             if (isset($this->attributes['access']) && ($this->attributes['access'] == 'internal' || $this->attributes['access'] == 'private')) {
-                return FALSE;
+                return false;
             }
         } else {
             foreach ($product['attributes'] as $attr) {
@@ -230,7 +230,7 @@ class APIProduct extends Base implements APIProductInterface
                 }
             }
         }
-        return TRUE;
+        return true;
     }
 
     /**
@@ -246,7 +246,7 @@ class APIProduct extends Base implements APIProductInterface
             $response = $this->responseObj;
             foreach ($response['apiProduct'] as $prod) {
                 $product = new self($this->getConfig());
-                $product->load(NULL, $prod);
+                $product->load(null, $prod);
                 $api_products[] = $product;
             }
         }
@@ -256,7 +256,7 @@ class APIProduct extends Base implements APIProductInterface
     /**
      * {@inheritDoc}
      */
-    public function listProducts($show_nonpublic = FALSE)
+    public function listProducts($show_nonpublic = false)
     {
         $products = $this->getProductsCache();
         if (!$show_nonpublic) {
@@ -294,7 +294,7 @@ class APIProduct extends Base implements APIProductInterface
         if (isset($this->attributes[$name])) {
             return $this->attributes[$name];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -375,7 +375,7 @@ class APIProduct extends Base implements APIProductInterface
         } elseif (!empty($this->quota)) {
             return $this->quota;
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -388,7 +388,7 @@ class APIProduct extends Base implements APIProductInterface
         } elseif (!empty($this->quotaInterval)) {
             return $this->quotaInterval;
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -401,7 +401,7 @@ class APIProduct extends Base implements APIProductInterface
         } elseif (!empty($this->quotaTimeUnit)) {
             return $this->quotaTimeUnit;
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -423,7 +423,7 @@ class APIProduct extends Base implements APIProductInterface
         if (isset($this->attributes['description'])) {
             return $this->attributes['description'];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -440,7 +440,7 @@ class APIProduct extends Base implements APIProductInterface
     public function removeApiResource($resource)
     { // was delApiResource
         $index = array_search($resource, $this->apiResources);
-        if ($index !== FALSE) {
+        if ($index !== false) {
             unset($this->apiResources[$index]);
             // reindex this array to be sequential zero-based.
             $this->apiResources = array_values($this->apiResources);
@@ -485,10 +485,10 @@ class APIProduct extends Base implements APIProductInterface
         $this->apiResources = array();
         $this->approvalType = 'auto';
         $this->attributes = array();
-        $this->createdAt = NULL;
-        $this->createdBy = NULL;
-        $this->modifiedAt = NULL;
-        $this->modifiedBy = NULL;
+        $this->createdAt = null;
+        $this->createdBy = null;
+        $this->modifiedAt = null;
+        $this->modifiedBy = null;
         $this->description = '';
         $this->displayName = '';
         $this->environments = array();
@@ -499,7 +499,7 @@ class APIProduct extends Base implements APIProductInterface
         $this->quotaTimeUnit = '';
         $this->scopes = array();
 
-        $this->loaded = FALSE;
+        $this->loaded = false;
     }
 
 
@@ -563,7 +563,7 @@ class APIProduct extends Base implements APIProductInterface
                 $this->{$key} = $value;
             }
         }
-        $this->loaded = TRUE;
+        $this->loaded = true;
     }
 
 }
