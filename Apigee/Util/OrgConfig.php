@@ -60,7 +60,7 @@ class OrgConfig
     /**
      * @var array
      * Array of HTTP options. The only options currently supported are
-     * 'connection_timeout' and 'timeout'.
+     * 'follow_location', 'connection_timeout' and 'timeout'.
      */
     public $http_options;
 
@@ -105,8 +105,9 @@ class OrgConfig
             'user_mail' => null,
             'subscribers' => array(),
             'http_options' => array(
+                'follow_location' => true,
                 'connection_timeout' => 10,
-                'timeout' => 10
+                'timeout' => 10,
             )
         );
 
