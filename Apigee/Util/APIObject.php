@@ -90,7 +90,8 @@ class APIObject
     {
         $this->config =& $config;
         $base_url = rtrim($config->endpoint, '/') . '/' . ltrim($base_url, '/');
-        $this->client = new \Guzzle\Http\Client($base_url);
+        $config->http_options += array('follow_location' => true);
+        $this->client = new \Guzzle\Http\Client($base_url, array('redirect.disable' => !$config->http_options['follow_location']));
         if (is_array($config->subscribers)) {
             foreach ($config->subscribers as $subscriber) {
                 $this->client->addSubscriber($subscriber);
@@ -279,7 +280,7 @@ class APIObject
             $headers[strtolower($key)] = $value;
         }
         $options += $this->config->http_options;
-        $request = $this->client->delete($uri, $headers, $options);
+        $request = $this->client->delete($uri, $headers, null, $options);
         $this->exec($request);
     }
 
