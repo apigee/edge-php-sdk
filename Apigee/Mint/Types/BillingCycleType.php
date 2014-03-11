@@ -2,7 +2,7 @@
 
 namespace Apigee\Mint\Types;
 
-class BillingCycleType extends Type
+final class BillingCycleType extends Type
 {
     const PRORATED = 'PRORATED';
     const CALENDAR_MONTH = 'CALENDAR_MONTH';

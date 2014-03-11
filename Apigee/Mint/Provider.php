@@ -1,9 +1,10 @@
 <?php
-
 namespace Apigee\Mint;
 
-
 use Apigee\Exceptions\NotImplementedException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Util\CacheFactory;
 
 class Provider extends Base\BaseObject
 {

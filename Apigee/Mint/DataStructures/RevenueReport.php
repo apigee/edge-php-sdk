@@ -22,7 +22,7 @@ class RevenueReport extends DataStructure
 
     private $type;
 
-    public function __construct($data = NULL, Developer $developer)
+    public function __construct($data = null, Developer $developer)
     {
 
         $excluded_properties = array('mintCriteria', 'developer', 'organization');
@@ -41,8 +41,6 @@ class RevenueReport extends DataStructure
             $organization->loadFromRawData($data['organization']);
             $this->organization = $organization;
         }
-
-
     }
 
     public function getMintCriteria()

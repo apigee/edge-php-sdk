@@ -273,7 +273,7 @@ class Developer extends Base implements DeveloperInterface
         $developer->attributes = array();
         if (array_key_exists('attributes', $response) && is_array($response['attributes'])) {
             foreach ($response['attributes'] as $attribute) {
-                $developer->attributes[$attribute['name']] = $attribute['value'];
+                $developer->attributes[$attribute['name']] = @$attribute['value'];
             }
         }
         $developer->createdAt = $response['createdAt'];

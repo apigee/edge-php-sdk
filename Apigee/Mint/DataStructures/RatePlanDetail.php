@@ -99,7 +99,7 @@ class RatePlanDetail
      * @param array|null $data
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($data = NULL, \Apigee\Util\OrgConfig $config)
+    public function __construct($data = null, \Apigee\Util\OrgConfig $config)
     {
         if (is_array($data)) {
 
@@ -141,7 +141,7 @@ class RatePlanDetail
         foreach ($properties as $property) {
             if (isset($this->$property)) {
                 if (is_object($this->$property)) {
-                    $obj[$property] = json_decode((string)$this->$property, TRUE);
+                    $obj[$property] = json_decode((string)$this->$property, true);
                 } else {
                     $obj[$property] = $this->$property;
                 }

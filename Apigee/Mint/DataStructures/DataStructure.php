@@ -22,7 +22,7 @@ class DataStructure
                 continue;
             }
             if ($method->isPrivate()) {
-                $method->setAccessible(TRUE);
+                $method->setAccessible(true);
             }
             $setter_methods[$method_name] = $method;
         }

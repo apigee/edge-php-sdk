@@ -6,7 +6,6 @@
 
 namespace Apigee\Mint\DataStructures;
 
-
 class Payment extends DataStructure
 {
 
@@ -40,7 +39,7 @@ class Payment extends DataStructure
      *
      * @param array $data
      */
-    public function __construct($data = NULL)
+    public function __construct($data = null)
     {
         if (is_array($data)) {
             $this->loadFromRawData($data);

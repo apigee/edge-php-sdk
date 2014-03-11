@@ -2,7 +2,7 @@
 
 namespace Apigee\Mint\Types;
 
-class MonthType extends Type
+final class MonthType extends Type
 {
     const JANUARY = 'JANUARY';
     const FEBRUARY = 'FEBRUARY';
@@ -16,4 +16,8 @@ class MonthType extends Type
     const OCTOBER = 'OCTOBER';
     const NOVEMBER = 'NOVEMBER';
     const DECEMBER = 'DECEMBER';
+
+    private function __construct()
+    {
+    }
 }
