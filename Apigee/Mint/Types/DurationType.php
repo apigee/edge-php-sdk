@@ -9,4 +9,8 @@ final class DurationType extends Type
     const MONTH = 'MONTH';
     const QUARTER = 'QUARTER';
     const YEAR = 'YEAR';
+
+    private function __construct()
+    {
+    }
 }

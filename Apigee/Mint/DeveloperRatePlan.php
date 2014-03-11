@@ -2,10 +2,10 @@
 namespace Apigee\Mint;
 
 use Apigee\Exceptions\NotImplementedException;
-use Apigee\Exceptions\ResponseException as ResponseException;
-use Apigee\Mint\Exceptions\MintApiException as MintApiException;
-use Apigee\Exceptions\ParameterException as ParameterException;
-use Apigee\Util\CacheFactory as CacheFactory;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Mint\Exceptions\MintApiException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\CacheFactory;
 
 class DeveloperRatePlan extends Base\BaseObject
 {

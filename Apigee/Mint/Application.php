@@ -3,6 +3,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Mint\Types\ApplicationStatusType;
+use Apigee\Mint\Types\StatusType;
 use Apigee\Exceptions\ParameterException;
 
 class Application extends Base\BaseObject
