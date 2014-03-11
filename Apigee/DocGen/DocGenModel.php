@@ -52,17 +52,20 @@ class DocGenModel extends APIObject implements DocGenModelInterface
    *
    * {@inheritDoc}
    */
-  public function importWADL($apiId, $xml, $format, $url)
+  public function importWADL($apiId, $xml)
   {
-    if (!is_null($url)) {
-      $url = '&url=' . $url;
-    } else {
-      $url = '';
-    }
-    if (is_null($xml)) {
-      $xml = '';
-    }
-    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=' . $format . $url, $xml, 'application/xml; charset=utf-8');
+    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
+    return $this->responseObj;
+  }
+
+  /**
+   * Gets information from a Swagger URL, and transforms it to a given model, returns JSON representation of the model
+   *
+   * {@inheritDoc}
+   */
+  public function importSwagger($apiId, $url)
+  {
+    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=swagger', 'URL=' . $url, 'application/xml; charset=utf-8');
     return $this->responseObj;
   }
 

@@ -27,7 +27,16 @@ interface DocGenModelInterface
    * @param string $xml
    * @return array
    */
-  public function importWADL($apiId, $xml, $format, $url);
+  public function importWADL($apiId, $xml);
+
+  /**
+   * Gets information from a Swagger URL, and transforms it to a given model, returns JSON representation of the model
+   *
+   * @param string $apiId
+   * @param string $url
+   * @return array
+   */
+  public function importSwagger($apiId, $url);
 
   /**
    * Returns the details of an API, such as its name, description, list of revisions and metadata.
