@@ -4,22 +4,20 @@ namespace Apigee\Mint;
 use Apigee\Util\CacheFactory;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\DataStructures\BillingMonth;
-use Apigee\Mint\Types\StatusType as StatusType;
-use Apigee\Mint\Types\TaxModelType as TaxModelType;
-use Apigee\Mint\Types\OrgType as OrgType;
-use Apigee\Mint\Types\Country as Country;
-use Apigee\Mint\Types\BillingCycleType as BillingCycleType;
-use Apigee\Mint\Types\BillingType as BillingType;
+use Apigee\Mint\Types\StatusType;
+use Apigee\Mint\Types\TaxModelType;
+use Apigee\Mint\Types\OrgType;
+use Apigee\Mint\Types\Country;
+use Apigee\Mint\Types\BillingCycleType;
+use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Exceptions\MintApiException;
 
-use \Apigee\Mint\DataStructures\SupportedCurrency as SupportedCurrency;
-use \Apigee\Exceptions\ParameterException as ParameterException;
-use \Apigee\Exceptions\NotImplementedException as NotImplementedException;
-use \Apigee\Util\Log as Log;
+use \Apigee\Mint\DataStructures\SupportedCurrency;
+use \Apigee\Exceptions\ParameterException;
+use \Apigee\Exceptions\NotImplementedException;
 
 class Organization extends Base\BaseObject
 {
-
     /**
      * @var array
      */
@@ -255,6 +253,30 @@ class Organization extends Base\BaseObject
                 self::$logger->notice('No setter method was found for property "' . $property . '"');
             }
         }
+    }
+
+    /**
+     * Pushes Developers that are missing in Mint from 4G
+     *
+     * @param $id Organization id, if not specified or null
+     *   then this object's organization name is used
+     *
+     * @return Text response from 4g request
+     */
+    public function syncAllFrom4g($id = null)
+    {
+        if (!isset($id)) {
+            $id = $this->name;
+        }
+        if (!isset($id)) {
+            $id = $this->config->orgName;
+        }
+        if (!isset($id)) {
+            throw new ParameterException("Missing organization name");
+        }
+        $url = rawurlencode($id) . '/sync-organization?childEntities=true';
+        $this->get($url);
+        return $this->responseText;
     }
 
     public function __toString()
