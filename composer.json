@@ -2,17 +2,34 @@
     "name": "apigee/edge-sdk",
     "type": "library",
     "description": "Apigee API Library is a set of objects abstracting various internal REST API calls.",
-    "keywords": ["http", "rest", "web service", "curl"],
+    "keywords": [
+        "http",
+        "rest",
+        "web service",
+        "curl"
+    ],
     "homepage": "http://apigee.com/",
-    "license": "unknown",
-
+    "license": "MIT",
     "authors": [
         {
-            "name": "Apigee Corporation",
-            "homepage": "http://apigee.com/"
+            "name": "Daniel Johnson",
+            "email": "djohnson@apigee.com",
+            "homepage": "http://apigee.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Brian Hasselbeck",
+            "email": "bhasselbeck@apigee.com",
+            "homepage": "http://apigee.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Isaias Arellano",
+            "email": "isaias@apigee.com",
+            "homepage": "http://apigee.com/",
+            "role": "Developer"
         }
     ],
-
     "require": {
         "php": ">=5.3.3",
         "ext-mcrypt": "*",
@@ -20,16 +37,15 @@
         "symfony/yaml": ">=2.1",
         "psr/log": "1.*"
     },
-
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "suggest": {
         "ext-xdebug": "*"
     },
-
     "autoload": {
         "psr-0": {
             "Apigee": "./"
         }
     }
-
 }
