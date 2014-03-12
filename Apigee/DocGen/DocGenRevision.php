@@ -26,6 +26,17 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
     }
 
     /**
+     * Gets all of the revisions for a given model.
+     *
+     * {@inheritDoc}
+     */
+    public function getAllRevisions($apiId)
+    {
+      $this->get(rawurlencode($apiId) . '/revisions');
+      return $this->responseObj;
+    }
+
+    /**
      * Loads a verbose object of a revision.
      *
      * {@inheritDoc}
