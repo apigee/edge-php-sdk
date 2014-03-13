@@ -383,7 +383,13 @@ class Company extends Base
     {
         foreach ($response as $key => $value) {
             if (property_exists($company, $key)) {
-                $company->$key = $value;
+                if ($key == 'attributes') {
+                   foreach ($value as $name_value_pair) {
+                       $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
+                   }
+                } else {
+                    $company->$key = $value;
+                }
             }
         }
     }
