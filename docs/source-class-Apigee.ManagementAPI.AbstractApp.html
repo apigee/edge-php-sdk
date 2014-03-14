@@ -8,7 +8,7 @@
 	<title>File ManagementAPI/AbstractApp.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -323,7 +318,7 @@
 </span></span><span id="193" class="l"><a class="l" href="#193"> 193: </a><span class="php-comment">     */</span>
 </span><span id="194" class="l"><a class="l" href="#194"> 194: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getAttribute" href="#_getAttribute">getAttribute</a>(<span class="php-var">$attr</span>)
 </span><span id="195" class="l"><a class="l" href="#195"> 195: </a>    {
-</span><span id="196" class="l"><a class="l" href="#196"> 196: </a>        <span class="php-keyword1">return</span> (<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$attr</span>, <span class="php-var">$this</span>-&gt;attributes) ? <span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$attr</span>] : <span class="php-keyword1">NULL</span>);
+</span><span id="196" class="l"><a class="l" href="#196"> 196: </a>        <span class="php-keyword1">return</span> (<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$attr</span>, <span class="php-var">$this</span>-&gt;attributes) ? <span class="php-var">$this</span>-&gt;attributes[<span class="php-var">$attr</span>] : <span class="php-keyword1">null</span>);
 </span><span id="197" class="l"><a class="l" href="#197"> 197: </a>    }
 </span><span id="198" class="l"><a class="l" href="#198"> 198: </a>
 </span><span id="199" class="l"><a class="l" href="#199"> 199: </a>    <span class="php-comment">/**
@@ -619,7 +614,7 @@
 </span><span id="489" class="l"><a class="l" href="#489"> 489: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;credentialAttributes[<span class="php-var">$attr_name</span>])) {
 </span><span id="490" class="l"><a class="l" href="#490"> 490: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;credentialAttributes[<span class="php-var">$attr_name</span>];
 </span><span id="491" class="l"><a class="l" href="#491"> 491: </a>        }
-</span><span id="492" class="l"><a class="l" href="#492"> 492: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">NULL</span>;
+</span><span id="492" class="l"><a class="l" href="#492"> 492: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
 </span><span id="493" class="l"><a class="l" href="#493"> 493: </a>    }
 </span><span id="494" class="l"><a class="l" href="#494"> 494: </a>
 </span><span id="495" class="l"><a class="l" href="#495"> 495: </a>    <span class="php-comment">/**
@@ -712,10 +707,10 @@
 </span><span id="582" class="l"><a class="l" href="#582"> 582: </a>        );
 </span><span id="583" class="l"><a class="l" href="#583"> 583: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$credential_fields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
 </span><span id="584" class="l"><a class="l" href="#584"> 584: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$field</span>)) {
-</span><span id="585" class="l"><a class="l" href="#585"> 585: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">TRUE</span>;
+</span><span id="585" class="l"><a class="l" href="#585"> 585: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 </span><span id="586" class="l"><a class="l" href="#586"> 586: </a>            }
 </span><span id="587" class="l"><a class="l" href="#587"> 587: </a>        }
-</span><span id="588" class="l"><a class="l" href="#588"> 588: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="588" class="l"><a class="l" href="#588"> 588: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span id="589" class="l"><a class="l" href="#589"> 589: </a>    }
 </span><span id="590" class="l"><a class="l" href="#590"> 590: </a>
 </span><span id="591" class="l"><a class="l" href="#591"> 591: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setApiProductCache" href="#_setApiProductCache">setApiProductCache</a>(<span class="php-keyword1">array</span> <span class="php-var">$cache</span>)
@@ -736,10 +731,10 @@
 </span></span><span id="606" class="l"><a class="l" href="#606"> 606: </a><span class="php-comment">     * @param AppInterface $obj
 </span></span><span id="607" class="l"><a class="l" href="#607"> 607: </a><span class="php-comment">     * @param array $response
 </span></span><span id="608" class="l"><a class="l" href="#608"> 608: </a><span class="php-comment">     */</span>
-</span><span id="609" class="l"><a class="l" href="#609"> 609: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_loadFromResponse" href="#_loadFromResponse">loadFromResponse</a>(AppInterface &amp;<span class="php-var">$obj</span>, <span class="php-keyword1">array</span> <span class="php-var">$response</span>, <span class="php-var">$owner_identifier</span> = <span class="php-keyword1">NULL</span>)
+</span><span id="609" class="l"><a class="l" href="#609"> 609: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_loadFromResponse" href="#_loadFromResponse">loadFromResponse</a>(AppInterface &amp;<span class="php-var">$obj</span>, <span class="php-keyword1">array</span> <span class="php-var">$response</span>, <span class="php-var">$owner_identifier</span> = <span class="php-keyword1">null</span>)
 </span><span id="610" class="l"><a class="l" href="#610"> 610: </a>    {
 </span><span id="611" class="l"><a class="l" href="#611"> 611: </a>        <span class="php-var">$obj</span>-&gt;accessType = <span class="php-var">$response</span>[<span class="php-quote">'accessType'</span>];
-</span><span id="612" class="l"><a class="l" href="#612"> 612: </a>        <span class="php-var">$obj</span>-&gt;appFamily = (<span class="php-keyword1">isset</span>(<span class="php-var">$response</span>[<span class="php-quote">'appFamily'</span>]) ? <span class="php-var">$response</span>[<span class="php-quote">'appFamily'</span>] : <span class="php-keyword1">NULL</span>);
+</span><span id="612" class="l"><a class="l" href="#612"> 612: </a>        <span class="php-var">$obj</span>-&gt;appFamily = (<span class="php-keyword1">isset</span>(<span class="php-var">$response</span>[<span class="php-quote">'appFamily'</span>]) ? <span class="php-var">$response</span>[<span class="php-quote">'appFamily'</span>] : <span class="php-keyword1">null</span>);
 </span><span id="613" class="l"><a class="l" href="#613"> 613: </a>        <span class="php-var">$obj</span>-&gt;appId = <span class="php-var">$response</span>[<span class="php-quote">'appId'</span>];
 </span><span id="614" class="l"><a class="l" href="#614"> 614: </a>        <span class="php-var">$obj</span>-&gt;callbackUrl = <span class="php-var">$response</span>[<span class="php-quote">'callbackUrl'</span>];
 </span><span id="615" class="l"><a class="l" href="#615"> 615: </a>        <span class="php-var">$obj</span>-&gt;createdAt = <span class="php-var">$response</span>[<span class="php-quote">'createdAt'</span>];
@@ -757,7 +752,7 @@
 </span><span id="627" class="l"><a class="l" href="#627"> 627: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$obj</span>-&gt;attributes[<span class="php-quote">'description'</span>])) {
 </span><span id="628" class="l"><a class="l" href="#628"> 628: </a>            <span class="php-var">$obj</span>-&gt;description = <span class="php-var">$obj</span>-&gt;getAttribute(<span class="php-quote">'description'</span>);
 </span><span id="629" class="l"><a class="l" href="#629"> 629: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="630" class="l"><a class="l" href="#630"> 630: </a>            <span class="php-var">$obj</span>-&gt;description = <span class="php-keyword1">NULL</span>;
+</span><span id="630" class="l"><a class="l" href="#630"> 630: </a>            <span class="php-var">$obj</span>-&gt;description = <span class="php-keyword1">null</span>;
 </span><span id="631" class="l"><a class="l" href="#631"> 631: </a>        }
 </span><span id="632" class="l"><a class="l" href="#632"> 632: </a>
 </span><span id="633" class="l"><a class="l" href="#633"> 633: </a>        self::loadCredentials(<span class="php-var">$obj</span>, <span class="php-var">$response</span>[<span class="php-quote">'credentials'</span>]);
@@ -783,7 +778,7 @@
 </span><span id="653" class="l"><a class="l" href="#653"> 653: </a>    {
 </span><span id="654" class="l"><a class="l" href="#654"> 654: </a>        <span class="php-comment">// Find the credential with the max issuedAt attribute which isn't expired.</span>
 </span><span id="655" class="l"><a class="l" href="#655"> 655: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$credentials</span>) &gt; <span class="php-num">0</span>) {
-</span><span id="656" class="l"><a class="l" href="#656"> 656: </a>            <span class="php-var">$credential</span> = <span class="php-keyword1">NULL</span>;
+</span><span id="656" class="l"><a class="l" href="#656"> 656: </a>            <span class="php-var">$credential</span> = <span class="php-keyword1">null</span>;
 </span><span id="657" class="l"><a class="l" href="#657"> 657: </a>            <span class="php-comment">// Sort credentials by issuedAt descending.</span>
 </span><span id="658" class="l"><a class="l" href="#658"> 658: </a>            <span class="php-keyword2">usort</span>(<span class="php-var">$credentials</span>, <span class="php-keyword1">array</span>(__CLASS__, <span class="php-quote">'sortCredentials'</span>));
 </span><span id="659" class="l"><a class="l" href="#659"> 659: </a>            <span class="php-comment">// Look for the first member of the array that is approved.</span>
@@ -870,7 +865,7 @@
 </span><span id="740" class="l"><a class="l" href="#740"> 740: </a>    <span class="php-comment">/**
 </span></span><span id="741" class="l"><a class="l" href="#741"> 741: </a><span class="php-comment">     * {@inheritDoc}
 </span></span><span id="742" class="l"><a class="l" href="#742"> 742: </a><span class="php-comment">     */</span>
-</span><span id="743" class="l"><a class="l" href="#743"> 743: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_load" href="#_load">load</a>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>)
+</span><span id="743" class="l"><a class="l" href="#743"> 743: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_load" href="#_load">load</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
 </span><span id="744" class="l"><a class="l" href="#744"> 744: </a>    {
 </span><span id="745" class="l"><a class="l" href="#745"> 745: </a>        <span class="php-var">$name</span> = <span class="php-var">$name</span> ? : <span class="php-var">$this</span>-&gt;name;
 </span><span id="746" class="l"><a class="l" href="#746"> 746: </a>        <span class="php-var">$this</span>-&gt;get(<span class="php-keyword2">rawurlencode</span>(<span class="php-var">$name</span>));
@@ -881,15 +876,15 @@
 </span><span id="751" class="l"><a class="l" href="#751"> 751: </a>    <span class="php-comment">/**
 </span></span><span id="752" class="l"><a class="l" href="#752"> 752: </a><span class="php-comment">     * {@inheritDoc}
 </span></span><span id="753" class="l"><a class="l" href="#753"> 753: </a><span class="php-comment">     */</span>
-</span><span id="754" class="l"><a class="l" href="#754"> 754: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_validate" href="#_validate">validate</a>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>)
+</span><span id="754" class="l"><a class="l" href="#754"> 754: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_validate" href="#_validate">validate</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
 </span><span id="755" class="l"><a class="l" href="#755"> 755: </a>    {
 </span><span id="756" class="l"><a class="l" href="#756"> 756: </a>        <span class="php-var">$name</span> = <span class="php-var">$name</span> ? : <span class="php-var">$this</span>-&gt;name;
 </span><span id="757" class="l"><a class="l" href="#757"> 757: </a>        <span class="php-keyword1">try</span> {
 </span><span id="758" class="l"><a class="l" href="#758"> 758: </a>            <span class="php-var">$this</span>-&gt;get(<span class="php-keyword2">rawurlencode</span>(<span class="php-var">$name</span>));
-</span><span id="759" class="l"><a class="l" href="#759"> 759: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">FALSE</span>;
+</span><span id="759" class="l"><a class="l" href="#759"> 759: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span id="760" class="l"><a class="l" href="#760"> 760: </a>        } <span class="php-keyword1">catch</span> (\Apigee\Exceptions\ResponseException <span class="php-var">$e</span>) {
 </span><span id="761" class="l"><a class="l" href="#761"> 761: </a>        }
-</span><span id="762" class="l"><a class="l" href="#762"> 762: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">TRUE</span>;
+</span><span id="762" class="l"><a class="l" href="#762"> 762: </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 </span><span id="763" class="l"><a class="l" href="#763"> 763: </a>    }
 </span><span id="764" class="l"><a class="l" href="#764"> 764: </a>
 </span><span id="765" class="l"><a class="l" href="#765"> 765: </a>    <span class="php-comment">/**
@@ -929,7 +924,7 @@
 </span><span id="799" class="l"><a class="l" href="#799"> 799: </a>    <span class="php-comment">/**
 </span></span><span id="800" class="l"><a class="l" href="#800"> 800: </a><span class="php-comment">     * {@inheritDoc}
 </span></span><span id="801" class="l"><a class="l" href="#801"> 801: </a><span class="php-comment">     */</span>
-</span><span id="802" class="l"><a class="l" href="#802"> 802: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_save" href="#_save">save</a>(<span class="php-var">$force_update</span> = <span class="php-keyword1">FALSE</span>)
+</span><span id="802" class="l"><a class="l" href="#802"> 802: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_save" href="#_save">save</a>(<span class="php-var">$force_update</span> = <span class="php-keyword1">false</span>)
 </span><span id="803" class="l"><a class="l" href="#803"> 803: </a>    {
 </span><span id="804" class="l"><a class="l" href="#804"> 804: </a>        <span class="php-var">$is_update</span> = (<span class="php-var">$force_update</span> || <span class="php-var">$this</span>-&gt;modifiedAt);
 </span><span id="805" class="l"><a class="l" href="#805"> 805: </a>
@@ -942,7 +937,7 @@
 </span><span id="812" class="l"><a class="l" href="#812"> 812: </a>        <span class="php-comment">// expected on the Enterprise UI.</span>
 </span><span id="813" class="l"><a class="l" href="#813"> 813: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'DisplayName'</span>, <span class="php-var">$this</span>-&gt;attributes)) {
 </span><span id="814" class="l"><a class="l" href="#814"> 814: </a>            <span class="php-var">$display_name</span> = <span class="php-var">$this</span>-&gt;name;
-</span><span id="815" class="l"><a class="l" href="#815"> 815: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$display_name</span>, <span class="php-quote">' '</span>) === <span class="php-keyword1">FALSE</span>) {
+</span><span id="815" class="l"><a class="l" href="#815"> 815: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$display_name</span>, <span class="php-quote">' '</span>) === <span class="php-keyword1">false</span>) {
 </span><span id="816" class="l"><a class="l" href="#816"> 816: </a>                <span class="php-var">$display_name</span> = <span class="php-keyword2">ucwords</span>(<span class="php-keyword2">str_replace</span>(<span class="php-keyword1">array</span>(<span class="php-quote">'_'</span>, <span class="php-quote">'-'</span>), <span class="php-quote">' '</span>, <span class="php-var">$display_name</span>));
 </span><span id="817" class="l"><a class="l" href="#817"> 817: </a>            }
 </span><span id="818" class="l"><a class="l" href="#818"> 818: </a>            <span class="php-var">$this</span>-&gt;attributes[<span class="php-quote">'DisplayName'</span>] = <span class="php-var">$display_name</span>;
@@ -958,11 +953,11 @@
 </span><span id="828" class="l"><a class="l" href="#828"> 828: </a>
 </span><span id="829" class="l"><a class="l" href="#829"> 829: </a>        <span class="php-var">$this</span>-&gt;alterAttributes(<span class="php-var">$payload</span>);
 </span><span id="830" class="l"><a class="l" href="#830"> 830: </a>
-</span><span id="831" class="l"><a class="l" href="#831"> 831: </a>        <span class="php-var">$url</span> = <span class="php-keyword1">NULL</span>;
+</span><span id="831" class="l"><a class="l" href="#831"> 831: </a>        <span class="php-var">$url</span> = <span class="php-keyword1">null</span>;
 </span><span id="832" class="l"><a class="l" href="#832"> 832: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$is_update</span>) {
 </span><span id="833" class="l"><a class="l" href="#833"> 833: </a>            <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;getName());
 </span><span id="834" class="l"><a class="l" href="#834"> 834: </a>        }
-</span><span id="835" class="l"><a class="l" href="#835"> 835: </a>        <span class="php-var">$created_new_key</span> = <span class="php-keyword1">FALSE</span>;
+</span><span id="835" class="l"><a class="l" href="#835"> 835: </a>        <span class="php-var">$created_new_key</span> = <span class="php-keyword1">false</span>;
 </span><span id="836" class="l"><a class="l" href="#836"> 836: </a>        <span class="php-comment">// NOTE: On update, we send APIProduct information separately from other</span>
 </span><span id="837" class="l"><a class="l" href="#837"> 837: </a>        <span class="php-comment">// fields, in order to preserve the client-key/secret pair. Updates to</span>
 </span><span id="838" class="l"><a class="l" href="#838"> 838: </a>        <span class="php-comment">// APIProducts must be made separately against the app's client-key,</span>
@@ -983,7 +978,7 @@
 </span><span id="853" class="l"><a class="l" href="#853"> 853: </a>            }
 </span><span id="854" class="l"><a class="l" href="#854"> 854: </a>        } <span class="php-keyword1">else</span> {
 </span><span id="855" class="l"><a class="l" href="#855"> 855: </a>            <span class="php-var">$payload</span>[<span class="php-quote">'apiProducts'</span>] = <span class="php-var">$this</span>-&gt;getApiProducts();
-</span><span id="856" class="l"><a class="l" href="#856"> 856: </a>            <span class="php-var">$created_new_key</span> = <span class="php-keyword1">TRUE</span>;
+</span><span id="856" class="l"><a class="l" href="#856"> 856: </a>            <span class="php-var">$created_new_key</span> = <span class="php-keyword1">true</span>;
 </span><span id="857" class="l"><a class="l" href="#857"> 857: </a>        }
 </span><span id="858" class="l"><a class="l" href="#858"> 858: </a>
 </span><span id="859" class="l"><a class="l" href="#859"> 859: </a>        <span class="php-comment">// Let subclasses fiddle with the payload here</span>
@@ -992,14 +987,14 @@
 </span><span id="862" class="l"><a class="l" href="#862"> 862: </a>        <span class="php-var">$this</span>-&gt;post(<span class="php-var">$url</span>, <span class="php-var">$payload</span>);
 </span><span id="863" class="l"><a class="l" href="#863"> 863: </a>        <span class="php-var">$response</span> = <span class="php-var">$this</span>-&gt;responseObj;
 </span><span id="864" class="l"><a class="l" href="#864"> 864: </a>
-</span><span id="865" class="l"><a class="l" href="#865"> 865: </a>        <span class="php-var">$credential_response</span> = <span class="php-keyword1">NULL</span>;
+</span><span id="865" class="l"><a class="l" href="#865"> 865: </a>        <span class="php-var">$credential_response</span> = <span class="php-keyword1">null</span>;
 </span><span id="866" class="l"><a class="l" href="#866"> 866: </a>
 </span><span id="867" class="l"><a class="l" href="#867"> 867: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$response</span>[<span class="php-quote">'credentials'</span>]) &gt; <span class="php-num">0</span>) {
 </span><span id="868" class="l"><a class="l" href="#868"> 868: </a>            <span class="php-var">$credential_attributes</span> = <span class="php-keyword1">array</span>();
-</span><span id="869" class="l"><a class="l" href="#869"> 869: </a>            <span class="php-var">$current_credential</span> = <span class="php-keyword1">NULL</span>;
+</span><span id="869" class="l"><a class="l" href="#869"> 869: </a>            <span class="php-var">$current_credential</span> = <span class="php-keyword1">null</span>;
 </span><span id="870" class="l"><a class="l" href="#870"> 870: </a>            <span class="php-comment">// Find credential -- it should have the maximum issuedAt date.</span>
 </span><span id="871" class="l"><a class="l" href="#871"> 871: </a>            <span class="php-var">$max_issued_at</span> = -<span class="php-num">1</span>;
-</span><span id="872" class="l"><a class="l" href="#872"> 872: </a>            <span class="php-var">$credential_index</span> = <span class="php-keyword1">NULL</span>;
+</span><span id="872" class="l"><a class="l" href="#872"> 872: </a>            <span class="php-var">$credential_index</span> = <span class="php-keyword1">null</span>;
 </span><span id="873" class="l"><a class="l" href="#873"> 873: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$response</span>[<span class="php-quote">'credentials'</span>] <span class="php-keyword1">as</span> <span class="php-var">$i</span> =&gt; <span class="php-var">$cred</span>) {
 </span><span id="874" class="l"><a class="l" href="#874"> 874: </a>                <span class="php-var">$issued_at</span> = (<span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'issuedAt'</span>, <span class="php-var">$cred</span>) ? <span class="php-keyword2">intval</span>(<span class="php-var">$cred</span>[<span class="php-quote">'issuedAt'</span>]) : <span class="php-num">0</span>);
 </span><span id="875" class="l"><a class="l" href="#875"> 875: </a>                <span class="php-keyword1">if</span> (<span class="php-var">$max_issued_at</span> == -<span class="php-num">1</span> || <span class="php-var">$issued_at</span> &gt; <span class="php-var">$max_issued_at</span>) {
@@ -1084,11 +1079,11 @@
 </span><span id="954" class="l"><a class="l" href="#954"> 954: </a>    <span class="php-comment">/**
 </span></span><span id="955" class="l"><a class="l" href="#955"> 955: </a><span class="php-comment">     * {@inheritDOc}
 </span></span><span id="956" class="l"><a class="l" href="#956"> 956: </a><span class="php-comment">     */</span>
-</span><span id="957" class="l"><a class="l" href="#957"> 957: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setKeyStatus" href="#_setKeyStatus">setKeyStatus</a>(<span class="php-var">$status</span>, <span class="php-var">$also_set_apiproduct</span> = <span class="php-keyword1">TRUE</span>)
+</span><span id="957" class="l"><a class="l" href="#957"> 957: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setKeyStatus" href="#_setKeyStatus">setKeyStatus</a>(<span class="php-var">$status</span>, <span class="php-var">$also_set_apiproduct</span> = <span class="php-keyword1">true</span>)
 </span><span id="958" class="l"><a class="l" href="#958"> 958: </a>    {
-</span><span id="959" class="l"><a class="l" href="#959"> 959: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$status</span> === <span class="php-num">0</span> || <span class="php-var">$status</span> === <span class="php-keyword1">FALSE</span>) {
+</span><span id="959" class="l"><a class="l" href="#959"> 959: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$status</span> === <span class="php-num">0</span> || <span class="php-var">$status</span> === <span class="php-keyword1">false</span>) {
 </span><span id="960" class="l"><a class="l" href="#960"> 960: </a>            <span class="php-var">$status</span> = <span class="php-quote">'revoke'</span>;
-</span><span id="961" class="l"><a class="l" href="#961"> 961: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$status</span> === <span class="php-num">1</span> || <span class="php-var">$status</span> === <span class="php-keyword1">TRUE</span>) {
+</span><span id="961" class="l"><a class="l" href="#961"> 961: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$status</span> === <span class="php-num">1</span> || <span class="php-var">$status</span> === <span class="php-keyword1">true</span>) {
 </span><span id="962" class="l"><a class="l" href="#962"> 962: </a>            <span class="php-var">$status</span> = <span class="php-quote">'approve'</span>;
 </span><span id="963" class="l"><a class="l" href="#963"> 963: </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$status</span> != <span class="php-quote">'revoke'</span> &amp;&amp; <span class="php-var">$status</span> != <span class="php-quote">'approve'</span>) {
 </span><span id="964" class="l"><a class="l" href="#964"> 964: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ParameterException(<span class="php-quote">'Invalid key status '</span> . <span class="php-var">$status</span>);
@@ -1121,7 +1116,7 @@
 </span><span id="991" class="l"><a class="l" href="#991"> 991: </a>    <span class="php-comment">/**
 </span></span><span id="992" class="l"><a class="l" href="#992"> 992: </a><span class="php-comment">     * {@inheritDOc}
 </span></span><span id="993" class="l"><a class="l" href="#993"> 993: </a><span class="php-comment">     */</span>
-</span><span id="994" class="l"><a class="l" href="#994"> 994: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>)
+</span><span id="994" class="l"><a class="l" href="#994"> 994: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>)
 </span><span id="995" class="l"><a class="l" href="#995"> 995: </a>    {
 </span><span id="996" class="l"><a class="l" href="#996"> 996: </a>        <span class="php-var">$name</span> = <span class="php-var">$name</span> ? : <span class="php-var">$this</span>-&gt;name;
 </span><span id="997" class="l"><a class="l" href="#997"> 997: </a>        <span class="php-var">$this</span>-&gt;http_delete(<span class="php-keyword2">rawurlencode</span>(<span class="php-var">$name</span>));
@@ -1142,218 +1137,215 @@
 </span><span id="1012" class="l"><a class="l" href="#1012">1012: </a>    <span class="php-comment">/**
 </span></span><span id="1013" class="l"><a class="l" href="#1013">1013: </a><span class="php-comment">     * {@inheritDoc}
 </span></span><span id="1014" class="l"><a class="l" href="#1014">1014: </a><span class="php-comment">     */</span>
-</span><span id="1015" class="l"><a class="l" href="#1015">1015: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">abstract</span> <span class="php-keyword1">function</span> <a id="_getListDetail" href="#_getListDetail">getListDetail</a>(<span class="php-var">$owner_identifier</span> = <span class="php-keyword1">NULL</span>);
-</span><span id="1016" class="l"><a class="l" href="#1016">1016: </a>
-</span><span id="1017" class="l"><a class="l" href="#1017">1017: </a>    <span class="php-comment">/**
-</span></span><span id="1018" class="l"><a class="l" href="#1018">1018: </a><span class="php-comment">     * {@inheritDoc}
-</span></span><span id="1019" class="l"><a class="l" href="#1019">1019: </a><span class="php-comment">     */</span>
-</span><span id="1020" class="l"><a class="l" href="#1020">1020: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_createKey" href="#_createKey">createKey</a>(<span class="php-var">$consumer_key</span>, <span class="php-var">$consumer_secret</span>)
-</span><span id="1021" class="l"><a class="l" href="#1021">1021: </a>    {
-</span><span id="1022" class="l"><a class="l" href="#1022">1022: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$consumer_key</span>) &lt; <span class="php-num">5</span> || <span class="php-keyword2">strlen</span>(<span class="php-var">$consumer_secret</span>) &lt; <span class="php-num">5</span>) {
-</span><span id="1023" class="l"><a class="l" href="#1023">1023: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ParameterException(<span class="php-quote">'Consumer Key and Consumer Secret must each be at least 5 characters long.'</span>);
-</span><span id="1024" class="l"><a class="l" href="#1024">1024: </a>        }
-</span><span id="1025" class="l"><a class="l" href="#1025">1025: </a>        <span class="php-comment">// This is by nature a two-step process. API Products cannot be added</span>
-</span><span id="1026" class="l"><a class="l" href="#1026">1026: </a>        <span class="php-comment">// to a new key at the time of key creation, for some reason.</span>
-</span><span id="1027" class="l"><a class="l" href="#1027">1027: </a>        <span class="php-var">$payload</span> = <span class="php-keyword1">array</span>(
-</span><span id="1028" class="l"><a class="l" href="#1028">1028: </a>            <span class="php-quote">'consumerKey'</span> =&gt; <span class="php-var">$consumer_key</span>,
-</span><span id="1029" class="l"><a class="l" href="#1029">1029: </a>            <span class="php-quote">'consumerSecret'</span> =&gt; <span class="php-var">$consumer_secret</span>,
-</span><span id="1030" class="l"><a class="l" href="#1030">1030: </a>            <span class="php-quote">'scopes'</span> =&gt; <span class="php-var">$this</span>-&gt;getCredentialScopes(),
-</span><span id="1031" class="l"><a class="l" href="#1031">1031: </a>        );
-</span><span id="1032" class="l"><a class="l" href="#1032">1032: </a>
-</span><span id="1033" class="l"><a class="l" href="#1033">1033: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;name) . <span class="php-quote">'/keys/create'</span>;
-</span><span id="1034" class="l"><a class="l" href="#1034">1034: </a>        <span class="php-var">$this</span>-&gt;post(<span class="php-var">$url</span>, <span class="php-var">$payload</span>);
-</span><span id="1035" class="l"><a class="l" href="#1035">1035: </a>
-</span><span id="1036" class="l"><a class="l" href="#1036">1036: </a>        <span class="php-var">$new_credential</span> = <span class="php-var">$this</span>-&gt;responseObj;
-</span><span id="1037" class="l"><a class="l" href="#1037">1037: </a>        <span class="php-comment">// We now have the new key, sans apiproducts. Let us add them now.</span>
-</span><span id="1038" class="l"><a class="l" href="#1038">1038: </a>        <span class="php-var">$new_credential</span>[<span class="php-quote">'apiProducts'</span>] = <span class="php-var">$this</span>-&gt;getCredentialApiProducts();
-</span><span id="1039" class="l"><a class="l" href="#1039">1039: </a>        <span class="php-var">$key</span> = <span class="php-var">$new_credential</span>[<span class="php-quote">'consumerKey'</span>];
-</span><span id="1040" class="l"><a class="l" href="#1040">1040: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;getName()) . <span class="php-quote">'/keys/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$key</span>);
-</span><span id="1041" class="l"><a class="l" href="#1041">1041: </a>        <span class="php-var">$this</span>-&gt;post(<span class="php-var">$url</span>, <span class="php-var">$new_credential</span>);
-</span><span id="1042" class="l"><a class="l" href="#1042">1042: </a>        <span class="php-var">$credential</span> = <span class="php-var">$this</span>-&gt;responseObj;
-</span><span id="1043" class="l"><a class="l" href="#1043">1043: </a>
-</span><span id="1044" class="l"><a class="l" href="#1044">1044: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$credential</span>[<span class="php-quote">'status'</span>] == <span class="php-quote">'approved'</span> || <span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;consumerKey)) {
-</span><span id="1045" class="l"><a class="l" href="#1045">1045: </a>            <span class="php-comment">// Update $this with new credential info ONLY if the key is auto-approved</span>
-</span><span id="1046" class="l"><a class="l" href="#1046">1046: </a>            <span class="php-comment">// or if there are no keys yet.</span>
-</span><span id="1047" class="l"><a class="l" href="#1047">1047: </a>            <span class="php-var">$this</span>-&gt;setCredentialApiProducts(<span class="php-var">$credential</span>[<span class="php-quote">'apiProducts'</span>]);
-</span><span id="1048" class="l"><a class="l" href="#1048">1048: </a>            <span class="php-var">$this</span>-&gt;setConsumerKey(<span class="php-var">$credential</span>[<span class="php-quote">'consumerKey'</span>]);
-</span><span id="1049" class="l"><a class="l" href="#1049">1049: </a>            <span class="php-var">$this</span>-&gt;setConsumerSecret(<span class="php-var">$credential</span>[<span class="php-quote">'consumerSecret'</span>]);
-</span><span id="1050" class="l"><a class="l" href="#1050">1050: </a>            <span class="php-var">$this</span>-&gt;setCredentialScopes(<span class="php-var">$credential</span>[<span class="php-quote">'scopes'</span>]);
-</span><span id="1051" class="l"><a class="l" href="#1051">1051: </a>            <span class="php-var">$this</span>-&gt;setCredentialStatus(<span class="php-var">$credential</span>[<span class="php-quote">'status'</span>]);
-</span><span id="1052" class="l"><a class="l" href="#1052">1052: </a>            <span class="php-var">$this</span>-&gt;setCredentialIssueDate(<span class="php-var">$credential</span>[<span class="php-quote">'issuedAt'</span>]);
-</span><span id="1053" class="l"><a class="l" href="#1053">1053: </a>            <span class="php-var">$this</span>-&gt;setCredentialExpiryDate(<span class="php-var">$credential</span>[<span class="php-quote">'expiresAt'</span>]);
-</span><span id="1054" class="l"><a class="l" href="#1054">1054: </a>            <span class="php-var">$this</span>-&gt;clearCredentialAttributes();
-</span><span id="1055" class="l"><a class="l" href="#1055">1055: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$credential</span>[<span class="php-quote">'attributes'</span>] <span class="php-keyword1">as</span> <span class="php-var">$attribute</span>) {
-</span><span id="1056" class="l"><a class="l" href="#1056">1056: </a>                <span class="php-var">$this</span>-&gt;setCredentialAttribute(<span class="php-var">$attribute</span>[<span class="php-quote">'name'</span>], <span class="php-var">$attribute</span>[<span class="php-quote">'value'</span>]);
-</span><span id="1057" class="l"><a class="l" href="#1057">1057: </a>            }
-</span><span id="1058" class="l"><a class="l" href="#1058">1058: </a>        }
-</span><span id="1059" class="l"><a class="l" href="#1059">1059: </a>    }
-</span><span id="1060" class="l"><a class="l" href="#1060">1060: </a>
-</span><span id="1061" class="l"><a class="l" href="#1061">1061: </a>    <span class="php-comment">/**
-</span></span><span id="1062" class="l"><a class="l" href="#1062">1062: </a><span class="php-comment">     * {@inheritDoc}
-</span></span><span id="1063" class="l"><a class="l" href="#1063">1063: </a><span class="php-comment">     */</span>
-</span><span id="1064" class="l"><a class="l" href="#1064">1064: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_deleteKey" href="#_deleteKey">deleteKey</a>(<span class="php-var">$consumer_key</span>)
-</span><span id="1065" class="l"><a class="l" href="#1065">1065: </a>    {
-</span><span id="1066" class="l"><a class="l" href="#1066">1066: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;getName()) . <span class="php-quote">'/keys/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$consumer_key</span>);
-</span><span id="1067" class="l"><a class="l" href="#1067">1067: </a>        <span class="php-keyword1">try</span> {
-</span><span id="1068" class="l"><a class="l" href="#1068">1068: </a>            <span class="php-var">$this</span>-&gt;http_delete(<span class="php-var">$url</span>);
-</span><span id="1069" class="l"><a class="l" href="#1069">1069: </a>        } <span class="php-keyword1">catch</span> (\Apigee\Exceptions\ResponseException <span class="php-var">$e</span>) {
-</span><span id="1070" class="l"><a class="l" href="#1070">1070: </a>        }
-</span><span id="1071" class="l"><a class="l" href="#1071">1071: </a>        <span class="php-comment">// We ignore whether or not the delete was successful. Either way, we can</span>
-</span><span id="1072" class="l"><a class="l" href="#1072">1072: </a>        <span class="php-comment">// be sure it doesn't exist now, if it did before.</span>
-</span><span id="1073" class="l"><a class="l" href="#1073">1073: </a>
-</span><span id="1074" class="l"><a class="l" href="#1074">1074: </a>        <span class="php-comment">// Reload app to repopulate credential fields.</span>
-</span><span id="1075" class="l"><a class="l" href="#1075">1075: </a>        <span class="php-var">$this</span>-&gt;load();
-</span><span id="1076" class="l"><a class="l" href="#1076">1076: </a>    }
-</span><span id="1077" class="l"><a class="l" href="#1077">1077: </a>
-</span><span id="1078" class="l"><a class="l" href="#1078">1078: </a>    <span class="php-comment">/**
-</span></span><span id="1079" class="l"><a class="l" href="#1079">1079: </a><span class="php-comment">     * {@inheritDoc}
-</span></span><span id="1080" class="l"><a class="l" href="#1080">1080: </a><span class="php-comment">     */</span>
-</span><span id="1081" class="l"><a class="l" href="#1081">1081: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_blankValues" href="#_blankValues">blankValues</a>()
-</span><span id="1082" class="l"><a class="l" href="#1082">1082: </a>    {
-</span><span id="1083" class="l"><a class="l" href="#1083">1083: </a>        <span class="php-var">$this</span>-&gt;accessType = <span class="php-quote">'read'</span>;
-</span><span id="1084" class="l"><a class="l" href="#1084">1084: </a>        <span class="php-var">$this</span>-&gt;apiProducts = <span class="php-keyword1">array</span>();
-</span><span id="1085" class="l"><a class="l" href="#1085">1085: </a>        <span class="php-var">$this</span>-&gt;appFamily = <span class="php-keyword1">NULL</span>;
-</span><span id="1086" class="l"><a class="l" href="#1086">1086: </a>        <span class="php-var">$this</span>-&gt;appId = <span class="php-keyword1">NULL</span>;
-</span><span id="1087" class="l"><a class="l" href="#1087">1087: </a>        <span class="php-var">$this</span>-&gt;attributes = <span class="php-keyword1">array</span>();
-</span><span id="1088" class="l"><a class="l" href="#1088">1088: </a>        <span class="php-var">$this</span>-&gt;callbackUrl = <span class="php-quote">''</span>;
-</span><span id="1089" class="l"><a class="l" href="#1089">1089: </a>        <span class="php-var">$this</span>-&gt;createdAt = <span class="php-keyword1">NULL</span>;
-</span><span id="1090" class="l"><a class="l" href="#1090">1090: </a>        <span class="php-var">$this</span>-&gt;createdBy = <span class="php-keyword1">NULL</span>;
-</span><span id="1091" class="l"><a class="l" href="#1091">1091: </a>        <span class="php-var">$this</span>-&gt;modifiedAt = <span class="php-keyword1">NULL</span>;
-</span><span id="1092" class="l"><a class="l" href="#1092">1092: </a>        <span class="php-var">$this</span>-&gt;modifiedBy = <span class="php-keyword1">NULL</span>;
-</span><span id="1093" class="l"><a class="l" href="#1093">1093: </a>        <span class="php-var">$this</span>-&gt;name = <span class="php-keyword1">NULL</span>;
-</span><span id="1094" class="l"><a class="l" href="#1094">1094: </a>        <span class="php-var">$this</span>-&gt;scopes = <span class="php-keyword1">array</span>();
-</span><span id="1095" class="l"><a class="l" href="#1095">1095: </a>        <span class="php-var">$this</span>-&gt;status = <span class="php-quote">'pending'</span>;
-</span><span id="1096" class="l"><a class="l" href="#1096">1096: </a>        <span class="php-var">$this</span>-&gt;description = <span class="php-keyword1">NULL</span>;
-</span><span id="1097" class="l"><a class="l" href="#1097">1097: </a>
-</span><span id="1098" class="l"><a class="l" href="#1098">1098: </a>        <span class="php-var">$this</span>-&gt;credentialApiProducts = <span class="php-keyword1">array</span>();
-</span><span id="1099" class="l"><a class="l" href="#1099">1099: </a>        <span class="php-var">$this</span>-&gt;consumerKey = <span class="php-keyword1">NULL</span>;
-</span><span id="1100" class="l"><a class="l" href="#1100">1100: </a>        <span class="php-var">$this</span>-&gt;consumerSecret = <span class="php-keyword1">NULL</span>;
-</span><span id="1101" class="l"><a class="l" href="#1101">1101: </a>        <span class="php-var">$this</span>-&gt;credentialScopes = <span class="php-keyword1">array</span>();
-</span><span id="1102" class="l"><a class="l" href="#1102">1102: </a>        <span class="php-var">$this</span>-&gt;credentialStatus = <span class="php-keyword1">NULL</span>;
-</span><span id="1103" class="l"><a class="l" href="#1103">1103: </a>        <span class="php-var">$this</span>-&gt;credentialAttributes = <span class="php-keyword1">array</span>();
-</span><span id="1104" class="l"><a class="l" href="#1104">1104: </a>        <span class="php-var">$this</span>-&gt;credentialIssuedAt = <span class="php-num">0</span>;
-</span><span id="1105" class="l"><a class="l" href="#1105">1105: </a>        <span class="php-var">$this</span>-&gt;credentialExpiresAt = -<span class="php-num">1</span>;
-</span><span id="1106" class="l"><a class="l" href="#1106">1106: </a>
-</span><span id="1107" class="l"><a class="l" href="#1107">1107: </a>        <span class="php-var">$this</span>-&gt;cachedApiProducts = <span class="php-keyword1">array</span>();
-</span><span id="1108" class="l"><a class="l" href="#1108">1108: </a>    }
-</span><span id="1109" class="l"><a class="l" href="#1109">1109: </a>
-</span><span id="1110" class="l"><a class="l" href="#1110">1110: </a>    <span class="php-comment">/**
-</span></span><span id="1111" class="l"><a class="l" href="#1111">1111: </a><span class="php-comment">     * Turns this object's properties into an array for external use.
-</span></span><span id="1112" class="l"><a class="l" href="#1112">1112: </a><span class="php-comment">     *
-</span></span><span id="1113" class="l"><a class="l" href="#1113">1113: </a><span class="php-comment">     * @return array
-</span></span><span id="1114" class="l"><a class="l" href="#1114">1114: </a><span class="php-comment">     */</span>
-</span><span id="1115" class="l"><a class="l" href="#1115">1115: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_toArray" href="#_toArray">toArray</a>()
-</span><span id="1116" class="l"><a class="l" href="#1116">1116: </a>    {
-</span><span id="1117" class="l"><a class="l" href="#1117">1117: </a>        <span class="php-var">$output</span> = <span class="php-keyword1">array</span>();
-</span><span id="1118" class="l"><a class="l" href="#1118">1118: </a>        <span class="php-keyword1">foreach</span> (self::getAppProperties() <span class="php-keyword1">as</span> <span class="php-var">$property</span>) {
-</span><span id="1119" class="l"><a class="l" href="#1119">1119: </a>            <span class="php-keyword1">switch</span> (<span class="php-var">$property</span>) {
-</span><span id="1120" class="l"><a class="l" href="#1120">1120: </a>                <span class="php-keyword1">case</span> <span class="php-quote">'debugData'</span>:
-</span><span id="1121" class="l"><a class="l" href="#1121">1121: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;getDebugData();
-</span><span id="1122" class="l"><a class="l" href="#1122">1122: </a>                    <span class="php-keyword1">break</span>;
-</span><span id="1123" class="l"><a class="l" href="#1123">1123: </a>                <span class="php-keyword1">case</span> <span class="php-quote">'overallStatus'</span>:
-</span><span id="1124" class="l"><a class="l" href="#1124">1124: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;getOverallStatus();
-</span><span id="1125" class="l"><a class="l" href="#1125">1125: </a>                    <span class="php-keyword1">break</span>;
-</span><span id="1126" class="l"><a class="l" href="#1126">1126: </a>                <span class="php-keyword1">default</span>:
-</span><span id="1127" class="l"><a class="l" href="#1127">1127: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;<span class="php-var">$property</span>;
-</span><span id="1128" class="l"><a class="l" href="#1128">1128: </a>                    <span class="php-keyword1">break</span>;
-</span><span id="1129" class="l"><a class="l" href="#1129">1129: </a>            }
-</span><span id="1130" class="l"><a class="l" href="#1130">1130: </a>        }
-</span><span id="1131" class="l"><a class="l" href="#1131">1131: </a>        <span class="php-keyword1">return</span> <span class="php-var">$output</span>;
-</span><span id="1132" class="l"><a class="l" href="#1132">1132: </a>    }
-</span><span id="1133" class="l"><a class="l" href="#1133">1133: </a>
-</span><span id="1134" class="l"><a class="l" href="#1134">1134: </a>    <span class="php-comment">/**
-</span></span><span id="1135" class="l"><a class="l" href="#1135">1135: </a><span class="php-comment">     * Returns an array of all property names that can be returned
-</span></span><span id="1136" class="l"><a class="l" href="#1136">1136: </a><span class="php-comment">     * from a call to self::toArray().
-</span></span><span id="1137" class="l"><a class="l" href="#1137">1137: </a><span class="php-comment">     *
-</span></span><span id="1138" class="l"><a class="l" href="#1138">1138: </a><span class="php-comment">     * @return array
-</span></span><span id="1139" class="l"><a class="l" href="#1139">1139: </a><span class="php-comment">     */</span>
-</span><span id="1140" class="l"><a class="l" href="#1140">1140: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_getAppProperties" href="#_getAppProperties">getAppProperties</a>()
-</span><span id="1141" class="l"><a class="l" href="#1141">1141: </a>    {
-</span><span id="1142" class="l"><a class="l" href="#1142">1142: </a>        <span class="php-var">$properties</span> = <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(__CLASS__));
-</span><span id="1143" class="l"><a class="l" href="#1143">1143: </a>
-</span><span id="1144" class="l"><a class="l" href="#1144">1144: </a>        <span class="php-var">$parent_class</span> = <span class="php-keyword2">get_parent_class</span>();
-</span><span id="1145" class="l"><a class="l" href="#1145">1145: </a>        <span class="php-var">$grandparent_class</span> = <span class="php-keyword2">get_parent_class</span>(<span class="php-var">$parent_class</span>);
-</span><span id="1146" class="l"><a class="l" href="#1146">1146: </a>
-</span><span id="1147" class="l"><a class="l" href="#1147">1147: </a>        <span class="php-var">$excluded_properties</span> = <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$parent_class</span>));
-</span><span id="1148" class="l"><a class="l" href="#1148">1148: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$grandparent_class</span>) {
-</span><span id="1149" class="l"><a class="l" href="#1149">1149: </a>            <span class="php-var">$excluded_properties</span> += <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$grandparent_class</span>));
-</span><span id="1150" class="l"><a class="l" href="#1150">1150: </a>            <span class="php-var">$gg_class</span> = <span class="php-keyword2">get_parent_class</span>(<span class="php-var">$grandparent_class</span>);
-</span><span id="1151" class="l"><a class="l" href="#1151">1151: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$gg_class</span>) {
-</span><span id="1152" class="l"><a class="l" href="#1152">1152: </a>                <span class="php-var">$excluded_properties</span> += <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$gg_class</span>));
-</span><span id="1153" class="l"><a class="l" href="#1153">1153: </a>            }
-</span><span id="1154" class="l"><a class="l" href="#1154">1154: </a>        }
-</span><span id="1155" class="l"><a class="l" href="#1155">1155: </a>        <span class="php-var">$excluded_properties</span>[] = <span class="php-quote">'cachedApiProducts'</span>;
-</span><span id="1156" class="l"><a class="l" href="#1156">1156: </a>        <span class="php-var">$excluded_properties</span>[] = <span class="php-quote">'baseUrl'</span>;
-</span><span id="1157" class="l"><a class="l" href="#1157">1157: </a>
-</span><span id="1158" class="l"><a class="l" href="#1158">1158: </a>        <span class="php-var">$count</span> = <span class="php-keyword2">count</span>(<span class="php-var">$properties</span>);
-</span><span id="1159" class="l"><a class="l" href="#1159">1159: </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$count</span>; <span class="php-var">$i</span>++) {
-</span><span id="1160" class="l"><a class="l" href="#1160">1160: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$properties</span>[<span class="php-var">$i</span>], <span class="php-var">$excluded_properties</span>)) {
-</span><span id="1161" class="l"><a class="l" href="#1161">1161: </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$properties</span>[<span class="php-var">$i</span>]);
-</span><span id="1162" class="l"><a class="l" href="#1162">1162: </a>            }
-</span><span id="1163" class="l"><a class="l" href="#1163">1163: </a>        }
-</span><span id="1164" class="l"><a class="l" href="#1164">1164: </a>        <span class="php-var">$properties</span>[] = <span class="php-quote">'debugData'</span>;
-</span><span id="1165" class="l"><a class="l" href="#1165">1165: </a>        <span class="php-var">$properties</span>[] = <span class="php-quote">'overallStatus'</span>;
-</span><span id="1166" class="l"><a class="l" href="#1166">1166: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_values</span>(<span class="php-var">$properties</span>);
-</span><span id="1167" class="l"><a class="l" href="#1167">1167: </a>    }
-</span><span id="1168" class="l"><a class="l" href="#1168">1168: </a>
-</span><span id="1169" class="l"><a class="l" href="#1169">1169: </a>    <span class="php-comment">/**
-</span></span><span id="1170" class="l"><a class="l" href="#1170">1170: </a><span class="php-comment">     * Populates this object based on an incoming array generated by the
-</span></span><span id="1171" class="l"><a class="l" href="#1171">1171: </a><span class="php-comment">     * toArray() method.
-</span></span><span id="1172" class="l"><a class="l" href="#1172">1172: </a><span class="php-comment">     *
-</span></span><span id="1173" class="l"><a class="l" href="#1173">1173: </a><span class="php-comment">     * @param $array
-</span></span><span id="1174" class="l"><a class="l" href="#1174">1174: </a><span class="php-comment">     */</span>
-</span><span id="1175" class="l"><a class="l" href="#1175">1175: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_fromArray" href="#_fromArray">fromArray</a>(<span class="php-var">$array</span>)
-</span><span id="1176" class="l"><a class="l" href="#1176">1176: </a>    {
-</span><span id="1177" class="l"><a class="l" href="#1177">1177: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span id="1178" class="l"><a class="l" href="#1178">1178: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">property_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$key</span>) &amp;&amp; <span class="php-var">$key</span> != <span class="php-quote">'debugData'</span>) {
-</span><span id="1179" class="l"><a class="l" href="#1179">1179: </a>                <span class="php-var">$this</span>-&gt;{<span class="php-var">$key</span>} = <span class="php-var">$value</span>;
-</span><span id="1180" class="l"><a class="l" href="#1180">1180: </a>            }
-</span><span id="1181" class="l"><a class="l" href="#1181">1181: </a>        }
-</span><span id="1182" class="l"><a class="l" href="#1182">1182: </a>    }
-</span><span id="1183" class="l"><a class="l" href="#1183">1183: </a>
-</span><span id="1184" class="l"><a class="l" href="#1184">1184: </a>    <span class="php-comment">/**
-</span></span><span id="1185" class="l"><a class="l" href="#1185">1185: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the App object as it is
-</span></span><span id="1186" class="l"><a class="l" href="#1186">1186: </a><span class="php-comment">     * finishing the load process.
-</span></span><span id="1187" class="l"><a class="l" href="#1187">1187: </a><span class="php-comment">     *
-</span></span><span id="1188" class="l"><a class="l" href="#1188">1188: </a><span class="php-comment">     * @param AppInterface $obj
-</span></span><span id="1189" class="l"><a class="l" href="#1189">1189: </a><span class="php-comment">     * @param array $response
-</span></span><span id="1190" class="l"><a class="l" href="#1190">1190: </a><span class="php-comment">     * @param string|null $owner_identifier
-</span></span><span id="1191" class="l"><a class="l" href="#1191">1191: </a><span class="php-comment">     */</span>
-</span><span id="1192" class="l"><a class="l" href="#1192">1192: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_afterLoad" href="#_afterLoad">afterLoad</a>(AppInterface &amp;<span class="php-var">$obj</span>, <span class="php-keyword1">array</span> <span class="php-var">$response</span>, <span class="php-var">$owner_identifier</span>)
-</span><span id="1193" class="l"><a class="l" href="#1193">1193: </a>    {
-</span><span id="1194" class="l"><a class="l" href="#1194">1194: </a>        <span class="php-comment">// Do Nothing</span>
-</span><span id="1195" class="l"><a class="l" href="#1195">1195: </a>    }
-</span><span id="1196" class="l"><a class="l" href="#1196">1196: </a>
-</span><span id="1197" class="l"><a class="l" href="#1197">1197: </a>    <span class="php-comment">/**
-</span></span><span id="1198" class="l"><a class="l" href="#1198">1198: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the payload of the
-</span></span><span id="1199" class="l"><a class="l" href="#1199">1199: </a><span class="php-comment">     * app-save call right before it is invoked.
-</span></span><span id="1200" class="l"><a class="l" href="#1200">1200: </a><span class="php-comment">     *
-</span></span><span id="1201" class="l"><a class="l" href="#1201">1201: </a><span class="php-comment">     * @param array $payload
-</span></span><span id="1202" class="l"><a class="l" href="#1202">1202: </a><span class="php-comment">     * @param AppInterface $obj
-</span></span><span id="1203" class="l"><a class="l" href="#1203">1203: </a><span class="php-comment">     */</span>
-</span><span id="1204" class="l"><a class="l" href="#1204">1204: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_preSave" href="#_preSave">preSave</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>, AppInterface <span class="php-var">$obj</span>)
-</span><span id="1205" class="l"><a class="l" href="#1205">1205: </a>    {
-</span><span id="1206" class="l"><a class="l" href="#1206">1206: </a>        <span class="php-comment">// Do Nothing</span>
-</span><span id="1207" class="l"><a class="l" href="#1207">1207: </a>    }
-</span><span id="1208" class="l"><a class="l" href="#1208">1208: </a>
-</span><span id="1209" class="l"><a class="l" href="#1209">1209: </a>    <span class="php-comment">/**
-</span></span><span id="1210" class="l"><a class="l" href="#1210">1210: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the payload of the
-</span></span><span id="1211" class="l"><a class="l" href="#1211">1211: </a><span class="php-comment">     * credential-save call right before it is invoked.
-</span></span><span id="1212" class="l"><a class="l" href="#1212">1212: </a><span class="php-comment">     *
-</span></span><span id="1213" class="l"><a class="l" href="#1213">1213: </a><span class="php-comment">     * @param array $payload
-</span></span><span id="1214" class="l"><a class="l" href="#1214">1214: </a><span class="php-comment">     * @param array $credential
-</span></span><span id="1215" class="l"><a class="l" href="#1215">1215: </a><span class="php-comment">     * @param array $kms_response
-</span></span><span id="1216" class="l"><a class="l" href="#1216">1216: </a><span class="php-comment">     */</span>
-</span><span id="1217" class="l"><a class="l" href="#1217">1217: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_preSaveCredential" href="#_preSaveCredential">preSaveCredential</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>, <span class="php-keyword1">array</span> <span class="php-var">$credential</span>, <span class="php-keyword1">array</span> <span class="php-var">$kms_response</span>)
-</span><span id="1218" class="l"><a class="l" href="#1218">1218: </a>    {
-</span><span id="1219" class="l"><a class="l" href="#1219">1219: </a>        <span class="php-comment">// Do Nothing</span>
-</span><span id="1220" class="l"><a class="l" href="#1220">1220: </a>    }
-</span><span id="1221" class="l"><a class="l" href="#1221">1221: </a>
-</span><span id="1222" class="l"><a class="l" href="#1222">1222: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_alterAttributes" href="#_alterAttributes">alterAttributes</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>)
-</span><span id="1223" class="l"><a class="l" href="#1223">1223: </a>    {
-</span><span id="1224" class="l"><a class="l" href="#1224">1224: </a>
-</span><span id="1225" class="l"><a class="l" href="#1225">1225: </a>    }
-</span><span id="1226" class="l"><a class="l" href="#1226">1226: </a></span>}</code></pre>
+</span><span id="1015" class="l"><a class="l" href="#1015">1015: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_createKey" href="#_createKey">createKey</a>(<span class="php-var">$consumer_key</span>, <span class="php-var">$consumer_secret</span>)
+</span><span id="1016" class="l"><a class="l" href="#1016">1016: </a>    {
+</span><span id="1017" class="l"><a class="l" href="#1017">1017: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$consumer_key</span>) &lt; <span class="php-num">5</span> || <span class="php-keyword2">strlen</span>(<span class="php-var">$consumer_secret</span>) &lt; <span class="php-num">5</span>) {
+</span><span id="1018" class="l"><a class="l" href="#1018">1018: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ParameterException(<span class="php-quote">'Consumer Key and Consumer Secret must each be at least 5 characters long.'</span>);
+</span><span id="1019" class="l"><a class="l" href="#1019">1019: </a>        }
+</span><span id="1020" class="l"><a class="l" href="#1020">1020: </a>        <span class="php-comment">// This is by nature a two-step process. API Products cannot be added</span>
+</span><span id="1021" class="l"><a class="l" href="#1021">1021: </a>        <span class="php-comment">// to a new key at the time of key creation, for some reason.</span>
+</span><span id="1022" class="l"><a class="l" href="#1022">1022: </a>        <span class="php-var">$payload</span> = <span class="php-keyword1">array</span>(
+</span><span id="1023" class="l"><a class="l" href="#1023">1023: </a>            <span class="php-quote">'consumerKey'</span> =&gt; <span class="php-var">$consumer_key</span>,
+</span><span id="1024" class="l"><a class="l" href="#1024">1024: </a>            <span class="php-quote">'consumerSecret'</span> =&gt; <span class="php-var">$consumer_secret</span>,
+</span><span id="1025" class="l"><a class="l" href="#1025">1025: </a>            <span class="php-quote">'scopes'</span> =&gt; <span class="php-var">$this</span>-&gt;getCredentialScopes(),
+</span><span id="1026" class="l"><a class="l" href="#1026">1026: </a>        );
+</span><span id="1027" class="l"><a class="l" href="#1027">1027: </a>
+</span><span id="1028" class="l"><a class="l" href="#1028">1028: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;name) . <span class="php-quote">'/keys/create'</span>;
+</span><span id="1029" class="l"><a class="l" href="#1029">1029: </a>        <span class="php-var">$this</span>-&gt;post(<span class="php-var">$url</span>, <span class="php-var">$payload</span>);
+</span><span id="1030" class="l"><a class="l" href="#1030">1030: </a>
+</span><span id="1031" class="l"><a class="l" href="#1031">1031: </a>        <span class="php-var">$new_credential</span> = <span class="php-var">$this</span>-&gt;responseObj;
+</span><span id="1032" class="l"><a class="l" href="#1032">1032: </a>        <span class="php-comment">// We now have the new key, sans apiproducts. Let us add them now.</span>
+</span><span id="1033" class="l"><a class="l" href="#1033">1033: </a>        <span class="php-var">$new_credential</span>[<span class="php-quote">'apiProducts'</span>] = <span class="php-var">$this</span>-&gt;getCredentialApiProducts();
+</span><span id="1034" class="l"><a class="l" href="#1034">1034: </a>        <span class="php-var">$key</span> = <span class="php-var">$new_credential</span>[<span class="php-quote">'consumerKey'</span>];
+</span><span id="1035" class="l"><a class="l" href="#1035">1035: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;getName()) . <span class="php-quote">'/keys/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$key</span>);
+</span><span id="1036" class="l"><a class="l" href="#1036">1036: </a>        <span class="php-var">$this</span>-&gt;post(<span class="php-var">$url</span>, <span class="php-var">$new_credential</span>);
+</span><span id="1037" class="l"><a class="l" href="#1037">1037: </a>        <span class="php-var">$credential</span> = <span class="php-var">$this</span>-&gt;responseObj;
+</span><span id="1038" class="l"><a class="l" href="#1038">1038: </a>
+</span><span id="1039" class="l"><a class="l" href="#1039">1039: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$credential</span>[<span class="php-quote">'status'</span>] == <span class="php-quote">'approved'</span> || <span class="php-keyword1">empty</span>(<span class="php-var">$this</span>-&gt;consumerKey)) {
+</span><span id="1040" class="l"><a class="l" href="#1040">1040: </a>            <span class="php-comment">// Update $this with new credential info ONLY if the key is auto-approved</span>
+</span><span id="1041" class="l"><a class="l" href="#1041">1041: </a>            <span class="php-comment">// or if there are no keys yet.</span>
+</span><span id="1042" class="l"><a class="l" href="#1042">1042: </a>            <span class="php-var">$this</span>-&gt;setCredentialApiProducts(<span class="php-var">$credential</span>[<span class="php-quote">'apiProducts'</span>]);
+</span><span id="1043" class="l"><a class="l" href="#1043">1043: </a>            <span class="php-var">$this</span>-&gt;setConsumerKey(<span class="php-var">$credential</span>[<span class="php-quote">'consumerKey'</span>]);
+</span><span id="1044" class="l"><a class="l" href="#1044">1044: </a>            <span class="php-var">$this</span>-&gt;setConsumerSecret(<span class="php-var">$credential</span>[<span class="php-quote">'consumerSecret'</span>]);
+</span><span id="1045" class="l"><a class="l" href="#1045">1045: </a>            <span class="php-var">$this</span>-&gt;setCredentialScopes(<span class="php-var">$credential</span>[<span class="php-quote">'scopes'</span>]);
+</span><span id="1046" class="l"><a class="l" href="#1046">1046: </a>            <span class="php-var">$this</span>-&gt;setCredentialStatus(<span class="php-var">$credential</span>[<span class="php-quote">'status'</span>]);
+</span><span id="1047" class="l"><a class="l" href="#1047">1047: </a>            <span class="php-var">$this</span>-&gt;setCredentialIssueDate(<span class="php-var">$credential</span>[<span class="php-quote">'issuedAt'</span>]);
+</span><span id="1048" class="l"><a class="l" href="#1048">1048: </a>            <span class="php-var">$this</span>-&gt;setCredentialExpiryDate(<span class="php-var">$credential</span>[<span class="php-quote">'expiresAt'</span>]);
+</span><span id="1049" class="l"><a class="l" href="#1049">1049: </a>            <span class="php-var">$this</span>-&gt;clearCredentialAttributes();
+</span><span id="1050" class="l"><a class="l" href="#1050">1050: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$credential</span>[<span class="php-quote">'attributes'</span>] <span class="php-keyword1">as</span> <span class="php-var">$attribute</span>) {
+</span><span id="1051" class="l"><a class="l" href="#1051">1051: </a>                <span class="php-var">$this</span>-&gt;setCredentialAttribute(<span class="php-var">$attribute</span>[<span class="php-quote">'name'</span>], <span class="php-var">$attribute</span>[<span class="php-quote">'value'</span>]);
+</span><span id="1052" class="l"><a class="l" href="#1052">1052: </a>            }
+</span><span id="1053" class="l"><a class="l" href="#1053">1053: </a>        }
+</span><span id="1054" class="l"><a class="l" href="#1054">1054: </a>    }
+</span><span id="1055" class="l"><a class="l" href="#1055">1055: </a>
+</span><span id="1056" class="l"><a class="l" href="#1056">1056: </a>    <span class="php-comment">/**
+</span></span><span id="1057" class="l"><a class="l" href="#1057">1057: </a><span class="php-comment">     * {@inheritDoc}
+</span></span><span id="1058" class="l"><a class="l" href="#1058">1058: </a><span class="php-comment">     */</span>
+</span><span id="1059" class="l"><a class="l" href="#1059">1059: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_deleteKey" href="#_deleteKey">deleteKey</a>(<span class="php-var">$consumer_key</span>)
+</span><span id="1060" class="l"><a class="l" href="#1060">1060: </a>    {
+</span><span id="1061" class="l"><a class="l" href="#1061">1061: </a>        <span class="php-var">$url</span> = <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$this</span>-&gt;getName()) . <span class="php-quote">'/keys/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$consumer_key</span>);
+</span><span id="1062" class="l"><a class="l" href="#1062">1062: </a>        <span class="php-keyword1">try</span> {
+</span><span id="1063" class="l"><a class="l" href="#1063">1063: </a>            <span class="php-var">$this</span>-&gt;http_delete(<span class="php-var">$url</span>);
+</span><span id="1064" class="l"><a class="l" href="#1064">1064: </a>        } <span class="php-keyword1">catch</span> (\Apigee\Exceptions\ResponseException <span class="php-var">$e</span>) {
+</span><span id="1065" class="l"><a class="l" href="#1065">1065: </a>        }
+</span><span id="1066" class="l"><a class="l" href="#1066">1066: </a>        <span class="php-comment">// We ignore whether or not the delete was successful. Either way, we can</span>
+</span><span id="1067" class="l"><a class="l" href="#1067">1067: </a>        <span class="php-comment">// be sure it doesn't exist now, if it did before.</span>
+</span><span id="1068" class="l"><a class="l" href="#1068">1068: </a>
+</span><span id="1069" class="l"><a class="l" href="#1069">1069: </a>        <span class="php-comment">// Reload app to repopulate credential fields.</span>
+</span><span id="1070" class="l"><a class="l" href="#1070">1070: </a>        <span class="php-var">$this</span>-&gt;load();
+</span><span id="1071" class="l"><a class="l" href="#1071">1071: </a>    }
+</span><span id="1072" class="l"><a class="l" href="#1072">1072: </a>
+</span><span id="1073" class="l"><a class="l" href="#1073">1073: </a>    <span class="php-comment">/**
+</span></span><span id="1074" class="l"><a class="l" href="#1074">1074: </a><span class="php-comment">     * {@inheritDoc}
+</span></span><span id="1075" class="l"><a class="l" href="#1075">1075: </a><span class="php-comment">     */</span>
+</span><span id="1076" class="l"><a class="l" href="#1076">1076: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_blankValues" href="#_blankValues">blankValues</a>()
+</span><span id="1077" class="l"><a class="l" href="#1077">1077: </a>    {
+</span><span id="1078" class="l"><a class="l" href="#1078">1078: </a>        <span class="php-var">$this</span>-&gt;accessType = <span class="php-quote">'read'</span>;
+</span><span id="1079" class="l"><a class="l" href="#1079">1079: </a>        <span class="php-var">$this</span>-&gt;apiProducts = <span class="php-keyword1">array</span>();
+</span><span id="1080" class="l"><a class="l" href="#1080">1080: </a>        <span class="php-var">$this</span>-&gt;appFamily = <span class="php-keyword1">null</span>;
+</span><span id="1081" class="l"><a class="l" href="#1081">1081: </a>        <span class="php-var">$this</span>-&gt;appId = <span class="php-keyword1">null</span>;
+</span><span id="1082" class="l"><a class="l" href="#1082">1082: </a>        <span class="php-var">$this</span>-&gt;attributes = <span class="php-keyword1">array</span>();
+</span><span id="1083" class="l"><a class="l" href="#1083">1083: </a>        <span class="php-var">$this</span>-&gt;callbackUrl = <span class="php-quote">''</span>;
+</span><span id="1084" class="l"><a class="l" href="#1084">1084: </a>        <span class="php-var">$this</span>-&gt;createdAt = <span class="php-keyword1">null</span>;
+</span><span id="1085" class="l"><a class="l" href="#1085">1085: </a>        <span class="php-var">$this</span>-&gt;createdBy = <span class="php-keyword1">null</span>;
+</span><span id="1086" class="l"><a class="l" href="#1086">1086: </a>        <span class="php-var">$this</span>-&gt;modifiedAt = <span class="php-keyword1">null</span>;
+</span><span id="1087" class="l"><a class="l" href="#1087">1087: </a>        <span class="php-var">$this</span>-&gt;modifiedBy = <span class="php-keyword1">null</span>;
+</span><span id="1088" class="l"><a class="l" href="#1088">1088: </a>        <span class="php-var">$this</span>-&gt;name = <span class="php-keyword1">null</span>;
+</span><span id="1089" class="l"><a class="l" href="#1089">1089: </a>        <span class="php-var">$this</span>-&gt;scopes = <span class="php-keyword1">array</span>();
+</span><span id="1090" class="l"><a class="l" href="#1090">1090: </a>        <span class="php-var">$this</span>-&gt;status = <span class="php-quote">'pending'</span>;
+</span><span id="1091" class="l"><a class="l" href="#1091">1091: </a>        <span class="php-var">$this</span>-&gt;description = <span class="php-keyword1">null</span>;
+</span><span id="1092" class="l"><a class="l" href="#1092">1092: </a>
+</span><span id="1093" class="l"><a class="l" href="#1093">1093: </a>        <span class="php-var">$this</span>-&gt;credentialApiProducts = <span class="php-keyword1">array</span>();
+</span><span id="1094" class="l"><a class="l" href="#1094">1094: </a>        <span class="php-var">$this</span>-&gt;consumerKey = <span class="php-keyword1">null</span>;
+</span><span id="1095" class="l"><a class="l" href="#1095">1095: </a>        <span class="php-var">$this</span>-&gt;consumerSecret = <span class="php-keyword1">null</span>;
+</span><span id="1096" class="l"><a class="l" href="#1096">1096: </a>        <span class="php-var">$this</span>-&gt;credentialScopes = <span class="php-keyword1">array</span>();
+</span><span id="1097" class="l"><a class="l" href="#1097">1097: </a>        <span class="php-var">$this</span>-&gt;credentialStatus = <span class="php-keyword1">null</span>;
+</span><span id="1098" class="l"><a class="l" href="#1098">1098: </a>        <span class="php-var">$this</span>-&gt;credentialAttributes = <span class="php-keyword1">array</span>();
+</span><span id="1099" class="l"><a class="l" href="#1099">1099: </a>        <span class="php-var">$this</span>-&gt;credentialIssuedAt = <span class="php-num">0</span>;
+</span><span id="1100" class="l"><a class="l" href="#1100">1100: </a>        <span class="php-var">$this</span>-&gt;credentialExpiresAt = -<span class="php-num">1</span>;
+</span><span id="1101" class="l"><a class="l" href="#1101">1101: </a>
+</span><span id="1102" class="l"><a class="l" href="#1102">1102: </a>        <span class="php-var">$this</span>-&gt;cachedApiProducts = <span class="php-keyword1">array</span>();
+</span><span id="1103" class="l"><a class="l" href="#1103">1103: </a>    }
+</span><span id="1104" class="l"><a class="l" href="#1104">1104: </a>
+</span><span id="1105" class="l"><a class="l" href="#1105">1105: </a>    <span class="php-comment">/**
+</span></span><span id="1106" class="l"><a class="l" href="#1106">1106: </a><span class="php-comment">     * Turns this object's properties into an array for external use.
+</span></span><span id="1107" class="l"><a class="l" href="#1107">1107: </a><span class="php-comment">     *
+</span></span><span id="1108" class="l"><a class="l" href="#1108">1108: </a><span class="php-comment">     * @return array
+</span></span><span id="1109" class="l"><a class="l" href="#1109">1109: </a><span class="php-comment">     */</span>
+</span><span id="1110" class="l"><a class="l" href="#1110">1110: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_toArray" href="#_toArray">toArray</a>()
+</span><span id="1111" class="l"><a class="l" href="#1111">1111: </a>    {
+</span><span id="1112" class="l"><a class="l" href="#1112">1112: </a>        <span class="php-var">$output</span> = <span class="php-keyword1">array</span>();
+</span><span id="1113" class="l"><a class="l" href="#1113">1113: </a>        <span class="php-keyword1">foreach</span> (self::getAppProperties() <span class="php-keyword1">as</span> <span class="php-var">$property</span>) {
+</span><span id="1114" class="l"><a class="l" href="#1114">1114: </a>            <span class="php-keyword1">switch</span> (<span class="php-var">$property</span>) {
+</span><span id="1115" class="l"><a class="l" href="#1115">1115: </a>                <span class="php-keyword1">case</span> <span class="php-quote">'debugData'</span>:
+</span><span id="1116" class="l"><a class="l" href="#1116">1116: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;getDebugData();
+</span><span id="1117" class="l"><a class="l" href="#1117">1117: </a>                    <span class="php-keyword1">break</span>;
+</span><span id="1118" class="l"><a class="l" href="#1118">1118: </a>                <span class="php-keyword1">case</span> <span class="php-quote">'overallStatus'</span>:
+</span><span id="1119" class="l"><a class="l" href="#1119">1119: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;getOverallStatus();
+</span><span id="1120" class="l"><a class="l" href="#1120">1120: </a>                    <span class="php-keyword1">break</span>;
+</span><span id="1121" class="l"><a class="l" href="#1121">1121: </a>                <span class="php-keyword1">default</span>:
+</span><span id="1122" class="l"><a class="l" href="#1122">1122: </a>                    <span class="php-var">$output</span>[<span class="php-var">$property</span>] = <span class="php-var">$this</span>-&gt;<span class="php-var">$property</span>;
+</span><span id="1123" class="l"><a class="l" href="#1123">1123: </a>                    <span class="php-keyword1">break</span>;
+</span><span id="1124" class="l"><a class="l" href="#1124">1124: </a>            }
+</span><span id="1125" class="l"><a class="l" href="#1125">1125: </a>        }
+</span><span id="1126" class="l"><a class="l" href="#1126">1126: </a>        <span class="php-keyword1">return</span> <span class="php-var">$output</span>;
+</span><span id="1127" class="l"><a class="l" href="#1127">1127: </a>    }
+</span><span id="1128" class="l"><a class="l" href="#1128">1128: </a>
+</span><span id="1129" class="l"><a class="l" href="#1129">1129: </a>    <span class="php-comment">/**
+</span></span><span id="1130" class="l"><a class="l" href="#1130">1130: </a><span class="php-comment">     * Returns an array of all property names that can be returned
+</span></span><span id="1131" class="l"><a class="l" href="#1131">1131: </a><span class="php-comment">     * from a call to self::toArray().
+</span></span><span id="1132" class="l"><a class="l" href="#1132">1132: </a><span class="php-comment">     *
+</span></span><span id="1133" class="l"><a class="l" href="#1133">1133: </a><span class="php-comment">     * @return array
+</span></span><span id="1134" class="l"><a class="l" href="#1134">1134: </a><span class="php-comment">     */</span>
+</span><span id="1135" class="l"><a class="l" href="#1135">1135: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_getAppProperties" href="#_getAppProperties">getAppProperties</a>()
+</span><span id="1136" class="l"><a class="l" href="#1136">1136: </a>    {
+</span><span id="1137" class="l"><a class="l" href="#1137">1137: </a>        <span class="php-var">$properties</span> = <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(__CLASS__));
+</span><span id="1138" class="l"><a class="l" href="#1138">1138: </a>
+</span><span id="1139" class="l"><a class="l" href="#1139">1139: </a>        <span class="php-var">$parent_class</span> = <span class="php-keyword2">get_parent_class</span>();
+</span><span id="1140" class="l"><a class="l" href="#1140">1140: </a>        <span class="php-var">$grandparent_class</span> = <span class="php-keyword2">get_parent_class</span>(<span class="php-var">$parent_class</span>);
+</span><span id="1141" class="l"><a class="l" href="#1141">1141: </a>
+</span><span id="1142" class="l"><a class="l" href="#1142">1142: </a>        <span class="php-var">$excluded_properties</span> = <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$parent_class</span>));
+</span><span id="1143" class="l"><a class="l" href="#1143">1143: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$grandparent_class</span>) {
+</span><span id="1144" class="l"><a class="l" href="#1144">1144: </a>            <span class="php-var">$excluded_properties</span> += <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$grandparent_class</span>));
+</span><span id="1145" class="l"><a class="l" href="#1145">1145: </a>            <span class="php-var">$gg_class</span> = <span class="php-keyword2">get_parent_class</span>(<span class="php-var">$grandparent_class</span>);
+</span><span id="1146" class="l"><a class="l" href="#1146">1146: </a>            <span class="php-keyword1">if</span> (<span class="php-var">$gg_class</span>) {
+</span><span id="1147" class="l"><a class="l" href="#1147">1147: </a>                <span class="php-var">$excluded_properties</span> += <span class="php-keyword2">array_keys</span>(<span class="php-keyword2">get_class_vars</span>(<span class="php-var">$gg_class</span>));
+</span><span id="1148" class="l"><a class="l" href="#1148">1148: </a>            }
+</span><span id="1149" class="l"><a class="l" href="#1149">1149: </a>        }
+</span><span id="1150" class="l"><a class="l" href="#1150">1150: </a>        <span class="php-var">$excluded_properties</span>[] = <span class="php-quote">'cachedApiProducts'</span>;
+</span><span id="1151" class="l"><a class="l" href="#1151">1151: </a>        <span class="php-var">$excluded_properties</span>[] = <span class="php-quote">'baseUrl'</span>;
+</span><span id="1152" class="l"><a class="l" href="#1152">1152: </a>        <span class="php-var">$excluded_properties</span>[] = <span class="php-quote">'ownerIdentifierField'</span>;
+</span><span id="1153" class="l"><a class="l" href="#1153">1153: </a>
+</span><span id="1154" class="l"><a class="l" href="#1154">1154: </a>        <span class="php-var">$count</span> = <span class="php-keyword2">count</span>(<span class="php-var">$properties</span>);
+</span><span id="1155" class="l"><a class="l" href="#1155">1155: </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$count</span>; <span class="php-var">$i</span>++) {
+</span><span id="1156" class="l"><a class="l" href="#1156">1156: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$properties</span>[<span class="php-var">$i</span>], <span class="php-var">$excluded_properties</span>)) {
+</span><span id="1157" class="l"><a class="l" href="#1157">1157: </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$properties</span>[<span class="php-var">$i</span>]);
+</span><span id="1158" class="l"><a class="l" href="#1158">1158: </a>            }
+</span><span id="1159" class="l"><a class="l" href="#1159">1159: </a>        }
+</span><span id="1160" class="l"><a class="l" href="#1160">1160: </a>        <span class="php-var">$properties</span>[] = <span class="php-quote">'debugData'</span>;
+</span><span id="1161" class="l"><a class="l" href="#1161">1161: </a>        <span class="php-var">$properties</span>[] = <span class="php-quote">'overallStatus'</span>;
+</span><span id="1162" class="l"><a class="l" href="#1162">1162: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_values</span>(<span class="php-var">$properties</span>);
+</span><span id="1163" class="l"><a class="l" href="#1163">1163: </a>    }
+</span><span id="1164" class="l"><a class="l" href="#1164">1164: </a>
+</span><span id="1165" class="l"><a class="l" href="#1165">1165: </a>    <span class="php-comment">/**
+</span></span><span id="1166" class="l"><a class="l" href="#1166">1166: </a><span class="php-comment">     * Populates this object based on an incoming array generated by the
+</span></span><span id="1167" class="l"><a class="l" href="#1167">1167: </a><span class="php-comment">     * toArray() method.
+</span></span><span id="1168" class="l"><a class="l" href="#1168">1168: </a><span class="php-comment">     *
+</span></span><span id="1169" class="l"><a class="l" href="#1169">1169: </a><span class="php-comment">     * @param $array
+</span></span><span id="1170" class="l"><a class="l" href="#1170">1170: </a><span class="php-comment">     */</span>
+</span><span id="1171" class="l"><a class="l" href="#1171">1171: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_fromArray" href="#_fromArray">fromArray</a>(<span class="php-var">$array</span>)
+</span><span id="1172" class="l"><a class="l" href="#1172">1172: </a>    {
+</span><span id="1173" class="l"><a class="l" href="#1173">1173: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span id="1174" class="l"><a class="l" href="#1174">1174: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">property_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$key</span>) &amp;&amp; <span class="php-var">$key</span> != <span class="php-quote">'debugData'</span>) {
+</span><span id="1175" class="l"><a class="l" href="#1175">1175: </a>                <span class="php-var">$this</span>-&gt;{<span class="php-var">$key</span>} = <span class="php-var">$value</span>;
+</span><span id="1176" class="l"><a class="l" href="#1176">1176: </a>            }
+</span><span id="1177" class="l"><a class="l" href="#1177">1177: </a>        }
+</span><span id="1178" class="l"><a class="l" href="#1178">1178: </a>    }
+</span><span id="1179" class="l"><a class="l" href="#1179">1179: </a>
+</span><span id="1180" class="l"><a class="l" href="#1180">1180: </a>    <span class="php-comment">/**
+</span></span><span id="1181" class="l"><a class="l" href="#1181">1181: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the App object as it is
+</span></span><span id="1182" class="l"><a class="l" href="#1182">1182: </a><span class="php-comment">     * finishing the load process.
+</span></span><span id="1183" class="l"><a class="l" href="#1183">1183: </a><span class="php-comment">     *
+</span></span><span id="1184" class="l"><a class="l" href="#1184">1184: </a><span class="php-comment">     * @param AppInterface $obj
+</span></span><span id="1185" class="l"><a class="l" href="#1185">1185: </a><span class="php-comment">     * @param array $response
+</span></span><span id="1186" class="l"><a class="l" href="#1186">1186: </a><span class="php-comment">     * @param string|null $owner_identifier
+</span></span><span id="1187" class="l"><a class="l" href="#1187">1187: </a><span class="php-comment">     */</span>
+</span><span id="1188" class="l"><a class="l" href="#1188">1188: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_afterLoad" href="#_afterLoad">afterLoad</a>(AppInterface &amp;<span class="php-var">$obj</span>, <span class="php-keyword1">array</span> <span class="php-var">$response</span>, <span class="php-var">$owner_identifier</span>)
+</span><span id="1189" class="l"><a class="l" href="#1189">1189: </a>    {
+</span><span id="1190" class="l"><a class="l" href="#1190">1190: </a>        <span class="php-comment">// Do Nothing</span>
+</span><span id="1191" class="l"><a class="l" href="#1191">1191: </a>    }
+</span><span id="1192" class="l"><a class="l" href="#1192">1192: </a>
+</span><span id="1193" class="l"><a class="l" href="#1193">1193: </a>    <span class="php-comment">/**
+</span></span><span id="1194" class="l"><a class="l" href="#1194">1194: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the payload of the
+</span></span><span id="1195" class="l"><a class="l" href="#1195">1195: </a><span class="php-comment">     * app-save call right before it is invoked.
+</span></span><span id="1196" class="l"><a class="l" href="#1196">1196: </a><span class="php-comment">     *
+</span></span><span id="1197" class="l"><a class="l" href="#1197">1197: </a><span class="php-comment">     * @param array $payload
+</span></span><span id="1198" class="l"><a class="l" href="#1198">1198: </a><span class="php-comment">     * @param AppInterface $obj
+</span></span><span id="1199" class="l"><a class="l" href="#1199">1199: </a><span class="php-comment">     */</span>
+</span><span id="1200" class="l"><a class="l" href="#1200">1200: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_preSave" href="#_preSave">preSave</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>, AppInterface <span class="php-var">$obj</span>)
+</span><span id="1201" class="l"><a class="l" href="#1201">1201: </a>    {
+</span><span id="1202" class="l"><a class="l" href="#1202">1202: </a>        <span class="php-comment">// Do Nothing</span>
+</span><span id="1203" class="l"><a class="l" href="#1203">1203: </a>    }
+</span><span id="1204" class="l"><a class="l" href="#1204">1204: </a>
+</span><span id="1205" class="l"><a class="l" href="#1205">1205: </a>    <span class="php-comment">/**
+</span></span><span id="1206" class="l"><a class="l" href="#1206">1206: </a><span class="php-comment">     * Dummy placeholder to allow subclasses to modify the payload of the
+</span></span><span id="1207" class="l"><a class="l" href="#1207">1207: </a><span class="php-comment">     * credential-save call right before it is invoked.
+</span></span><span id="1208" class="l"><a class="l" href="#1208">1208: </a><span class="php-comment">     *
+</span></span><span id="1209" class="l"><a class="l" href="#1209">1209: </a><span class="php-comment">     * @param array $payload
+</span></span><span id="1210" class="l"><a class="l" href="#1210">1210: </a><span class="php-comment">     * @param array $credential
+</span></span><span id="1211" class="l"><a class="l" href="#1211">1211: </a><span class="php-comment">     * @param array $kms_response
+</span></span><span id="1212" class="l"><a class="l" href="#1212">1212: </a><span class="php-comment">     */</span>
+</span><span id="1213" class="l"><a class="l" href="#1213">1213: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_preSaveCredential" href="#_preSaveCredential">preSaveCredential</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>, <span class="php-keyword1">array</span> <span class="php-var">$credential</span>, <span class="php-keyword1">array</span> <span class="php-var">$kms_response</span>)
+</span><span id="1214" class="l"><a class="l" href="#1214">1214: </a>    {
+</span><span id="1215" class="l"><a class="l" href="#1215">1215: </a>        <span class="php-comment">// Do Nothing</span>
+</span><span id="1216" class="l"><a class="l" href="#1216">1216: </a>    }
+</span><span id="1217" class="l"><a class="l" href="#1217">1217: </a>
+</span><span id="1218" class="l"><a class="l" href="#1218">1218: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_alterAttributes" href="#_alterAttributes">alterAttributes</a>(<span class="php-keyword1">array</span> &amp;<span class="php-var">$payload</span>)
+</span><span id="1219" class="l"><a class="l" href="#1219">1219: </a>    {
+</span><span id="1220" class="l"><a class="l" href="#1220">1220: </a>
+</span><span id="1221" class="l"><a class="l" href="#1221">1221: </a>    }
+</span><span id="1222" class="l"><a class="l" href="#1222">1222: </a>}
+</span><span id="1223" class="l"><a class="l" href="#1223">1223: </a></span></code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

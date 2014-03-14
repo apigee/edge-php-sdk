@@ -8,7 +8,7 @@
 	<title>File DocGen/DocGenResource.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li class="active"><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -63,8 +58,8 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDoc.html">DocGenDoc</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethod.html">DocGenMethod</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenModel.html">DocGenModel</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperation.html">DocGenOperation</a></li>
 				<li class="active"><a href="class-Apigee.DocGen.DocGenResource.html">DocGenResource</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevision.html">DocGenRevision</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenTemplate.html">DocGenTemplate</a></li>
@@ -73,8 +68,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDocInterface.html">DocGenDocInterface</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethodInterface.html">DocGenMethodInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenModelInterface.html">DocGenModelInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperationInterface.html">DocGenOperationInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenResourceInterface.html">DocGenResourceInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevisionInterface.html">DocGenRevisionInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenTemplateInterface.html">DocGenTemplateInterface</a></li>
@@ -128,7 +123,7 @@
 </span></span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-comment"> * @file
 </span></span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-comment"> * Reads/Writes to and from the Apigee DocGen modeling API
 </span></span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-comment"> *
-</span></span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-comment"> * @author Brian Hasselbeck
+</span></span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-comment"> * @author bhasselbeck
 </span></span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-comment"> */</span>
 </span><span id="9" class="l"><a class="l" href="#9"> 9: </a>
 </span><span id="10" class="l"><a class="l" href="#10">10: </a><span class="php-keyword1">namespace</span> Apigee\DocGen;
@@ -136,28 +131,31 @@
 </span><span id="12" class="l"><a class="l" href="#12">12: </a><span class="php-keyword1">use</span> Apigee\Util\APIObject;
 </span><span id="13" class="l"><a class="l" href="#13">13: </a><span class="php-keyword1">use</span> Apigee\Util\OrgConfig;
 </span><span id="14" class="l"><a class="l" href="#14">14: </a>
-</span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-keyword1">class</span> <a id="DocGenResource" href="#DocGenResource">DocGenResource</a> <span class="php-keyword1">extends</span> APIObject <span class="php-keyword1">implements</span> DocGenResourceInterface {
-</span><span id="16" class="l"><a class="l" href="#16">16: </a>
-</span><span id="17" class="l"><a class="l" href="#17">17: </a>  <span class="php-comment">/**
-</span></span><span id="18" class="l"><a class="l" href="#18">18: </a><span class="php-comment">   * Constructs the proper values for the Apigee DocGen API.
-</span></span><span id="19" class="l"><a class="l" href="#19">19: </a><span class="php-comment">   *
-</span></span><span id="20" class="l"><a class="l" href="#20">20: </a><span class="php-comment">   * @param \Apigee\Util\OrgConfig $config
-</span></span><span id="21" class="l"><a class="l" href="#21">21: </a><span class="php-comment">   */</span>
-</span><span id="22" class="l"><a class="l" href="#22">22: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(OrgCOnfig <span class="php-var">$config</span>) {
-</span><span id="23" class="l"><a class="l" href="#23">23: </a>    <span class="php-var">$this</span>-&gt;init(<span class="php-var">$config</span>, <span class="php-quote">'/o/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$config</span>-&gt;orgName) . <span class="php-quote">'/apimodels'</span>);
-</span><span id="24" class="l"><a class="l" href="#24">24: </a>  }
-</span><span id="25" class="l"><a class="l" href="#25">25: </a>
-</span><span id="26" class="l"><a class="l" href="#26">26: </a>  <span class="php-comment">/**
-</span></span><span id="27" class="l"><a class="l" href="#27">27: </a><span class="php-comment">   * Loads all of the resources of a given revision with a model.
-</span></span><span id="28" class="l"><a class="l" href="#28">28: </a><span class="php-comment">   *
-</span></span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">   * {@inheritDoc}
-</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment">   */</span>
-</span><span id="31" class="l"><a class="l" href="#31">31: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_loadResources" href="#_loadResources">loadResources</a>(<span class="php-var">$apiId</span>, <span class="php-var">$revId</span>) {
-</span><span id="32" class="l"><a class="l" href="#32">32: </a>    <span class="php-var">$this</span>-&gt;get(<span class="php-keyword2">rawurlencode</span>(<span class="php-var">$apiId</span>) . <span class="php-quote">'/revisions/'</span> . <span class="php-var">$revId</span> . <span class="php-quote">'/resources?expand=yes'</span>);
-</span><span id="33" class="l"><a class="l" href="#33">33: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;responseObj;
-</span><span id="34" class="l"><a class="l" href="#34">34: </a>  }
-</span><span id="35" class="l"><a class="l" href="#35">35: </a>
-</span><span id="36" class="l"><a class="l" href="#36">36: </a></span>}</code></pre>
+</span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-keyword1">class</span> <a id="DocGenResource" href="#DocGenResource">DocGenResource</a> <span class="php-keyword1">extends</span> APIObject <span class="php-keyword1">implements</span> DocGenResourceInterface
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>{
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>    <span class="php-comment">/**
+</span></span><span id="19" class="l"><a class="l" href="#19">19: </a><span class="php-comment">     * Constructs the proper values for the Apigee DocGen API.
+</span></span><span id="20" class="l"><a class="l" href="#20">20: </a><span class="php-comment">     *
+</span></span><span id="21" class="l"><a class="l" href="#21">21: </a><span class="php-comment">     * @param \Apigee\Util\OrgConfig $config
+</span></span><span id="22" class="l"><a class="l" href="#22">22: </a><span class="php-comment">     */</span>
+</span><span id="23" class="l"><a class="l" href="#23">23: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(OrgCOnfig <span class="php-var">$config</span>)
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>    {
+</span><span id="25" class="l"><a class="l" href="#25">25: </a>        <span class="php-var">$this</span>-&gt;init(<span class="php-var">$config</span>, <span class="php-quote">'/o/'</span> . <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$config</span>-&gt;orgName) . <span class="php-quote">'/apimodels'</span>);
+</span><span id="26" class="l"><a class="l" href="#26">26: </a>    }
+</span><span id="27" class="l"><a class="l" href="#27">27: </a>
+</span><span id="28" class="l"><a class="l" href="#28">28: </a>    <span class="php-comment">/**
+</span></span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">     * Loads all of the resources of a given revision with a model.
+</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment">     *
+</span></span><span id="31" class="l"><a class="l" href="#31">31: </a><span class="php-comment">     * {@inheritDoc}
+</span></span><span id="32" class="l"><a class="l" href="#32">32: </a><span class="php-comment">     */</span>
+</span><span id="33" class="l"><a class="l" href="#33">33: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_loadResources" href="#_loadResources">loadResources</a>(<span class="php-var">$apiId</span>, <span class="php-var">$revId</span>)
+</span><span id="34" class="l"><a class="l" href="#34">34: </a>    {
+</span><span id="35" class="l"><a class="l" href="#35">35: </a>        <span class="php-var">$this</span>-&gt;get(<span class="php-keyword2">rawurlencode</span>(<span class="php-var">$apiId</span>) . <span class="php-quote">'/revisions/'</span> . <span class="php-var">$revId</span> . <span class="php-quote">'/resources?expand=yes'</span>);
+</span><span id="36" class="l"><a class="l" href="#36">36: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;responseObj;
+</span><span id="37" class="l"><a class="l" href="#37">37: </a>    }
+</span><span id="38" class="l"><a class="l" href="#38">38: </a>
+</span><span id="39" class="l"><a class="l" href="#39">39: </a></span>}</code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

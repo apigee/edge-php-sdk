@@ -8,7 +8,7 @@
 	<title>File DocGen/DocGenTemplateInterface.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li class="active"><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -63,8 +58,8 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDoc.html">DocGenDoc</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethod.html">DocGenMethod</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenModel.html">DocGenModel</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperation.html">DocGenOperation</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenResource.html">DocGenResource</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevision.html">DocGenRevision</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenTemplate.html">DocGenTemplate</a></li>
@@ -73,8 +68,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDocInterface.html">DocGenDocInterface</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethodInterface.html">DocGenMethodInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenModelInterface.html">DocGenModelInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperationInterface.html">DocGenOperationInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenResourceInterface.html">DocGenResourceInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevisionInterface.html">DocGenRevisionInterface</a></li>
 				<li class="active"><a href="class-Apigee.DocGen.DocGenTemplateInterface.html">DocGenTemplateInterface</a></li>
@@ -125,33 +120,34 @@
 <pre><code><span id="1" class="l"><a class="l" href="#1"> 1: </a><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l"><a class="l" href="#2"> 2: </a><span class="php-keyword1">namespace</span> Apigee\DocGen;
 </span><span id="3" class="l"><a class="l" href="#3"> 3: </a>
-</span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">interface</span> <a id="DocGenTemplateInterface" href="#DocGenTemplateInterface">DocGenTemplateInterface</a> {
-</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>  <span class="php-comment">/**
-</span></span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-comment">   * Gets the inndex template.
-</span></span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-comment">   *
-</span></span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-comment">   * @param $apiId
-</span></span><span id="9" class="l"><a class="l" href="#9"> 9: </a><span class="php-comment">   * @return array|string
-</span></span><span id="10" class="l"><a class="l" href="#10">10: </a><span class="php-comment">   */</span>
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getIndexTemplate" href="#_getIndexTemplate">getIndexTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$name</span>);
-</span><span id="12" class="l"><a class="l" href="#12">12: </a>
-</span><span id="13" class="l"><a class="l" href="#13">13: </a>  <span class="php-comment">/**
-</span></span><span id="14" class="l"><a class="l" href="#14">14: </a><span class="php-comment">   * Gets the operation HTML.
-</span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment">   *
-</span></span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-comment">   * @param $apiId
-</span></span><span id="17" class="l"><a class="l" href="#17">17: </a><span class="php-comment">   * @return array|string
-</span></span><span id="18" class="l"><a class="l" href="#18">18: </a><span class="php-comment">   */</span>
-</span><span id="19" class="l"><a class="l" href="#19">19: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getOperationTemplate" href="#_getOperationTemplate">getOperationTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$name</span>);
-</span><span id="20" class="l"><a class="l" href="#20">20: </a>
-</span><span id="21" class="l"><a class="l" href="#21">21: </a>  <span class="php-comment">/**
-</span></span><span id="22" class="l"><a class="l" href="#22">22: </a><span class="php-comment">   * Saves the template back to the modeling API.
-</span></span><span id="23" class="l"><a class="l" href="#23">23: </a><span class="php-comment">   */</span>
-</span><span id="24" class="l"><a class="l" href="#24">24: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_saveTemplate" href="#_saveTemplate">saveTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$type</span>, <span class="php-var">$name</span>, <span class="php-var">$html</span>);
-</span><span id="25" class="l"><a class="l" href="#25">25: </a>
-</span><span id="26" class="l"><a class="l" href="#26">26: </a>  <span class="php-comment">/**
-</span></span><span id="27" class="l"><a class="l" href="#27">27: </a><span class="php-comment">   * Updates the template back to the modeling API.
-</span></span><span id="28" class="l"><a class="l" href="#28">28: </a><span class="php-comment">   */</span>
-</span><span id="29" class="l"><a class="l" href="#29">29: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_updateTemplate" href="#_updateTemplate">updateTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$type</span>, <span class="php-var">$name</span>, <span class="php-var">$html</span>);
-</span><span id="30" class="l"><a class="l" href="#30">30: </a></span>}</code></pre>
+</span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">interface</span> <a id="DocGenTemplateInterface" href="#DocGenTemplateInterface">DocGenTemplateInterface</a>
+</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>{
+</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>    <span class="php-comment">/**
+</span></span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-comment">     * Gets the inndex template.
+</span></span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-comment">     *
+</span></span><span id="9" class="l"><a class="l" href="#9"> 9: </a><span class="php-comment">     * @param $apiId
+</span></span><span id="10" class="l"><a class="l" href="#10">10: </a><span class="php-comment">     * @return array|string
+</span></span><span id="11" class="l"><a class="l" href="#11">11: </a><span class="php-comment">     */</span>
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getIndexTemplate" href="#_getIndexTemplate">getIndexTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$name</span>);
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>    <span class="php-comment">/**
+</span></span><span id="15" class="l"><a class="l" href="#15">15: </a><span class="php-comment">     * Gets the operation HTML.
+</span></span><span id="16" class="l"><a class="l" href="#16">16: </a><span class="php-comment">     *
+</span></span><span id="17" class="l"><a class="l" href="#17">17: </a><span class="php-comment">     * @param $apiId
+</span></span><span id="18" class="l"><a class="l" href="#18">18: </a><span class="php-comment">     * @return array|string
+</span></span><span id="19" class="l"><a class="l" href="#19">19: </a><span class="php-comment">     */</span>
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getOperationTemplate" href="#_getOperationTemplate">getOperationTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$name</span>);
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>
+</span><span id="22" class="l"><a class="l" href="#22">22: </a>    <span class="php-comment">/**
+</span></span><span id="23" class="l"><a class="l" href="#23">23: </a><span class="php-comment">     * Saves the template back to the modeling API.
+</span></span><span id="24" class="l"><a class="l" href="#24">24: </a><span class="php-comment">     */</span>
+</span><span id="25" class="l"><a class="l" href="#25">25: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_saveTemplate" href="#_saveTemplate">saveTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$type</span>, <span class="php-var">$name</span>, <span class="php-var">$html</span>);
+</span><span id="26" class="l"><a class="l" href="#26">26: </a>
+</span><span id="27" class="l"><a class="l" href="#27">27: </a>    <span class="php-comment">/**
+</span></span><span id="28" class="l"><a class="l" href="#28">28: </a><span class="php-comment">     * Updates the template back to the modeling API.
+</span></span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">     */</span>
+</span><span id="30" class="l"><a class="l" href="#30">30: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_updateTemplate" href="#_updateTemplate">updateTemplate</a>(<span class="php-var">$apiId</span>, <span class="php-var">$type</span>, <span class="php-var">$name</span>, <span class="php-var">$html</span>);
+</span><span id="31" class="l"><a class="l" href="#31">31: </a></span>}</code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
