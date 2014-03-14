@@ -13,7 +13,7 @@ The Edge PHP SDK has the following prerequisites:
 </br>
 ### Installation of Dependencies
 #### As part of a Composer-based project
-If your project is itself based on Composer, simply add `“apigee/edge-sdk”` to your project’s composer.json file and run `composer install --no-dev`.  This should install the Edge PHP SDK as well as all its dependencies into your project’s `vendor` dir, and it will integrate them all with your project’s class autoloader. If you want to run the SDK’s unit tests, you should omit the `--no-dev` option.
+If your project is itself based on Composer, simply add `“apigee/edge”` to your project’s composer.json file and run `composer install --no-dev`.  This should install the Edge PHP SDK as well as all its dependencies into your project’s `vendor` dir, and it will integrate them all with your project’s class autoloader. If you want to run the SDK’s unit tests, you should omit the `--no-dev` option.
 
 </br>
 #### Using Composer, but not as part of a Composer-based project

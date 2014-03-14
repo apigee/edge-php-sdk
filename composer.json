@@ -1,7 +1,7 @@
 {
-    "name": "apigee/edge-sdk",
+    "name": "apigee/edge",
     "type": "library",
-    "description": "Apigee API Library is a set of objects abstracting various internal REST API calls.",
+    "description": "Apigee Edge API is a set of objects that communicate with Apigee's Edge management server via REST calls to manage developers, apps, and other entities.",
     "keywords": [
         "http",
         "rest",
@@ -28,6 +28,12 @@
             "email": "isaias@apigee.com",
             "homepage": "http://apigee.com/",
             "role": "Developer"
+        },
+        {
+            "name": "Stephen Gilson",
+            "email": "sgilson@apigee.com",
+            "homepage": "http://apigee.com",
+            "role": "Documentation"
         }
     ],
     "require": {
