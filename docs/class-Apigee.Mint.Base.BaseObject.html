@@ -7,7 +7,7 @@
 	<title>Class Apigee\Mint\Base\BaseObject | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -23,11 +23,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -173,7 +168,7 @@ their constructor.</p>
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Mint.html">Mint</a>\<a href="namespace-Apigee.Mint.Base.html">Base</a><br />
 		<b>Package:</b> Apigee\Mint\Base<br />
 
-		<b>Located at</b> <a href="source-class-Apigee.Mint.Base.BaseObject.html#15-217" title="Go to source code">Mint/Base/BaseObject.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Mint.Base.BaseObject.html#16-219" title="Go to source code">Mint/Base/BaseObject.php</a><br />
 	</div>
 
 
@@ -191,7 +186,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_instantiateNew">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#44-50" title="Go to source code">instantiateNew</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#46-52" title="Go to source code">instantiateNew</a>( )</code>
 
 		<div class="description short">
 			
@@ -230,7 +225,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromRawData">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#52-60" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#54-62" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -265,14 +260,14 @@ with that data.</p>
 
 		<td class="attributes"><code>
 			abstract protected 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_initValues">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#62-67" title="Go to source code">initValues</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#64-69" title="Go to source code">initValues</a>( )</code>
 
 		<div class="description short">
 			
@@ -287,10 +282,6 @@ with that data.</p>
 
 
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br />
-				</div>
 
 
 
@@ -302,14 +293,14 @@ with that data.</p>
 
 		<td class="attributes"><code>
 			abstract public 
-			mixed
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#69-74" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#71-76" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -326,7 +317,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br />
+					<code>string</code><br />
 				</div>
 
 
@@ -346,7 +337,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getList">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#76-107" title="Go to source code">getList</a>( <span>null|integer <var>$page_num</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$page_size</var> = <span class="php-num">20</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#78-109" title="Go to source code">getList</a>( <span>null|integer <var>$page_num</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$page_size</var> = <span class="php-num">20</span></span> )</code>
 
 		<div class="description short">
 			
@@ -390,7 +381,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#109-129" title="Go to source code">load</a>( <span>null|string <var>$id</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#111-132" title="Go to source code">load</a>( <span>null|string <var>$id</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -432,7 +423,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#131-189" title="Go to source code">save</a>( <span>string <var>$save_method</var> = <span class="php-quote">'auto'</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#134-189" title="Go to source code">save</a>( <span>string <var>$save_method</var> = <span class="php-quote">'auto'</span></span> )</code>
 
 		<div class="description short">
 			
@@ -481,7 +472,7 @@ This is more robust but less efficient.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#191-205" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#191-206" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
@@ -518,7 +509,7 @@ This is more robust but less efficient.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validateUri">#</a>
-		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#207-216" title="Go to source code">validateUri</a>( <span>mixed <var>$url</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Base.BaseObject.html#208-218" title="Go to source code">validateUri</a>( <span>mixed <var>$url</var></span> )</code>
 
 		<div class="description short">
 			
@@ -575,7 +566,7 @@ This is more robust but less efficient.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Mint.Base.BaseObject.html#25-30" title="Go to source code"><var>$wrapperTag</var></a>
+				<a href="source-class-Apigee.Mint.Base.BaseObject.html#27-32" title="Go to source code"><var>$wrapperTag</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -604,7 +595,7 @@ is usually a camelCase version of the object name.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Mint.Base.BaseObject.html#32-36" title="Go to source code"><var>$idField</var></a>
+				<a href="source-class-Apigee.Mint.Base.BaseObject.html#34-38" title="Go to source code"><var>$idField</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -631,9 +622,9 @@ is usually a camelCase version of the object name.</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.Mint.Base.BaseObject.html#38-42" title="Go to source code"><var>$idIsAutogenerated</var></a>
+				<a href="source-class-Apigee.Mint.Base.BaseObject.html#40-44" title="Go to source code"><var>$idIsAutogenerated</var></a>
 		</td>
-		<td class="value"><code><span class="php-keyword1">TRUE</span></code></td>
+		<td class="value"><code><span class="php-keyword1">true</span></code></td>
 		<td class="description"><div>
 			<a href="#$idIsAutogenerated" class="anchor">#</a>
 

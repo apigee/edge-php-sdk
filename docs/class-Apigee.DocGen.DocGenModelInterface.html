@@ -7,7 +7,7 @@
 	<title>Interface Apigee\DocGen\DocGenModelInterface | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -23,11 +23,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li class="active"><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -62,8 +57,8 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDoc.html">DocGenDoc</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethod.html">DocGenMethod</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenModel.html">DocGenModel</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperation.html">DocGenOperation</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenResource.html">DocGenResource</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevision.html">DocGenRevision</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenTemplate.html">DocGenTemplate</a></li>
@@ -72,8 +67,8 @@
 			<h3>Interfaces</h3>
 			<ul>
 				<li><a href="class-Apigee.DocGen.DocGenDocInterface.html">DocGenDocInterface</a></li>
+				<li><a href="class-Apigee.DocGen.DocGenMethodInterface.html">DocGenMethodInterface</a></li>
 				<li class="active"><a href="class-Apigee.DocGen.DocGenModelInterface.html">DocGenModelInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenOperationInterface.html">DocGenOperationInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenResourceInterface.html">DocGenResourceInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenRevisionInterface.html">DocGenRevisionInterface</a></li>
 				<li><a href="class-Apigee.DocGen.DocGenTemplateInterface.html">DocGenTemplateInterface</a></li>
@@ -143,7 +138,7 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.DocGen.html">DocGen</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenModelInterface.html#4-55" title="Go to source code">DocGen/DocGenModelInterface.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenModelInterface.html#4-65" title="Go to source code">DocGen/DocGenModelInterface.php</a><br />
 	</div>
 
 
@@ -161,7 +156,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModels">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#5-10" title="Go to source code">getModels</a>( )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#6-11" title="Go to source code">getModels</a>( )</code>
 
 		<div class="description short">
 			
@@ -198,7 +193,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#12-20" title="Go to source code">createModel</a>( <span>array <var>$payload</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#13-21" title="Go to source code">createModel</a>( <span>array <var>$payload</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			
@@ -244,7 +239,7 @@ following sections.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_importWADL">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#22-29" title="Go to source code">importWADL</a>( <span>string <var>$apiId</var></span>, <span>string <var>$xml</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#23-30" title="Go to source code">importWADL</a>( <span>string <var>$apiId</var></span>, <span>string <var>$xml</var></span> )</code>
 
 		<div class="description short">
 			
@@ -277,6 +272,52 @@ following sections.</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="importSwagger" id="_importSwagger">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_importSwagger">#</a>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#32-39" title="Go to source code">importSwagger</a>( <span>string <var>$apiId</var></span>, <span>string <var>$url</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Gets information from a Swagger URL, and transforms it to a given model,
+returns JSON representation of the model</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Gets information from a Swagger URL, and transforms it to a given model,
+returns JSON representation of the model</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiId</var></dt>
+					<dd><code>string</code><br>$apiId</dd>
+					<dt><var>$url</var></dt>
+					<dd><code>string</code><br>$url</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getModel" id="_getModel">
 
 		<td class="attributes"><code>
@@ -288,7 +329,7 @@ following sections.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#31-37" title="Go to source code">getModel</a>( <span>string <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#41-47" title="Go to source code">getModel</a>( <span>string <var>$apiId</var></span> )</code>
 
 		<div class="description short">
 			
@@ -332,7 +373,7 @@ revisions and metadata.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#39-46" title="Go to source code">updateModel</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$update</var></span>, <span>mixed <var>$headers</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#49-56" title="Go to source code">updateModel</a>( <span>mixed <var>$apiId</var></span>, <span>mixed <var>$update</var></span>, <span>mixed <var>$headers</var></span> )</code>
 
 		<div class="description short">
 			
@@ -378,7 +419,7 @@ revisions and metadata.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteModel">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#48-54" title="Go to source code">deleteModel</a>( <span>mixed <var>$apiId</var></span> )</code>
+		<code><a href="source-class-Apigee.DocGen.DocGenModelInterface.html#58-64" title="Go to source code">deleteModel</a>( <span>mixed <var>$apiId</var></span> )</code>
 
 		<div class="description short">
 			

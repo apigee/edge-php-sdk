@@ -8,7 +8,7 @@
 	<title>File ManagementAPI/AppInterface.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -148,7 +143,7 @@
 </span></span><span id="18" class="l"><a class="l" href="#18"> 18: </a><span class="php-comment">     *
 </span></span><span id="19" class="l"><a class="l" href="#19"> 19: </a><span class="php-comment">     * @param null|string $name
 </span></span><span id="20" class="l"><a class="l" href="#20"> 20: </a><span class="php-comment">     */</span>
-</span><span id="21" class="l"><a class="l" href="#21"> 21: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_load" href="#_load">load</a>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>);
+</span><span id="21" class="l"><a class="l" href="#21"> 21: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_load" href="#_load">load</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>);
 </span><span id="22" class="l"><a class="l" href="#22"> 22: </a>
 </span><span id="23" class="l"><a class="l" href="#23"> 23: </a>    <span class="php-comment">/**
 </span></span><span id="24" class="l"><a class="l" href="#24"> 24: </a><span class="php-comment">     * Checks to see if an app with the given name exists for this
@@ -159,29 +154,29 @@
 </span></span><span id="29" class="l"><a class="l" href="#29"> 29: </a><span class="php-comment">     * @param null|string $name
 </span></span><span id="30" class="l"><a class="l" href="#30"> 30: </a><span class="php-comment">     * @return bool
 </span></span><span id="31" class="l"><a class="l" href="#31"> 31: </a><span class="php-comment">     */</span>
-</span><span id="32" class="l"><a class="l" href="#32"> 32: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_validate" href="#_validate">validate</a>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>);
+</span><span id="32" class="l"><a class="l" href="#32"> 32: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_validate" href="#_validate">validate</a>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>);
 </span><span id="33" class="l"><a class="l" href="#33"> 33: </a>
 </span><span id="34" class="l"><a class="l" href="#34"> 34: </a>    <span class="php-comment">/**
 </span></span><span id="35" class="l"><a class="l" href="#35"> 35: </a><span class="php-comment">     * Write this app's data to the Management API, preserving client key/secret.
 </span></span><span id="36" class="l"><a class="l" href="#36"> 36: </a><span class="php-comment">     *
 </span></span><span id="37" class="l"><a class="l" href="#37"> 37: </a><span class="php-comment">     * The function attempts to determine if this should be an insert or an
-</span></span><span id="38" class="l"><a class="l" href="#38"> 38: </a><span class="php-comment">     * update automagically. However, when $force_update is set to TRUE, this
+</span></span><span id="38" class="l"><a class="l" href="#38"> 38: </a><span class="php-comment">     * update automagically. However, when $force_update is set to true, this
 </span></span><span id="39" class="l"><a class="l" href="#39"> 39: </a><span class="php-comment">     * determination is short-circuited and an update is assumed.
 </span></span><span id="40" class="l"><a class="l" href="#40"> 40: </a><span class="php-comment">     *
 </span></span><span id="41" class="l"><a class="l" href="#41"> 41: </a><span class="php-comment">     * @param bool $force_update
 </span></span><span id="42" class="l"><a class="l" href="#42"> 42: </a><span class="php-comment">     */</span>
-</span><span id="43" class="l"><a class="l" href="#43"> 43: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_save" href="#_save">save</a>(<span class="php-var">$force_update</span> = <span class="php-keyword1">FALSE</span>);
+</span><span id="43" class="l"><a class="l" href="#43"> 43: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_save" href="#_save">save</a>(<span class="php-var">$force_update</span> = <span class="php-keyword1">false</span>);
 </span><span id="44" class="l"><a class="l" href="#44"> 44: </a>
 </span><span id="45" class="l"><a class="l" href="#45"> 45: </a>    <span class="php-comment">/**
 </span></span><span id="46" class="l"><a class="l" href="#46"> 46: </a><span class="php-comment">     * Approves or revokes a client key for an app, and optionally also for all
 </span></span><span id="47" class="l"><a class="l" href="#47"> 47: </a><span class="php-comment">     * API Products associated with that app.
 </span></span><span id="48" class="l"><a class="l" href="#48"> 48: </a><span class="php-comment">     *
 </span></span><span id="49" class="l"><a class="l" href="#49"> 49: </a><span class="php-comment">     * @param mixed $status
-</span></span><span id="50" class="l"><a class="l" href="#50"> 50: </a><span class="php-comment">     *        May be TRUE, FALSE, 0, 1, 'approve' or 'revoke'.
+</span></span><span id="50" class="l"><a class="l" href="#50"> 50: </a><span class="php-comment">     *        May be true, false, 0, 1, 'approve' or 'revoke'.
 </span></span><span id="51" class="l"><a class="l" href="#51"> 51: </a><span class="php-comment">     * @param bool $also_set_apiproduct
 </span></span><span id="52" class="l"><a class="l" href="#52"> 52: </a><span class="php-comment">     * @throws \Apigee\Exceptions\ParameterException
 </span></span><span id="53" class="l"><a class="l" href="#53"> 53: </a><span class="php-comment">     */</span>
-</span><span id="54" class="l"><a class="l" href="#54"> 54: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setKeyStatus" href="#_setKeyStatus">setKeyStatus</a>(<span class="php-var">$status</span>, <span class="php-var">$also_set_apiproduct</span> = <span class="php-keyword1">TRUE</span>);
+</span><span id="54" class="l"><a class="l" href="#54"> 54: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setKeyStatus" href="#_setKeyStatus">setKeyStatus</a>(<span class="php-var">$status</span>, <span class="php-var">$also_set_apiproduct</span> = <span class="php-keyword1">true</span>);
 </span><span id="55" class="l"><a class="l" href="#55"> 55: </a>
 </span><span id="56" class="l"><a class="l" href="#56"> 56: </a>    <span class="php-comment">/**
 </span></span><span id="57" class="l"><a class="l" href="#57"> 57: </a><span class="php-comment">     * Deletes an app from the Management API.
@@ -190,7 +185,7 @@
 </span></span><span id="60" class="l"><a class="l" href="#60"> 60: </a><span class="php-comment">     *
 </span></span><span id="61" class="l"><a class="l" href="#61"> 61: </a><span class="php-comment">     * @param null|string $name
 </span></span><span id="62" class="l"><a class="l" href="#62"> 62: </a><span class="php-comment">     */</span>
-</span><span id="63" class="l"><a class="l" href="#63"> 63: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(<span class="php-var">$name</span> = <span class="php-keyword1">NULL</span>);
+</span><span id="63" class="l"><a class="l" href="#63"> 63: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(<span class="php-var">$name</span> = <span class="php-keyword1">null</span>);
 </span><span id="64" class="l"><a class="l" href="#64"> 64: </a>
 </span><span id="65" class="l"><a class="l" href="#65"> 65: </a>    <span class="php-comment">/**
 </span></span><span id="66" class="l"><a class="l" href="#66"> 66: </a><span class="php-comment">     * Returns names of all apps belonging to this developer/company.
@@ -203,11 +198,11 @@
 </span></span><span id="73" class="l"><a class="l" href="#73"> 73: </a><span class="php-comment">     * Returns array of all DeveloperApp/CompanyApp objects belonging to this
 </span></span><span id="74" class="l"><a class="l" href="#74"> 74: </a><span class="php-comment">     * developer or company.
 </span></span><span id="75" class="l"><a class="l" href="#75"> 75: </a><span class="php-comment">     *
-</span></span><span id="76" class="l"><a class="l" href="#76"> 76: </a><span class="php-comment">     * @param string|NULL $owner
+</span></span><span id="76" class="l"><a class="l" href="#76"> 76: </a><span class="php-comment">     * @param string|null $owner
 </span></span><span id="77" class="l"><a class="l" href="#77"> 77: </a><span class="php-comment">     *   refers to the developerId or company name owning the app
 </span></span><span id="78" class="l"><a class="l" href="#78"> 78: </a><span class="php-comment">     * @return array
 </span></span><span id="79" class="l"><a class="l" href="#79"> 79: </a><span class="php-comment">     */</span>
-</span><span id="80" class="l"><a class="l" href="#80"> 80: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getListDetail" href="#_getListDetail">getListDetail</a>(<span class="php-var">$owner</span> = <span class="php-keyword1">NULL</span>);
+</span><span id="80" class="l"><a class="l" href="#80"> 80: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getListDetail" href="#_getListDetail">getListDetail</a>(<span class="php-var">$owner</span> = <span class="php-keyword1">null</span>);
 </span><span id="81" class="l"><a class="l" href="#81"> 81: </a>
 </span><span id="82" class="l"><a class="l" href="#82"> 82: </a>    <span class="php-comment">/**
 </span></span><span id="83" class="l"><a class="l" href="#83"> 83: </a><span class="php-comment">     * Creates a key/secret pair for this app against its component APIProducts.
@@ -250,14 +245,14 @@
 </span><span id="120" class="l"><a class="l" href="#120">120: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getAttributes" href="#_getAttributes">getAttributes</a>();
 </span><span id="121" class="l"><a class="l" href="#121">121: </a>
 </span><span id="122" class="l"><a class="l" href="#122">122: </a>    <span class="php-comment">/**
-</span></span><span id="123" class="l"><a class="l" href="#123">123: </a><span class="php-comment">     * Returns TRUE if the app attributes array contains $attr.
+</span></span><span id="123" class="l"><a class="l" href="#123">123: </a><span class="php-comment">     * Returns true if the app attributes array contains $attr.
 </span></span><span id="124" class="l"><a class="l" href="#124">124: </a><span class="php-comment">     * @param string $attr
 </span></span><span id="125" class="l"><a class="l" href="#125">125: </a><span class="php-comment">     * @return bool
 </span></span><span id="126" class="l"><a class="l" href="#126">126: </a><span class="php-comment">     */</span>
 </span><span id="127" class="l"><a class="l" href="#127">127: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_hasAttribute" href="#_hasAttribute">hasAttribute</a>(<span class="php-var">$attr</span>);
 </span><span id="128" class="l"><a class="l" href="#128">128: </a>
 </span><span id="129" class="l"><a class="l" href="#129">129: </a>    <span class="php-comment">/**
-</span></span><span id="130" class="l"><a class="l" href="#130">130: </a><span class="php-comment">     * Returns the value of the specified app attribute, or NULL if the
+</span></span><span id="130" class="l"><a class="l" href="#130">130: </a><span class="php-comment">     * Returns the value of the specified app attribute, or null if the
 </span></span><span id="131" class="l"><a class="l" href="#131">131: </a><span class="php-comment">     * attribute does not exist.
 </span></span><span id="132" class="l"><a class="l" href="#132">132: </a><span class="php-comment">     * @param string $attr
 </span></span><span id="133" class="l"><a class="l" href="#133">133: </a><span class="php-comment">     */</span>
@@ -434,15 +429,16 @@
 </span><span id="304" class="l"><a class="l" href="#304">304: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getScopes" href="#_getScopes">getScopes</a>();
 </span><span id="305" class="l"><a class="l" href="#305">305: </a>
 </span><span id="306" class="l"><a class="l" href="#306">306: </a>    <span class="php-comment">/**
-</span></span><span id="307" class="l"><a class="l" href="#307">307: </a><span class="php-comment">     * Returns TRUE if the $credentialApiproducts, $consumerKey, $consumerSecret,
+</span></span><span id="307" class="l"><a class="l" href="#307">307: </a><span class="php-comment">     * Returns true if the $credentialApiproducts, $consumerKey, $consumerSecret,
 </span></span><span id="308" class="l"><a class="l" href="#308">308: </a><span class="php-comment">     * $credentialScopes, and $credentialStatus properties are all set
-</span></span><span id="309" class="l"><a class="l" href="#309">309: </a><span class="php-comment">     * to nonNULL values.
-</span></span><span id="310" class="l"><a class="l" href="#310">310: </a><span class="php-comment">     * Otherwise, returns FALSE.
+</span></span><span id="309" class="l"><a class="l" href="#309">309: </a><span class="php-comment">     * to nonnull values.
+</span></span><span id="310" class="l"><a class="l" href="#310">310: </a><span class="php-comment">     * Otherwise, returns false.
 </span></span><span id="311" class="l"><a class="l" href="#311">311: </a><span class="php-comment">     */</span>
 </span><span id="312" class="l"><a class="l" href="#312">312: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_hasCredentialInfo" href="#_hasCredentialInfo">hasCredentialInfo</a>();
 </span><span id="313" class="l"><a class="l" href="#313">313: </a>
 </span><span id="314" class="l"><a class="l" href="#314">314: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_afterLoad" href="#_afterLoad">afterLoad</a>(AppInterface &amp;<span class="php-var">$obj</span>, <span class="php-keyword1">array</span> <span class="php-var">$response</span>, <span class="php-var">$owner_identifier</span>);
-</span><span id="315" class="l"><a class="l" href="#315">315: </a></span>}</code></pre>
+</span><span id="315" class="l"><a class="l" href="#315">315: </a>}
+</span><span id="316" class="l"><a class="l" href="#316">316: </a></span></code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

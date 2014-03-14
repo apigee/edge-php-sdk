@@ -8,7 +8,7 @@
 	<title>File ManagementAPI/UserRoleInterface.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -149,7 +144,7 @@
 </span></span><span id="19" class="l"><a class="l" href="#19">19: </a><span class="php-comment">     * Adds users to a role.
 </span></span><span id="20" class="l"><a class="l" href="#20">20: </a><span class="php-comment">     * @param array An array of email addresses of the users.
 </span></span><span id="21" class="l"><a class="l" href="#21">21: </a><span class="php-comment">     * @param string
-</span></span><span id="22" class="l"><a class="l" href="#22">22: </a><span class="php-comment">     * @return bool TRUE if the users are added, and FALSE if not.
+</span></span><span id="22" class="l"><a class="l" href="#22">22: </a><span class="php-comment">     * @return bool true if the users are added, and false if not.
 </span></span><span id="23" class="l"><a class="l" href="#23">23: </a><span class="php-comment">     */</span>
 </span><span id="24" class="l"><a class="l" href="#24">24: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_addUsersToRole" href="#_addUsersToRole">addUsersToRole</a>(<span class="php-keyword1">array</span> <span class="php-var">$users</span>, <span class="php-var">$role</span>);
 </span><span id="25" class="l"><a class="l" href="#25">25: </a>
@@ -157,7 +152,7 @@
 </span></span><span id="27" class="l"><a class="l" href="#27">27: </a><span class="php-comment">     * Removes users from a role.
 </span></span><span id="28" class="l"><a class="l" href="#28">28: </a><span class="php-comment">     * @param array An array of email addresses of the users.
 </span></span><span id="29" class="l"><a class="l" href="#29">29: </a><span class="php-comment">     * @param string
-</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment">     * @return bool TRUE if the users are removed, and FALSE if not.
+</span></span><span id="30" class="l"><a class="l" href="#30">30: </a><span class="php-comment">     * @return bool true if the users are removed, and false if not.
 </span></span><span id="31" class="l"><a class="l" href="#31">31: </a><span class="php-comment">     */</span>
 </span><span id="32" class="l"><a class="l" href="#32">32: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_removeUsersFromRole" href="#_removeUsersFromRole">removeUsersFromRole</a>(<span class="php-keyword1">array</span> <span class="php-var">$users</span>, <span class="php-var">$role</span>);
 </span><span id="33" class="l"><a class="l" href="#33">33: </a>
@@ -165,7 +160,7 @@
 </span></span><span id="35" class="l"><a class="l" href="#35">35: </a><span class="php-comment">     * Replaces the users in a role with $users.
 </span></span><span id="36" class="l"><a class="l" href="#36">36: </a><span class="php-comment">     * @param array An array of email addresses of the users.
 </span></span><span id="37" class="l"><a class="l" href="#37">37: </a><span class="php-comment">     * @param string
-</span></span><span id="38" class="l"><a class="l" href="#38">38: </a><span class="php-comment">     * @return bool TRUE if the set was successful, and FALSE if not.
+</span></span><span id="38" class="l"><a class="l" href="#38">38: </a><span class="php-comment">     * @return bool true if the set was successful, and false if not.
 </span></span><span id="39" class="l"><a class="l" href="#39">39: </a><span class="php-comment">     */</span>
 </span><span id="40" class="l"><a class="l" href="#40">40: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setRoleUsers" href="#_setRoleUsers">setRoleUsers</a>(<span class="php-keyword1">array</span> <span class="php-var">$users</span>, <span class="php-var">$role</span>);
 </span><span id="41" class="l"><a class="l" href="#41">41: </a>
@@ -174,7 +169,7 @@
 </span></span><span id="44" class="l"><a class="l" href="#44">44: </a><span class="php-comment">     * @param bool Internal use only.
 </span></span><span id="45" class="l"><a class="l" href="#45">45: </a><span class="php-comment">     * @return array
 </span></span><span id="46" class="l"><a class="l" href="#46">46: </a><span class="php-comment">     */</span>
-</span><span id="47" class="l"><a class="l" href="#47">47: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_listRoles" href="#_listRoles">listRoles</a>(<span class="php-var">$reset</span> = <span class="php-keyword1">FALSE</span>);
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_listRoles" href="#_listRoles">listRoles</a>(<span class="php-var">$reset</span> = <span class="php-keyword1">false</span>);
 </span><span id="48" class="l"><a class="l" href="#48">48: </a>
 </span><span id="49" class="l"><a class="l" href="#49">49: </a>    <span class="php-comment">/**
 </span></span><span id="50" class="l"><a class="l" href="#50">50: </a><span class="php-comment">     * Adds a role.
@@ -187,7 +182,8 @@
 </span></span><span id="57" class="l"><a class="l" href="#57">57: </a><span class="php-comment">     * @param string
 </span></span><span id="58" class="l"><a class="l" href="#58">58: </a><span class="php-comment">     */</span>
 </span><span id="59" class="l"><a class="l" href="#59">59: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_deleteRole" href="#_deleteRole">deleteRole</a>(<span class="php-var">$role_name</span>);
-</span><span id="60" class="l"><a class="l" href="#60">60: </a></span>}</code></pre>
+</span><span id="60" class="l"><a class="l" href="#60">60: </a>}
+</span><span id="61" class="l"><a class="l" href="#61">61: </a></span></code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

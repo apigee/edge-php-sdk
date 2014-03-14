@@ -8,7 +8,7 @@
 	<title>File Util/ErrorHandling.php | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -24,11 +24,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -121,26 +116,28 @@
 <pre><code><span id="1" class="l"><a class="l" href="#1"> 1: </a><span class="xlang">&lt;?php</span>
 </span><span id="2" class="l"><a class="l" href="#2"> 2: </a><span class="php-keyword1">namespace</span> Apigee\Util;
 </span><span id="3" class="l"><a class="l" href="#3"> 3: </a>
-</span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">class</span> <a id="ErrorHandling" href="#ErrorHandling">ErrorHandling</a> {
-</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>
-</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>  <span class="php-keyword1">const</span> <a id="SEVERITY_STATUS" href="#SEVERITY_STATUS">SEVERITY_STATUS</a> = <span class="php-num">0</span>;
-</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>  <span class="php-keyword1">const</span> <a id="SEVERITY_WARNING" href="#SEVERITY_WARNING">SEVERITY_WARNING</a> = <span class="php-num">1</span>;
-</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>  <span class="php-keyword1">const</span> <a id="SEVERITY_ERROR" href="#SEVERITY_ERROR">SEVERITY_ERROR</a> = <span class="php-num">2</span>;
-</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>
-</span><span id="10" class="l"><a class="l" href="#10">10: </a>  <span class="php-keyword1">const</span> <a id="DISPLAY_MESSAGE" href="#DISPLAY_MESSAGE">DISPLAY_MESSAGE</a> = <span class="php-num">0</span>;
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>  <span class="php-keyword1">const</span> <a id="DISPLAY_INLINE" href="#DISPLAY_INLINE">DISPLAY_INLINE</a> = <span class="php-num">1</span>;
-</span><span id="12" class="l"><a class="l" href="#12">12: </a>
-</span><span id="13" class="l"><a class="l" href="#13">13: </a>  <span class="php-comment">/* App-related codes: 0x00-0x0F */</span>
-</span><span id="14" class="l"><a class="l" href="#14">14: </a>  <span class="php-keyword1">const</span> <a id="CODE_APP_CREATED" href="#CODE_APP_CREATED">CODE_APP_CREATED</a> = <span class="php-num">0x1</span>;
-</span><span id="15" class="l"><a class="l" href="#15">15: </a>  <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_DELETED" href="#CODE_APP_CANNOT_BE_DELETED">CODE_APP_CANNOT_BE_DELETED</a> = <span class="php-num">0x2</span>;
-</span><span id="16" class="l"><a class="l" href="#16">16: </a>  <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_LOADED" href="#CODE_APP_CANNOT_BE_LOADED">CODE_APP_CANNOT_BE_LOADED</a> = <span class="php-num">0x3</span>;
-</span><span id="17" class="l"><a class="l" href="#17">17: </a>  <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_SAVED" href="#CODE_APP_CANNOT_BE_SAVED">CODE_APP_CANNOT_BE_SAVED</a> = <span class="php-num">0x4</span>;
-</span><span id="18" class="l"><a class="l" href="#18">18: </a>
-</span><span id="19" class="l"><a class="l" href="#19">19: </a>  <span class="php-comment">/* User-related codes: 0x10-0x1F */</span>
-</span><span id="20" class="l"><a class="l" href="#20">20: </a>  <span class="php-keyword1">const</span> <a id="CODE_USER_CANNOT_BE_SAVED" href="#CODE_USER_CANNOT_BE_SAVED">CODE_USER_CANNOT_BE_SAVED</a> = <span class="php-num">0x11</span>;
-</span><span id="21" class="l"><a class="l" href="#21">21: </a>  <span class="php-keyword1">const</span> <a id="CODE_USER_CANNOT_BE_LOADED" href="#CODE_USER_CANNOT_BE_LOADED">CODE_USER_CANNOT_BE_LOADED</a> = <span class="php-num">0x12</span>;
-</span><span id="22" class="l"><a class="l" href="#22">22: </a>
-</span><span id="23" class="l"><a class="l" href="#23">23: </a></span>}</code></pre>
+</span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">class</span> <a id="ErrorHandling" href="#ErrorHandling">ErrorHandling</a>
+</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>{
+</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>
+</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>    <span class="php-keyword1">const</span> <a id="SEVERITY_STATUS" href="#SEVERITY_STATUS">SEVERITY_STATUS</a> = <span class="php-num">0</span>;
+</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>    <span class="php-keyword1">const</span> <a id="SEVERITY_WARNING" href="#SEVERITY_WARNING">SEVERITY_WARNING</a> = <span class="php-num">1</span>;
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-keyword1">const</span> <a id="SEVERITY_ERROR" href="#SEVERITY_ERROR">SEVERITY_ERROR</a> = <span class="php-num">2</span>;
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>    <span class="php-keyword1">const</span> <a id="DISPLAY_MESSAGE" href="#DISPLAY_MESSAGE">DISPLAY_MESSAGE</a> = <span class="php-num">0</span>;
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>    <span class="php-keyword1">const</span> <a id="DISPLAY_INLINE" href="#DISPLAY_INLINE">DISPLAY_INLINE</a> = <span class="php-num">1</span>;
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>    <span class="php-comment">/* App-related codes: 0x00-0x0F */</span>
+</span><span id="15" class="l"><a class="l" href="#15">15: </a>    <span class="php-keyword1">const</span> <a id="CODE_APP_CREATED" href="#CODE_APP_CREATED">CODE_APP_CREATED</a> = <span class="php-num">0x1</span>;
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>    <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_DELETED" href="#CODE_APP_CANNOT_BE_DELETED">CODE_APP_CANNOT_BE_DELETED</a> = <span class="php-num">0x2</span>;
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>    <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_LOADED" href="#CODE_APP_CANNOT_BE_LOADED">CODE_APP_CANNOT_BE_LOADED</a> = <span class="php-num">0x3</span>;
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>    <span class="php-keyword1">const</span> <a id="CODE_APP_CANNOT_BE_SAVED" href="#CODE_APP_CANNOT_BE_SAVED">CODE_APP_CANNOT_BE_SAVED</a> = <span class="php-num">0x4</span>;
+</span><span id="19" class="l"><a class="l" href="#19">19: </a>
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>    <span class="php-comment">/* User-related codes: 0x10-0x1F */</span>
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>    <span class="php-keyword1">const</span> <a id="CODE_USER_CANNOT_BE_SAVED" href="#CODE_USER_CANNOT_BE_SAVED">CODE_USER_CANNOT_BE_SAVED</a> = <span class="php-num">0x11</span>;
+</span><span id="22" class="l"><a class="l" href="#22">22: </a>    <span class="php-keyword1">const</span> <a id="CODE_USER_CANNOT_BE_LOADED" href="#CODE_USER_CANNOT_BE_LOADED">CODE_USER_CANNOT_BE_LOADED</a> = <span class="php-num">0x12</span>;
+</span><span id="23" class="l"><a class="l" href="#23">23: </a>
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>}
+</span><span id="25" class="l"><a class="l" href="#25">25: </a></span></code></pre>
 
 	<div id="footer">
 		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

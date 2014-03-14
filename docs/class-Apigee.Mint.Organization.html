@@ -7,7 +7,7 @@
 	<title>Class Apigee\Mint\Organization | API Reference for the Apigee Edge PHP Management SDK</title>
 
 	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?4057567376"></script>
+	<script type="text/javascript" src="elementlist.js?1451456074"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -23,11 +23,6 @@
 			<ul>
 				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
 						<ul>
-				<li><a href="namespace-Apigee.Commerce.html">Commerce<span></span></a>
-						<ul>
-				<li><a href="namespace-Apigee.Commerce.DataStructures.html">DataStructures</a>
-						</li>
-							</ul></li>
 				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
 						</li>
 				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
@@ -177,7 +172,7 @@ their constructor.</p>
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Mint.html">Mint</a><br />
 		<b>Package:</b> Apigee\Mint\Base<br />
 
-		<b>Located at</b> <a href="source-class-Apigee.Mint.Organization.html#20-622" title="Go to source code">Mint/Organization.php</a><br />
+		<b>Located at</b> <a href="source-class-Apigee.Mint.Organization.html#19-756" title="Go to source code">Mint/Organization.php</a><br />
 	</div>
 
 
@@ -195,7 +190,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#172-180" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#171-180" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			
@@ -224,7 +219,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getList">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#182-184" title="Go to source code">getList</a>( <span>null|integer <var>$page_num</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$page_size</var> = <span class="php-num">20</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#182-185" title="Go to source code">getList</a>( <span>null|integer <var>$page_num</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$page_size</var> = <span class="php-num">20</span></span> )</code>
 
 		<div class="description short">
 			
@@ -270,7 +265,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listOrganizationIdentifiers">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#186-192" title="Go to source code">listOrganizationIdentifiers</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#187-194" title="Go to source code">listOrganizationIdentifiers</a>( )</code>
 
 		<div class="description short">
 			
@@ -299,7 +294,7 @@ their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#194-217" title="Go to source code">load</a>( <span>null|string <var>$id</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#196-220" title="Go to source code">load</a>( <span>null|string <var>$id</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -345,7 +340,7 @@ APIClient.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromRawData">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#219-253" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#222-256" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -376,18 +371,61 @@ with that data.</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="syncAllFrom4g" id="_syncAllFrom4g">
+
+		<td class="attributes"><code>
+			 public 
+			Text
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_syncAllFrom4g">#</a>
+		<code><a href="source-class-Apigee.Mint.Organization.html#258-280" title="Go to source code">syncAllFrom4g</a>( <span>mixed <var>$id</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Pushes Developers that are missing in Mint from 4G</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Pushes Developers that are missing in Mint from 4G</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd><code>mixed</code><br>$id Organization id, if not specified or null then this object's organization
+name is used</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>Text</code><br>response from 4g request<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="__toString" id="___toString">
 
 		<td class="attributes"><code>
 			 public 
-			mixed
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#255-269" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#282-297" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
@@ -404,7 +442,7 @@ with that data.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>mixed</code><br />
+					<code>string</code><br />
 				</div>
 
 
@@ -417,14 +455,14 @@ with that data.</p>
 
 		<td class="attributes"><code>
 			 protected 
-			mixed
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_initValues">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#271-297" title="Go to source code">initValues</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#299-326" title="Go to source code">initValues</a>( )</code>
 
 		<div class="description short">
 			
@@ -439,10 +477,6 @@ with that data.</p>
 
 
 
-				<h4>Returns</h4>
-				<div class="list">
-					<code>mixed</code><br />
-				</div>
 
 
 
@@ -461,7 +495,7 @@ with that data.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_instantiateNew">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#299-301" title="Go to source code">instantiateNew</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#328-331" title="Go to source code">instantiateNew</a>( )</code>
 
 		<div class="description short">
 			
@@ -500,7 +534,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAddresses">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#306-308" title="Go to source code">getAddresses</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#336-339" title="Go to source code">getAddresses</a>( )</code>
 
 		<div class="description short">
 			
@@ -529,7 +563,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addAddress">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#309-311" title="Go to source code">addAddress</a>( <span><code><a href="class-Apigee.Mint.DataStructures.Address.html">Apigee\Mint\DataStructures\Address</a></code> <var>$address</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#341-344" title="Go to source code">addAddress</a>( <span><code><a href="class-Apigee.Mint.DataStructures.Address.html">Apigee\Mint\DataStructures\Address</a></code> <var>$address</var></span> )</code>
 
 		<div class="description short">
 			
@@ -558,7 +592,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clearAddresses">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#312-314" title="Go to source code">clearAddresses</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#346-349" title="Go to source code">clearAddresses</a>( )</code>
 
 		<div class="description short">
 			
@@ -587,7 +621,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApproveTrusted">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#317-319" title="Go to source code">getApproveTrusted</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#352-355" title="Go to source code">getApproveTrusted</a>( )</code>
 
 		<div class="description short">
 			
@@ -616,7 +650,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApproveTrusted">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#320-322" title="Go to source code">setApproveTrusted</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#357-360" title="Go to source code">setApproveTrusted</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -645,7 +679,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApproveUntrusted">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#323-325" title="Go to source code">getApproveUntrusted</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#362-365" title="Go to source code">getApproveUntrusted</a>( )</code>
 
 		<div class="description short">
 			
@@ -674,7 +708,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApproveUntrusted">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#326-328" title="Go to source code">setApproveUntrusted</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#367-370" title="Go to source code">setApproveUntrusted</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -703,7 +737,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getGroupOrganization">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#329-331" title="Go to source code">getGroupOrganization</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#372-375" title="Go to source code">getGroupOrganization</a>( )</code>
 
 		<div class="description short">
 			
@@ -732,7 +766,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setGroupOrganization">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#332-334" title="Go to source code">setGroupOrganization</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#377-380" title="Go to source code">setGroupOrganization</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -761,7 +795,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasBillingAdjustment">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#335-337" title="Go to source code">hasBillingAdjustment</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#382-385" title="Go to source code">hasBillingAdjustment</a>( )</code>
 
 		<div class="description short">
 			
@@ -790,7 +824,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHasBillingAdjustment">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#338-340" title="Go to source code">setHasBillingAdjustment</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#387-390" title="Go to source code">setHasBillingAdjustment</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -819,7 +853,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasBroker">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#341-343" title="Go to source code">hasBroker</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#392-395" title="Go to source code">hasBroker</a>( )</code>
 
 		<div class="description short">
 			
@@ -848,7 +882,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHasBroker">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#344-346" title="Go to source code">setHasBroker</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#397-400" title="Go to source code">setHasBroker</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -877,7 +911,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasSelfBilling">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#347-349" title="Go to source code">hasSelfBilling</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#402-405" title="Go to source code">hasSelfBilling</a>( )</code>
 
 		<div class="description short">
 			
@@ -906,7 +940,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHasSelfBilling">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#350-352" title="Go to source code">setHasSelfBilling</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#407-410" title="Go to source code">setHasSelfBilling</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -935,7 +969,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasSeparateInvoiceForProduct">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#353-355" title="Go to source code">hasSeparateInvoiceForProduct</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#412-415" title="Go to source code">hasSeparateInvoiceForProduct</a>( )</code>
 
 		<div class="description short">
 			
@@ -964,7 +998,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setHasSeparateInvoiceForProduct">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#356-358" title="Go to source code">setHasSeparateInvoiceForProduct</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#417-420" title="Go to source code">setHasSeparateInvoiceForProduct</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -993,7 +1027,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getIssueNettingStmt">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#359-361" title="Go to source code">getIssueNettingStmt</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#422-425" title="Go to source code">getIssueNettingStmt</a>( )</code>
 
 		<div class="description short">
 			
@@ -1022,7 +1056,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setIssueNettingStmt">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#362-364" title="Go to source code">setIssueNettingStmt</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#427-430" title="Go to source code">setIssueNettingStmt</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1051,7 +1085,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getNettingStmtPerCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#365-367" title="Go to source code">getNettingStmtPerCurrency</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#432-435" title="Go to source code">getNettingStmtPerCurrency</a>( )</code>
 
 		<div class="description short">
 			
@@ -1080,7 +1114,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setNettingStmtPerCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#368-370" title="Go to source code">setNettingStmtPerCurrency</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#437-440" title="Go to source code">setNettingStmtPerCurrency</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1109,7 +1143,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSelfBillingAsExchOrg">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#371-373" title="Go to source code">getSelfBillingAsExchOrg</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#442-445" title="Go to source code">getSelfBillingAsExchOrg</a>( )</code>
 
 		<div class="description short">
 			
@@ -1138,7 +1172,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSelfBillingAsExchOrg">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#374-376" title="Go to source code">setSelfBillingAsExchOrg</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#447-450" title="Go to source code">setSelfBillingAsExchOrg</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1167,7 +1201,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSelfBillingForAllDev">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#377-379" title="Go to source code">getSelfBillingForAllDev</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#452-455" title="Go to source code">getSelfBillingForAllDev</a>( )</code>
 
 		<div class="description short">
 			
@@ -1196,7 +1230,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSelfBillingForAllDev">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#380-382" title="Go to source code">setSelfBillingForAllDev</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#457-460" title="Go to source code">setSelfBillingForAllDev</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1225,7 +1259,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSeparateInvoiceForFees">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#383-385" title="Go to source code">getSeparateInvoiceForFees</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#462-465" title="Go to source code">getSeparateInvoiceForFees</a>( )</code>
 
 		<div class="description short">
 			
@@ -1254,7 +1288,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSeparateInvoiceForFees">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#386-388" title="Go to source code">setSeparateInvoiceForFees</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">TRUE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#467-470" title="Go to source code">setSeparateInvoiceForFees</a>( <span>mixed <var>$bool</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -1283,7 +1317,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getBillingCycle">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#390-392" title="Go to source code">getBillingCycle</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#472-475" title="Go to source code">getBillingCycle</a>( )</code>
 
 		<div class="description short">
 			
@@ -1312,7 +1346,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setBillingCycle">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#393-395" title="Go to source code">setBillingCycle</a>( <span>mixed <var>$cycle</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#477-480" title="Go to source code">setBillingCycle</a>( <span>mixed <var>$cycle</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1341,7 +1375,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getChildren">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#397-399" title="Go to source code">getChildren</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#482-485" title="Go to source code">getChildren</a>( )</code>
 
 		<div class="description short">
 			
@@ -1370,7 +1404,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setChildren">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#400-402" title="Go to source code">setChildren</a>( <span>mixed <var>$children</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#487-490" title="Go to source code">setChildren</a>( <span>mixed <var>$children</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1399,7 +1433,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCountry">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#404-406" title="Go to source code">getCountry</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#492-495" title="Go to source code">getCountry</a>( )</code>
 
 		<div class="description short">
 			
@@ -1428,7 +1462,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCountry">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#407-410" title="Go to source code">setCountry</a>( <span>mixed <var>$country</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#497-501" title="Go to source code">setCountry</a>( <span>mixed <var>$country</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1457,7 +1491,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#412-414" title="Go to source code">getCurrency</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#503-506" title="Go to source code">getCurrency</a>( )</code>
 
 		<div class="description short">
 			
@@ -1486,7 +1520,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCurrency">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#415-418" title="Go to source code">setCurrency</a>( <span>mixed <var>$currency</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#508-512" title="Go to source code">setCurrency</a>( <span>mixed <var>$currency</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1515,7 +1549,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDescription">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#420-422" title="Go to source code">getDescription</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#514-517" title="Go to source code">getDescription</a>( )</code>
 
 		<div class="description short">
 			
@@ -1544,7 +1578,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDescription">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#423-425" title="Go to source code">setDescription</a>( <span>mixed <var>$desc</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#519-522" title="Go to source code">setDescription</a>( <span>mixed <var>$desc</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1573,7 +1607,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getId">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#427-429" title="Go to source code">getId</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#524-527" title="Go to source code">getId</a>( )</code>
 
 		<div class="description short">
 			
@@ -1602,7 +1636,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setId">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#430-432" title="Go to source code">setId</a>( <span>mixed <var>$id</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#529-532" title="Go to source code">setId</a>( <span>mixed <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1631,7 +1665,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLogoUrl">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#434-436" title="Go to source code">getLogoUrl</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#534-537" title="Go to source code">getLogoUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -1660,7 +1694,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setLogoUrl">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#437-447" title="Go to source code">setLogoUrl</a>( <span>mixed <var>$url</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#539-549" title="Go to source code">setLogoUrl</a>( <span>mixed <var>$url</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1689,7 +1723,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#449-451" title="Go to source code">getName</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#551-554" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			
@@ -1718,7 +1752,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#452-454" title="Go to source code">setName</a>( <span>mixed <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#556-559" title="Go to source code">setName</a>( <span>mixed <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1747,7 +1781,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOrgType">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#456-458" title="Go to source code">getOrgType</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#561-564" title="Go to source code">getOrgType</a>( )</code>
 
 		<div class="description short">
 			
@@ -1776,7 +1810,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setOrgType">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#459-461" title="Go to source code">setOrgType</a>( <span>mixed <var>$org_type</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#566-569" title="Go to source code">setOrgType</a>( <span>mixed <var>$org_type</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1805,7 +1839,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getParent">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#463-468" title="Go to source code">getParent</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#571-577" title="Go to source code">getParent</a>( )</code>
 
 		<div class="description short">
 			
@@ -1838,7 +1872,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setParent">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#469-474" title="Go to source code">setParent</a>( <span><code><a href="class-Apigee.Mint.Organization.html">Apigee\Mint\Organization</a></code> <var>$parent</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#579-585" title="Go to source code">setParent</a>( <span><code><a href="class-Apigee.Mint.Organization.html">Apigee\Mint\Organization</a></code> <var>$parent</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1872,7 +1906,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRegNo">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#476-478" title="Go to source code">getRegNo</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#587-590" title="Go to source code">getRegNo</a>( )</code>
 
 		<div class="description short">
 			
@@ -1901,7 +1935,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRegNo">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#479-481" title="Go to source code">setRegNo</a>( <span>mixed <var>$num</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#592-595" title="Go to source code">setRegNo</a>( <span>mixed <var>$num</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1930,7 +1964,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatus">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#483-485" title="Go to source code">getStatus</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#597-600" title="Go to source code">getStatus</a>( )</code>
 
 		<div class="description short">
 			
@@ -1959,7 +1993,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatus">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#486-488" title="Go to source code">setStatus</a>( <span>mixed <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#602-605" title="Go to source code">setStatus</a>( <span>mixed <var>$status</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1988,7 +2022,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSupportedBillingType">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#490-492" title="Go to source code">getSupportedBillingType</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#607-610" title="Go to source code">getSupportedBillingType</a>( )</code>
 
 		<div class="description short">
 			
@@ -2017,7 +2051,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSupportedBillingType">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#493-495" title="Go to source code">setSupportedBillingType</a>( <span>mixed <var>$supported_billing_type</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#612-615" title="Go to source code">setSupportedBillingType</a>( <span>mixed <var>$supported_billing_type</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2046,7 +2080,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTaxModel">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#497-499" title="Go to source code">getTaxModel</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#617-620" title="Go to source code">getTaxModel</a>( )</code>
 
 		<div class="description short">
 			
@@ -2075,7 +2109,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTaxModel">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#500-502" title="Go to source code">setTaxModel</a>( <span>mixed <var>$model</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#622-625" title="Go to source code">setTaxModel</a>( <span>mixed <var>$model</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2104,7 +2138,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTaxNexus">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#504-506" title="Go to source code">getTaxNexus</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#627-630" title="Go to source code">getTaxNexus</a>( )</code>
 
 		<div class="description short">
 			
@@ -2133,7 +2167,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTaxNexus">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#507-509" title="Go to source code">setTaxNexus</a>( <span>mixed <var>$tax_nexus</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#632-635" title="Go to source code">setTaxNexus</a>( <span>mixed <var>$tax_nexus</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2162,7 +2196,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTaxRegNo">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#511-513" title="Go to source code">getTaxRegNo</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#637-640" title="Go to source code">getTaxRegNo</a>( )</code>
 
 		<div class="description short">
 			
@@ -2191,7 +2225,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTaxRegNo">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#514-516" title="Go to source code">setTaxRegNo</a>( <span>mixed <var>$num</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#642-645" title="Go to source code">setTaxRegNo</a>( <span>mixed <var>$num</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2220,7 +2254,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTimezone">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#518-520" title="Go to source code">getTimezone</a>( )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#647-650" title="Go to source code">getTimezone</a>( )</code>
 
 		<div class="description short">
 			
@@ -2249,7 +2283,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTimezone">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#521-524" title="Go to source code">setTimezone</a>( <span>mixed <var>$tz</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#652-656" title="Go to source code">setTimezone</a>( <span>mixed <var>$tz</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2278,7 +2312,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listSupportedCurrencies">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#526-549" title="Go to source code">listSupportedCurrencies</a>( <span>mixed <var>$id</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$include_children</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#658-682" title="Go to source code">listSupportedCurrencies</a>( <span>mixed <var>$id</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$include_children</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -2307,7 +2341,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPrepaidBalanceReport">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#551-587" title="Go to source code">getPrepaidBalanceReport</a>( <span>mixed <var>$month</var></span>, <span>mixed <var>$year</var></span>, <span>mixed <var>$developer_id</var></span>, <span>mixed <var>$currency_id</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#684-720" title="Go to source code">getPrepaidBalanceReport</a>( <span>mixed <var>$month</var></span>, <span>mixed <var>$year</var></span>, <span>mixed <var>$developer_id</var></span>, <span>mixed <var>$currency_id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -2336,7 +2370,7 @@ the class that is doing the instantiation.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOrganizationFamily">#</a>
-		<code><a href="source-class-Apigee.Mint.Organization.html#589-621" title="Go to source code">getOrganizationFamily</a>( <span>mixed <var>$id</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Organization.html#722-755" title="Go to source code">getOrganizationFamily</a>( <span>mixed <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
