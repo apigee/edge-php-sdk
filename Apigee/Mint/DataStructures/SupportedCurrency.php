@@ -9,54 +9,54 @@ class SupportedCurrency extends DataStructure
      * Organization
      * @var \Apigee\Mint\Organization
      */
-    public $organization;
+    private $organization;
 
     /**
      * Currency id
      * @var string
      */
-    public $id;
+    private $id;
 
     /**
      * Supported Currency Name
      * @var string
      */
-    public $name;
+    private $name;
 
     /**
      * Display Name
      * @var string
      */
-    public $displayName;
+    private $displayName;
 
     /**
      * Description
      * @var string
      */
-    public $description;
+    private $description;
 
     /**
      * Virtual currency
      * @var boolean
      */
-    public $virtualCurrency;
+    private $virtualCurrency;
 
     /**
      * Status.
      * @var string Allowed values [CREATED|INACTIVE|ACTIVE]
      */
-    public $status;
+    private $status;
 
     /**
      * Credit Limit for Postpaid developers. This can be overridden for each developer in developer balance.
      * @var double
      */
-    public $creditLimit;
+    private $creditLimit;
 
     /**
      * @var float Minimum amount a developer can set a recurring amount
      */
-    public $minimumRecurringAmount = 0;
+    private $minimumRecurringAmount = 0;
 
   /**
    * @param float $creditLimit

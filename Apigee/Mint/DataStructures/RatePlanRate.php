@@ -1,45 +1,45 @@
 <?php
 namespace Apigee\Mint\DataStructures;
 
-final class RatePlanRate
+class RatePlanRate extends DataStructure
 {
 
     /**
      * RatePlanRate id
      * @var string
      */
-    public $id;
+    private $id;
 
     /**
      * Rate plan rate type.
      * Possible values:
      * @var string Allowed values: [REVSHARE|RATECARD]
      */
-    public $type;
+    private $type;
 
     /**
      * Price
      * @var double
      */
-    public $rate;
+    private $rate;
 
     /**
      * Revshare
      * @var string
      */
-    public $revshare;
+    private $revshare;
 
     /**
      * Unit range start
      * @var int
      */
-    public $startUnit;
+    private $startUnit;
 
     /**
      * Unit range end
      * @var int
      */
-    public $endUnit;
+    private $endUnit;
 
     /**
      * Class constructor.
@@ -70,5 +70,89 @@ final class RatePlanRate
             }
         }
         return json_encode($obj);
+    }
+
+    /**
+     * @param int $endUnit
+     */
+    public function setEndUnit($endUnit) {
+        $this->endUnit = $endUnit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndUnit() {
+        return $this->endUnit;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @param float $rate
+     */
+    public function setRate($rate) {
+        $this->rate = $rate;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRate() {
+        return $this->rate;
+    }
+
+    /**
+     * @param string $revshare
+     */
+    public function setRevshare($revshare) {
+        $this->revshare = $revshare;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRevshare() {
+        return $this->revshare;
+    }
+
+    /**
+     * @param int $startUnit
+     */
+    public function setStartUnit($startUnit) {
+        $this->startUnit = $startUnit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStartUnit() {
+        return $this->startUnit;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType() {
+        return $this->type;
     }
 }
