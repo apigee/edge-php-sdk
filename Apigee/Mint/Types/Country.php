@@ -249,6 +249,7 @@ final class Country
         'TC' => 'Turks and Caicos Islands',
         'TV' => 'Tuvalu',
         'UM' => 'U.S. Minor Outlying Islands',
+        'UK' => 'United Kingdom',
         'PU' => 'U.S. Miscellaneous Pacific Islands',
         'VI' => 'U.S. Virgin Islands',
         'UG' => 'Uganda',
