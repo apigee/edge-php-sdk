@@ -65,10 +65,17 @@ class OrgConfig
     public $http_options;
 
     /**
+     * @var array
+     * Array of callables to be called after each REST transaction. Each
+     * callback should accept a single array parameter.
+     */
+    public $debug_callbacks;
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger', 'user_email',
-     * 'subscribers', and 'http_options'. </p>
+     * 'subscribers', 'debug_callbacks', and 'http_options'. </p>
      *
      * <p>For example:</p>
      * <pre>
@@ -108,12 +115,14 @@ class OrgConfig
                 'follow_location' => true,
                 'connection_timeout' => 10,
                 'timeout' => 10,
-            )
+            ),
+            'debug_callbacks' => array()
         );
 
         $this->logger = $options['logger'];
         $this->user_mail = $options['user_mail'];
         $this->subscribers = $options['subscribers'];
         $this->http_options = $options['http_options'];
+        $this->debug_callbacks = $options['debug_callbacks'];
     }
 }

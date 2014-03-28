@@ -18,6 +18,7 @@ class DebugData
     public static $code_status;
     public static $code_class;
     public static $exception;
+    public static $time_elapsed;
 
     public static function toArray()
     {
@@ -28,7 +29,8 @@ class DebugData
             'code' => self::$code,
             'code_status' => self::$code_status,
             'code_class' => self::$code_class,
-            'exception' => self::$exception
+            'exception' => self::$exception,
+            'time_elapsed' => self::$time_elapsed
         );
     }
 }

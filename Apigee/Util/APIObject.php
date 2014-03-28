@@ -136,6 +136,7 @@ class APIObject
 
     private function exec(\Guzzle\Http\Message\RequestInterface $request)
     {
+        $start = microtime(true);
         $this->responseCode = 0;
         $request->setAuth($this->config->user, $this->config->pass);
         try {
@@ -187,6 +188,7 @@ class APIObject
         DebugData::$code_status = $status;
         DebugData::$code_class = $code_class;
         DebugData::$exception = null;
+        DebugData::$time_elapsed = microtime(true) - $start;
 
         if ($code_class != 2) {
             $uri = $request->getUrl();
@@ -196,6 +198,7 @@ class APIObject
                 $message = 'API returned HTTP code of ' . $this->responseCode . ' when fetching from ' . $uri;
             }
             DebugData::$exception = $message;
+            $this->debugCallback(DebugData::toArray());
             self::$logger->error($this->responseText);
 
             // Create better status to show up in logs
@@ -213,6 +216,17 @@ class APIObject
             $exception->responseObj = $response;
             throw $exception;
         }
+        $this->debugCallback(DebugData::toArray());
+    }
+
+    private function debugCallback(array $debug) {
+      if (is_array($this->config->debug_callbacks)) {
+        foreach ($this->config->debug_callbacks as $callback) {
+          if (is_callable($callback)) {
+            call_user_func($callback, $debug);
+          }
+        }
+      }
     }
 
     /**
