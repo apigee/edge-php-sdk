@@ -43,7 +43,7 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function oAuthEnable($apiId, $rev, $auth)
     {
-      $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authSchemes';
+      $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
       $this->post($path, $auth, 'application/json; charset=utf-8');
       return $this->responseObj;
     }
