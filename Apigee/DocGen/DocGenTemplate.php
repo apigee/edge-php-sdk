@@ -54,8 +54,7 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
      */
     public function saveTemplate($apiId, $type, $name, $html)
     {
-        $headers = array();
-        $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=' . $name, $html, 'text/html', 'text/html', $headers);
+        $this->post(rawurlencode($apiId) . '/templates?type=' . $type . '&name=' . $name, $html, 'text/html', 'text/html');
         return $this->responseText;
     }
 
@@ -66,8 +65,8 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
      */
     public function updateTemplate($apiId, $type, $name, $html)
     {
-        $headers = array();
-        $this->put(rawurlencode($apiId) . '/templates/' . $name . '?type=' . $type, $html, 'text/html', 'text/html', $headers);
+        $uri = rawurlencode($apiId) . '/templates/' . $name . '?type=' . $type;
+        $this->put($uri, $html, 'text/html');
         return $this->responseText;
     }
 
