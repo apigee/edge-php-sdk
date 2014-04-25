@@ -97,6 +97,9 @@ class APIObject
                 $this->client->addSubscriber($subscriber);
             }
         }
+        if (!empty($config->user_agent)) {
+            $this->client->setUserAgent($config->user_agent, true);
+        }
         self::$logger = $config->logger;
     }
 
