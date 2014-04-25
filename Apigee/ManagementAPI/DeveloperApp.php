@@ -149,7 +149,7 @@ class DeveloperApp extends AbstractApp
     public function loadByAppId($appId, $reset_developer = false)
     {
         if (!preg_match('!^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$!', $appId)) {
-            throw new ParameterException('Invalid UUID passed as appId.');
+            throw new ParameterException('Invalid UUID “' . $appId . '” passed as appId.');
         }
 
         $url = '/o/' . rawurlencode($this->config->orgName) . '/apps';
