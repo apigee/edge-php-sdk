@@ -43,10 +43,13 @@ interface DeveloperInterface
      *   If false, assume that this is a new instance.
      *   If true, assume that this is an update to an existing instance.
      *   If null, try an update, and if that fails, try an insert.
+     * @param string|null $old_email
+     *   If the developer's email has changed, this field must contain the
+     *   previous email value.
      *
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function save($force_update = false);
+    public function save($force_update = false, $old_email = null);
 
     /**
      * Deletes a developer.
