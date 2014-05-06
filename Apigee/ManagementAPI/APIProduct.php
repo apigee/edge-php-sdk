@@ -242,15 +242,20 @@ class APIProduct extends Base implements APIProductInterface
     {
         static $api_products;
         if (!isset($api_products)) {
+            $api_products = array();
+        }
+        $org = $this->config->orgName;
+        if (!isset($api_products[$org])) {
+            $api_products[$org] = array();
             $this->get('?expand=true');
             $response = $this->responseObj;
             foreach ($response['apiProduct'] as $prod) {
                 $product = new self($this->getConfig());
                 $product->load(null, $prod);
-                $api_products[] = $product;
+                $api_products[$org][] = $product;
             }
         }
-        return $api_products;
+        return $api_products[$org];
     }
 
     /**

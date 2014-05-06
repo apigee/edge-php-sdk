@@ -72,6 +72,12 @@ class OrgConfig
     public $debug_callbacks;
 
     /**
+     * @var string|null
+     * User-Agent information to be added to the standard Guzzle UA header.
+     */
+    public $user_agent;
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger', 'user_email',
@@ -116,7 +122,8 @@ class OrgConfig
                 'connection_timeout' => 10,
                 'timeout' => 10,
             ),
-            'debug_callbacks' => array()
+            'debug_callbacks' => array(),
+            'user_agent' => NULL,
         );
 
         $this->logger = $options['logger'];
@@ -124,5 +131,6 @@ class OrgConfig
         $this->subscribers = $options['subscribers'];
         $this->http_options = $options['http_options'];
         $this->debug_callbacks = $options['debug_callbacks'];
+        $this->user_agent = $options['user_agent'];
     }
 }

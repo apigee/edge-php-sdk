@@ -300,18 +300,18 @@ class Developer extends Base implements DeveloperInterface
     /**
      * {@inheritDoc}
      */
-    public function save($force_update = false)
+    public function save($force_update = false, $old_email = null)
     {
 
         // See if we need to brute-force this.
         if ($force_update === null) {
             try {
-                $this->save(true);
+                $this->save(true, $old_email);
             } catch (ResponseException $e) {
                 if ($e->getCode() == 404) {
                     // Update failed because dev doesn't exist.
                     // Try insert instead.
-                    $this->save(false);
+                    $this->save(false, $old_email);
                 } else {
                     // Some other response error.
                     throw $e;
@@ -322,6 +322,10 @@ class Developer extends Base implements DeveloperInterface
 
         if (!$this->validateUser()) {
             throw new ParameterException('Developer requires valid-looking email address, firstName, lastName and userName.');
+        }
+
+        if (empty($old_email)) {
+            $old_email = $this->email;
         }
 
         $payload = array(
@@ -342,7 +346,7 @@ class Developer extends Base implements DeveloperInterface
             if ($this->developerId) {
                 $payload['developerId'] = $this->developerId;
             }
-            $url = rawurlencode($this->email);
+            $url = rawurlencode($old_email);
         }
         if ($force_update) {
             $this->put($url, $payload);
