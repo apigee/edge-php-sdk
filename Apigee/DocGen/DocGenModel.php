@@ -65,7 +65,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface
    */
   public function importSwagger($apiId, $url)
   {
-    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=swagger', 'URL=' . $url, 'application/xml; charset=utf-8');
+    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=swagger', 'URL=' . $url, 'text/plain; charset=utf-8');
     return $this->responseObj;
   }
 
