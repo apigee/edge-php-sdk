@@ -64,7 +64,6 @@ class DataStructure
      */
     public function __set($name, $value) {
         $class_name = get_class($this);
-        drupal_set_message('No setter method was found for property "' . $name . '" on class "' . $class_name . '" from ' . json_encode(debug_backtrace()));
         if (!array_key_exists($class_name, self::$childSetters)) {
             self::$childSetters[$class_name] = self::getSetterMethods($class_name);
         }
