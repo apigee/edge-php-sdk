@@ -81,9 +81,12 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
             if (version_compare(PHP_VERSION, '5.4', '>=')) {
                 // Be more efficient when running PHP 5.4
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-            } else {
+            } elseif (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
                 // Sigh. Pull entire backtrace.
                 $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            } else {
+                // Double-sigh. We are dealing with PHP < 5.3.6 dinosaurs.
+                $backtrace = debug_backtrace();
             }
             $type = basename($backtrace[1]['file']);
             $type = preg_replace('!\.(module|php)$!', '', $type);
