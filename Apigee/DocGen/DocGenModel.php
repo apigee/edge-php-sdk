@@ -70,6 +70,17 @@ class DocGenModel extends APIObject implements DocGenModelInterface
   }
 
   /**
+   * Imports an Apigee Internal JSON to a given model, returns JSON representation of the model
+   *
+   * {@inheritDoc}
+   */
+  public function importApigeeJSON($apiId, $json)
+  {
+    $this->post(rawurlencode($apiId) . '/revisions?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
+    return $this->responseObj;
+  }
+
+  /**
    * Gets a specific Model
    *
    * {@inheritDoc}
@@ -103,6 +114,24 @@ class DocGenModel extends APIObject implements DocGenModelInterface
   {
     $this->http_delete(rawurlencode($apiId));
     return $this->responseObj;
+  }
+
+  /**
+   * Exports SmartDocs model
+   *
+   * {@inheritDoc}
+   */
+  public function exportModel($apiId, $format)
+  {
+    if (empty($format)) {
+      $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes');
+      // Convert back to JSON - Guzzle decodes JSON by default
+      return @json_encode($this->responseObj, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    }
+    else {
+      $this->get(rawurlencode($apiId) . '/revisions/latest?format='.$format, 'text/xml');
+      return $this->responseObj;
+    }
   }
 
 }
