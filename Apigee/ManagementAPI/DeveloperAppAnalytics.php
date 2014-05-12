@@ -67,10 +67,16 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
      */
     public function getAllEnvironments()
     {
-        $env = Cache::get('devconnect_org_environments', array());
+        $data_store = $this->config->variable_store;
+        $env = null;
+        if ($data_store instanceof \Apigee\Util\KeyValueStoreInterface) {
+          $env = $data_store->get('devconnect_org_environments', array());
+        }
         if (empty($env)) {
             $env = $this->queryEnvironments();
-            Cache::set('devconnect_org_environments', $env);
+            if ($data_store instanceof \Apigee\Util\KeyValueStoreInterface) {
+                $data_store->set('devconnect_org_environments', $env);
+            }
         }
         return $env;
     }

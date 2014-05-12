@@ -3,6 +3,9 @@ namespace Apigee\Util;
 
 /**
  * Class to read from cache and write to cache a persistent name/value pair.
+ *
+ * @deprecated
+ * Use Apigee\Util\KeyValueStoreInterface implementations instead.
  */
 class Cache
 {
