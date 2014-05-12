@@ -102,7 +102,7 @@ class OrgConfig
      *       'connection_timeout' => 10,
      *       'timeout' => 50
      *     ),
-     *     'variable_store' => new Apigee\Drupal\DrupalCache()
+     *     'variable_store' => new Apigee\Drupal\VariableCache()
      *   );
      * </pre>
      *
