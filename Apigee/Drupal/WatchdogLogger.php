@@ -51,7 +51,9 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
         // Translate Psr\LogLevel constants to WATCHDOG_* constants
         $severity = self::log2drupal($level);
         // Short-circuit if this event is too insignificant to log.
-        if ($severity < self::$logThreshold) {
+        // Note that Drupal's severity is in decreasing order, i.e.
+        // 0 = emergency and 7 = debug
+        if ($severity > self::$logThreshold) {
             return;
         }
 
