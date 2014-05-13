@@ -125,12 +125,11 @@ class DocGenModel extends APIObject implements DocGenModelInterface
   {
     if (empty($format)) {
       $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes');
-      // Convert back to JSON - Guzzle decodes JSON by default
-      return @json_encode($this->responseObj, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+      return  $this->responseText;
     }
     else {
       $this->get(rawurlencode($apiId) . '/revisions/latest?format='.$format, 'text/xml');
-      return $this->responseObj;
+      return  $this->responseText;
     }
   }
 
