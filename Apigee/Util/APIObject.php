@@ -80,7 +80,7 @@ class APIObject
      */
     private $cachedBaseUrl;
 
-    /**
+  /**
      * Initializes the OrgConfig for this class.
      *
      * @param \Apigee\Util\OrgConfig $config

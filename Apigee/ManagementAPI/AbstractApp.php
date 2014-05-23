@@ -2,7 +2,8 @@
 
 namespace Apigee\ManagementAPI;
 
-use Apigee\Exceptions\ParameterException as ParameterException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
 
 /**
  * Superclass of DeveloperApps and CompanyApps.
@@ -754,12 +755,23 @@ abstract class AbstractApp extends Base implements AppInterface
     public function validate($name = null)
     {
         $name = $name ? : $this->name;
+        $cached_logger = null;
+        // Make sure that errors are not logged by replacing the logger with a
+        // dummy that routes errors to /dev/null
+        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+            $cached_logger = self::$logger;
+            self::$logger = new \Psr\Log\NullLogger();
+        }
         try {
             $this->get(rawurlencode($name));
-            return false;
-        } catch (\Apigee\Exceptions\ResponseException $e) {
+            $app_exists = true;
+        } catch (ResponseException $e) {
+            $app_exists = false;
         }
-        return true;
+        if (!empty($cached_logger)) {
+            self::$logger = $cached_logger;
+        }
+        return $app_exists;
     }
 
     /**
