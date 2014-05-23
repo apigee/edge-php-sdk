@@ -170,7 +170,7 @@ class DeveloperApp extends AbstractApp
         self::loadFromResponse($obj, $response, $owner_id);
         // Must load developer to get email
         if ($reset_developer && $reset_eligible) {
-            $this->client->setBaseUrl('/o/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($owner_id));
+            $this->setBaseUrl('/o/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($owner_id));
         }
     }
 
