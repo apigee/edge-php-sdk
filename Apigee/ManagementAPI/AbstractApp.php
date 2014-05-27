@@ -607,7 +607,7 @@ abstract class AbstractApp extends Base implements AppInterface
      * @param AppInterface $obj
      * @param array $response
      */
-    protected static function loadFromResponse(AppInterface &$obj, array $response, $owner_identifier = null)
+    protected static function loadFromResponse(AbstractApp &$obj, array $response, $owner_identifier = null)
     {
         $obj->accessType = $response['accessType'];
         $obj->appFamily = (isset($response['appFamily']) ? $response['appFamily'] : null);
@@ -1122,7 +1122,7 @@ abstract class AbstractApp extends Base implements AppInterface
     public function toArray()
     {
         $output = array();
-        foreach (self::getAppProperties() as $property) {
+        foreach ($this->getAppProperties() as $property) {
             switch ($property) {
                 case 'debugData':
                     $output[$property] = $this->getDebugData();
@@ -1144,9 +1144,9 @@ abstract class AbstractApp extends Base implements AppInterface
      *
      * @return array
      */
-    public static function getAppProperties()
+    public function getAppProperties($class = __CLASS__)
     {
-        $properties = array_keys(get_class_vars(__CLASS__));
+        $properties = array_keys(get_class_vars($class));
 
         $parent_class = get_parent_class();
         $grandparent_class = get_parent_class($parent_class);
