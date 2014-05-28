@@ -92,6 +92,12 @@ class Developer extends Base implements DeveloperInterface
      */
     protected $modifiedBy;
 
+    /**
+     * @var string
+     * Caches the previous status to see if it has changed
+     */
+    protected $previousStatus;
+
     /* Accessors (getters/setters) */
     /**
      * {@inheritDoc}
@@ -194,6 +200,7 @@ class Developer extends Base implements DeveloperInterface
         if ($status != 'active' && $status != 'inactive') {
             throw new ParameterException('Status may be either active or inactive; value "' . $status . '" is invalid.');
         }
+        $this->previousStatus = $this->status;
         $this->status = $status;
     }
 
@@ -251,13 +258,14 @@ class Developer extends Base implements DeveloperInterface
         $this->get(rawurlencode($email));
         $developer = $this->responseObj;
         self::loadFromResponse($this, $developer);
+        $this->previousStatus = $this->status;
     }
 
     /**
      * Takes the raw KMS response and populates the member variables of the
      * passed-in Developer object from it.
      *
-     * @param Apigee\ManagementAPI\Developer $developer
+     * @param \Apigee\ManagementAPI\Developer $developer
      * @param array $response
      */
     protected static function loadFromResponse(Developer &$developer, array $response)
@@ -333,7 +341,6 @@ class Developer extends Base implements DeveloperInterface
             'userName' => $this->userName,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
-            'status' => $this->status,
         );
         if (count($this->attributes) > 0) {
             $payload['attributes'] = array();
@@ -348,13 +355,22 @@ class Developer extends Base implements DeveloperInterface
             }
             $url = rawurlencode($old_email);
         }
+        // Save our desired status for later.
+        $cached_status = $this->status;
         if ($force_update) {
             $this->put($url, $payload);
         } else {
             $this->post($url, $payload);
         }
-
         self::loadFromResponse($this, $this->responseObj);
+        // If status has changed, we must directly change it with a separate
+        // POST call, because Edge will ignore a 'status' member in the
+        // app-save payload.
+        if (isset($cached_status) && $cached_status != $this->previousStatus) {
+            $this->post($old_email . '?action=' . $cached_status);
+            $this->status = $cached_status;
+        }
+        $this->previousStatus = $this->status;
     }
 
     /**
@@ -392,6 +408,7 @@ class Developer extends Base implements DeveloperInterface
         foreach ($developers['developer'] as $dev) {
             $developer = new Developer($this->config);
             self::loadFromResponse($developer, $dev);
+            $developer->previousStatus = $developer->status;
             $out[] = $developer;
         }
         return $out;
@@ -432,6 +449,7 @@ class Developer extends Base implements DeveloperInterface
         $this->createdBy = null;
         $this->modifiedAt = null;
         $this->modifiedBy = null;
+        $this->previousStatus = null;
     }
 
 
