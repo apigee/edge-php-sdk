@@ -94,7 +94,7 @@ class CompanyApp extends AbstractApp
         $this->attributes['Company'] = $this->companyName;
     }
 
-    public function getAppProperties()
+    public function getAppProperties($class = __CLASS__)
     {
         $properties = parent::getAppProperties(__CLASS__);
         $properties[] = 'companyName';
