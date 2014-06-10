@@ -197,10 +197,10 @@ class DeveloperApp extends AbstractApp
     /**
      * Set properties specific to DeveloperApps right after they are loaded.
      *
-     * @param DeveloperApp $obj
+     * @param AbstractApp $obj
      * @param array $response
      */
-    public static function afterLoad(AppInterface &$obj, array $response, $owner_identifier)
+    public static function afterLoad(AbstractApp &$obj, array $response, $owner_identifier)
     {
         $obj->developerId = $response['developerId'];
         $obj->developer = $obj->getDeveloperMailById($response['developerId']);

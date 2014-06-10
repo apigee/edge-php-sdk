@@ -10,7 +10,7 @@ use Apigee\Exceptions\ResponseException;
  *
  * @author djohnson
  */
-abstract class AbstractApp extends Base implements AppInterface
+abstract class AbstractApp extends Base
 {
 
     /**
@@ -153,8 +153,10 @@ abstract class AbstractApp extends Base implements AppInterface
     protected $ownerIdentifierField;
 
     /* Accessors (getters/setters) */
+
     /**
-     * {@inheritDOc}
+     * Returns the array of API products with which the app is associated.
+     * @return array
      */
     public function getApiProducts()
     {
@@ -162,7 +164,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Sets the array of API products with which the app is associated.
+     * @param array
      */
     public function setApiProducts($products)
     {
@@ -174,7 +177,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the array of name/value pairs used to extend the default app
+     * profile with which the app is associated.
+     * @return array
      */
     public function getAttributes()
     {
@@ -182,7 +187,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns true if the app attributes array contains $attr.
+     * @param string $attr
+     * @return bool
      */
     public function hasAttribute($attr)
     {
@@ -190,7 +197,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the value of the specified app attribute, or null if the
+     * attribute does not exist.
+     * @param string $attr
      */
     public function getAttribute($attr)
     {
@@ -198,7 +207,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the value of the app attribute.
+     * @param string $attr
+     * @param
      */
     public function setAttribute($attr, $value)
     {
@@ -206,7 +217,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the app name.
+     * @param string
      */
     public function setName($name)
     {
@@ -214,7 +226,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the app name.
+     * @return string
      */
     public function getName()
     {
@@ -222,7 +235,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the callback URL.
+     * @param string
      */
     public function setCallbackUrl($url)
     {
@@ -230,7 +244,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the app name.
+     * @return string
      */
     public function getCallbackUrl()
     {
@@ -238,7 +253,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the app description.
+     * @param string
      */
     public function setDescription($descr)
     {
@@ -247,7 +263,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the app description.
+     * @return string
      */
     public function getDescription()
     {
@@ -255,7 +272,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the app access type as 'read', 'write', or 'both'.
+     * @param string
      */
     public function setAccessType($type)
     {
@@ -266,7 +284,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the app access type as 'read', 'write', or 'both'.
+     * @return string
      */
     public function getAccessType()
     {
@@ -274,7 +293,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the app status of the app: 'approved' or 'unapproved'.
+     * @return string
      */
     public function getStatus()
     {
@@ -291,7 +311,11 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the status of the consumer key for each API Product:
+     * 'approved' or 'pending'.
+     * Each member of this array is itself an associative array, with keys
+     * of 'apiproduct' and 'status'.
+     * @return array
      */
     public function getCredentialApiProducts()
     {
@@ -311,7 +335,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Returns the value of the consumer key for the app.
+     * @return string
      */
     public function getConsumerKey()
     {
@@ -328,7 +353,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the value of the consumer secret for the app.
+     * @return string
      */
     public function getConsumerSecret()
     {
@@ -345,7 +371,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the scope(s) of the active credentials.
+     * @return array
      */
     public function getCredentialScopes()
     {
@@ -362,7 +389,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the status of the consumer key for the app: 'approved' or 'pending'.
+     * @return string
      */
     public function getCredentialStatus()
     {
@@ -415,7 +443,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the Unix time when the app was created.
+     * @return integer
      */
     public function getCreatedAt()
     {
@@ -432,7 +461,10 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Returns the username of the user who created the app.
+     * Note that this is usually not the developer who owns the app, but
+     * rather the user (usually an org-admin) which is logged into Edge.
+     * @return string
      */
     public function getCreatedBy()
     {
@@ -440,7 +472,7 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * Sets the username of the developer who created the app.
+     * Sets the username of the user who created the app.
      * @param string
      */
     public function setCreatedBy($who)
@@ -449,7 +481,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Returns the Unix time when the app was last modified.
+     * @return integer
      */
     public function getModifiedAt()
     {
@@ -466,7 +499,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the username of the user who last modified the app.
+     * @return string
      */
     public function getModifiedBy()
     {
@@ -483,7 +517,10 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Returns the value of an attribute used to extend the
+     * default credential's profile.
+     * @param string
+     * @return
      */
     public function getCredentialAttribute($attr_name)
     {
@@ -494,7 +531,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets a name/value pair used to extend the default credential's profile.
+     * @param string
+     * @param
      */
     public function setCredentialAttribute($name, $value)
     {
@@ -502,7 +541,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the array of name/value pairs used to extend the default
+     * credential's profile.
+     * @return string
      */
     public function getCredentialAttributes()
     {
@@ -510,7 +551,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Clears the array of name/value pairs used to extend the default
+     * credential's profile.
      */
     public function clearCredentialAttributes()
     {
@@ -518,7 +560,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the UUID of this app.
+     * @return string
      */
     public function getAppId()
     {
@@ -526,7 +569,7 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * Sets the GUID of this app.
+     * Sets the UUID of this app.
      * @param string
      */
     protected function setAppId($id)
@@ -534,9 +577,9 @@ abstract class AbstractApp extends Base implements AppInterface
         $this->appId = $id;
     }
 
-
     /**
-     * {@inheritDoc}
+     * Returns the name of the app family containing the app, if any.
+     * @return string
      */
     public function getAppFamily()
     {
@@ -544,7 +587,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the name of the app family containing the app.
+     * @param string
      */
     public function setAppFamily($family)
     {
@@ -552,7 +596,8 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the scope of the app.
+     * @return string
      */
     public function getScopes()
     {
@@ -568,9 +613,12 @@ abstract class AbstractApp extends Base implements AppInterface
         $this->scopes = $scopes;
     }
 
-
     /**
-     * {@inheritDOc}
+     * Returns true if the $credentialApiproducts, $consumerKey, $consumerSecret,
+     * $credentialScopes, and $credentialStatus properties are all set
+     * to non-null values.
+     * Otherwise, returns false.
+     * @return bool
      */
     public function hasCredentialInfo()
     {
@@ -589,22 +637,24 @@ abstract class AbstractApp extends Base implements AppInterface
         return false;
     }
 
+    /**
+     * Sets the cached version of API products associated with this app. This
+     * is useful when performing before-versus-after comparisons of API
+     * Products, which is necessary when ensuring that Consumer Key/Secrets
+     * remain unchanged.
+     * @param array $cache
+     */
     public function setApiProductCache(array $cache)
     {
         $this->cachedApiProducts = $cache;
     }
 
-    // TODO: write other getters/setters
-
     /**
      * Loads a DeveloperApp/CompanyApp object with the contents of a raw
      * Management API response.
      *
-     * This must be public because DeveloperApps should be able to invoke it
-     * on CompanyApps.
-     *
      * @static
-     * @param AppInterface $obj
+     * @param AbstractApp $obj
      * @param array $response
      */
     protected static function loadFromResponse(AbstractApp &$obj, array $response, $owner_identifier = null)
@@ -739,7 +789,11 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Populates this object with information retrieved from the Management API.
+     *
+     * If $name is not passed, $this->name is used.
+     *
+     * @param null|string $name
      */
     public function load($name = null)
     {
@@ -750,7 +804,13 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Checks to see if an app with the given name exists for this
+     * developer/company.
+     *
+     * If $name is not passed, $this->name is used.
+     *
+     * @param null|string $name
+     * @return bool
      */
     public function validate($name = null)
     {
@@ -809,7 +869,13 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Write this app's data to the Management API, preserving client key/secret.
+     *
+     * The function attempts to determine if this should be an insert or an
+     * update automagically. However, when $force_update is set to true, this
+     * determination is short-circuited and an update is assumed.
+     *
+     * @param bool $force_update
      */
     public function save($force_update = false)
     {
@@ -964,7 +1030,13 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Approves or revokes a client key for an app, and optionally also for all
+     * API Products associated with that app.
+     *
+     * @param mixed $status
+     *        May be true, false, 0, 1, 'approve' or 'revoke'.
+     * @param bool $also_set_apiproduct
+     * @throws \Apigee\Exceptions\ParameterException
      */
     public function setKeyStatus($status, $also_set_apiproduct = true)
     {
@@ -1001,7 +1073,11 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Deletes an app from the Management API.
+     *
+     * If $name is not passed, $this->name is used.
+     *
+     * @param null|string $name
      */
     public function delete($name = null)
     {
@@ -1013,7 +1089,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDOc}
+     * Returns names of all apps belonging to this developer/company.
+     *
+     * @return array
      */
     public function getList()
     {
@@ -1022,7 +1100,11 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Creates a key/secret pair for this app against its component APIProducts.
+     *
+     * @param string $consumer_key
+     * @param string $consumer_secret
+     * @throws \Apigee\Exceptions\ParameterException
      */
     public function createKey($consumer_key, $consumer_secret)
     {
@@ -1066,7 +1148,9 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a given key from an app.
+     *
+     * @param string $consumer_key
      */
     public function deleteKey($consumer_key)
     {
@@ -1083,7 +1167,7 @@ abstract class AbstractApp extends Base implements AppInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Restores this object to its pristine state.
      */
     public function blankValues()
     {
@@ -1193,11 +1277,11 @@ abstract class AbstractApp extends Base implements AppInterface
      * Dummy placeholder to allow subclasses to modify the App object as it is
      * finishing the load process.
      *
-     * @param AppInterface $obj
+     * @param AbstractApp $obj
      * @param array $response
      * @param string|null $owner_identifier
      */
-    public static function afterLoad(AppInterface &$obj, array $response, $owner_identifier)
+    public static function afterLoad(AbstractApp &$obj, array $response, $owner_identifier)
     {
         // Do Nothing
     }
@@ -1207,9 +1291,9 @@ abstract class AbstractApp extends Base implements AppInterface
      * app-save call right before it is invoked.
      *
      * @param array $payload
-     * @param AppInterface $obj
+     * @param AbstractApp $obj
      */
-    protected static function preSave(array &$payload, AppInterface $obj)
+    protected static function preSave(array &$payload, AbstractApp $obj)
     {
         // Do Nothing
     }
@@ -1227,6 +1311,12 @@ abstract class AbstractApp extends Base implements AppInterface
         // Do Nothing
     }
 
+    /**
+     * Allows subclasses to change or augment attribute name-value pairs before
+     * an app is saved.
+     *
+     * @param array $payload
+     */
     protected function alterAttributes(array &$payload)
     {
 
