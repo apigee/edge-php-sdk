@@ -1203,13 +1203,13 @@ abstract class AbstractApp extends Base
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($include_debug_data = true)
     {
         $output = array();
         foreach ($this->getAppProperties() as $property) {
             switch ($property) {
                 case 'debugData':
-                    $output[$property] = $this->getDebugData();
+                    $output[$property] = $incude_debug_data ? $this->getDebugData() : null;
                     break;
                 case 'overallStatus':
                     $output[$property] = $this->getOverallStatus();

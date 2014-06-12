@@ -179,4 +179,11 @@ interface DeveloperInterface
      * @return integer
      */
     public function getModifiedAt();
+
+    /**
+     * Converts this object's properties into an array for external use.
+     *
+     * @return array
+     */
+    public function toArray($include_debug_data = true);
 }

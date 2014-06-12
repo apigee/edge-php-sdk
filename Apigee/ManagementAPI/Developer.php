@@ -454,11 +454,9 @@ class Developer extends Base implements DeveloperInterface
 
 
     /**
-     * Converts this object's properties into an array for external use.
-     *
-     * @return array
+     * {@inheritDoc}
      */
-    public function toArray()
+    public function toArray($include_debug_data = true)
     {
         $properties = array_keys(get_object_vars($this));
         $excluded_properties = array_keys(get_class_vars(get_parent_class($this)));
@@ -468,7 +466,7 @@ class Developer extends Base implements DeveloperInterface
                 $output[$property] = $this->$property;
             }
         }
-        $output['debugData'] = $this->getDebugData();
+        $output['debugData'] = $include_debug_data ? $this->getDebugData() : null;
         return $output;
     }
 
