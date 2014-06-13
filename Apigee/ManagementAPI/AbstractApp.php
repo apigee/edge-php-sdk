@@ -1209,7 +1209,7 @@ abstract class AbstractApp extends Base
         foreach ($this->getAppProperties() as $property) {
             switch ($property) {
                 case 'debugData':
-                    $output[$property] = $incude_debug_data ? $this->getDebugData() : null;
+                    $output[$property] = $include_debug_data ? $this->getDebugData() : null;
                     break;
                 case 'overallStatus':
                     $output[$property] = $this->getOverallStatus();
