@@ -23,12 +23,14 @@ class CacheManager
 
     private $config;
 
+    private static $cache;
+
     /**
      * @internal
      */
     public function __construct()
     {
-        $GLOBALS['ApigeeMintCache'] = array();
+        self::$cache = array();
     }
 
     /**
@@ -62,7 +64,7 @@ class CacheManager
      */
     public function set($cid, $data)
     {
-        $GLOBALS['ApigeeMintCache'][$cid] = $data;
+        self::$cache[$cid] = $data;
     }
 
     /**
@@ -76,8 +78,8 @@ class CacheManager
      */
     public function get($cid, $data = null)
     {
-        if (array_key_exists($cid, $GLOBALS['ApigeeMintCache'])) {
-            $data = $GLOBALS['ApigeeMintCache'][$cid];
+        if (array_key_exists($cid, self::$cache)) {
+            $data = self::$cache[$cid];
         }
         return $data;
     }
@@ -85,15 +87,15 @@ class CacheManager
     public function clear($cid = null, $wildcard = false)
     {
         if (empty($cid) && $wildcard === true) {
-            $GLOBALS['ApigeeMintCache'] = array();
+            self::$cache = array();
         } elseif ($wildcard === true) {
-            foreach ($GLOBALS['ApigeeMintCache'] as $cache_id) {
+            foreach (self::$cache as $cache_id) {
                 if (strpos($cache_id, $cid) === 0) {
-                    unset($GLOBALS['ApigeeMintCache'][$cache_id]);
+                    unset(self::$cache[$cache_id]);
                 }
             }
         } else {
-            unset($GLOBALS['ApigeeMintCache'][$cid]);
+            unset(self::$cache[$cid]);
         }
     }
 }
