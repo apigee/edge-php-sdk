@@ -83,6 +83,12 @@ class OrgConfig
     public $variable_store;
 
     /**
+     * @var array
+     * These may be used for storing arbitrary metadata
+     */
+    public $tags;
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger', 'user_email',
@@ -118,6 +124,7 @@ class OrgConfig
         $this->endpoint = $endpoint;
         $this->user = $user;
         $this->pass = $pass;
+        $this->tags = array();
 
         $options += array(
             'logger' => new \Psr\Log\NullLogger(),
