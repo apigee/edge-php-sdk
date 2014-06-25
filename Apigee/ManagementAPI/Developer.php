@@ -310,7 +310,6 @@ class Developer extends Base implements DeveloperInterface
      */
     public function save($force_update = false, $old_email = null)
     {
-
         // See if we need to brute-force this.
         if ($force_update === null) {
             try {
@@ -366,7 +365,7 @@ class Developer extends Base implements DeveloperInterface
         // If status has changed, we must directly change it with a separate
         // POST call, because Edge will ignore a 'status' member in the
         // app-save payload.
-        if (isset($cached_status) && $cached_status != $this->previousStatus) {
+        if (isset($cached_status) && isset($this->previousStatus) && $cached_status != $this->previousStatus) {
             $this->post($old_email . '?action=' . $cached_status);
             $this->status = $cached_status;
         }
