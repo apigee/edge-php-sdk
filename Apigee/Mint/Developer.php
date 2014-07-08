@@ -308,9 +308,16 @@ class Developer extends Base\BaseObject
         $url = rawurlencode($id) . '/payment';
         $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
         if ($this->responseCode == 200) {
-            return new Payment($this->responseObj);
+            // Make sure the response did not fail, where success value is
+            // FALSE from WorldPay.
+            // TODO: These error responses need to be payment provider agnostic.
+            if (isset($this->responseObj['success']) && !$this->responseObj['success']) {
+                throw new ResponseException('Payment server response unsuccessful', $this->responseCode, $url, $options, $this->responseText);
+            }
+            $payment = new Payment($this->responseObj);
+            return $payment;
         }
-        throw new ResponseException($this->responseText, $this->responseCode);
+        throw new ResponseException('Payment server response failed', $this->responseCode, $url, $options, $this->responseText);
     }
 
     public function topUpPrepaidBalance($new_balance)
