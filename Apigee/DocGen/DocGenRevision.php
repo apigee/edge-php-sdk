@@ -59,4 +59,16 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
         return $this->responseObj;
     }
 
+    /**
+     * Makes a new revision for a given model
+     *
+     * @param $apiId
+     * @param $payload
+     */
+    public function newRevision($apiId, $payload)
+    {
+        $this->post(rawurlencode($apiId) . '/revisions', $payload, 'application/json; charset=utf-8');
+        return $this->responseObj;
+    }
+
 }

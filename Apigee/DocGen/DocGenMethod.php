@@ -41,4 +41,19 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
         return $this->responseText;
     }
 
+    /**
+     * Updates a method
+     *
+     * @param $apiId
+     * @param $revisionId
+     * @param $resourceId
+     * @param $methodId
+     * @return array|void
+     */
+    public function createMethod($apiId, $revisionId, $resourceId, $payload)
+    {
+      $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+      return $this->responseObj;
+    }
+
 }

@@ -36,4 +36,42 @@ class DocGenResource extends APIObject implements DocGenResourceInterface
         return $this->responseObj;
     }
 
+
+    /**
+     * Loads a single resource.
+     *
+     * {@inheritDoc}
+     */
+    public function loadResource($apiId, $revId, $resId)
+    {
+      // /{apiId}/revisions/{revisionId}/resources/{resourceId}
+      $this->get(rawurlencode($apiId) . '/revisions/' . $revId . '/resources/' . $resId);
+      return $this->responseObj;
+    }
+
+    /**
+     * Creates a resource for a given revision and model.
+     *
+     * @param $mid
+     * @param $rev
+     * @param $payload
+     * @return array
+     */
+    public function createResource($apiId, $revId, $payload) {
+      $this->post(rawurlencode($apiId) . '/revisions/' . $revId . '/resources', $payload, 'application/json; charset=utf-8');
+      return $this->responseObj;
+    }
+
+    /**
+     * Updates a resource for a given revision and model.
+     *
+     * @param $mid
+     * @param $rev
+     * @param $payload
+     * @return array
+     */
+    public function updateResource($apiId, $revId, $resId, $payload) {
+      $this->put(rawurlencode($apiId) . '/revisions/' . $revId . '/resources/' . $resId, $payload, 'application/json; charset=utf-8');
+      return $this->responseObj;
+    }
 }

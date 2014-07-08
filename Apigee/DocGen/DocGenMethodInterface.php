@@ -15,5 +15,6 @@ interface DocGenMethodInterface
      * @return array
      */
     public function updateMethod($apiId, $revisionId, $resourceId, $methodId, $payload);
+    public function createMethod($apiId, $revisionId, $resourceId, $payload);
 
 }

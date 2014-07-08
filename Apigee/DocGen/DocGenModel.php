@@ -121,15 +121,22 @@ class DocGenModel extends APIObject implements DocGenModelInterface
    *
    * {@inheritDoc}
    */
-  public function exportModel($apiId, $format)
+  public function exportModel($apiId, $format, $rev = NULL)
   {
-    if (empty($format)) {
-      $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes');
-      return  $this->responseText;
-    }
-    else {
-      $this->get(rawurlencode($apiId) . '/revisions/latest?format='.$format, 'text/xml');
-      return  $this->responseText;
+    if (is_null($rev)) {
+      if (empty($format)) {
+        $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes');
+        return  $this->responseText;
+      }
+    } else {
+      if (empty($format)) {
+        $this->get(rawurlencode($apiId) . '/revisions/' . $rev .'?expand=yes');
+        return  $this->responseText;
+      }
+      else {
+        $this->get(rawurlencode($apiId) . '/revisions/' . $rev .'?expand=yes&format='.$format, 'text/xml');
+        return  $this->responseText;
+      }
     }
   }
 
