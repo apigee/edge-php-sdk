@@ -41,11 +41,72 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      *
      * {@inheritDoc}
      */
-    public function oAuthEnable($apiId, $rev, $auth)
+    public function getRevision($apiId, $revId)
+    {
+      $this->get(rawurlencode($apiId) . '/revisions/' . $revId);
+      return $this->responseObj;
+    }
+
+    /**
+     * Gets all of the revisions for a given model.
+     *
+     * {@inheritDoc}
+     */
+    public function addAuth($apiId, $rev, $auth)
     {
       $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
       $this->post($path, $auth, 'application/json; charset=utf-8');
       return $this->responseObj;
+    }
+
+    /**
+     * Gets all of the revisions for a given model.
+     *
+     * {@inheritDoc}
+     */
+    public function updateAuth($apiId, $rev, $auth)
+    {
+      $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
+      $this->post($path, $auth, 'application/json; charset=utf-8');
+      return $this->responseObj;
+    }
+
+    /**
+     * Gets all of the revisions for a given model.
+     *
+     * {@inheritDoc}
+     */
+    public function getOAuthCredentials($apiId, $rev)
+    {
+      try {
+        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/oauth2webserverflow';
+        $this->get($path);
+        return array(
+          'code' => (int)$this->responseCode,
+          'data' => $this->responseObj
+        );
+      } catch (\Exception $e) {
+        return $this->responseCode;
+      }
+    }
+
+    /**
+     * Gets all of the revisions for a given model.
+     *
+     * {@inheritDoc}
+     */
+    public function getTokenCredentials($apiId, $rev)
+    {
+      try {
+        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/custom';
+        $this->get($path);
+        return array(
+          'code' => (int)$this->responseCode,
+          'data' => $this->responseObj
+        );
+      } catch (\Exception $e) {
+        return $this->responseCode;
+      }
     }
 
     /**
@@ -69,6 +130,18 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
     {
         $this->post(rawurlencode($apiId) . '/revisions', $payload, 'application/json; charset=utf-8');
         return $this->responseObj;
+    }
+
+    /**
+     * Makes a new revision for a given model
+     *
+     * @param $apiId
+     * @param $payload
+     */
+    public function updateRevision($apiId, $revId, $payload)
+    {
+      $this->put(rawurlencode($apiId) . '/revisions/' . $revId, $payload, 'application/json; charset=utf-8');
+      return $this->responseObj;
     }
 
 }
