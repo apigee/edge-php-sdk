@@ -105,7 +105,7 @@ class ResponseException extends \Exception
                 'url' => $this->requestObj->getUrl(),
                 'host' => $this->requestObj->getHost(),
                 'headers' => $this->requestObj->getRawHeaders(),
-                'query' => $this->requestObj->getQuery()
+                'query' => (string)$this->requestObj->getQuery()
             );
             if ($this->requestObj instanceof \Guzzle\Http\Message\EntityEnclosingRequestInterface) {
                 $request_body = $this->requestObj->getBody();
