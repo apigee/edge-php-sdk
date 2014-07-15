@@ -543,7 +543,7 @@ abstract class AbstractApp extends Base
     /**
      * Returns the array of name/value pairs used to extend the default
      * credential's profile.
-     * @return string
+     * @return array
      */
     public function getCredentialAttributes()
     {
@@ -1130,8 +1130,12 @@ abstract class AbstractApp extends Base
         }
         $new_credential['attributes'] = array();
         foreach ($this->getCredentialAttributes() as $name => $value) {
+            if ($name == 'create_date') {
+                continue;
+            }
             $new_credential['attributes'][] = array('name' => $name, 'value' => $value);
         }
+        $new_credential['attributes'][] = array('name' => 'create_date', 'value' => (string)time());
         $key = $new_credential['consumerKey'];
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($key);
 
