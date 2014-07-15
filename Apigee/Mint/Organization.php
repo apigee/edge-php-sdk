@@ -261,7 +261,7 @@ class Organization extends Base\BaseObject
      * @param $id Organization id, if not specified or null
      *   then this object's organization name is used
      *
-     * @return Text response from 4g request
+     * @return string Text response from 4g request
      */
     public function syncAllFrom4g($id = null)
     {

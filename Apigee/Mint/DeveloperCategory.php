@@ -37,7 +37,7 @@ class DeveloperCategory extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiate_new().
+     * Implements Base\BaseObject::instantiateNew().
      *
      * @return DeveloperCategory
      */
@@ -47,7 +47,7 @@ class DeveloperCategory extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::load_from_raw_data().
+     * Implements Base\BaseObject::loadFromRawData().
      *
      * @param array $data
      * @param bool $reset

@@ -76,7 +76,7 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::init_values().
+     * Implements Base\BaseObject::initValues().
      *
      * @return void
      */
@@ -89,7 +89,7 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiate_new().
+     * Implements Base\BaseObject::instantiateNew().
      *
      * @return DeveloperRatePlan
      */
@@ -99,7 +99,7 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::load_from_raw_data().
+     * Implements Base\BaseObject::loadFromRawData().
      *
      * @param array $data
      * @param bool $reset

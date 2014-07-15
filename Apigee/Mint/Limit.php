@@ -167,7 +167,7 @@ class Limit extends Base\BaseObject
     }
 
     /**
-     * Implements BaseObject::instantiate_new()
+     * Implements BaseObject::instantiateNew()
      *
      * @return \Apigee\Mint\Limit
      */
@@ -177,7 +177,7 @@ class Limit extends Base\BaseObject
     }
 
     /**
-     * Implements BaseObject::init_values()
+     * Implements BaseObject::initValues()
      */
     protected function initValues()
     {
@@ -202,7 +202,7 @@ class Limit extends Base\BaseObject
     }
 
     /**
-     * Implements BaseObject::load_from_raw_data($data, $reset = false)
+     * Implements BaseObject::loadFromRawData($data, $reset = false)
      *
      * @param array $data
      * @param bool $reset
