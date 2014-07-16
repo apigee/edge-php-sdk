@@ -130,7 +130,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface
       } else {
         switch($format) {
           case 'json':
-            $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes&format=' . $format);
+            $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes');
             break;
           default:
             $this->get(rawurlencode($apiId) . '/revisions/latest?expand=yes&format=' . $format, 'text/xml');
