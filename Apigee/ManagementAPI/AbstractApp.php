@@ -543,7 +543,7 @@ abstract class AbstractApp extends Base
     /**
      * Returns the array of name/value pairs used to extend the default
      * credential's profile.
-     * @return string
+     * @return array
      */
     public function getCredentialAttributes()
     {
@@ -1124,9 +1124,21 @@ abstract class AbstractApp extends Base
 
         $new_credential = $this->responseObj;
         // We now have the new key, sans apiproducts. Let us add them now.
-        $new_credential['apiProducts'] = $this->getCredentialApiProducts();
+        $new_credential['apiProducts'] = array();
+        foreach($this->getCredentialApiProducts() as $apiproduct) {
+            $new_credential['apiProducts'][] = $apiproduct['apiproduct'];
+        }
+        $new_credential['attributes'] = array();
+        foreach ($this->getCredentialAttributes() as $name => $value) {
+            if ($name == 'create_date') {
+                continue;
+            }
+            $new_credential['attributes'][] = array('name' => $name, 'value' => $value);
+        }
+        $new_credential['attributes'][] = array('name' => 'create_date', 'value' => (string)time());
         $key = $new_credential['consumerKey'];
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($key);
+
         $this->post($url, $new_credential);
         $credential = $this->responseObj;
 
@@ -1138,7 +1150,9 @@ abstract class AbstractApp extends Base
             $this->setConsumerSecret($credential['consumerSecret']);
             $this->setCredentialScopes($credential['scopes']);
             $this->setCredentialStatus($credential['status']);
-            $this->setCredentialIssueDate($credential['issuedAt']);
+            if (array_key_exists('issuedAt', $credential)) {
+                $this->setCredentialIssueDate($credential['issuedAt']);
+            }
             $this->setCredentialExpiryDate($credential['expiresAt']);
             $this->clearCredentialAttributes();
             foreach ($credential['attributes'] as $attribute) {

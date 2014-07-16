@@ -110,6 +110,20 @@ class DeveloperAppTest extends \Apigee\test\AbstractAPITest
         $this->assertEquals($key, $app->getConsumerKey(), 'Consumer Key changed when API Product changed.');
         // End update key
 
+        // Create key
+        $key = $this->randomString(16);
+        $secret = $this->randomString(16);
+        try {
+            $app->createKey($key, $secret);
+        } catch (\Exception $e) {
+            $this->fail('Cannot create key: ' . $e->getMessage());
+            return;
+        }
+        $app->blankValues();
+        $app->load('phpunit test');
+        $this->assertEquals($key, $app->getConsumerKey(), 'Consumer Key changed to our custom value.');
+        // End create key
+
         // Begin delete
         try {
             $app->delete();

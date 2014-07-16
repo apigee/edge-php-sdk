@@ -16,17 +16,17 @@ class BillingDocument extends Base\BaseObject
     private $organization;
 
     /**
-     * @var array \Apigee\Mint\Product
+     * @var array of \Apigee\Mint\Product
      */
     private $product;
 
     /**
-     * @var array \Apigee\Mint\Organization
+     * @var array of \Apigee\Mint\Organization
      */
     private $subOrg;
 
     /**
-     * @var array \Apigee\Mint\Developer
+     * @var array of \Apigee\Mint\Developer
      */
     private $developer;
 

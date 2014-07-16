@@ -60,8 +60,7 @@ class Provider extends Base\BaseObject
 
 
     /**
-     * Creates a blank instance of __CLASS__ with the same constructor parameters
-     * as the class that is doing the instantiation.
+     * Implements Base\BaseObject::instantiateNew().
      *
      * @return \Apigee\Mint\Base\BaseObject
      */
@@ -71,7 +70,7 @@ class Provider extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiatNew().
+     * Implements Base\BaseObject::loadFromRawData().
      *
      * Given an associative array from the raw JSON response, populates the
      * object with that data.
@@ -95,7 +94,7 @@ class Provider extends Base\BaseObject
     }
 
     /**
-     * Returns all member variables to their default values.
+     * Implements Base\BaseObject::initValues().
      *
      * @return mixed
      */

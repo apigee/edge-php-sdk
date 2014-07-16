@@ -138,7 +138,7 @@ class Developer extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiatNew().
+     * Implements Base\BaseObject::instantiateNew().
      *
      * @return Developer
      */
