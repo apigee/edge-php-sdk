@@ -6,6 +6,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Mint\DataStructures\SupportedCurrency;
+use Apigee\Mint\DataStructures\DeveloperBalanceTransaction;
 
 class DeveloperBalance extends Base\BaseObject
 {
@@ -110,6 +111,8 @@ class DeveloperBalance extends Base\BaseObject
      * @var string
      */
     private $cachedBaseUrl;
+  
+    private $transaction;
 
     /**
      * @param string $dev
@@ -154,14 +157,14 @@ class DeveloperBalance extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        $excluded_properties = array('supportedCurrency');
+        $excluded_properties = array('supportedCurrency','transaction');
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
                 continue;
             }
 
-            // form the setter method name to invoke setXxxx
-            $setter_method = 'set' . ucfirst($property);
+       	// Form the setter method name to invoke setter method.
+    	$setter_method = 'set' . ucfirst($property);
 
             if (method_exists($this, $setter_method)) {
                 $this->$setter_method($data[$property]);
@@ -171,6 +174,9 @@ class DeveloperBalance extends Base\BaseObject
         }
         if (isset($data['supportedCurrency'])) {
             $this->supportedCurrency = new SupportedCurrency($data['supportedCurrency']);
+        }
+        if (isset($data['transaction'])) {
+          $this->transaction = new DeveloperBalanceTransaction($data['transaction']);
         }
     }
 
@@ -191,6 +197,7 @@ class DeveloperBalance extends Base\BaseObject
         $this->isRecurring = false;
         $this->providerId = false;
         $this->chargePerUsage = false;
+    	$this->transaction = new DeveloperBalanceTransaction();
 
         // @TODO Remove
         $this->providerId = 'worldpay';
@@ -356,6 +363,19 @@ class DeveloperBalance extends Base\BaseObject
         return $this->chargePerUsage;
     }
 
+  /**
+   * @param mixed $transaction
+   */
+  public function setTransaction(\Apigee\Mint\DataStructures\DeveloperBalanceTransaction $transaction) {
+    $this->transaction = $transaction;
+  }
+
+  /**
+   * @return \Apigee\Mint\DataStructures\DeveloperBalanceTransaction
+   */
+  public function getTransaction() {
+    return $this->transaction;
+  }
     /**
      * @param $currencyId
      *
