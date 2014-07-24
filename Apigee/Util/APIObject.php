@@ -158,6 +158,22 @@ class APIObject
             DebugData::$data = null;
             $exception = new ResponseException($e->getError(), $e->getErrorNo(), $request->getUrl(), DebugData::$opts);
             $exception->requestObj = $request;
+          // Log Exception
+          $headers_array = $request->getHeaders();
+          unset($headers_array['Authorization']);
+          $header_string = "";
+          foreach ($headers_array as $value) {
+            $header_string .= $value->getName() . ': ' . $value . " ";
+          }
+          self::$logger->emergency('{code_status} ({code}) Request Details:[ {r_method} {r_resource} {r_scheme} {r_headers} ]',
+            array(
+              'code' => $e->getErrorNo(),
+              'code_status' => $e->getError(),
+              'r_method' => $request->getUrl(),
+              'r_resource' =>  $request->getRawHeaders(),
+              'r_scheme' => strtoupper(str_replace('https', 'http', $request->getScheme())) . $request->getProtocolVersion(),
+              'r_headers' => $header_string,
+            ));
             throw $exception;
         }
         $this->responseCode = $response->getStatusCode();

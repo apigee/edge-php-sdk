@@ -73,6 +73,10 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
                 $message = ob_get_clean();
             }
         }
+	
+        if(count($context) > 0) {
+          $message = $this->interpolate($message, $context);
+        }
 
         // Find the "type" (source) of the log request. Generally this is a class
         // or file name. It may be specified in $context, or it can be derived from
@@ -140,4 +144,19 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
         }
         return $level;
     }
+
+  /**
+   * Interpolates context values into the message placeholders.
+   */
+  private function interpolate($message, array $context = array())
+  {
+    // build a replacement array with braces around the context keys
+    $replace = array();
+    foreach ($context as $key => $val) {
+      $replace['{' . $key . '}'] = $val;
+    }
+
+    // interpolate replacement values into the message and return
+    return strtr($message, $replace);
+  }
 }
