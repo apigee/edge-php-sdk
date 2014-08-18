@@ -224,9 +224,11 @@ class Organization extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        foreach ($data['address'] as $address_data) {
+        if(isset($data['address'])) {
+          foreach ($data['address'] as $address_data) {
             $address = new DataStructures\Address($address_data);
             $this->addresses[] = $address;
+          }
         }
 
         if (isset($data['parent'])) {
