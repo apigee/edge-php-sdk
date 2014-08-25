@@ -32,27 +32,44 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
      * @param $revisionId
      * @param $resourceId
      * @param $methodId
-     * @return array|void
+     * @param $payload
+     * @return array|string
      */
     public function updateMethod($apiId, $revisionId, $resourceId, $methodId, $payload)
     {
-        $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
-        $this->put($path, $payload, 'application/json', array(), array());
-        return $this->responseText;
+      $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
+      $this->put($path, $payload, 'application/json', array(), array());
+      return $this->responseObj;
     }
 
     /**
-     * Updates a method
+     * Creates a method
+     *
+     * @param $apiId
+     * @param $revisionId
+     * @param $resourceId
+     * @param $payload
+     * @return array
+     */
+    public function createMethod($apiId, $revisionId, $resourceId, $payload)
+    {
+      $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+      return $this->responseObj;
+    }
+
+    /**
+     * Gets a method
      *
      * @param $apiId
      * @param $revisionId
      * @param $resourceId
      * @param $methodId
-     * @return array|void
+     * @return array
      */
-    public function createMethod($apiId, $revisionId, $resourceId, $payload)
+    public function getMethod($apiId, $revisionId, $resourceId, $methodId)
     {
-      $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+      $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
+      $this->get($path, 'application/json', array(), array());
       return $this->responseObj;
     }
 
