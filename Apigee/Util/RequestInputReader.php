@@ -9,7 +9,13 @@ class RequestInputReader
     {
         static $request;
         if (!isset($request)) {
-            $request['headers'] = getallheaders();
+            $headers = '';
+            foreach ($_SERVER as $name => $value) {
+              if (substr($name, 0, 5) == 'HTTP_') {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+              }
+            }
+            $request['headers'] = $headers;
             $handle = fopen('php://input', 'r');
             $buffer = null;
             $chunk_size = isset($request['headers']['Content-Length']) ? $request['headers']['Content-Length'] : 1025;
