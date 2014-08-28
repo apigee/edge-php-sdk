@@ -931,7 +931,6 @@ abstract class AbstractApp extends Base
             }
         } else {
             $payload['apiProducts'] = $this->getApiProducts();
-            $created_new_key = true;
         }
 
         // Let subclasses fiddle with the payload here
@@ -943,13 +942,20 @@ abstract class AbstractApp extends Base
         $credential_response = null;
 
         if (count($response['credentials']) > 0) {
-            $credential_attributes = array();
             $current_credential = null;
             // Find credential -- it should have the maximum issuedAt date.
             $max_issued_at = -1;
             $credential_index = null;
             foreach ($response['credentials'] as $i => $cred) {
                 $issued_at = (array_key_exists('issuedAt', $cred) ? intval($cred['issuedAt']) : 0);
+                if ($issued_at == 0 && array_key_exists('attributes', $cred)) {
+                    foreach ($cred['attributes'] as $attrib) {
+                        if ($attrib['name'] == 'create_date') {
+                            $issued_at = $attrib['value'] * 1000;
+                            break;
+                        }
+                    }
+                }
                 if ($max_issued_at == -1 || $issued_at > $max_issued_at) {
                     $max_issued_at = $issued_at;
                     $credential_index = $i;
