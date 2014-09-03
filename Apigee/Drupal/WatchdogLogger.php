@@ -150,18 +150,18 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
    */
   private function interpolate($message, array $context = array())
   {
-    // build a replacement array with braces around the context keys
-    $replace = array();
-    foreach ($context as $key => $val) {
-      if (!is_scalar($val)) {
-        if (is_object($val) && method_exists($val, '__toString')) {
-          $val = $val->__toString();
-        }
-        else {
-          $val = print_r($val, TRUE);
-        }
-      }
-      $replace['{' . $key . '}'] = $val;
+      // build a replacement array with braces around the context keys
+      $replace = array();
+      foreach ($context as $key => $val) {
+          if (!is_scalar($val)) {
+              if (is_object($val) && method_exists($val, '__toString')) {
+                  $val = $val->__toString();
+              }
+              else {
+                  $val = print_r($val, TRUE);
+              }
+          }
+          $replace['{' . $key . '}'] = $val;
     }
 
     // interpolate replacement values into the message and return
