@@ -1168,6 +1168,40 @@ abstract class AbstractApp extends Base
     }
 
     /**
+     * Deletes an attribute from an app.
+     *
+     * @param $attr_name
+     */
+    public function deleteAttribute($attr_name)
+    {
+        $url = rawurlencode($this->getName()) . '/attributes/' . rawurlencode($attr_name);
+        try {
+            $this->http_delete($url);
+        } catch (ResponseException $e) {
+        }
+        if (array_key_exists($attr_name, $this->attributes)) {
+            unset($this->attributes[$attr_name]);
+        }
+    }
+
+    /**
+     * Deletes an attribute from the active credential of an app.
+     *
+     * @param $attr_name
+     */
+    public function deleteCredentialAttribute($attr_name)
+    {
+        $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($this->getConsumerKey()) . '/attributes/' . rawurlencode($attr_name);
+        try {
+            $this->http_delete($url);
+        } catch (ResponseException $e) {
+        }
+        if (array_key_exists($attr_name, $this->credentialAttributes)) {
+            unset($this->credentialAttributes[$attr_name]);
+        }
+    }
+
+    /**
      * Deletes a given key from an app.
      *
      * @param string $consumer_key
