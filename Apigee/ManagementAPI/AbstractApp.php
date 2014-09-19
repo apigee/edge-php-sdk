@@ -1175,12 +1175,23 @@ abstract class AbstractApp extends Base
      */
     public function deleteAttribute($attr_name)
     {
+        $cached_logger = null;
+        // Make sure that errors are not logged by replacing the logger with a
+        // dummy that routes errors to /dev/null
+        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+            $cached_logger = self::$logger;
+            self::$logger = new \Psr\Log\NullLogger();
+        }
         $returnVal = false;
         $url = rawurlencode($this->getName()) . '/attributes/' . rawurlencode($attr_name);
         try {
             $this->http_delete($url);
             $returnVal = true;
         } catch (ResponseException $e) {
+        }
+        // Restore logger to its previous state
+        if (!empty($cached_logger)) {
+            self::$logger = $cached_logger;
         }
         if ($returnVal && array_key_exists($attr_name, $this->attributes)) {
             unset($this->attributes[$attr_name]);
@@ -1195,12 +1206,23 @@ abstract class AbstractApp extends Base
      */
     public function deleteCredentialAttribute($attr_name)
     {
+        $cached_logger = null;
+        // Make sure that errors are not logged by replacing the logger with a
+        // dummy that routes errors to /dev/null
+        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+            $cached_logger = self::$logger;
+            self::$logger = new \Psr\Log\NullLogger();
+        }
         $returnVal = false;
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($this->getConsumerKey()) . '/attributes/' . rawurlencode($attr_name);
         try {
             $this->http_delete($url);
             $returnVal = true;
         } catch (ResponseException $e) {
+        }
+        // Restore logger to its previous state
+        if (!empty($cached_logger)) {
+            self::$logger = $cached_logger;
         }
         if ($returnVal && array_key_exists($attr_name, $this->credentialAttributes)) {
             unset($this->credentialAttributes[$attr_name]);
