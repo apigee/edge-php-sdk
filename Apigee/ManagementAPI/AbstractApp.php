@@ -1168,37 +1168,44 @@ abstract class AbstractApp extends Base
     }
 
     /**
-     * Deletes an attribute from an app.
+     * Deletes an attribute from an app. Returns true if successful, else false.
      *
-     * @param $attr_name
+     * @param string $attr_name
+     * @return bool
      */
     public function deleteAttribute($attr_name)
     {
+        $returnVal = false;
         $url = rawurlencode($this->getName()) . '/attributes/' . rawurlencode($attr_name);
         try {
             $this->http_delete($url);
+            $returnVal = true;
         } catch (ResponseException $e) {
         }
-        if (array_key_exists($attr_name, $this->attributes)) {
+        if ($returnVal && array_key_exists($attr_name, $this->attributes)) {
             unset($this->attributes[$attr_name]);
         }
+        return $returnVal;
     }
 
     /**
-     * Deletes an attribute from the active credential of an app.
+     * Deletes an attribute from the active credential of an app. Returns true if successful, else false.
      *
      * @param $attr_name
      */
     public function deleteCredentialAttribute($attr_name)
     {
+        $returnVal = false;
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($this->getConsumerKey()) . '/attributes/' . rawurlencode($attr_name);
         try {
             $this->http_delete($url);
+            $returnVal = true;
         } catch (ResponseException $e) {
         }
-        if (array_key_exists($attr_name, $this->credentialAttributes)) {
+        if ($returnVal && array_key_exists($attr_name, $this->credentialAttributes)) {
             unset($this->credentialAttributes[$attr_name]);
         }
+        return $returnVal;
     }
 
     /**
