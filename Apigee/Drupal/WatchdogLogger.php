@@ -75,7 +75,7 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
         }
 	
         if(count($context) > 0) {
-          $message = $this->interpolate($message, $context);
+            $message = $this->interpolate($message, $context);
         }
 
         // Find the "type" (source) of the log request. Generally this is a class

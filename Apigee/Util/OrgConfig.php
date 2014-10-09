@@ -89,6 +89,12 @@ class OrgConfig
     public $tags;
 
     /**
+     * @var string
+     * Optionally holds content to be sent in the Referer HTTP header.
+     */
+    public $referer;
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger', 'user_email',
@@ -137,7 +143,8 @@ class OrgConfig
             ),
             'debug_callbacks' => array(),
             'user_agent' => null,
-            'variable_store' => null
+            'variable_store' => null,
+            'referer' => null
         );
 
         $this->logger = $options['logger'];
@@ -147,5 +154,6 @@ class OrgConfig
         $this->debug_callbacks = $options['debug_callbacks'];
         $this->user_agent = $options['user_agent'];
         $this->variable_store = $options['variable_store'];
+        $this->referer = $options['referer'];
     }
 }
