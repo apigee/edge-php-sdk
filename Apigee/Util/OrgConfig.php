@@ -95,6 +95,11 @@ class OrgConfig
     public $referer;
 
     /**
+     * @var string
+     * Describes the authorization type. Defaults to 'basic' but can also be 'digest' or 'ntlm'.
+     */
+    public $auth;
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger', 'user_email',
@@ -144,8 +149,12 @@ class OrgConfig
             'debug_callbacks' => array(),
             'user_agent' => null,
             'variable_store' => null,
-            'referer' => null
+            'referer' => null,
+            'auth' => 'basic'
         );
+        if (!in_array($options['auth'], array('basic', 'digest', 'ntlm'))) {
+            $options['auth'] = 'basic';
+        }
 
         $this->logger = $options['logger'];
         $this->user_mail = $options['user_mail'];
@@ -155,5 +164,6 @@ class OrgConfig
         $this->user_agent = $options['user_agent'];
         $this->variable_store = $options['variable_store'];
         $this->referer = $options['referer'];
+        $this->auth = $options['auth'];
     }
 }

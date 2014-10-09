@@ -98,6 +98,8 @@ class WatchdogLogger extends \Psr\Log\AbstractLogger
             $type = preg_replace('!\.(module|php)$!', '', $type);
         }
 
+        $message = preg_replace("!Authorization: Basic [A-Za-z0-9+\\=]+!", 'Authorization: Basic [**masked**]', $message);
+
         if ($use_watchdog_exception) {
             watchdog_exception($type, $message, null, array(), $severity);
         } else {

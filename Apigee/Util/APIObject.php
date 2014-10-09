@@ -144,7 +144,10 @@ class APIObject
         if (!empty($this->config->referer)) {
             $request->setHeader('Referer', $this->config->referer);
         }
-        $request->setAuth($this->config->user, $this->config->pass);
+        // Get snapshot of request headers before adding auth.
+        $request_headers = $request->getRawHeaders();
+        $request->setAuth($this->config->user, $this->config->pass, $this->config->auth);
+        $request_headers .= "\r\nAuthorization: " . ucfirst($this->config->auth) . ' [**masked**]';
         try {
             $response = $request->send();
         } catch (\Guzzle\Http\Exception\BadResponseException $e) {
@@ -156,7 +159,7 @@ class APIObject
             DebugData::$code_status = $e->getError();
             DebugData::$code_class = 0;
             DebugData::$exception = $e->getMessage();
-            DebugData::$opts = array('request_headers' => $request->getRawHeaders());
+            DebugData::$opts = array('request_headers' => $request_headers);
             DebugData::$data = null;
             $exception = new ResponseException($e->getError(), $e->getErrorNo(), $request->getUrl(), DebugData::$opts);
             $exception->requestObj = $request;
@@ -196,7 +199,7 @@ class APIObject
 
         DebugData::$raw = $this->responseText;
         DebugData::$opts = array(
-            'request_headers' => $request->getRawHeaders(),
+            'request_headers' => $request_headers,
             'response_headers' => $response->getRawHeaders()
         );
 
