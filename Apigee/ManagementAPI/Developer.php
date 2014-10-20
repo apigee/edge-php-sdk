@@ -93,6 +93,13 @@ class Developer extends Base implements DeveloperInterface
     protected $modifiedBy;
 
     /**
+     * @var array
+     * Read-only list of company identifiers of which this developer is a
+     * member.
+     */
+    protected $companies;
+
+    /**
      * @var string
      * Caches the previous status to see if it has changed
      */
@@ -239,6 +246,11 @@ class Developer extends Base implements DeveloperInterface
         return $this->modifiedAt;
     }
 
+    public function getCompanies()
+    {
+        return $this->companies;
+    }
+
     /**
      * Initializes default values of all member variables.
      *
@@ -288,6 +300,12 @@ class Developer extends Base implements DeveloperInterface
         $developer->createdBy = $response['createdBy'];
         $developer->modifiedAt = $response['lastModifiedAt'];
         $developer->modifiedBy = $response['lastModifiedBy'];
+        if (array_key_exists('companies', $response)) {
+          $developer->companies = $response['companies'];
+        }
+        else {
+          $developer->companies = array();
+        }
     }
 
     /**
@@ -449,6 +467,7 @@ class Developer extends Base implements DeveloperInterface
         $this->modifiedAt = null;
         $this->modifiedBy = null;
         $this->previousStatus = null;
+        $this->companies = array();
     }
 
 

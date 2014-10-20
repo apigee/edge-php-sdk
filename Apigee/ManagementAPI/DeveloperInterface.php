@@ -181,6 +181,13 @@ interface DeveloperInterface
     public function getModifiedAt();
 
     /**
+     * Returns a list of string identifiers for companies of which this
+     * developer is a member.
+     * @return array
+     */
+    public function getCompanies();
+
+    /**
      * Converts this object's properties into an array for external use.
      *
      * @return array
