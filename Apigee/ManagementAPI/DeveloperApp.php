@@ -38,7 +38,7 @@ class DeveloperApp extends AbstractApp
     }
 
     /**
-     * {@inheritDOc}
+     * {@inheritDoc}
      */
     public function getDeveloperMail()
     {
@@ -172,6 +172,7 @@ class DeveloperApp extends AbstractApp
         if ($reset_developer && $reset_eligible) {
             $this->setBaseUrl('/o/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($owner_id) . '/apps');
         }
+        return $obj;
     }
 
     private function getDeveloperMailById($id)
