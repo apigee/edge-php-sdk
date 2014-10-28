@@ -54,7 +54,7 @@ class SuborgProduct extends Base\BaseObject
      * @param string $save_method Allowed values: update
      * @throws \Apigee\Exceptions\ParameterException;
      */
-    public function save($save_method)
+    public function save($save_method = 'auto')
     {
         if ($save_method != 'update') {
             throw new ParameterException("Only update method is supported");
