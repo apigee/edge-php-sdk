@@ -201,10 +201,11 @@ class DeveloperApp extends AbstractApp
     {
         static $devs = array();
         if (!isset($devs[$id])) {
+            $cached_logger = self::$logger;
             $config = clone $this->config;
             // Suppress all logging.
-            $config->subscribers = array();
             $config->logger = new \Psr\Log\NullLogger();
+            $config->subscribers = array();
             $dev = new Developer($config);
             try {
                 $dev->load($id);
@@ -212,6 +213,7 @@ class DeveloperApp extends AbstractApp
             } catch (ResponseException $e) {
                 $devs[$id] = null;
             }
+            self::$logger = $cached_logger;
         }
         return $devs[$id];
     }
