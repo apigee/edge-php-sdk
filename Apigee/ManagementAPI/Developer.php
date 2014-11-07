@@ -301,10 +301,10 @@ class Developer extends Base implements DeveloperInterface
         $developer->modifiedAt = $response['lastModifiedAt'];
         $developer->modifiedBy = $response['lastModifiedBy'];
         if (array_key_exists('companies', $response)) {
-          $developer->companies = $response['companies'];
+            $developer->companies = $response['companies'];
         }
         else {
-          $developer->companies = array();
+            $developer->companies = array();
         }
     }
 
