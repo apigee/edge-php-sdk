@@ -37,9 +37,9 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
      */
     public function updateMethod($apiId, $revisionId, $resourceId, $methodId, $payload)
     {
-      $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
-      $this->put($path, $payload, 'application/json', array(), array());
-      return $this->responseObj;
+        $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
+        $this->put($path, $payload, 'application/json', array(), array());
+        return $this->responseObj;
     }
 
     /**
@@ -53,8 +53,8 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
      */
     public function createMethod($apiId, $revisionId, $resourceId, $payload)
     {
-      $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
-      return $this->responseObj;
+        $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+        return $this->responseObj;
     }
 
     /**
@@ -68,9 +68,9 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
      */
     public function getMethod($apiId, $revisionId, $resourceId, $methodId)
     {
-      $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
-      $this->get($path, 'application/json', array(), array());
-      return $this->responseObj;
+        $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
+        $this->get($path, 'application/json', array(), array());
+        return $this->responseObj;
     }
 
 }

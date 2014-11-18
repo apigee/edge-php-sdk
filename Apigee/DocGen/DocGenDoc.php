@@ -32,15 +32,15 @@ class DocGenDoc extends APIObject implements DocGenDocInterface
      */
     public function requestOperation($data, $mid, $name)
     {
-      if (empty($name)) {
-        $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'];
-        $this->get($path);
-      }
-      else {
-        $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'] . '/doc?template=' . $name;
-        $this->get($path, 'text/html');
-      }
-      return $this->responseText;
+        if (empty($name)) {
+            $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'];
+            $this->get($path);
+        }
+        else {
+            $path = $mid . '/revisions/' . $data['revision'] . '/resources/' . $data['resource'] . '/methods/' . $data['operation'] . '/doc?template=' . $name;
+            $this->get($path, 'text/html');
+        }
+        return $this->responseText;
     }
 
 }

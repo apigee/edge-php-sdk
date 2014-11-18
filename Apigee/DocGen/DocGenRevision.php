@@ -32,8 +32,8 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function getAllRevisions($apiId)
     {
-      $this->get(rawurlencode($apiId) . '/revisions');
-      return $this->responseObj;
+        $this->get(rawurlencode($apiId) . '/revisions');
+        return $this->responseObj;
     }
 
     /**
@@ -43,8 +43,8 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function getRevision($apiId, $revId)
     {
-      $this->get(rawurlencode($apiId) . '/revisions/' . $revId);
-      return $this->responseObj;
+        $this->get(rawurlencode($apiId) . '/revisions/' . $revId);
+        return $this->responseObj;
     }
 
     /**
@@ -54,9 +54,9 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function addAuth($apiId, $rev, $auth)
     {
-      $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
-      $this->post($path, $auth, 'application/json; charset=utf-8');
-      return $this->responseObj;
+        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
+        $this->post($path, $auth, 'application/json; charset=utf-8');
+        return $this->responseObj;
     }
 
     /**
@@ -66,9 +66,9 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function updateAuth($apiId, $rev, $auth)
     {
-      $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
-      $this->post($path, $auth, 'application/json; charset=utf-8');
-      return $this->responseObj;
+        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
+        $this->post($path, $auth, 'application/json; charset=utf-8');
+        return $this->responseObj;
     }
 
     /**
@@ -78,16 +78,16 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function getOAuthCredentials($apiId, $rev)
     {
-      try {
-        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/oauth2webserverflow';
-        $this->get($path);
-        return array(
-          'code' => (int)$this->responseCode,
-          'data' => $this->responseObj
-        );
-      } catch (\Exception $e) {
-        return $this->responseCode;
-      }
+        try {
+            $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/oauth2webserverflow';
+            $this->get($path);
+            return array(
+                'code' => (int)$this->responseCode,
+                'data' => $this->responseObj
+            );
+        } catch (\Exception $e) {
+            return $this->responseCode;
+        }
     }
 
     /**
@@ -97,16 +97,16 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function getTokenCredentials($apiId, $rev)
     {
-      try {
-        $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/custom';
-        $this->get($path);
-        return array(
-          'code' => (int)$this->responseCode,
-          'data' => $this->responseObj
-        );
-      } catch (\Exception $e) {
-        return $this->responseCode;
-      }
+        try {
+            $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes/custom';
+            $this->get($path);
+            return array(
+                'code' => (int)$this->responseCode,
+                'data' => $this->responseObj
+            );
+        } catch (\Exception $e) {
+            return $this->responseCode;
+        }
     }
 
     /**
@@ -140,8 +140,8 @@ class DocGenRevision extends APIObject implements DocGenRevisionInterface
      */
     public function updateRevision($apiId, $revId, $payload)
     {
-      $this->put(rawurlencode($apiId) . '/revisions/' . $revId, $payload, 'application/json; charset=utf-8');
-      return $this->responseObj;
+        $this->put(rawurlencode($apiId) . '/revisions/' . $revId, $payload, 'application/json; charset=utf-8');
+        return $this->responseObj;
     }
 
 }
