@@ -77,9 +77,15 @@ class Crypto
      * @static
      * @param string $scrambled
      * @return string
+     *
+     * @throws \Apigee\Exceptions\ParameterException
      */
     public static function decrypt($scrambled)
     {
+        // If $scrambled is not valid base64, abort.
+        if (!preg_match('!^[A-Za-z0-9+/]+={0,2}$!', $scrambled)) {
+            throw new \Apigee\Exceptions\ParameterException('Encrypted string is not properly formed.');
+        }
         $iv_base64 = substr($scrambled, 0, 22) . '==';
         $string_encrypted = substr($scrambled, 22);
 
@@ -88,6 +94,9 @@ class Crypto
             throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
         }
         $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
+        if (strpos($decrypted, "\n") === false) {
+            throw new \Apigee\Exceptions\ParameterException('Unable to decrypt encrypted string.');
+        }
         list ($length, $password) = explode("\n", $decrypted, 2);
         return substr($password, 0, intval($length));
     }
