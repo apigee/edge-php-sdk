@@ -383,7 +383,10 @@ class Developer extends Base implements DeveloperInterface
         // If status has changed, we must directly change it with a separate
         // POST call, because Edge will ignore a 'status' member in the
         // app-save payload.
-        if (isset($cached_status) && isset($this->previousStatus) && $cached_status != $this->previousStatus) {
+        // We must also do this when creating a developer ex nihilo in order
+        // to set initial status. Otherwise new developer will have default
+        // status, which is generally 'approved'.
+        if (isset($cached_status) && (!$force_update || (isset($this->previousStatus) && $cached_status != $this->previousStatus))) {
             $this->post($old_email . '?action=' . $cached_status);
             $this->status = $cached_status;
         }
