@@ -17,9 +17,14 @@ class KeyValueMap extends Base implements KeyValueMapInterface
      *
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(\Apigee\Util\OrgConfig $config, $environment = '*')
     {
-        $base_url = '/o/' . rawurlencode($config->orgName) . '/keyvaluemaps';
+        if ($environment == '*') {
+            $base_url = '/o/' . rawurlencode($config->orgName) . '/keyvaluemaps';
+        }
+        else {
+            $base_url = '/o/' . rawurlencode($config->orgName) . '/e/' . rawurlencode($environment) . '/keyvaluemaps';
+        }
         $this->init($config, $base_url);
     }
 
