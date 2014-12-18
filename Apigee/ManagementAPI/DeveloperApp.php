@@ -186,7 +186,8 @@ class DeveloperApp extends AbstractApp
      * Attempts to fetch the email address associated with a developerId.
      *
      * If no such developer exists, null is returned. We turn off all logging,
-     * both by the main logger and by any subscribers. It is therefore the
+     * both by the main logger and by any subscribers. (The exception is that
+     * non-404 ResponseExceptions are logged.) It is therefore the
      * responsibility of any client of this method to handle appropriate
      * logging.
      *
@@ -203,7 +204,7 @@ class DeveloperApp extends AbstractApp
         if (!isset($devs[$id])) {
             $cached_logger = self::$logger;
             $config = clone $this->config;
-            // Suppress all logging.
+            // Suppress (almost) all logging.
             $config->logger = new \Psr\Log\NullLogger();
             $config->subscribers = array();
             $dev = new Developer($config);
@@ -212,6 +213,10 @@ class DeveloperApp extends AbstractApp
                 $devs[$id] = $dev->getEmail();
             } catch (ResponseException $e) {
                 $devs[$id] = null;
+                // Log exceptions that are NOT 404s.
+                if ($e->getCode() != 404) {
+                    $cached_logger->warning('Attempting to load dev “' . $id . '” resulted in a response code of ' . $e->getCode() . '.');
+                }
             }
             self::$logger = $cached_logger;
         }
