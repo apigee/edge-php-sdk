@@ -99,12 +99,6 @@ class Developer extends Base implements DeveloperInterface
      */
     protected $companies;
 
-    /**
-     * @var string
-     * Caches the previous status to see if it has changed
-     */
-    protected $previousStatus;
-
     /* Accessors (getters/setters) */
     /**
      * {@inheritDoc}
@@ -207,7 +201,6 @@ class Developer extends Base implements DeveloperInterface
         if ($status != 'active' && $status != 'inactive') {
             throw new ParameterException('Status may be either active or inactive; value "' . $status . '" is invalid.');
         }
-        $this->previousStatus = $this->status;
         $this->status = $status;
     }
 
@@ -270,7 +263,6 @@ class Developer extends Base implements DeveloperInterface
         $this->get(rawurlencode($email));
         $developer = $this->responseObj;
         self::loadFromResponse($this, $developer);
-        $this->previousStatus = $this->status;
     }
 
     /**
@@ -386,11 +378,8 @@ class Developer extends Base implements DeveloperInterface
         // We must also do this when creating a developer ex nihilo in order
         // to set initial status. Otherwise new developer will have default
         // status, which is generally 'approved'.
-        if (isset($cached_status) && (!$force_update || (isset($this->previousStatus) && $cached_status != $this->previousStatus))) {
-            $this->post($old_email . '?action=' . $cached_status);
-            $this->status = $cached_status;
-        }
-        $this->previousStatus = $this->status;
+        $this->post($old_email . '?action=' . $cached_status);
+        $this->status = $cached_status;
     }
 
     /**
@@ -428,7 +417,6 @@ class Developer extends Base implements DeveloperInterface
         foreach ($developers['developer'] as $dev) {
             $developer = new Developer($this->config);
             self::loadFromResponse($developer, $dev);
-            $developer->previousStatus = $developer->status;
             $out[] = $developer;
         }
         return $out;
@@ -469,7 +457,6 @@ class Developer extends Base implements DeveloperInterface
         $this->createdBy = null;
         $this->modifiedAt = null;
         $this->modifiedBy = null;
-        $this->previousStatus = null;
         $this->companies = array();
     }
 
