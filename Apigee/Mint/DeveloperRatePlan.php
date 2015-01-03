@@ -1,14 +1,34 @@
 <?php
 namespace Apigee\Mint;
 
+use \DateTime;
+use \DateTimeZone;
 use Apigee\Mint\Exceptions\InsufficientFundsException;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Util\CacheFactory;
 
+
 class DeveloperRatePlan extends Base\BaseObject
 {
+    /**
+     * The plan is currently active for the developer and can be used for
+     * API calls.
+     */
+    const STATUS_ACTIVE = 'Active';
+
+    /**
+     * The plan will be active at a future date, and cannot be used until
+     * that date.
+     */
+    const STATUS_FUTURE = 'Future';
+
+    /**
+     * The plan haa been ended by the provider, or the developer has ended
+     * the plan.
+     */
+    const STATUS_ENDED = 'Ended';
 
     private $dev;
 
@@ -198,8 +218,8 @@ class DeveloperRatePlan extends Base\BaseObject
     {
         $obj = array(
             'developer' => array('id' => $this->dev),
-            'endDate' => $this->endDate,
-            'startDate' => $this->startDate,
+            'endDate' => $this->getEndDate()->format('Y-m-d H:i:s'),
+            'startDate' => $this->getStartDate()->format('Y-m-d H:i:s'),
             'id' => $this->id,
             'ratePlan' => null
         );
@@ -219,12 +239,22 @@ class DeveloperRatePlan extends Base\BaseObject
 
     public function getStartDate()
     {
-        return $this->startDate;
+        return $this->convertToDateTime($this->startDate);
     }
 
     public function getEndDate()
     {
-        return $this->endDate;
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+        $start_date = $this->getStartDate();
+        $end_date = $this->convertToDateTime($this->endDate);
+        // COMMERCE-558: If there is an end date and it has already started,
+        // and the plan was also ended today, shift end_date to start_date.
+        // TODO: Look into this, I believe this logic is wrong -cnovak
+        if(is_object($end_date) && $start_date <= $today && $end_date < $start_date ) {
+            $end_date = $start_date;
+        }
+        return $end_date;
     }
 
     public function getId()
@@ -239,14 +269,47 @@ class DeveloperRatePlan extends Base\BaseObject
 
     public function getRenewalDate()
     {
-        return $this->renewalDate;
+        return $this->convertToDateTime($this->renewalDate);
     }
 
     public function getNextRecurringFeeDate()
     {
-        return $this->nextRecurringFeeDate;
+        return $this->convertToDateTime($this->nextRecurringFeeDate);
     }
 
+    public function getStatus() {
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+
+        // If rate plan ended before today, the status is ended.
+        $plan_end_date = $this->getRatePlan()->getEndDate();
+        if (!empty($plan_end_date) && $plan_end_date < $today) {
+            return DeveloperRatePlan::STATUS_ENDED;
+        }
+        // If the developer ended the plan before today, the plan has ended.
+        $developer_plan_end_date = $this->getEndDate();
+        if (!empty($developer_plan_end_date) && $developer_plan_end_date < $today) {
+            return DeveloperRatePlan::STATUS_ENDED;
+        }
+
+        // If the start date is later than today, it is a future plan.
+        $developer_plan_start_date = $this->getStartDate();
+        if (!empty($developer_plan_start_date) && $developer_plan_start_date > $today) {
+            return DeveloperRatePlan::STATUS_FUTURE;
+        }
+
+        return DeveloperRatePlan::STATUS_ACTIVE;
+    }
+
+    public function isCancelable() {
+        $start_date = $this->getStartDate();
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+        if ($start_date > $today) {
+            return TRUE;
+        }
+        return FALSE;
+    }
 
     /* Setters */
 
@@ -283,5 +346,33 @@ class DeveloperRatePlan extends Base\BaseObject
     public function setDeveloperId($dev)
     {
         $this->dev = $dev;
+    }
+
+    /**
+     * Convert date string to DateTime object in proper timezone.
+     *
+     * To get the proper date, the date needs to be converted from
+     * UTC time to the org's timezone.
+     *
+     * @param $date_string string The date in the Edge API format of 'Y-m-d H:i:s'
+     * @return \DateTime The date as a DateTime object or NULL if not set.
+     */
+    private function convertToDateTime($date_string)
+    {
+        if(empty($date_string)) {
+            return NULL;
+        }
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $utc_timezone = new DateTimeZone('UTC');
+
+        // Get UTC datetime of date string.
+        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
+
+        if($date_utc == FALSE) {
+            return NULL;
+        }
+
+        // Convert to org's timezone.
+        return  $date_utc->setTimezone($org_timezone);
     }
 }
