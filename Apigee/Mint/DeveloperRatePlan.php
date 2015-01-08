@@ -1,7 +1,7 @@
 <?php
 namespace Apigee\Mint;
 
-use Apigee\Exceptions\NotImplementedException;
+use Apigee\Mint\Exceptions\InsufficientFundsException;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Exceptions\ParameterException;
@@ -177,10 +177,8 @@ class DeveloperRatePlan extends Base\BaseObject
             }
             $this->restoreBaseUrl();
         } catch (ResponseException $re) {
-            if (MintApiException::isMintExceptionCode($re)) {
-                throw new MintApiException($re);
-            }
-            throw $re;
+            $e = MintApiException::factory($re);
+            throw $e;
         }
     }
 

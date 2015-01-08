@@ -7,11 +7,9 @@ use Apigee\Exceptions\ResponseException;
 
 class MintApiException extends \Exception
 {
-    private $mintCode;
+    protected $mintCode;
 
-    private $mintMessage;
-
-    private $contexts;
+    protected $mintMessage;
 
     const DEVELOPER_LEGAL_COMPANY_NAME_NOT_SPECIFIED = 'mint.developerLegalCompanyNameNotSpecified';
     const DEVELOPER_ADDRESS_NOT_SPECIFIED = 'mint.developerAddressNotSpecified';
@@ -28,7 +26,6 @@ class MintApiException extends \Exception
     const DEVELOPER_HAS_FOLLOWING_OVERLAP_RATE_PLANS = 'mint.developerHasFollowingOverlapRatePlans';
     const DEVELOPER_ON_RATE_PLAN_WITH_START_DATE = 'mint.developerOnRatePlanWithStartDate';
     const PREPAID_DEVELOPER_HAS_NO_BALANCE = 'mint.prepaidDeveloperHasNoBalance';
-    const INSUFFICIENT_FUNDS = 'mint.insufficientFunds';
     const ONLY_FUTURE_DEVELOPER_RATE_PLAN_CAN_BE_DELETED = 'mint.onlyFutureDeveloperRatePlanCanBeDeleted';
     const PRODUCT_NOT_PART_OF_ANY_MONETIZATION_PACKAGE = 'mint.productNotPartOfAnyMonetizationPackage';
     const NO_CURRENT_PUBLISHABLE_ENTITY = 'mint.noCurrentPublishableEntity';
@@ -53,11 +50,29 @@ class MintApiException extends \Exception
         self::DEVELOPER_HAS_FOLLOWING_OVERLAP_RATE_PLANS => null,
         self::DEVELOPER_ON_RATE_PLAN_WITH_START_DATE => null,
         self::PREPAID_DEVELOPER_HAS_NO_BALANCE => null,
-        self::INSUFFICIENT_FUNDS => 'Developer doesnt have sufficient funds to proceed',
         self::ONLY_FUTURE_DEVELOPER_RATE_PLAN_CAN_BE_DELETED => 'Delete operation allowed only on future dated developer rate plan',
         self::PRODUCT_NOT_PART_OF_ANY_MONETIZATION_PACKAGE => null,
         self::NO_CURRENT_PUBLISHABLE_ENTITY => null,
     );
+
+    /**
+     * Factory method to create the proper exception class depending on the error.
+     *
+     * @param ResponseException $re The response exception from the Edge API
+     *
+     * @return MintApiException MintApiException or a subclass of MintApiException
+     */
+    public static function factory(ResponseException $re)
+    {
+        if (InsufficientFundsException::isInsufficientFundsException($re)) {
+            return new InsufficientFundsException($re);
+        }
+        elseif (MintApiException::isMintExceptionCode($re)) {
+            return new MintApiException($re);
+        } else {
+            throw new ParameterException('Not a registered mint exception.', $re);
+        }
+    }
 
     /**
      * Determines if this exception is relative to the Mint API REST call
@@ -82,9 +97,6 @@ class MintApiException extends \Exception
     public function __construct($e)
     {
         parent::__construct($e->getMessage(), $e->getCode(), $e);
-        if (!self::isMintExceptionCode($e)) {
-            throw new ParameterException('Not a registered mint exception.', $e);
-        }
         $error_info = json_decode($e->getResponse());
         $this->mintCode = $error_info->code;
         $this->mintMessage = $error_info->message;
