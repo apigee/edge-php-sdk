@@ -619,19 +619,39 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get Effective Start date
-     * @return string
+     * Get start date as a string in GMT
+     * @deprecated Use getStartDateTime() instead
+     * @return string The start date
      */
     public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Get start date as a DateTime object in org's timezone.
+     * @return \DateTime The start date
+     */
+    public function getStartDateTime()
     {
         return $this->convertToDateTime($this->startDate);
     }
 
     /**
-     * Get Effective End date
-     * @return string
+     * Get end date as a string in GMT
+     * @deprecated Use getEndDateTime() instead
+     * @return string The end date
      */
     public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Get end date as a DateTime object in org's timezone.
+     * @return \DateTime The end date or null if not set
+     */
+    public function getEndDateTime()
     {
         return $this->convertToDateTime($this->endDate);
     }
@@ -1124,7 +1144,7 @@ class RatePlan extends Base\BaseObject
 
     public function hasEnded()
     {
-        $plan_end_date = $this->getEndDate();
+        $plan_end_date = $this->getEndDateTime();
 
         // If plan end date is not set, return FALSE.
         if(is_null($plan_end_date)) {

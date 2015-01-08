@@ -218,8 +218,8 @@ class DeveloperRatePlan extends Base\BaseObject
     {
         $obj = array(
             'developer' => array('id' => $this->dev),
-            'endDate' => $this->getEndDate()->format('Y-m-d H:i:s'),
-            'startDate' => $this->getStartDate()->format('Y-m-d H:i:s'),
+            'endDate' => $this->getEndDateTime()->format('Y-m-d H:i:s'),
+            'startDate' => $this->getStartDateTime()->format('Y-m-d H:i:s'),
             'id' => $this->id,
             'ratePlan' => null
         );
@@ -237,12 +237,40 @@ class DeveloperRatePlan extends Base\BaseObject
         return $this->dev;
     }
 
+    /**
+     * Get start date as a string in GMT
+     * @deprecated Use getStartDateTime() instead
+     * @return string The start date
+     */
     public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Get start date as a DateTime object in org's timezone.
+     * @return \DateTime The start date
+     */
+    public function getStartDateTime()
     {
         return $this->convertToDateTime($this->startDate);
     }
 
+    /**
+     * Get end date as a string in GMT
+     * @deprecated Use getEndDateTime() instead
+     * @return string The end date
+     */
     public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Get end date as a DateTime object in org's timezone.
+     * @return \DateTime The end date or null if not set
+     */
+    public function getEndDateTime()
     {
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
         $today = new DateTime('today', $org_timezone);
@@ -267,12 +295,40 @@ class DeveloperRatePlan extends Base\BaseObject
         return $this->ratePlan;
     }
 
+    /**
+     * Get renewal date as a string in GMT
+     * @deprecated Use getRenewalDateTime() instead
+     * @return string The renewal date
+     */
     public function getRenewalDate()
+    {
+        return $this->renewalDate;
+    }
+
+    /**
+     * Get renewal date as a DateTime object in org's timezone.
+     * @return \DateTime The renewal date or null if not set
+     */
+    public function getRenewalDateTime()
     {
         return $this->convertToDateTime($this->renewalDate);
     }
 
+    /**
+     * Get renewal date as a string in GMT
+     * @deprecated Use getNextRecurringFeeDateTime() instead
+     * @return string The next recurring fee date
+     */
     public function getNextRecurringFeeDate()
+    {
+        return $this->nextRecurringFeeDate;
+    }
+
+    /**
+     * Get next recurring fee date date as a DateTime object in org's timezone.
+     * @return \DateTime the recurring fee date or null if not set
+     */
+    public function getNextRecurringFeeDateTime()
     {
         return $this->convertToDateTime($this->nextRecurringFeeDate);
     }
@@ -282,18 +338,18 @@ class DeveloperRatePlan extends Base\BaseObject
         $today = new DateTime('today', $org_timezone);
 
         // If rate plan ended before today, the status is ended.
-        $plan_end_date = $this->getRatePlan()->getEndDate();
+        $plan_end_date = $this->getRatePlan()->getEndDateTime();
         if (!empty($plan_end_date) && $plan_end_date < $today) {
             return DeveloperRatePlan::STATUS_ENDED;
         }
         // If the developer ended the plan before today, the plan has ended.
-        $developer_plan_end_date = $this->getEndDate();
+        $developer_plan_end_date = $this->getEndDateTime();
         if (!empty($developer_plan_end_date) && $developer_plan_end_date < $today) {
             return DeveloperRatePlan::STATUS_ENDED;
         }
 
         // If the start date is later than today, it is a future plan.
-        $developer_plan_start_date = $this->getStartDate();
+        $developer_plan_start_date = $this->getStartDateTime();
         if (!empty($developer_plan_start_date) && $developer_plan_start_date > $today) {
             return DeveloperRatePlan::STATUS_FUTURE;
         }
