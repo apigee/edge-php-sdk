@@ -1,6 +1,11 @@
 <?php
 namespace Apigee\Util;
 
+/**
+ * Class ErrorHandling
+ * @package Apigee\Util
+ * @deprecated
+ */
 class ErrorHandling
 {
 

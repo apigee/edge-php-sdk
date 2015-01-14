@@ -4,6 +4,10 @@ namespace Apigee\Drupal;
 
 /**
  * A wrapper class around Drupal's variable_get/variable_set.
+ *
+ * This class will be removed in a future release.
+ *
+ * @deprecated
  */
 class VariableCache implements \Apigee\Util\KeyValueStoreInterface
 {

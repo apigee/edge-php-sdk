@@ -1,10 +1,7 @@
 <?php
 
 /**
- * @file
- * Utility class for cryptological functionality.
- *
- * All methods are declared static.
+ * This file will be removed in a future version of Edge SDK.
  *
  * @author djohnson
  */
@@ -15,7 +12,8 @@ namespace Apigee\Util;
  *
  * All methods are declared static.
  *
- * @author djohnson
+ * @package Apigee\Util
+ * @deprecated
  */
 class Crypto
 {

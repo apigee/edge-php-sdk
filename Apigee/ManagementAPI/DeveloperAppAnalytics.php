@@ -17,11 +17,11 @@ use Apigee\Util\Cache;
  *
  * @author djohnson
  */
-class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterface
+class DeveloperAppAnalytics extends Base
 {
     /**
      * @var string
-     * The environment of the app, such as 'test'or 'prod'.
+     *    The environment of the app, such as 'test'or 'prod'.
      */
     protected $environment;
 
@@ -29,8 +29,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
      * Initializes the environment and sets up the OrgConfig object.
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param string The environment, such as 'test'or 'prod'.
-     * A value of the asterisk, &#42;, wildcard means all environments.
+     * @param string
+     *    The environment, such as 'test'or 'prod'. An asterisk wildcard means
+     *    all environments.
      */
     public function __construct(\Apigee\Util\OrgConfig $config, $env = '*')
     {
@@ -39,7 +40,12 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * Validates and sets the environment.
+     *
+     * @param string
+     *    The environment, such as 'test'or 'prod'. An asterisk wildcard means
+     *    all environments.
+     * @throws \Apigee\Exceptions\EnvironmentException
      */
     public function setEnvironment($env)
     {
@@ -55,7 +61,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the current environment.
+     *
+     * @return string
      */
     public function getEnvironment()
     {
@@ -63,7 +71,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a list of all environments for this org.
+     *
+     * @return array
      */
     public function getAllEnvironments()
     {
@@ -82,7 +92,45 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * After ensuring params are valid, fetches analytics data.
+     *
+     * @param string $developer_id
+     *    The ID of the developer who owns the app.
+     * @param string $app_name
+     *    The name of the app.
+     * @param string $metric
+     *    A value of 'message_count', 'message_count-first24hrs',
+     *    'message_count-second24hrs', 'error_count', 'error_count-first24hrs',
+     *    'user_count', 'user_count-first24hrs', 'total_response_time',
+     *    'max_response_time', 'min_response_time', or 'end_point_response_time'.
+     * @param string $time_start
+     *    Expressed as:
+     *    <ul>
+     *      <li>UNIX timestamp</li>
+     *      <li>mm/dd/YYYY hh:ii</li>
+     *      <li>Any other format that the underlying strtotime() PHP function
+     *        can parse. See {@link http://php.net/strtotime}.
+     *        It parses them out to a UNIX timestamp if possible, otherwise
+     *        it throws an exception.</li>
+     *    </ul>
+     * @param string $time_end
+     *    Expressed as:
+     *    <ul>
+     *      <li>UNIX timestamp</li>
+     *      <li>mm/dd/YYYY hh:ii</li>
+     *      <li>Any other format that the underlying strtotime() PHP function
+     *        can parse. See {@link http://php.net/strtotime}.
+     *        It parses them out to a UNIX timestamp if possible, otherwise
+     *        it throws an exception.</li>
+     *    </ul>
+     * @param string $time_unit
+     *    A value of 'second', 'minute', 'hour', 'day', 'week', 'month',
+     *    'quarter', or 'year'.
+     * @param string $sort_by
+     *    A comma separated list of the same values as $metric.
+     * @param string $sort_order
+     *    Either 'ASC' or 'DESC'.
+     * @return array
      */
     public function getByAppName($developer_id, $app_name, $metric, $time_start, $time_end, $time_unit, $sort_by, $sort_order = 'ASC')
     {
@@ -134,7 +182,9 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * Queries Edge to get a list of all environments configured for the org.
+     *
+     * @return array
      */
     public function queryEnvironments()
     {
@@ -146,44 +196,50 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * Lists all metrics valid for Developer Apps.
+     *
+     * @static
+     * @return array
      */
     public static function getMetrics()
     {
         return array(
-            'message_count' => t('Message Count'),
-            'message_count-first24hrs' => t('Message Count - First 24 Hours'),
-            'message_count-second24hrs' => t('Message Count - Second 24 Hours'),
-            'error_count' => t('Error Count'),
-            'error_count-first24hrs' => t('Error Count - First 24 Hours'),
-            'user_count' => t('User Count'),
-            'user_count-first24hrs' => t('User Count - First 24 Hours'),
-            'total_response_time' => t('Total Response Time'),
-            'max_response_time' => t('Maximum Response Time'),
-            'min_response_time' => t('Minimum Response Time'),
-            'end_point_response_time' => t('Endpoint Response Time')
+            'message_count' => 'Message Count',
+            'message_count-first24hrs' => 'Message Count - First 24 Hours',
+            'message_count-second24hrs' => 'Message Count - Second 24 Hours',
+            'error_count' => 'Error Count',
+            'error_count-first24hrs' => 'Error Count - First 24 Hours',
+            'user_count' => 'User Count',
+            'user_count-first24hrs' => 'User Count - First 24 Hours',
+            'total_response_time' => 'Total Response Time',
+            'max_response_time' => 'Maximum Response Time',
+            'min_response_time' => 'Minimum Response Time',
+            'end_point_response_time' => 'Endpoint Response Time'
         );
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a keyed array of allowable time units. Array keys are machine
+     * names and values are human-readable names.
+     *
+     * @return array
      */
     public static function getTimeUnits()
     {
         return array(
-            'second' => t('Second'),
-            'minute' => t('Minute'),
-            'hour' => t('Hour'),
-            'day' => t('Day'),
-            'week' => t('Week'),
-            'month' => t('Month'),
-            'quarter' => t('Quarter'),
-            'year' => t('Year'),
+            'second' => 'Second',
+            'minute' => 'Minute',
+            'hour' => 'Hour',
+            'day' => 'Day',
+            'week' => 'Week',
+            'month' => 'Month',
+            'quarter' => 'Quarter',
+            'year' => 'Year',
             // The rest of these are just silly.
             /*
-            'decade' => t('Decade'),
-            'century' => t('Century'),
-            'millennium' => t('Millenium')
+            'decade' => 'Decade',
+            'century' => 'Century',
+            'millennium' => 'Millenium'
             */
         );
     }
@@ -198,7 +254,8 @@ class DeveloperAppAnalytics extends Base implements DeveloperAppAnalyticsInterfa
      * @param string $time_end
      * @param string $time_unit
      * @param string $sort_by
-     * @param string $sort_order Either 'ASC' or 'DESC'.
+     * @param string $sort_order
+     *    Either 'ASC' or 'DESC'.
      * @return array
      * @throws ParameterException
      */

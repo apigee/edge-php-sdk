@@ -4,8 +4,6 @@ The Apigee Edge Management PHP SDK makes it easy to write PHP modules that use t
 ### PHP Requirements
 The Edge PHP SDK has the following prerequisites:
 - PHP 5.3 or greater. This is required due to the SDK’s use of PHP namespaces and closures, which were not available in 5.2 or earlier.
-- The `mcrypt` PHP extension.
-- For unit testing: the `xdebug` PHP extension.
 - JSON support built into PHP. This is enabled in almost all default builds of PHP. Certain Linux distributions (such as Debian) may ship with JSON-C instead of the standard JSON, due to licensing restrictions. This is also acceptable.
 - CURL support built into PHP.
 - (Recommended) Composer, https://getcomposer.org/, should be installed and in your path.
@@ -36,7 +34,6 @@ $ sh make-autoloader.sh > autoload.php
 This will generate `autoload.php`, which you should include in your code in order to autoload all the SDK classes.
 In order to use the Edge SDK without Composer, you will need the following packages and their dependencies:
 - guzzle/guzzle
-- symfony/yaml
 - psr/log
 
 </br>
@@ -50,7 +47,7 @@ $org = 'my-org';
 // API endpoint in Apigee’s cloud
 $endpoint = 'https://api.enterprise.apigee.com/v1';
 // Authenticated user for this organization.
-// This user should have the ‘orgadmin’ role on Edge.
+// This user should have the ‘devadmin’ (or ‘orgadmin’) role on Edge.
 $user = 'poweruser@example.com';
 // Password for the above user
 $pass = 'i<3apis';

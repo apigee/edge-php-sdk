@@ -6,6 +6,11 @@ use \ReflectionClass as ReflectionClass;
 use \stdClass as stdClass;
 use Apigee\Exceptions\ParameterException;
 
+/**
+ * Class Debugger
+ * @package Apigee\Util
+ * @deprecated
+ */
 class Debugger
 {
 

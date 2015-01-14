@@ -7,6 +7,10 @@ use Psr\Log\LogLevel;
 /**
  * A logger class that implements Psr\Log\LoggerInterface. This class writes
  * log data to Drupal's watchdog table.
+ *
+ * This class will be removed in a future release.
+ *
+ * @deprecated
  */
 class WatchdogLogger extends \Psr\Log\AbstractLogger
 {

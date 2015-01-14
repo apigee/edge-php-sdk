@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="generator" content="ApiGen 2.8.0" />
+	<meta charset="utf-8">
 
-	<title>Class Apigee\Util\CacheManager | API Reference for the Apigee Edge PHP Management SDK</title>
+	<title>Class Apigee\Util\CacheManager</title>
 
-	<script type="text/javascript" src="resources/combined.js?1630807870"></script>
-	<script type="text/javascript" src="elementlist.js?1451456074"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
 </head>
 
@@ -19,56 +16,82 @@
 
 
 		<div id="groups">
-			<h3>Namespaces</h3>
+				<h3>Namespaces</h3>
 			<ul>
-				<li class="active"><a href="namespace-Apigee.html">Apigee<span></span></a>
+				<li class="active">
+					<a href="namespace-Apigee.html">
+						Apigee<span></span>
+					</a>
+
 						<ul>
-				<li><a href="namespace-Apigee.DocGen.html">DocGen</a>
+				<li>
+					<a href="namespace-Apigee.DocGen.html">
+						DocGen					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.Drupal.html">Drupal</a>
+				<li>
+					<a href="namespace-Apigee.Exceptions.html">
+						Exceptions					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.Exceptions.html">Exceptions</a>
+				<li>
+					<a href="namespace-Apigee.ManagementAPI.html">
+						ManagementAPI					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.ManagementAPI.html">ManagementAPI</a>
-						</li>
-				<li><a href="namespace-Apigee.Mint.html">Mint<span></span></a>
+				<li>
+					<a href="namespace-Apigee.Mint.html">
+						Mint<span></span>
+					</a>
+
 						<ul>
-				<li><a href="namespace-Apigee.Mint.Base.html">Base</a>
+				<li>
+					<a href="namespace-Apigee.Mint.Base.html">
+						Base					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.Mint.DataStructures.html">DataStructures</a>
+				<li>
+					<a href="namespace-Apigee.Mint.DataStructures.html">
+						DataStructures					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.Mint.Exceptions.html">Exceptions</a>
+				<li>
+					<a href="namespace-Apigee.Mint.Exceptions.html">
+						Exceptions					</a>
+
 						</li>
-				<li><a href="namespace-Apigee.Mint.Types.html">Types</a>
+				<li>
+					<a href="namespace-Apigee.Mint.Types.html">
+						Types					</a>
+
 						</li>
 							</ul></li>
-				<li class="active"><a href="namespace-Apigee.Util.html">Util</a>
+				<li class="active">
+					<a href="namespace-Apigee.Util.html">
+						Util					</a>
+
 						</li>
 							</ul></li>
-				<li><a href="namespace-PHP.html">PHP</a>
-						</li>
 			</ul>
 		</div>
 
-		<hr />
+		<hr>
 
 
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Apigee.Util.APIObject.html">APIObject</a></li>
-				<li><a href="class-Apigee.Util.Cache.html">Cache</a></li>
 				<li><a href="class-Apigee.Util.CacheFactory.html">CacheFactory</a></li>
 				<li class="active"><a href="class-Apigee.Util.CacheManager.html">CacheManager</a></li>
-				<li><a href="class-Apigee.Util.Crypto.html">Crypto</a></li>
 				<li><a href="class-Apigee.Util.DebugData.html">DebugData</a></li>
-				<li><a href="class-Apigee.Util.Debugger.html">Debugger</a></li>
-				<li><a href="class-Apigee.Util.ErrorHandling.html">ErrorHandling</a></li>
-				<li><a href="class-Apigee.Util.Log.html" class="deprecated">Log</a></li>
 				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
-				<li><a href="class-Apigee.Util.RequestInputReader.html">RequestInputReader</a></li>
 			</ul>
 
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Apigee.Util.KeyValueStoreInterface.html">KeyValueStoreInterface</a></li>
+			</ul>
 
 
 
@@ -82,10 +105,9 @@
 <div id="right">
 <div id="rightInner">
 	<form id="search">
-		<input type="hidden" name="cx" value="" />
-		<input type="hidden" name="ie" value="UTF-8" />
-		<input type="text" name="q" class="text" />
-		<input type="submit" value="Search" />
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
 	</form>
 
 	<div id="navigation">
@@ -100,12 +122,6 @@
 <span>Class</span>			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-			</li>
-			<li>
-				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
-			</li>
 		</ul>
 		<ul>
 		</ul>
@@ -116,18 +132,17 @@
 
 
 	<div class="description">
-	
-<p>The base class for a cache manager. Cache classes must extend this class and
-provide a default constructor.</p>
+	<p>The base class for a cache manager.
+Cache classes must extend this class and provide a default constructor.</p>
 
-<p>A Factory class creates an instance of the class and then invokes the setup()
-method. The setup() method is passed an argument that is returned by the
-getConfig() method, which means setup logic can be performed outside of the
-constructor.</p>
+<p>A Factory class creates an instance of the class and
+then invokes the setup() method.
+The setup() method is passed an argument that is returned
+by the getConfig() method, which means setup logic can be performed
+outside of the constructor. </p>
 
-<p>Note that the setup() method should be invoked once and only once by the
-Factory class.</p>
-
+<p>Note that the setup() method should be
+invoked once and only once by the Factory class.</p>
 	</div>
 
 
@@ -141,22 +156,24 @@ Factory class.</p>
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br />
+		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br>
 		
 
 				<b>Author:</b>
-				isaias<br />
-		<b>Located at</b> <a href="source-class-Apigee.Util.CacheManager.html#5-99" title="Go to source code">Util/CacheManager.php</a><br />
+				isaias<br>
+			<b>Located at</b> <a href="source-class-Apigee.Util.CacheManager.html#5-101" title="Go to source code">Util/CacheManager.php</a>
+		<br>
 	</div>
 
 
 
-	<table class="summary" id="methods">
+	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
 	<tr data-order="setup" id="_setup">
 
 		<td class="attributes"><code>
 			 public 
+
 			
 			
 			</code>
@@ -164,28 +181,24 @@ Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setup">#</a>
-		<code><a href="source-class-Apigee.Util.CacheManager.html#34-44" title="Go to source code">setup</a>( <span>array <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#36-46" title="Go to source code">setup</a>( <span>array <var>$config</var></span> )</code>
 
 		<div class="description short">
-			
-<p>Since static methods are not overridden, the Factory class invokes this
-method right after the cache manager is created. That means setup logic can be
-executed here instead of in the constructor.</p>
-
+			<p>Since static methods are not overridden, the Factory class
+invokes this method right after the cache manager is created.
+That means setup logic can be executed here instead of in the constructor.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Since static methods are not overridden, the Factory class invokes this
-method right after the cache manager is created. That means setup logic can be
-executed here instead of in the constructor.</p>
-
+			<p>Since static methods are not overridden, the Factory class
+invokes this method right after the cache manager is created.
+That means setup logic can be executed here instead of in the constructor.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
-					<dd><code>array</code><br>$config</dd>
+					<dd></dd>
 				</dl></div>
 
 
@@ -199,6 +212,7 @@ executed here instead of in the constructor.</p>
 
 		<td class="attributes"><code>
 			 public 
+
 			array
 			
 			</code>
@@ -206,26 +220,22 @@ executed here instead of in the constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConfig">#</a>
-		<code><a href="source-class-Apigee.Util.CacheManager.html#46-55" title="Go to source code">getConfig</a>( )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#48-57" title="Go to source code">getConfig</a>( )</code>
 
 		<div class="description short">
-			
-<p>Returns a config array that is later passed to the setup() method by the
-Factory class.</p>
-
+			<p>Returns a config array that is later
+passed to the setup() method by the Factory class.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Returns a config array that is later passed to the setup() method by the
-Factory class.</p>
-
+			<p>Returns a config array that is later
+passed to the setup() method by the Factory class.</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array</code><br />
+					array
 				</div>
 
 
@@ -238,6 +248,7 @@ Factory class.</p>
 
 		<td class="attributes"><code>
 			 public 
+
 			
 			
 			</code>
@@ -245,26 +256,22 @@ Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-Apigee.Util.CacheManager.html#57-66" title="Go to source code">set</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#59-68" title="Go to source code">set</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var></span> )</code>
 
 		<div class="description short">
-			
-<p>Cache a value given $data and identifying it by $cid</p>
-
+			<p>Cache a value given $data and identifying it by $cid</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Cache a value given $data and identifying it by $cid</p>
-
+			<p>Cache a value given $data and identifying it by $cid</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$cid</var></dt>
-					<dd><code>string</code><br>$cid</dd>
+					<dd></dd>
 					<dt><var>$data</var></dt>
-					<dd><code>mixed</code><br>$data</dd>
+					<dd></dd>
 				</dl></div>
 
 
@@ -278,6 +285,7 @@ Factory class.</p>
 
 		<td class="attributes"><code>
 			 public 
+
 			
 			
 			</code>
@@ -285,30 +293,28 @@ Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Apigee.Util.CacheManager.html#68-83" title="Go to source code">get</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#70-85" title="Go to source code">get</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
-			
-<p>Attempt to get a value from cache given the ID specified by $cid. If no value
-is found in the cache, then value specified by $data is returned. If no $data is
-specified, return null.</p>
-
+			<p>Attempt to get a value from cache given the ID specified by $cid.
+If no value is found in the cache, then value specified by $data is
+returned.
+If no $data is specified, return null.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
-<p>Attempt to get a value from cache given the ID specified by $cid. If no value
-is found in the cache, then value specified by $data is returned. If no $data is
-specified, return null.</p>
-
+			<p>Attempt to get a value from cache given the ID specified by $cid.
+If no value is found in the cache, then value specified by $data is
+returned.
+If no $data is specified, return null.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$cid</var></dt>
-					<dd><code>string</code><br>$cid</dd>
+					<dd></dd>
 					<dt><var>$data</var></dt>
-					<dd><code>mixed</code><br>$data</dd>
+					<dd></dd>
 				</dl></div>
 
 
@@ -322,6 +328,7 @@ specified, return null.</p>
 
 		<td class="attributes"><code>
 			 public 
+
 			
 			
 			</code>
@@ -329,7 +336,7 @@ specified, return null.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clear">#</a>
-		<code><a href="source-class-Apigee.Util.CacheManager.html#85-98" title="Go to source code">clear</a>( <span>mixed <var>$cid</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$wildcard</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#87-100" title="Go to source code">clear</a>( <span> <var>$cid</var> = <span class="php-keyword1">null</span></span>, <span> <var>$wildcard</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -369,9 +376,11 @@ specified, return null.</p>
 </div>
 
 	<div id="footer">
-		API Reference for the Apigee Edge PHP Management SDK API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
 	</div>
 </div>
 </div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
 </body>
 </html>

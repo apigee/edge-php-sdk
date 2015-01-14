@@ -2,6 +2,11 @@
 
 namespace Apigee\Util;
 
+/**
+ * Class RequestInputReader
+ * @package Apigee\Util
+ * @deprecated
+ */
 class RequestInputReader
 {
 

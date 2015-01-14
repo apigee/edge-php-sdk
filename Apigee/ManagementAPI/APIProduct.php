@@ -12,7 +12,7 @@
  */
 namespace Apigee\ManagementAPI;
 
-use Apigee\Util\Cache as Cache;
+use Apigee\Exceptions\ParameterException;
 
 /**
  * Abstracts the API Product object in the Management API and allows clients
@@ -22,7 +22,7 @@ use Apigee\Util\Cache as Cache;
  *
  * @author djohnson
  */
-class APIProduct extends Base implements APIProductInterface
+class APIProduct extends Base
 {
 
     /**
@@ -138,7 +138,16 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Queries the Management API and populates self's properties from
+     * the result.
+     *
+     * If neither $name nor $result is passed, tries to load from $this->name.
+     * If $name is passed, loads from $name instead of $this->name.
+     * If $response is passed, bypasses API query and uses the given array
+     * instead.
+     *
+     * @param null|string $name
+     * @param null|array $response
      */
     public function load($name = null, $response = null)
     {
@@ -168,7 +177,8 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * POSTs self's properties to Management API. This handles both
+     * inserts and updates.
      */
     public function save()
     {
@@ -194,7 +204,11 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes an API Product.
+     *
+     * If $name is not passed, uses $this->name.
+     *
+     * @param null|string $name
      */
     public function delete($name = null)
     {
@@ -259,7 +273,14 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a detailed list of all products. This list may have been cached
+     * from a previous call.
+     *
+     * If $show_nonpublic is true, even API Products which are marked as hidden
+     * or internal are returned.
+     *
+     * @param bool $show_nonpublic
+     * @return array
      */
     public function listProducts($show_nonpublic = false)
     {
@@ -274,9 +295,10 @@ class APIProduct extends Base implements APIProductInterface
         return $products;
     }
 
-    /* Accessors (getters/setters) */
     /**
-     * {@inheritDoc}
+     * Returns the attributes array of name/value pairs.
+     *
+     * @return array
      */
     public function getAttributes()
     {
@@ -284,7 +306,7 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Clears the attributes array.
      */
     public function clearAttributes()
     {
@@ -292,7 +314,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a specific attribute value, or null if the attribute does not exist.
+     *
+     * @param $name
      */
     public function getAttribute($name)
     {
@@ -303,7 +327,10 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets an attribute value.
+     *
+     * @param $name
+     * @param $value
      */
     public function setAttribute($name, $value)
     {
@@ -315,7 +342,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the UNIX time when the API Product was created.
+     *
+     * @return integer
      */
     public function getCreatedAt()
     {
@@ -323,7 +352,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the username of the user who created the API Product.
+     *
+     * @return string
      */
     public function getCreatedBy()
     {
@@ -331,7 +362,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the UNIX time when the API Product was most recently updated.
+     *
+     * @return integer
      */
     public function getModifiedAt()
     {
@@ -339,7 +372,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the username of the user who most recently updated the API Product.
+     *
+     * @return string
      */
     public function getModifiedBy()
     {
@@ -347,7 +382,10 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the array of environment names in which this API Product is
+     * available.
+     *
+     * @return array
      */
     public function getEnvironments()
     {
@@ -355,7 +393,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the internal name of the API Product.
+     *
+     * @return string
      */
     public function getName()
     {
@@ -363,7 +403,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns an array of API proxy names used by this API Product.
+     *
+     * @return array
      */
     public function getProxies()
     {
@@ -371,7 +413,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the number of request messages permitted by this API product.
+     *
+     * @return integer|null
      */
     public function getQuotaLimit()
     {
@@ -384,7 +428,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the time interval over which the number of request messages is calculated.
+     *
+     * @return integer|null
      */
     public function getQuotaInterval()
     {
@@ -397,7 +443,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the time unit defined for the quota interval.
+     *
+     * @return string|null
      */
     public function getQuotaTimeUnit()
     {
@@ -409,16 +457,21 @@ class APIProduct extends Base implements APIProductInterface
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+  /**
+   * Returns the name to be displayed in the User Interface to developers
+   * registering for API access.
+   *
+   * @return string
+   */
     public function getDisplayName()
     {
         return $this->displayName;
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the string describing the API Product.
+     *
+     * @return string
      */
     public function getDescription()
     {
@@ -432,7 +485,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Adds an API resource to the API Product.
+     *
+     * @param $resource
      */
     public function addApiResource($resource)
     {
@@ -440,7 +495,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Removes an API resource from the API Product.
+     *
+     * @param string $resource
      */
     public function removeApiResource($resource)
     { // was delApiResource
@@ -453,7 +510,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {{@inheritDoc}}
+     * Returns the array of API resources.
+     *
+     * @return array
      */
     public function getApiResources()
     {
@@ -461,7 +520,9 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the API product approval type as 'manual' or 'auto'.
+     *
+     * @return string
      */
     public function getApprovalType()
     {
@@ -469,18 +530,17 @@ class APIProduct extends Base implements APIProductInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the API product approval type as 'manual' or 'auto'.
+     *
+     * @param string $type
      */
     public function setApprovalType($type)
     {
         if ($type != 'auto' && $type != 'manual') {
-            throw new \Exception('Invalid approval type ' . $type . '; allowed values are "auto" and "manual".'); // TODO: use custom exception class
+            throw new ParameterException('Invalid approval type ' . $type . '; allowed values are "auto" and "manual".');
         }
         $this->approvalType = $type;
     }
-
-    //TODO: populate getters/setters for other properties
-
 
     /**
      * Initializes this object to a blank state.
@@ -570,5 +630,4 @@ class APIProduct extends Base implements APIProductInterface
         }
         $this->loaded = true;
     }
-
 }

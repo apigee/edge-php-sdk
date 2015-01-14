@@ -55,7 +55,7 @@ class DeveloperApp extends AbstractApp
     public function __construct(\Apigee\Util\OrgConfig $config, $developer)
     {
         $this->ownerIdentifierField = 'developerId';
-        if ($developer instanceof DeveloperInterface) {
+        if ($developer instanceof Developer) {
             $this->developer = $developer->getEmail();
         } else {
             // $developer may be either an email or a developerId.

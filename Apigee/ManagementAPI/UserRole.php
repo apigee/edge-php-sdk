@@ -1,7 +1,7 @@
 <?php
 namespace Apigee\ManagementAPI;
 
-class UserRole extends Base implements UserRoleInterface
+class UserRole extends Base
 {
 
     /**
@@ -15,7 +15,11 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a list of all system users associated with a role.
+     *
+     * @param string $role
+     * @return array
+     *    An array of email addresses of the users.
      */
     public function getUsersByRole($role)
     {
@@ -27,7 +31,13 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Adds users to a role.
+     *
+     * @param array $users
+     *    An array of email addresses of the users.
+     * @param string $role
+     * @return bool
+     *    True if the users are added, and false if not.
      */
     public function addUsersToRole(array $users, $role)
     {
@@ -46,7 +56,13 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Removes users from a role.
+     *
+     * @param array $users
+     *    An array of email addresses of the users.
+     * @param string $role
+     * @return bool
+     *    True if the users are removed, and false if not.
      */
     public function removeUsersFromRole(array $users, $role)
     {
@@ -64,7 +80,13 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Replaces the users in a role with $users.
+     *
+     * @param array $users
+     *    An array of email addresses of the users.
+     * @param string $role
+     * @return bool
+     *    True if the set was successful, and false if not.
      */
     public function setRoleUsers(array $users, $role)
     {
@@ -92,7 +114,11 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a list of all system roles.
+     *
+     * @param bool|array $reset
+     *    Internal use only. Used to reset internal cache.
+     * @return array
      */
     public function listRoles($reset = false)
     {
@@ -113,7 +139,9 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Adds a role.
+     *
+     * @param string $role_name
      */
     public function addRole($role_name)
     {
@@ -128,7 +156,9 @@ class UserRole extends Base implements UserRoleInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a role.
+     *
+     * @param string $role_name
      */
     public function deleteRole($role_name)
     {

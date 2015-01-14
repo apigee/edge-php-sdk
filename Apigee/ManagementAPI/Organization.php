@@ -14,7 +14,7 @@ namespace Apigee\ManagementAPI;
  *
  * @author djohnson
  */
-class Organization extends Base implements OrganizationInterface
+class Organization extends Base
 {
 
     /**
@@ -73,7 +73,9 @@ class Organization extends Base implements OrganizationInterface
     protected $lastModifiedBy;
 
     /**
-     * {@inheritDoc}
+     * Returns the internal name of the organization.
+     *
+     * @return string
      */
     public function getName()
     {
@@ -81,7 +83,9 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the display name of the organization.
+     *
+     * @return string
      */
     public function getDisplayName()
     {
@@ -89,7 +93,10 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the environments available in the organization. By default 'test'
+     * and 'prod' environments are available.
+     *
+     * @return array
      */
     public function getEnvironments()
     {
@@ -97,7 +104,8 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a list of descriptors used internally by Apigee.
+     * @return array
      */
     public function getProperties()
     {
@@ -105,7 +113,10 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a named descriptor used internally by Apigee.
+     *
+     * @param string $name
+     * @return string|null
      */
     public function getProperty($name)
     {
@@ -113,7 +124,8 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the organization type. Currently 'trial' and 'paid' are valid.
+     * @return string
      */
     public function getType()
     {
@@ -121,7 +133,9 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the Unix time when the organization was created.
+     *
+     * @return int
      */
     public function getCreatedAt()
     {
@@ -129,7 +143,9 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the username of the Apigee user who created the organization.
+     *
+     * @return string
      */
     public function getCreatedBy()
     {
@@ -137,7 +153,9 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the Unix time when the organization was last modified.
+     *
+     * @return int
      */
     public function getLastModifiedAt()
     {
@@ -145,7 +163,9 @@ class Organization extends Base implements OrganizationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the username of the Apigee user who last modified the organization.
+     *
+     * @return string
      */
     public function getLastModifiedBy()
     {
