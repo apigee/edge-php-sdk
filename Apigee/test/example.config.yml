@@ -4,6 +4,6 @@ user: dc_devportal+myorg@apigee.com
 pass: I<3apis
 options:
   http_options:
-    connection_timeout: 4
+    connect_timeout: 4
     timeout: 4
 

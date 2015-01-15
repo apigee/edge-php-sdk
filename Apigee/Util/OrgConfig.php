@@ -137,13 +137,20 @@ class OrgConfig
         $this->pass = $pass;
         $this->tags = array();
 
+        // Work around old bug in client implementations, wherein a key of
+        // "connection_timeout" was passed instead of "connect_timeout".
+        if (array_key_exists('http_options', $options) && array_key_exists('connection_timeout', $options['http_options'])) {
+            $options['http_options']['connect_timeout'] = $options['http_options']['connection_timeout'];
+            unset($options['http_options']['connection_timeout']);
+        }
+
         $options += array(
             'logger' => new \Psr\Log\NullLogger(),
             'user_mail' => null,
             'subscribers' => array(),
             'http_options' => array(
                 'follow_location' => true,
-                'connection_timeout' => 10,
+                'connect_timeout' => 10,
                 'timeout' => 10,
             ),
             'debug_callbacks' => array(),
