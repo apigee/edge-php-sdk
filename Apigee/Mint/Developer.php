@@ -399,6 +399,50 @@ class Developer extends Base\BaseObject
                 throw $e;
             }
         }
+        return $products;
+    }
+
+    /**
+     * Get eligible Mint products for this developer.
+     *
+     * This function calls the /eligible-products API to find
+     * out what products this developer is able to purchase.  If the product
+     * is associated to one or more packages, then the product is not displayed
+     * unless the developer has purchased a plan that has that product
+     * associated to it.
+     *
+     * @return array of
+     * @throws \Apigee\Exceptions\ParameterException
+     * @throws \Apigee\Mint\Exceptions\MintApiException
+     * @throws \Exception
+     */
+    public function getEligibleProducts()
+    {
+
+        if (!empty($this->email)) {
+            $developer_id = $this->email;
+        } else {
+            throw new ParameterException("Developer id not specified");
+        }
+
+        $products = array();
+        try {
+            $url = rawurlencode($developer_id) . '/eligible-products';
+            $this->get($url);
+            $data = $this->responseObj;
+            foreach ($data['product'] as $product) {
+                unset($product['organization']);
+                $products[$product['name']] = $product;
+            }
+
+        } catch (\Exception $e) {
+            if (MintApiException::isMintExceptionCode($e)) {
+                throw new MintApiException($e);
+            } else {
+                throw $e;
+            }
+        }
+        return $products;
     }
 
     /*
