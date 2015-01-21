@@ -1,14 +1,34 @@
 <?php
 namespace Apigee\Mint;
 
-use Apigee\Exceptions\NotImplementedException;
+use \DateTime;
+use \DateTimeZone;
+use Apigee\Mint\Exceptions\InsufficientFundsException;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Util\CacheFactory;
 
+
 class DeveloperRatePlan extends Base\BaseObject
 {
+    /**
+     * The plan is currently active for the developer and can be used for
+     * API calls.
+     */
+    const STATUS_ACTIVE = 'Active';
+
+    /**
+     * The plan will be active at a future date, and cannot be used until
+     * that date.
+     */
+    const STATUS_FUTURE = 'Future';
+
+    /**
+     * The plan haa been ended by the provider, or the developer has ended
+     * the plan.
+     */
+    const STATUS_ENDED = 'Ended';
 
     private $dev;
 
@@ -177,10 +197,8 @@ class DeveloperRatePlan extends Base\BaseObject
             }
             $this->restoreBaseUrl();
         } catch (ResponseException $re) {
-            if (MintApiException::isMintExceptionCode($re)) {
-                throw new MintApiException($re);
-            }
-            throw $re;
+            $e = MintApiException::factory($re);
+            throw $e;
         }
     }
 
@@ -200,8 +218,8 @@ class DeveloperRatePlan extends Base\BaseObject
     {
         $obj = array(
             'developer' => array('id' => $this->dev),
-            'endDate' => $this->endDate,
-            'startDate' => $this->startDate,
+            'endDate' => $this->getEndDateTime()->format('Y-m-d H:i:s'),
+            'startDate' => $this->getStartDateTime()->format('Y-m-d H:i:s'),
             'id' => $this->id,
             'ratePlan' => null
         );
@@ -219,14 +237,52 @@ class DeveloperRatePlan extends Base\BaseObject
         return $this->dev;
     }
 
+    /**
+     * Get start date as a string in GMT
+     * @deprecated Use getStartDateTime() instead
+     * @return string The start date
+     */
     public function getStartDate()
     {
         return $this->startDate;
     }
 
+    /**
+     * Get start date as a DateTime object in org's timezone.
+     * @return \DateTime The start date
+     */
+    public function getStartDateTime()
+    {
+        return $this->convertToDateTime($this->startDate);
+    }
+
+    /**
+     * Get end date as a string in GMT
+     * @deprecated Use getEndDateTime() instead
+     * @return string The end date
+     */
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * Get end date as a DateTime object in org's timezone.
+     * @return \DateTime The end date or null if not set
+     */
+    public function getEndDateTime()
+    {
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+        $start_date = $this->getStartDate();
+        $end_date = $this->convertToDateTime($this->endDate);
+        // COMMERCE-558: If there is an end date and it has already started,
+        // and the plan was also ended today, shift end_date to start_date.
+        // TODO: Look into this, I believe this logic is wrong -cnovak
+        if(is_object($end_date) && $start_date <= $today && $end_date < $start_date ) {
+            $end_date = $start_date;
+        }
+        return $end_date;
     }
 
     public function getId()
@@ -239,16 +295,77 @@ class DeveloperRatePlan extends Base\BaseObject
         return $this->ratePlan;
     }
 
+    /**
+     * Get renewal date as a string in GMT
+     * @deprecated Use getRenewalDateTime() instead
+     * @return string The renewal date
+     */
     public function getRenewalDate()
     {
         return $this->renewalDate;
     }
 
+    /**
+     * Get renewal date as a DateTime object in org's timezone.
+     * @return \DateTime The renewal date or null if not set
+     */
+    public function getRenewalDateTime()
+    {
+        return $this->convertToDateTime($this->renewalDate);
+    }
+
+    /**
+     * Get renewal date as a string in GMT
+     * @deprecated Use getNextRecurringFeeDateTime() instead
+     * @return string The next recurring fee date
+     */
     public function getNextRecurringFeeDate()
     {
         return $this->nextRecurringFeeDate;
     }
 
+    /**
+     * Get next recurring fee date date as a DateTime object in org's timezone.
+     * @return \DateTime the recurring fee date or null if not set
+     */
+    public function getNextRecurringFeeDateTime()
+    {
+        return $this->convertToDateTime($this->nextRecurringFeeDate);
+    }
+
+    public function getStatus() {
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+
+        // If rate plan ended before today, the status is ended.
+        $plan_end_date = $this->getRatePlan()->getEndDateTime();
+        if (!empty($plan_end_date) && $plan_end_date < $today) {
+            return DeveloperRatePlan::STATUS_ENDED;
+        }
+        // If the developer ended the plan before today, the plan has ended.
+        $developer_plan_end_date = $this->getEndDateTime();
+        if (!empty($developer_plan_end_date) && $developer_plan_end_date < $today) {
+            return DeveloperRatePlan::STATUS_ENDED;
+        }
+
+        // If the start date is later than today, it is a future plan.
+        $developer_plan_start_date = $this->getStartDateTime();
+        if (!empty($developer_plan_start_date) && $developer_plan_start_date > $today) {
+            return DeveloperRatePlan::STATUS_FUTURE;
+        }
+
+        return DeveloperRatePlan::STATUS_ACTIVE;
+    }
+
+    public function isCancelable() {
+        $start_date = $this->getStartDate();
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+        if ($start_date > $today) {
+            return TRUE;
+        }
+        return FALSE;
+    }
 
     /* Setters */
 
@@ -285,5 +402,33 @@ class DeveloperRatePlan extends Base\BaseObject
     public function setDeveloperId($dev)
     {
         $this->dev = $dev;
+    }
+
+    /**
+     * Convert date string to DateTime object in proper timezone.
+     *
+     * To get the proper date, the date needs to be converted from
+     * UTC time to the org's timezone.
+     *
+     * @param $date_string string The date in the Edge API format of 'Y-m-d H:i:s'
+     * @return \DateTime The date as a DateTime object or NULL if not set.
+     */
+    private function convertToDateTime($date_string)
+    {
+        if(empty($date_string)) {
+            return NULL;
+        }
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $utc_timezone = new DateTimeZone('UTC');
+
+        // Get UTC datetime of date string.
+        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
+
+        if($date_utc == FALSE) {
+            return NULL;
+        }
+
+        // Convert to org's timezone.
+        return  $date_utc->setTimezone($org_timezone);
     }
 }

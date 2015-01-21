@@ -2,6 +2,9 @@
 
 namespace Apigee\Mint;
 
+use \DateTime;
+use \DateTimeZone;
+
 use Apigee\Util\CacheFactory;
 
 use Apigee\Exceptions\ParameterException;
@@ -616,8 +619,9 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get Effective Start date
-     * @return string
+     * Get start date as a string in GMT
+     * @deprecated Use getStartDateTime() instead
+     * @return string The start date
      */
     public function getStartDate()
     {
@@ -625,12 +629,31 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get Effective End date
-     * @return string
+     * Get start date as a DateTime object in org's timezone.
+     * @return \DateTime The start date
+     */
+    public function getStartDateTime()
+    {
+        return $this->convertToDateTime($this->startDate);
+    }
+
+    /**
+     * Get end date as a string in GMT
+     * @deprecated Use getEndDateTime() instead
+     * @return string The end date
      */
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * Get end date as a DateTime object in org's timezone.
+     * @return \DateTime The end date or null if not set
+     */
+    public function getEndDateTime()
+    {
+        return $this->convertToDateTime($this->endDate);
     }
 
     /**
@@ -1116,6 +1139,54 @@ class RatePlan extends Base\BaseObject
         }
         $this->initValues();
         $this->loadFromRawData($data);
+    }
+
+
+    public function hasEnded()
+    {
+        $plan_end_date = $this->getEndDateTime();
+
+        // If plan end date is not set, return FALSE.
+        if(is_null($plan_end_date)) {
+            return FALSE;
+        }
+
+        $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
+        $today = new DateTime('today', $org_timezone);
+
+        if($plan_end_date < $today) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Convert date string to DateTime object in proper timezone.
+     *
+     * To get the proper date, the date needs to be converted from
+     * UTC time to the org's timezone.
+     *
+     * @param $date_string The date in the Edge API format of 'Y-m-d H:i:s'
+     * @return \DateTime The date as a DateTime object or NULL if not set.
+     */
+    private function convertToDateTime($date_string)
+    {
+        if(empty($date_string)) {
+            return NULL;
+        }
+        $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
+        $utc_timezone = new DateTimeZone('UTC');
+
+        // Get UTC datetime of date string.
+        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
+
+        if($date_utc == FALSE) {
+            return NULL;
+        }
+
+        // Convert to org's timezone.
+        return  $date_utc->setTimezone($org_timezone);
     }
 }
 
