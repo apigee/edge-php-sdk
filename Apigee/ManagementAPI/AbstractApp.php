@@ -152,7 +152,36 @@ abstract class AbstractApp extends Base
      */
     protected $ownerIdentifierField;
 
+    /**
+     * @var int
+     * On app creation, the number of milliseconds until the newly-created key
+     * expires. This value is ignored for app updates.
+     */
+    protected $keyExpiry;
+
     /* Accessors (getters/setters) */
+
+    /**
+     * For apps that are being created, gets the number of seconds until the key
+     * will expire.
+     *
+     * @return float
+     */
+    public function getKeyExpiry()
+    {
+        return $this->keyExpiry / 1000;
+    }
+
+    /**
+     * For apps that are being created, sets the number of seconds until the key
+     * will expire.
+     *
+     * @param float $seconds
+     */
+    public function setKeyExpiry($seconds)
+    {
+        $this->keyExpiry = intval($seconds * 1000);
+    }
 
     /**
      * Returns the array of API products with which the app is associated.
@@ -910,7 +939,7 @@ abstract class AbstractApp extends Base
         if ($is_update) {
             $url = rawurlencode($this->getName());
         }
-        $created_new_key = false;
+
         // NOTE: On update, we send APIProduct information separately from other
         // fields, in order to preserve the client-key/secret pair. Updates to
         // APIProducts must be made separately against the app's client-key,
@@ -931,6 +960,10 @@ abstract class AbstractApp extends Base
             }
         } else {
             $payload['apiProducts'] = $this->getApiProducts();
+        }
+
+        if (!$is_update && $this->keyExpiry != -1) {
+            $payload['keyExpiresIn'] = $this->keyExpiry;
         }
 
         // Let subclasses fiddle with the payload here
@@ -1277,6 +1310,8 @@ abstract class AbstractApp extends Base
         $this->credentialAttributes = array();
         $this->credentialIssuedAt = 0;
         $this->credentialExpiresAt = -1;
+
+        $this->keyExpiry = -1;
 
         $this->cachedApiProducts = array();
     }
