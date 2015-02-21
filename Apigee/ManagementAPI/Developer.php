@@ -11,6 +11,7 @@ namespace Apigee\ManagementAPI;
 
 use \Apigee\Exceptions\ResponseException;
 use \Apigee\Exceptions\ParameterException;
+use \Apigee\Util\DebugData;
 
 /**
  * Abstracts the Developer object in the Management API and allows clients to
@@ -439,6 +440,10 @@ class Developer extends Base
             $this->post($url, $payload);
         }
         self::loadFromResponse($this, $this->responseObj);
+        // We must cache the DebugData from the developer-save call so that
+        // we can make it available to clients AFTER the "action" call below.
+        $responseData = DebugData::toArray();
+
         // If status has changed, we must directly change it with a separate
         // POST call, because Edge will ignore a 'status' member in the
         // app-save payload.
@@ -447,6 +452,9 @@ class Developer extends Base
         // status, which is generally 'approved'.
         $this->post($old_email . '?action=' . $cached_status);
         $this->status = $cached_status;
+
+        // Restore DebugData from cached response.
+        DebugData::fromArray($responseData);
     }
 
     /**
