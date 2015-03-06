@@ -5,6 +5,7 @@
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
  * @author bhasselbeck
+ * @deprecated
  */
 
 namespace Apigee\DocGen;
@@ -12,7 +13,7 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
-class DocGenMethod extends APIObject implements DocGenMethodInterface
+class DocGenMethod extends APIObject
 {
 
     /**

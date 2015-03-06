@@ -4,7 +4,7 @@ namespace Apigee\Util;
 /**
  * A class that represents infomration about an Edge organization.
  */
-class OrgConfig
+class OrgConfig implements \Serializable
 {
 
     /**
@@ -172,5 +172,18 @@ class OrgConfig
         $this->variable_store = $options['variable_store'];
         $this->referer = $options['referer'];
         $this->auth = $options['auth'];
+    }
+
+    // Functions implementing the Serializable interface
+    public function serialize() {
+        return serialize(get_object_vars($this));
+    }
+    public function unserialize($serialized) {
+        $object_vars = unserialize($serialized);
+        foreach ($object_vars as $key => $val) {
+            if (property_exists($this, $key)) {
+                $this->$key = $val;
+            }
+        }
     }
 }

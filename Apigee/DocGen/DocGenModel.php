@@ -5,6 +5,7 @@
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
  * @author bhasselbeck
+ * @deprecated
  */
 
 namespace Apigee\DocGen;
@@ -12,7 +13,8 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
-class DocGenModel extends APIObject implements DocGenModelInterface {
+class DocGenModel extends APIObject
+{
 
     /**
      * Constructs the proper values for the Apigee DocGen API.
@@ -26,7 +28,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Creates a model with the given payload.
      *
-     * {@inheritDoc}
+     * @param array $payload
+     * @return array
      */
     public function createModel($payload = array()) {
         $this->post(NULL, $payload);
@@ -36,7 +39,7 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Gets all of the models for the given org
      *
-     * {@inheritDoc}
+     * @return array
      */
     public function getModels() {
         $this->get();
@@ -46,7 +49,9 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Imports a WADL to a given model, returns JSON representation of the model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $xml
+     * @return array
      */
     public function importWADL($apiId, $xml) {
         $this->post(rawurlencode($apiId) . '/revisions?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
@@ -56,7 +61,9 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Gets information from a Swagger URL, and transforms it to a given model, returns JSON representation of the model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $url
+     * @return array
      */
     public function importSwagger($apiId, $url) {
         $this->post(rawurlencode($apiId) . '/revisions?action=import&format=swagger', 'URL=' . $url, 'text/plain; charset=utf-8');
@@ -66,7 +73,9 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Imports an Apigee Internal JSON to a given model, returns JSON representation of the model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $json
+     * @return array
      */
     public function importApigeeJSON($apiId, $json) {
         $this->post(rawurlencode($apiId) . '/revisions?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
@@ -76,7 +85,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Gets a specific Model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @return array
      */
     public function getModel($apiId) {
         $this->get(rawurlencode($apiId));
@@ -86,7 +96,10 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Updates a specific model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param array $update
+     * @param array $headers
+     * @return array
      */
     public function updateModel($apiId, $update, $headers) {
         if (is_null($headers)) {
@@ -99,7 +112,8 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Deletes a specific model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @return array
      */
     public function deleteModel($apiId) {
         $this->http_delete(rawurlencode($apiId));
@@ -109,7 +123,10 @@ class DocGenModel extends APIObject implements DocGenModelInterface {
     /**
      * Exports SmartDocs model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string|null $format
+     * @param int|null $rev
+     * @return array
      */
     public function exportModel($apiId, $format, $rev = NULL) {
         if (is_null($rev)) {
