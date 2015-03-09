@@ -80,7 +80,7 @@ class APIObject
      */
     private $cachedBaseUrl;
 
-  /**
+    /**
      * Initializes the OrgConfig for this class.
      *
      * @param \Apigee\Util\OrgConfig $config
@@ -174,7 +174,7 @@ class APIObject
                 'code' => $e->getErrorNo(),
                 'code_status' => $e->getError(),
                 'r_method' => $request->getUrl(),
-                'r_resource' =>  $request->getRawHeaders(),
+                'r_resource' => $request->getRawHeaders(),
                 'r_scheme' => strtoupper(str_replace('https', 'http', $request->getScheme())) . $request->getProtocolVersion(),
                 'r_headers' => $header_string,
             );
@@ -221,6 +221,7 @@ class APIObject
             } else {
                 $message = 'API returned HTTP code of ' . $this->responseCode . ' when fetching from ' . $uri;
             }
+
             DebugData::$exception = $message;
             $this->debugCallback(DebugData::toArray());
             self::$logger->error($this->responseText);
@@ -243,14 +244,15 @@ class APIObject
         $this->debugCallback(DebugData::toArray());
     }
 
-    private function debugCallback(array $debug) {
-      if (is_array($this->config->debug_callbacks)) {
-        foreach ($this->config->debug_callbacks as $callback) {
-          if (is_callable($callback)) {
-            call_user_func($callback, $debug);
-          }
+    private function debugCallback(array $debug)
+    {
+        if (is_array($this->config->debug_callbacks)) {
+            foreach ($this->config->debug_callbacks as $callback) {
+                if (is_callable($callback)) {
+                    call_user_func($callback, $debug);
+                }
+            }
         }
-      }
     }
 
     /**
@@ -453,7 +455,6 @@ class APIObject
             207 => 'Multi-Status', // WebDAV
             208 => 'Already Reported', // WebDAV
             226 => 'IM Used',
-
             300 => 'Multiple Choices',
             301 => 'Moved Permanently',
             302 => 'Found',
@@ -463,7 +464,6 @@ class APIObject
             306 => 'Switch Proxy',
             307 => 'Temporary Redirect',
             308 => 'Permanent Redirect',
-
             400 => 'Bad Request',
             401 => 'Unauthorized',
             402 => 'Payment Required',

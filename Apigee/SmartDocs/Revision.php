@@ -285,8 +285,7 @@ class Revision extends APIObject implements \Serializable
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'revision', 'createdAt', 'modifiedAt', 'createdBy', 'modifiedBy',
-                'config', 'apiId'
+                'id', 'revisionNumber', 'createdTime', 'modifiedTime', 'config', 'apiId'
             ));
         }
         $payload = array();

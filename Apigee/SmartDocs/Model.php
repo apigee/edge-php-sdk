@@ -268,6 +268,9 @@ class Model extends APIObject implements \Serializable
     public function save($update = FALSE)
     {
         $payload = $this->toArray();
+        if (empty($payload['customAttributes'])) {
+            unset($payload['customAttributes']);
+        }
         if ($update) {
             $url = $this->id;
             $method = 'put';
