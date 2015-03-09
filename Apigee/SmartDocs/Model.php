@@ -31,19 +31,21 @@ class Model extends APIObject implements \Serializable
     private $createdTime;
 
     /** @var int */
-    private $modifiedTime;
-
-    /** @var int */
     private $latestRevisionNumber;
-
-    /**
-     * @var int
-     *      Not internally set,
-     */
-    private $methodCount;
 
     /** @var array */
     private $tags;
+
+    /** @var array */
+    private $customAttributes;
+
+    /**
+     * @var array
+     *      This is a key-value store for any metadata that a client might
+     *      want to persist related to the model. It is neither transmitted to
+     *      Edge nor pulled from it.
+     */
+    private $metadata;
 
     /**
      * Returns the current Model to its pristine state.
@@ -54,11 +56,12 @@ class Model extends APIObject implements \Serializable
         $this->name = '';
         $this->displayName = '';
         $this->description = '';
+        $this->tags = array();
+        $this->customAttributes = array();
+
         $this->createdTime = 0;
         $this->modifiedTime = 0;
-        $this->latestRevisionNumber = -1;
-        $this->methodCount = -1;
-        $this->tags = array();
+        $this->latestRevisionNumber = -1; // Indicates that this value is unset.
     }
 
     /* Accessors (getters/setters) */
@@ -122,25 +125,41 @@ class Model extends APIObject implements \Serializable
         $this->latestRevisionNumber = intval($int);
     }
 
-    public function getMethodCount()
-    {
-        return $this->methodCount;
+    public function getTags() {
+        return $this->tags;
+    }
+    public function setTags(array $tags) {
+        $this->tags = $tags;
     }
 
-    public function setMethodCount($int)
-    {
-        $this->methodCount = intval($int);
+    public function getCustomAttribute($name) {
+        if (array_key_exists($name, $this->customAttributes)) {
+            return $this->customAttributes[$name];
+        }
+        return NULL;
+    }
+    public function setCustomAttribute($name, $value) {
+        $this->customAttributes[$name] = $value;
+    }
+    public function setCustomAttributes(array $attr) {
+        $this->customAttributes = $attr;
+    }
+    public function clearCustomAttribute($name) {
+        if (array_key_exists($name, $this->customAttributes)) {
+            unset($this->customAttributes[$name]);
+        }
     }
 
-    public function setTag($name, $value)
+
+    public function setMetadata($name, $value)
     {
-        $this->tags[$name] = $value;
+        $this->metadata[$name] = $value;
     }
 
-    public function getTag($name)
+    public function getMetadata($name)
     {
-        if (array_key_exists($name, $this->tags)) {
-            return $this->tags[$name];
+        if (array_key_exists($name, $this->metadata)) {
+            return $this->metadata[$name];
         }
         return NULL;
     }
@@ -154,7 +173,12 @@ class Model extends APIObject implements \Serializable
     public static function fromArray(Model $model, array $array)
     {
         foreach ($array as $key => $value) {
-            if (property_exists($model, $key)) {
+            if ($key == 'customAttributes') {
+                foreach ($value as $item) {
+                    $model->{$key}[$item['name']] = $item['value'];
+                }
+            }
+            elseif (property_exists($model, $key)) {
                 $model->$key = $value;
             }
         }
@@ -165,15 +189,26 @@ class Model extends APIObject implements \Serializable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($verbose = TRUE)
     {
-        $payload_keys = array(
-            'id', 'name', 'displayName', 'description', 'createdTime', 'methodCount',
-            'latestRevisionNumber', 'methodCount', 'tags', 'config'
-        );
+        $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
+        if ($verbose) {
+            $payload_keys = array_merge($payload_keys, array(
+              'id', 'latestRevisionNumber', 'tags', 'config', 'createdTime', 'modifiedTime',
+              'metadata'
+            ));
+        }
         $payload = array();
         foreach ($payload_keys as $key) {
-            $payload[$key] = $this->$key;
+            if ($key == 'customAttributes') {
+                $payload['customAttributes'] = array();
+                foreach ($this->customAttributes as $name => $value) {
+                    $payload['customAttributes'][] = array('name' => $name, 'value' => $value);
+                }
+            }
+            else {
+                $payload[$key] = $this->$key;
+            }
         }
         return $payload;
     }

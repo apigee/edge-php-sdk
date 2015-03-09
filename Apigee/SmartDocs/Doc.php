@@ -17,14 +17,14 @@ class Doc extends APIObject
      * Constructs the proper values for the Apigee DocGen API.
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param string $revisionUuid
-     * @param string $resourceId
+     * @param string $modelId
+     * @param string $revisionId
+     * @param string $resourceUuid
      * @param string $methodUuid
-     * @param string $modelName
      */
-    public function __construct(OrgConfig $config, $revisionId, $resourceUuid, $methodUuid, $modelName)
+    public function __construct(OrgConfig $config, $modelId, $revisionId, $resourceUuid, $methodUuid)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . $modelName . '/revisions/' . $revisionId . '/resources/' . $resourceUuid . '/methods/' . $methodUuid);
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . $modelId . '/revisions/' . $revisionId . '/resources/' . $resourceUuid . '/methods/' . $methodUuid);
     }
 
     /**

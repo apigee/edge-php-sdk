@@ -61,13 +61,13 @@ class Revision extends APIObject implements \Serializable
     protected $revisionNumber;
 
     /** @var int */
-    protected $createdAt;
+    protected $createdTime;
 
     /** @var int */
     protected $modifiedAt;
 
     /** @var string */
-    protected $createdBy;
+    protected $modifiedTime;
 
     /** @var string */
     protected $modifiedBy;
@@ -238,12 +238,12 @@ class Revision extends APIObject implements \Serializable
 
     public function getCreatedTime()
     {
-        return floor($this->createdAt / 1000);
+        return floor($this->createdTime / 1000);
     }
 
     public function getModifiedTime()
     {
-        return floor($this->modifiedAt / 1000);
+        return floor($this->modifiedTime / 1000);
     }
 
 
