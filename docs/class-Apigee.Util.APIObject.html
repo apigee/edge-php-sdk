@@ -25,11 +25,6 @@
 
 						<ul>
 				<li>
-					<a href="namespace-Apigee.DocGen.html">
-						DocGen					</a>
-
-						</li>
-				<li>
 					<a href="namespace-Apigee.Exceptions.html">
 						Exceptions					</a>
 
@@ -66,6 +61,11 @@
 
 						</li>
 							</ul></li>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.html">
+						SmartDocs					</a>
+
+						</li>
 				<li class="active">
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -140,14 +140,15 @@ invocation, which makes the actual HTTP calls.</p>
 
 	<div>
 		<h4>Direct known subclasses</h4>
-			<a href="class-Apigee.DocGen.DocGenDoc.html">Apigee\DocGen\DocGenDoc</a>, 
-			<a href="class-Apigee.DocGen.DocGenMethod.html">Apigee\DocGen\DocGenMethod</a>, 
-			<a href="class-Apigee.DocGen.DocGenModel.html">Apigee\DocGen\DocGenModel</a>, 
-			<a href="class-Apigee.DocGen.DocGenResource.html">Apigee\DocGen\DocGenResource</a>, 
-			<a href="class-Apigee.DocGen.DocGenRevision.html">Apigee\DocGen\DocGenRevision</a>, 
-			<a href="class-Apigee.DocGen.DocGenTemplate.html">Apigee\DocGen\DocGenTemplate</a>, 
 			<a href="class-Apigee.ManagementAPI.Base.html">Apigee\ManagementAPI\Base</a>, 
-			<a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a>
+			<a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a>, 
+			<a href="class-Apigee.SmartDocs.AuthScheme.html">Apigee\SmartDocs\AuthScheme</a>, 
+			<a href="class-Apigee.SmartDocs.Doc.html">Apigee\SmartDocs\Doc</a>, 
+			<a href="class-Apigee.SmartDocs.Method.html">Apigee\SmartDocs\Method</a>, 
+			<a href="class-Apigee.SmartDocs.Model.html">Apigee\SmartDocs\Model</a>, 
+			<a href="class-Apigee.SmartDocs.Resource.html">Apigee\SmartDocs\Resource</a>, 
+			<a href="class-Apigee.SmartDocs.Revision.html">Apigee\SmartDocs\Revision</a>, 
+			<a href="class-Apigee.SmartDocs.Template.html">Apigee\SmartDocs\Template</a>
 	</div>
 
 	<div>
@@ -365,7 +366,7 @@ instances of Base.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#256-273" title="Go to source code">get</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#258-275" title="Go to source code">get</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Performs an HTTP GET on a URI. The result can be read from
@@ -408,7 +409,7 @@ $this->response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_post">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#275-301" title="Go to source code">post</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>string <var>$accept_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#277-303" title="Go to source code">post</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>string <var>$accept_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Performs an HTTP POST on a URI. The result can be read from
@@ -455,7 +456,7 @@ $this->response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_http_delete">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#303-323" title="Go to source code">http_delete</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#305-325" title="Go to source code">http_delete</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Performs an HTTP DELETE on a URI. The result can be read from
@@ -501,7 +502,7 @@ from this one, which usually have a delete() method.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_put">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#325-347" title="Go to source code">put</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#327-349" title="Go to source code">put</a>( <span>string|null <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$payload</var> = <span class="php-quote">''</span></span>, <span>string <var>$content_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Performs an HTTP PUT on a URI. The result can be read from
@@ -546,7 +547,7 @@ $this->response* variables.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_head">#</a>
-		<code><a href="source-class-Apigee.Util.APIObject.html#349-367" title="Go to source code">head</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.APIObject.html#351-369" title="Go to source code">head</a>( <span>string <var>$uri</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$accept_mime_type</var> = <span class="php-quote">'application/json; charset=utf-8'</span></span>, <span>array <var>$custom_headers</var> = <span class="php-keyword1">array</span>()</span>, <span> <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Performs an HTTP HEAD on a URI. $this->responseText and $this->responseObj

@@ -26,11 +26,6 @@
 
 						<ul>
 				<li>
-					<a href="namespace-Apigee.DocGen.html">
-						DocGen					</a>
-
-						</li>
-				<li>
 					<a href="namespace-Apigee.Exceptions.html">
 						Exceptions					</a>
 
@@ -67,6 +62,11 @@
 
 						</li>
 							</ul></li>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.html">
+						SmartDocs					</a>
+
+						</li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -134,7 +134,7 @@
 </span><span id="4" class="l"><a href="#4">  4: </a><span class="php-comment">/**
 </span></span><span id="5" class="l"><a href="#5">  5: </a><span class="php-comment"> * A class that represents infomration about an Edge organization.
 </span></span><span id="6" class="l"><a href="#6">  6: </a><span class="php-comment"> */</span>
-</span><span id="7" class="l"><a href="#7">  7: </a><span class="php-keyword1">class</span> OrgConfig
+</span><span id="7" class="l"><a href="#7">  7: </a><span class="php-keyword1">class</span> OrgConfig <span class="php-keyword1">implements</span> \Serializable
 </span><span id="8" class="l"><a href="#8">  8: </a>{
 </span><span id="9" class="l"><a href="#9">  9: </a>
 </span><span id="10" class="l"><a href="#10"> 10: </a>    <span class="php-comment">/**
@@ -267,37 +267,57 @@
 </span><span id="137" class="l"><a href="#137">137: </a>        <span class="php-var">$this</span>-&gt;pass = <span class="php-var">$pass</span>;
 </span><span id="138" class="l"><a href="#138">138: </a>        <span class="php-var">$this</span>-&gt;tags = <span class="php-keyword1">array</span>();
 </span><span id="139" class="l"><a href="#139">139: </a>
-</span><span id="140" class="l"><a href="#140">140: </a>        <span class="php-var">$options</span> += <span class="php-keyword1">array</span>(
-</span><span id="141" class="l"><a href="#141">141: </a>            <span class="php-quote">'logger'</span> =&gt; <span class="php-keyword1">new</span> \Psr\<span class="php-keyword2">Log</span>\NullLogger(),
-</span><span id="142" class="l"><a href="#142">142: </a>            <span class="php-quote">'user_mail'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="143" class="l"><a href="#143">143: </a>            <span class="php-quote">'subscribers'</span> =&gt; <span class="php-keyword1">array</span>(),
-</span><span id="144" class="l"><a href="#144">144: </a>            <span class="php-quote">'http_options'</span> =&gt; <span class="php-keyword1">array</span>(
-</span><span id="145" class="l"><a href="#145">145: </a>                <span class="php-quote">'follow_location'</span> =&gt; <span class="php-keyword1">true</span>,
-</span><span id="146" class="l"><a href="#146">146: </a>                <span class="php-quote">'connection_timeout'</span> =&gt; <span class="php-num">10</span>,
-</span><span id="147" class="l"><a href="#147">147: </a>                <span class="php-quote">'timeout'</span> =&gt; <span class="php-num">10</span>,
-</span><span id="148" class="l"><a href="#148">148: </a>            ),
-</span><span id="149" class="l"><a href="#149">149: </a>            <span class="php-quote">'debug_callbacks'</span> =&gt; <span class="php-keyword1">array</span>(),
-</span><span id="150" class="l"><a href="#150">150: </a>            <span class="php-quote">'user_agent'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="151" class="l"><a href="#151">151: </a>            <span class="php-quote">'variable_store'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="152" class="l"><a href="#152">152: </a>            <span class="php-quote">'referer'</span> =&gt; <span class="php-keyword1">null</span>,
-</span><span id="153" class="l"><a href="#153">153: </a>            <span class="php-quote">'auth'</span> =&gt; <span class="php-quote">'basic'</span>
-</span><span id="154" class="l"><a href="#154">154: </a>        );
-</span><span id="155" class="l"><a href="#155">155: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$options</span>[<span class="php-quote">'auth'</span>], <span class="php-keyword1">array</span>(<span class="php-quote">'basic'</span>, <span class="php-quote">'digest'</span>, <span class="php-quote">'ntlm'</span>))) {
-</span><span id="156" class="l"><a href="#156">156: </a>            <span class="php-var">$options</span>[<span class="php-quote">'auth'</span>] = <span class="php-quote">'basic'</span>;
-</span><span id="157" class="l"><a href="#157">157: </a>        }
-</span><span id="158" class="l"><a href="#158">158: </a>
-</span><span id="159" class="l"><a href="#159">159: </a>        <span class="php-var">$this</span>-&gt;logger = <span class="php-var">$options</span>[<span class="php-quote">'logger'</span>];
-</span><span id="160" class="l"><a href="#160">160: </a>        <span class="php-var">$this</span>-&gt;user_mail = <span class="php-var">$options</span>[<span class="php-quote">'user_mail'</span>];
-</span><span id="161" class="l"><a href="#161">161: </a>        <span class="php-var">$this</span>-&gt;subscribers = <span class="php-var">$options</span>[<span class="php-quote">'subscribers'</span>];
-</span><span id="162" class="l"><a href="#162">162: </a>        <span class="php-var">$this</span>-&gt;http_options = <span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>];
-</span><span id="163" class="l"><a href="#163">163: </a>        <span class="php-var">$this</span>-&gt;debug_callbacks = <span class="php-var">$options</span>[<span class="php-quote">'debug_callbacks'</span>];
-</span><span id="164" class="l"><a href="#164">164: </a>        <span class="php-var">$this</span>-&gt;user_agent = <span class="php-var">$options</span>[<span class="php-quote">'user_agent'</span>];
-</span><span id="165" class="l"><a href="#165">165: </a>        <span class="php-var">$this</span>-&gt;variable_store = <span class="php-var">$options</span>[<span class="php-quote">'variable_store'</span>];
-</span><span id="166" class="l"><a href="#166">166: </a>        <span class="php-var">$this</span>-&gt;referer = <span class="php-var">$options</span>[<span class="php-quote">'referer'</span>];
-</span><span id="167" class="l"><a href="#167">167: </a>        <span class="php-var">$this</span>-&gt;auth = <span class="php-var">$options</span>[<span class="php-quote">'auth'</span>];
-</span><span id="168" class="l"><a href="#168">168: </a>    }
-</span><span id="169" class="l"><a href="#169">169: </a>}
-</span><span id="170" class="l"><a href="#170">170: </a></span></code></pre>
+</span><span id="140" class="l"><a href="#140">140: </a>        <span class="php-comment">// Work around old bug in client implementations, wherein a key of</span>
+</span><span id="141" class="l"><a href="#141">141: </a>        <span class="php-comment">// &quot;connection_timeout&quot; was passed instead of &quot;connect_timeout&quot;.</span>
+</span><span id="142" class="l"><a href="#142">142: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'http_options'</span>, <span class="php-var">$options</span>) &amp;&amp; <span class="php-keyword2">array_key_exists</span>(<span class="php-quote">'connection_timeout'</span>, <span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>])) {
+</span><span id="143" class="l"><a href="#143">143: </a>            <span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>][<span class="php-quote">'connect_timeout'</span>] = <span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>][<span class="php-quote">'connection_timeout'</span>];
+</span><span id="144" class="l"><a href="#144">144: </a>            <span class="php-keyword1">unset</span>(<span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>][<span class="php-quote">'connection_timeout'</span>]);
+</span><span id="145" class="l"><a href="#145">145: </a>        }
+</span><span id="146" class="l"><a href="#146">146: </a>
+</span><span id="147" class="l"><a href="#147">147: </a>        <span class="php-var">$options</span> += <span class="php-keyword1">array</span>(
+</span><span id="148" class="l"><a href="#148">148: </a>            <span class="php-quote">'logger'</span> =&gt; <span class="php-keyword1">new</span> \Psr\<span class="php-keyword2">Log</span>\NullLogger(),
+</span><span id="149" class="l"><a href="#149">149: </a>            <span class="php-quote">'user_mail'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="150" class="l"><a href="#150">150: </a>            <span class="php-quote">'subscribers'</span> =&gt; <span class="php-keyword1">array</span>(),
+</span><span id="151" class="l"><a href="#151">151: </a>            <span class="php-quote">'http_options'</span> =&gt; <span class="php-keyword1">array</span>(
+</span><span id="152" class="l"><a href="#152">152: </a>                <span class="php-quote">'follow_location'</span> =&gt; <span class="php-keyword1">true</span>,
+</span><span id="153" class="l"><a href="#153">153: </a>                <span class="php-quote">'connect_timeout'</span> =&gt; <span class="php-num">10</span>,
+</span><span id="154" class="l"><a href="#154">154: </a>                <span class="php-quote">'timeout'</span> =&gt; <span class="php-num">10</span>,
+</span><span id="155" class="l"><a href="#155">155: </a>            ),
+</span><span id="156" class="l"><a href="#156">156: </a>            <span class="php-quote">'debug_callbacks'</span> =&gt; <span class="php-keyword1">array</span>(),
+</span><span id="157" class="l"><a href="#157">157: </a>            <span class="php-quote">'user_agent'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="158" class="l"><a href="#158">158: </a>            <span class="php-quote">'variable_store'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="159" class="l"><a href="#159">159: </a>            <span class="php-quote">'referer'</span> =&gt; <span class="php-keyword1">null</span>,
+</span><span id="160" class="l"><a href="#160">160: </a>            <span class="php-quote">'auth'</span> =&gt; <span class="php-quote">'basic'</span>
+</span><span id="161" class="l"><a href="#161">161: </a>        );
+</span><span id="162" class="l"><a href="#162">162: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$options</span>[<span class="php-quote">'auth'</span>], <span class="php-keyword1">array</span>(<span class="php-quote">'basic'</span>, <span class="php-quote">'digest'</span>, <span class="php-quote">'ntlm'</span>))) {
+</span><span id="163" class="l"><a href="#163">163: </a>            <span class="php-var">$options</span>[<span class="php-quote">'auth'</span>] = <span class="php-quote">'basic'</span>;
+</span><span id="164" class="l"><a href="#164">164: </a>        }
+</span><span id="165" class="l"><a href="#165">165: </a>
+</span><span id="166" class="l"><a href="#166">166: </a>        <span class="php-var">$this</span>-&gt;logger = <span class="php-var">$options</span>[<span class="php-quote">'logger'</span>];
+</span><span id="167" class="l"><a href="#167">167: </a>        <span class="php-var">$this</span>-&gt;user_mail = <span class="php-var">$options</span>[<span class="php-quote">'user_mail'</span>];
+</span><span id="168" class="l"><a href="#168">168: </a>        <span class="php-var">$this</span>-&gt;subscribers = <span class="php-var">$options</span>[<span class="php-quote">'subscribers'</span>];
+</span><span id="169" class="l"><a href="#169">169: </a>        <span class="php-var">$this</span>-&gt;http_options = <span class="php-var">$options</span>[<span class="php-quote">'http_options'</span>];
+</span><span id="170" class="l"><a href="#170">170: </a>        <span class="php-var">$this</span>-&gt;debug_callbacks = <span class="php-var">$options</span>[<span class="php-quote">'debug_callbacks'</span>];
+</span><span id="171" class="l"><a href="#171">171: </a>        <span class="php-var">$this</span>-&gt;user_agent = <span class="php-var">$options</span>[<span class="php-quote">'user_agent'</span>];
+</span><span id="172" class="l"><a href="#172">172: </a>        <span class="php-var">$this</span>-&gt;variable_store = <span class="php-var">$options</span>[<span class="php-quote">'variable_store'</span>];
+</span><span id="173" class="l"><a href="#173">173: </a>        <span class="php-var">$this</span>-&gt;referer = <span class="php-var">$options</span>[<span class="php-quote">'referer'</span>];
+</span><span id="174" class="l"><a href="#174">174: </a>        <span class="php-var">$this</span>-&gt;auth = <span class="php-var">$options</span>[<span class="php-quote">'auth'</span>];
+</span><span id="175" class="l"><a href="#175">175: </a>    }
+</span><span id="176" class="l"><a href="#176">176: </a>
+</span><span id="177" class="l"><a href="#177">177: </a>    <span class="php-comment">// Functions implementing the Serializable interface</span>
+</span><span id="178" class="l"><a href="#178">178: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">serialize</span>() {
+</span><span id="179" class="l"><a href="#179">179: </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">serialize</span>(<span class="php-keyword2">get_object_vars</span>(<span class="php-var">$this</span>));
+</span><span id="180" class="l"><a href="#180">180: </a>    }
+</span><span id="181" class="l"><a href="#181">181: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">unserialize</span>(<span class="php-var">$serialized</span>) {
+</span><span id="182" class="l"><a href="#182">182: </a>        <span class="php-var">$object_vars</span> = <span class="php-keyword2">unserialize</span>(<span class="php-var">$serialized</span>);
+</span><span id="183" class="l"><a href="#183">183: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$object_vars</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$val</span>) {
+</span><span id="184" class="l"><a href="#184">184: </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">property_exists</span>(<span class="php-var">$this</span>, <span class="php-var">$key</span>)) {
+</span><span id="185" class="l"><a href="#185">185: </a>                <span class="php-var">$this</span>-&gt;<span class="php-var">$key</span> = <span class="php-var">$val</span>;
+</span><span id="186" class="l"><a href="#186">186: </a>            }
+</span><span id="187" class="l"><a href="#187">187: </a>        }
+</span><span id="188" class="l"><a href="#188">188: </a>    }
+</span><span id="189" class="l"><a href="#189">189: </a>}
+</span><span id="190" class="l"><a href="#190">190: </a></span></code></pre>
 
 	<div id="footer">
 		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
@@ -305,6 +325,6 @@
 </div>
 </div>
 <script src="resources/combined.js?44e93de8fc3b749f55d0fae2da59a38c45b15f0b"></script>
-<script src="elementlist.js?bbe9b04906b735775d89c94d92cfe151c2265d70"></script>
+<script src="elementlist.js?709b9f82065264fa9014c7a02760bc6c4419350f"></script>
 </body>
 </html>

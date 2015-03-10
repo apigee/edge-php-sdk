@@ -25,11 +25,6 @@
 
 						<ul>
 				<li>
-					<a href="namespace-Apigee.DocGen.html">
-						DocGen					</a>
-
-						</li>
-				<li>
 					<a href="namespace-Apigee.Exceptions.html">
 						Exceptions					</a>
 
@@ -66,6 +61,11 @@
 
 						</li>
 							</ul></li>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.html">
+						SmartDocs					</a>
+
+						</li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -179,7 +179,7 @@
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.AbstractApp.html#8-1407" title="Go to source code">ManagementAPI/AbstractApp.php</a>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.AbstractApp.html#8-1442" title="Go to source code">ManagementAPI/AbstractApp.php</a>
 		<br>
 	</div>
 
@@ -187,6 +187,79 @@
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
+	<tr data-order="getKeyExpiry" id="_getKeyExpiry">
+
+		<td class="attributes"><code>
+			 public 
+
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getKeyExpiry">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#164-173" title="Go to source code">getKeyExpiry</a>( )</code>
+
+		<div class="description short">
+			<p>For apps that are being created, gets the number of seconds until the key
+will expire.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>For apps that are being created, gets the number of seconds until the key
+will expire.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					float
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setKeyExpiry" id="_setKeyExpiry">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setKeyExpiry">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#175-184" title="Go to source code">setKeyExpiry</a>( <span>float <var>$seconds</var></span> )</code>
+
+		<div class="description short">
+			<p>For apps that are being created, sets the number of seconds until the key
+will expire.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>For apps that are being created, sets the number of seconds until the key
+will expire.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$seconds</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getApiProducts" id="_getApiProducts">
 
 		<td class="attributes"><code>
@@ -199,7 +272,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApiProducts">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#157-164" title="Go to source code">getApiProducts</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#186-193" title="Go to source code">getApiProducts</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the array of API products with which the app is associated.</p>
@@ -233,7 +306,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApiProducts">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#166-177" title="Go to source code">setApiProducts</a>( <span>array <var>$products</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#195-206" title="Go to source code">setApiProducts</a>( <span>array <var>$products</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the array of API products with which the app is associated.</p>
@@ -268,7 +341,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#179-187" title="Go to source code">getAttributes</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#208-216" title="Go to source code">getAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the array of name/value pairs used to extend the default app
@@ -304,7 +377,7 @@ profile with which the app is associated.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#189-197" title="Go to source code">hasAttribute</a>( <span>string <var>$attr</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#218-226" title="Go to source code">hasAttribute</a>( <span>string <var>$attr</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns true if the app attributes array contains $attr.</p>
@@ -343,7 +416,7 @@ profile with which the app is associated.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#199-207" title="Go to source code">getAttribute</a>( <span>string <var>$attr</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#228-236" title="Go to source code">getAttribute</a>( <span>string <var>$attr</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns the value of the specified app attribute, or null if the
@@ -380,7 +453,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#209-217" title="Go to source code">setAttribute</a>( <span>string <var>$attr</var></span>, <span> <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#238-246" title="Go to source code">setAttribute</a>( <span>string <var>$attr</var></span>, <span> <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the value of the app attribute.</p>
@@ -417,7 +490,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#219-226" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#248-255" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the app name.</p>
@@ -452,7 +525,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#228-235" title="Go to source code">getName</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#257-264" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the app name.</p>
@@ -486,7 +559,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCallbackUrl">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#237-244" title="Go to source code">setCallbackUrl</a>( <span>string <var>$url</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#266-273" title="Go to source code">setCallbackUrl</a>( <span>string <var>$url</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the callback URL.</p>
@@ -521,7 +594,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCallbackUrl">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#246-253" title="Go to source code">getCallbackUrl</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#275-282" title="Go to source code">getCallbackUrl</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the app name.</p>
@@ -555,7 +628,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDescription">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#255-263" title="Go to source code">setDescription</a>( <span>string <var>$descr</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#284-292" title="Go to source code">setDescription</a>( <span>string <var>$descr</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the app description.</p>
@@ -590,7 +663,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDescription">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#265-272" title="Go to source code">getDescription</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#294-301" title="Go to source code">getDescription</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the app description.</p>
@@ -624,7 +697,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAccessType">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#274-284" title="Go to source code">setAccessType</a>( <span>string <var>$type</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#303-313" title="Go to source code">setAccessType</a>( <span>string <var>$type</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the app access type as 'read', 'write', or 'both'.</p>
@@ -659,7 +732,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAccessType">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#286-293" title="Go to source code">getAccessType</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#315-322" title="Go to source code">getAccessType</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the app access type as 'read', 'write', or 'both'.</p>
@@ -693,7 +766,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#295-302" title="Go to source code">getStatus</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#324-331" title="Go to source code">getStatus</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the app status of the app: 'approved' or 'unapproved'.</p>
@@ -727,7 +800,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#304-311" title="Go to source code">setStatus</a>( <span>string <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#333-340" title="Go to source code">setStatus</a>( <span>string <var>$status</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the app access type as 'read', 'write', or 'both'.</p>
@@ -762,7 +835,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialApiProducts">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#313-323" title="Go to source code">getCredentialApiProducts</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#342-352" title="Go to source code">getCredentialApiProducts</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the status of the consumer key for each API Product:
@@ -802,7 +875,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialApiProducts">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#325-335" title="Go to source code">setCredentialApiProducts</a>( <span>array <var>$list</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#354-364" title="Go to source code">setCredentialApiProducts</a>( <span>array <var>$list</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the status of the consumer key for each API Product:
@@ -843,7 +916,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConsumerKey">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#337-344" title="Go to source code">getConsumerKey</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#366-373" title="Go to source code">getConsumerKey</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the value of the consumer key for the app.</p>
@@ -877,7 +950,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConsumerKey">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#346-353" title="Go to source code">setConsumerKey</a>( <span>string <var>$key</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#375-382" title="Go to source code">setConsumerKey</a>( <span>string <var>$key</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the value of the consumer key for the app.</p>
@@ -912,7 +985,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConsumerSecret">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#355-362" title="Go to source code">getConsumerSecret</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#384-391" title="Go to source code">getConsumerSecret</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the value of the consumer secret for the app.</p>
@@ -946,7 +1019,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setConsumerSecret">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#364-371" title="Go to source code">setConsumerSecret</a>( <span>string <var>$secret</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#393-400" title="Go to source code">setConsumerSecret</a>( <span>string <var>$secret</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the value of the consumer secret for the app.</p>
@@ -981,7 +1054,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialScopes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#373-380" title="Go to source code">getCredentialScopes</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#402-409" title="Go to source code">getCredentialScopes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the scope(s) of the active credentials.</p>
@@ -1015,7 +1088,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialScopes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#382-389" title="Go to source code">setCredentialScopes</a>( <span>array <var>$scopes</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#411-418" title="Go to source code">setCredentialScopes</a>( <span>array <var>$scopes</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the value of the credential's scope.</p>
@@ -1050,7 +1123,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#391-398" title="Go to source code">getCredentialStatus</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#420-427" title="Go to source code">getCredentialStatus</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the status of the consumer key for the app: 'approved' or 'pending'.</p>
@@ -1084,7 +1157,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#400-407" title="Go to source code">setCredentialStatus</a>( <span>string <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#429-436" title="Go to source code">setCredentialStatus</a>( <span>string <var>$status</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the status of the consumer key for the app: 'approved' or 'pending'.</p>
@@ -1119,7 +1192,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialIssueDate">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#409-416" title="Go to source code">getCredentialIssueDate</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#438-445" title="Go to source code">getCredentialIssueDate</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the credentials were created.</p>
@@ -1153,7 +1226,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialIssueDate">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#418-425" title="Go to source code">setCredentialIssueDate</a>( <span>integer <var>$timestamp</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#447-454" title="Go to source code">setCredentialIssueDate</a>( <span>integer <var>$timestamp</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the Unix time when the credentials were created.</p>
@@ -1188,7 +1261,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialExpiryDate">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#427-434" title="Go to source code">getCredentialExpiryDate</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#456-463" title="Go to source code">getCredentialExpiryDate</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the credentials expire.</p>
@@ -1222,7 +1295,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialExpiryDate">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#436-443" title="Go to source code">setCredentialExpiryDate</a>( <span>integer <var>$timestamp</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#465-472" title="Go to source code">setCredentialExpiryDate</a>( <span>integer <var>$timestamp</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the Unix time when the credentials expire.</p>
@@ -1257,7 +1330,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedAt">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#445-452" title="Go to source code">getCreatedAt</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#474-481" title="Go to source code">getCreatedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the app was created.</p>
@@ -1291,7 +1364,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCreatedAt">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#454-461" title="Go to source code">setCreatedAt</a>( <span>integer <var>$time_in_milliseconds</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#483-490" title="Go to source code">setCreatedAt</a>( <span>integer <var>$time_in_milliseconds</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the Unix time when the app was created.</p>
@@ -1326,7 +1399,7 @@ of 'apiproduct' and 'status'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedBy">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#463-472" title="Go to source code">getCreatedBy</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#492-501" title="Go to source code">getCreatedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the user who created the app.
@@ -1364,7 +1437,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCreatedBy">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#474-481" title="Go to source code">setCreatedBy</a>( <span>string <var>$who</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#503-510" title="Go to source code">setCreatedBy</a>( <span>string <var>$who</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the username of the user who created the app.</p>
@@ -1399,7 +1472,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedAt">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#483-490" title="Go to source code">getModifiedAt</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#512-519" title="Go to source code">getModifiedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the app was last modified.</p>
@@ -1433,7 +1506,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setModifiedAt">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#492-499" title="Go to source code">setModifiedAt</a>( <span>integer <var>$time_in_milliseconds</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#521-528" title="Go to source code">setModifiedAt</a>( <span>integer <var>$time_in_milliseconds</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the Unix time when the app was last modified.</p>
@@ -1468,7 +1541,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedBy">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#501-508" title="Go to source code">getModifiedBy</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#530-537" title="Go to source code">getModifiedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the user who last modified the app.</p>
@@ -1502,7 +1575,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setModifiedBy">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#510-517" title="Go to source code">setModifiedBy</a>( <span>string <var>$who</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#539-546" title="Go to source code">setModifiedBy</a>( <span>string <var>$who</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the username of the developer who last modified the app.</p>
@@ -1537,7 +1610,7 @@ rather the user (usually an org-admin) which is logged into Edge.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#519-531" title="Go to source code">getCredentialAttribute</a>( <span>string <var>$attr_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#548-560" title="Go to source code">getCredentialAttribute</a>( <span>string <var>$attr_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns the value of an attribute used to extend the
@@ -1578,7 +1651,7 @@ default credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setCredentialAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#533-541" title="Go to source code">setCredentialAttribute</a>( <span>string <var>$name</var></span>, <span> <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#562-570" title="Go to source code">setCredentialAttribute</a>( <span>string <var>$name</var></span>, <span> <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets a name/value pair used to extend the default credential's profile.</p>
@@ -1615,7 +1688,7 @@ default credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCredentialAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#543-551" title="Go to source code">getCredentialAttributes</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#572-580" title="Go to source code">getCredentialAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the array of name/value pairs used to extend the default
@@ -1651,7 +1724,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clearCredentialAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#553-560" title="Go to source code">clearCredentialAttributes</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#582-589" title="Go to source code">clearCredentialAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Clears the array of name/value pairs used to extend the default
@@ -1683,7 +1756,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAppId">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#562-569" title="Go to source code">getAppId</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#591-598" title="Go to source code">getAppId</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the UUID of this app.</p>
@@ -1717,7 +1790,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAppId">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#571-578" title="Go to source code">setAppId</a>( <span>string <var>$id</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#600-607" title="Go to source code">setAppId</a>( <span>string <var>$id</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the UUID of this app.</p>
@@ -1752,7 +1825,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAppFamily">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#580-587" title="Go to source code">getAppFamily</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#609-616" title="Go to source code">getAppFamily</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the name of the app family containing the app, if any.</p>
@@ -1786,7 +1859,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAppFamily">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#589-596" title="Go to source code">setAppFamily</a>( <span>string <var>$family</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#618-625" title="Go to source code">setAppFamily</a>( <span>string <var>$family</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the name of the app family containing the app.</p>
@@ -1821,7 +1894,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getScopes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#598-605" title="Go to source code">getScopes</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#627-634" title="Go to source code">getScopes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the scope of the app.</p>
@@ -1855,7 +1928,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setScopes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#607-614" title="Go to source code">setScopes</a>( <span>array <var>$scopes</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#636-643" title="Go to source code">setScopes</a>( <span>array <var>$scopes</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the scope of the app.</p>
@@ -1890,7 +1963,7 @@ credential's profile.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hasCredentialInfo">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#616-638" title="Go to source code">hasCredentialInfo</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#645-667" title="Go to source code">hasCredentialInfo</a>( )</code>
 
 		<div class="description short">
 			<p>Returns true if the $credentialApiproducts, $consumerKey, $consumerSecret,
@@ -1930,7 +2003,7 @@ Otherwise, returns false.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApiProductCache">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#640-650" title="Go to source code">setApiProductCache</a>( <span>array <var>$cache</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#669-679" title="Go to source code">setApiProductCache</a>( <span>array <var>$cache</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the cached version of API products associated with this app. This
@@ -1971,7 +2044,7 @@ remain unchanged.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromResponse">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#652-689" title="Go to source code">loadFromResponse</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span>array <var>$response</var></span>, <span> <var>$owner_identifier</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#681-718" title="Go to source code">loadFromResponse</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span>array <var>$response</var></span>, <span> <var>$owner_identifier</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Loads a DeveloperApp/CompanyApp object with the contents of a raw
@@ -2012,7 +2085,7 @@ Management API response.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadCredentials">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#691-753" title="Go to source code">loadCredentials</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span> <var>$credentials</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#720-782" title="Go to source code">loadCredentials</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span> <var>$credentials</var></span> )</code>
 
 		<div class="description short">
 			<p>Reads the credentials array from the API response and sets object
@@ -2055,7 +2128,7 @@ earliest-issued credential in the list.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOverallStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#755-789" title="Go to source code">getOverallStatus</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#784-818" title="Go to source code">getOverallStatus</a>( )</code>
 
 		<div class="description short">
 			<p>Finds the overall status of this app. First check app status, then
@@ -2095,7 +2168,7 @@ else return 'approved'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#791-804" title="Go to source code">load</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#820-833" title="Go to source code">load</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Populates this object with information retrieved from the Management API.</p>
@@ -2132,7 +2205,7 @@ else return 'approved'.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validate">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#806-835" title="Go to source code">validate</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#835-864" title="Go to source code">validate</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Checks to see if an app with the given name exists for this
@@ -2175,7 +2248,7 @@ developer/company.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_apiProductsDiff">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#837-869" title="Go to source code">apiProductsDiff</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#866-898" title="Go to source code">apiProductsDiff</a>( )</code>
 
 		<div class="description short">
 			<p>Determines difference between cached version of API Products array for
@@ -2213,7 +2286,7 @@ Products are due for removal (if any), and which should be added.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#871-998" title="Go to source code">save</a>( <span>boolean <var>$force_update</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#900-1031" title="Go to source code">save</a>( <span>boolean <var>$force_update</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Write this app's data to the Management API, preserving client key/secret.</p>
@@ -2252,7 +2325,7 @@ determination is short-circuited and an update is assumed.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sortCredentials">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1000-1036" title="Go to source code">sortCredentials</a>( <span> <var>$a</var></span>, <span> <var>$b</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1033-1069" title="Go to source code">sortCredentials</a>( <span> <var>$a</var></span>, <span> <var>$b</var></span> )</code>
 
 		<div class="description short">
 			<p>Usort callback to sort credentials by create date (most recent first).</p>
@@ -2293,7 +2366,7 @@ determination is short-circuited and an update is assumed.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setKeyStatus">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1038-1079" title="Go to source code">setKeyStatus</a>( <span>mixed <var>$status</var></span>, <span>boolean <var>$also_set_apiproduct</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1071-1112" title="Go to source code">setKeyStatus</a>( <span>mixed <var>$status</var></span>, <span>boolean <var>$also_set_apiproduct</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			<p>Approves or revokes a client key for an app, and optionally also for all
@@ -2336,7 +2409,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1081-1095" title="Go to source code">delete</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1114-1128" title="Go to source code">delete</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Deletes an app from the Management API.</p>
@@ -2373,7 +2446,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getList">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1097-1106" title="Go to source code">getList</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1130-1139" title="Go to source code">getList</a>( )</code>
 
 		<div class="description short">
 			<p>Returns names of all apps belonging to this developer/company.</p>
@@ -2407,7 +2480,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createKey">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1108-1168" title="Go to source code">createKey</a>( <span>string <var>$consumer_key</var></span>, <span>string <var>$consumer_secret</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1141-1201" title="Go to source code">createKey</a>( <span>string <var>$consumer_key</var></span>, <span>string <var>$consumer_secret</var></span> )</code>
 
 		<div class="description short">
 			<p>Creates a key/secret pair for this app against its component APIProducts.</p>
@@ -2448,7 +2521,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1170-1200" title="Go to source code">deleteAttribute</a>( <span>string <var>$attr_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1203-1233" title="Go to source code">deleteAttribute</a>( <span>string <var>$attr_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Deletes an attribute from an app. Returns true if successful, else false.</p>
@@ -2487,7 +2560,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteCredentialAttribute">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1202-1231" title="Go to source code">deleteCredentialAttribute</a>( <span> <var>$attr_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1235-1264" title="Go to source code">deleteCredentialAttribute</a>( <span> <var>$attr_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Deletes an attribute from the active credential of an app. Returns true if successful, else false.</p>
@@ -2522,7 +2595,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteKey">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1233-1250" title="Go to source code">deleteKey</a>( <span>string <var>$consumer_key</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1266-1283" title="Go to source code">deleteKey</a>( <span>string <var>$consumer_key</var></span> )</code>
 
 		<div class="description short">
 			<p>Deletes a given key from an app.</p>
@@ -2557,7 +2630,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_blankValues">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1252-1282" title="Go to source code">blankValues</a>( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1285-1317" title="Go to source code">blankValues</a>( )</code>
 
 		<div class="description short">
 			<p>Restores this object to its pristine state.</p>
@@ -2587,7 +2660,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1284-1306" title="Go to source code">toArray</a>( <span> <var>$include_debug_data</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1319-1341" title="Go to source code">toArray</a>( <span> <var>$include_debug_data</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			<p>Turns this object's properties into an array for external use.</p>
@@ -2621,7 +2694,7 @@ API Products associated with that app.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAppProperties">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1308-1342" title="Go to source code">getAppProperties</a>( <span> <var>$class</var> = __CLASS__</span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1343-1377" title="Go to source code">getAppProperties</a>( <span> <var>$class</var> = __CLASS__</span> )</code>
 
 		<div class="description short">
 			<p>Returns an array of all property names that can be returned
@@ -2657,7 +2730,7 @@ from a call to self::toArray().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fromArray">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1344-1357" title="Go to source code">fromArray</a>( <span> <var>$array</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1379-1392" title="Go to source code">fromArray</a>( <span> <var>$array</var></span> )</code>
 
 		<div class="description short">
 			<p>Populates this object based on an incoming array generated by the
@@ -2694,7 +2767,7 @@ toArray() method.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_afterLoad">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1359-1370" title="Go to source code">afterLoad</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span>array <var>$response</var></span>, <span>string|null <var>$owner_identifier</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1394-1405" title="Go to source code">afterLoad</a>( <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>&amp; $obj</var></span>, <span>array <var>$response</var></span>, <span>string|null <var>$owner_identifier</var></span> )</code>
 
 		<div class="description short">
 			<p>Dummy placeholder to allow subclasses to modify the App object as it is
@@ -2735,7 +2808,7 @@ finishing the load process.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_preSave">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1372-1382" title="Go to source code">preSave</a>( <span>array <var>&amp; $payload</var></span>, <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>$obj</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1407-1417" title="Go to source code">preSave</a>( <span>array <var>&amp; $payload</var></span>, <span><code><a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a></code> <var>$obj</var></span> )</code>
 
 		<div class="description short">
 			<p>Dummy placeholder to allow subclasses to modify the payload of the
@@ -2774,7 +2847,7 @@ app-save call right before it is invoked.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_preSaveCredential">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1384-1395" title="Go to source code">preSaveCredential</a>( <span>array <var>&amp; $payload</var></span>, <span>array <var>$credential</var></span>, <span>array <var>$kms_response</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1419-1430" title="Go to source code">preSaveCredential</a>( <span>array <var>&amp; $payload</var></span>, <span>array <var>$credential</var></span>, <span>array <var>$kms_response</var></span> )</code>
 
 		<div class="description short">
 			<p>Dummy placeholder to allow subclasses to modify the payload of the
@@ -2815,7 +2888,7 @@ credential-save call right before it is invoked.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_alterAttributes">#</a>
-		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1397-1406" title="Go to source code">alterAttributes</a>( <span>array <var>&amp; $payload</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.AbstractApp.html#1432-1441" title="Go to source code">alterAttributes</a>( <span>array <var>&amp; $payload</var></span> )</code>
 
 		<div class="description short">
 			<p>Allows subclasses to change or augment attribute name-value pairs before
@@ -3504,6 +3577,33 @@ the app.</p>
 		<td class="value">
 			<div>
 				<a href="#$ownerIdentifierField" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="keyExpiry" id="$keyExpiry">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.ManagementAPI.AbstractApp.html#155-160" title="Go to source code"><var>$keyExpiry</var></a>
+
+			<div class="description short">
+				<p>On app creation, the number of milliseconds until the newly-created key
+expires. This value is ignored for app updates.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>On app creation, the number of milliseconds until the newly-created key
+expires. This value is ignored for app updates.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$keyExpiry" class="anchor">#</a>
 				<code></code>
 			</div>
 		</td>

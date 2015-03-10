@@ -4,8 +4,9 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
+ * This class is deprecated. Please use Apigee\SmartDocs\Method instead.
+ *
  * @author bhasselbeck
- * @deprecated
  */
 
 namespace Apigee\DocGen;
@@ -13,6 +14,11 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
+/**
+ * Class DocGenMethod
+ * @deprecated
+ * @package Apigee\DocGen
+ */
 class DocGenMethod extends APIObject
 {
 

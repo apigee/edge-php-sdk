@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Apigee\DocGen\DocGenResource</title>
+	<title>Class Apigee\SmartDocs\Template</title>
 
 	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
@@ -24,11 +24,6 @@
 					</a>
 
 						<ul>
-				<li class="active">
-					<a href="namespace-Apigee.DocGen.html">
-						DocGen					</a>
-
-						</li>
 				<li>
 					<a href="namespace-Apigee.Exceptions.html">
 						Exceptions					</a>
@@ -66,6 +61,11 @@
 
 						</li>
 							</ul></li>
+				<li class="active">
+					<a href="namespace-Apigee.SmartDocs.html">
+						SmartDocs					</a>
+
+						</li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -81,23 +81,17 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Apigee.DocGen.DocGenDoc.html">DocGenDoc</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenMethod.html">DocGenMethod</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenModel.html">DocGenModel</a></li>
-				<li class="active"><a href="class-Apigee.DocGen.DocGenResource.html">DocGenResource</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenRevision.html">DocGenRevision</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenTemplate.html">DocGenTemplate</a></li>
+				<li><a href="class-Apigee.SmartDocs.AuthScheme.html">AuthScheme</a></li>
+				<li><a href="class-Apigee.SmartDocs.Doc.html">Doc</a></li>
+				<li><a href="class-Apigee.SmartDocs.Method.html">Method</a></li>
+				<li><a href="class-Apigee.SmartDocs.Model.html">Model</a></li>
+				<li><a href="class-Apigee.SmartDocs.Oauth2Credentials.html">Oauth2Credentials</a></li>
+				<li><a href="class-Apigee.SmartDocs.Resource.html">Resource</a></li>
+				<li><a href="class-Apigee.SmartDocs.Revision.html">Revision</a></li>
+				<li class="active"><a href="class-Apigee.SmartDocs.Template.html">Template</a></li>
+				<li><a href="class-Apigee.SmartDocs.TokenCredentials.html">TokenCredentials</a></li>
 			</ul>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Apigee.DocGen.DocGenDocInterface.html">DocGenDocInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenMethodInterface.html">DocGenMethodInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenModelInterface.html">DocGenModelInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenResourceInterface.html">DocGenResourceInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenRevisionInterface.html">DocGenRevisionInterface</a></li>
-				<li><a href="class-Apigee.DocGen.DocGenTemplateInterface.html">DocGenTemplateInterface</a></li>
-			</ul>
 
 
 
@@ -122,7 +116,7 @@
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
 			<li>
-				<a href="namespace-Apigee.DocGen.html" title="Summary of Apigee\DocGen"><span>Namespace</span></a>
+				<a href="namespace-Apigee.SmartDocs.html" title="Summary of Apigee\SmartDocs"><span>Namespace</span></a>
 			</li>
 			<li class="active">
 <span>Class</span>			</li>
@@ -134,12 +128,11 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class DocGenResource</h1>
+	<h1>Class Template</h1>
 
 
 	<div class="description">
-	<p>Base class for API object classes. Handles some of the OrgConfig
-invocation, which makes the actual HTTP calls.</p>
+	<p>Loads and saves template HTML.</p>
 	</div>
 
 	<dl class="tree">
@@ -151,9 +144,7 @@ invocation, which makes the actual HTTP calls.</p>
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>Apigee\DocGen\DocGenResource</span></b>			
-			 implements 
-				<a href="class-Apigee.DocGen.DocGenResourceInterface.html"><span>Apigee\DocGen\DocGenResourceInterface</span></a>
+<b><span>Apigee\SmartDocs\Template</span></b>			
 			
 			
 		</dd>
@@ -169,12 +160,12 @@ invocation, which makes the actual HTTP calls.</p>
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.DocGen.html">DocGen</a><br>
-		
+		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.SmartDocs.html">SmartDocs</a><br>
+		<b>Package:</b> Apigee\SmartDocs<br>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> <a href="source-class-Apigee.DocGen.DocGenResource.html#15-77" title="Go to source code">DocGen/DocGenResource.php</a>
+			<b>Located at</b> <a href="source-class-Apigee.SmartDocs.Template.html#9-73" title="Go to source code">SmartDocs/Template.php</a>
 		<br>
 	</div>
 
@@ -194,20 +185,22 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenResource.html#18-26" title="Go to source code">__construct</a>( <span>Apigee\DocGen\OrgCOnfig <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.SmartDocs.Template.html#18-27" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$modelId</var></span> )</code>
 
 		<div class="description short">
-			<p>Constructs the proper values for the Apigee DocGen API.</p>
+			<p>Initializes this object's base URL.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Constructs the proper values for the Apigee DocGen API.</p>
+			<p>Initializes this object's base URL.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
 					<dd></dd>
+					<dt><var>$modelId</var></dt>
+					<dd></dd>
 				</dl></div>
 
 
@@ -217,159 +210,97 @@ invocation, which makes the actual HTTP calls.</p>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="loadResources" id="_loadResources">
+	<tr data-order="load" id="_load">
 
 		<td class="attributes"><code>
 			 public 
 
-			
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_loadResources">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenResource.html#28-37" title="Go to source code">loadResources</a>( <span> <var>$apiId</var></span>, <span> <var>$revId</var></span> )</code>
+		<a class="anchor" href="#_load">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Template.html#29-44" title="Go to source code">load</a>( <span>string <var>$name</var></span>, <span>string <var>$type</var></span> )</code>
 
 		<div class="description short">
-			<p>Loads all of the resources of a given revision with a model.</p>
+			<p>Loads a template of a given name and type.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Loads all of the resources of a given revision with a model.</p>
-
-
-
-
-
-
-
-				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Apigee.DocGen.DocGenResourceInterface.html#_loadResources">Apigee\DocGen\DocGenResourceInterface::loadResources()</a></code></div>
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="loadResource" id="_loadResource">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_loadResource">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenResource.html#40-50" title="Go to source code">loadResource</a>( <span> <var>$apiId</var></span>, <span> <var>$revId</var></span>, <span> <var>$resId</var></span> )</code>
-
-		<div class="description short">
-			<p>Loads a single resource.</p>
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Loads a single resource.</p>
-
-
-
-
-
-
-
-				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Apigee.DocGen.DocGenResourceInterface.html#_loadResource">Apigee\DocGen\DocGenResourceInterface::loadResource()</a></code></div>
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="createResource" id="_createResource">
-
-		<td class="attributes"><code>
-			 public 
-
-			array
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_createResource">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenResource.html#52-63" title="Go to source code">createResource</a>( <span> <var>$apiId</var></span>, <span> <var>$revId</var></span>, <span> <var>$payload</var></span> )</code>
-
-		<div class="description short">
-			<p>Creates a resource for a given revision and model.</p>
-		</div>
-
-		<div class="description detailed hidden">
-			<p>Creates a resource for a given revision and model.</p>
+			<p>Loads a template of a given name and type.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$apiId</var></dt>
+					<dt><var>$name</var></dt>
 					<dd></dd>
-					<dt><var>$revId</var></dt>
-					<dd></dd>
-					<dt><var>$payload</var></dt>
+					<dt><var>$type</var></dt>
 					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code>
 				</div>
 
 
 
-
-				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Apigee.DocGen.DocGenResourceInterface.html#_createResource">Apigee\DocGen\DocGenResourceInterface::createResource()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="updateResource" id="_updateResource">
+	<tr data-order="save" id="_save">
 
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_updateResource">#</a>
-		<code><a href="source-class-Apigee.DocGen.DocGenResource.html#65-76" title="Go to source code">updateResource</a>( <span> <var>$apiId</var></span>, <span> <var>$revId</var></span>, <span> <var>$resId</var></span>, <span> <var>$payload</var></span> )</code>
+		<a class="anchor" href="#_save">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Template.html#46-70" title="Go to source code">save</a>( <span>string <var>$name</var></span>, <span>string <var>$type</var></span>, <span>string <var>$html</var></span>, <span>boolean <var>$update</var> = <span class="php-keyword1">FALSE</span></span> )</code>
 
 		<div class="description short">
-			<p>Updates a resource for a given revision and model.</p>
+			<p>Saves HTML to a template of a given name and type.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Updates a resource for a given revision and model.</p>
+			<p>Saves HTML to a template of a given name and type.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$apiId</var></dt>
+					<dt><var>$name</var></dt>
 					<dd></dd>
-					<dt><var>$revId</var></dt>
+					<dt><var>$type</var></dt>
 					<dd></dd>
-					<dt><var>$resId</var></dt>
+					<dt><var>$html</var></dt>
 					<dd></dd>
-					<dt><var>$payload</var></dt>
+					<dt><var>$update</var></dt>
 					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code>
 				</div>
 
 
 
-
-				<h4>Implementation of</h4>
-				<div class="list"><code><a href="class-Apigee.DocGen.DocGenResourceInterface.html#_updateResource">Apigee\DocGen\DocGenResourceInterface::updateResource()</a></code></div>
 		</div>
 		</div></td>
 	</tr>
