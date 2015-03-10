@@ -110,11 +110,6 @@ class Model extends APIObject implements \Serializable
         return floor($this->createdTime / 1000);
     }
 
-    public function getModifiedTime()
-    {
-        return floor($this->modifiedTime / 1000);
-    }
-
     public function getLatestRevisionNumber()
     {
         return $this->latestRevisionNumber;

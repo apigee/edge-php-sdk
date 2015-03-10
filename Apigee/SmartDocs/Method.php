@@ -412,13 +412,21 @@ class Method extends APIObject implements \Serializable
      */
     public function save($update = FALSE)
     {
+        $array_members = array('authSchemes', 'parameters', 'parameterGroups', 'tags', 'samples');
+        $object_members = array('body', 'response');
         $payload = $this->toArray(FALSE);
-        $keys = array_keys($payload);
-        foreach ($keys as $key) {
+        unset($payload['customAttributes']); // FIXME: when API is fixed (or correctly doc'ed) add this back in.
+        foreach ($array_members as $key) {
             if (empty($payload[$key])) {
-                unset($payload[$key]);
+                $payload[$key] = array();
             }
         }
+        foreach ($object_members as $key) {
+            if (empty($payload[$key])) {
+                $payload[$key] = new \stdClass;
+            }
+        }
+
         if ($update) {
             $url = $this->id;
             $method = 'put';
