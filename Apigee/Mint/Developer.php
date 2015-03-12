@@ -299,9 +299,15 @@ class Developer extends Base\BaseObject
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
      */
-    public function createPayment(array $parameters, $address)
+    public function createPayment(array $parameters, $address, $developer_or_company_id = NULL)
     {
+      if($developer_or_company_id == NULL) {
         $id = $this->email;
+      }
+      else {
+        $id = $developer_or_company_id;
+      }
+
         $options = array(
             'query' => $parameters,
         );
