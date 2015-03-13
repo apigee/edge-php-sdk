@@ -31,6 +31,9 @@ class Model extends APIObject
     private $createdTime;
 
     /** @var int */
+    private $modifiedTime;
+
+    /** @var int */
     private $latestRevisionNumber;
 
     /** @var array */
@@ -61,6 +64,7 @@ class Model extends APIObject
         $this->metadata = array();
 
         $this->createdTime = 0;
+        $this->modifiedTime = 0;
         $this->latestRevisionNumber = -1; // Indicates that this value is unset.
     }
 
@@ -108,6 +112,10 @@ class Model extends APIObject
     public function getCreatedTime()
     {
         return floor($this->createdTime / 1000);
+    }
+    public function getModifiedTime()
+    {
+        return floor($this->modifiedTime / 1000);
     }
 
     public function getLatestRevisionNumber()
@@ -197,7 +205,7 @@ class Model extends APIObject
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'latestRevisionNumber', 'tags', 'createdTime', 'metadata'
+                'id', 'latestRevisionNumber', 'tags', 'createdTime', 'modifiedTime', 'metadata'
             ));
         }
         $payload = array();
