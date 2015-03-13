@@ -279,7 +279,7 @@ class Revision extends APIObject
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'revisionNumber', 'createdTime', 'modifiedTime', 'config', 'apiId'
+                'id', 'revisionNumber', 'createdTime', 'modifiedTime', 'apiId'
             ));
         }
         $payload = array();
@@ -297,9 +297,9 @@ class Revision extends APIObject
      */
     public function __construct(OrgConfig $config, $modelId)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions');
         $this->blankValues();
         $this->apiId = $modelId;
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
     }
 
     /**

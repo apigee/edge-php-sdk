@@ -229,7 +229,7 @@ class Resource extends APIObject
         $payload_keys = array(
             'id', 'name', 'displayName', 'description', 'baseUrl', 'path',
             'parameters', 'methods', 'createdTime', 'modifiedTime', 'apiRevisionId',
-            'resources', 'modelId', 'config'
+            'resources', 'modelId'
         );
         $payload = array();
         foreach ($payload_keys as $key) {
@@ -242,13 +242,15 @@ class Resource extends APIObject
      * Constructs the proper values for the Apigee DocGen API.
      *
      * @param \Apigee\Util\OrgConfig $config
+     * @param string $modelId
+     * @param string $revisionUuid
      */
-    public function __construct(OrgCOnfig $config, $modelId, $revisionUuid)
+    public function __construct(OrgConfig $config, $modelId, $revisionUuid)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions/' . $revisionUuid . '/resources');
         $this->blankValues();
         $this->modelId = $modelId;
         $this->apiRevisionId = $revisionUuid;
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->modelId) . '/revisions/' . $this->apiRevisionId . '/resources');
     }
 
     /**

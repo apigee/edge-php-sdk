@@ -197,7 +197,7 @@ class Model extends APIObject
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'latestRevisionNumber', 'tags', 'config', 'createdTime', 'metadata'
+                'id', 'latestRevisionNumber', 'tags', 'createdTime', 'metadata'
             ));
         }
         $payload = array();
@@ -214,8 +214,8 @@ class Model extends APIObject
      */
     public function __construct(OrgConfig $config)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');
         $this->blankValues();
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels');
     }
 
     /**

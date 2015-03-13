@@ -341,7 +341,7 @@ class Method extends APIObject
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'createdTime', 'modifiedTime', 'createdBy', 'modifiedBy', 'config'
+                'id', 'createdTime', 'modifiedTime', 'createdBy', 'modifiedBy'
             ));
         }
         $payload = array();
@@ -361,12 +361,12 @@ class Method extends APIObject
      */
     public function __construct(OrgConfig $config, $modelId, $revisionUuid, $resourceUuid)
     {
-        $basePath = '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions/' . $revisionUuid . '/resources/' . $resourceUuid . '/methods';
-        $this->init($config, $basePath);
         $this->blankValues();
         $this->apiRevisionId = $revisionUuid;
         $this->resourceId = $resourceUuid;
         $this->apiId = $modelId;
+        $basePath = '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions/' . rawurlencode($this->apiRevisionId) . '/resources/' . $this->resourceId . '/methods';
+        $this->init($config, $basePath);
     }
 
     /**
