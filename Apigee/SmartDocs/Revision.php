@@ -12,14 +12,8 @@ use Apigee\Exceptions\ParameterException;
  * @package Apigee\SmartDocs
  * @author djohnson
  */
-class Revision extends APIObject implements \Serializable
+class Revision extends APIObject
 {
-
-    /*
-   'displayName', 'description', 'releaseVersion', 'changeLog', 'apiSchema',
-   'baseUrl', 'params', 'paramGroups', 'tags', 'customAttributes',
-   */
-
     /** @var string */
     protected $id;
 
@@ -452,16 +446,5 @@ class Revision extends APIObject implements \Serializable
             $this->get($revision . '?expand=yes&format=' . $format, 'text/xml');
         }
         return $this->responseText;
-    }
-
-    // Functions implementing the Serializable interface
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    public function unserialize($serialized)
-    {
-        self::fromArray($this, unserialize($serialized));
     }
 }

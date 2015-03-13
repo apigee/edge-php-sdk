@@ -10,7 +10,7 @@ use Apigee\Exceptions\ParameterException;
  * @package Apigee\SmartDocs
  * @author djohnson
  */
-class Resource extends APIObject implements \Serializable
+class Resource extends APIObject
 {
 
     /** @var string */
@@ -320,16 +320,5 @@ class Resource extends APIObject implements \Serializable
         $this->http_delete($resourceUuid);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
-    }
-
-    // Functions implementing the Serializable interface
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    public function unserialize($serialized)
-    {
-        self::fromArray($this, unserialize($serialized));
     }
 }

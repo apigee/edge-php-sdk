@@ -12,7 +12,7 @@ use Apigee\Exceptions\ParameterException;
  * @package Apigee\SmartDocs
  * @author djohnson
  */
-class Model extends APIObject implements \Serializable
+class Model extends APIObject
 {
 
     /** @var string */
@@ -58,9 +58,9 @@ class Model extends APIObject implements \Serializable
         $this->description = '';
         $this->tags = array();
         $this->customAttributes = array();
+        $this->metadata = array();
 
         $this->createdTime = 0;
-        $this->modifiedTime = 0;
         $this->latestRevisionNumber = -1; // Indicates that this value is unset.
     }
 
@@ -120,26 +120,39 @@ class Model extends APIObject implements \Serializable
         $this->latestRevisionNumber = intval($int);
     }
 
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
-    public function setTags(array $tags) {
+    public function setTags(array $tags)
+    {
         $this->tags = $tags;
     }
 
-    public function getCustomAttribute($name) {
+    public function getCustomAttribute($name)
+    {
         if (array_key_exists($name, $this->customAttributes)) {
             return $this->customAttributes[$name];
         }
         return NULL;
     }
-    public function setCustomAttribute($name, $value) {
-        $this->customAttributes[$name] = $value;
+    public function setCustomAttribute($name, $value)
+    {
+        if (empty($value)) {
+            if (array_key_exists($name, $this->customAttributes)) {
+                unset($this->customAttributes[$name]);
+            }
+        }
+        else {
+            $this->customAttributes[$name] = $value;
+        }
     }
-    public function setCustomAttributes(array $attr) {
+    public function setCustomAttributes(array $attr)
+    {
         $this->customAttributes = $attr;
     }
-    public function clearCustomAttribute($name) {
+    public function clearCustomAttribute($name)
+    {
         if (array_key_exists($name, $this->customAttributes)) {
             unset($this->customAttributes[$name]);
         }
@@ -168,12 +181,7 @@ class Model extends APIObject implements \Serializable
     public static function fromArray(Model $model, array $array)
     {
         foreach ($array as $key => $value) {
-            if ($key == 'customAttributes') {
-                foreach ($value as $item) {
-                    $model->{$key}[$item['name']] = $item['value'];
-                }
-            }
-            elseif (property_exists($model, $key)) {
+            if (property_exists($model, $key)) {
                 $model->$key = $value;
             }
         }
@@ -189,21 +197,12 @@ class Model extends APIObject implements \Serializable
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-              'id', 'latestRevisionNumber', 'tags', 'config', 'createdTime', 'modifiedTime',
-              'metadata'
+                'id', 'latestRevisionNumber', 'tags', 'config', 'createdTime', 'metadata'
             ));
         }
         $payload = array();
         foreach ($payload_keys as $key) {
-            if ($key == 'customAttributes') {
-                $payload['customAttributes'] = array();
-                foreach ($this->customAttributes as $name => $value) {
-                    $payload['customAttributes'][] = array('name' => $name, 'value' => $value);
-                }
-            }
-            else {
-                $payload[$key] = $this->$key;
-            }
+            $payload[$key] = $this->$key;
         }
         return $payload;
     }
@@ -264,7 +263,7 @@ class Model extends APIObject implements \Serializable
     {
         $payload = $this->toArray();
         if (empty($payload['customAttributes'])) {
-            unset($payload['customAttributes']);
+            $payload['customAttributes'] = new \stdClass;
         }
         if ($update) {
             $url = $this->id;
@@ -292,16 +291,5 @@ class Model extends APIObject implements \Serializable
         $this->http_delete($modelId);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
-    }
-
-    // Functions implementing the Serializable interface
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    public function unserialize($serialized)
-    {
-        self::fromArray($this, unserialize($serialized));
     }
 }

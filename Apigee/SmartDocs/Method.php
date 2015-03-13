@@ -11,7 +11,7 @@ use Apigee\Exceptions\ParameterException;
  * @package Apigee\SmartDocs
  * @author djohnson
  */
-class Method extends APIObject implements \Serializable
+class Method extends APIObject
 {
 
     /**
@@ -413,9 +413,8 @@ class Method extends APIObject implements \Serializable
     public function save($update = FALSE)
     {
         $array_members = array('authSchemes', 'parameters', 'parameterGroups', 'tags', 'samples');
-        $object_members = array('body', 'response');
+        $object_members = array('body', 'response', 'customAttributes');
         $payload = $this->toArray(FALSE);
-        unset($payload['customAttributes']); // FIXME: when API is fixed (or correctly doc'ed) add this back in.
         foreach ($array_members as $key) {
             if (empty($payload[$key])) {
                 $payload[$key] = array();
@@ -453,16 +452,5 @@ class Method extends APIObject implements \Serializable
         $this->http_delete($methodUuid);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
-    }
-
-    // Functions implementing the Serializable interface
-    public function serialize()
-    {
-        return serialize($this->toArray());
-    }
-
-    public function unserialize($serialized)
-    {
-        self::fromArray($this, unserialize($serialized));
     }
 }
