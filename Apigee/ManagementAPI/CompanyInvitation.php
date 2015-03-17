@@ -76,7 +76,7 @@ class CompanyInvitation extends Base {
    * The url for the developer to accept invitation.
    * @var string.
    */
-  private $url;
+  private $responseUrl;
 
   /**
    * Gets the id of the Invitation object.
@@ -231,19 +231,19 @@ class CompanyInvitation extends Base {
   }
 
   /**
-   * Get the url of the invitation.
+   * Get the response url of the invitation.
    * @return string
    */
-  public function getUrl(){
-    return $this->url;
+  public function getResponseUrl(){
+    return $this->responseUrl;
   }
   
   /**
-   * Sets the url of the invitation.
-   * @param string $url
+   * Sets the reponse url of the invitation.
+   * @param string $responseUrl
    */
-  public function setUrl($url){
-    $this->url = $url;
+  public function setResponseUrl($url){
+    $this->responseUrl = $url;
   }
   
   /**
@@ -269,7 +269,7 @@ class CompanyInvitation extends Base {
     $this->state = '';
     $this->type = '';
     $this->sourceDeveloperEmail = '';
-    $this->url = '';
+    $this->responseUrl = '';
   }
 
   /**
@@ -404,7 +404,7 @@ class CompanyInvitation extends Base {
       $this->put($url, $payload, 'application/json; charset=utf-8', $headers);
     }
     else {
-      $headers['url'] = $this->url;
+      $headers['responseUrl'] = $this->responseUrl;
       $this->post($url, $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', $headers);
     }
     self::loadFromResponse($this, $this->responseObj);
