@@ -46,9 +46,6 @@ class Resource extends APIObject
     /** @var string */
     protected $apiRevisionId;
 
-    /** @var array */
-    protected $resources;
-
     /** @var string */
     protected $modelId;
 
@@ -68,7 +65,6 @@ class Resource extends APIObject
         $this->createdTime = 0;
         $this->modifiedTime = 0;
         $this->apiRevisionId = '';
-        $this->resources = array();
 
         $this->modelId = '';
     }
@@ -176,16 +172,6 @@ class Resource extends APIObject
         $this->apiRevisionId = $id;
     }
 
-    public function getResources()
-    {
-        return $this->resources;
-    }
-
-    public function setResources(array $resources)
-    {
-        $this->resources = $resources;
-    }
-
     /**
      * Takes values from an array and populates a Resource with them.
      *
@@ -208,15 +194,6 @@ class Resource extends APIObject
                 }
             }
         }
-        if (!empty($resource->resources)) {
-            foreach ($resource->resources as &$subresource) {
-                if (is_array($subresource)) {
-                    $resourceObj = new Resource($resource->getConfig(), $resource->modelId, $resource->getApiRevisionId());
-                    Resource::fromArray($resourceObj, $subresource);
-                    $subresource = $resourceObj;
-                }
-            }
-        }
     }
 
     /**
@@ -224,16 +201,26 @@ class Resource extends APIObject
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($verbose = TRUE)
     {
         $payload_keys = array(
             'id', 'name', 'displayName', 'description', 'baseUrl', 'path',
-            'parameters', 'methods', 'createdTime', 'modifiedTime', 'apiRevisionId',
-            'resources', 'modelId'
+            'parameters'
         );
+        if ($verbose) {
+            $payload_keys = array_merge($payload_keys, array(
+                'createdTime', 'modifiedTime', 'apiRevisionId', 'modelId'
+            ));
+        }
         $payload = array();
         foreach ($payload_keys as $key) {
             $payload[$key] = $this->$key;
+        }
+        if ($verbose && count($this->methods) > 0) {
+            $payload['methods'] = array();
+            foreach ($this->methods as $method) {
+                $payload['methods'][] = $method->toArray();
+            }
         }
         return $payload;
     }
@@ -293,9 +280,7 @@ class Resource extends APIObject
      */
     public function save($update = FALSE)
     {
-        $payload = $this->toArray();
-        unset($payload['createdTime']);
-        unset($payload['modelId']);
+        $payload = $this->toArray(FALSE);
         if ($update) {
             $url = $this->id;
             $method = 'put';

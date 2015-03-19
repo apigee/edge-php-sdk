@@ -58,7 +58,7 @@ class Revision extends APIObject
     protected $createdTime;
 
     /** @var int */
-    protected $modifiedAt;
+    protected $createdBy;
 
     /** @var string */
     protected $modifiedTime;
@@ -97,8 +97,8 @@ class Revision extends APIObject
         // Auto-generated fields (read-only)
         $this->id = '';
         $this->revisionNumber = 0;
-        $this->createdAt = 0;
-        $this->modifiedAt = 0;
+        $this->createdTime = 0;
+        $this->modifiedTime = 0;
         $this->createdBy = '';
         $this->modifiedBy = '';
         //$this->isactive = '';
@@ -279,12 +279,19 @@ class Revision extends APIObject
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'revisionNumber', 'createdTime', 'modifiedTime', 'apiId'
+                'id', 'revisionNumber', 'createdTime', 'modifiedTime', 'apiId',
+                'createdBy', 'modifiedBy'
             ));
         }
         $payload = array();
         foreach ($payload_keys as $key) {
             $payload[$key] = $this->$key;
+        }
+        if ($verbose && count($this->resources) > 0) {
+            $payload['resources'] = array();
+            foreach ($this->resources as $resource) {
+                $payload['resources'][] = $resource->toArray();
+            }
         }
         return $payload;
     }
