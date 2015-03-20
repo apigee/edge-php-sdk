@@ -88,6 +88,8 @@
 				<li><a href="class-Apigee.SmartDocs.Oauth2Credentials.html">Oauth2Credentials</a></li>
 				<li class="active"><a href="class-Apigee.SmartDocs.Resource.html">Resource</a></li>
 				<li><a href="class-Apigee.SmartDocs.Revision.html">Revision</a></li>
+				<li><a href="class-Apigee.SmartDocs.Security.html">Security</a></li>
+				<li><a href="class-Apigee.SmartDocs.SecurityItem.html">SecurityItem</a></li>
 				<li><a href="class-Apigee.SmartDocs.Template.html">Template</a></li>
 				<li><a href="class-Apigee.SmartDocs.TokenCredentials.html">TokenCredentials</a></li>
 			</ul>
@@ -145,8 +147,6 @@
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
 <b><span>Apigee\SmartDocs\Resource</span></b>			
-			 implements 
-<span>Serializable</span>
 			
 			
 		</dd>
@@ -167,8 +167,7 @@
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> <a href="source-class-Apigee.SmartDocs.Resource.html#8-335" title="Go to source code">SmartDocs/Resource.php</a>
-		<br>
+			<b>Located at</b> SmartDocs/Resource.php		<br>
 	</div>
 
 
@@ -187,7 +186,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_blankValues">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#55-74" title="Go to source code">blankValues</a>( )</code>
+		<code>blankValues( )</code>
 
 		<div class="description short">
 			<p>Returns this object to its pristine state.</p>
@@ -217,7 +216,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUuid">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#76-79" title="Go to source code">getUuid</a>( )</code>
+		<code>getUuid( )</code>
 
 		<div class="description short">
 			
@@ -247,7 +246,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setUuid">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#81-84" title="Go to source code">setUuid</a>( <span> <var>$uuid</var></span> )</code>
+		<code>setUuid( <span> <var>$uuid</var></span> )</code>
 
 		<div class="description short">
 			
@@ -277,7 +276,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#86-89" title="Go to source code">getName</a>( )</code>
+		<code>getName( )</code>
 
 		<div class="description short">
 			
@@ -307,7 +306,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#91-94" title="Go to source code">setName</a>( <span> <var>$name</var></span> )</code>
+		<code>setName( <span> <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -337,7 +336,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDisplayName">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#96-102" title="Go to source code">getDisplayName</a>( )</code>
+		<code>getDisplayName( )</code>
 
 		<div class="description short">
 			
@@ -367,7 +366,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDisplayName">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#104-107" title="Go to source code">setDisplayName</a>( <span> <var>$name</var></span> )</code>
+		<code>setDisplayName( <span> <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -397,7 +396,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDescription">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#109-112" title="Go to source code">getDescription</a>( )</code>
+		<code>getDescription( )</code>
 
 		<div class="description short">
 			
@@ -427,7 +426,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDescription">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#114-117" title="Go to source code">setDescription</a>( <span> <var>$desc</var></span> )</code>
+		<code>setDescription( <span> <var>$desc</var></span> )</code>
 
 		<div class="description short">
 			
@@ -457,7 +456,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getBaseUrl">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#119-122" title="Go to source code">getBaseUrl</a>( )</code>
+		<code>getBaseUrl( )</code>
 
 		<div class="description short">
 			
@@ -487,7 +486,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setBaseUrl">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#124-127" title="Go to source code">setBaseUrl</a>( <span>string <var>$url</var></span> )</code>
+		<code>setBaseUrl( <span>string <var>$url</var></span> )</code>
 
 		<div class="description short">
 			<p>Overwrites the base URL defined in $client.
@@ -526,7 +525,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPath">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#129-132" title="Go to source code">getPath</a>( )</code>
+		<code>getPath( )</code>
 
 		<div class="description short">
 			
@@ -556,7 +555,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setPath">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#134-137" title="Go to source code">setPath</a>( <span> <var>$path</var></span> )</code>
+		<code>setPath( <span> <var>$path</var></span> )</code>
 
 		<div class="description short">
 			
@@ -586,7 +585,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getParameters">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#139-142" title="Go to source code">getParameters</a>( )</code>
+		<code>getParameters( )</code>
 
 		<div class="description short">
 			
@@ -616,7 +615,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setParameters">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#144-147" title="Go to source code">setParameters</a>( <span>array <var>$parms</var></span> )</code>
+		<code>setParameters( <span>array <var>$parms</var></span> )</code>
 
 		<div class="description short">
 			
@@ -646,7 +645,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMethods">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#149-152" title="Go to source code">getMethods</a>( )</code>
+		<code>getMethods( )</code>
 
 		<div class="description short">
 			
@@ -676,7 +675,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setMethods">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#154-157" title="Go to source code">setMethods</a>( <span>array <var>$methods</var></span> )</code>
+		<code>setMethods( <span>array <var>$methods</var></span> )</code>
 
 		<div class="description short">
 			
@@ -706,7 +705,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedTime">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#159-162" title="Go to source code">getCreatedTime</a>( )</code>
+		<code>getCreatedTime( )</code>
 
 		<div class="description short">
 			
@@ -736,7 +735,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedTime">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#164-167" title="Go to source code">getModifiedTime</a>( )</code>
+		<code>getModifiedTime( )</code>
 
 		<div class="description short">
 			
@@ -766,7 +765,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApiRevisionId">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#169-172" title="Go to source code">getApiRevisionId</a>( )</code>
+		<code>getApiRevisionId( )</code>
 
 		<div class="description short">
 			
@@ -796,67 +795,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApiRevisionId">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#174-177" title="Go to source code">setApiRevisionId</a>( <span> <var>$id</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="getResources" id="_getResources">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_getResources">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#179-182" title="Go to source code">getResources</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="setResources" id="_setResources">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_setResources">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#184-187" title="Go to source code">setResources</a>( <span>array <var>$resources</var></span> )</code>
+		<code>setApiRevisionId( <span> <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -886,7 +825,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fromArray">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#189-220" title="Go to source code">fromArray</a>( <span><code><a href="class-Apigee.SmartDocs.Resource.html">Apigee\SmartDocs\Resource</a></code> <var>$resource</var></span>, <span>array <var>$array</var></span> )</code>
+		<code>fromArray( <span><code><a href="class-Apigee.SmartDocs.Resource.html">Apigee\SmartDocs\Resource</a></code> <var>$resource</var></span>, <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			<p>Takes values from an array and populates a Resource with them.</p>
@@ -923,7 +862,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#222-239" title="Go to source code">toArray</a>( )</code>
+		<code>toArray( <span> <var>$verbose</var> = <span class="php-keyword1">TRUE</span></span> )</code>
 
 		<div class="description short">
 			<p>Persists the current Resource as an array.</p>
@@ -957,7 +896,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#241-252" title="Go to source code">__construct</a>( <span>Apigee\SmartDocs\OrgCOnfig <var>$config</var></span>, <span> <var>$modelId</var></span>, <span> <var>$revisionUuid</var></span> )</code>
+		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$modelId</var></span>, <span>string <var>$revisionUuid</var></span> )</code>
 
 		<div class="description short">
 			<p>Constructs the proper values for the Apigee DocGen API.</p>
@@ -996,7 +935,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listResources">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#254-268" title="Go to source code">listResources</a>( )</code>
+		<code>listResources( )</code>
 
 		<div class="description short">
 			<p>Returns an array of Resources in the current revision of the current model.</p>
@@ -1030,7 +969,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#270-285" title="Go to source code">load</a>( <span>null|string <var>$resourceUuid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code>load( <span>null|string <var>$resourceUuid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Loads a single resource from the current revision.</p>
@@ -1069,7 +1008,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#287-306" title="Go to source code">save</a>( <span>boolean <var>$update</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code>save( <span>boolean <var>$update</var> = <span class="php-keyword1">FALSE</span></span> )</code>
 
 		<div class="description short">
 			<p>Saves (insert or update) a resource.</p>
@@ -1104,7 +1043,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#308-323" title="Go to source code">delete</a>( <span>null|string <var>$resourceUuid</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code>delete( <span>null|string <var>$resourceUuid</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Deletes a resource from the current revision.</p>
@@ -1128,70 +1067,6 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 
 
 
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="serialize" id="_serialize">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_serialize">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#326-329" title="Go to source code">serialize</a>( )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-				<h4>Implementation of</h4>
-				<div class="list"><code>Serializable::serialize()</code></div>
-		</div>
-		</div></td>
-	</tr>
-	<tr data-order="unserialize" id="_unserialize">
-
-		<td class="attributes"><code>
-			 public 
-
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_unserialize">#</a>
-		<code><a href="source-class-Apigee.SmartDocs.Resource.html#331-334" title="Go to source code">unserialize</a>( <span> <var>$serialized</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-
-				<h4>Implementation of</h4>
-				<div class="list"><code>Serializable::unserialize()</code></div>
 		</div>
 		</div></td>
 	</tr>
@@ -1233,8 +1108,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#16-17" title="Go to source code"><var>$id</var></a>
-
+<var>$id</var>
 			<div class="description short">
 				
 			</div>
@@ -1258,8 +1132,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#19-20" title="Go to source code"><var>$name</var></a>
-
+<var>$name</var>
 			<div class="description short">
 				
 			</div>
@@ -1283,8 +1156,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#22-23" title="Go to source code"><var>$displayName</var></a>
-
+<var>$displayName</var>
 			<div class="description short">
 				
 			</div>
@@ -1308,8 +1180,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#25-26" title="Go to source code"><var>$description</var></a>
-
+<var>$description</var>
 			<div class="description short">
 				
 			</div>
@@ -1333,8 +1204,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#28-29" title="Go to source code"><var>$baseUrl</var></a>
-
+<var>$baseUrl</var>
 			<div class="description short">
 				
 			</div>
@@ -1358,8 +1228,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#31-32" title="Go to source code"><var>$path</var></a>
-
+<var>$path</var>
 			<div class="description short">
 				
 			</div>
@@ -1383,8 +1252,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#34-35" title="Go to source code"><var>$parameters</var></a>
-
+<var>$parameters</var>
 			<div class="description short">
 				
 			</div>
@@ -1408,8 +1276,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#37-38" title="Go to source code"><var>$methods</var></a>
-
+<var>$methods</var>
 			<div class="description short">
 				
 			</div>
@@ -1433,8 +1300,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#40-41" title="Go to source code"><var>$createdTime</var></a>
-
+<var>$createdTime</var>
 			<div class="description short">
 				
 			</div>
@@ -1458,8 +1324,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#43-44" title="Go to source code"><var>$modifiedTime</var></a>
-
+<var>$modifiedTime</var>
 			<div class="description short">
 				
 			</div>
@@ -1483,8 +1348,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#46-47" title="Go to source code"><var>$apiRevisionId</var></a>
-
+<var>$apiRevisionId</var>
 			<div class="description short">
 				
 			</div>
@@ -1501,31 +1365,6 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="resources" id="$resources">
-		<td class="attributes"><code>
-			protected  
-			array
-		</code></td>
-
-		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#49-50" title="Go to source code"><var>$resources</var></a>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</td>
-		<td class="value">
-			<div>
-				<a href="#$resources" class="anchor">#</a>
-				<code></code>
-			</div>
-		</td>
-	</tr>
 	<tr data-order="modelId" id="$modelId">
 		<td class="attributes"><code>
 			protected  
@@ -1533,8 +1372,7 @@ You can restore the base URL by calling restoreBaseUrl().</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Apigee.SmartDocs.Resource.html#52-53" title="Go to source code"><var>$modelId</var></a>
-
+<var>$modelId</var>
 			<div class="description short">
 				
 			</div>
