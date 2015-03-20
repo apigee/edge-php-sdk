@@ -70,7 +70,7 @@ class DocGenResource extends APIObject
      * @return array
      */
     public function createResource($apiId, $revId, $payload) {
-        $this->post(rawurlencode($apiId) . '/revisions/' . $revId . '/resources', $payload, 'application/json; charset=utf-8');
+        $this->post(rawurlencode($apiId) . '/revisions/' . $revId . '/resources', $payload);
         return $this->responseObj;
     }
 
@@ -84,7 +84,7 @@ class DocGenResource extends APIObject
      * @return array
      */
     public function updateResource($apiId, $revId, $resId, $payload) {
-        $this->put(rawurlencode($apiId) . '/revisions/' . $revId . '/resources/' . $resId, $payload, 'application/json; charset=utf-8');
+        $this->put(rawurlencode($apiId) . '/revisions/' . $revId . '/resources/' . $resId, $payload);
         return $this->responseObj;
     }
 }

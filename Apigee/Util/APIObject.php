@@ -263,7 +263,7 @@ class APIObject
      * @param string $accept_mime_type
      * @param array $custom_headers
      */
-    public function get($uri = null, $accept_mime_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function get($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
@@ -284,7 +284,7 @@ class APIObject
      * @param string $accept_type
      * @param array $custom_headers
      */
-    public function post($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function post($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         self::preparePayload($content_type, $payload);
         $headers = array(
@@ -313,7 +313,7 @@ class APIObject
      * @param string $accept
      * @param array $custom_headers
      */
-    public function http_delete($uri = null, $accept = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function http_delete($uri = null, $accept = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept);
         foreach ($custom_headers as $key => $value) {
@@ -331,12 +331,16 @@ class APIObject
      * @param string|null $uri
      * @param mixed $payload
      * @param string $content_type
+     * @param string $accept_type
      * @param array $custom_headers
      */
-    public function put($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function put($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         self::preparePayload($content_type, $payload);
-        $headers = array('content-type' => $content_type);
+        $headers = array(
+            'accept' => $accept_type,
+            'content-type' => $content_type
+        );
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
         }
@@ -357,7 +361,7 @@ class APIObject
      * @param string $accept_mime_type
      * @param array $custom_headers
      */
-    public function head($uri = null, $accept_mime_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function head($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
@@ -384,7 +388,7 @@ class APIObject
      * @throws \Apigee\Exceptions\IllegalMethodException
      * @internal
      */
-    public function __call($method, $args)
+    public function __call($method, array $args)
     {
         $class = get_class();
 
@@ -412,7 +416,7 @@ class APIObject
      * @throws \Apigee\Exceptions\IllegalMethodException
      * @internal
      */
-    public static function __callstatic($method, $args)
+    public static function __callstatic($method, array $args)
     {
         $class = get_class();
 

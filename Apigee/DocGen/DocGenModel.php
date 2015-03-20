@@ -84,7 +84,7 @@ class DocGenModel extends APIObject
      * @return array
      */
     public function importApigeeJSON($apiId, $json) {
-        $this->post(rawurlencode($apiId) . '/revisions?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
+        $this->post(rawurlencode($apiId) . '/revisions?action=import&format=apimodel', $json);
         return $this->responseObj;
     }
 

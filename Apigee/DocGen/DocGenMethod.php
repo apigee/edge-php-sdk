@@ -45,7 +45,7 @@ class DocGenMethod extends APIObject
     public function updateMethod($apiId, $revisionId, $resourceId, $methodId, $payload)
     {
         $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
-        $this->put($path, $payload, 'application/json', array(), array());
+        $this->put($path, $payload);
         return $this->responseObj;
     }
 
@@ -60,7 +60,7 @@ class DocGenMethod extends APIObject
      */
     public function createMethod($apiId, $revisionId, $resourceId, $payload)
     {
-        $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+        $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload);
         return $this->responseObj;
     }
 

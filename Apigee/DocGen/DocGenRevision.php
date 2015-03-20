@@ -68,7 +68,7 @@ class DocGenRevision extends APIObject
     public function addAuth($apiId, $rev, $auth)
     {
         $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
-        $this->post($path, $auth, 'application/json; charset=utf-8');
+        $this->post($path, $auth);
         return $this->responseObj;
     }
 
@@ -83,7 +83,7 @@ class DocGenRevision extends APIObject
     public function updateAuth($apiId, $rev, $auth)
     {
         $path = rawurlencode($apiId) . '/revisions/' . $rev . '/authschemes';
-        $this->post($path, $auth, 'application/json; charset=utf-8');
+        $this->post($path, $auth);
         return $this->responseObj;
     }
 
@@ -150,7 +150,7 @@ class DocGenRevision extends APIObject
      */
     public function newRevision($apiId, $payload)
     {
-        $this->post(rawurlencode($apiId) . '/revisions', $payload, 'application/json; charset=utf-8');
+        $this->post(rawurlencode($apiId) . '/revisions', $payload);
         return $this->responseObj;
     }
 
@@ -162,7 +162,7 @@ class DocGenRevision extends APIObject
      */
     public function updateRevision($apiId, $revId, $payload)
     {
-        $this->put(rawurlencode($apiId) . '/revisions/' . $revId, $payload, 'application/json; charset=utf-8');
+        $this->put(rawurlencode($apiId) . '/revisions/' . $revId, $payload);
         return $this->responseObj;
     }
 
