@@ -142,7 +142,7 @@ class Resource extends APIObject
         $this->parameters = $parms;
     }
 
-    public function getMethods()
+    public function &getMethods()
     {
         return $this->methods;
     }

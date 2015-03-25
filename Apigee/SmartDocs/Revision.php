@@ -225,7 +225,7 @@ class Revision extends APIObject
         return $this->revisionNumber;
     }
 
-    public function getResources()
+    public function &getResources()
     {
         return $this->resources;
     }

@@ -51,6 +51,12 @@ class Model extends APIObject
     private $metadata;
 
     /**
+     * @var \Apigee\SmartDocs\Revision|null
+     *      This is not auto-populated, but may be externally set.
+     */
+    private $activeRevision;
+
+    /**
      * Returns the current Model to its pristine state.
      */
     protected function blankValues()
@@ -66,6 +72,7 @@ class Model extends APIObject
         $this->createdTime = 0;
         $this->modifiedTime = 0;
         $this->latestRevisionNumber = -1; // Indicates that this value is unset.
+        $this->activeRevision = null;
     }
 
     /* Accessors (getters/setters) */
@@ -180,6 +187,16 @@ class Model extends APIObject
         return NULL;
     }
 
+    public function getActiveRevision() {
+        return $this->activeRevision;
+    }
+    public function setActiveRevision(Revision $revision) {
+        $this->activeRevision = $revision;
+    }
+    public function clearActiveRevision() {
+        $this->activeRevision = null;
+    }
+
     /**
      * Takes values from an array and populates a Model with them.
      *
@@ -190,6 +207,11 @@ class Model extends APIObject
     {
         foreach ($array as $key => $value) {
             if (property_exists($model, $key)) {
+                if ($key == 'activeRevision' && is_array($value) && !empty($value)) {
+                    $revision = new Revision($model->getConfig(), $model->getUuid());
+                    Revision::fromArray($revision, $value);
+                    $value = $revision;
+                }
                 $model->$key = $value;
             }
         }
@@ -205,12 +227,17 @@ class Model extends APIObject
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
-                'id', 'latestRevisionNumber', 'tags', 'createdTime', 'modifiedTime', 'metadata'
+                'id', 'latestRevisionNumber', 'tags', 'createdTime', 'modifiedTime', 'metadata',
+                'activeRevision'
             ));
         }
         $payload = array();
         foreach ($payload_keys as $key) {
-            $payload[$key] = $this->$key;
+            $value = $this->$key;
+            if ($key == 'activeRevision' && $value instanceof Revision) {
+                $value = $value->toArray();
+            }
+            $payload[$key] = $value;
         }
         return $payload;
     }
