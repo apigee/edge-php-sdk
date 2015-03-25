@@ -349,9 +349,17 @@ class BillingDocument extends Base\BaseObject
         }
     }
 
-    public function searchBillingDoc($bill_doc, $developer_id)
+    /**
+     * @param $bill_doc_number
+     * @param $developer_id
+     * @return array
+     *
+     * @throws MintApiException
+     */
+    public function searchBillingDoc($bill_doc_number, $developer_id)
     {
 
+        $docs = array();
         try {
             $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/search-billing-documents';
 
@@ -360,26 +368,25 @@ class BillingDocument extends Base\BaseObject
             $devCriteria->orgId = $this->config->orgName;
             $mintCriteria = array(
                 'devCriteria' => array($devCriteria,),
-                'documentNumber' => $bill_doc
+                'documentNumber' => $bill_doc_number
             );
             $this->setBaseUrl($url);
             $this->post(null, $mintCriteria);
             $this->restoreBaseUrl();
             $response = $this->responseObj;
 
-            $docs = array();
             foreach ($response[$this->wrapper_tag] as $doc) {
                 $bill_doc = new BillingDocument($this->config);
                 $bill_doc->loadFromRawData($doc);
                 $docs[] = $bill_doc;
             }
-            return $docs;
             //return $this->responseObj;
         } catch (ResponseException $re) {
             if (MintApiException::isMintExceptionCode($re)) {
                 throw new MintApiException($re);
             }
         }
+        return $docs;
     }
 
     protected function setFile($file)

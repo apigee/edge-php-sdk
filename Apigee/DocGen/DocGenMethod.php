@@ -4,6 +4,8 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
+ * This class is deprecated. Please use Apigee\SmartDocs\Method instead.
+ *
  * @author bhasselbeck
  */
 
@@ -12,7 +14,12 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
-class DocGenMethod extends APIObject implements DocGenMethodInterface
+/**
+ * Class DocGenMethod
+ * @deprecated
+ * @package Apigee\DocGen
+ */
+class DocGenMethod extends APIObject
 {
 
     /**
@@ -38,7 +45,7 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
     public function updateMethod($apiId, $revisionId, $resourceId, $methodId, $payload)
     {
         $path = rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods/' . $methodId;
-        $this->put($path, $payload, 'application/json', array(), array());
+        $this->put($path, $payload);
         return $this->responseObj;
     }
 
@@ -53,7 +60,7 @@ class DocGenMethod extends APIObject implements DocGenMethodInterface
      */
     public function createMethod($apiId, $revisionId, $resourceId, $payload)
     {
-        $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload, 'application/json; charset=utf-8');
+        $this->post(rawurlencode($apiId) . '/revisions/' . $revisionId . '/resources/' . $resourceId . '/methods', $payload);
         return $this->responseObj;
     }
 

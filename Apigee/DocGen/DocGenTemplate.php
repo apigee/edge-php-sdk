@@ -4,6 +4,8 @@
  * @file
  * Reads/Writes to and from the Apigee DocGen modeling API
  *
+ * This class is deprecated. Please use Apigee\SmartDocs\Template instead.
+ *
  * @author bhasselbeck
  */
 
@@ -12,7 +14,12 @@ namespace Apigee\DocGen;
 use Apigee\Util\APIObject;
 use Apigee\Util\OrgConfig;
 
-class DocGenTemplate extends APIObject implements DocGenTemplateInterface
+/**
+ * Class DocGenTemplate
+ * @deprecated
+ * @package Apigee\DocGen
+ */
+class DocGenTemplate extends APIObject
 {
 
     /**
@@ -28,7 +35,9 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
     /**
      * Gets the template HTML that lists all of the operations of a given model.
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $name
+     * @return string
      */
     public function getIndexTemplate($apiId, $name)
     {
@@ -39,7 +48,9 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
     /**
      * Gets the operation template for a specific model and template name
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $name
+     * @return string
      */
     public function getOperationTemplate($apiId, $name)
     {
@@ -50,7 +61,11 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
     /**
      * Saves a type of template for a specific model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $type
+     * @param string $name
+     * @param string $html
+     * @return string
      */
     public function saveTemplate($apiId, $type, $name, $html)
     {
@@ -61,7 +76,11 @@ class DocGenTemplate extends APIObject implements DocGenTemplateInterface
     /**
      * Updates a type of template for a specific model
      *
-     * {@inheritDoc}
+     * @param string $apiId
+     * @param string $type
+     * @param string $name
+     * @param string $html
+     * @return string
      */
     public function updateTemplate($apiId, $type, $name, $html)
     {

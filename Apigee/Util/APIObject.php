@@ -80,7 +80,7 @@ class APIObject
      */
     private $cachedBaseUrl;
 
-  /**
+    /**
      * Initializes the OrgConfig for this class.
      *
      * @param \Apigee\Util\OrgConfig $config
@@ -174,7 +174,7 @@ class APIObject
                 'code' => $e->getErrorNo(),
                 'code_status' => $e->getError(),
                 'r_method' => $request->getUrl(),
-                'r_resource' =>  $request->getRawHeaders(),
+                'r_resource' => $request->getRawHeaders(),
                 'r_scheme' => strtoupper(str_replace('https', 'http', $request->getScheme())) . $request->getProtocolVersion(),
                 'r_headers' => $header_string,
             );
@@ -221,6 +221,7 @@ class APIObject
             } else {
                 $message = 'API returned HTTP code of ' . $this->responseCode . ' when fetching from ' . $uri;
             }
+
             DebugData::$exception = $message;
             $this->debugCallback(DebugData::toArray());
             self::$logger->error($this->responseText);
@@ -243,14 +244,15 @@ class APIObject
         $this->debugCallback(DebugData::toArray());
     }
 
-    private function debugCallback(array $debug) {
-      if (is_array($this->config->debug_callbacks)) {
-        foreach ($this->config->debug_callbacks as $callback) {
-          if (is_callable($callback)) {
-            call_user_func($callback, $debug);
-          }
+    private function debugCallback(array $debug)
+    {
+        if (is_array($this->config->debug_callbacks)) {
+            foreach ($this->config->debug_callbacks as $callback) {
+                if (is_callable($callback)) {
+                    call_user_func($callback, $debug);
+                }
+            }
         }
-      }
     }
 
     /**
@@ -261,7 +263,7 @@ class APIObject
      * @param string $accept_mime_type
      * @param array $custom_headers
      */
-    public function get($uri = null, $accept_mime_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function get($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
@@ -282,7 +284,7 @@ class APIObject
      * @param string $accept_type
      * @param array $custom_headers
      */
-    public function post($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function post($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         self::preparePayload($content_type, $payload);
         $headers = array(
@@ -311,7 +313,7 @@ class APIObject
      * @param string $accept
      * @param array $custom_headers
      */
-    public function http_delete($uri = null, $accept = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function http_delete($uri = null, $accept = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept);
         foreach ($custom_headers as $key => $value) {
@@ -329,12 +331,16 @@ class APIObject
      * @param string|null $uri
      * @param mixed $payload
      * @param string $content_type
+     * @param string $accept_type
      * @param array $custom_headers
      */
-    public function put($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function put($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         self::preparePayload($content_type, $payload);
-        $headers = array('content-type' => $content_type);
+        $headers = array(
+            'accept' => $accept_type,
+            'content-type' => $content_type
+        );
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
         }
@@ -355,7 +361,7 @@ class APIObject
      * @param string $accept_mime_type
      * @param array $custom_headers
      */
-    public function head($uri = null, $accept_mime_type = 'application/json; charset=utf-8', $custom_headers = array(), $options = array())
+    public function head($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
     {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
@@ -382,7 +388,7 @@ class APIObject
      * @throws \Apigee\Exceptions\IllegalMethodException
      * @internal
      */
-    public function __call($method, $args)
+    public function __call($method, array $args)
     {
         $class = get_class();
 
@@ -410,7 +416,7 @@ class APIObject
      * @throws \Apigee\Exceptions\IllegalMethodException
      * @internal
      */
-    public static function __callstatic($method, $args)
+    public static function __callstatic($method, array $args)
     {
         $class = get_class();
 
@@ -453,7 +459,6 @@ class APIObject
             207 => 'Multi-Status', // WebDAV
             208 => 'Already Reported', // WebDAV
             226 => 'IM Used',
-
             300 => 'Multiple Choices',
             301 => 'Moved Permanently',
             302 => 'Found',
@@ -463,7 +468,6 @@ class APIObject
             306 => 'Switch Proxy',
             307 => 'Temporary Redirect',
             308 => 'Permanent Redirect',
-
             400 => 'Bad Request',
             401 => 'Unauthorized',
             402 => 'Payment Required',

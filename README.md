@@ -85,7 +85,7 @@ try {
     print $my_app->getName() . "\n";
   }
 }
-catch (Apigee\Exceptions\ResponseExeption $e) {
+catch (Apigee\Exceptions\ResponseException $e) {
   print $e->getMessage();
 }
 ```

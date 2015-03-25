@@ -962,7 +962,7 @@ abstract class AbstractApp extends Base
             $payload['apiProducts'] = $this->getApiProducts();
         }
 
-        if (!$is_update && $this->keyExpiry != -1) {
+        if (!$is_update && $this->keyExpiry > 0) {
             $payload['keyExpiresIn'] = $this->keyExpiry;
         }
 
