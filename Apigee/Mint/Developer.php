@@ -307,7 +307,7 @@ class Developer extends Base\BaseObject
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
      */
-    public function createPayment(array $parameters, $address, $developer_or_company_id = NULL)
+    public function createPayment(array $parameters, $address, array $headers, $developer_or_company_id = NULL)
     {
       if($developer_or_company_id == NULL) {
         $id = $this->email;
@@ -320,7 +320,7 @@ class Developer extends Base\BaseObject
             'query' => $parameters,
         );
         $url = rawurlencode($id) . '/payment';
-        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
+        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', $headers, $options);
         if ($this->responseCode == 200) {
             // Make sure the response did not fail, where success value is
             // FALSE from WorldPay.
