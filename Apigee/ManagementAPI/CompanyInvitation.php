@@ -401,7 +401,7 @@ class CompanyInvitation extends Base {
       'source' => $this->sourceDeveloperEmail,
     );
     if ($force_update) {
-      $this->put($url, $payload, 'application/json; charset=utf-8', $headers);
+      $this->put($url, $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', $headers);
     }
     else {
       $headers['responseUrl'] = $this->responseUrl;
