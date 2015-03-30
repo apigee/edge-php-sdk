@@ -104,6 +104,7 @@ class Method extends APIObject
         $this->parameterGroups = array();
         $this->customAttributes = array();
         $this->tags = array();
+        $this->metadata = array();
 
         $this->createdTime = 0;
         $this->modifiedTime = 0;

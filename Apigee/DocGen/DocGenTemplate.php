@@ -85,7 +85,7 @@ class DocGenTemplate extends APIObject
     public function updateTemplate($apiId, $type, $name, $html)
     {
         $uri = rawurlencode($apiId) . '/templates/' . $name . '?type=' . $type;
-        $this->put($uri, $html, 'text/html');
+        $this->put($uri, $html, 'text/html', 'text/html');
         return $this->responseText;
     }
 
