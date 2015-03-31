@@ -319,7 +319,7 @@ class CompanyInvitation extends Base {
   private static function loadInvitationArray($reponseobj, \Apigee\Util\OrgConfig $config) {
 
     $invitations = array();
-    foreach ($reponseobj['company'] as $response) {
+    foreach ($reponseobj['invitations'] as $response) {
       $invitation = new CompanyInvitation($config);
       self::loadFromResponse($invitation, $response);
       $invitations[] = $invitation;
