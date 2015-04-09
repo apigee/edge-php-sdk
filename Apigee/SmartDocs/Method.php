@@ -352,7 +352,7 @@ class Method extends APIObject
         $payload_keys = array(
             'name', 'verb', 'authSchemes', 'body', 'response', 'samples',
             'displayName', 'description', 'parameters', 'parameterGroups',
-            'customAttributes', 'tags'
+            'customAttributes', 'tags', 'path'
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
