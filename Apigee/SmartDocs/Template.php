@@ -5,6 +5,7 @@ namespace Apigee\SmartDocs;
 use Apigee\Util\OrgConfig;
 use Apigee\Util\APIObject;
 use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptoins\ResponseException;
 
 /**
  * Loads and saves template HTML.
@@ -65,7 +66,17 @@ class Template extends APIObject
             $uri = '?type=' . $type . '&name=' . urlencode($name);
             $method = 'post';
         }
-        $this->$method($uri, $html, 'text/html', 'text/html');
+        try {
+            $this->$method($uri, $html, 'text/html', 'text/html');
+        } catch (ResponseException $e) {
+            // If update failed, try insert.
+            if ($update && $e->getCode() == 404) {
+                $this->save($name, $type, $html, FALSE);
+            }
+            else {
+                throw $e;
+            }
+        }
         return $this->responseText;
     }
 
