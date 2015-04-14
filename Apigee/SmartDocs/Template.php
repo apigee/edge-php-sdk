@@ -5,7 +5,7 @@ namespace Apigee\SmartDocs;
 use Apigee\Util\OrgConfig;
 use Apigee\Util\APIObject;
 use Apigee\Exceptions\ParameterException;
-use Apigee\Exceptoins\ResponseException;
+use Apigee\Exceptions\ResponseException;
 
 /**
  * Loads and saves template HTML.
