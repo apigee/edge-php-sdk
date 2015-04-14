@@ -54,7 +54,7 @@ class Template extends APIObject
      * @return string
      * @throws ParameterException
      */
-    public function save($name, $type, $html, $update = FALSE)
+    public function save($name, $type, $html, $update = false)
     {
         if ($type != 'index' && $type != 'method') {
             throw new ParameterException('Invalid template type ‘' . $type . '’ (valid values are ‘index’ and ‘method’).');
@@ -71,7 +71,7 @@ class Template extends APIObject
         } catch (ResponseException $e) {
             // If update failed, try insert.
             if ($update && $e->getCode() == 404) {
-                $this->save($name, $type, $html, FALSE);
+                $this->save($name, $type, $html, false);
             }
             else {
                 throw $e;
