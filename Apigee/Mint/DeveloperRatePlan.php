@@ -218,8 +218,8 @@ class DeveloperRatePlan extends Base\BaseObject
     {
         $obj = array(
             'developer' => array('id' => $this->dev),
-            'endDate' => $this->getEndDateTime()->format('Y-m-d H:i:s'),
-            'startDate' => $this->getStartDateTime()->format('Y-m-d H:i:s'),
+            'endDate' => $this->getEndDateTime() instanceof DateTime ? $this->getEndDateTime()->format('Y-m-d H:i:s') : '',
+            'startDate' => $this->getStartDateTime() instanceof DateTime ? $this->getStartDateTime()->format('Y-m-d H:i:s') : '',
             'id' => $this->id,
             'ratePlan' => null
         );
