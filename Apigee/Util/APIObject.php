@@ -4,6 +4,7 @@ namespace Apigee\Util;
 
 use Apigee\Exceptions\ResponseException;
 use Apigee\Exceptions\IllegalMethodException;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Base class for API object classes. Handles some of the OrgConfig
@@ -81,6 +82,11 @@ class APIObject
     private $cachedBaseUrl;
 
     /**
+     * @var array
+     */
+    private $subscribers;
+
+    /**
      * Initializes the OrgConfig for this class.
      *
      * @param \Apigee\Util\OrgConfig $config
@@ -88,13 +94,17 @@ class APIObject
      */
     protected function init(\Apigee\Util\OrgConfig $config, $base_url)
     {
+        $this->subscribers = array();
         $this->config =& $config;
         $base_url = rtrim($config->endpoint, '/') . '/' . ltrim($base_url, '/');
         $config->http_options += array('follow_location' => true);
         $this->client = new \Guzzle\Http\Client($base_url, array('redirect.disable' => !$config->http_options['follow_location']));
         if (is_array($config->subscribers)) {
             foreach ($config->subscribers as $subscriber) {
-                $this->client->addSubscriber($subscriber);
+                if ($subscriber instanceof EventSubscriberInterface) {
+                    $this->client->addSubscriber($subscriber);
+                    $this->subscribers[] = $subscriber;
+                }
             }
         }
         if (!empty($config->user_agent)) {
@@ -104,7 +114,34 @@ class APIObject
     }
 
     /**
+     * Clears any subscribers that may have been attached to the HTTP client.
+     */
+    protected function clearSubscribers()
+    {
+        if (!($this->client instanceof \Guzzle\Http\Client) || empty($this->subscribers)) {
+            return;
+        }
+        foreach ($this->subscribers as $subscriber) {
+            $this->client->getEventDispatcher()->removeSubscriber($subscriber);
+        }
+    }
+
+    /**
+     * Restores any subscribers that were cleared by self::clearSubscribers().
+     */
+    protected function restoreSubscribers()
+    {
+        if (!($this->client instanceof \Guzzle\Http\Client) || empty($this->subscribers)) {
+            return;
+        }
+        foreach ($this->subscribers as $subscriber) {
+            $this->client->addSubscriber($subscriber);
+        }
+    }
+
+    /**
      * Overwrites the base URL defined in $client.
+     *
      * You can restore the base URL by calling restoreBaseUrl().
      *
      * @param string $base_url
