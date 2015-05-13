@@ -86,9 +86,11 @@ class Template extends APIObject
         }
         // Make sure that update 404 errors are not logged by replacing the
         // logger with a dummy that routes errors to /dev/null.
-        if ($update && !(self::$logger instanceof \Psr\Log\NullLogger)) {
-            $cached_logger = self::$logger;
-            self::$logger = new \Psr\Log\NullLogger();
+        if ($update) {
+            if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+                $cached_logger = self::$logger;
+                self::$logger = new \Psr\Log\NullLogger();
+            }
             $this->clearSubscribers();
         }
 
@@ -97,12 +99,16 @@ class Template extends APIObject
             // Restore logger if it was cached.
             if (isset($cached_logger)) {
                 self::$logger = $cached_logger;
-                $this->restoreSubscribers();
+            }
+            if ($update) {
+               $this->restoreSubscribers();
             }
         } catch (ResponseException $e) {
             // Restore logger if it was cached.
             if (isset($cached_logger)) {
                 self::$logger = $cached_logger;
+            }
+            if ($update) {
                 $this->restoreSubscribers();
             }
             // If update failed, try insert.
@@ -110,6 +116,12 @@ class Template extends APIObject
                 $this->save($name, $type, $html, false);
             }
             else {
+                // If we had disabled logging, let's log this incident now that
+                // we have restored the logger, since this isn't just a
+                // PUT-to-POST conversion.
+                if (isset($cached_logger)) {
+                    self::$logger->error($this->responseText);
+                }
                 throw $e;
             }
         }
