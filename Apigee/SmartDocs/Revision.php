@@ -140,6 +140,11 @@ class Revision extends APIObject
         $this->description = $desc;
     }
 
+    public function getApiName()
+    {
+        return $this->apiName;
+    }
+
     public function getReleaseVersion()
     {
         return $this->releaseVersion;
@@ -301,12 +306,15 @@ class Revision extends APIObject
      *
      * @param OrgConfig $config
      * @param string $modelId
+     * @param string $modelName
      */
-    public function __construct(OrgConfig $config, $modelId)
+    public function __construct(OrgConfig $config, $modelId, $modelName = "")
     {
         $this->blankValues();
         $this->apiId = $modelId;
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
+        $this->apiName = $modelName;
+//        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
+      $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/');
     }
 
     /**
@@ -320,7 +328,7 @@ class Revision extends APIObject
         $revisions = array();
         $this->get();
         foreach ($this->responseObj as $key => $blob) {
-            $revision = new Revision($this->getConfig(), $this->apiId);
+            $revision = new Revision($this->getConfig(), $this->apiId, $this->apiName);
             self::fromArray($revision, $blob);
             $revisions[$key] = $revision;
         }
@@ -343,7 +351,7 @@ class Revision extends APIObject
         if (is_int($revisionId) && $revisionId < 1) {
             throw new ParameterException('Cannot load a revision number less than 1.');
         }
-        $this->get($revisionId . '?expand=true');
+        $this->get(rawurlencode($this->apiId) . '/revisions/' . $revisionId . '?expand=true');
         self::fromArray($this, $this->responseObj);
     }
 
@@ -401,11 +409,27 @@ class Revision extends APIObject
      */
     public function importSwagger($swaggerUrl)
     {
+        $combinedString = rawurlencode($this->apiId) . '/revisions?action=import&format=swagger';
         $this->blankValues();
-        $this->post('?action=import&format=swagger', 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
+        $this->post($combinedString, 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
     }
+
+  /**
+   * Imports a model revision from a WADL document.
+   *
+   * @param string $modelId
+   * @param string $xml
+   */
+  public function importSwaggerFile($yaml)
+  {
+    $combinedString = $this->apiName . '/import/file?format=swagger';
+    $this->blankValues();
+    $this->post($combinedString, $yaml, 'application/yaml; charset=utf-8');
+    $response = $this->responseObj;
+    self::fromArray($this, $response);
+  }
 
     /**
      * Imports a model revision from a WADL document.
@@ -416,7 +440,7 @@ class Revision extends APIObject
     public function importWadl($xml)
     {
         $this->blankValues();
-        $this->post('?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
+        $this->post('edge/revisions?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
     }
