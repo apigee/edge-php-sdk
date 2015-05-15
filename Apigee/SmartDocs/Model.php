@@ -354,17 +354,60 @@ class Model extends APIObject
      */
     public function importFile($document, $document_format, $content_type, $modelId = null)
     {
-      $modelId = $modelId ?: $this->id;
-      if (empty($modelId)) {
-        throw new ParameterException('Cannot import a model with no ID.');
-      }
-      // Clear out object, we will get all attributes back from server.
-      $this->blankValues();
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+          throw new ParameterException('Cannot import a model with no ID.');
+        }
+        // Clear out object, we will get all attributes back from server.
+        $this->blankValues();
 
-      $this->post($modelId . '/import/url?format=' . $document_format, $document, $content_type);
-      $response = $this->responseObj;
-      self::fromArray($this, $response);
+        $this->post($modelId . '/import/url?format=' . $document_format, $document, $content_type);
+        $response = $this->responseObj;
+        self::fromArray($this, $response);
     }
 
-  
+    /**
+     * Import a model from a URL.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $url The URL to get the model from.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     * or 'apimodel'.
+     * @param string $content_type is the mime type, which valid values depend
+     * on the document format:
+     *   wadl: 'application/xml'
+     *   swagger: 'application/yaml' or 'application/json'
+     *   apimodel: 'application/json'
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     * from this object.
+     *
+     * @throws ParameterException, RequestException
+     */
+    public function importUrl($url, $document_format, $content_type, $modelId = null)
+    {
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+          throw new ParameterException('Cannot import a model with no ID.');
+        }
+
+        // Try to get the URL.
+        $url_client = new \Guzzle\Http\Client();
+        $document = $url_client->get($url)->send();
+
+        // Clear out object, we will get all attributes back from server.
+        $this->blankValues();
+
+        $this->importFile($modelId . '/import/url?format=' . $document_format, $document, $content_type);
+        $response = $this->responseObj;
+        self::fromArray($this, $response);
+    }
+
+
 }
