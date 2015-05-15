@@ -431,61 +431,68 @@ class Revision extends APIObject
     self::fromArray($this, $response);
   }
 
-    /**
-     * Imports a model revision from a WADL document.
-     *
-     * @param string $modelId
-     * @param string $xml
-     */
-    public function importWadl($xml)
-    {
-        $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
-        $this->blankValues();
-        $this->post($combinedString, $xml, 'application/xml; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-    public function importWadlUrl($wadlUrl)
-    {
+  /**
+   * Imports a model revision from a WADL document.
+   * @deprecated Use Model.importFile() or Model.importUrl() instead.
+   *
+   * @param string $xml
+   */
+  public function importWadl($xml)
+  {
+      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
+      $this->blankValues();
+      $this->post($combinedString, $xml, 'application/xml; charset=utf-8');
+      $response = $this->responseObj;
+      self::fromArray($this, $response);
+  }
+
+  /**
+   * Imports a model revision from a WADL document.
+   * @deprecated Use Model.importFile() or Model.importUrl() instead.
+   *
+   * @param string $wadlUrl
+   */
+  public function importWadlUrl($wadlUrl)
+  {
       $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
       $this->blankValues();
       $this->post($combinedString, 'URL=' . $wadlUrl, 'application/xml; charset=utf-8', 'application/xml; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
+          $response = $this->responseObj;
+          self::fromArray($this, $response);
+  }
 
-    /**
-     * Imports a model revision from an Apigee Internal JSON document.
-     *
-     * @param string $modelId
-     * @param string $json
-     */
-    public function importApigeeJson($json)
-    {
-        $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=apimodel';
-        $this->blankValues();
-        $this->post($combinedString, $json, 'application/json; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
+  /**
+   * Imports a model revision from an Apigee Internal JSON document.
+   * @deprecated Use Model.importFile() or Model.importUrl() instead.
+   *
+   * @param string $json
+   */
+  public function importApigeeJson($json)
+  {
+      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=apimodel';
+      $this->blankValues();
+      $this->post($combinedString, $json, 'application/json; charset=utf-8');
+      $response = $this->responseObj;
+      self::fromArray($this, $response);
+  }
 
-    /**
-     * Exports a SmartDocs revision as JSON (default) or an XML-based format.
-     *
-     * @param string $modelId
-     * @param string $format
-     * @param int|null $revision
-     *
-     * @return string
-     */
-    public function export($format, $revision = NULL)
-    {
-        $revision = $revision ?: 'latest';
-        if ($format == 'json' || empty($format)) {
-            $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes');
-        } else {
-            $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes&format=' . $format, 'text/xml');
-        }
-        return $this->responseText;
-    }
+  /**
+   * Exports a SmartDocs revision as JSON (default) or an XML-based format.
+   *
+   * @param string $modelId
+   * @param string $format
+   * @param int|null $revision
+   *
+   * @return string
+   */
+  public function export($format, $revision = NULL)
+  {
+      $revision = $revision ?: 'latest';
+      if ($format == 'json' || empty($format)) {
+          $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes');
+      } else {
+          $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes&format=' . $format, 'text/xml');
+      }
+      return $this->responseText;
+  }
 }
