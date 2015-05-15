@@ -439,8 +439,17 @@ class Revision extends APIObject
      */
     public function importWadl($xml)
     {
+        $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
         $this->blankValues();
-        $this->post('edge/revisions?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
+        $this->post($combinedString, $xml, 'application/xml; charset=utf-8');
+        $response = $this->responseObj;
+        self::fromArray($this, $response);
+    }
+    public function importWadlUrl($wadlUrl)
+    {
+      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
+      $this->blankValues();
+      $this->post($combinedString, 'URL=' . $wadlUrl, 'application/xml; charset=utf-8', 'application/xml; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
     }
@@ -453,8 +462,9 @@ class Revision extends APIObject
      */
     public function importApigeeJson($json)
     {
+        $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=apimodel';
         $this->blankValues();
-        $this->post('?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
+        $this->post($combinedString, $json, 'application/json; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
     }
@@ -472,9 +482,9 @@ class Revision extends APIObject
     {
         $revision = $revision ?: 'latest';
         if ($format == 'json' || empty($format)) {
-            $this->get($revision . '?expand=yes');
+            $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes');
         } else {
-            $this->get($revision . '?expand=yes&format=' . $format, 'text/xml');
+            $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes&format=' . $format, 'text/xml');
         }
         return $this->responseText;
     }
