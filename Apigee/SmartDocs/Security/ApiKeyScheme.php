@@ -69,9 +69,9 @@ class ApiKeyScheme extends SecurityScheme
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray($is_update = false)
     {
-        return parent::toArray() + array(
+        return parent::toArray($is_update) + array(
             'paramName' => $this->paramName,
             'in' => $this->in,
         );

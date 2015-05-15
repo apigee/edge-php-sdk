@@ -60,12 +60,14 @@ abstract class SecurityScheme
      *
      * @return array
      */
-    public function toArray()
+    public function toArray($is_update = false)
     {
-        return array(
-            'type' => $this->getType(),
-            'name' => $this->name,
-        );
+        $returnVal = array();
+        if (!$is_update) {
+            $returnVal['type'] = $this->getType();
+        }
+        $returnVal['name'] = $this->name;
+        return $returnVal;
     }
 
     /**

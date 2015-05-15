@@ -81,14 +81,10 @@ class Security extends APIObject {
      */
     public function save(SecurityScheme $scheme, $is_update = false)
     {
-        $payload = $scheme->toArray();
+        $payload = $scheme->toArray($is_update);
         if ($is_update) {
             $method = 'put';
             $path = rawurlencode($scheme->getName());
-            unset($payload['type']);
-            if (array_key_exists('grantType', $payload)) {
-                unset($payload['grantType']);
-            }
         }
         else {
             $method = 'post';
