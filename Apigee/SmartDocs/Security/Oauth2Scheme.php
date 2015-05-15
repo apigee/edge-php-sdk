@@ -42,6 +42,21 @@ class Oauth2Scheme extends SecurityScheme {
     protected $scopes;
 
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $parameters)
+    {
+        // Ensure that scopes is saved as an object.
+        if (array_key_exists('scopes', $parameters)) {
+            $parameters['scopes'] = (object) $parameters['scopes'];
+        }
+        else {
+            $parameters['scopes'] = new \stdClass();
+        }
+        parent::__construct($parameters);
+    }
+
+    /**
      * Returns the OAuth2 grant type.
      *
      * @return string
@@ -180,15 +195,19 @@ class Oauth2Scheme extends SecurityScheme {
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray($is_update = false)
     {
-        return parent::toArray() + array(
-            'grantType' => $this->grantType,
+        $returnVal = parent::toArray($is_update);
+        if (!$is_update) {
+            $returnVal['grantType'] = $this->grantType;
+        }
+        $returnVal += array(
             'authorizationUrl' => $this->authorizationUrl,
             'authorizationVerb' => $this->authorizationVerb,
             'accessTokenUrl' => $this->accessTokenUrl,
             'accessTokenParamName' => $this->accessTokenParamName,
             'scopes' => $this->scopes,
         );
+        return $returnVal;
     }
 }
