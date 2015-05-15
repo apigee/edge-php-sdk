@@ -217,7 +217,7 @@ class DeveloperRatePlan extends Base\BaseObject
     public function __toString()
     {
         $obj = array(
-            'developer' => array('id' => $this->dev),
+            'developer' => array('id' => $this->developer_or_company_id),
             'endDate' => $this->getEndDateTime() instanceof DateTime ? $this->getEndDateTime()->format('Y-m-d H:i:s') : '',
             'startDate' => $this->getStartDateTime() instanceof DateTime ? $this->getStartDateTime()->format('Y-m-d H:i:s') : '',
             'id' => $this->id,
