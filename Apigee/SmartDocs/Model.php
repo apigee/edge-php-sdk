@@ -327,4 +327,44 @@ class Model extends APIObject
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }
+
+    /**
+     * Import a model from a file.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $document The text to import into the model.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     * or 'apimodel'.
+     * @param string $content_type is the mime type, which valid values depend
+     * on the document format:
+     *   wadl: 'application/xml'
+     *   swagger: 'application/yaml' or 'application/json'
+     *   apimodel: 'application/json'
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     * from this object.
+     *
+     * @throws ParameterException
+     */
+    public function importFile($document, $document_format, $content_type, $modelId = null)
+    {
+      $modelId = $modelId ?: $this->id;
+      if (empty($modelId)) {
+        throw new ParameterException('Cannot import a model with no ID.');
+      }
+      // Clear out object, we will get all attributes back from server.
+      $this->blankValues();
+
+      $this->post($modelId . '/import/url?format=' . $document_format, $document, $content_type);
+      $response = $this->responseObj;
+      self::fromArray($this, $response);
+    }
+
+  
 }
