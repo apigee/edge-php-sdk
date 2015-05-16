@@ -390,23 +390,20 @@ class Model extends APIObject
      *
      * @throws ParameterException, RequestException
      */
-    public function importUrl($url, $document_format, $content_type, $modelId = null)
+    public function importUrl($url, $document_format, $modelId = null)
     {
         $modelId = $modelId ?: $this->id;
         if (empty($modelId)) {
           throw new ParameterException('Cannot import a model with no ID.');
         }
 
-        // Try to get the URL.
-        $url_client = new \Guzzle\Http\Client();
-        $document = $url_client->get($url)->send();
-
-        // Clear out object, we will get all attributes back from server.
-        $this->blankValues();
-
-        $this->importFile($modelId . '/import/url?format=' . $document_format, $document, $content_type);
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
+        $payload = "URL=" . $url;
+        try {
+            $this->post($modelId . '/import/url?format=' . $document_format, $payload, 'text/plain');
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $this->responseObj['revisionNumber'];
     }
 
 
