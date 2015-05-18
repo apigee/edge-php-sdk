@@ -1,255 +1,117 @@
 <?php
 
-/**
- * @file
- * Code for SmartDocs security scheme.
- */
-
 namespace Apigee\SmartDocs;
 
 use Apigee\Util\OrgConfig;
 use Apigee\Util\APIObject;
 use Apigee\Exceptions\ResponseException;
-use Apigee\Exceptions\ParameterException;
+use Apigee\SmartDocs\Security\SecurityScheme;
 
-/**
- * Abstraction of new Security sub system of SmartDocs.
- *
- * @package Apigee\SmartDocs
- * @author Sudheesh
- */
 class Security extends APIObject {
 
-  public $type;
-
   /**
-   * Initializes this object.
+   * Initializes the Security object and sets its base URL.
    *
    * @param OrgConfig $config
-   *   The management Endpoint config object.
+   *   Contains configuration info for connecting to the Modeling API.
    * @param string $modelId
-   *   The SmartDocs model Id.
-   * @param string|int $revisionId
-   *   The revision Id of the model.
-   * @param string $type
-   *   The type of security scheme, values can be
-   *   -OAUTH2
-   *   -APIKEY
-   *   -BASIC
+   *   Model name or UUID for which we want security info.
+   * @param string $revisionId
+   *   Revision number or UUID for which we want security info.
    */
-  public function __construct(OrgConfig $config, $modelId, $revisionId, $type = NULL) {
-    $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions/' . $revisionId . '/security');
-
-    if (!empty($type)) {
-      $this->type = $type;
+    public function __construct(OrgConfig $config, $modelId, $revisionId)
+    {
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions/' . $revisionId . '/security');
     }
-  }
 
-  /**
-   * Load all the available security schemes for a model's revision.
-   * @return array
-   *   An indexed array of security schemes.
-   */
-  public function loadAllSchemes() {
-    try {
-      $this->get();
-      $schemes = $this->responseObj;
+    /**
+     * Loads all schemes associated with the current model + revision.
+     *
+     * @return array
+     *   Each member of the array is a subclass of SecurityScheme.
+     */
+    public function loadAllSchemes()
+    {
+        $scheme_objects = array();
+        try {
+            $this->get();
+            $schemes = $this->responseObj;
+            foreach ($schemes as $scheme_array) {
+                $scheme_objects[] = SecurityScheme::fromArray($scheme_array);
+            }
+        }
+        catch (ResponseException $e) {
+        }
+        return $scheme_objects;
     }
-    catch (ResponseException $e){
 
+    /**
+     * Loads a security scheme by name, or null if named scheme does not exist.
+     *
+     * @param string $name
+     *
+     * @return SecurityScheme|null
+     */
+    public function load($name)
+    {
+        $scheme = null;
+        try {
+            $this->get(rawurlencode($name));
+            if (array_key_exists('type', $this->responseObj)) {
+                $scheme = SecurityScheme::fromArray($this->responseObj);
+            }
+        }
+        catch (ResponseException $e) {
+        }
+        return $scheme;
     }
-    return !empty($schemes) ? $schemes : array();
-  }
 
-  /**
-   * Load a give security scheme for a model.
-   *
-   * @param string $name
-   *   The name of the scheme to load.
-   *
-   * @return object
-   *   The scheme object. Based on the type of the scheme the object can be an
-   *   instance of
-   *   Apigee\SmartDocs\Oauth2Scheme
-   *   Apigee\SmartDocs\ApikeyScheme
-   *   Apigee\SmartDocs\BasicScheme
-   */
-  public function load($name) {
-    try {
-      $this->get($name);
-      $this->type = $this->responseObj['type'];
-      switch ($this->type) {
-        case 'OAUTH2':
-          $scheme = new Oauth2Scheme($this->responseObj);
-          break;
-
-        case 'APIKEY':
-          $scheme = new ApikeyScheme($this->responseObj);
-          break;
-
-        case 'BASIC':
-          $scheme = new BasicScheme($this->responseObj);
-          break;
-      }
+    /**
+     * Saves security scheme to modeling API.
+     *
+     * @param SecurityScheme $scheme
+     * @param bool $is_update
+     *   If true, will attempt a PUT; otherwise a POST. Be aware that if a PUT
+     *   is attempted and the security scheme resource does not exist, the save
+     *   will fail.
+     *
+     * @return SecurityScheme|null
+     *   On success, returns the saved security scheme. On failure, returns
+     *   null.
+     */
+    public function save(SecurityScheme $scheme, $is_update = false)
+    {
+        $payload = $scheme->toArray($is_update);
+        if ($is_update) {
+            $method = 'put';
+            $path = rawurlencode($scheme->getName());
+        }
+        else {
+            $method = 'post';
+            $path = null;
+        }
+        try {
+            $this->$method($path, $payload);
+            return SecurityScheme::fromArray($this->responseObj);
+        }
+        catch (ResponseException $e) {
+            return null;
+        }
     }
-    catch (ResponseException $e) {
 
-    }
-    return $scheme;
-  }
-
-  /**
-   * Save a security scheme.
-   *
-   * @param array $payload
-   *   The payload to instantiate the appropriate scheme object.
-   * @param bool $is_update
-   *   This indicates whether to create a new scheme or to update and existing
-   *   scheme.
-   *
-   * @throws ParameterException
-   */
-  public function save(array $payload, $is_update = FALSE) {
-    if (empty($payload)) {
-      throw new ParameterException('Cannot create a scheme with an empty payload');
-    }
-    switch ($this->type) {
-      case 'OAUTH2':
-        $oauth2scheme = new Oauth2Scheme($payload);
-        try{
-          $this->saveOauth2Scheme($oauth2scheme, $is_update);
+    /**
+     * Deletes a named security scheme from the Modeling API.
+     *
+     * @param string $name
+     *   Name of the scheme to be deleted.
+     */
+    public function delete($name)
+    {
+        try {
+            $this->http_delete(rawurlencode($name));
         }
         catch (ResponseException $e) {
 
         }
-        break;
-
-      case 'APIKEY':
-        $apikeyscheme = new ApikeyScheme($payload);
-        try{
-          $this->saveApikeyScheme($apikeyscheme, $is_update);
-        }
-        catch (ResponseException $e) {
-
-        }
-        break;
-
-      case 'BASIC':
-        $basicscheme = new BasicScheme($payload);
-        try{
-          $this->saveBasicScheme($basicscheme, $is_update);
-        }
-        catch (ResponseException $e) {
-
-        }
-        break;
     }
-  }
-
-  /**
-   * Delete a particular scheme.
-   *
-   * @param string $name
-   *   The name of the scheme to delete.
-   */
-  public function delete($name) {
-    try {
-      $this->http_delete($name);
-    }
-    catch (ResponseException $e) {
-
-    }
-  }
-
-  /**
-   * Save an Oauth 2.0 Scheme.
-   *
-   * @param \Apigee\SmartDocs\Oauth2Scheme $scheme
-   *   The scheme object to save.
-   * @param bool $is_update
-   *   This indicates if a scheme should be created or updated.
-   */
-  public function saveOauth2Scheme(Oauth2Scheme &$scheme, $is_update = FALSE) {
-    if ($is_update) {
-      try{
-        $payload = $scheme->toArray();
-        unset($payload['type']);
-        unset($payload['grantType']);
-        $this->put($scheme->getName(), $payload);
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    else {
-      try{
-        $this->post(NULL, $scheme->toArray());
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    $scheme = new Oauth2Scheme($this->responseObj);
-  }
-
-  /**
-   * Save an Apikey scheme.
-   *
-   * @param \Apigee\SmartDocs\ApikeyScheme $scheme
-   *   The apikey scheme to be saved.
-   * @param bool $is_update
-   *   Indicates if a scheme should be created or updated.
-   */
-  public function saveApikeyScheme(ApikeyScheme &$scheme, $is_update = FALSE) {
-    if ($is_update) {
-      try{
-        $payload = $scheme->toArray();
-        unset($payload['type']);
-        $this->put($scheme->getName(), $payload);
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    else {
-      try{
-        $this->post(NULL, $scheme->toArray());
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    $scheme = new ApikeyScheme($this->responseObj);
-  }
-
-  /**
-   * Save a basic scheme.
-   *
-   * @param \Apigee\SmartDocs\BasicScheme $scheme
-   *   The Basic scheme object to be saved.
-   * @param bool $is_update
-   *   Indicates if a scheme should be creaed or updated.
-   */
-  public function saveBasicScheme(BasicScheme &$scheme, $is_update = FALSE) {
-    if ($is_update) {
-      try{
-        $payload = $scheme->toArray();
-        unset($payload['type']);
-        $this->put($scheme->getName(), $payload);
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    else {
-      try{
-        $this->post(NULL, $scheme->toArray());
-      }
-      catch (ResponseException $e) {
-
-      }
-    }
-    $scheme = new BasicScheme($this->responseObj);
-  }
-
 }
