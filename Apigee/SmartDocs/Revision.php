@@ -421,7 +421,7 @@ class Revision extends APIObject
         $this->post('?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
-  }
+    }
 
     /**
      * Imports a model revision from an Apigee Internal JSON document.
