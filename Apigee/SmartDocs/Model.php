@@ -208,7 +208,7 @@ class Model extends APIObject
         foreach ($array as $key => $value) {
             if (property_exists($model, $key)) {
                 if ($key == 'activeRevision' && is_array($value) && !empty($value)) {
-                    $revision = new Revision($model->getConfig(), $model->getUuid(), $model->getName());
+                    $revision = new Revision($model->getConfig(), $model->getUuid());
                     Revision::fromArray($revision, $value);
                     $value = $revision;
                 }

@@ -140,11 +140,6 @@ class Revision extends APIObject
         $this->description = $desc;
     }
 
-    public function getApiName()
-    {
-        return $this->apiName;
-    }
-
     public function getReleaseVersion()
     {
         return $this->releaseVersion;
@@ -306,15 +301,12 @@ class Revision extends APIObject
      *
      * @param OrgConfig $config
      * @param string $modelId
-     * @param string $modelName
      */
-    public function __construct(OrgConfig $config, $modelId, $modelName = "")
+    public function __construct(OrgConfig $config, $modelId)
     {
         $this->blankValues();
         $this->apiId = $modelId;
-        $this->apiName = $modelName;
-//        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
-      $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/');
+        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
     }
 
     /**
@@ -328,7 +320,7 @@ class Revision extends APIObject
         $revisions = array();
         $this->get();
         foreach ($this->responseObj as $key => $blob) {
-            $revision = new Revision($this->getConfig(), $this->apiId, $this->apiName);
+            $revision = new Revision($this->getConfig(), $this->apiId);
             self::fromArray($revision, $blob);
             $revisions[$key] = $revision;
         }
@@ -351,7 +343,7 @@ class Revision extends APIObject
         if (is_int($revisionId) && $revisionId < 1) {
             throw new ParameterException('Cannot load a revision number less than 1.');
         }
-        $this->get(rawurlencode($this->apiId) . '/revisions/' . $revisionId . '?expand=true');
+        $this->get($revisionId . '?expand=true');
         self::fromArray($this, $this->responseObj);
     }
 
@@ -403,96 +395,66 @@ class Revision extends APIObject
 
     /**
      * Imports a model revision from a Swagger URL.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
      *
      * @param string $modelId
      * @param string $swaggerUrl
      */
     public function importSwagger($swaggerUrl)
     {
-        $combinedString = rawurlencode($this->apiId) . '/revisions?action=import&format=swagger';
         $this->blankValues();
-        $this->post($combinedString, 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
+        $this->post('?action=import&format=swagger', 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
         $response = $this->responseObj;
         self::fromArray($this, $response);
     }
 
-  /**
-   * Imports a model revision from a WADL document.
-   *
-   * @param string $modelId
-   * @param string $xml
-   */
-  public function importSwaggerFile($yaml)
-  {
-    $combinedString = $this->apiName . '/import/file?format=swagger';
-    $this->blankValues();
-    $this->post($combinedString, $yaml, 'application/yaml; charset=utf-8');
-    $response = $this->responseObj;
-    self::fromArray($this, $response);
+    /**
+     * Imports a model revision from a WADL document.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
+     *
+     * @param string $modelId
+     * @param string $xml
+     */
+    public function importWadl($xml)
+    {
+        $this->blankValues();
+        $this->post('?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
+        $response = $this->responseObj;
+        self::fromArray($this, $response);
   }
 
-  /**
-   * Imports a model revision from a WADL document.
-   * @deprecated Use Model.importFile() or Model.importUrl() instead.
-   *
-   * @param string $xml
-   */
-  public function importWadl($xml)
-  {
-      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
-      $this->blankValues();
-      $this->post($combinedString, $xml, 'application/xml; charset=utf-8');
-      $response = $this->responseObj;
-      self::fromArray($this, $response);
-  }
+    /**
+     * Imports a model revision from an Apigee Internal JSON document.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
+     *
+     * @param string $modelId
+     * @param string $json
+     */
+    public function importApigeeJson($json)
+    {
+        $this->blankValues();
+        $this->post('?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
+        $response = $this->responseObj;
+        self::fromArray($this, $response);
+    }
 
-  /**
-   * Imports a model revision from a WADL document.
-   * @deprecated Use Model.importFile() or Model.importUrl() instead.
-   *
-   * @param string $wadlUrl
-   */
-  public function importWadlUrl($wadlUrl)
-  {
-      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=wadl';
-      $this->blankValues();
-      $this->post($combinedString, 'URL=' . $wadlUrl, 'application/xml; charset=utf-8', 'application/xml; charset=utf-8');
-          $response = $this->responseObj;
-          self::fromArray($this, $response);
-  }
-
-  /**
-   * Imports a model revision from an Apigee Internal JSON document.
-   * @deprecated Use Model.importFile() or Model.importUrl() instead.
-   *
-   * @param string $json
-   */
-  public function importApigeeJson($json)
-  {
-      $combinedString = rawurlencode($this->apiName) . '/revisions?action=import&format=apimodel';
-      $this->blankValues();
-      $this->post($combinedString, $json, 'application/json; charset=utf-8');
-      $response = $this->responseObj;
-      self::fromArray($this, $response);
-  }
-
-  /**
-   * Exports a SmartDocs revision as JSON (default) or an XML-based format.
-   *
-   * @param string $modelId
-   * @param string $format
-   * @param int|null $revision
-   *
-   * @return string
-   */
-  public function export($format, $revision = NULL)
-  {
-      $revision = $revision ?: 'latest';
-      if ($format == 'json' || empty($format)) {
-          $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes');
-      } else {
-          $this->get(rawurlencode($this->apiName) . '/revisions/' . $revision . '?expand=yes&format=' . $format, 'text/xml');
-      }
-      return $this->responseText;
-  }
+    /**
+     * Exports a SmartDocs revision as JSON (default) or an XML-based format.
+     *
+     * @param string $modelId
+     * @param string $format
+     * @param int|null $revision
+     *
+     * @return string
+     */
+    public function export($format, $revision = NULL)
+    {
+        $revision = $revision ?: 'latest';
+        if ($format == 'json' || empty($format)) {
+            $this->get($revision . '?expand=yes');
+        } else {
+            $this->get($revision . '?expand=yes&format=' . $format, 'text/xml');
+        }
+        return $this->responseText;
+    }
 }
