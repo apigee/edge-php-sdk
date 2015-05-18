@@ -395,6 +395,7 @@ class Revision extends APIObject
 
     /**
      * Imports a model revision from a Swagger URL.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
      *
      * @param string $modelId
      * @param string $swaggerUrl
@@ -409,6 +410,7 @@ class Revision extends APIObject
 
     /**
      * Imports a model revision from a WADL document.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
      *
      * @param string $modelId
      * @param string $xml
@@ -423,6 +425,7 @@ class Revision extends APIObject
 
     /**
      * Imports a model revision from an Apigee Internal JSON document.
+     * @deprecated Use Model.importFile() or Model.importUrl() instead.
      *
      * @param string $modelId
      * @param string $json
