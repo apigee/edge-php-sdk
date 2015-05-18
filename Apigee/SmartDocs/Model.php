@@ -351,6 +351,8 @@ class Model extends APIObject
      * from this object.
      *
      * @throws ParameterException
+     *
+     * @return int Revision number of newly created revision.
      */
     public function importFile($document, $document_format, $content_type, $modelId = null)
     {
@@ -358,12 +360,15 @@ class Model extends APIObject
         if (empty($modelId)) {
           throw new ParameterException('Cannot import a model with no ID.');
         }
-        // Clear out object, we will get all attributes back from server.
-        $this->blankValues();
 
-        $this->post($modelId . '/import/url?format=' . $document_format, $document, $content_type);
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
+        try {
+          $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
+        } catch (Exception $e) {
+          print_r($e);
+        }
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
     }
 
     /**
@@ -389,6 +394,8 @@ class Model extends APIObject
      * from this object.
      *
      * @throws ParameterException, RequestException
+     *
+     * @return int Revision number of newly created revision.
      */
     public function importUrl($url, $document_format, $modelId = null)
     {
@@ -403,7 +410,9 @@ class Model extends APIObject
         } catch (Exception $e) {
             print_r($e);
         }
-        return $this->responseObj['revisionNumber'];
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
     }
 
 
