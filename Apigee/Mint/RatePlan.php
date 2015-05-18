@@ -55,7 +55,7 @@ class RatePlan extends Base\BaseObject
      * com.apigee.mint.model.Developer
      * @var \Apigee\Mint\Developer
      */
-    private $developer;
+    private $developerId;
 
     /**
      * com.apigee.mint.model.DeveloperCategory
@@ -246,7 +246,7 @@ class RatePlan extends Base\BaseObject
 
     public function getList($page_num = null, $page_size = 20, $current = true, $all_available = true)
     {
-        if (!isset($this->developer)) {
+        if (!isset($this->developerId)) {
             return parent::getList();
         }
 
@@ -256,7 +256,7 @@ class RatePlan extends Base\BaseObject
                 'allAvailable' => $all_available ? 'true' : 'false',
             ),
         );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/monetization-packages/' . rawurlencode($this->mPackageId) . '/developers/' . rawurlencode($this->developer->getEmail()) . '/rate-plans';
+        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/monetization-packages/' . rawurlencode($this->mPackageId) . '/developers/' . rawurlencode($this->developerId) . '/rate-plans';
         $this->setBaseUrl($url);
         $this->get(null, 'application/json; charset=utf-8', array(), $options);
         $this->restoreBaseUrl();
@@ -343,7 +343,7 @@ class RatePlan extends Base\BaseObject
         if (isset($data['developer'])) {
             $dev = new Developer($this->config);
             $dev->loadFromRawData($data['developer']);
-            $this->developer = $dev;
+            $this->developerId = $dev->getEmail();
         }
 
         //@TODO Implement load of developerCategory
@@ -373,7 +373,9 @@ class RatePlan extends Base\BaseObject
         $this->currency = null;
         $this->childRatePlan = null;
         $this->parentRatePlan = null;
-        $this->developer = null;
+        $this->developerId = null;
+      $this->companyId = null;
+      $this->isCompanyPlan = FALSE;
         $this->developerCategory = null;
         $this->developers = array();
         $this->applicationCategory = null;
@@ -466,12 +468,12 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get com.apigee.mint.model.Developer
-     * @return \Apigee\Mint\Developer
+     * Get Company or Developer ID.
+     * @return integer The company or developer ID.
      */
-    public function getDeveloper()
+    public function getDeveloperId()
     {
-        return $this->developer;
+        return $this->developerId;
     }
 
     /**
@@ -804,13 +806,23 @@ class RatePlan extends Base\BaseObject
         $this->childRatePlan = $rate_plan;
     }
 
+  /**
+   * Set com.apigee.mint.model.Developer
+   * @param \Apigee\Mint\Developer $developer
+   */
+  public function setCompanyId($company_id)
+  {
+    $this->companyId = $company_id;
+    $this->isCompanyPlan = TRUE;
+  }
+
     /**
      * Set com.apigee.mint.model.Developer
-     * @param \Apigee\Mint\Developer $developer
+     * @param \Apigee\Mint\Developer $developerId
      */
-    public function setDeveloper(Developer $developer)
+    public function setDeveloperId($developerId)
     {
-        $this->developer = $developer;
+        $this->developerId = $developerId;
     }
 
     /**

@@ -231,20 +231,20 @@ class Company extends Base
     /**
      * Saves this object's properties to the Edge server.
      *
-     * If $force_update is set to true, we assume that this is an update call.
+     * If $is_update is set to true, we assume that this is an update call.
      * If it is false, we assume that it is an insert. If null is passed in,
      * we attempt an update, and if it fails we attempt an insert. This is
-     * much less efficient, so declaring $force_update as a boolean will yield
+     * much less efficient, so declaring $is_update as a boolean will yield
      * faster response times.
      *
      * @param bool|null $force_update
      * @throws \Apigee\Exceptions\ResponseException
      * @throws \Exception
      */
-    public function save($force_update = false)
+    public function save($is_update = false)
     {
         // See if we need to brute-force this.
-        if ($force_update === null) {
+        if ($is_update === null) {
             try {
                 $this->save(true);
             } catch (ResponseException $e) {
@@ -272,13 +272,13 @@ class Company extends Base
             }
         }
         $url = null;
-        if ($force_update || $this->createdAt) {
+        if ($is_update || $this->createdAt) {
             $url = rawurlencode($this->name);
         }
-        if ($force_update) {
+        if ($is_update) {
             $this->put($url, $payload);
         } else {
-            $this->post($url, $payload);
+              $this->post($url, $payload);
         }
         self::loadFromResponse($this, $this->responseObj);
     }
@@ -335,6 +335,9 @@ class Company extends Base
     /**
      * Adds or updates a developer (and the dev's role) on the Edge server.
      *
+     * When updating an existing developer, specify both the developer's email
+     * and role.
+     *
      * @param string $dev_email
      * @param string $role
      * @param null|string $company_name
@@ -372,7 +375,22 @@ class Company extends Base
         $this->http_delete($url);
     }
 
-    /**
+  // Get All Companies which developer is part of
+  public function getDeveloperCompanies($developer_id) {
+    $url = '/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/companies';
+//    $content_type = 'application/json; charset=utf-8';
+//    $accept_type = 'application/json; charset=utf-8';
+
+    $this->setBaseUrl($url);
+    $this->get();
+    $this->restoreBaseUrl();
+    $response = $this->responseText;
+    return $response;
+
+  }
+
+
+  /**
      * Parses an Edge response array and populates a given Company object
      * accordingly.
      *
@@ -385,7 +403,9 @@ class Company extends Base
             if (property_exists($company, $key)) {
                 if ($key == 'attributes') {
                    foreach ($value as $name_value_pair) {
-                       $company->attributes[$name_value_pair['name']] = isset($name_value_pair['value']) ? $name_value_pair['value'] : "";
+                     if (isset($name_value_pair['value'])) {
+                       $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
+                     }
                    }
                 } else {
                     $company->$key = $value;
@@ -426,6 +446,27 @@ class Company extends Base
                 $this->$key = $value;
             }
         }
+    }
+
+    /**
+     * Return an array of roles for a developer in a company.
+     *
+     * @param string $developer_email The email of the developer.
+     * @param string $company_name The name of the company the developer belongs to.
+     * @return array An array of role names associated with the developer.
+     */
+    public function getDeveloperRoles($developer_email, $company_name = NUll) {
+      $company_name = $company_name ? : $this->name;
+      if (empty($company_name)) {
+        throw new ParameterException('No Company name given.');
+      }
+      $url = rawurlencode($company_name) . '/developers/' . $developer_email;
+      $this->get($url);
+
+      $developer_companies = $this->responseObj['company'];
+      $roles = explode(',', $developer_companies[0]['role']);
+
+      return $roles;
     }
 
 }

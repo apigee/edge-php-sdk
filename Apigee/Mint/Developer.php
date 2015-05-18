@@ -266,8 +266,16 @@ class Developer extends Base\BaseObject
         return $return_objects;
     }
 
-    public function getPrepaidBalance($month = null, $billing_year = null, $currency_id = null)
+    public function getPrepaidBalance($month = null, $billing_year = null, $currency_id = null, $company_or_developer_id = NULL)
     {
+
+      if ($company_or_developer_id != NULL ) {
+        $identifier = $company_or_developer_id;
+      }
+      else {
+        $identifier =  $this->email;
+      }
+
         $month = isset($month) ? $month : date('F', time());
         $billing_year = isset($billing_year) ? $billing_year : date('Y');
 
@@ -278,12 +286,12 @@ class Developer extends Base\BaseObject
                 'supportedCurrencyId' => $currency_id,
             ),
         );
-        $url = rawurlencode($this->email) . '/prepaid-developer-balance';
+        $url = rawurlencode($identifier) . '/prepaid-developer-balance';
         $this->get($url, 'application/json; charset=utf-8', array(), $options);
         $response = $this->responseObj;
         $return_objects = array();
         foreach ($response['developerBalance'] as $response_data) {
-            $obj = new DeveloperBalance($this->email, $this->getConfig());
+            $obj = new DeveloperBalance($identifier, $this->getConfig());
             $obj->loadFromRawData($response_data);
             $return_objects[] = $obj;
         }
@@ -299,14 +307,20 @@ class Developer extends Base\BaseObject
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
      */
-    public function createPayment(array $parameters, $address)
+    public function createPayment(array $parameters, $address, array $headers, $developer_or_company_id = NULL)
     {
+      if($developer_or_company_id == NULL) {
         $id = $this->email;
+      }
+      else {
+        $id = $developer_or_company_id;
+      }
+
         $options = array(
             'query' => $parameters,
         );
         $url = rawurlencode($id) . '/payment';
-        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
+        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', $headers, $options);
         if ($this->responseCode == 200) {
             // Make sure the response did not fail, where success value is
             // FALSE from WorldPay.
@@ -320,9 +334,16 @@ class Developer extends Base\BaseObject
         throw new ResponseException('Payment server response failed', $this->responseCode, $url, $options, $this->responseText);
     }
 
-    public function topUpPrepaidBalance($new_balance)
+    public function topUpPrepaidBalance($new_balance, $developer_or_company_id = NULL)
     {
-        $url = rawurlencode($this->email) . '/developer-balances';
+      if($developer_or_company_id == NULL) {
+        $id = $this->email;
+      }
+      else {
+        $id = $developer_or_company_id;
+      }
+
+        $url = rawurlencode($id) . '/developer-balances';
         $this->post($url, $new_balance);
     }
 
