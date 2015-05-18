@@ -44,6 +44,14 @@ class Model extends APIObject
 
     /**
      * @var array
+     *      This is an array of string identifiers, corresponding to security
+     *      schemes defined by the Security object attached to this model's
+     *      revision.
+     */
+    private $security;
+
+    /**
+     * @var array
      *      This is a key-value store for any metadata that a client might
      *      want to persist related to the model. It is neither transmitted to
      *      Edge nor pulled from it.
@@ -67,6 +75,7 @@ class Model extends APIObject
         $this->description = '';
         $this->tags = array();
         $this->customAttributes = array();
+        $this->security = array();
         $this->metadata = array();
 
         $this->createdTime = 0;
@@ -142,6 +151,15 @@ class Model extends APIObject
     public function setTags(array $tags)
     {
         $this->tags = $tags;
+    }
+
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+    public function setSecurity(array $security)
+    {
+        $this->security = $security;
     }
 
     public function getCustomAttribute($name)
