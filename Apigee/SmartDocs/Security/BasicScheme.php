@@ -12,8 +12,11 @@ class BasicScheme extends SecurityScheme
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType($humanReadable = false)
     {
+        if ($humanReadable) {
+            return 'Basic';
+        }
         return 'BASIC';
     }
 }

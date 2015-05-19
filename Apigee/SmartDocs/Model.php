@@ -240,7 +240,7 @@ class Model extends APIObject
      *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
@@ -312,7 +312,7 @@ class Model extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
         $payload = $this->toArray();
         if (empty($payload['customAttributes'])) {
