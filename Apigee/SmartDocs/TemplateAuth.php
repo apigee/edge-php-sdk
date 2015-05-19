@@ -14,7 +14,7 @@ class TemplateAuth extends APIObject
      * Initializes this object.
      *
      * @param \Apigee\Util\OrgConfig $config
-     *   The mangement endpoint config.
+     *   The management endpoint config.
      * @param string $modelId
      *   The model id
      */
@@ -58,7 +58,7 @@ class TemplateAuth extends APIObject
             $this->get();
             $schemes = array();
             foreach ($this->responseObj as $scheme_array) {
-                $scheme                      = TemplateAuthScheme::fromArray($scheme_array);
+                $scheme = TemplateAuthScheme::fromArray($scheme_array);
                 $schemes[$scheme->getName()] = $scheme;
             }
         }
