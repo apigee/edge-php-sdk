@@ -450,7 +450,7 @@ class Developer extends Base
         // We must also do this when creating a developer ex nihilo in order
         // to set initial status. Otherwise new developer will have default
         // status, which is generally 'approved'.
-        $this->post($old_email . '?action=' . $cached_status);
+        $this->post($this->email . '?action=' . $cached_status);
         $this->status = $cached_status;
 
         // Restore DebugData from cached response.
