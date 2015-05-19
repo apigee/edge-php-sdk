@@ -44,6 +44,14 @@ class Model extends APIObject
 
     /**
      * @var array
+     *      This is an array of string identifiers, corresponding to security
+     *      schemes defined by the Security object attached to this model's
+     *      revision.
+     */
+    private $security;
+
+    /**
+     * @var array
      *      This is a key-value store for any metadata that a client might
      *      want to persist related to the model. It is neither transmitted to
      *      Edge nor pulled from it.
@@ -67,6 +75,7 @@ class Model extends APIObject
         $this->description = '';
         $this->tags = array();
         $this->customAttributes = array();
+        $this->security = array();
         $this->metadata = array();
 
         $this->createdTime = 0;
@@ -142,6 +151,15 @@ class Model extends APIObject
     public function setTags(array $tags)
     {
         $this->tags = $tags;
+    }
+
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+    public function setSecurity(array $security)
+    {
+        $this->security = $security;
     }
 
     public function getCustomAttribute($name)
@@ -327,4 +345,93 @@ class Model extends APIObject
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }
+
+    /**
+     * Import a model from a file.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $document The text to import into the model.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     * or 'apimodel'.
+     * @param string $content_type is the mime type, which valid values depend
+     * on the document format:
+     *   wadl: 'application/xml'
+     *   swagger: 'application/yaml' or 'application/json'
+     *   apimodel: 'application/json'
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     * from this object.
+     *
+     * @throws ParameterException
+     *
+     * @return int Revision number of newly created revision.
+     */
+    public function importFile($document, $document_format, $content_type, $modelId = null)
+    {
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+          throw new ParameterException('Cannot import a model with no ID.');
+        }
+
+        try {
+          $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
+        } catch (Exception $e) {
+          print_r($e);
+        }
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
+    }
+
+    /**
+     * Import a model from a URL.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $url The URL to get the model from.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     * or 'apimodel'.
+     * @param string $content_type is the mime type, which valid values depend
+     * on the document format:
+     *   wadl: 'application/xml'
+     *   swagger: 'application/yaml' or 'application/json'
+     *   apimodel: 'application/json'
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     * from this object.
+     *
+     * @throws ParameterException, RequestException
+     *
+     * @return int Revision number of newly created revision.
+     */
+    public function importUrl($url, $document_format, $modelId = null)
+    {
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+          throw new ParameterException('Cannot import a model with no ID.');
+        }
+
+        $payload = "URL=" . $url;
+        try {
+            $this->post($modelId . '/import/url?format=' . $document_format, $payload, 'text/plain');
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
+    }
+
+
 }
