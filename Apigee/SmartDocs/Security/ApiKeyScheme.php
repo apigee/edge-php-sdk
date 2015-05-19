@@ -61,8 +61,11 @@ class ApiKeyScheme extends SecurityScheme
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType($humanReadable = false)
     {
+        if ($humanReadable) {
+            return 'Api Key';
+        }
         return 'APIKEY';
     }
 

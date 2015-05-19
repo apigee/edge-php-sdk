@@ -23,8 +23,6 @@ class Method extends APIObject
     protected $name;
     /** @var string */
     protected $verb;
-    /** @var array */
-    protected $authSchemes;
     /**
      * @var array
      *      May contain the following keys:
@@ -83,6 +81,14 @@ class Method extends APIObject
     /** @var string */
     protected $apiId;
 
+    /**
+     * @var array
+     *      This is an array of string identifiers, corresponding to security
+     *      schemes defined by the Security object attached to this model's
+     *      revision.
+     */
+    private $security;
+
     /** @var array */
     protected $metadata;
 
@@ -94,7 +100,6 @@ class Method extends APIObject
         $this->id = '';
         $this->name = '';
         $this->verb = '';
-        $this->authSchemes = array();
         $this->body = array();
         $this->response = array();
         $this->samples = array();
@@ -105,6 +110,7 @@ class Method extends APIObject
         $this->customAttributes = array();
         $this->tags = array();
         $this->metadata = array();
+        $this->security = array();
 
         $this->createdTime = 0;
         $this->modifiedTime = 0;
@@ -146,14 +152,13 @@ class Method extends APIObject
         $this->verb = $verb;
     }
 
-    public function getAuthSchemes()
+    public function getSecurity()
     {
-        return $this->authSchemes;
+        return $this->security;
     }
-
-    public function setAuthSchemes(array $schemes)
+    public function setSecurity(array $security)
     {
-        $this->authSchemes = $schemes;
+        $this->security = $security;
     }
 
     public function getBody()
@@ -346,11 +351,11 @@ class Method extends APIObject
      *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
 
         $payload_keys = array(
-            'name', 'verb', 'authSchemes', 'body', 'response', 'samples',
+            'name', 'verb', 'security', 'body', 'response', 'samples',
             'displayName', 'description', 'parameters', 'parameterGroups',
             'customAttributes', 'tags', 'path'
         );
@@ -426,11 +431,11 @@ class Method extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
-        $array_members = array('authSchemes', 'parameters', 'parameterGroups', 'tags', 'samples');
+        $array_members = array('security', 'parameters', 'parameterGroups', 'tags', 'samples');
         $object_members = array('body', 'response', 'customAttributes');
-        $payload = $this->toArray(FALSE);
+        $payload = $this->toArray(false);
         foreach ($array_members as $key) {
             if (empty($payload[$key])) {
                 $payload[$key] = array();

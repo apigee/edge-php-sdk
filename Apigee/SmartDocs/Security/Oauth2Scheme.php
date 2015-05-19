@@ -187,8 +187,11 @@ class Oauth2Scheme extends SecurityScheme {
     /**
      * {@inheritdoc}
      */
-    public function getType()
+    public function getType($humanReadable = false)
     {
+        if ($humanReadable) {
+            return 'OAuth2: ' . ucwords(strtolower($this->getGrantType()));
+        }
         return 'OAUTH2';
     }
 
