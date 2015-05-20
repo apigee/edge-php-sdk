@@ -9,7 +9,8 @@ use Apigee\Exceptions\ParameterException;
  *
  * @package Apigee\SmartDocs\Security
  */
-class Oauth2Scheme extends SecurityScheme {
+class Oauth2Scheme extends SecurityScheme
+{
 
     /**
      * @var string
@@ -37,6 +38,12 @@ class Oauth2Scheme extends SecurityScheme {
     protected $accessTokenParamName;
 
     /**
+     *
+     * @var string
+     */
+    protected $in;
+
+    /**
      * @var object
      */
     protected $scopes;
@@ -49,8 +56,7 @@ class Oauth2Scheme extends SecurityScheme {
         // Ensure that scopes is saved as an object.
         if (array_key_exists('scopes', $parameters)) {
             $parameters['scopes'] = (object) $parameters['scopes'];
-        }
-        else {
+        } else {
             $parameters['scopes'] = new \stdClass();
         }
         parent::__construct($parameters);
@@ -165,6 +171,26 @@ class Oauth2Scheme extends SecurityScheme {
     }
 
     /**
+     * Get the in (location) value of the scheme.
+     *
+     * @return string
+     */
+    public function getIn()
+    {
+        return $this->in;
+    }
+
+    /**
+     * Sets the in (location) value of the scheme.
+     *
+     * @param string $in
+     */
+    public function setIn($in)
+    {
+        $this->in = $in;
+    }
+
+    /**
      * Gets OAuth2 scopes.
      *
      * @return array
@@ -209,7 +235,7 @@ class Oauth2Scheme extends SecurityScheme {
             'authorizationVerb' => $this->authorizationVerb,
             'accessTokenUrl' => $this->accessTokenUrl,
             'accessTokenParamName' => $this->accessTokenParamName,
-            'scopes' => $this->scopes,
+            'scopes' => $this->scopes
         );
         return $returnVal;
     }
