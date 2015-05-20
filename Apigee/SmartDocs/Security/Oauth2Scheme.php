@@ -9,7 +9,8 @@ use Apigee\Exceptions\ParameterException;
  *
  * @package Apigee\SmartDocs\Security
  */
-class Oauth2Scheme extends SecurityScheme {
+class Oauth2Scheme extends SecurityScheme
+{
 
     /**
      * @var string
@@ -55,8 +56,7 @@ class Oauth2Scheme extends SecurityScheme {
         // Ensure that scopes is saved as an object.
         if (array_key_exists('scopes', $parameters)) {
             $parameters['scopes'] = (object) $parameters['scopes'];
-        }
-        else {
+        } else {
             $parameters['scopes'] = new \stdClass();
         }
         parent::__construct($parameters);
@@ -177,7 +177,7 @@ class Oauth2Scheme extends SecurityScheme {
      */
     public function getIn()
     {
-      return $this->in;
+        return $this->in;
     }
 
     /**
@@ -187,7 +187,7 @@ class Oauth2Scheme extends SecurityScheme {
      */
     public function setIn($in)
     {
-      $this->in = $in;
+        $this->in = $in;
     }
 
     /**
@@ -235,7 +235,7 @@ class Oauth2Scheme extends SecurityScheme {
             'authorizationVerb' => $this->authorizationVerb,
             'accessTokenUrl' => $this->accessTokenUrl,
             'accessTokenParamName' => $this->accessTokenParamName,
-            'scopes' => $this->scopes,
+            'scopes' => $this->scopes
         );
         return $returnVal;
     }
