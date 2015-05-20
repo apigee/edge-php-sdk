@@ -37,6 +37,12 @@ class Oauth2Scheme extends SecurityScheme {
     protected $accessTokenParamName;
 
     /**
+     *
+     * @var string
+     */
+    protected $in;
+
+    /**
      * @var object
      */
     protected $scopes;
@@ -162,6 +168,26 @@ class Oauth2Scheme extends SecurityScheme {
     {
         // TODO: validate $name
         $this->accessTokenParamName = $name;
+    }
+
+    /**
+     * Get the in (location) value of the scheme.
+     *
+     * @return string
+     */
+    public function getIn()
+    {
+      return $this->in;
+    }
+
+    /**
+     * Sets the in (location) value of the scheme.
+     *
+     * @param string $in
+     */
+    public function setIn($in)
+    {
+      $this->in = $in;
     }
 
     /**
