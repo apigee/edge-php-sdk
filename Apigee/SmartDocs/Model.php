@@ -379,11 +379,7 @@ class Model extends APIObject
           throw new ParameterException('Cannot import a model with no ID.');
         }
 
-        try {
-          $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
-        } catch (Exception $e) {
-          print_r($e);
-        }
+        $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
         $revision = $this->responseObj['revisionNumber'];
         $this->latestRevisionNumber = $revision;
         return $revision;
@@ -423,11 +419,7 @@ class Model extends APIObject
         }
 
         $payload = "URL=" . $url;
-        try {
-            $this->post($modelId . '/import/url?format=' . $document_format, $payload, 'text/plain');
-        } catch (Exception $e) {
-            print_r($e);
-        }
+        $this->post($modelId . '/import/url?format=' . $document_format, $payload, 'text/plain');
         $revision = $this->responseObj['revisionNumber'];
         $this->latestRevisionNumber = $revision;
         return $revision;
