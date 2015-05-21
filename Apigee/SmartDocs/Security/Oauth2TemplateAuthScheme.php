@@ -20,6 +20,11 @@ class Oauth2TemplateAuthScheme extends TemplateAuthScheme
     protected $clientSecret;
 
     /**
+     * @var string
+     */
+    protected $callbackUrl;
+
+    /**
      * Gets the type of the scheme.
      *
      * @return string
@@ -69,6 +74,10 @@ class Oauth2TemplateAuthScheme extends TemplateAuthScheme
         $this->clientSecret = $clientSecret;
     }
 
+    public function getCallbackUrl()
+    {
+        return $this->callbackUrl;
+    }
     /**
      * {@inheritdoc}
      */
