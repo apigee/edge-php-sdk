@@ -176,15 +176,23 @@ class Model extends APIObject
                 unset($this->customAttributes[$name]);
             }
         }
-        elseif ($name !== NULL && $name !== '') {
+        elseif ($name !== NULL && $name !== '' && is_scalar($value)) {
             $this->customAttributes[strval($name)] = strval($value);
+        }
+        else {
+            if (!is_scalar($value)) {
+                throw new ParameterException('Custom Attribute value must be a scalar.');
+            }
+            else {
+                throw new ParameterException('Custom Attribute name cannot be empty.');
+            }
         }
     }
     public function setCustomAttributes(array $attr)
     {
         $this->customAttributes = array();
         foreach ($attr as $key => $value) {
-            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '') {
+            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '' && is_scalar($value)) {
                 $this->customAttributes[strval($key)] = strval($value);
             }
         }
