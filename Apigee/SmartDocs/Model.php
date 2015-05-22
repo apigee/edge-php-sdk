@@ -171,18 +171,31 @@ class Model extends APIObject
     }
     public function setCustomAttribute($name, $value)
     {
-        if (empty($value)) {
+        if ($value === NULL || $value === '') {
             if (array_key_exists($name, $this->customAttributes)) {
                 unset($this->customAttributes[$name]);
             }
         }
+        elseif ($name !== NULL && $name !== '' && is_scalar($value)) {
+            $this->customAttributes[strval($name)] = strval($value);
+        }
         else {
-            $this->customAttributes[$name] = $value;
+            if (!is_scalar($value)) {
+                throw new ParameterException('Custom Attribute value must be a scalar.');
+            }
+            else {
+                throw new ParameterException('Custom Attribute name cannot be empty.');
+            }
         }
     }
     public function setCustomAttributes(array $attr)
     {
-        $this->customAttributes = $attr;
+        $this->customAttributes = array();
+        foreach ($attr as $key => $value) {
+            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '' && is_scalar($value)) {
+                $this->customAttributes[strval($key)] = strval($value);
+            }
+        }
     }
     public function clearCustomAttribute($name)
     {
@@ -315,6 +328,12 @@ class Model extends APIObject
     public function save($update = false)
     {
         $payload = $this->toArray();
+        // Eliminate any customAttributes with empty keys or values.
+        foreach ($payload['customAttributes'] as $key => $value) {
+            if ($value === NULL || $value === '' || $key === NULL || $key === '') {
+                unset($payload['customAttributes'][$key]);
+            }
+        }
         if (empty($payload['customAttributes'])) {
             $payload['customAttributes'] = new \stdClass;
         }
