@@ -239,9 +239,46 @@ class Method extends APIObject
         return $this->customAttributes;
     }
 
+    public function getCustomAttribute($name)
+    {
+        if (array_key_exists($name, $this->customAttributes)) {
+            return $this->customAttributes[$name];
+        }
+        return NULL;
+    }
+    public function setCustomAttribute($name, $value)
+    {
+        if ($value === NULL || $value === '') {
+            if (array_key_exists($name, $this->customAttributes)) {
+                unset($this->customAttributes[$name]);
+            }
+        }
+        elseif ($name !== NULL && $name !== '' && is_scalar($value)) {
+            $this->customAttributes[strval($name)] = strval($value);
+        }
+        else {
+            if (!is_scalar($value)) {
+                throw new ParameterException('Custom Attribute value must be a scalar.');
+            }
+            else {
+                throw new ParameterException('Custom Attribute name cannot be empty.');
+            }
+        }
+    }
     public function setCustomAttributes(array $attr)
     {
-        $this->customAttributes = $attr;
+        $this->customAttributes = array();
+        foreach ($attr as $key => $value) {
+            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '' && is_scalar($value)) {
+                $this->customAttributes[strval($key)] = strval($value);
+            }
+        }
+    }
+    public function clearCustomAttribute($name)
+    {
+        if (array_key_exists($name, $this->customAttributes)) {
+            unset($this->customAttributes[$name]);
+        }
     }
 
     public function getTags()
@@ -436,6 +473,13 @@ class Method extends APIObject
         $array_members = array('security', 'parameters', 'parameterGroups', 'tags', 'samples');
         $object_members = array('body', 'response', 'customAttributes');
         $payload = $this->toArray(false);
+        // Eliminate any customAttributes with empty keys or values.
+        foreach ($payload['customAttributes'] as $key => $value) {
+            if ($value === NULL || $value === '' || $key === NULL || $key === '') {
+                unset($payload['customAttributes'][$key]);
+            }
+        }
+
         foreach ($array_members as $key) {
             if (empty($payload[$key])) {
                 $payload[$key] = array();
