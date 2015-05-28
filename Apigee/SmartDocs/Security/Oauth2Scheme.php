@@ -44,6 +44,12 @@ class Oauth2Scheme extends SecurityScheme
     protected $in;
 
     /**
+     *
+     * @var string
+     */
+    protected $clientAuthenticationMethod;
+
+    /**
      * @var object
      */
     protected $scopes;
@@ -191,6 +197,24 @@ class Oauth2Scheme extends SecurityScheme
     }
 
     /**
+     * Gets the client authentication method.
+     *
+     * @return string
+     */
+    public function getClientAuthenticationMethod(){
+        return $this->clientAuthenticationMethod;
+    }
+
+    /**
+     * Sets the client authentication method.
+     *
+     * @param string $clientAuthenticationMethod
+     */
+    public function setClientAuthenticationMethod($clientAuthenticationMethod){
+        $this->clientAuthenticationMethod = $clientAuthenticationMethod;
+    }
+
+    /**
      * Gets OAuth2 scopes.
      *
      * @return array
@@ -236,6 +260,7 @@ class Oauth2Scheme extends SecurityScheme
             'accessTokenUrl' => $this->accessTokenUrl,
             'accessTokenParamName' => $this->accessTokenParamName,
             'in' => $this->in,
+            'clientAuthenticationMethod' => $this->clientAuthenticationMethod,
             'scopes' => $this->scopes
         );
         return $returnVal;
