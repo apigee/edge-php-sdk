@@ -358,10 +358,11 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     public function isCancelable() {
-        $start_date = $this->getStartDate();
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        $start_date = new DateTime($this->getStartDate(), $org_timezone);
         $today = new DateTime('today', $org_timezone);
-        if ($start_date > $today) {
+
+        if ($start_date->getTimestamp() > $today->getTimestamp()) {
             return TRUE;
         }
         return FALSE;
