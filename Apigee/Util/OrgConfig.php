@@ -21,20 +21,6 @@ class OrgConfig
     public $endpoint;
 
     /**
-     * The username of an authenticated user in the organization
-     * when making API calls to the endpoint URL.
-     * @var string
-     */
-    public $user;
-
-    /**
-     * The password of the authenticated user in the organization
-     * when making API calls to the endpoint URL.
-     * @var string
-     */
-    public $pass;
-
-    /**
      * A logger that implements the \Psr\Log\LoggerInterface interface.
      * See the {@link Apigee\Drupal\WatchdogLogger} class for an example that
      * implements the Psr\Log\LoggerInterface.
@@ -83,27 +69,21 @@ class OrgConfig
     public $variable_store;
 
     /**
-     * @var array
-     * These may be used for storing arbitrary metadata
-     */
-    public $tags;
-
-    /**
      * @var string
      * Optionally holds content to be sent in the Referer HTTP header.
      */
     public $referer;
 
     /**
-     * @var string
-     * Describes the authorization type. Defaults to 'basic' but can also be 'digest' or 'ntlm'.
+     * @var bool
      */
-    public $auth;
+    public $redirect_disable = FALSE;
+
     /**
      * Create an instance of OrgConfig.
      *
-     * <p>The $options argument is an array containing the fields 'logger', 'user_email',
-     * 'subscribers', 'debug_callbacks', and 'http_options'. </p>
+     * <p>The $options argument is an array containing the fields 'logger',
+     * 'user_email', 'subscribers', 'debug_callbacks', and 'http_options'.</p>
      *
      * <p>For example:</p>
      * <pre>
@@ -114,10 +94,10 @@ class OrgConfig
      *   $options = array(
      *     'logger' => $logger,
      *     'user_mail' => $user_mail,
-     *     'subscribers' => null,
+     *     'subscribers' => array(),
      *     'http_options' => array(
      *       'connection_timeout' => 10,
-     *       'timeout' => 50
+     *       'timeout' => 50,
      *     ),
      *     'variable_store' => new Apigee\Drupal\VariableCache()
      *   );
@@ -133,44 +113,52 @@ class OrgConfig
     {
         $this->orgName = $org_name;
         $this->endpoint = $endpoint;
-        $this->user = $user;
-        $this->pass = $pass;
-        $this->tags = array();
+
+        $request_options = (array_key_exists('http_options', $options) ? $options['http_options'] : array());
 
         // Work around old bug in client implementations, wherein a key of
         // "connection_timeout" was passed instead of "connect_timeout".
-        if (array_key_exists('http_options', $options) && array_key_exists('connection_timeout', $options['http_options'])) {
-            $options['http_options']['connect_timeout'] = $options['http_options']['connection_timeout'];
-            unset($options['http_options']['connection_timeout']);
+        if (array_key_exists('connection_timeout', $request_options)) {
+            $request_options['connect_timeout'] = $request_options['connection_timeout'];
+            unset($request_options['connection_timeout']);
+        }
+        elseif (!array_key_exists('connect_timeout', $options)) {
+            $request_options['connect_timeout'] = 10;
         }
 
-        $options += array(
-            'logger' => new \Psr\Log\NullLogger(),
-            'user_mail' => null,
-            'subscribers' => array(),
-            'http_options' => array(
-                'follow_location' => true,
-                'connect_timeout' => 10,
-                'timeout' => 10,
-            ),
-            'debug_callbacks' => array(),
-            'user_agent' => null,
-            'variable_store' => null,
-            'referer' => null,
-            'auth' => 'basic'
-        );
-        if (!in_array($options['auth'], array('basic', 'digest', 'ntlm'))) {
-            $options['auth'] = 'basic';
+        if (!array_key_exists('timeout', $options)) {
+            $request_options['timeout'] = 10;
         }
 
-        $this->logger = $options['logger'];
-        $this->user_mail = $options['user_mail'];
-        $this->subscribers = $options['subscribers'];
-        $this->http_options = $options['http_options'];
-        $this->debug_callbacks = $options['debug_callbacks'];
-        $this->user_agent = $options['user_agent'];
-        $this->variable_store = $options['variable_store'];
-        $this->referer = $options['referer'];
-        $this->auth = $options['auth'];
+        if (isset($request_options['follow_location'])) {
+            $this->redirect_disable = !$request_options['follow_location'];
+            unset($request_options['follow_location']);
+        }
+
+        $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
+        if ($auth != 'basic' && $auth != 'digest') {
+            $auth = 'basic';
+        }
+
+        $request_options['auth'] = array($user, $pass, $auth);
+        if (array_key_exists('referer', $options)) {
+            $request_options['headers']['Referer'] = $options['referer'];
+        }
+
+        $proxy = null;
+        if (!$proxy = getenv('HTTPS_PROXY')) {
+          $proxy = getenv('HTTP_PROXY');
+        }
+        if (!empty($proxy)) {
+            $request_options['proxy'] = $proxy;
+        }
+
+        $this->logger = array_key_exists('logger', $options) && $options['logger'] instanceof \Psr\Log\LoggerInterface ? $options['logger'] : new \Psr\Log\NullLogger();
+        $this->user_mail = array_key_exists('user_mail', $options) ? $options['user_mail'] : null;
+        $this->subscribers = array_key_exists('subscribers', $options) ? $options['subscribers'] : array();
+        $this->http_options = $request_options;
+        $this->debug_callbacks = array_key_exists('debug_callbacks', $options) ? $options['debug_callbacks'] : array();
+        $this->user_agent = array_key_exists('user_agent', $options) ? $options['user_agent'] : null;
+        $this->variable_store = array_key_exists('variable_store', $options) ? $options['variable_store'] : null;
     }
 }

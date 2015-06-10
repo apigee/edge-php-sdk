@@ -90,8 +90,18 @@ class APIObject
     {
         $this->config =& $config;
         $base_url = rtrim($config->endpoint, '/') . '/' . ltrim($base_url, '/');
-        $config->http_options += array('follow_location' => true);
-        $this->client = new \Guzzle\Http\Client($base_url, array('redirect.disable' => !$config->http_options['follow_location']));
+
+        $options = array();
+        if (is_array($config->http_options) && !empty($config->http_options)) {
+            foreach ($config->http_options as $key => $value) {
+                if (!array_key_exists('request.options', $options) || !array_key_exists($key, $options['request.options'])) {
+                    $options['request.options'][$key] = $value;
+                }
+            }
+        }
+        $options['redirect.disable'] = $config->redirect_disable;
+
+        $this->client = new \Guzzle\Http\Client($base_url, $options);
         if (is_array($config->subscribers)) {
             foreach ($config->subscribers as $subscriber) {
                 $this->client->addSubscriber($subscriber);
@@ -141,13 +151,10 @@ class APIObject
     {
         $start = microtime(true);
         $this->responseCode = 0;
-        if (!empty($this->config->referer)) {
-            $request->setHeader('Referer', $this->config->referer);
-        }
-        // Get snapshot of request headers before adding auth.
+        // Get snapshot of request headers.
         $request_headers = $request->getRawHeaders();
-        $request->setAuth($this->config->user, $this->config->pass, $this->config->auth);
-        $request_headers .= "\r\nAuthorization: " . ucfirst($this->config->auth) . ' [**masked**]';
+        // Mask authorization for logs.
+        $request_headers = preg_replace('!\nAuthorization: (Basic|Digest) [^\r\n]+\r!i', "\nAuthorization: $1 [**masked**]\r", $request_headers);
         try {
             $response = $request->send();
         } catch (\Guzzle\Http\Exception\BadResponseException $e) {
@@ -269,7 +276,6 @@ class APIObject
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
         }
-        $options += $this->config->http_options;
         $request = $this->client->get($uri, $headers, $options);
         $this->exec($request);
     }
@@ -297,7 +303,6 @@ class APIObject
         if (strlen($payload) == 0) {
             $headers['content-type'] = '';
         }
-        $options += $this->config->http_options;
         $request = $this->client->post($uri, $headers, $payload, $options);
         $this->exec($request);
     }
@@ -319,7 +324,6 @@ class APIObject
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
         }
-        $options += $this->config->http_options;
         $request = $this->client->delete($uri, $headers, null, $options);
         $this->exec($request);
     }
@@ -347,7 +351,6 @@ class APIObject
         if (strlen($payload) == 0) {
             $headers['content-type'] = '';
         }
-        $options += $this->config->http_options;
         $request = $this->client->put($uri, $headers, $payload, $options);
         $this->exec($request);
     }
@@ -367,7 +370,6 @@ class APIObject
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
         }
-        $options += $this->config->http_options;
         $request = $this->client->head($uri, $headers, $options);
         $this->exec($request);
     }
