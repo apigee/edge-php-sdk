@@ -326,13 +326,12 @@ class BillingDocument extends Base\BaseObject
             }
 
             $headers = array('accept' => 'application/octet-stream');
-            $options = array();
 
             $url = $this->client->getBaseUrl() . '/' . rawurlencode($this->documentNumber) . '/file';
-            $this->client = new \Guzzle\Http\Client();
-            $this->client->setSslVerification(false, false, 0);
-            $request = $this->client->get($url, $headers, $options);
-            $request->setAuth($this->getConfig()->user, $this->getConfig()->pass);
+            $client = clone $this->client;
+            $client->setBaseUrl(null);
+            $client->setSslVerification(false, false, 0);
+            $request = $client->get($url, $headers);
             $tmp_file = 'php://temp/maxmemory:256000';
             $handle = fopen($tmp_file, 'rw');
             $request->setResponseBody($handle);
@@ -342,6 +341,7 @@ class BillingDocument extends Base\BaseObject
             while (($read = fread($handle, 254)) != null) {
                 $content = !isset($content) ? $read : $content . $read;
             }
+            fclose($handle);
             return array(
                 'content' => $content,
                 'length' => $response->getContentLength(),
