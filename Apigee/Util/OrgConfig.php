@@ -122,11 +122,11 @@ class OrgConfig
             $request_options['connect_timeout'] = $request_options['connection_timeout'];
             unset($request_options['connection_timeout']);
         }
-        elseif (!array_key_exists('connect_timeout', $options)) {
+        if (!array_key_exists('connect_timeout', $request_options)) {
             $request_options['connect_timeout'] = 10;
         }
 
-        if (!array_key_exists('timeout', $options)) {
+        if (!array_key_exists('timeout', $request_options)) {
             $request_options['timeout'] = 10;
         }
 
@@ -147,7 +147,7 @@ class OrgConfig
 
         $proxy = null;
         if (!$proxy = getenv('HTTPS_PROXY')) {
-          $proxy = getenv('HTTP_PROXY');
+            $proxy = getenv('HTTP_PROXY');
         }
         if (!empty($proxy)) {
             $request_options['proxy'] = $proxy;
