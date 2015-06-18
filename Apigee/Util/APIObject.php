@@ -248,7 +248,9 @@ class APIObject
             $exception->responseObj = $response;
             throw $exception;
         }
-        $this->debugCallback(DebugData::toArray());
+        $debug_array = DebugData::toArray();
+        self::$logger->debug(print_r($debug_array, true));
+        $this->debugCallback($debug_array);
     }
 
     private function debugCallback(array $debug)
