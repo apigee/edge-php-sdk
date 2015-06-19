@@ -1,11 +1,22 @@
 <?php
 namespace Apigee\Util;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Guzzle\Log\PsrLogAdapter;
+use Guzzle\Plugin\Log\LogPlugin;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
 /**
  * A class that represents infomration about an Edge organization.
  */
 class OrgConfig
 {
+    /**
+     * A possible format of logs written by Guzzle's LogPlugin.
+     * @see \Guzzle\Log\MessageFormatter
+     */
+    const LOG_SUBSCRIBER_FORMAT = ">>>>>>>>\n{request}\n<<<<<<<<\n{response}\n--------\n{curl_stderr}\n--------\nConnection time: {connect_time}\nTotal transaction time: {total_time}";
 
     /**
      * The organization name.
@@ -153,9 +164,27 @@ class OrgConfig
             $request_options['proxy'] = $proxy;
         }
 
-        $this->logger = array_key_exists('logger', $options) && $options['logger'] instanceof \Psr\Log\LoggerInterface ? $options['logger'] : new \Psr\Log\NullLogger();
+        $subscribers = array();
+        if (array_key_exists('subscribers', $options) && is_array($options['subscribers'])) {
+            foreach ($options['subscribers'] as $subscriber) {
+                if ($subscriber instanceof LoggerInterface) {
+                    if (array_key_exists('log_subscriber_format', $options)) {
+                        $log_subscriber_format = $options['log_subscriber_format'];
+                    }
+                    else {
+                        $log_subscriber_format = self::LOG_SUBSCRIBER_FORMAT;
+                    }
+                    $subscribers[] = new LogPlugin(new PsrLogAdapter($subscriber), $log_subscriber_format);
+                }
+                elseif ($subscriber instanceof EventSubscriberInterface) {
+                    $subscribers[] = $subscriber;
+                }
+            }
+        }
+
+        $this->logger = array_key_exists('logger', $options) && $options['logger'] instanceof LoggerInterface ? $options['logger'] : new NullLogger();
         $this->user_mail = array_key_exists('user_mail', $options) ? $options['user_mail'] : null;
-        $this->subscribers = array_key_exists('subscribers', $options) ? $options['subscribers'] : array();
+        $this->subscribers = $subscribers;
         $this->http_options = $request_options;
         $this->debug_callbacks = array_key_exists('debug_callbacks', $options) ? $options['debug_callbacks'] : array();
         $this->user_agent = array_key_exists('user_agent', $options) ? $options['user_agent'] : null;
