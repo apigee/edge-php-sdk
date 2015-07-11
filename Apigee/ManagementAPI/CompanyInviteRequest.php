@@ -38,13 +38,13 @@ class CompanyInviteRequest extends Base {
 
   /**
    * The last modfied time.
-   * @var int 
+   * @var int
    */
   private $lastmodified_at;
 
   /**
    * The org id
-   * @var string 
+   * @var string
    */
   private $orgId;
 
@@ -74,7 +74,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * The email id of the source developer.
-   * @var string 
+   * @var string
    */
   private $sourceDeveloperEmail;
 
@@ -88,7 +88,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the id of the request object.
-   * 
+   *
    * @param string $id
    */
   public function setId($id) {
@@ -97,7 +97,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the Company Id.
-   * 
+   *
    * @return string
    */
   public function getCompanyId() {
@@ -106,7 +106,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the Company Id.
-   * 
+   *
    * @param string $companyId
    */
   public function setCompanyId($companyId) {
@@ -115,7 +115,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the Developer Id.
-   * 
+   *
    * @return string
    */
   public function getDeveloperId() {
@@ -124,7 +124,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the Developer Id.
-   * 
+   *
    * @param string $developerId
    */
   public function setDeveloperId($developerId) {
@@ -133,7 +133,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the created time.
-   * 
+   *
    * @return int
    */
   public function getCreatedAt() {
@@ -142,7 +142,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the modified time.
-   * 
+   *
    * @return int
    */
   public function getLastModifedAt() {
@@ -151,7 +151,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the orgId.
-   * 
+   *
    * @return string
    */
   public function getOrgId() {
@@ -160,7 +160,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the requestor.
-   * 
+   *
    * @return string
    */
   public function getRequestor() {
@@ -169,7 +169,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the requestor.
-   * 
+   *
    * @param string $requestor
    */
   public function setRequestor($requestor) {
@@ -178,7 +178,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the state of the request.
-   * 
+   *
    * @return string
    */
   public function getState() {
@@ -187,7 +187,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the state of the request.
-   * 
+   *
    * @param string $state
    */
   public function setSate($state) {
@@ -196,7 +196,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the type of the request.
-   * 
+   *
    * @return string
    */
   public function getType() {
@@ -205,7 +205,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets  the type of the request.
-   * 
+   *
    * @param string $type
    */
   public function setType($type) {
@@ -214,7 +214,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Gets the source developer email.
-   * 
+   *
    * @return string
    */
   public function getSourceDeveloperEmail() {
@@ -223,7 +223,7 @@ class CompanyInviteRequest extends Base {
 
   /**
    * Sets the source developer email.
-   * 
+   *
    * @param type $sourceDeveloperEmail
    */
   public function setSourceDeveloperEmail($sourceDeveloperEmail) {
@@ -327,11 +327,11 @@ class CompanyInviteRequest extends Base {
   }
 
   /**
-   * Saves an invite request object to the Edge server. 
-   * 
+   * Saves an invite request object to the Edge server.
+   *
    * If $force_update is true then a PUT call is made to update an existing request, otherwise a POST
    * call is made to create a new request.
-   * 
+   *
    * @param boolean $force_update
    */
   public function save($force_update = FALSE) {
@@ -417,5 +417,3 @@ class CompanyInviteRequest extends Base {
   }
 
 }
-
-?>
