@@ -448,4 +448,3 @@ class CompanyInvitation extends Base {
 
 }
 
-?>
