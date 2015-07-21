@@ -9,6 +9,8 @@ use \Apigee\Exceptions\ParameterException;
  * Abstracts the Company object in the Management API and allows clients to
  * manipulate it.
  *
+ * Note: at this time Companies do not support paging.
+ *
  * @author djohnson
  */
 class Company extends Base
@@ -151,6 +153,14 @@ class Company extends Base
         return $this->attributes[$name];
     }
 
+    /**
+     * Sets a named attribute.
+     *
+     * @todo If we are in a paged environment, make sure we don't exceed 20 here.
+     *
+     * @param string $name
+     * @param string $value
+     */
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -219,6 +229,11 @@ class Company extends Base
     /**
      * Given a valid internal company name, populates this object with
      * its properties as fetched from the Edge server.
+     *
+     * Note that if using a paging-enabled org, a maximum of 100 apps will be
+     * returned for a company. In order to get a canonical listing of a
+     * company's apps, you should invoke CompanyApp::getList() or
+     * CompanyApp::getListDetail().
      *
      * @param string $name
      */
@@ -310,6 +325,8 @@ class Company extends Base
      * Return value is an associative array whose keys are role names, and
      * whose values are arrays of developer emails.
      *
+     * @todo Validate that pagination does not come into play here.
+     *
      * @param null|string $company_name
      * @return array
      * @throws \Apigee\Exceptions\ParameterException
@@ -375,19 +392,25 @@ class Company extends Base
         $this->http_delete($url);
     }
 
-  // Get All Companies which developer is part of
-  public function getDeveloperCompanies($developer_id) {
-    $url = '/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/companies';
-//    $content_type = 'application/json; charset=utf-8';
-//    $accept_type = 'application/json; charset=utf-8';
+    /**
+     * Get all companies which developer is part of.
+     *
+     * @todo Validate that responseText makes sense to return here.
+     *
+     * @param string $developer_id
+     * @return string
+     */
+    public function getDeveloperCompanies($developer_id) {
+        $url = '/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/companies';
+//      $content_type = 'application/json; charset=utf-8';
+//      $accept_type = 'application/json; charset=utf-8';
 
-    $this->setBaseUrl($url);
-    $this->get();
-    $this->restoreBaseUrl();
-    $response = $this->responseText;
-    return $response;
-
-  }
+        $this->setBaseUrl($url);
+        $this->get();
+        $this->restoreBaseUrl();
+        $response = $this->responseText;
+        return $response;
+    }
 
 
   /**
@@ -403,9 +426,9 @@ class Company extends Base
             if (property_exists($company, $key)) {
                 if ($key == 'attributes') {
                    foreach ($value as $name_value_pair) {
-                     if (isset($name_value_pair['value'])) {
-                       $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
-                     }
+                       if (isset($name_value_pair['value'])) {
+                          $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
+                       }
                    }
                 } else {
                     $company->$key = $value;
@@ -456,17 +479,17 @@ class Company extends Base
      * @return array An array of role names associated with the developer.
      */
     public function getDeveloperRoles($developer_email, $company_name = NUll) {
-      $company_name = $company_name ? : $this->name;
-      if (empty($company_name)) {
-        throw new ParameterException('No Company name given.');
-      }
-      $url = rawurlencode($company_name) . '/developers/' . $developer_email;
-      $this->get($url);
+        $company_name = $company_name ? : $this->name;
+        if (empty($company_name)) {
+            throw new ParameterException('No Company name given.');
+        }
+        $url = rawurlencode($company_name) . '/developers/' . $developer_email;
+        $this->get($url);
 
-      $developer_companies = $this->responseObj['company'];
-      $roles = explode(',', $developer_companies[0]['role']);
+        $developer_companies = $this->responseObj['company'];
+        $roles = explode(',', $developer_companies[0]['role']);
 
-      return $roles;
+        return $roles;
     }
 
 }

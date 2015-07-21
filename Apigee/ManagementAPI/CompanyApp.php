@@ -52,21 +52,21 @@ class CompanyApp extends AbstractApp
      */
     public function getListDetail($company_name = null)
     {
+        $allApps = array();
         $company_name = $company_name ? : $this->companyName;
 
+        // Per-company app listing paging is not enabled at this time.
         $this->get('?expand=true');
         $list = $this->responseObj;
+        if (array_key_exists('app', $list)) {
+            foreach ($list['app'] as $response) {
+                $app = new CompanyApp($this->getConfig(), $company_name);
+                self::loadFromResponse($app, $response, $company_name);
+                $allApps[] = $app;
+            }
+        }
 
-        $app_list = array();
-        if (!array_key_exists('app', $list) || empty($list['app'])) {
-            return $app_list;
-        }
-        foreach ($list['app'] as $response) {
-            $app = new CompanyApp($this->getConfig(), $company_name);
-            self::loadFromResponse($app, $response, $company_name);
-            $app_list[] = $app;
-        }
-        return $app_list;
+        return $allApps;
     }
 
     /**
@@ -91,7 +91,9 @@ class CompanyApp extends AbstractApp
 
     protected function alterAttributes(array &$payload)
     {
-        $this->attributes['Company'] = $this->companyName;
+        if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+            $this->attributes['Company'] = $this->companyName;
+        }
     }
 
     public function getAppProperties($class = __CLASS__)
