@@ -4,6 +4,7 @@ namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ParameterException;
 use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\TooManyAttributesException;
 
 /**
  * Superclass of DeveloperApps and CompanyApps.
@@ -12,6 +13,15 @@ use Apigee\Exceptions\ResponseException;
  */
 abstract class AbstractApp extends Base
 {
+    /**
+     * If paging is enabled, how many developers can be retrieved per query?
+     */
+    const MAX_ITEMS_PER_PAGE = 1000;
+
+    /**
+     * If paging is enabled, we cannot exceed this number of attributes.
+     */
+    const MAX_ATTRIBUTE_COUNT = 20;
 
     /**
      * @var string
@@ -159,7 +169,41 @@ abstract class AbstractApp extends Base
      */
     protected $keyExpiry;
 
+
+    /**
+     * @var bool
+     * If true, use paging when fetching lists of apps.
+     */
+    protected $pagingEnabled = false;
+
+    /**
+     * @var int
+     * Number of apps fetched per page, if paging is enabled.
+     */
+    protected $pageSize;
+
+
     /* Accessors (getters/setters) */
+
+    /**
+     * Sets/clears the Paging flag.
+     *
+     * @param bool $flag
+     */
+    public function usePaging($flag = true)
+    {
+        $this->pagingEnabled = (bool)$flag;
+    }
+
+    /**
+     * Reports current status of the Paging flag.
+     *
+     * @return bool
+     */
+    public function isPagingEnabled()
+    {
+        return $this->pagingEnabled;
+    }
 
     /**
      * For apps that are being created, gets the number of seconds until the key
@@ -242,6 +286,11 @@ abstract class AbstractApp extends Base
      */
     public function setAttribute($attr, $value)
     {
+        // In paging-enabled environments, there is a hard limit of 20 on the
+        // number of attributes any entity may have.
+        if ($this->pagingEnabled && count($this->attributes) >= self::MAX_ATTRIBUTE_COUNT) {
+            throw new TooManyAttributesException('This app already has ' . self::MAX_ATTRIBUTE_COUNT . ' attributes; cannot add any more.');
+        }
         $this->attributes[$attr] = $value;
     }
 
@@ -642,6 +691,20 @@ abstract class AbstractApp extends Base
         $this->scopes = $scopes;
     }
 
+    public function getPageSize()
+    {
+        return $this->pageSize;
+    }
+
+    public function setPageSize($size)
+    {
+        $size = intval($size);
+        if ($size < 2 || $size > self::MAX_ITEMS_PER_PAGE) {
+            throw new ParameterException('Invalid value ' . $size . ' for pageSize; must be between 2 and ' . self::MAX_ITEMS_PER_PAGE);
+        }
+        $this->pageSize = $size;
+    }
+
     /**
      * Returns true if the $credentialApiproducts, $consumerKey, $consumerSecret,
      * $credentialScopes, and $credentialStatus properties are all set
@@ -676,6 +739,14 @@ abstract class AbstractApp extends Base
     public function setApiProductCache(array $cache)
     {
         $this->cachedApiProducts = $cache;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function init(\Apigee\Util\OrgConfig $config, $baseUrl) {
+        $this->pageSize = self::MAX_ITEMS_PER_PAGE;
+        parent::init($config, $baseUrl);
     }
 
     /**
@@ -915,25 +986,41 @@ abstract class AbstractApp extends Base
             'name' => $this->getName(),
             'callbackUrl' => $this->getCallbackUrl()
         );
+
+        // Twiddle with attributes. If we are in a paging-enabled environment,
+        // there is a hard limit of 20 attributes.
+
         // Make sure DisplayName attribute is saved. It seems to be required or
         // expected on the Enterprise UI.
         if (!array_key_exists('DisplayName', $this->attributes)) {
-            $display_name = $this->name;
-            if (strpos($display_name, ' ') === false) {
-                $display_name = ucwords(str_replace(array('_', '-'), ' ', $display_name));
+            if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+                $display_name = $this->name;
+                if (strpos($display_name, ' ') === false) {
+                  $display_name = ucwords(str_replace(array('_', '-'), ' ', $display_name));
+                }
+                $this->attributes['DisplayName'] = $display_name;
             }
-            $this->attributes['DisplayName'] = $display_name;
         }
         // Set other attributes that Enterprise UI sets by default.
-        $this->attributes['lastModified'] = gmdate('Y-m-d H:i A');
-        $this->attributes['lastModifier'] = $this->config->user_mail;
-        if (!$is_update && !array_key_exists('creationDate', $this->attributes)) {
+        if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+            $this->attributes['lastModified'] = gmdate('Y-m-d H:i A');
+        }
+        if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+            $this->attributes['lastModifier'] = $this->config->user_mail;
+        }
+        if (!$is_update && !array_key_exists('creationDate', $this->attributes) && (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT)) {
             $this->attributes['creationDate'] = gmdate('Y-m-d H:i A');
         }
 
         $this->writeAttributes($payload);
 
         $this->alterAttributes($payload);
+
+        // Make sure we are not sending too many attributes.
+        if ($this->pagingEnabled && count($this->attributes) > self::MAX_ATTRIBUTE_COUNT) {
+            // This truncation occurs silently; should we throw an exception?
+            $this->attributes = array_slice($this->attributes, 0, self::MAX_ATTRIBUTE_COUNT);
+        }
 
         $url = null;
         if ($is_update) {
@@ -1134,8 +1221,11 @@ abstract class AbstractApp extends Base
      */
     public function getList()
     {
+        // Per-developer/per-company app listing paging is not enabled at this
+        // time.
         $this->get();
-        return $this->responseObj;
+        $apps = $this->responseObj;
+        return $apps;
     }
 
     /**
@@ -1364,6 +1454,8 @@ abstract class AbstractApp extends Base
         $excluded_properties[] = 'cachedApiProducts';
         $excluded_properties[] = 'baseUrl';
         $excluded_properties[] = 'ownerIdentifierField';
+        $excluded_properties[] = 'pagingEnabled';
+        $excluded_properties[] = 'pageSize';
 
         $count = count($properties);
         for ($i = 0; $i < $count; $i++) {

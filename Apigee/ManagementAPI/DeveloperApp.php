@@ -71,24 +71,23 @@ class DeveloperApp extends AbstractApp
      */
     public function getListDetail($developer_mail = null)
     {
+        $allApps = array();
         $developer_mail = $developer_mail ? : $this->developer;
-
         $this->setBaseUrl('/o/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_mail) . '/apps');
 
+        // Per-developer app listing paging is not enabled at this time.
         $this->get('?expand=true');
         $list = $this->responseObj;
-        $this->restoreBaseUrl();
+        if (array_key_exists('app', $list)) {
+            foreach ($list['app'] as $response) {
+                $app = new DeveloperApp($this->getConfig(), $developer_mail);
+                self::loadFromResponse($app, $response, $developer_mail);
+                $allApps[] = $app;
+            }
+        }
 
-        $app_list = array();
-        if (!array_key_exists('app', $list) || empty($list['app'])) {
-            return $app_list;
-        }
-        foreach ($list['app'] as $response) {
-            $app = new DeveloperApp($this->getConfig(), $developer_mail);
-            self::loadFromResponse($app, $response, $developer_mail);
-            $app_list[] = $app;
-        }
-        return $app_list;
+        $this->restoreBaseUrl();
+        return $allApps;
     }
 
     /**
@@ -103,8 +102,8 @@ class DeveloperApp extends AbstractApp
     }
 
     /**
-     * Lists all apps within the org or company. Each member of the returned
-     * array is a fully-populated DeveloperApp/CompanyApp object.
+     * Lists all apps within the org. Each member of the returned array is a
+     * fully-populated DeveloperApp/CompanyApp object.
      *
      * @return array
      */
@@ -112,28 +111,78 @@ class DeveloperApp extends AbstractApp
     {
         $url = '/o/' . rawurlencode($this->config->orgName);
         $this->setBaseUrl($url);
-        $this->get('apps?expand=true');
-        $response = $this->responseObj;
-        $this->restoreBaseUrl();
-        $app_list = array();
-        foreach ($response['app'] as $app_detail) {
-            if (array_key_exists('developerId', $app_detail)) {
-                $owner_id = $this->getDeveloperMailById($app_detail['developerId']);
-                if (!isset($owner_id)) {
-                    // Anomalous condition: app exists but owner is deleted.
-                    // This occurs rarely.
-                    self::$logger->warning('Attempted to load an app owned by nonexistent Developer ' . $app_detail['developerId'] . ' for App ' . $app_detail['appId'] . ' (' . $app_detail['name'] . ')');
-                    continue;
+        if ($this->pagingEnabled) {
+            $lastKey = null;
+            while (true) {
+                $queryString = 'expand=true&rows=' . $this->pageSize;
+                if (isset($lastKey)) {
+                    $queryString .= '&lastKey=' . urlencode($lastKey);
                 }
-                $app = new self($this->config, $owner_id);
-            } else {
-                $owner_id = $app_detail['companyName'];
-                $app = new CompanyApp($this->config, $owner_id);
+                $this->get($queryString);
+                $appSubset = $this->responseObj;
+                if (!array_key_exists('app', $appSubset)) {
+                    break;
+                }
+                $subsetCount = count($appSubset['app']);
+                if ($subsetCount == 0) {
+                    break;
+                }
+                if (isset($lastKey)) {
+                    // Avoid duplicating the last key, which is the first key
+                    // on this page.
+                    array_shift($appSubset['app']);
+                }
+                foreach ($appSubset['app'] as $app_detail) {
+                    if (array_key_exists('developerId', $app_detail)) {
+                        $owner_id = $this->getDeveloperMailById($app_detail['developerId']);
+                        if (!isset($owner_id)) {
+                            // Anomalous condition: app exists but owner is deleted.
+                            // This occurs rarely.
+                            self::$logger->warning('Attempted to load an app owned by nonexistent Developer ' . $app_detail['developerId'] . ' for App ' . $app_detail['appId'] . ' (' . $app_detail['name'] . ')');
+                            continue;
+                        }
+                        $app = new self($this->config, $owner_id);
+                    }
+                    else {
+                        $owner_id = $app_detail['companyName'];
+                        $app = new CompanyApp($this->config, $owner_id);
+                    }
+                    self::loadFromResponse($app, $app_detail, $owner_id);
+                    $app_list[] = $app;
+                }
+                if ($subsetCount == $this->pageSize) {
+                    $lastApp = end($appSubset['app']);
+                    $lastKey = $lastApp['appId'];
+                }
+                else {
+                  break;
+                }
             }
-            self::loadFromResponse($app, $app_detail, $owner_id);
-            $app_list[] = $app;
+        } else {
+            $this->get('apps?expand=true');
+            $response = $this->responseObj;
+            $this->restoreBaseUrl();
+            $app_list = array();
+            foreach ($response['app'] as $app_detail) {
+                if (array_key_exists('developerId', $app_detail)) {
+                    $owner_id = $this->getDeveloperMailById($app_detail['developerId']);
+                    if (!isset($owner_id)) {
+                        // Anomalous condition: app exists but owner is deleted.
+                        // This occurs rarely.
+                        self::$logger->warning('Attempted to load an app owned by nonexistent Developer ' . $app_detail['developerId'] . ' for App ' . $app_detail['appId'] . ' (' . $app_detail['name'] . ')');
+                        continue;
+                    }
+                    $app = new self($this->config, $owner_id);
+                }
+                else {
+                    $owner_id = $app_detail['companyName'];
+                    $app = new CompanyApp($this->config, $owner_id);
+                }
+                self::loadFromResponse($app, $app_detail, $owner_id);
+                $app_list[] = $app;
+            }
+            return $app_list;
         }
-        return $app_list;
     }
 
     /**
@@ -240,13 +289,17 @@ class DeveloperApp extends AbstractApp
      */
     public static function afterLoad(AbstractApp &$obj, array $response, $owner_identifier)
     {
-        $obj->developerId = $response['developerId'];
-        $obj->developer = $obj->getDeveloperMailById($response['developerId']);
+        if ($obj instanceof DeveloperApp) {
+            $obj->developerId = $response['developerId'];
+            $obj->developer = $obj->getDeveloperMailById($response['developerId']);
+        }
     }
 
     protected function alterAttributes(array &$payload)
     {
-        $this->attributes['Developer'] = $this->developer;
+        if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+            $this->attributes['Developer'] = $this->developer;
+        }
     }
 
     public function getAppProperties($class = __CLASS__)
