@@ -125,5 +125,4 @@ class Payment extends DataStructure
     {
         return $this->success;
     }
-
 }

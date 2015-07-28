@@ -24,7 +24,10 @@ class Template extends APIObject
      */
     public function __construct(OrgConfig $config, $modelId)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/templates');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($modelId)
+            . '/templates';
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -38,7 +41,8 @@ class Template extends APIObject
     public function load($name, $type)
     {
         if ($type != 'index' && $type != 'method') {
-            throw new ParameterException('Invalid template type ‘' . $type . '’ (valid values are ‘index’ and ‘method’).');
+            $message = 'Invalid template type ‘%s’ (valid values are ‘index’ and ‘method’).';
+            throw new ParameterException(sprintf($message, $type));
         }
         $this->get($name . '?type=' . $type, 'text/html');
         return $this->responseText;
@@ -57,7 +61,8 @@ class Template extends APIObject
     public function save($name, $type, $html, $update = false)
     {
         if ($type != 'index' && $type != 'method') {
-            throw new ParameterException('Invalid template type ‘' . $type . '’ (valid values are ‘index’ and ‘method’).');
+            $message = 'Invalid template type ‘%s’ (valid values are ‘index’ and ‘method’).';
+            throw new ParameterException(sprintf($message, $type));
         }
         if ($update) {
             $uri = rawurlencode($name) . '?type=' . $type;
@@ -72,8 +77,7 @@ class Template extends APIObject
             // If update failed, try insert.
             if ($update && $e->getCode() == 404) {
                 $this->save($name, $type, $html, false);
-            }
-            else {
+            } else {
                 throw $e;
             }
         }

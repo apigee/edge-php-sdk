@@ -104,7 +104,11 @@ class ReportDefinition extends BaseObject
         } else {
             throw new ParameterException("Report definition identifier not specified.");
         }
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($id) . '/report-definitions';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($id)
+            . '/report-definitions';
         $this->setBaseUrl($url);
         $this->get();
         $this->restoreBaseUrl();

@@ -67,7 +67,11 @@ class Application extends Base\BaseObject
 
     public function __construct($developer_email, \Apigee\Util\OrgConfig $config)
     {
-        $baseUrl = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers/' . rawurlencode($developer_email) . '/applications';
+        $baseUrl = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_email)
+            . '/applications';
         $this->init($config, $baseUrl);
         $this->developerEmail = $developer_email;
         $this->wrapperTag = 'application';

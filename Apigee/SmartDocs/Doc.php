@@ -24,7 +24,12 @@ class Doc extends APIObject
      */
     public function __construct(OrgConfig $config, $modelId, $revisionId, $resourceUuid, $methodUuid)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . $modelId . '/revisions/' . $revisionId . '/resources/' . $resourceUuid . '/methods/' . $methodUuid);
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+          . '/apimodels/' . $modelId
+          . '/revisions/' . $revisionId
+          . '/resources/' . $resourceUuid
+          . '/methods/' . $methodUuid;
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -39,5 +44,4 @@ class Doc extends APIObject
         $this->get('doc?template=' . $templateName, 'text/html');
         return $this->responseText;
     }
-
 }

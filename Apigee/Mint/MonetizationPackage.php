@@ -189,7 +189,11 @@ class MonetizationPackage extends Base\BaseObject
                 'allAvailable' => 'true',
             ),
         );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/monetization-packages';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_id)
+            . '/monetization-packages';
         $this->setBaseUrl($url);
         $this->get(null, 'application/json; charset=utf-8', array(), $options);
         $this->restoreBaseUrl();
@@ -352,7 +356,7 @@ class MonetizationPackage extends Base\BaseObject
     /**
      * Remove all product from this package
      */
-    public function clear_products()
+    public function clearProducts()
     {
         $this->products = array();
     }

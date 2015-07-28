@@ -20,7 +20,7 @@ class Debugger
         foreach ($array as $key => $value) {
             if (is_object($value)) {
                 $items[$key] = self::getDeclaredValues($value);
-            } else if (is_array($value)) {
+            } elseif (is_array($value)) {
                 $items[$key] = self::getArrayValues($value);
             } else {
                 $items[$key] = $value;
@@ -42,16 +42,16 @@ class Debugger
                     $value = $property->getValue($object);
                     if (is_object($value)) {
                         $newObject->$name = self::getDeclaredValues($value);
-                    } else if (is_array($value)) {
+                    } elseif (is_array($value)) {
                         $newObject->$name = self::getArrayValues($value);
                     } else {
                         $newObject->$name = $value;
                     }
                 }
             }
-        } else if (is_array($object)) {
+        } elseif (is_array($object)) {
             return self::getArrayValues($object);
-        } else if (is_null($object)) {
+        } elseif (is_null($object)) {
             return null;
         } else {
             throw new ParameterException('Not an object');

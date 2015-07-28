@@ -188,7 +188,12 @@ class Resource extends APIObject
         if (!empty($resource->methods)) {
             foreach ($resource->methods as &$method) {
                 if (is_array($method)) {
-                    $methodObj = new Method($resource->getConfig(), $resource->modelId, $resource->getApiRevisionId(), $resource->id);
+                    $methodObj = new Method(
+                        $resource->getConfig(),
+                        $resource->modelId,
+                        $resource->getApiRevisionId(),
+                        $resource->id
+                    );
                     Method::fromArray($methodObj, $method);
                     $method = $methodObj;
                 }
@@ -201,7 +206,7 @@ class Resource extends APIObject
      *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
         $payload_keys = array(
             'id', 'name', 'displayName', 'description', 'baseUrl', 'path',
@@ -237,7 +242,11 @@ class Resource extends APIObject
         $this->blankValues();
         $this->modelId = $modelId;
         $this->apiRevisionId = $revisionUuid;
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->modelId) . '/revisions/' . $this->apiRevisionId . '/resources');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($this->modelId)
+            . '/revisions/' . $this->apiRevisionId
+            . '/resources';
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -278,9 +287,9 @@ class Resource extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
-        $payload = $this->toArray(FALSE);
+        $payload = $this->toArray(false);
         if ($update) {
             $url = $this->id;
             $method = 'put';
@@ -304,7 +313,7 @@ class Resource extends APIObject
         if (empty($resourceUuid)) {
             throw new ParameterException('Cannot delete a resource with no Resource UUID.');
         }
-        $this->http_delete($resourceUuid);
+        $this->httpDelete($resourceUuid);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }

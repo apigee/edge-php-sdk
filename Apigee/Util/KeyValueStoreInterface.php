@@ -6,8 +6,11 @@ namespace Apigee\Util;
  * Interface KeyValueStoreInterface
  * @package Apigee\Util
  * Defines functions necessary to read/write variables to a persistent store.
+ *
+ * @deprecated
  */
-interface KeyValueStoreInterface {
+interface KeyValueStoreInterface
+{
     /**
      * Reads a value from the persistent store. If value is missing,
      * the value specified by $default is returned instead.

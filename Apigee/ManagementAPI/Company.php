@@ -313,7 +313,7 @@ class Company extends Base
         if (empty($name)) {
             throw new ParameterException('No company name given.');
         }
-        $this->http_delete(rawurlencode($name));
+        $this->httpDelete(rawurlencode($name));
         if ($name == $this->name) {
             $this->blankValues();
         }
@@ -389,7 +389,7 @@ class Company extends Base
             throw new ParameterException('No company name given.');
         }
         $url = rawurlencode($company_name) . '/developers/' . rawurlencode($dev_email);
-        $this->http_delete($url);
+        $this->httpDelete($url);
     }
 
     /**
@@ -400,10 +400,13 @@ class Company extends Base
      * @param string $developer_id
      * @return string
      */
-    public function getDeveloperCompanies($developer_id) {
-        $url = '/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/companies';
-//      $content_type = 'application/json; charset=utf-8';
-//      $accept_type = 'application/json; charset=utf-8';
+    public function getDeveloperCompanies($developer_id)
+    {
+        $url = '/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_id)
+            . '/companies';
 
         $this->setBaseUrl($url);
         $this->get();
@@ -425,11 +428,11 @@ class Company extends Base
         foreach ($response as $key => $value) {
             if (property_exists($company, $key)) {
                 if ($key == 'attributes') {
-                   foreach ($value as $name_value_pair) {
-                       if (isset($name_value_pair['value'])) {
-                          $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
-                       }
-                   }
+                    foreach ($value as $name_value_pair) {
+                        if (isset($name_value_pair['value'])) {
+                            $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
+                        }
+                    }
                 } else {
                     $company->$key = $value;
                 }
@@ -478,7 +481,8 @@ class Company extends Base
      * @param string $company_name The name of the company the developer belongs to.
      * @return array An array of role names associated with the developer.
      */
-    public function getDeveloperRoles($developer_email, $company_name = NUll) {
+    public function getDeveloperRoles($developer_email, $company_name = null)
+    {
         $company_name = $company_name ? : $this->name;
         if (empty($company_name)) {
             throw new ParameterException('No Company name given.');
@@ -491,5 +495,4 @@ class Company extends Base
 
         return $roles;
     }
-
 }

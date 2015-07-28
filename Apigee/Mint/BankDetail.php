@@ -73,7 +73,11 @@ class BankDetail extends Base\BaseObject
 
     public function __construct($developer_email, \Apigee\Util\OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers/' . rawurldecode($developer_email) . '/bank-details';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/developers/'
+            . rawurldecode($developer_email)
+            . '/bank-details';
         $this->init($config, $base_url);
         $this->devEmail = $developer_email;
         $this->wrapperTag = 'bankDetail';
@@ -164,7 +168,8 @@ class BankDetail extends Base\BaseObject
         if ($this->id == null) {
             $this->post(null, $this->__toString());
         } else {
-            $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id);
+            $baseUrl = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id;
+            $this->setBaseUrl($baseUrl);
             $this->put(null, $this->__toString());
             $this->restoreBaseUrl();
         }
@@ -173,7 +178,7 @@ class BankDetail extends Base\BaseObject
     public function delete()
     {
         $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id);
-        $this->http_delete();
+        $this->httpDelete();
         $this->restoreBaseUrl();
     }
 
@@ -311,5 +316,4 @@ class BankDetail extends Base\BaseObject
         // TODO: validate
         $this->sortCode = $code;
     }
-
 }

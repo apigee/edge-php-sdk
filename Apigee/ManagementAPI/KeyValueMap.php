@@ -21,32 +21,40 @@ class KeyValueMap extends Base
     public function __construct(\Apigee\Util\OrgConfig $config, $environment = '*')
     {
         if ($environment == '*') {
-            $base_url = '/o/' . rawurlencode($config->orgName) . '/keyvaluemaps';
+            $baseUrl = '/o/' . rawurlencode($config->orgName) . '/keyvaluemaps';
+        } else {
+            $baseUrl = '/o/' . rawurlencode($config->orgName) . '/e/' . rawurlencode($environment) . '/keyvaluemaps';
         }
-        else {
-            $base_url = '/o/' . rawurlencode($config->orgName) . '/e/' . rawurlencode($environment) . '/keyvaluemaps';
-        }
-        $this->init($config, $base_url);
+        $this->init($config, $baseUrl);
     }
 
     /**
      * Fetches a value from a named map/key. If no such map or key is found,
      * returns null.
      *
-     * @param string $map_name
-     * @param string $key_name
+     * @param string $mapName
+     * @param string $keyName
      * @return null|string
      */
-    public function getEntryValue($map_name, $key_name)
+    public function getEntryValue($mapName, $keyName)
     {
-        $url = rawurlencode($map_name) . '/entries/' . rawurlencode($key_name);
+        $tempConfig = clone $this->config;
+        // Disable logging and all subscribers for this fetch attempt.
+        $tempConfig->logger = new \Psr\Log\NullLogger();
+        $tempConfig->subscribers = array();
+        $cachedConfig = $this->config;
+        $this->config = $tempConfig;
+
+        $url = rawurlencode($mapName) . '/entries/' . rawurlencode($keyName);
         $value = null;
         try {
             $this->get($url);
-            $response_obj = $this->responseObj;
-            $value = $response_obj['value'];
+            $responseObj = $this->responseObj;
+            $value = $responseObj['value'];
         } catch (ResponseException $e) {
         }
+
+        $this->config = $cachedConfig;
         return $value;
     }
 
@@ -56,13 +64,13 @@ class KeyValueMap extends Base
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param string $map_name
+     * @param string $mapName
      * @return array
      */
-    public function getAllEntries($map_name)
+    public function getAllEntries($mapName)
     {
         // If something went wrong, the following line will throw a ResponseException.
-        $this->get(rawurlencode($map_name));
+        $this->get(rawurlencode($mapName));
         $entries = array();
         $response = $this->responseObj;
         foreach ($response['entry'] as $entry) {
@@ -79,39 +87,39 @@ class KeyValueMap extends Base
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param string $map_name
-     * @param string $key_name
-     * @param $value
+     * @param string $mapName
+     * @param string $keyName
+     * @param string $value
      */
-    public function setEntryValue($map_name, $key_name, $value)
+    public function setEntryValue($mapName, $keyName, $value)
     {
-        $url = rawurlencode($map_name) . '/entries/' . rawurlencode($key_name);
+        $url = rawurlencode($mapName) . '/entries/' . rawurlencode($keyName);
         $payload = array(
             'entry' => array(
                 array(
-                    'name' => $key_name,
-                    'value' => $value
+                    'name' => $keyName,
+                    'value' => (string)$value
                 )
             ),
-            'name' => $map_name
+            'name' => $mapName
         );
         // If something went wrong, the following line will throw a ResponseException.
         $this->put($url, $payload);
     }
 
     /**
-     * Deletes a key and value from a map.
+     * Deletes a key-value pair from a map.
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param string $map_name
-     * @param string $key_name
+     * @param string $mapName
+     * @param string $keyName
      */
-    public function deleteEntry($map_name, $key_name)
+    public function deleteEntry($mapName, $keyName)
     {
-        $url = rawurlencode($map_name) . '/entries/' . rawurlencode($key_name);
+        $url = rawurlencode($mapName) . '/entries/' . rawurlencode($keyName);
         // If something went wrong, the following line will throw a ResponseException.
-        $this->http_delete($url);
+        $this->httpDelete($url);
     }
 
     /**
@@ -119,14 +127,14 @@ class KeyValueMap extends Base
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param string $map_name
+     * @param string $mapName
      * @param array|null $entries An optional array of key/value pairs for the map.
      */
-    public function create($map_name, $entries = null)
+    public function create($mapName, $entries = null)
     {
         $payload = array(
             'entry' => array(),
-            'name' => $map_name
+            'name' => $mapName
         );
         if (!empty($entries) && is_array($entries)) {
             foreach ($entries as $key => $value) {
@@ -142,11 +150,11 @@ class KeyValueMap extends Base
      *
      * @throws \Apigee\Exceptions\ResponseException
      *
-     * @param string $map_name
+     * @param string $mapName
      */
-    public function delete($map_name)
+    public function delete($mapName)
     {
         // If something went wrong, the following line will throw a ResponseException.
-        $this->http_delete(rawurlencode($map_name));
+        $this->httpDelete(rawurlencode($mapName));
     }
 }

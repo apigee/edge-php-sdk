@@ -16,9 +16,10 @@ class RequestInputReader
         if (!isset($request)) {
             $headers = array();
             foreach ($_SERVER as $name => $value) {
-              if (substr($name, 0, 5) == 'HTTP_') {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-              }
+                if (substr($name, 0, 5) == 'HTTP_') {
+                    $header_name = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                    $headers[$header_name] = $value;
+                }
             }
             $request['headers'] = $headers;
             $handle = fopen('php://input', 'r');

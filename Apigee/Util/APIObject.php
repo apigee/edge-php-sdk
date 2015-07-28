@@ -91,17 +91,17 @@ class APIObject
         $this->config =& $config;
         $base_url = rtrim($config->endpoint, '/') . '/' . ltrim($base_url, '/');
 
-        $options = array();
+        $opts = array();
         if (is_array($config->http_options) && !empty($config->http_options)) {
             foreach ($config->http_options as $key => $value) {
-                if (!array_key_exists('request.options', $options) || !array_key_exists($key, $options['request.options'])) {
-                    $options['request.options'][$key] = $value;
+                if (!array_key_exists('request.options', $opts) || !array_key_exists($key, $opts['request.options'])) {
+                    $opts['request.options'][$key] = $value;
                 }
             }
         }
-        $options['redirect.disable'] = $config->redirect_disable;
+        $opts['redirect.disable'] = $config->redirect_disable;
 
-        $this->client = new \Guzzle\Http\Client($base_url, $options);
+        $this->client = new \Guzzle\Http\Client($base_url, $opts);
         if (is_array($config->subscribers)) {
             foreach ($config->subscribers as $subscriber) {
                 $this->client->addSubscriber($subscriber);
@@ -154,7 +154,11 @@ class APIObject
         // Get snapshot of request headers.
         $request_headers = $request->getRawHeaders();
         // Mask authorization for logs.
-        $request_headers = preg_replace('!\nAuthorization: (Basic|Digest) [^\r\n]+\r!i', "\nAuthorization: $1 [**masked**]\r", $request_headers);
+        $request_headers = preg_replace(
+            '!\nAuthorization: (Basic|Digest) [^\r\n]+\r!i',
+            "\nAuthorization: $1 [**masked**]\r",
+            $request_headers
+        );
         try {
             $response = $request->send();
         } catch (\Guzzle\Http\Exception\BadResponseException $e) {
@@ -173,19 +177,22 @@ class APIObject
             // Log Exception
             $headers_array = $request->getHeaders();
             unset($headers_array['Authorization']);
-            $header_string = "";
+            $headerString = '';
             foreach ($headers_array as $value) {
-                $header_string .= $value->getName() . ': ' . $value . " ";
+                $headerString .= $value->getName() . ': ' . $value . " ";
             }
+            $log_message = '{code_status} ({code}) Request Details:[ {r_method} {r_resource} {r_scheme} {r_headers} ]';
+            $httpScheme = strtoupper(str_replace('https', 'http', $request->getScheme()))
+                . $request->getProtocolVersion();
             $log_params = array(
                 'code' => $e->getErrorNo(),
                 'code_status' => $e->getError(),
                 'r_method' => $request->getUrl(),
                 'r_resource' => $request->getRawHeaders(),
-                'r_scheme' => strtoupper(str_replace('https', 'http', $request->getScheme())) . $request->getProtocolVersion(),
-                'r_headers' => $header_string,
+                'r_scheme' => $httpScheme,
+                'r_headers' => $headerString,
             );
-            self::$logger->emergency('{code_status} ({code}) Request Details:[ {r_method} {r_resource} {r_scheme} {r_headers} ]', $log_params);
+            self::$logger->emergency($log_message, $log_params);
             throw $exception;
         }
         $this->responseCode = $response->getStatusCode();
@@ -194,7 +201,8 @@ class APIObject
         $this->responseMimeType = $response->getContentType();
         $this->responseObj = array();
         $content_type = $response->getContentType();
-        if (strpos($content_type, '/json') !== false && (substr($this->responseText, 0, 1) == '{' || substr($this->responseText, 0, 1) == '[')) {
+        $firstChar = substr($this->responseText, 0, 1);
+        if (strpos($content_type, '/json') !== false && ($firstChar == '{' || $firstChar == '[')) {
             $response_obj = @json_decode($this->responseText, true);
             if (is_array($response_obj)) {
                 $this->responseObj = $response_obj;
@@ -243,7 +251,13 @@ class APIObject
                 }
             }
 
-            $exception = new ResponseException($status, $this->responseCode, $uri, DebugData::$opts, $this->responseText);
+            $exception = new ResponseException(
+                $status,
+                $this->responseCode,
+                $uri,
+                DebugData::$opts,
+                $this->responseText
+            );
             $exception->requestObj = $request;
             $exception->responseObj = $response;
             throw $exception;
@@ -270,8 +284,12 @@ class APIObject
      * @param string $accept_mime_type
      * @param array $custom_headers
      */
-    public function get($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
-    {
+    public function get(
+        $uri = null,
+        $accept_mime_type = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
@@ -290,8 +308,14 @@ class APIObject
      * @param string $accept_type
      * @param array $custom_headers
      */
-    public function post($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
-    {
+    public function post(
+        $uri = null,
+        $payload = '',
+        $content_type = 'application/json; charset=utf-8',
+        $accept_type = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
         self::preparePayload($content_type, $payload);
         $headers = array(
             'accept' => $accept_type,
@@ -311,15 +335,20 @@ class APIObject
      * Performs an HTTP DELETE on a URI. The result can be read from
      * $this->response* variables.
      *
-     * This method is named http_delete() to avoid a name clash with objects that inherit
+     * This method is named httpDelete() to avoid a name clash with objects that inherit
      * from this one, which usually have a delete() method.
      *
      * @param string $uri
      * @param string $accept
      * @param array $custom_headers
+     * @param array $options
      */
-    public function http_delete($uri = null, $accept = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
-    {
+    public function httpDelete(
+        $uri = null,
+        $accept = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
         $headers = array('accept' => $accept);
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
@@ -327,6 +356,21 @@ class APIObject
         $request = $this->client->delete($uri, $headers, null, $options);
         $this->exec($request);
     }
+
+    /**
+     * Alias of self::httpDelete().
+     *
+     * @deprecated
+     */
+    public function http_delete(
+        $uri = null,
+        $accept = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
+        $this->httpDelete($uri, $accept, $custom_headers, $options);
+    }
+
 
     /**
      * Performs an HTTP PUT on a URI. The result can be read from
@@ -337,9 +381,16 @@ class APIObject
      * @param string $content_type
      * @param string $accept_type
      * @param array $custom_headers
+     * @param array $options
      */
-    public function put($uri = null, $payload = '', $content_type = 'application/json; charset=utf-8', $accept_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
-    {
+    public function put(
+        $uri = null,
+        $payload = '',
+        $content_type = 'application/json; charset=utf-8',
+        $accept_type = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
         self::preparePayload($content_type, $payload);
         $headers = array(
             'accept' => $accept_type,
@@ -363,9 +414,14 @@ class APIObject
      * @param string $uri
      * @param string $accept_mime_type
      * @param array $custom_headers
+     * @param array $options
      */
-    public function head($uri = null, $accept_mime_type = 'application/json; charset=utf-8', array $custom_headers = array(), array $options = array())
-    {
+    public function head(
+        $uri = null,
+        $accept_mime_type = 'application/json; charset=utf-8',
+        array $custom_headers = array(),
+        array $options = array()
+    ) {
         $headers = array('accept' => $accept_mime_type);
         foreach ($custom_headers as $key => $value) {
             $headers[strtolower($key)] = $value;
@@ -393,6 +449,7 @@ class APIObject
     public function __call($method, array $args)
     {
         $class = get_class();
+        $exceptionText = sprintf('Class “%s” contains no such static method “%s”', $class, $method);
 
         if ($method == strtolower($method) && strpos($method, '_') !== false) {
             $parts = explode('_', $method);
@@ -404,9 +461,9 @@ class APIObject
                 self::warnDeprecated($class, $method);
                 return call_user_func_array(array($this, $camel_case), $args);
             }
-            throw new IllegalMethodException('Class “' . $class . '” contains no such method “' . $method . '” (even after camelCasing)');
+            throw new IllegalMethodException($exceptionText . ' (even after camelCasing)');
         }
-        throw new IllegalMethodException('Class “' . $class . '” contains no such method “' . $method . '”');
+        throw new IllegalMethodException($exceptionText);
     }
 
     /**
@@ -422,6 +479,8 @@ class APIObject
     {
         $class = get_class();
 
+        $exceptionText = sprintf('Class “%s” contains no such static method “%s”', $class, $method);
+
         if ($method == strtolower($method) && strpos($method, '_') !== false) {
             $parts = explode('_', $method);
             $camel_case = array_shift($parts);
@@ -432,9 +491,9 @@ class APIObject
                 self::warnDeprecated($class, $method);
                 return forward_static_call_array(array($class, $camel_case), $args);
             }
-            throw new IllegalMethodException('Class “' . $class . '” contains no such static method “' . $method . '” (even after camelCasing)');
+            throw new IllegalMethodException($exceptionText . ' (even after camelCasing)');
         }
-        throw new IllegalMethodException('Class “' . $class . '” contains no such static method “' . $method . '”');
+        throw new IllegalMethodException($exceptionText);
     }
 
     /**
@@ -573,8 +632,13 @@ class APIObject
             $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         }
         $frame = $backtrace[3];
-        $message = 'Deprecated method ' . $class . '::' . $method . ' was invoked in file ' . $frame['file'] . ', line ' . $frame['line'] . '. Please use camelCase method name instead.';
-        self::$logger->notice($message, array('type' => $class));
+        $message = 'Deprecated method %s:%s was invoked in file %s, line %s. Please use camelCase method name instead.';
+        $messageArgs = array(
+            $class,
+            $method,
+            $frame['file'],
+            $frame['line'],
+        );
+        self::$logger->notice(vsprintf($message, $messageArgs), array('type' => $class));
     }
-
 }

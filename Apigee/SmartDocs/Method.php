@@ -244,23 +244,20 @@ class Method extends APIObject
         if (array_key_exists($name, $this->customAttributes)) {
             return $this->customAttributes[$name];
         }
-        return NULL;
+        return null;
     }
     public function setCustomAttribute($name, $value)
     {
-        if ($value === NULL || $value === '') {
+        if ($value === null || $value === '') {
             if (array_key_exists($name, $this->customAttributes)) {
                 unset($this->customAttributes[$name]);
             }
-        }
-        elseif ($name !== NULL && $name !== '' && is_scalar($value)) {
+        } elseif ($name !== null && $name !== '' && is_scalar($value)) {
             $this->customAttributes[strval($name)] = strval($value);
-        }
-        else {
+        } else {
             if (!is_scalar($value)) {
                 throw new ParameterException('Custom Attribute value must be a scalar.');
-            }
-            else {
+            } else {
                 throw new ParameterException('Custom Attribute name cannot be empty.');
             }
         }
@@ -269,7 +266,7 @@ class Method extends APIObject
     {
         $this->customAttributes = array();
         foreach ($attr as $key => $value) {
-            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '' && is_scalar($value)) {
+            if ($value !== null && $value !== '' && $key !== null && $key !== '' && is_scalar($value)) {
                 $this->customAttributes[strval($key)] = strval($value);
             }
         }
@@ -355,7 +352,7 @@ class Method extends APIObject
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -423,7 +420,11 @@ class Method extends APIObject
         $this->apiRevisionId = $revisionUuid;
         $this->resourceId = $resourceUuid;
         $this->apiId = $modelId;
-        $basePath = '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions/' . rawurlencode($this->apiRevisionId) . '/resources/' . $this->resourceId . '/methods';
+        $basePath = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($this->apiId)
+            . '/revisions/' . rawurlencode($this->apiRevisionId)
+            . '/resources/' . $this->resourceId
+            . '/methods';
         $this->init($config, $basePath);
     }
 
@@ -475,7 +476,7 @@ class Method extends APIObject
         $payload = $this->toArray(false);
         // Eliminate any customAttributes with empty keys or values.
         foreach ($payload['customAttributes'] as $key => $value) {
-            if ($value === NULL || $value === '' || $key === NULL || $key === '') {
+            if ($value === null || $value === '' || $key === null || $key === '') {
                 unset($payload['customAttributes'][$key]);
             }
         }
@@ -514,7 +515,7 @@ class Method extends APIObject
         if (empty($methodUuid)) {
             throw new ParameterException('Cannot delete a method with no Method UUID.');
         }
-        $this->http_delete($methodUuid);
+        $this->httpDelete($methodUuid);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }

@@ -149,6 +149,4 @@ class MintCriteria extends DataStructure
     {
         $this->toDate = $to_date;
     }
-
-
 }

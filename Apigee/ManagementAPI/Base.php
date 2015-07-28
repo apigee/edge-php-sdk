@@ -67,14 +67,14 @@ class Base extends \Apigee\Util\APIObject
 
         if ($has_attributes) {
             if (isset($response['attributes']) && is_array($response['attributes'])) {
-                foreach ($response['attributes'] as $attrib) {
-                    if (!is_array($attrib) || !array_key_exists('name', $attrib) || !array_key_exists('value', $attrib)) {
+                foreach ($response['attributes'] as $attr) {
+                    if (!is_array($attr) || !array_key_exists('name', $attr) || !array_key_exists('value', $attr)) {
                         continue;
                     }
-                    if ($attrib['name'] == 'apiResourcesInfo') {
-                        $attrib['value'] = @json_decode($attrib['value'], true);
+                    if ($attr['name'] == 'apiResourcesInfo') {
+                        $attr['value'] = @json_decode($attr['value'], true);
                     }
-                    $attributes[$attrib['name']] = $attrib['value'];
+                    $attributes[$attr['name']] = $attr['value'];
                 }
             }
         }

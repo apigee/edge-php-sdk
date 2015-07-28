@@ -45,7 +45,8 @@ class DataStructure
                 $method = self::$childSetters[$class_name][$property_setter_name];
                 $method->invoke($this, $property_value);
             } else {
-                APIObject::$logger->notice('No setter method was found for property "' . $property_name . '" on class "' . $class_name . '".');
+                $notice = 'No setter method was found for property “%s” on class “%s”.';
+                APIObject::$logger->notice(sprintf($notice, $property_name, $class_name));
             }
         }
     }
@@ -59,10 +60,11 @@ class DataStructure
      * also update the way they set its properties to the mutators method instead of the
      * property, since properties are now marked as private.
      *
-     * @param $name Name of the private property to set
-     * @param $value Value to be set
+     * @param string $name Name of the private property to set
+     * @param mixed $value Value to be set
      */
-    public function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $class_name = get_class($this);
         if (!array_key_exists($class_name, self::$childSetters)) {
             self::$childSetters[$class_name] = self::getSetterMethods($class_name);
@@ -71,11 +73,12 @@ class DataStructure
         if (array_key_exists($property_setter_name, self::$childSetters[$class_name])) {
             $method = self::$childSetters[$class_name][$property_setter_name];
             $method->invoke($this, $value);
+        } else {
+            $notice = 'No setter method was found for property “%s” on class “%s”.';
+            APIObject::$logger->notice(sprintf($notice, $name, $class_name));
         }
-        else {
-            APIObject::$logger->notice('No setter method was found for property "' . $name . '" on class "' . $class_name . '".');
-        }
-        APIObject::$logger->warning('Attempt to access property "' . $name . '" without its accessor on class "' . $class_name . '".');
+        $warning = 'Attempt to access property “%s” without its accessor in class “%s”.';
+        APIObject::$logger->warning(sprintf($warning, $name, $class_name));
     }
 
     /**
@@ -86,18 +89,21 @@ class DataStructure
      * which at the beginning did not provide accessors methods. These old references
      * must be upgraded to accessor methods since properties are now marked as private
      *
-     * @param $name Name of the property
+     * @param string $name Name of the property
      * @return mixed
      */
-    public function __get($name) {
+    public function __get($name)
+    {
         $class_name = get_class($this);
-        APIObject::$logger->notice('Attempt to access property "' . $name . '" without its accessor on class "' . $class_name . '" from '  . json_encode(debug_backtrace()));
+        $notice = 'Attempt to access property “%s” without its accessor on class “%s” from %s';
+        $noticeArgs = array($name, $class_name, json_encode(debug_backtrace()));
+        APIObject::$logger->notice(vsprintf($notice, $noticeArgs));
         $property_accessor_name = 'get' . ucfirst($name);
         if (method_exists($this, $name)) {
-          return $this->$property_accessor_name();
-        }
-        else {
-            APIObject::$logger->warning('No accessor method was found for property "' . $name . '" on class "' . $class_name . '".');
+            return $this->$property_accessor_name();
+        } else {
+            $warning = 'No accessor method was found for property “%s” on class “%s”.';
+            APIObject::$logger->warning(sprintf($warning, $name, $class_name));
         }
     }
 }

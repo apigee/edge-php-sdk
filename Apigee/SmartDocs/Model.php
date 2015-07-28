@@ -167,23 +167,20 @@ class Model extends APIObject
         if (array_key_exists($name, $this->customAttributes)) {
             return $this->customAttributes[$name];
         }
-        return NULL;
+        return null;
     }
     public function setCustomAttribute($name, $value)
     {
-        if ($value === NULL || $value === '') {
+        if ($value === null || $value === '') {
             if (array_key_exists($name, $this->customAttributes)) {
                 unset($this->customAttributes[$name]);
             }
-        }
-        elseif ($name !== NULL && $name !== '' && is_scalar($value)) {
+        } elseif ($name !== null && $name !== '' && is_scalar($value)) {
             $this->customAttributes[strval($name)] = strval($value);
-        }
-        else {
+        } else {
             if (!is_scalar($value)) {
                 throw new ParameterException('Custom Attribute value must be a scalar.');
-            }
-            else {
+            } else {
                 throw new ParameterException('Custom Attribute name cannot be empty.');
             }
         }
@@ -192,7 +189,7 @@ class Model extends APIObject
     {
         $this->customAttributes = array();
         foreach ($attr as $key => $value) {
-            if ($value !== NULL && $value !== '' && $key !== NULL && $key !== '' && is_scalar($value)) {
+            if ($value !== null && $value !== '' && $key !== null && $key !== '' && is_scalar($value)) {
                 $this->customAttributes[strval($key)] = strval($value);
             }
         }
@@ -215,16 +212,19 @@ class Model extends APIObject
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
-        return NULL;
+        return null;
     }
 
-    public function getActiveRevision() {
+    public function getActiveRevision()
+    {
         return $this->activeRevision;
     }
-    public function setActiveRevision(Revision $revision) {
+    public function setActiveRevision(Revision $revision)
+    {
         $this->activeRevision = $revision;
     }
-    public function clearActiveRevision() {
+    public function clearActiveRevision()
+    {
         $this->activeRevision = null;
     }
 
@@ -330,7 +330,7 @@ class Model extends APIObject
         $payload = $this->toArray();
         // Eliminate any customAttributes with empty keys or values.
         foreach ($payload['customAttributes'] as $key => $value) {
-            if ($value === NULL || $value === '' || $key === NULL || $key === '') {
+            if ($value === null || $value === '' || $key === null || $key === '') {
                 unset($payload['customAttributes'][$key]);
             }
         }
@@ -360,7 +360,7 @@ class Model extends APIObject
         if (empty($modelId)) {
             throw new ParameterException('Cannot delete a model with no ID.');
         }
-        $this->http_delete($modelId);
+        $this->httpDelete($modelId);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }
@@ -395,7 +395,7 @@ class Model extends APIObject
     {
         $modelId = $modelId ?: $this->id;
         if (empty($modelId)) {
-          throw new ParameterException('Cannot import a model with no ID.');
+            throw new ParameterException('Cannot import a model with no ID.');
         }
 
         $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
@@ -434,7 +434,7 @@ class Model extends APIObject
     {
         $modelId = $modelId ?: $this->id;
         if (empty($modelId)) {
-          throw new ParameterException('Cannot import a model with no ID.');
+            throw new ParameterException('Cannot import a model with no ID.');
         }
 
         $payload = "URL=" . $url;
@@ -443,6 +443,4 @@ class Model extends APIObject
         $this->latestRevisionNumber = $revision;
         return $revision;
     }
-
-
 }

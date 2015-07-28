@@ -184,27 +184,28 @@ class Organization extends Base
     }
 
     /**
-     * Loads the organization specified by $org.
-     * @param string|null $org
+     * Loads an organization.
+     *
+     * @param string|null $orgName
      */
-    public function load($org = null)
+    public function load($orgName = null)
     {
-        $org = $org ? : $this->name;
-        $this->get(rawurlencode($org));
-        $organization = $this->responseObj;
+        $orgName = $orgName ? : $this->name;
+        $this->get(rawurlencode($orgName));
+        $org = $this->responseObj;
 
-        $this->name = $organization['name'];
-        $this->displayName = $organization['displayName'];
-        $this->environments = $organization['environments'];
-        $this->type = $organization['type'];
-        $this->createAt = $organization['createdAt'];
-        $this->createdBy = $organization['createdBy'];
-        $this->lastModifiedAt = $organization['lastModifiedAt'];
-        $this->lastModifiedBy = $organization['lastModifiedBy'];
+        $this->name = $org['name'];
+        $this->displayName = $org['displayName'];
+        $this->environments = $org['environments'];
+        $this->type = $org['type'];
+        $this->createAt = $org['createdAt'];
+        $this->createdBy = $org['createdBy'];
+        $this->lastModifiedAt = $org['lastModifiedAt'];
+        $this->lastModifiedBy = $org['lastModifiedBy'];
         $this->properties = array();
 
-        if (array_key_exists('properties', $organization) && array_key_exists('property', $organization['properties'])) {
-            foreach ($organization['properties']['property'] as $prop) {
+        if (array_key_exists('properties', $org) && array_key_exists('property', $org['properties'])) {
+            foreach ($org['properties']['property'] as $prop) {
                 if (array_key_exists('name', $prop) && array_key_exists('value', $prop)) {
                     $this->properties[$prop['name']] = $prop['value'];
                 }

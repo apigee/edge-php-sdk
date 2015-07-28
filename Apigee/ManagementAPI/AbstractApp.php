@@ -289,7 +289,8 @@ abstract class AbstractApp extends Base
         // In paging-enabled environments, there is a hard limit of 20 on the
         // number of attributes any entity may have.
         if ($this->pagingEnabled && count($this->attributes) >= self::MAX_ATTRIBUTE_COUNT) {
-            throw new TooManyAttributesException('This app already has ' . self::MAX_ATTRIBUTE_COUNT . ' attributes; cannot add any more.');
+            $message = sprintf('This app already has %u attributes; cannot add any more', self::MAX_ATTRIBUTE_COUNT);
+            throw new TooManyAttributesException($message);
         }
         $this->attributes[$attr] = $value;
     }
@@ -700,7 +701,8 @@ abstract class AbstractApp extends Base
     {
         $size = intval($size);
         if ($size < 2 || $size > self::MAX_ITEMS_PER_PAGE) {
-            throw new ParameterException('Invalid value ' . $size . ' for pageSize; must be between 2 and ' . self::MAX_ITEMS_PER_PAGE);
+            $ex = sprintf('Invalid value %u for pageSize; must be between 2 and %u', $size, self::MAX_ITEMS_PER_PAGE);
+            throw new ParameterException($ex);
         }
         $this->pageSize = $size;
     }
@@ -744,7 +746,8 @@ abstract class AbstractApp extends Base
     /**
      * {@inheritDoc}
      */
-    protected function init(\Apigee\Util\OrgConfig $config, $baseUrl) {
+    protected function init(\Apigee\Util\OrgConfig $config, $baseUrl)
+    {
         $this->pageSize = self::MAX_ITEMS_PER_PAGE;
         parent::init($config, $baseUrl);
     }
@@ -996,7 +999,7 @@ abstract class AbstractApp extends Base
             if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
                 $display_name = $this->name;
                 if (strpos($display_name, ' ') === false) {
-                  $display_name = ucwords(str_replace(array('_', '-'), ' ', $display_name));
+                    $display_name = ucwords(str_replace(array('_', '-'), ' ', $display_name));
                 }
                 $this->attributes['DisplayName'] = $display_name;
             }
@@ -1008,8 +1011,10 @@ abstract class AbstractApp extends Base
         if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
             $this->attributes['lastModifier'] = $this->config->user_mail;
         }
-        if (!$is_update && !array_key_exists('creationDate', $this->attributes) && (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT)) {
-            $this->attributes['creationDate'] = gmdate('Y-m-d H:i A');
+        if (!$is_update && !array_key_exists('creationDate', $this->attributes)) {
+            if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+                $this->attributes['creationDate'] = gmdate('Y-m-d H:i A');
+            }
         }
 
         $this->writeAttributes($payload);
@@ -1039,7 +1044,7 @@ abstract class AbstractApp extends Base
             // api-product deletions must happen one-by-one.
             foreach ($diff->to_delete as $api_product) {
                 $delete_uri = "$key_uri/apiproducts/" . rawurlencode($api_product);
-                $this->http_delete($delete_uri);
+                $this->httpDelete($delete_uri);
             }
             // api-product additions can happen in a batch.
             if (count($diff->to_add) > 0) {
@@ -1208,7 +1213,7 @@ abstract class AbstractApp extends Base
     public function delete($name = null)
     {
         $name = $name ? : $this->name;
-        $this->http_delete(rawurlencode($name));
+        $this->httpDelete(rawurlencode($name));
         if ($name == $this->getName()) {
             $this->blankValues();
         }
@@ -1254,7 +1259,7 @@ abstract class AbstractApp extends Base
         $new_credential = $this->responseObj;
         // We now have the new key, sans apiproducts. Let us add them now.
         $new_credential['apiProducts'] = array();
-        foreach($this->getCredentialApiProducts() as $apiproduct) {
+        foreach ($this->getCredentialApiProducts() as $apiproduct) {
             $new_credential['apiProducts'][] = $apiproduct['apiproduct'];
         }
         $new_credential['attributes'] = array();
@@ -1308,7 +1313,7 @@ abstract class AbstractApp extends Base
         $returnVal = false;
         $url = rawurlencode($this->getName()) . '/attributes/' . rawurlencode($attr_name);
         try {
-            $this->http_delete($url);
+            $this->httpDelete($url);
             $returnVal = true;
         } catch (ResponseException $e) {
         }
@@ -1337,9 +1342,12 @@ abstract class AbstractApp extends Base
             self::$logger = new \Psr\Log\NullLogger();
         }
         $returnVal = false;
-        $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($this->getConsumerKey()) . '/attributes/' . rawurlencode($attr_name);
+        $url = rawurlencode($this->getName())
+            . '/keys/'
+            . rawurlencode($this->getConsumerKey())
+            . '/attributes/' . rawurlencode($attr_name);
         try {
-            $this->http_delete($url);
+            $this->httpDelete($url);
             $returnVal = true;
         } catch (ResponseException $e) {
         }
@@ -1362,7 +1370,7 @@ abstract class AbstractApp extends Base
     {
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($consumer_key);
         try {
-            $this->http_delete($url);
+            $this->httpDelete($url);
         } catch (\Apigee\Exceptions\ResponseException $e) {
         }
         // We ignore whether or not the delete was successful. Either way, we can

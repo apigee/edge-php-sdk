@@ -39,7 +39,7 @@ abstract class SecurityScheme
      *
      * @return string
      */
-    public abstract function getType($humanReadable = false);
+    abstract public function getType($humanReadable = false);
 
     /**
      * Populates this security scheme from a JSON payload.

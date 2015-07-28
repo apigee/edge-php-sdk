@@ -224,11 +224,11 @@ class Organization extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        if(isset($data['address'])) {
-          foreach ($data['address'] as $address_data) {
-            $address = new DataStructures\Address($address_data);
-            $this->addresses[] = $address;
-          }
+        if (isset($data['address'])) {
+            foreach ($data['address'] as $address_data) {
+                $address = new DataStructures\Address($address_data);
+                $this->addresses[] = $address;
+            }
         }
 
         if (isset($data['parent'])) {
@@ -238,7 +238,7 @@ class Organization extends Base\BaseObject
         }
 
         $this->taxRegNo = isset($data['taxRegNo']) ? $data['taxRegNo'] : null;
-        $this->regNo = ISSET($data['regNo']) ? $data['regNo'] : null;
+        $this->regNo = isset($data['regNo']) ? $data['regNo'] : null;
 
         $excluded_properties = array('address', 'regNo', 'taxRegNo', 'parent', 'children');
         foreach (array_keys($data) as $property) {
@@ -669,12 +669,13 @@ class Organization extends Base\BaseObject
         );
         $url = rawurlencode($id) . '/supported-currencies';
         $cache_manager = CacheFactory::getCacheManager(null);
-        $data = $cache_manager->get('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), null);
+        $cache_id = 'supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false');
+        $data = $cache_manager->get($cache_id, null);
 
-        if ($data == null) {
+        if ($data === null) {
             $this->get($url, 'application/json; charset=utf-8', array(), $options);
             $data = $this->responseObj;
-            $cache_manager->set('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), $data);
+            $cache_manager->set($cache_id, $data);
         }
         $currencies = array();
         foreach ($data['supportedCurrency'] as $currency_item) {
