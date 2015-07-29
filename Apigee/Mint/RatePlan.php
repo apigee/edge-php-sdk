@@ -232,7 +232,11 @@ class RatePlan extends Base\BaseObject
      */
     public function __construct($m_package_id, \Apigee\Util\OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/monetization-packages/' . rawurlencode($m_package_id) . '/rate-plans';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/monetization-packages/'
+            . rawurlencode($m_package_id)
+            . '/rate-plans';
         $this->init($config, $base_url);
         $this->mPackageId = $m_package_id;
 
@@ -256,7 +260,13 @@ class RatePlan extends Base\BaseObject
                 'allAvailable' => $all_available ? 'true' : 'false',
             ),
         );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/monetization-packages/' . rawurlencode($this->mPackageId) . '/developers/' . rawurlencode($this->developerId) . '/rate-plans';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/monetization-packages/'
+            . rawurlencode($this->mPackageId)
+            . '/developers/'
+            . rawurlencode($this->developerId)
+            . '/rate-plans';
         $this->setBaseUrl($url);
         $this->get(null, 'application/json; charset=utf-8', array(), $options);
         $this->restoreBaseUrl();
@@ -310,8 +320,7 @@ class RatePlan extends Base\BaseObject
             $setter_method = 'set' . ucfirst($property);
             if (method_exists($this, $setter_method)) {
                 $this->$setter_method($data[$property]);
-            }
-            else {
+            } else {
                 self::$logger->notice('No setter method was found for property "' . $property . '"');
             }
         }
@@ -374,8 +383,8 @@ class RatePlan extends Base\BaseObject
         $this->childRatePlan = null;
         $this->parentRatePlan = null;
         $this->developerId = null;
-      $this->companyId = null;
-      $this->isCompanyPlan = FALSE;
+        $this->companyId = null;
+        $this->isCompanyPlan = false;
         $this->developerCategory = null;
         $this->developers = array();
         $this->applicationCategory = null;
@@ -750,7 +759,7 @@ class RatePlan extends Base\BaseObject
      * Set Advance
      * @param boolean $advance
      */
-    public function  setAdvance($advance)
+    public function setAdvance($advance)
     {
         $this->advance = $advance;
     }
@@ -806,15 +815,15 @@ class RatePlan extends Base\BaseObject
         $this->childRatePlan = $rate_plan;
     }
 
-  /**
-   * Set com.apigee.mint.model.Developer
-   * @param \Apigee\Mint\Developer $developer
-   */
-  public function setCompanyId($company_id)
-  {
-    $this->companyId = $company_id;
-    $this->isCompanyPlan = TRUE;
-  }
+    /**
+     * Set com.apigee.mint.model.Developer
+     * @param \Apigee\Mint\Developer $developer
+     */
+    public function setCompanyId($company_id)
+    {
+        $this->companyId = $company_id;
+        $this->isCompanyPlan = true;
+    }
 
     /**
      * Set com.apigee.mint.model.Developer
@@ -871,20 +880,21 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Set Rate plan type.
-     * @param string $type Possible values: STANDARD|DEVELOPER_CATEGORY|DEVELOPER|APPLICATION_CATEGORY|EXCHANGE_ORGANIZATION
+     * @param string $type
+     *    Possible values: STANDARD|DEVELOPER_CATEGORY|DEVELOPER|APPLICATION_CATEGORY|EXCHANGE_ORGANIZATION
      * @throws \Apigee\Exceptions\ParameterException
      */
     public function setType($type)
     {
         $type = strtoupper($type);
-        if (!in_array($type, array(
-            'STANDARD',
-            'DEVELOPER_CATEGORY',
-            'DEVELOPER',
-            'APPLICATION_CATEGORY',
-            'EXCHANGE_ORGANIZATION'
-        ))
-        ) {
+        $validTypes = array(
+          'STANDARD',
+          'DEVELOPER_CATEGORY',
+          'DEVELOPER',
+          'APPLICATION_CATEGORY',
+          'EXCHANGE_ORGANIZATION',
+        );
+        if (!in_array($type, $validTypes)) {
             throw new ParameterException('Invalid type of RatePlan: ' . $type);
         }
         $this->type = $type;
@@ -1125,7 +1135,7 @@ class RatePlan extends Base\BaseObject
             if ($ratePlanDetails->getOrganization()->getParent() == null) {
                 $is_group_plan = false;
                 break;
-            } else if ($ratePlanDetails->getOrganization()->getParent()->getId() != $this->organization->getId()) {
+            } elseif ($ratePlanDetails->getOrganization()->getParent()->getId() != $this->organization->getId()) {
                 $is_group_plan = false;
                 break;
             }
@@ -1159,18 +1169,17 @@ class RatePlan extends Base\BaseObject
         $plan_end_date = $this->getEndDateTime();
 
         // If plan end date is not set, return FALSE.
-        if(is_null($plan_end_date)) {
-            return FALSE;
+        if (is_null($plan_end_date)) {
+            return false;
         }
 
         $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
         $today = new DateTime('today', $org_timezone);
 
-        if($plan_end_date < $today) {
-            return TRUE;
-        } else {
-            return FALSE;
+        if ($plan_end_date < $today) {
+            return true;
         }
+        return false;
     }
 
     /**
@@ -1179,13 +1188,13 @@ class RatePlan extends Base\BaseObject
      * To get the proper date, the date needs to be converted from
      * UTC time to the org's timezone.
      *
-     * @param $date_string The date in the Edge API format of 'Y-m-d H:i:s'
+     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'
      * @return \DateTime The date as a DateTime object or NULL if not set.
      */
     private function convertToDateTime($date_string)
     {
-        if(empty($date_string)) {
-            return NULL;
+        if (empty($date_string)) {
+            return null;
         }
         $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
         $utc_timezone = new DateTimeZone('UTC');
@@ -1193,12 +1202,11 @@ class RatePlan extends Base\BaseObject
         // Get UTC datetime of date string.
         $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
 
-        if($date_utc == FALSE) {
-            return NULL;
+        if ($date_utc == false) {
+            return null;
         }
 
         // Convert to org's timezone.
         return  $date_utc->setTimezone($org_timezone);
     }
 }
-

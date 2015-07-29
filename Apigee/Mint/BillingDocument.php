@@ -621,5 +621,4 @@ class BillingDocument extends Base\BaseObject
     {
         $this->billingDocDate = $date;
     }
-
 }

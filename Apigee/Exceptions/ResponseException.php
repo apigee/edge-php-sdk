@@ -18,16 +18,14 @@ class ResponseException extends \Exception
     private $responseBody;
 
     /**
-     * The request object as an instance of the
-     * {@link http://api.guzzlephp.org/class-Guzzle.Http.Message.RequestInterface.html \Guzzle\Http\Message\RequestInterface}.
+     * The request object as an instance of \Guzzle\Http\Message\RequestInterface.
      *
      * @var \Guzzle\Http\Message\RequestInterface
      */
     public $requestObj;
 
     /**
-     * The response object as an instance of
-     * {@link http://api.guzzlephp.org/class-Guzzle.Http.Message.Response.html \Guzzle\Http\Message\Response}.
+     * The response object as an instance of \Guzzle\Http\Message\Response.
      *
      * @var \Guzzle\Http\Message\Response
      */
@@ -41,12 +39,12 @@ class ResponseException extends \Exception
         parent::__construct($message, $code);
 
         if (strpos($uri, '@') !== false) {
-            // strip out username/password
+            // strip out username/password.
             $components = parse_url($uri);
             unset ($components['user']);
             unset ($components['pass']);
-            // Use PECL http functions when available
-            $uri = (function_exists('http_build_url') ? http_build_url($components) : self::http_build_url($components));
+            // Use PECL http functions when available.
+            $uri = (function_exists('http_build_url') ? http_build_url($components) : self::httpBuildUrl($components));
         }
 
         $this->uri = $uri;
@@ -134,7 +132,7 @@ class ResponseException extends \Exception
      * @param $components
      * @return string
      */
-    private static function http_build_url($components)
+    private static function httpBuildUrl($components)
     {
         $uri = $components['scheme'] . '://' . $components['host'];
         if (array_key_exists('port', $components) && !empty($components['port'])) {

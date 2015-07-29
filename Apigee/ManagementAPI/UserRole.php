@@ -73,7 +73,7 @@ class UserRole extends Base
         foreach ($users as $user) {
             if (in_array($user, $existing_users)) {
                 // TODO: catch exceptions
-                $this->http_delete(rawurlencode($role) . '/users/' . rawurlencode($user));
+                $this->httpDelete(rawurlencode($role) . '/users/' . rawurlencode($user));
             }
         }
         return true;
@@ -165,7 +165,7 @@ class UserRole extends Base
         $roles = $this->listRoles();
         if (($i = array_search($role_name, $roles)) !== false) {
             unset($roles[$i]);
-            $this->http_delete(rawurlencode($role_name));
+            $this->httpDelete(rawurlencode($role_name));
             // Reset the cache
             $this->listRoles($roles);
         }

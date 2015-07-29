@@ -266,7 +266,8 @@ class Developer extends Base
             $status = 'active';
         }
         if ($status != 'active' && $status != 'inactive') {
-            throw new ParameterException('Status may be either active or inactive; value "' . $status . '" is invalid.');
+            $msg = sprintf('Status may be either active or inactive; value “%s” is invalid', $status);
+            throw new ParameterException($msg);
         }
         $this->status = $status;
     }
@@ -297,7 +298,8 @@ class Developer extends Base
         // In paging-enabled environments, there is a hard limit of 20 on the
         // number of attributes any entity may have.
         if ($this->pagingEnabled && count($this->attributes) >= self::MAX_ATTRIBUTE_COUNT) {
-            throw new TooManyAttributesException('This developer already has ' . self::MAX_ATTRIBUTE_COUNT . ' attributes; cannot add any more.');
+            $msg = sprintf('This developer already has %u attributes; cannot add any more.', self::MAX_ATTRIBUTE_COUNT);
+            throw new TooManyAttributesException($msg);
         }
         $this->attributes[$attr] = $value;
     }
@@ -342,7 +344,8 @@ class Developer extends Base
     {
         $size = intval($size);
         if ($size < 2 || $size > self::MAX_ITEMS_PER_PAGE) {
-            throw new ParameterException('Invalid value ' . $size . ' for pageSize; must be between 2 and ' . self::MAX_ITEMS_PER_PAGE);
+            $msg = sprintf('Invalid value %d for pageSize; must be between 2 and %u', $size, self::MAX_ITEMS_PER_PAGE);
+            throw new ParameterException($msg);
         }
         $this->pageSize = $size;
     }
@@ -407,8 +410,7 @@ class Developer extends Base
         $developer->modifiedBy = $response['lastModifiedBy'];
         if (array_key_exists('companies', $response)) {
             $developer->companies = $response['companies'];
-        }
-        else {
+        } else {
             $developer->companies = array();
         }
     }
@@ -474,7 +476,8 @@ class Developer extends Base
         }
 
         if (!$this->validateUser()) {
-            throw new ParameterException('Developer requires valid-looking email address, firstName, lastName and userName.');
+            $message = 'Developer requires valid-looking email address, firstName, lastName and userName.';
+            throw new ParameterException($message);
         }
 
         if (empty($old_email)) {
@@ -541,7 +544,7 @@ class Developer extends Base
     public function delete($email = null)
     {
         $email = $email ? : $this->email;
-        $this->http_delete(rawurlencode($email));
+        $this->httpDelete(rawurlencode($email));
         if ($email == $this->email) {
             $this->blankValues();
         }
@@ -579,13 +582,11 @@ class Developer extends Base
                 $developers = array_merge($developers, $developerSubset);
                 if ($subsetCount == $this->pageSize) {
                     $lastKey = end($developerSubset);
-                }
-                else {
+                } else {
                     break;
                 }
             }
-        }
-        else {
+        } else {
             $this->get();
             $developers = $this->responseObj;
         }
@@ -631,13 +632,11 @@ class Developer extends Base
                 if ($subsetCount == $this->pageSize) {
                     $lastDeveloper = end($developerSubset['developer']);
                     $lastKey = $lastDeveloper['developerId'];
-                }
-                else {
+                } else {
                     break;
                 }
             }
-        }
-        else {
+        } else {
             $this->get('?expand=true');
             $developerList = $this->responseObj;
             foreach ($developerList['developer'] as $dev) {
@@ -668,7 +667,13 @@ class Developer extends Base
                 $this->lastName = $name[1];
             }
         }
-        return (!empty($this->firstName) && !empty($this->lastName) && !empty($this->userName) && !empty($this->email) && strpos($this->email, '@') > 0);
+        return (
+            !empty($this->firstName)
+            && !empty($this->lastName)
+            && !empty($this->userName)
+            && !empty($this->email)
+            && strpos($this->email, '@') > 0
+        );
     }
 
     /**

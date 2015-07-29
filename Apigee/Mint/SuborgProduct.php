@@ -39,7 +39,11 @@ class SuborgProduct extends Base\BaseObject
      */
     public function __construct($product_id, \Apigee\Util\OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/products/' . rawurlencode($product_id) . '/suborg-products';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/products/'
+            . rawurlencode($product_id)
+            . '/suborg-products';
         $this->init($config, $base_url);
         $this->wrapperTag = 'suborgProduct';
         $this->idField = 'id';

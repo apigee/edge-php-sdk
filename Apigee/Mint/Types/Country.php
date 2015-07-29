@@ -279,7 +279,7 @@ final class Country
         if (array_key_exists($iso_code, self::$iso_codes)) {
             return self::$iso_codes[$iso_code];
         }
-        throw new ParameterException('Nonexistent country ISO code \'' . $iso_code . '\'');
+        throw new ParameterException('Nonexistent country ISO code ‘' . $iso_code . '’');
     }
 
     public static function getCountryIsoCode($country_name)
@@ -290,13 +290,13 @@ final class Country
         if (array_key_exists($country_name, self::$countries)) {
             return self::$countries[$country_name];
         }
-        throw new ParameterException('Nonexistent country \'' . $country_name . '\'');
+        throw new ParameterException('Nonexistent country ‘' . $country_name . '’');
     }
 
     public static function validateCountryCode($iso_code)
     {
         if (!array_key_exists($iso_code, self::$iso_codes)) {
-            throw new ParameterException('Nonexistent country ISO code \'' . $iso_code . '\'');
+            throw new ParameterException('Nonexistent country ISO code ‘' . $iso_code . '’');
         }
     }
 
@@ -309,5 +309,4 @@ final class Country
     {
         return self::$iso_codes;
     }
-
 }

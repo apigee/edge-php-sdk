@@ -123,7 +123,11 @@ class DeveloperBalance extends Base\BaseObject
         if ($dev == null) {
             return;
         }
-        $base_url = '/mint/organizations/' . $config->orgName . '/developers/' . rawurlencode($dev) . '/developer-balances';
+        $base_url = '/mint/organizations/'
+            . $config->orgName
+            . '/developers/'
+            . rawurlencode($dev)
+            . '/developer-balances';
         $this->dev = $dev;
         $this->init($config, $base_url);
         $this->wrapperTag = 'developerBalance';
@@ -163,8 +167,8 @@ class DeveloperBalance extends Base\BaseObject
                 continue;
             }
 
-       	// Form the setter method name to invoke setter method.
-    	$setter_method = 'set' . ucfirst($property);
+            // Form the setter method name to invoke setter method.
+            $setter_method = 'set' . ucfirst($property);
 
             if (method_exists($this, $setter_method)) {
                 $this->$setter_method($data[$property]);
@@ -176,7 +180,7 @@ class DeveloperBalance extends Base\BaseObject
             $this->supportedCurrency = new SupportedCurrency($data['supportedCurrency']);
         }
         if (isset($data['transaction'])) {
-          $this->transaction = new DeveloperBalanceTransaction($data['transaction']);
+            $this->transaction = new DeveloperBalanceTransaction($data['transaction']);
         }
     }
 
@@ -197,7 +201,7 @@ class DeveloperBalance extends Base\BaseObject
         $this->isRecurring = false;
         $this->providerId = false;
         $this->chargePerUsage = false;
-    	$this->transaction = new DeveloperBalanceTransaction();
+        $this->transaction = new DeveloperBalanceTransaction();
 
         // @TODO Remove
         $this->providerId = 'worldpay';
@@ -363,19 +367,21 @@ class DeveloperBalance extends Base\BaseObject
         return $this->chargePerUsage;
     }
 
-  /**
-   * @param mixed $transaction
-   */
-  public function setTransaction(\Apigee\Mint\DataStructures\DeveloperBalanceTransaction $transaction) {
-    $this->transaction = $transaction;
-  }
+    /**
+     * @param mixed $transaction
+     */
+    public function setTransaction(\Apigee\Mint\DataStructures\DeveloperBalanceTransaction $transaction)
+    {
+        $this->transaction = $transaction;
+    }
 
-  /**
-   * @return \Apigee\Mint\DataStructures\DeveloperBalanceTransaction
-   */
-  public function getTransaction() {
-    return $this->transaction;
-  }
+    /**
+     * @return \Apigee\Mint\DataStructures\DeveloperBalanceTransaction
+     */
+    public function getTransaction()
+    {
+        return $this->transaction;
+    }
     /**
      * @param $currencyId
      *
@@ -402,11 +408,11 @@ class DeveloperBalance extends Base\BaseObject
      *
      * @param $supportedCurrencyId
      * @param $recurring
-     * @param $replenishAmount
-     * @param $recurringAmount
+     * @param $replenishAmt
+     * @param $recurringAmt
      * @param $provider
      */
-    public function updateRecurringSetup($supportedCurrencyId, $recurring, $replenishAmount, $recurringAmount, $provider)
+    public function updateRecurringSetup($supportedCurrencyId, $recurring, $replenishAmt, $recurringAmt, $provider)
     {
         $options = array(
             'query' => array(
@@ -422,14 +428,21 @@ class DeveloperBalance extends Base\BaseObject
             );
         } else {
             $payload += array(
-                'recurringAmount' => $recurringAmount,
-                'replenishAmount' => $replenishAmount,
+                'recurringAmount' => $recurringAmt,
+                'replenishAmount' => $replenishAmt,
             );
         }
 
         $payload += $recurring;
 
-        $this->post('recurring-setup', $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
+        $this->post(
+            'recurring-setup',
+            $payload,
+            'application/json; charset=utf-8',
+            'application/json; charset=utf-8',
+            array(),
+            $options
+        );
     }
 
     /**

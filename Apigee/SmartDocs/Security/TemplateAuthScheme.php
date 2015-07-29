@@ -39,7 +39,7 @@ abstract class TemplateAuthScheme
      *
      * @return string
      */
-    public abstract function getType();
+    abstract public function getType();
 
     /**
      * Populates this template auth scheme from JSON payload

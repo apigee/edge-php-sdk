@@ -201,7 +201,8 @@ class Oauth2Scheme extends SecurityScheme
      *
      * @return string
      */
-    public function getClientAuthenticationMethod(){
+    public function getClientAuthenticationMethod()
+    {
         return $this->clientAuthenticationMethod;
     }
 
@@ -210,7 +211,8 @@ class Oauth2Scheme extends SecurityScheme
      *
      * @param string $clientAuthenticationMethod
      */
-    public function setClientAuthenticationMethod($clientAuthenticationMethod){
+    public function setClientAuthenticationMethod($clientAuthenticationMethod)
+    {
         $this->clientAuthenticationMethod = $clientAuthenticationMethod;
     }
 

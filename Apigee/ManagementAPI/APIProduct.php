@@ -234,8 +234,10 @@ class APIProduct extends Base
     public function isPublic($product = null)
     {
         if (!isset($product)) {
-            if (isset($this->attributes['access']) && ($this->attributes['access'] == 'internal' || $this->attributes['access'] == 'private')) {
-                return false;
+            if (isset($this->attributes['access'])) {
+                if ($this->attributes['access'] == 'internal' || $this->attributes['access'] == 'private') {
+                    return false;
+                }
             }
         } else {
             foreach ($product['attributes'] as $attr) {
@@ -537,7 +539,8 @@ class APIProduct extends Base
     public function setApprovalType($type)
     {
         if ($type != 'auto' && $type != 'manual') {
-            throw new ParameterException('Invalid approval type ' . $type . '; allowed values are "auto" and "manual".');
+            $message = 'Invalid approval type “%s”; allowed values are “auto” and “manual”.';
+            throw new ParameterException(sprintf($message, $type));
         }
         $this->approvalType = $type;
     }

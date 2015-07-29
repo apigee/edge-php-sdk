@@ -91,12 +91,17 @@ class Crypto
         if ($iv === false || strlen($iv) < 16) {
             throw new \Apigee\Exceptions\ParameterException('Unable to parse encrypted string.');
         }
-        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::$cryptoKey, base64_decode($string_encrypted), MCRYPT_MODE_CBC, $iv);
+        $decrypted = mcrypt_decrypt(
+            MCRYPT_RIJNDAEL_128,
+            self::$cryptoKey,
+            base64_decode($string_encrypted),
+            MCRYPT_MODE_CBC,
+            $iv
+        );
         if (strpos($decrypted, "\n") === false) {
             throw new \Apigee\Exceptions\ParameterException('Unable to decrypt encrypted string.');
         }
         list ($length, $password) = explode("\n", $decrypted, 2);
         return substr($password, 0, intval($length));
     }
-
 }

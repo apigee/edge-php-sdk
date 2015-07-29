@@ -117,7 +117,11 @@ class TermAndCondition extends Base\BaseObject
         $cache_manager = CacheFactory::getCacheManager(null);
         $data = $cache_manager->get('developer_accepted_tncs:' . $developer_id, null);
         if (!isset($data)) {
-            $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/developer-tncs';
+            $url = '/mint/organizations/'
+                . rawurlencode($this->config->orgName)
+                . '/developers/'
+                . rawurlencode($developer_id)
+                . '/developer-tncs';
             if ($current) {
                 $url .= '?current=true';
             }
@@ -188,7 +192,13 @@ class TermAndCondition extends Base\BaseObject
                 $id = $this->id;
             }
         }
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/tncs/' . rawurlencode($id) . '/developer-tncs';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_id)
+            . '/tncs/'
+            . rawurlencode($id)
+            . '/developer-tncs';
         $this->setBaseUrl($url);
         $this->post(null, $tnc->__toString());
         $this->restoreBaseUrl();

@@ -13,7 +13,13 @@ class DeveloperSubscriptionDetail extends Base\BaseObject
 
     public function __construct($developer_id, $product_id, \Apigee\Util\OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers/' . rawurlencode($developer_id) . '/products/' . rawurlencode($product_id) . '/subscriptions_details';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_id)
+            . '/products/'
+            . rawurlencode($product_id)
+            . '/subscriptions_details';
         $this->init($config, $base_url);
 
         $this->developerId = $developer_id;

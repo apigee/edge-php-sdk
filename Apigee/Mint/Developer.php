@@ -152,7 +152,14 @@ class Developer extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        $excluded_properties = array('address', 'organization', 'transactionBrokerages', 'ratePlan', 'parentId', 'developerCategory');
+        $excluded_properties = array(
+            'address',
+            'organization',
+            'transactionBrokerages',
+            'ratePlan',
+            'parentId',
+            'developerCategory',
+        );
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
                 continue;
@@ -185,9 +192,9 @@ class Developer extends Base\BaseObject
             }
         }
         if (isset($data['ratePlan'])) {
-            foreach ($data['ratePlan'] as $dev_rate_plan) {
+            foreach ($data['ratePlan'] as $rate_plan_data) {
                 $dev_rate_plan = new DeveloperRatePlan($this->email, $this->config);
-                $dev_rate_plan->loadFromRawData($dev_rate_plan);
+                $dev_rate_plan->loadFromRawData($rate_plan_data);
                 $this->ratePlan[] = $dev_rate_plan;
             }
         }
@@ -266,36 +273,30 @@ class Developer extends Base\BaseObject
         return $return_objects;
     }
 
-    public function getPrepaidBalance($month = null, $billing_year = null, $currency_id = null, $company_or_developer_id = NULL)
+    public function getPrepaidBalance($month = null, $billingYear = null, $currencyId = null, $ownerId = null)
     {
+        $identifier = $ownerId ?: $this->email;
 
-      if ($company_or_developer_id != NULL ) {
-        $identifier = $company_or_developer_id;
-      }
-      else {
-        $identifier =  $this->email;
-      }
-
-        $month = isset($month) ? $month : date('F', time());
-        $billing_year = isset($billing_year) ? $billing_year : date('Y');
+        $month = $month ?: date('F');
+        $billingYear = $billingYear ?: date('Y');
 
         $options = array(
             'query' => array(
                 'billingMonth' => strtoupper($month),
-                'billingYear' => $billing_year,
-                'supportedCurrencyId' => $currency_id,
+                'billingYear' => $billingYear,
+                'supportedCurrencyId' => $currencyId,
             ),
         );
         $url = rawurlencode($identifier) . '/prepaid-developer-balance';
         $this->get($url, 'application/json; charset=utf-8', array(), $options);
         $response = $this->responseObj;
-        $return_objects = array();
-        foreach ($response['developerBalance'] as $response_data) {
+        $returnObjects = array();
+        foreach ($response['developerBalance'] as $responseData) {
             $obj = new DeveloperBalance($identifier, $this->getConfig());
-            $obj->loadFromRawData($response_data);
-            $return_objects[] = $obj;
+            $obj->loadFromRawData($responseData);
+            $returnObjects[] = $obj;
         }
-        return $return_objects;
+        return $returnObjects;
     }
 
     /**
@@ -307,49 +308,61 @@ class Developer extends Base\BaseObject
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
      */
-    public function createPayment(array $parameters, $address, array $headers, $developer_or_company_id = NULL)
+    public function createPayment(array $parameters, $address, array $headers, $developer_or_company_id = null)
     {
-      if($developer_or_company_id == NULL) {
-        $id = $this->email;
-      }
-      else {
-        $id = $developer_or_company_id;
-      }
+        $id = $developer_or_company_id ?: $this->email;
 
         $options = array(
             'query' => $parameters,
         );
         $url = rawurlencode($id) . '/payment';
-        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', $headers, $options);
+        $this->post(
+            $url,
+            $address,
+            'application/xml; charset=utf-8',
+            'application/json; charset=utf-8',
+            $headers,
+            $options
+        );
         if ($this->responseCode == 200) {
             // Make sure the response did not fail, where success value is
             // FALSE from WorldPay.
             // TODO: These error responses need to be payment provider agnostic.
             if (isset($this->responseObj['success']) && !$this->responseObj['success']) {
-                throw new ResponseException('Payment server response unsuccessful', $this->responseCode, $url, $options, $this->responseText);
+                throw new ResponseException(
+                    'Payment server response unsuccessful',
+                    $this->responseCode,
+                    $url,
+                    $options,
+                    $this->responseText
+                );
             }
             $payment = new Payment($this->responseObj);
             return $payment;
         }
-        throw new ResponseException('Payment server response failed', $this->responseCode, $url, $options, $this->responseText);
+        throw new ResponseException(
+            'Payment server response failed',
+            $this->responseCode,
+            $url,
+            $options,
+            $this->responseText
+        );
     }
 
-    public function topUpPrepaidBalance($new_balance, $developer_or_company_id = NULL)
+    public function topUpPrepaidBalance($new_balance, $developer_or_company_id = null)
     {
-      if($developer_or_company_id == NULL) {
-        $id = $this->email;
-      }
-      else {
-        $id = $developer_or_company_id;
-      }
-
+        $id = $developer_or_company_id ?: $this->email;
         $url = rawurlencode($id) . '/developer-balances';
         $this->post($url, $new_balance);
     }
 
     public function getRevenueReport($report)
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/revenue-reports';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/revenue-reports';
         $content_type = 'application/json; charset=utf-8';
         $accept_type = 'application/octet-stream; charset=utf-8';
 
@@ -362,7 +375,11 @@ class Developer extends Base\BaseObject
 
     public function saveReportDefinition($report_def)
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/report-definitions';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/report-definitions';
         $this->setBaseUrl($url);
         $this->post(null, $report_def);
         $this->restoreBaseUrl();
@@ -370,7 +387,11 @@ class Developer extends Base\BaseObject
 
     public function getReportDefinitions()
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/report-definitions';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/report-definitions';
         $this->setBaseUrl($url);
         $this->get();
         $this->restoreBaseUrl();
@@ -408,7 +429,10 @@ class Developer extends Base\BaseObject
             }
         }
         try {
-            $url = rawurlencode($developer_id) . '/products/' . rawurlencode($product_id) . '/rate-plan-by-developer-product/';
+            $url = rawurlencode($developer_id)
+                . '/products/'
+                . rawurlencode($product_id)
+                . '/rate-plan-by-developer-product/';
             $this->get($url);
             $ratePlan = new RatePlan(null, $this->config);
             $ratePlan->loadFromRawData($this->responseObj);
@@ -644,12 +668,12 @@ class Developer extends Base\BaseObject
         $this->phone = $phone;
     }
 
-    function getRatePlan()
+    public function getRatePlan()
     {
         return $this->ratePlan;
     }
 
-    function addRatePlan($rate_plan)
+    public function addRatePlan($rate_plan)
     {
         $this->ratePlan[] = $rate_plan;
     }

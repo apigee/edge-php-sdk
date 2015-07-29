@@ -74,7 +74,11 @@ class PricePoint extends Base\BaseObject
      */
     public function __construct($product_id, \Apigee\Util\OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/products/' . rawurlencode($product_id) . '/price-points';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/products/'
+            . rawurlencode($product_id)
+            . '/price-points';
 
         $this->init($config, $base_url);
         $this->productId = $product_id;
@@ -363,5 +367,3 @@ class PricePoint extends Base\BaseObject
         return $return_objects;
     }
 }
-
-

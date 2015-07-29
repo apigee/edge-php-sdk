@@ -33,8 +33,10 @@ class DebugData
             'time_elapsed' => self::$time_elapsed
         );
     }
-    public static function fromArray($array) {
-        foreach (array('raw', 'opts', 'data', 'code', 'code_status', 'code_class', 'exception', 'time_elapsed') as $key) {
+    public static function fromArray($array)
+    {
+        static $keys = array('raw', 'opts', 'data', 'code', 'code_status', 'code_class', 'exception', 'time_elapsed');
+        foreach ($keys as $key) {
             if (array_key_exists($key, $array)) {
                 self::$$key = $array[$key];
             }

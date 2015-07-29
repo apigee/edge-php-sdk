@@ -16,7 +16,17 @@ class OrgConfig
      * A possible format of logs written by Guzzle's LogPlugin.
      * @see \Guzzle\Log\MessageFormatter
      */
-    const LOG_SUBSCRIBER_FORMAT = ">>>>>>>>\n{request}\n<<<<<<<<\n{response}\n--------\n{curl_stderr}\n--------\nConnection time: {connect_time}\nTotal transaction time: {total_time}";
+    const LOG_SUBSCRIBER_FORMAT = <<<EOF
+>>>>>>>>
+{request}
+<<<<<<<<
+{response}
+--------
+{curl_stderr}
+--------
+Connection time: {connect_time}
+Total transaction time: {total_time}
+EOF;
 
     /**
      * The organization name.
@@ -75,11 +85,6 @@ class OrgConfig
     public $user_agent;
 
     /**
-     * @var KeyValueStoreInterface|null
-     */
-    public $variable_store;
-
-    /**
      * @var string
      * Optionally holds content to be sent in the Referer HTTP header.
      */
@@ -88,7 +93,7 @@ class OrgConfig
     /**
      * @var bool
      */
-    public $redirect_disable = FALSE;
+    public $redirect_disable = false;
 
     /**
      * Create an instance of OrgConfig.
@@ -110,7 +115,6 @@ class OrgConfig
      *       'connection_timeout' => 10,
      *       'timeout' => 50,
      *     ),
-     *     'variable_store' => new Apigee\Drupal\VariableCache()
      *   );
      * </pre>
      *
@@ -170,24 +174,25 @@ class OrgConfig
                 if ($subscriber instanceof LoggerInterface) {
                     if (array_key_exists('log_subscriber_format', $options)) {
                         $log_subscriber_format = $options['log_subscriber_format'];
-                    }
-                    else {
+                    } else {
                         $log_subscriber_format = self::LOG_SUBSCRIBER_FORMAT;
                     }
                     $subscribers[] = new LogPlugin(new PsrLogAdapter($subscriber), $log_subscriber_format);
-                }
-                elseif ($subscriber instanceof EventSubscriberInterface) {
+                } elseif ($subscriber instanceof EventSubscriberInterface) {
                     $subscribers[] = $subscriber;
                 }
             }
         }
 
-        $this->logger = array_key_exists('logger', $options) && $options['logger'] instanceof LoggerInterface ? $options['logger'] : new NullLogger();
+        if (array_key_exists('logger', $options) && $options['logger'] instanceof LoggerInterface) {
+            $this->logger = $options['logger'];
+        } else {
+            $this->logger = new NullLogger();
+        }
         $this->user_mail = array_key_exists('user_mail', $options) ? $options['user_mail'] : null;
         $this->subscribers = $subscribers;
         $this->http_options = $request_options;
         $this->debug_callbacks = array_key_exists('debug_callbacks', $options) ? $options['debug_callbacks'] : array();
         $this->user_agent = array_key_exists('user_agent', $options) ? $options['user_agent'] : null;
-        $this->variable_store = array_key_exists('variable_store', $options) ? $options['variable_store'] : null;
     }
 }

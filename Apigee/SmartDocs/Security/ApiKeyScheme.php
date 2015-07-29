@@ -53,7 +53,8 @@ class ApiKeyScheme extends SecurityScheme
      *
      * @param string $in
      */
-    public function setIn($in) {
+    public function setIn($in)
+    {
         // TODO: validate $in
         $this->in = $in;
     }
@@ -79,5 +80,4 @@ class ApiKeyScheme extends SecurityScheme
             'in' => $this->in,
         );
     }
-
 }

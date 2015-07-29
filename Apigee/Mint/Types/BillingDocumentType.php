@@ -10,8 +10,4 @@ final class BillingDocumentType extends Type
     const SELF_INVOICE = 'SELF_INVOICE';
     const INVOICE = 'INVOICE';
     const NETTING_STMT = 'NETTING_STMT';
-
-    private function __construct()
-    {
-    }
 }

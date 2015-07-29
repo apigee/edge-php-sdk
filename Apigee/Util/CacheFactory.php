@@ -10,6 +10,8 @@ use Apigee\Exceptions\ParameterException;
  */
 class CacheFactory
 {
+  
+    const CACHE_MGR_CLASS = 'Apigee\Util\CacheManager';
 
     /**
      * Holds the cache managers
@@ -61,7 +63,7 @@ class CacheFactory
     private static function setup()
     {
         self::$cache_managers = array();
-        self::$base_cache_class = new \ReflectionClass('Apigee\Util\CacheManager');
+        self::$base_cache_class = new \ReflectionClass(self::CACHE_MGR_CLASS);
         self::$is_setup = true;
     }
 
@@ -77,36 +79,41 @@ class CacheFactory
      * @param \Psr\Log\LoggerInterface|null $logger
      * @return \Apigee\Util\CacheManager
      */
-    public static function getCacheManager($cache_manager_class_name = 'Apigee\Util\CacheManager', $logger = null)
+    public static function getCacheManager($cache_manager_class_name = self::CACHE_MGR_CLASS, $logger = null)
     {
+        static $cache_managers = array();
+
         if (!self::$is_setup) {
             self::setup();
         }
-        if ($cache_manager_class_name == null) {
-            if (self::$default_cache_manager == null) {
-                throw new ParameterException('$cache_manager_class_name cannot be null if no default cache manager has been specified by invoking CacheFactory::setDefault()');
+        if ($cache_manager_class_name === null) {
+            if (self::$default_cache_manager === null) {
+                throw new ParameterException('Cache Manager class cannot be null.');
             }
             return self::$default_cache_manager;
         }
         if (!isset($cache_managers[$cache_manager_class_name])) {
             try {
                 $class = new \ReflectionClass($cache_manager_class_name);
-                if ($class->getName() == 'Apigee\Util\CacheManager' || $class->isSubclassOf('Apigee\Util\CacheManager')) {
+                if ($class->getName() == self::CACHE_MGR_CLASS || $class->isSubclassOf(self::CACHE_MGR_CLASS)) {
                     $cache_manager = $class->newInstance();
                     $arg = $cache_manager->getConfig();
                     $cache_manager->setUp($arg);
                     $cache_managers[$cache_manager_class_name] = $cache_manager;
                 } else {
+                    $msgArgs = array($cache_manager_class_name, self::CACHE_MGR_CLASS);
+                    $msg = vsprintf('Class %s does not extend %s.', $msgArgs);
                     if ($logger instanceof \Psr\Log\LoggerInterface) {
-                        $logger->error('Class ' . $cache_manager_class_name . ' does not extend Apigee\Util\Cache, an instance of  Apigee\Util\Cache will be used instead');
+                        $logger->error($msg);
                     }
-                    throw new ParameterException('Class ' . $cache_manager_class_name . ' does extend Apigee\Util\CacheManager');
+                    throw new ParameterException($msg);
                 }
             } catch (\ReflectionException $re) {
+                $msg = sprintf('Could not load cache manager class %s', $cache_manager_class_name);
                 if ($logger instanceof \Psr\Log\LoggerInterface) {
-                    $logger->error('Could not load cache manager class ' . $cache_manager_class_name);
+                    $logger->error($msg);
                 }
-                throw new ParameterException('Could not load cache manager class ' . $cache_manager_class_name . '.');
+                throw new ParameterException($msg);
             }
         }
         return $cache_managers[$cache_manager_class_name];

@@ -121,5 +121,4 @@ class TransactionBrokerage extends DataStructure
     {
         $this->broker = $broker;
     }
-
 }

@@ -3,12 +3,10 @@ namespace Apigee\Mint;
 
 use \DateTime;
 use \DateTimeZone;
-use Apigee\Mint\Exceptions\InsufficientFundsException;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Util\CacheFactory;
-
 
 class DeveloperRatePlan extends Base\BaseObject
 {
@@ -66,7 +64,11 @@ class DeveloperRatePlan extends Base\BaseObject
     public function __construct($developer_or_company_id, \Apigee\Util\OrgConfig $config)
     {
 
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers/' . rawurlencode($developer_or_company_id) . '/developer-accepted-rateplans';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_or_company_id)
+            . '/developer-accepted-rateplans';
         $this->init($config, $base_url);
         $this->developer_or_company_id = $developer_or_company_id;
 
@@ -154,9 +156,13 @@ class DeveloperRatePlan extends Base\BaseObject
         }
     }
 
-    public function force_save()
+    public function forceSave()
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->developer_or_company_id) . '/developer-rateplans';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->developer_or_company_id)
+            . '/developer-rateplans';
         try {
             $obj = array(
                 'developer' => array('id' => $this->developer_or_company_id),
@@ -176,9 +182,27 @@ class DeveloperRatePlan extends Base\BaseObject
         }
     }
 
+    /**
+     * Alias of self::forceSave(), for backwards compatibility reasons.
+     *
+     * @deprecated
+     *
+     * @throws MintApiException
+     * @throws ResponseException
+     * @throws \Exception
+     */
+    public function force_save()
+    {
+        $this->forceSave();
+    }
+
     public function save($save_method = 'update')
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->developer_or_company_id) . '/developer-rateplans';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->developer_or_company_id)
+            . '/developer-rateplans';
         $obj = array(
             'developer' => array('id' => $this->developer_or_company_id),
             'startDate' => $this->startDate,
@@ -204,8 +228,14 @@ class DeveloperRatePlan extends Base\BaseObject
 
     public function delete()
     {
-        $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->developer_or_company_id) . '/developer-rateplans/' . rawurlencode($this->id));
-        $this->http_delete(null);
+        $baseUrl = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->developer_or_company_id)
+            . '/developer-rateplans/'
+            . rawurlencode($this->id);
+        $this->setBaseUrl($baseUrl);
+        $this->httpDelete(null);
         $this->restoreBaseUrl();
     }
 
@@ -216,10 +246,20 @@ class DeveloperRatePlan extends Base\BaseObject
      */
     public function __toString()
     {
+        $endDate = $startDate = '';
+        $endDateTime = $this->getEndDateTime();
+        $startDateTime = $this->getStartDateTime();
+        if ($endDateTime instanceof DateTime) {
+            $endDate = $endDateTime->format('Y-m-d H:i:s');
+        }
+        if ($startDateTime instanceof DateTime) {
+            $startDate = $startDateTime->format('Y-m-d H:i:s');
+        }
+
         $obj = array(
             'developer' => array('id' => $this->developer_or_company_id),
-            'endDate' => $this->getEndDateTime() instanceof DateTime ? $this->getEndDateTime()->format('Y-m-d H:i:s') : '',
-            'startDate' => $this->getStartDateTime() instanceof DateTime ? $this->getStartDateTime()->format('Y-m-d H:i:s') : '',
+            'endDate' => $endDate,
+            'startDate' => $startDate,
             'id' => $this->id,
             'ratePlan' => null
         );
@@ -274,12 +314,12 @@ class DeveloperRatePlan extends Base\BaseObject
     {
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
         $today = new DateTime('today', $org_timezone);
-        $start_date = $this->getStartDate();
+        $start_date = $this->getStartDateTime();
         $end_date = $this->convertToDateTime($this->endDate);
         // COMMERCE-558: If there is an end date and it has already started,
         // and the plan was also ended today, shift end_date to start_date.
         // TODO: Look into this, I believe this logic is wrong -cnovak
-        if(is_object($end_date) && $start_date <= $today && $end_date < $start_date ) {
+        if (is_object($end_date) && $start_date <= $today && $end_date < $start_date) {
             $end_date = $start_date;
         }
         return $end_date;
@@ -333,7 +373,8 @@ class DeveloperRatePlan extends Base\BaseObject
         return $this->convertToDateTime($this->nextRecurringFeeDate);
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
         $today = new DateTime('today', $org_timezone);
 
@@ -357,15 +398,16 @@ class DeveloperRatePlan extends Base\BaseObject
         return DeveloperRatePlan::STATUS_ACTIVE;
     }
 
-    public function isCancelable() {
+    public function isCancelable()
+    {
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
-        $start_date = new DateTime($this->getStartDate(), $org_timezone);
+        $start_date = $this->getStartDateTime();
         $today = new DateTime('today', $org_timezone);
 
         if ($start_date->getTimestamp() > $today->getTimestamp()) {
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
 
     /* Setters */
@@ -416,8 +458,8 @@ class DeveloperRatePlan extends Base\BaseObject
      */
     private function convertToDateTime($date_string)
     {
-        if(empty($date_string)) {
-            return NULL;
+        if (empty($date_string)) {
+            return null;
         }
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
         $utc_timezone = new DateTimeZone('UTC');
@@ -425,8 +467,8 @@ class DeveloperRatePlan extends Base\BaseObject
         // Get UTC datetime of date string.
         $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
 
-        if($date_utc == FALSE) {
-            return NULL;
+        if ($date_utc == false) {
+            return null;
         }
 
         // Convert to org's timezone.

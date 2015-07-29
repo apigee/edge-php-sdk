@@ -25,5 +25,4 @@ class ErrorHandling
     /* User-related codes: 0x10-0x1F */
     const CODE_USER_CANNOT_BE_SAVED = 0x11;
     const CODE_USER_CANNOT_BE_LOADED = 0x12;
-
 }

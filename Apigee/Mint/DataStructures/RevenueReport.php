@@ -22,12 +22,13 @@ class RevenueReport extends DataStructure
 
     private $type;
 
-    public function __construct($data = null, Developer $developer)
+    public function __construct($data, Developer $developer)
     {
-
         $excluded_properties = array('mintCriteria', 'developer', 'organization');
         if (is_array($data)) {
             $this->loadFromRawData($data, $excluded_properties);
+        } elseif (!isset($data)) {
+            $data = array();
         }
 
         if (isset($data['mintCriteria'])) {

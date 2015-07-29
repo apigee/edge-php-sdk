@@ -20,7 +20,10 @@ class TemplateAuth extends APIObject
      */
     public function __construct(OrgConfig $config, $modelId)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/templateauths');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($modelId)
+            . '/templateauths';
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -40,8 +43,7 @@ class TemplateAuth extends APIObject
             if (array_key_exists('type', $this->responseObj)) {
                 $scheme = TemplateAuthScheme::fromArray($this->responseObj);
             }
-        }
-        catch (ResponseException $e) {
+        } catch (ResponseException $e) {
         }
         return $scheme;
     }
@@ -61,9 +63,7 @@ class TemplateAuth extends APIObject
                 $scheme = TemplateAuthScheme::fromArray($scheme_array);
                 $schemes[$scheme->getName()] = $scheme;
             }
-        }
-        catch (ResponseException $e) {
-
+        } catch (ResponseException $e) {
         }
         return !empty($schemes) ? $schemes : array();
     }
@@ -77,7 +77,7 @@ class TemplateAuth extends APIObject
      * is attempted and the security scheme resource does not exist, the save
      * will fail.
      */
-    public function save(TemplateAuthScheme $scheme, $is_update = FALSE)
+    public function save(TemplateAuthScheme $scheme, $is_update = false)
     {
 
         $payload = $scheme->toArray($is_update);
@@ -91,8 +91,7 @@ class TemplateAuth extends APIObject
         try {
             $this->$method($path, $payload);
             return TemplateAuthScheme::fromArray($this->responseObj);
-        }
-        catch (ResponseException $e) {
+        } catch (ResponseException $e) {
             return null;
         }
     }
@@ -106,9 +105,8 @@ class TemplateAuth extends APIObject
     public function delete($name)
     {
         try {
-            $this->http_delete(rawurlencode($name));
-        }
-        catch (ResponseException $e) {
+            $this->httpDelete(rawurlencode($name));
+        } catch (ResponseException $e) {
         }
     }
 }

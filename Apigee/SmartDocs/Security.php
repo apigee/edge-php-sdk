@@ -7,7 +7,8 @@ use Apigee\Util\APIObject;
 use Apigee\Exceptions\ResponseException;
 use Apigee\SmartDocs\Security\SecurityScheme;
 
-class Security extends APIObject {
+class Security extends APIObject
+{
 
   /**
    * Initializes the Security object and sets its base URL.
@@ -21,7 +22,11 @@ class Security extends APIObject {
    */
     public function __construct(OrgConfig $config, $modelId, $revisionId)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($modelId) . '/revisions/' . $revisionId . '/security');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($modelId)
+            . '/revisions/' . $revisionId
+            . '/security';
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -39,8 +44,7 @@ class Security extends APIObject {
             foreach ($schemes as $scheme_array) {
                 $scheme_objects[] = SecurityScheme::fromArray($scheme_array);
             }
-        }
-        catch (ResponseException $e) {
+        } catch (ResponseException $e) {
         }
         return $scheme_objects;
     }
@@ -60,8 +64,7 @@ class Security extends APIObject {
             if (array_key_exists('type', $this->responseObj)) {
                 $scheme = SecurityScheme::fromArray($this->responseObj);
             }
-        }
-        catch (ResponseException $e) {
+        } catch (ResponseException $e) {
         }
         return $scheme;
     }
@@ -85,16 +88,14 @@ class Security extends APIObject {
         if ($is_update) {
             $method = 'put';
             $path = rawurlencode($scheme->getName());
-        }
-        else {
+        } else {
             $method = 'post';
             $path = null;
         }
         try {
             $this->$method($path, $payload);
             return SecurityScheme::fromArray($this->responseObj);
-        }
-        catch (ResponseException $e) {
+        } catch (ResponseException $e) {
             return null;
         }
     }
@@ -108,10 +109,8 @@ class Security extends APIObject {
     public function delete($name)
     {
         try {
-            $this->http_delete(rawurlencode($name));
-        }
-        catch (ResponseException $e) {
-
+            $this->httpDelete(rawurlencode($name));
+        } catch (ResponseException $e) {
         }
     }
 }

@@ -271,7 +271,7 @@ class Revision extends APIObject
      *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
         $payload_keys = array(
             'displayName', 'description', 'releaseVersion', 'changeLog', 'apiSchema',
@@ -306,7 +306,10 @@ class Revision extends APIObject
     {
         $this->blankValues();
         $this->apiId = $modelId;
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($this->apiId)
+            . '/revisions';
+        $this->init($config, $baseUrl);
     }
 
     /**
@@ -355,9 +358,9 @@ class Revision extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
-        $payload = $this->toArray(FALSE);
+        $payload = $this->toArray(false);
         $keys = array_keys($payload);
         foreach ($keys as $key) {
             if (empty($payload[$key])) {
@@ -388,7 +391,7 @@ class Revision extends APIObject
         if (empty($revisionId)) {
             throw new ParameterException('Cannot delete a revision with no Revision UUID.');
         }
-        $this->http_delete($revisionId);
+        $this->httpDelete($revisionId);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }
@@ -448,11 +451,11 @@ class Revision extends APIObject
      *
      * @return string
      */
-    public function export($format = 'json', $revision = NULL)
+    public function export($format = 'json', $revision = null)
     {
         $revision = $revision ?: 'latest';
         if ($format == 'json' || empty($format)) {
-            $this->get($revision . '?expand=true' );
+            $this->get($revision . '?expand=true');
         } else {
             // Export format is WADL.
             $this->get($revision . '?expand=true&format=' . $format, 'text/xml');
