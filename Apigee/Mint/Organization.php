@@ -1,9 +1,9 @@
 <?php
 namespace Apigee\Mint;
 
+use \Apigee\Util\APIObject;
 use Apigee\Util\CacheFactory;
 use Apigee\Exceptions\ResponseException;
-use Apigee\Mint\DataStructures\BillingMonth;
 use Apigee\Mint\Types\StatusType;
 use Apigee\Mint\Types\TaxModelType;
 use Apigee\Mint\Types\OrgType;
@@ -498,8 +498,12 @@ class Organization extends Base\BaseObject
 
     public function setCountry($country)
     {
-        Country::validateCountryCode($country);
-        $this->country = $country;
+        // Only set country if it is valid.
+        if(Country::validateCountryCode($country)) {
+            $this->country = $country;
+        } else {
+            APIObject::$logger->error('Invalid country code "' . $country . '" passed from Edge MGMT API.');
+        }
     }
 
     public function getCurrency()

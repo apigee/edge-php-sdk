@@ -293,11 +293,18 @@ final class Country
         throw new ParameterException('Nonexistent country ‘' . $country_name . '’');
     }
 
+    /**
+     * Validate country code.
+     *
+     * @param $iso_code The two digit country code.
+     * @return bool True if country code is valid, false if not.
+     */
     public static function validateCountryCode($iso_code)
     {
         if (!array_key_exists($iso_code, self::$iso_codes)) {
-            throw new ParameterException('Nonexistent country ISO code ‘' . $iso_code . '’');
+          return FALSE;
         }
+        return TRUE;
     }
 
     // TODO
