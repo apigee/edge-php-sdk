@@ -302,7 +302,7 @@ final class Country
     public static function validateCountryCode($iso_code)
     {
         if (!array_key_exists($iso_code, self::$iso_codes)) {
-          return FALSE;
+            return FALSE;
         }
         return TRUE;
     }

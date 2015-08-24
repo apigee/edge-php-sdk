@@ -61,7 +61,7 @@ class Address extends DataStructure
     public function setCountry($country)
     {
         // Only set country if it is valid.
-        if(Country::validateCountryCode($country)) {
+        if (Country::validateCountryCode($country)) {
             $this->country = $country;
         } else {
             APIObject::$logger->error('Invalid country code "' . $country . '" passed from Edge MGMT API.');
