@@ -3,6 +3,7 @@
 namespace Apigee\Mint\DataStructures;
 
 use \Apigee\Mint\Types\Country;
+use \Apigee\Util\APIObject;
 
 class Address extends DataStructure
 {
@@ -59,8 +60,12 @@ class Address extends DataStructure
 
     public function setCountry($country)
     {
-        Country::validateCountryCode($country);
-        $this->country = $country;
+        // Only set country if it is valid.
+        if (Country::validateCountryCode($country)) {
+            $this->country = $country;
+        } else {
+            APIObject::$logger->error('Invalid country code "' . $country . '" passed from Edge MGMT API.');
+        }
     }
 
     public function getCountry()
