@@ -335,9 +335,12 @@ class Revision extends APIObject
      *
      * @param string|int|null $revisionId
      *        This may be a UUID or a revision number.
+     * @param bool $summaryOnly
+     *        When true, resource objects are returned as stubs without full
+     *        detail.
      * @throws ParameterException
      */
-    public function load($revisionId = null)
+    public function load($revisionId = null, $summaryOnly = false)
     {
         $revisionId = $revisionId ?: $this->id;
         if (empty($revisionId)) {
@@ -346,7 +349,8 @@ class Revision extends APIObject
         if (is_int($revisionId) && $revisionId < 1) {
             throw new ParameterException('Cannot load a revision number less than 1.');
         }
-        $this->get($revisionId . '?expand=true');
+        $queryString = ($summaryOnly ? '' : '?expand=true');
+        $this->get($revisionId . $queryString);
         self::fromArray($this, $this->responseObj);
     }
 
