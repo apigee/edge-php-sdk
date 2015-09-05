@@ -496,13 +496,16 @@ class Organization extends Base\BaseObject
         return $this->country;
     }
 
-    public function setCountry($country)
+    public function setCountry($country_code)
     {
         // Only set country if it is valid.
-        if (Country::validateCountryCode($country)) {
-            $this->country = $country;
+        if (Country::validateCountryCode($country_code)) {
+            $this->country = $country_code;
+        } elseif ($country_code == 'UK') {
+            // Change incorrect United Kingdom 'UK' country code to 'GB'.
+            $this->country = 'GB';
         } else {
-            APIObject::$logger->error('Invalid country code "' . $country . '" passed from Edge MGMT API.');
+            APIObject::$logger->error('Invalid country code "' . $country_code . '" passed from Edge MGMT API.');
         }
     }
 
