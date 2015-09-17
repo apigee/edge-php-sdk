@@ -263,7 +263,7 @@ class Oauth2Scheme extends SecurityScheme
             'accessTokenParamName' => $this->accessTokenParamName,
             'in' => $this->in,
             'clientAuthenticationMethod' => $this->clientAuthenticationMethod,
-            'scopes' => $this->scopes
+            'scopes' => (array)$this->scopes
         );
         return $returnVal;
     }
