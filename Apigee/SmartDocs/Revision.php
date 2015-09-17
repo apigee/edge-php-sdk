@@ -29,9 +29,6 @@ class Revision extends APIObject
     /** @var string */
     protected $changeLog;
 
-    /** @var array */
-    protected $apiSchema;
-
     /** @var string */
     protected $baseUrl;
 
@@ -87,7 +84,6 @@ class Revision extends APIObject
         $this->description = '';
         $this->releaseVersion = '';
         $this->changeLog = '';
-        $this->apiSchema = array();
         $this->baseUrl = '';
         $this->params = array();
         $this->paramGroups = array();
@@ -158,16 +154,6 @@ class Revision extends APIObject
     public function setChangeLog($log)
     {
         $this->changeLog = $log;
-    }
-
-    public function getApiSchema()
-    {
-        return $this->apiSchema;
-    }
-
-    public function setApiSchema(array $schema)
-    {
-        $this->apiSchema = $schema;
     }
 
     public function getBaseUrl()
@@ -274,7 +260,7 @@ class Revision extends APIObject
     public function toArray($verbose = true)
     {
         $payload_keys = array(
-            'displayName', 'description', 'releaseVersion', 'changeLog', 'apiSchema',
+            'displayName', 'description', 'releaseVersion', 'changeLog',
             'baseUrl', 'params', 'paramGroups', 'tags', 'customAttributes',
         );
         if ($verbose) {
