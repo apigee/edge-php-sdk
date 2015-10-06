@@ -609,7 +609,7 @@ class Developer extends Base
         if ($this->pagingEnabled) {
             $lastKey = null;
             while (true) {
-                $queryString = 'expand=true&count=' . $this->pageSize;
+                $queryString = '?expand=true&count=' . $this->pageSize;
                 if (isset($lastKey)) {
                     $queryString .= '&startKey=' . urlencode($lastKey);
                 }
