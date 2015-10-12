@@ -486,7 +486,7 @@ class Method extends APIObject
     public function save($update = false)
     {
         $array_members = array('security', 'parameters', 'parameterGroups', 'tags', 'samples');
-        $object_members = array('body', 'response', 'customAttributes');
+        $object_members = array('body', 'response', 'customAttributes', 'apiSchema');
         $payload = $this->toArray(false);
         // Eliminate any customAttributes with empty keys or values.
         foreach ($payload['customAttributes'] as $key => $value) {
