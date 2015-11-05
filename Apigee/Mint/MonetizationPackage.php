@@ -3,6 +3,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
+use Apigee\Util\OrgConfig;
 use Apigee\Exceptions\ParameterException;
 
 class MonetizationPackage extends Base\BaseObject
@@ -60,7 +61,7 @@ class MonetizationPackage extends Base\BaseObject
      * Class constructor
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/monetization-packages';
         $this->init($config, $base_url);

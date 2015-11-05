@@ -1,8 +1,8 @@
 <?php
 namespace Apigee\Mint\DataStructures;
 
-use \ReflectionClass;
-use \Apigee\Util\APIObject;
+use ReflectionClass;
+use Apigee\Util\APIObject;
 
 class DataStructure
 {
@@ -104,6 +104,7 @@ class DataStructure
         } else {
             $warning = 'No accessor method was found for property “%s” on class “%s”.';
             APIObject::$logger->warning(sprintf($warning, $name, $class_name));
+            return null;
         }
     }
 }

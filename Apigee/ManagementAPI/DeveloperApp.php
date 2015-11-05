@@ -3,7 +3,9 @@
 namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ResponseException;
-use Apigee\Exceptions\ParameterException as ParameterException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
+use Psr\Log\NullLogger;
 
 /**
  * Abstracts the Developer App object in the Management API and allows clients
@@ -52,7 +54,7 @@ class DeveloperApp extends AbstractApp
      * @param \Apigee\Util\OrgConfig $config
      * @param mixed $developer
      */
-    public function __construct(\Apigee\Util\OrgConfig $config, $developer)
+    public function __construct(OrgConfig $config, $developer)
     {
         $this->ownerIdentifierField = 'developerId';
         if ($developer instanceof Developer) {
@@ -96,26 +98,16 @@ class DeveloperApp extends AbstractApp
     }
 
     /**
-     * Alias for listAllApps().
-     *
-     * @deprecated
-     * @return array
-     */
-    public function listAllOrgApps()
-    {
-        return $this->listAllApps();
-    }
-
-    /**
      * Lists all apps within the org. Each member of the returned array is a
      * fully-populated DeveloperApp/CompanyApp object.
      *
-     * @return array
+     * @return AbstractApp[]
      */
     public function listAllApps()
     {
         $url = '/o/' . rawurlencode($this->config->orgName);
         $this->setBaseUrl($url);
+        $appList = array();
         if ($this->pagingEnabled) {
             $lastKey = null;
             while (true) {
@@ -154,7 +146,7 @@ class DeveloperApp extends AbstractApp
                         $app = new CompanyApp($this->config, $ownerId);
                     }
                     self::loadFromResponse($app, $appDetail, $ownerId);
-                    $app_list[] = $app;
+                    $appList[] = $app;
                 }
                 if ($subsetCount == $this->pageSize) {
                     $lastApp = end($appSubset['app']);
@@ -167,7 +159,6 @@ class DeveloperApp extends AbstractApp
             $this->get('apps?expand=true');
             $response = $this->responseObj;
             $this->restoreBaseUrl();
-            $appList = array();
             foreach ($response['app'] as $appDetail) {
                 if (array_key_exists('developerId', $appDetail)) {
                     $ownerId = $this->getDeveloperMailById($appDetail['developerId']);
@@ -187,8 +178,8 @@ class DeveloperApp extends AbstractApp
                 self::loadFromResponse($app, $appDetail, $ownerId);
                 $appList[] = $app;
             }
-            return $appList;
         }
+        return $appList;
     }
 
     /**
@@ -265,7 +256,7 @@ class DeveloperApp extends AbstractApp
             $cached_logger = self::$logger;
             $config = clone $this->config;
             // Suppress (almost) all logging.
-            $config->logger = new \Psr\Log\NullLogger();
+            $config->logger = new NullLogger();
             $config->subscribers = array();
             $dev = new Developer($config);
             try {
@@ -295,10 +286,7 @@ class DeveloperApp extends AbstractApp
     }
 
     /**
-     * Set properties specific to DeveloperApps right after they are loaded.
-     *
-     * @param AbstractApp $obj
-     * @param array $response
+     * {@inheritdoc}
      */
     public static function afterLoad(AbstractApp &$obj, array $response, $owner_identifier)
     {
@@ -308,6 +296,9 @@ class DeveloperApp extends AbstractApp
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function alterAttributes(array &$payload)
     {
         if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
@@ -315,6 +306,9 @@ class DeveloperApp extends AbstractApp
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAppProperties($class = __CLASS__)
     {
         $properties = parent::getAppProperties(__CLASS__);

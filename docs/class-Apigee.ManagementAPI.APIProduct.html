@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -177,7 +198,8 @@ to manipulate it.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/APIProduct.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.APIProduct.html#18-637" title="Go to source code">ManagementAPI/APIProduct.php</a>
+		<br>
 	</div>
 
 
@@ -196,7 +218,7 @@ to manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#129-139" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Initializes all member variables</p>
@@ -231,7 +253,7 @@ to manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code>load( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>null|array <var>$response</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#141-178" title="Go to source code">load</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>null|array <var>$response</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Queries the Management API and populates self's properties from
@@ -275,7 +297,7 @@ instead.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code>save( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#180-205" title="Go to source code">save</a>( )</code>
 
 		<div class="description short">
 			<p>POSTs self's properties to Management API. This handles both
@@ -307,7 +329,7 @@ inserts and updates.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code>delete( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#207-221" title="Go to source code">delete</a>( <span>null|string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Deletes an API Product.</p>
@@ -344,7 +366,7 @@ inserts and updates.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isPublic">#</a>
-		<code>isPublic( <span>null|array <var>$product</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#223-251" title="Go to source code">isPublic</a>( <span>null|array <var>$product</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Determines whether an API Product should be displayed to the public.</p>
@@ -382,14 +404,14 @@ make the determination based on self's properties.</p>
 		<td class="attributes"><code>
 			 protected 
 
-			array
+			<code><a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>[]</code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProductsCache">#</a>
-		<code>getProductsCache( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#253-276" title="Go to source code">getProductsCache</a>( )</code>
 
 		<div class="description short">
 			<p>Reads, caches and returns a detailed list of org's API Products.</p>
@@ -402,7 +424,7 @@ make the determination based on self's properties.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					<code><a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>[]</code>
 				</div>
 
 
@@ -416,14 +438,14 @@ make the determination based on self's properties.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			<code><a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>[]</code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listProducts">#</a>
-		<code>listProducts( <span>boolean <var>$show_nonpublic</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#278-299" title="Go to source code">listProducts</a>( <span>boolean <var>$showNonpublic</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Returns a detailed list of all products. This list may have been cached
@@ -440,13 +462,13 @@ or internal are returned.</p>
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$show_nonpublic</var></dt>
+					<dt><var>$showNonpublic</var></dt>
 					<dd></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					<code><a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>[]</code>
 				</div>
 
 
@@ -460,14 +482,14 @@ or internal are returned.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttributes">#</a>
-		<code>getAttributes( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#301-309" title="Go to source code">getAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the attributes array of name/value pairs.</p>
@@ -480,7 +502,7 @@ or internal are returned.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -501,7 +523,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clearAttributes">#</a>
-		<code>clearAttributes( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#311-317" title="Go to source code">clearAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Clears the attributes array.</p>
@@ -531,7 +553,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttribute">#</a>
-		<code>getAttribute( <span> <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#319-330" title="Go to source code">getAttribute</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns a specific attribute value, or null if the attribute does not exist.</p>
@@ -566,7 +588,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAttribute">#</a>
-		<code>setAttribute( <span> <var>$name</var></span>, <span> <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#332-345" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets an attribute value.</p>
@@ -603,7 +625,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedAt">#</a>
-		<code>getCreatedAt( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#347-355" title="Go to source code">getCreatedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the UNIX time when the API Product was created.</p>
@@ -637,7 +659,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedBy">#</a>
-		<code>getCreatedBy( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#357-365" title="Go to source code">getCreatedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the user who created the API Product.</p>
@@ -671,7 +693,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedAt">#</a>
-		<code>getModifiedAt( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#367-375" title="Go to source code">getModifiedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the UNIX time when the API Product was most recently updated.</p>
@@ -705,7 +727,7 @@ or internal are returned.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedBy">#</a>
-		<code>getModifiedBy( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#377-385" title="Go to source code">getModifiedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the user who most recently updated the API Product.</p>
@@ -732,14 +754,14 @@ or internal are returned.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEnvironments">#</a>
-		<code>getEnvironments( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#387-396" title="Go to source code">getEnvironments</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the array of environment names in which this API Product is
@@ -754,7 +776,7 @@ available.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -775,7 +797,7 @@ available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code>getName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#398-406" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the internal name of the API Product.</p>
@@ -802,14 +824,14 @@ available.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProxies">#</a>
-		<code>getProxies( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#408-416" title="Go to source code">getProxies</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of API proxy names used by this API Product.</p>
@@ -822,7 +844,7 @@ available.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -843,7 +865,7 @@ available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuotaLimit">#</a>
-		<code>getQuotaLimit( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#418-431" title="Go to source code">getQuotaLimit</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the number of request messages permitted by this API product.</p>
@@ -877,7 +899,7 @@ available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuotaInterval">#</a>
-		<code>getQuotaInterval( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#433-446" title="Go to source code">getQuotaInterval</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the time interval over which the number of request messages is calculated.</p>
@@ -911,7 +933,7 @@ available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuotaTimeUnit">#</a>
-		<code>getQuotaTimeUnit( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#448-461" title="Go to source code">getQuotaTimeUnit</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the time unit defined for the quota interval.</p>
@@ -945,7 +967,7 @@ available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDisplayName">#</a>
-		<code>getDisplayName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#463-472" title="Go to source code">getDisplayName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the name to be displayed in the User Interface to developers
@@ -981,7 +1003,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDescription">#</a>
-		<code>getDescription( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#474-488" title="Go to source code">getDescription</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the string describing the API Product.</p>
@@ -1015,7 +1037,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addApiResource">#</a>
-		<code>addApiResource( <span> <var>$resource</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#490-498" title="Go to source code">addApiResource</a>( <span>string <var>$resource</var></span> )</code>
 
 		<div class="description short">
 			<p>Adds an API resource to the API Product.</p>
@@ -1050,7 +1072,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeApiResource">#</a>
-		<code>removeApiResource( <span>string <var>$resource</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#500-513" title="Go to source code">removeApiResource</a>( <span>string <var>$resource</var></span> )</code>
 
 		<div class="description short">
 			<p>Removes an API resource from the API Product.</p>
@@ -1078,14 +1100,14 @@ registering for API access.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApiResources">#</a>
-		<code>getApiResources( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#515-523" title="Go to source code">getApiResources</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the array of API resources.</p>
@@ -1098,7 +1120,7 @@ registering for API access.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -1119,7 +1141,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApprovalType">#</a>
-		<code>getApprovalType( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#525-533" title="Go to source code">getApprovalType</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the API product approval type as 'manual' or 'auto'.</p>
@@ -1153,7 +1175,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApprovalType">#</a>
-		<code>setApprovalType( <span>string <var>$type</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#535-547" title="Go to source code">setApprovalType</a>( <span>string <var>$type</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the API product approval type as 'manual' or 'auto'.</p>
@@ -1188,7 +1210,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_blankValues">#</a>
-		<code>blankValues( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#549-572" title="Go to source code">blankValues</a>( )</code>
 
 		<div class="description short">
 			<p>Initializes this object to a blank state.</p>
@@ -1218,7 +1240,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code>toArray( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#575-591" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			<p>Turns this object's properties into an array for external use.</p>
@@ -1252,7 +1274,7 @@ registering for API access.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAPIProductProperties">#</a>
-		<code>getAPIProductProperties( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#593-620" title="Go to source code">getAPIProductProperties</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of all property names that can be returned from a call to
@@ -1288,7 +1310,7 @@ self::toArray().</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fromArray">#</a>
-		<code>fromArray( <span> <var>$array</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.APIProduct.html#622-636" title="Go to source code">fromArray</a>( <span>array <var>$array</var></span> )</code>
 
 		<div class="description short">
 			<p>Populates this object based on an incoming array generated by the
@@ -1332,7 +1354,7 @@ toArray() method.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 
@@ -1362,7 +1384,8 @@ toArray() method.</p>
 		</code></td>
 
 		<td class="name">
-<var>$apiResources</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#29-33" title="Go to source code"><var>$apiResources</var></a>
+
 			<div class="description short">
 				<p>Array of API resources bundled in the API Product.</p>
 			</div>
@@ -1386,7 +1409,8 @@ toArray() method.</p>
 		</code></td>
 
 		<td class="name">
-<var>$approvalType</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#34-38" title="Go to source code"><var>$approvalType</var></a>
+
 			<div class="description short">
 				<p>The API product approval type as 'manual' or 'auto'.</p>
 			</div>
@@ -1410,7 +1434,8 @@ toArray() method.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdAt</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#39-43" title="Go to source code"><var>$createdAt</var></a>
+
 			<div class="description short">
 				<p>UNIX time when the API Product was created.</p>
 			</div>
@@ -1434,7 +1459,8 @@ toArray() method.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdBy</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#44-49" title="Go to source code"><var>$createdBy</var></a>
+
 			<div class="description short">
 				<p>The username of the user who created the API Product.
 This property is read-only.</p>
@@ -1460,7 +1486,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$modifiedAt</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#50-55" title="Go to source code"><var>$modifiedAt</var></a>
+
 			<div class="description short">
 				<p>UNIX time when the API Product was most recently updated.
 This property is read-only.</p>
@@ -1486,7 +1513,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$modifiedBy</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#56-61" title="Go to source code"><var>$modifiedBy</var></a>
+
 			<div class="description short">
 				<p>The username of the user who most recently updated the API Product.
 This property is read-only.</p>
@@ -1512,7 +1540,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$description</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#62-67" title="Go to source code"><var>$description</var></a>
+
 			<div class="description short">
 				<p>A string describing the API Product.
 This property is read-only.</p>
@@ -1538,7 +1567,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$displayName</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#68-73" title="Go to source code"><var>$displayName</var></a>
+
 			<div class="description short">
 				<p>The name to be displayed in the UI or developer portal to developers
 registering for API access.</p>
@@ -1564,7 +1594,8 @@ registering for API access.</p>
 		</code></td>
 
 		<td class="name">
-<var>$environments</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#74-79" title="Go to source code"><var>$environments</var></a>
+
 			<div class="description short">
 				<p>Array of environment names in an organization.
 Requests to environments not listed are rejected.</p>
@@ -1590,7 +1621,8 @@ Requests to environments not listed are rejected.</p>
 		</code></td>
 
 		<td class="name">
-<var>$name</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#80-84" title="Go to source code"><var>$name</var></a>
+
 			<div class="description short">
 				<p>The internal name of the API Product.</p>
 			</div>
@@ -1614,7 +1646,8 @@ Requests to environments not listed are rejected.</p>
 		</code></td>
 
 		<td class="name">
-<var>$proxies</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#85-90" title="Go to source code"><var>$proxies</var></a>
+
 			<div class="description short">
 				<p>Array of API proxy names in an organization.
 Requests to API proxies not listed are rejected.</p>
@@ -1640,7 +1673,8 @@ Requests to API proxies not listed are rejected.</p>
 		</code></td>
 
 		<td class="name">
-<var>$quota</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#91-96" title="Go to source code"><var>$quota</var></a>
+
 			<div class="description short">
 				<p>The number of request messages permitted by this API product.
 It's safer to use attributes['developer.quota.limit'] instead.</p>
@@ -1666,7 +1700,8 @@ It's safer to use attributes['developer.quota.limit'] instead.</p>
 		</code></td>
 
 		<td class="name">
-<var>$quotaInterval</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#97-102" title="Go to source code"><var>$quotaInterval</var></a>
+
 			<div class="description short">
 				<p>The time interval over which the number of request messages is calculated.
 It's safer to use attributes['developer.quota.interval'] instead.</p>
@@ -1692,7 +1727,8 @@ It's safer to use attributes['developer.quota.interval'] instead.</p>
 		</code></td>
 
 		<td class="name">
-<var>$quotaTimeUnit</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#103-108" title="Go to source code"><var>$quotaTimeUnit</var></a>
+
 			<div class="description short">
 				<p>The time unit defined for the $quotaInterval.
 It's safer to use attributes['developer.quota.timeunit'] instead.</p>
@@ -1718,7 +1754,8 @@ It's safer to use attributes['developer.quota.timeunit'] instead.</p>
 		</code></td>
 
 		<td class="name">
-<var>$scopes</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#109-115" title="Go to source code"><var>$scopes</var></a>
+
 			<div class="description short">
 				<p>Array of scopes.
 These must map to the scopes defined in an Oauth policy associated
@@ -1746,7 +1783,8 @@ with the API Product.</p>
 		</code></td>
 
 		<td class="name">
-<var>$attributes</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#117-122" title="Go to source code"><var>$attributes</var></a>
+
 			<div class="description short">
 				<p>Arbitrary name/value pairs.
 Attributes must be protected because Base wants to twiddle with it.</p>
@@ -1772,7 +1810,8 @@ Attributes must be protected because Base wants to twiddle with it.</p>
 		</code></td>
 
 		<td class="name">
-<var>$loaded</var>
+				<a href="source-class-Apigee.ManagementAPI.APIProduct.html#123-127" title="Go to source code"><var>$loaded</var></a>
+
 			<div class="description short">
 				<p>Indicate whether an API Product's details have been loaded from KMS.</p>
 			</div>

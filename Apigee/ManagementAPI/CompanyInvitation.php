@@ -2,8 +2,9 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the CompanyInvitation object from the Management API and allows clients to manipulate it.
@@ -259,7 +260,7 @@ class CompanyInvitation extends Base
 
     /**
      * Sets the reponse url of the invitation.
-     * @param string $responseUrl
+     * @param string $url
      */
     public function setResponseUrl($url)
     {
@@ -270,7 +271,7 @@ class CompanyInvitation extends Base
      * Initializes default values of all the member variables
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/invitations');
         $this->blankValues();
@@ -299,7 +300,7 @@ class CompanyInvitation extends Base
      *
      * @param string $companyId
      * @param string|null $state
-     * @return array
+     * @return CompanyInvitation[]
      */
     public function getAllInvitationsForCompany($companyId, $state = null)
     {
@@ -314,9 +315,10 @@ class CompanyInvitation extends Base
 
     /**
      * Get all Invitations for a developer.
+     *
      * @param string $developerId
      * @param string|null $state
-     * @return array
+     * @return CompanyInvitation[]
      */
     public function getAllInvitationsForDeveloper($developerId, $state = null)
     {
@@ -330,6 +332,11 @@ class CompanyInvitation extends Base
         return self::loadInvitationArray($this->responseObj, $config);
     }
 
+    /**
+     * Get all Invitations for an org.
+     *
+     * @return CompanyInvitation[]
+     */
     public function getAllInvitationsForOrg()
     {
         $this->get();
@@ -341,9 +348,10 @@ class CompanyInvitation extends Base
      * Parses an Edge reponse and return an array of Invitations.
      *
      * @param array $reponseobj
-     * @return array of fully loaded response objects
+     * @param OrgConfig $config
+     * @return CompanyInvitation[]
      */
-    private static function loadInvitationArray($reponseobj, \Apigee\Util\OrgConfig $config)
+    private static function loadInvitationArray($reponseobj, OrgConfig $config)
     {
 
         $invitations = array();
@@ -357,8 +365,8 @@ class CompanyInvitation extends Base
 
     /**
      * Parses response from Edge and populates a CompanyInvitation object.
-     * @param \Apigee\ManagementAPI\CompanyInvitation $company_invitation
-     * @param array $reponse
+     * @param \Apigee\ManagementAPI\CompanyInvitation $invitation
+     * @param array $response
      */
     private static function loadFromResponse(CompanyInvitation &$invitation, array $response)
     {
@@ -383,14 +391,14 @@ class CompanyInvitation extends Base
     /**
      * Saves an invitation object to the Edge server.
      *
-     * If $force_update is true then a PUT call is made to update an existing Invitation, otherwise a POST
-     * call is made to create a new Invitaion.
+     * If $forceUpdate is true then a PUT call is made to update an existing
+     * Invitation, otherwise a POST call is made to create a new Invitaion.
      *
-     * @param boolean $force_update
+     * @param boolean $forceUpdate
      */
-    public function save($force_update = false)
+    public function save($forceUpdate = false)
     {
-        if ($force_update === null) {
+        if ($forceUpdate === null) {
             try {
                 $this->save(true);
             } catch (ResponseException $e) {
@@ -421,14 +429,14 @@ class CompanyInvitation extends Base
         }
 
         $url = null;
-        if ($force_update || $this->created_at) {
+        if ($forceUpdate || $this->created_at) {
             $url = rawurldecode($this->id);
         }
 
         $headers = array(
             'source' => $this->sourceDeveloperEmail,
         );
-        if ($force_update) {
+        if ($forceUpdate) {
             $this->put($url, $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', $headers);
         } else {
             $headers['responseUrl'] = $this->responseUrl;

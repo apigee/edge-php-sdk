@@ -2,8 +2,8 @@
 
 namespace Apigee\Mint\DataStructures;
 
-use \Apigee\Mint\Types\Country;
-use \Apigee\Util\APIObject;
+use Apigee\Mint\Types\Country;
+use Apigee\Util\APIObject;
 
 class Address extends DataStructure
 {

@@ -1,12 +1,13 @@
 <?php
 namespace Apigee\Mint;
 
-use \DateTime;
-use \DateTimeZone;
+use DateTime;
+use DateTimeZone;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Util\CacheFactory;
+use Apigee\Util\OrgConfig;
 
 class DeveloperRatePlan extends Base\BaseObject
 {
@@ -61,7 +62,7 @@ class DeveloperRatePlan extends Base\BaseObject
     private $renewalDate;
 
 
-    public function __construct($developer_or_company_id, \Apigee\Util\OrgConfig $config)
+    public function __construct($developer_or_company_id, OrgConfig $config)
     {
 
         $base_url = '/mint/organizations/'
@@ -182,20 +183,6 @@ class DeveloperRatePlan extends Base\BaseObject
         }
     }
 
-    /**
-     * Alias of self::forceSave(), for backwards compatibility reasons.
-     *
-     * @deprecated
-     *
-     * @throws MintApiException
-     * @throws ResponseException
-     * @throws \Exception
-     */
-    public function force_save()
-    {
-        $this->forceSave();
-    }
-
     public function save($save_method = 'update')
     {
         $url = '/mint/organizations/'
@@ -278,32 +265,12 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Get start date as a string in GMT
-     * @deprecated Use getStartDateTime() instead
-     * @return string The start date
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
      * Get start date as a DateTime object in org's timezone.
      * @return \DateTime The start date
      */
     public function getStartDateTime()
     {
         return $this->convertToDateTime($this->startDate);
-    }
-
-    /**
-     * Get end date as a string in GMT
-     * @deprecated Use getEndDateTime() instead
-     * @return string The end date
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
@@ -336,32 +303,12 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Get renewal date as a string in GMT
-     * @deprecated Use getRenewalDateTime() instead
-     * @return string The renewal date
-     */
-    public function getRenewalDate()
-    {
-        return $this->renewalDate;
-    }
-
-    /**
      * Get renewal date as a DateTime object in org's timezone.
      * @return \DateTime The renewal date or null if not set
      */
     public function getRenewalDateTime()
     {
         return $this->convertToDateTime($this->renewalDate);
-    }
-
-    /**
-     * Get renewal date as a string in GMT
-     * @deprecated Use getNextRecurringFeeDateTime() instead
-     * @return string The next recurring fee date
-     */
-    public function getNextRecurringFeeDate()
-    {
-        return $this->nextRecurringFeeDate;
     }
 
     /**

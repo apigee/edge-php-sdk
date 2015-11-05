@@ -2,9 +2,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Exceptions\NotImplementedException;
-use Apigee\Exceptions\ParameterException;
-use Apigee\Exceptions\ResponseException;
-use Apigee\Util\CacheFactory;
+use Apigee\Util\OrgConfig;
 
 class Provider extends Base\BaseObject
 {
@@ -48,7 +46,7 @@ class Provider extends Base\BaseObject
      * Class constructor
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . $config->orgName . '/providers';
         $this->init($config, $base_url);

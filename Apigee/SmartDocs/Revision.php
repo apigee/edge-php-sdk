@@ -45,7 +45,7 @@ class Revision extends APIObject
     protected $customAttributes;
 
 
-    /** @var array */
+    /** @var \Apigee\SmartDocs\Resource[] */
     protected $resources;
 
     /** @var int */
@@ -69,12 +69,6 @@ class Revision extends APIObject
     /** @var string */
     protected $apiName;
 
-    /* * @var bool */
-    //protected $isactive;
-
-    /* * @var bool */
-    //protected $isLatest;
-
     /**
      * Restores this Revision object to its pristine state.
      */
@@ -97,8 +91,6 @@ class Revision extends APIObject
         $this->modifiedTime = 0;
         $this->createdBy = '';
         $this->modifiedBy = '';
-        //$this->isactive = '';
-        //$this->isLatest = '';
 
         $this->resources = array();
         $this->apiId = '';
@@ -230,7 +222,7 @@ class Revision extends APIObject
     /**
      * Takes values from an array and populates a Revision with them.
      *
-     * @param Revision $model
+     * @param Revision $revision
      * @param array $array
      */
     public static function fromArray(Revision $revision, array $array)
@@ -255,6 +247,7 @@ class Revision extends APIObject
     /**
      * Persists the current Revision as an array.
      *
+     * @param bool $verbose
      * @return array
      */
     public function toArray($verbose = true)
@@ -302,7 +295,7 @@ class Revision extends APIObject
      * Returns an array of all revisions for this model. The order of items in
      * the array may be non-deterministic.
      *
-     * @return array
+     * @return Revision[]
      */
     public function listRevisions()
     {
@@ -371,7 +364,7 @@ class Revision extends APIObject
     /**
      * Deletes a revision.
      *
-     * @param string|int|null $revisionUuid
+     * @param string|int|null $revisionId
      *        This may be a UUID or a revision number.
      * @throws ParameterException
      */
@@ -387,54 +380,8 @@ class Revision extends APIObject
     }
 
     /**
-     * Imports a model revision from a Swagger URL.
-     * @deprecated Use Model.importFile() or Model.importUrl() instead.
-     *
-     * @param string $modelId
-     * @param string $swaggerUrl
-     */
-    public function importSwagger($swaggerUrl)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=swagger', 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
-     * Imports a model revision from a WADL document.
-     * @deprecated Use Model.importFile() or Model.importUrl() instead.
-     *
-     * @param string $modelId
-     * @param string $xml
-     */
-    public function importWadl($xml)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
-     * Imports a model revision from an Apigee Internal JSON document.
-     * @deprecated Use Model.importFile() or Model.importUrl() instead.
-     *
-     * @param string $modelId
-     * @param string $json
-     */
-    public function importApigeeJson($json)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
      * Exports a SmartDocs revision as JSON (default) or an XML-based format.
      *
-     * @param string $modelId
      * @param string $format Export format, either 'wadl' or 'json', defaults
      *  to 'wadl'.
      * @param int|null $revision

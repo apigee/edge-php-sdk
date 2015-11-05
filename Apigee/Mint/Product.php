@@ -3,6 +3,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 class Product extends Base\BaseObject
 {
@@ -145,7 +146,7 @@ class Product extends Base\BaseObject
      */
     private $brokers = array();
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
 
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/products';
@@ -227,7 +228,7 @@ class Product extends Base\BaseObject
     protected function initValues()
     {
         $this->name = '';
-        $this->display_name = '';
+        $this->displayName = '';
         $this->description = '';
         $this->environment = '';
         $this->supportsRefund = false;
@@ -367,7 +368,9 @@ class Product extends Base\BaseObject
 
     /**
      * Get Product Price Points
-     * @return array Array of instances of \Apigee\Mint\PricePoint
+     * @param string|null $product_id
+     * @param bool $refresh
+     * @return PricePoint[]
      */
     public function getPricePoints($product_id = null, $refresh = false)
     {

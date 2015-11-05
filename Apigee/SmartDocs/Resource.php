@@ -34,7 +34,7 @@ class Resource extends APIObject
     /** @var array */
     protected $parameters;
 
-    /** @var array */
+    /** @var Method[] */
     protected $methods;
 
     /** @var int */
@@ -175,7 +175,7 @@ class Resource extends APIObject
     /**
      * Takes values from an array and populates a Resource with them.
      *
-     * @param Resource $resource
+     * @param \Apigee\SmartDocs\Resource $resource
      * @param array $array
      */
     public static function fromArray(Resource $resource, array $array)
@@ -204,6 +204,7 @@ class Resource extends APIObject
     /**
      * Persists the current Resource as an array.
      *
+     * @param bool $verbose
      * @return array
      */
     public function toArray($verbose = true)

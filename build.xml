@@ -2,9 +2,9 @@
 <project name="php-sdk" default="build-docs" description="Apigee PHP SDK Documentation build">
   
   <target name="clean">
-		<phingcall target="display-step">
-			<param name="message" value="Cleaning docs directories" />
-		</phingcall>
+    <phingcall target="display-step">
+      <param name="message" value="Cleaning docs directories" />
+    </phingcall>
     <exec command="git checkout master" dir="${project.basedir}" logoutput="true" />
     <exec command="git pull" dir="${project.basedir}"  logoutput="true" />
     <delete dir="${project.basedir}/docs" quiet="true" failonerror="false" includeemptydirs="true" />
@@ -12,29 +12,28 @@
   </target>
   
   <target name="build-docs" depends="clean">
-		<!-- Entity Migration Fixes -->
-		<phingcall target="display-step">
-			<param name="message" value="Generating docs: /usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" />
-		</phingcall>
-    <exec command="/usr/bin/apigen  --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" checkreturn="true" logoutput="true" />
+	<phingcall target="display-step">
+      <param name="message" value="Generating docs: /usr/bin/apigen generate --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs'" />
+	</phingcall>
+    <exec command="/usr/bin/apigen generate --source='${project.basedir}/Apigee' --destination='${project.basedir}/docs' --debug" checkreturn="true" logoutput="true" />
     <exec command="git add docs/*" dir="${project.basedir}" logoutput="true" checkreturn="true" />
     <exec command="git commit -m 'adding docs ${env.BUILD_ID}'" dir="${project.basedir}" logoutput="true" checkreturn="true" />
     <exec command="git push origin master" dir="${project.basedir}" logoutput="true" checkreturn="true" />
     <delete dir="${project.basedir}" quiet="true" failonerror="false" includeemptydirs="true" />
   </target>
   
-	<target name="display-step">
-		<echo> </echo>
-		<echo> </echo>
-		<echo>/** </echo>
-		<echo>* -------------------------------------------------</echo>
-		<echo>*</echo>
-		<echo>* =&gt; ${message}</echo>
-		<echo>*</echo>
-		<echo>* -------------------------------------------------</echo>
-		<echo>*/</echo>
-		<echo> </echo>
-		<echo> </echo>
-	</target>
+  <target name="display-step">
+    <echo> </echo>
+    <echo> </echo>
+    <echo>/** </echo>
+    <echo>* -------------------------------------------------</echo>
+    <echo>*</echo>
+    <echo>* =&gt; ${message}</echo>
+    <echo>*</echo>
+    <echo>* -------------------------------------------------</echo>
+    <echo>*/</echo>
+    <echo> </echo>
+    <echo> </echo>
+  </target>
 
 </project>

@@ -43,12 +43,11 @@ class InsufficientFundsException extends MintApiException
     /**
      * Class constructor
      *
-     * @param \Apigee\Exceptions\ResponseException $e
-     * @return boolean
-     * @throws \Apigee\Exceptions\ParameterException if the exception has no Mint
+     * @param ResponseException $e
+     * @throws ParameterException if the exception has no Mint
      *   registered code
      */
-    public function __construct($e)
+    public function __construct(ResponseException $e)
     {
         parent::__construct($e);
         if (!self::isInsufficientFundsException($e)) {
@@ -87,8 +86,13 @@ class InsufficientFundsException extends MintApiException
     }
 
     /**
-     * @return string|null if there is a proper message then it is returned,
-     * otherwise NULL is return
+     * If there is a proper message then it is returned; otherwise NULL is
+     * returned.
+     *
+     * @param bool $response_message
+     * @param bool $no_code
+     *
+     * @return string|null
      */
     public function getMintMessage($response_message = false, $no_code = false)
     {

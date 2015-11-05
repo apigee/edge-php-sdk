@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li class="active">
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -88,10 +107,6 @@
 				<li><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 			</ul>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Apigee.Util.KeyValueStoreInterface.html">KeyValueStoreInterface</a></li>
-			</ul>
 
 
 
@@ -135,14 +150,13 @@
 	<p>The base class for a cache manager.
 Cache classes must extend this class and provide a default constructor.</p>
 
-<p>A Factory class creates an instance of the class and
-then invokes the setup() method.
-The setup() method is passed an argument that is returned
+<p>A Factory class creates an instance of the class and  then invokes the
+setup() method. The setup() method is passed an argument that is returned
 by the getConfig() method, which means setup logic can be performed
-outside of the constructor. </p>
+outside of the constructor.</p>
 
-<p>Note that the setup() method should be
-invoked once and only once by the Factory class.</p>
+<p>Note that the setup() method should be invoked once and only once by the
+Factory class.</p>
 	</div>
 
 
@@ -161,7 +175,8 @@ invoked once and only once by the Factory class.</p>
 
 				<b>Author:</b>
 				isaias<br>
-			<b>Located at</b> Util/CacheManager.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.Util.CacheManager.html#5-100" title="Go to source code">Util/CacheManager.php</a>
+		<br>
 	</div>
 
 
@@ -180,7 +195,7 @@ invoked once and only once by the Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setup">#</a>
-		<code>setup( <span>array <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#35-45" title="Go to source code">setup</a>( <span>array <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Since static methods are not overridden, the Factory class
@@ -219,7 +234,7 @@ That means setup logic can be executed here instead of in the constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConfig">#</a>
-		<code>getConfig( )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#47-56" title="Go to source code">getConfig</a>( )</code>
 
 		<div class="description short">
 			<p>Returns a config array that is later
@@ -255,7 +270,7 @@ passed to the setup() method by the Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code>set( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#58-67" title="Go to source code">set</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var></span> )</code>
 
 		<div class="description short">
 			<p>Cache a value given $data and identifying it by $cid</p>
@@ -292,7 +307,7 @@ passed to the setup() method by the Factory class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_get">#</a>
-		<code>get( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#69-84" title="Go to source code">get</a>( <span>string <var>$cid</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Attempt to get a value from cache given the ID specified by $cid.
@@ -335,7 +350,7 @@ If no $data is specified, return null.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clear">#</a>
-		<code>clear( <span> <var>$cid</var> = <span class="php-keyword1">null</span></span>, <span> <var>$wildcard</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.Util.CacheManager.html#86-99" title="Go to source code">clear</a>( <span> <var>$cid</var> = <span class="php-keyword1">null</span></span>, <span> <var>$wildcard</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			

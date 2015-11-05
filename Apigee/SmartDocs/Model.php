@@ -36,14 +36,14 @@ class Model extends APIObject
     /** @var int */
     private $latestRevisionNumber;
 
-    /** @var array */
+    /** @var string[] */
     private $tags;
 
-    /** @var array */
+    /** @var string[] */
     private $customAttributes;
 
     /**
-     * @var array
+     * @var string[]
      *      This is an array of string identifiers, corresponding to security
      *      schemes defined by the Security object attached to this model's
      *      revision.
@@ -417,14 +417,9 @@ class Model extends APIObject
      *
      * @param string $url The URL to get the model from.
      * @param string $document_format The format, either 'wadl', 'swagger',
-     * or 'apimodel'.
-     * @param string $content_type is the mime type, which valid values depend
-     * on the document format:
-     *   wadl: 'application/xml'
-     *   swagger: 'application/yaml' or 'application/json'
-     *   apimodel: 'application/json'
+     *    or 'apimodel'.
      * @param null|string $modelId The model id, if not passed will be the modelId
-     * from this object.
+     *    from this object.
      *
      * @throws ParameterException, RequestException
      *

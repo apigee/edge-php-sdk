@@ -3,6 +3,7 @@
 namespace Apigee\Util;
 
 use Apigee\Exceptions\ParameterException;
+use Psr\Log\LoggerInterface;
 
 /**
  * Factory class used to set the default cache manager and to create
@@ -44,9 +45,9 @@ class CacheFactory
      *
      * @param \Apigee\Util\CacheManager $cacheManager
      */
-    public static function setDefault(CacheManager $cache_manager)
+    public static function setDefault(CacheManager $cacheManager)
     {
-        self::$default_cache_manager = $cache_manager;
+        self::$default_cache_manager = $cacheManager;
     }
 
     /**
@@ -103,14 +104,14 @@ class CacheFactory
                 } else {
                     $msgArgs = array($cache_manager_class_name, self::CACHE_MGR_CLASS);
                     $msg = vsprintf('Class %s does not extend %s.', $msgArgs);
-                    if ($logger instanceof \Psr\Log\LoggerInterface) {
+                    if ($logger instanceof LoggerInterface) {
                         $logger->error($msg);
                     }
                     throw new ParameterException($msg);
                 }
             } catch (\ReflectionException $re) {
                 $msg = sprintf('Could not load cache manager class %s', $cache_manager_class_name);
-                if ($logger instanceof \Psr\Log\LoggerInterface) {
+                if ($logger instanceof LoggerInterface) {
                     $logger->error($msg);
                 }
                 throw new ParameterException($msg);

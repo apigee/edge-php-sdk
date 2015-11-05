@@ -3,15 +3,14 @@
 namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
-
-use Apigee\Util\Cache as Cache;
+use Apigee\ManagementAPI\Organization as EdgeOrganization;
 
 /**
  * ManagementAPIOrganization is used in monetization instead of
  * Organization so we can cache its response since it is somehow
  * more heavily used in this module
  */
-class ManagementAPIOrganization extends \Apigee\ManagementAPI\Organization
+class ManagementAPIOrganization extends EdgeOrganization
 {
     public function load($org = null)
     {
@@ -29,7 +28,7 @@ class ManagementAPIOrganization extends \Apigee\ManagementAPI\Organization
         $this->displayName = $organization['displayName'];
         $this->environments = $organization['environments'];
         $this->type = $organization['type'];
-        $this->createAt = $organization['createdAt'];
+        $this->createdAt = $organization['createdAt'];
         $this->createdBy = $organization['createdBy'];
         $this->lastModifiedAt = $organization['lastModifiedAt'];
         $this->lastModifiedBy = $organization['lastModifiedBy'];

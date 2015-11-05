@@ -2,11 +2,11 @@
 
 namespace Apigee\Mint;
 
-use \DateTime;
-use \DateTimeZone;
+use DateTime;
+use DateTimeZone;
 
 use Apigee\Util\CacheFactory;
-
+use Apigee\Util\OrgConfig;
 use Apigee\Exceptions\ParameterException;
 
 class RatePlan extends Base\BaseObject
@@ -210,7 +210,7 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Rate plan details
-     * @var array Array must elements must be instances of Apigee\Mint\DataStructures\RatePlanRate
+     * @var DataStructures\RatePlanDetail[]
      */
     private $ratePlanDetails = array();
 
@@ -225,12 +225,16 @@ class RatePlan extends Base\BaseObject
      */
     public $id;
 
+    private $companyId;
+
+    private $isCompanyPlan;
+
     /**
      * Class constructor
      * @param string $m_package_id Monetization Package id
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($m_package_id, \Apigee\Util\OrgConfig $config)
+    public function __construct($m_package_id, OrgConfig $config)
     {
         $base_url = '/mint/organizations/'
             . rawurlencode($config->orgName)
@@ -630,32 +634,12 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get start date as a string in GMT
-     * @deprecated Use getStartDateTime() instead
-     * @return string The start date
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
      * Get start date as a DateTime object in org's timezone.
      * @return \DateTime The start date
      */
     public function getStartDateTime()
     {
         return $this->convertToDateTime($this->startDate);
-    }
-
-    /**
-     * Get end date as a string in GMT
-     * @deprecated Use getEndDateTime() instead
-     * @return string The end date
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
@@ -746,7 +730,8 @@ class RatePlan extends Base\BaseObject
         } else {
             $rate_plan_details = array();
             foreach ($this->ratePlanDetails as &$rate_plan_detail) {
-                if (isset($rate_plan_detail->product) && $rate_plan_detail->product->getId() == $product->getId()) {
+                $detail_product = $rate_plan_detail->getProduct();
+                if (isset($detail_product) && $detail_product->getId() == $product->getId()) {
                     $rate_plan_details[] = $rate_plan_detail;
                 }
             }
@@ -817,7 +802,7 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Set com.apigee.mint.model.Developer
-     * @param \Apigee\Mint\Developer $developer
+     * @param string $company_id
      */
     public function setCompanyId($company_id)
     {

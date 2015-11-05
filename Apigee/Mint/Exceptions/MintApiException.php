@@ -83,8 +83,8 @@ class MintApiException extends \Exception
     /**
      * Determines if this exception is relative to the Mint API REST call
      *
-     * @param \Apigee\Exceptions\ResponseException $e
-     * @return boolean
+     * @param ResponseException $e
+     * @return bool
      */
     public static function isMintExceptionCode(ResponseException $e)
     {
@@ -95,10 +95,9 @@ class MintApiException extends \Exception
     /**
      * Class constructor
      *
-     * @param \Apigee\Exceptions\ResponseException $e
-     * @return boolean
-     * @throws \Apigee\Exceptions\ParameterException if the exception has not a mint
-     * registered code
+     * @param ResponseException $e
+     * @throws ParameterException if the exception does not have a Mint
+     *    registered code
      */
     public function __construct($e)
     {
@@ -114,8 +113,13 @@ class MintApiException extends \Exception
     }
 
     /**
-     * @return string|null if there is a proper message then it is returned,
-     * otherwise NULL is return
+     * If there is a proper message then it is returned; otherwise NULL is
+     * returned.
+     *
+     * @param bool $response_message
+     * @param bool $no_code
+     *
+     * @return string|null
      */
     public function getMintMessage($response_message = false, $no_code = false)
     {

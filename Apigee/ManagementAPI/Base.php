@@ -9,13 +9,16 @@
 
 namespace Apigee\ManagementAPI;
 
+use Apigee\Util\APIObject;
+use Apigee\Util\DebugData;
+
 /**
  * Base class for Management API classes. Handles a bit of the APIClient
  * invocation, which makes the actual HTTP calls.
  *
  * @author djohnson
  */
-class Base extends \Apigee\Util\APIObject
+class Base extends APIObject
 {
     /**
      * Returns debug data from the last API call in a backwards-compatible way.
@@ -24,7 +27,7 @@ class Base extends \Apigee\Util\APIObject
      */
     public function getDebugData()
     {
-        return \Apigee\Util\DebugData::toArray();
+        return DebugData::toArray();
     }
 
     /**

@@ -2,8 +2,9 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the CompanyInviteRequest object from the Management API and allows clients to manipulate it.
@@ -252,7 +253,7 @@ class CompanyInviteRequest extends Base
      * Initializes default values of all the member variables
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/requests');
         $this->blankValues();
@@ -278,13 +279,15 @@ class CompanyInviteRequest extends Base
      * Get all the requests for a company.
      * @param string $companyId
      * @param string|null $state
-     * @return array
+     * @return CompanyInviteRequest[]
      */
     public function getAllRequestsForCompany($companyId, $state = null)
     {
-        // TODO: If we get the modifed api call with state as another query param then use the state argument
-        // to filter the list of request based on the state.
-        $this->get('?company_id=' . $companyId);
+        $query = '?company_id=' . $companyId;
+        if (!empty($state)) {
+            $query .= '&state=' . $state;
+        }
+        $this->get($query);
         $config = $this->config;
         return self::loadRequestArray($this->responseObj, $config);
     }
@@ -293,12 +296,10 @@ class CompanyInviteRequest extends Base
      * Get all requests for a developer.
      * @param string $developerId
      * @param string|null $state
-     * @return array
+     * @return CompanyInviteRequest[]
      */
     public function getAllRequestsForDeveloper($developerId, $state = null)
     {
-        // TODO: If we get the modifed api call with state as another query param then use the state argument
-        // to filter the list of request based on the state.
         $query = '?dev_id=' . $developerId;
         if (!empty($state)) {
             $query .= '&state=' . $state;
@@ -309,6 +310,11 @@ class CompanyInviteRequest extends Base
         return self::loadRequestArray($this->responseObj, $config);
     }
 
+    /**
+     * Get all requests for this org.
+     *
+     * @return CompanyInviteRequest[]
+     */
     public function getAllRequestsForOrg()
     {
         $this->get();
@@ -319,9 +325,10 @@ class CompanyInviteRequest extends Base
     /**
      * Parses an Edge reponse and return an array of InviteRequest.
      * @param array $reponseobj
-     * @return array of fully loaded response objects
+     * @param OrgConfig $config
+     * @return CompanyInviteRequest[]
      */
-    private static function loadRequestArray($reponseobj, \Apigee\Util\OrgConfig $config)
+    private static function loadRequestArray($reponseobj, OrgConfig $config)
     {
         $requests = array();
         foreach ($reponseobj as $response) {
@@ -334,8 +341,8 @@ class CompanyInviteRequest extends Base
 
     /**
      * Parses response from Edge and populates a CompanyInviteRequest object.
-     * @param \Apigee\ManagementAPI\CompanyInviteRequest $company_invite_request
-     * @param array $reponse
+     * @param CompanyInviteRequest $company_invite_request
+     * @param array $response
      */
     private static function loadFromResponse(CompanyInviteRequest &$company_invite_request, array $response)
     {
@@ -354,14 +361,14 @@ class CompanyInviteRequest extends Base
     /**
      * Saves an invite request object to the Edge server.
      *
-     * If $force_update is true then a PUT call is made to update an existing request, otherwise a POST
-     * call is made to create a new request.
+     * If $forceUpdate is true then a PUT call is made to update an existing
+     * request, otherwise a POST call is made to create a new request.
      *
-     * @param boolean $force_update
+     * @param boolean $forceUpdate
      */
-    public function save($force_update = false)
+    public function save($forceUpdate = false)
     {
-        if ($force_update === null) {
+        if ($forceUpdate === null) {
             try {
                 $this->save(true);
             } catch (ResponseException $e) {
@@ -389,12 +396,12 @@ class CompanyInviteRequest extends Base
         }
 
         $url = null;
-        if ($force_update || $this->created_at) {
+        if ($forceUpdate || $this->created_at) {
             $url = rawurldecode($this->id);
         }
 
         $headers = array('source' => $this->sourceDeveloperEmail);
-        if ($force_update) {
+        if ($forceUpdate) {
             $this->put($url, $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', $headers);
         } else {
             $this->post($url, $payload, 'application/json; charset=utf-8', 'application/json; charset=utf-8', $headers);

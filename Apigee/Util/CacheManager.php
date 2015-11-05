@@ -6,14 +6,13 @@ namespace Apigee\Util;
  * The base class for a cache manager.
  * Cache classes must extend this class and provide a default constructor.
  *
- * <p>A Factory class creates an instance of the class and
- * then invokes the setup() method.
- * The setup() method is passed an argument that is returned
+ * A Factory class creates an instance of the class and  then invokes the
+ * setup() method. The setup() method is passed an argument that is returned
  * by the getConfig() method, which means setup logic can be performed
- * outside of the constructor. </p>
+ * outside of the constructor.
  *
- * <p>Note that the setup() method should be
- * invoked once and only once by the Factory class.</p>
+ * Note that the setup() method should be invoked once and only once by the
+ * Factory class.
  *
  * @author isaias
  *

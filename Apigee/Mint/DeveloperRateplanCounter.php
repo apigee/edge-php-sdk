@@ -1,12 +1,14 @@
 <?php
 namespace Apigee\Mint;
 
+use Apigee\Util\OrgConfig;
+
 class DeveloperRateplanCounter extends Base\BaseObject
 {
 
     private $id;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developer-ratecard-counters';
         $this->init($config, $base_url);

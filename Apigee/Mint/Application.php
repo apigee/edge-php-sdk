@@ -3,8 +3,8 @@
 namespace Apigee\Mint;
 
 use Apigee\Mint\Types\ApplicationStatusType;
-use Apigee\Mint\Types\StatusType;
 use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 class Application extends Base\BaseObject
 {
@@ -30,7 +30,7 @@ class Application extends Base\BaseObject
     private $name;
 
     /**
-     * @var array
+     * @var Product[]
      */
     private $products;
 
@@ -50,12 +50,12 @@ class Application extends Base\BaseObject
     private $status;
 
     /**
-     * @var \Apigee\Mint\ApplicationCategory
+     * @var ApplicationCategory
      */
     private $applicationCategory;
 
     /**
-     * @var \Apigee\Mint\Organization
+     * @var Organization
      */
     private $organization;
 
@@ -65,7 +65,7 @@ class Application extends Base\BaseObject
      */
     private $developerEmail;
 
-    public function __construct($developer_email, \Apigee\Util\OrgConfig $config)
+    public function __construct($developer_email, OrgConfig $config)
     {
         $baseUrl = '/mint/organizations/'
             . rawurlencode($config->orgName)
@@ -82,9 +82,7 @@ class Application extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::initValues().
-     *
-     * @return void
+     * {@inheritdoc}
      */
     public function initValues()
     {
@@ -101,9 +99,7 @@ class Application extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiateNew().
-     *
-     * @return Application|Base\BaseObject
+     * {@inheritdoc}
      */
     public function instantiateNew()
     {
@@ -111,10 +107,7 @@ class Application extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::loadFromRawData().
-     *
-     * @param array $data
-     * @param bool $reset
+     * {@inheritdoc}
      */
     public function loadFromRawData($data, $reset = false)
     {
@@ -158,9 +151,7 @@ class Application extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::__toString().
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function __toString()
     {

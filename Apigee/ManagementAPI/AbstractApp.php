@@ -5,6 +5,8 @@ namespace Apigee\ManagementAPI;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Exceptions\TooManyAttributesException;
+use Apigee\Util\OrgConfig;
+use Psr\Log\NullLogger;
 
 /**
  * Superclass of DeveloperApps and CompanyApps.
@@ -229,7 +231,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Returns the array of API products with which the app is associated.
-     * @return array
+     * @return string[]
      */
     public function getApiProducts()
     {
@@ -238,7 +240,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the array of API products with which the app is associated.
-     * @param array
+     * @param string[]
      */
     public function setApiProducts($products)
     {
@@ -282,7 +284,7 @@ abstract class AbstractApp extends Base
     /**
      * Sets the value of the app attribute.
      * @param string $attr
-     * @param
+     * @param string $value
      */
     public function setAttribute($attr, $value)
     {
@@ -297,7 +299,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the app name.
-     * @param string
+     * @param string $name
      */
     public function setName($name)
     {
@@ -315,7 +317,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the callback URL.
-     * @param string
+     * @param string $url
      */
     public function setCallbackUrl($url)
     {
@@ -333,7 +335,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the app description.
-     * @param string
+     * @param string $descr
      */
     public function setDescription($descr)
     {
@@ -352,7 +354,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the app access type as 'read', 'write', or 'both'.
-     * @param string
+     * @param string $type
      */
     public function setAccessType($type)
     {
@@ -382,7 +384,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the app access type as 'read', 'write', or 'both'.
-     * @param string
+     * @param string $status
      */
     protected function setStatus($status)
     {
@@ -394,7 +396,7 @@ abstract class AbstractApp extends Base
      * 'approved' or 'pending'.
      * Each member of this array is itself an associative array, with keys
      * of 'apiproduct' and 'status'.
-     * @return array
+     * @return array[]
      */
     public function getCredentialApiProducts()
     {
@@ -406,7 +408,7 @@ abstract class AbstractApp extends Base
      * 'approved' or 'pending'.
      * Each member of this array is itself an associative array, with keys
      * of 'apiproduct' and 'status'.
-     * @param array
+     * @param array[] $list
      */
     protected function setCredentialApiProducts(array $list)
     {
@@ -424,7 +426,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the value of the consumer key for the app.
-     * @param string
+     * @param string $key
      */
     public function setConsumerKey($key)
     {
@@ -442,7 +444,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the value of the consumer secret for the app.
-     * @param string
+     * @param string $secret
      */
     public function setConsumerSecret($secret)
     {
@@ -451,7 +453,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Returns the scope(s) of the active credentials.
-     * @return array
+     * @return string[]
      */
     public function getCredentialScopes()
     {
@@ -460,7 +462,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the value of the credential's scope.
-     * @param array
+     * @param string[] $scopes
      */
     protected function setCredentialScopes(array $scopes)
     {
@@ -478,7 +480,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the status of the consumer key for the app: 'approved' or 'pending'.
-     * @param string
+     * @param string $status
      */
     protected function setCredentialStatus($status)
     {
@@ -496,7 +498,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the Unix time when the credentials were created.
-     * @param integer
+     * @param integer $timestamp
      */
     protected function setCredentialIssueDate($timestamp)
     {
@@ -514,7 +516,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the Unix time when the credentials expire.
-     * @param integer
+     * @param integer $timestamp
      */
     protected function setCredentialExpiryDate($timestamp)
     {
@@ -532,11 +534,11 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the Unix time when the app was created.
-     * @param integer
+     * @param integer $timeInMilliseconds
      */
-    protected function setCreatedAt($time_in_milliseconds)
+    protected function setCreatedAt($timeInMilliseconds)
     {
-        $this->createdAt = floatval($time_in_milliseconds);
+        $this->createdAt = floatval($timeInMilliseconds);
     }
 
     /**
@@ -552,7 +554,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the username of the user who created the app.
-     * @param string
+     * @param string $who
      */
     public function setCreatedBy($who)
     {
@@ -570,11 +572,11 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the Unix time when the app was last modified.
-     * @param integer
+     * @param integer $timeInMilliseconds
      */
-    protected function setModifiedAt($time_in_milliseconds)
+    protected function setModifiedAt($timeInMilliseconds)
     {
-        $this->modifiedAt = $time_in_milliseconds;
+        $this->modifiedAt = $timeInMilliseconds;
     }
 
     /**
@@ -588,7 +590,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the username of the developer who last modified the app.
-     * @param string
+     * @param string $who
      */
     public function setModifiedBy($who)
     {
@@ -598,21 +600,21 @@ abstract class AbstractApp extends Base
     /**
      * Returns the value of an attribute used to extend the
      * default credential's profile.
-     * @param string
-     * @return
+     * @param string $attrName
+     * @return string|null
      */
-    public function getCredentialAttribute($attr_name)
+    public function getCredentialAttribute($attrName)
     {
-        if (isset($this->credentialAttributes[$attr_name])) {
-            return $this->credentialAttributes[$attr_name];
+        if (array_key_exists($attrName, $this->credentialAttributes)) {
+            return $this->credentialAttributes[$attrName];
         }
         return null;
     }
 
     /**
      * Sets a name/value pair used to extend the default credential's profile.
-     * @param string
-     * @param
+     * @param string $name
+     * @param string $value
      */
     public function setCredentialAttribute($name, $value)
     {
@@ -622,7 +624,7 @@ abstract class AbstractApp extends Base
     /**
      * Returns the array of name/value pairs used to extend the default
      * credential's profile.
-     * @return array
+     * @return string[]
      */
     public function getCredentialAttributes()
     {
@@ -649,7 +651,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the UUID of this app.
-     * @param string
+     * @param string $id
      */
     protected function setAppId($id)
     {
@@ -667,7 +669,7 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the name of the app family containing the app.
-     * @param string
+     * @param string $family
      */
     public function setAppFamily($family)
     {
@@ -685,18 +687,29 @@ abstract class AbstractApp extends Base
 
     /**
      * Sets the scope of the app.
-     * @param string
+     * @param string[] $scopes
      */
     protected function setScopes(array $scopes)
     {
         $this->scopes = $scopes;
     }
 
+    /**
+     * If paging is enabled, gets page size
+     *
+     * @return int
+     */
     public function getPageSize()
     {
         return $this->pageSize;
     }
 
+    /**
+     * Sets page size for paged results.
+     *
+     * @param int $size
+     * @throws ParameterException
+     */
     public function setPageSize($size)
     {
         $size = intval($size);
@@ -746,7 +759,7 @@ abstract class AbstractApp extends Base
     /**
      * {@inheritDoc}
      */
-    protected function init(\Apigee\Util\OrgConfig $config, $baseUrl)
+    protected function init(OrgConfig $config, $baseUrl)
     {
         $this->pageSize = self::MAX_ITEMS_PER_PAGE;
         parent::init($config, $baseUrl);
@@ -759,8 +772,9 @@ abstract class AbstractApp extends Base
      * @static
      * @param AbstractApp $obj
      * @param array $response
+     * @param mixed $ownerIdentifier
      */
-    protected static function loadFromResponse(AbstractApp &$obj, array $response, $owner_identifier = null)
+    protected static function loadFromResponse(AbstractApp &$obj, array $response, $ownerIdentifier = null)
     {
         $obj->accessType = $response['accessType'];
         $obj->appFamily = (isset($response['appFamily']) ? $response['appFamily'] : null);
@@ -788,7 +802,7 @@ abstract class AbstractApp extends Base
 
         // Let subclasses twiddle here
 
-        $obj::afterLoad($obj, $response, $owner_identifier);
+        $obj::afterLoad($obj, $response, $ownerIdentifier);
     }
 
     /**
@@ -800,10 +814,10 @@ abstract class AbstractApp extends Base
      * earliest-issued credential in the list.
      *
      * @static
-     * @param DeveloperApp $obj
-     * @param $credentials
+     * @param AbstractApp $obj
+     * @param array $credentials
      */
-    protected static function loadCredentials(AbstractApp &$obj, $credentials)
+    protected static function loadCredentials(AbstractApp &$obj, array $credentials)
     {
         // Find the credential with the max issuedAt attribute which isn't expired.
         if (count($credentials) > 0) {
@@ -921,9 +935,9 @@ abstract class AbstractApp extends Base
         $cached_logger = null;
         // Make sure that errors are not logged by replacing the logger with a
         // dummy that routes errors to /dev/null
-        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+        if (!(self::$logger instanceof NullLogger)) {
             $cached_logger = self::$logger;
-            self::$logger = new \Psr\Log\NullLogger();
+            self::$logger = new NullLogger();
         }
         try {
             $this->get(rawurlencode($name));
@@ -1233,6 +1247,14 @@ abstract class AbstractApp extends Base
         return $apps;
     }
 
+      /**
+       * Returns array of apps belonging to this developer/company.
+       *
+       * @param null|string $identifier
+       * @return AbstractApp[]
+       */
+      abstract public function getListDetail($identifier = null);
+
     /**
      * Creates a key/secret pair for this app against its component APIProducts.
      *
@@ -1306,9 +1328,9 @@ abstract class AbstractApp extends Base
         $cached_logger = null;
         // Make sure that errors are not logged by replacing the logger with a
         // dummy that routes errors to /dev/null
-        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+        if (!(self::$logger instanceof NullLogger)) {
             $cached_logger = self::$logger;
-            self::$logger = new \Psr\Log\NullLogger();
+            self::$logger = new NullLogger();
         }
         $returnVal = false;
         $url = rawurlencode($this->getName()) . '/attributes/' . rawurlencode($attr_name);
@@ -1337,9 +1359,9 @@ abstract class AbstractApp extends Base
         $cached_logger = null;
         // Make sure that errors are not logged by replacing the logger with a
         // dummy that routes errors to /dev/null
-        if (!(self::$logger instanceof \Psr\Log\NullLogger)) {
+        if (!(self::$logger instanceof NullLogger)) {
             $cached_logger = self::$logger;
-            self::$logger = new \Psr\Log\NullLogger();
+            self::$logger = new NullLogger();
         }
         $returnVal = false;
         $url = rawurlencode($this->getName())
@@ -1371,7 +1393,7 @@ abstract class AbstractApp extends Base
         $url = rawurlencode($this->getName()) . '/keys/' . rawurlencode($consumer_key);
         try {
             $this->httpDelete($url);
-        } catch (\Apigee\Exceptions\ResponseException $e) {
+        } catch (ResponseException $e) {
         }
         // We ignore whether or not the delete was successful. Either way, we can
         // be sure it doesn't exist now, if it did before.
@@ -1417,15 +1439,16 @@ abstract class AbstractApp extends Base
     /**
      * Turns this object's properties into an array for external use.
      *
+     * @param bool $includeDebugData
      * @return array
      */
-    public function toArray($include_debug_data = true)
+    public function toArray($includeDebugData = true)
     {
         $output = array();
         foreach ($this->getAppProperties() as $property) {
             switch ($property) {
                 case 'debugData':
-                    $output[$property] = $include_debug_data ? $this->getDebugData() : null;
+                    $output[$property] = $includeDebugData ? $this->getDebugData() : null;
                     break;
                 case 'overallStatus':
                     $output[$property] = $this->getOverallStatus();
@@ -1442,6 +1465,7 @@ abstract class AbstractApp extends Base
      * Returns an array of all property names that can be returned
      * from a call to self::toArray().
      *
+     * @param string $class
      * @return array
      */
     public function getAppProperties($class = __CLASS__)

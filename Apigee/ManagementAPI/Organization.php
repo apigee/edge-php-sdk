@@ -8,6 +8,8 @@
  */
 namespace Apigee\ManagementAPI;
 
+use Apigee\Util\OrgConfig;
+
 /**
  * Abstracts the Organization object in the Management API and allows clients to
  * manipulate it.
@@ -30,14 +32,14 @@ class Organization extends Base
     protected $displayName;
 
     /**
-     * @var array
+     * @var string[]
      * Environments available in the organization. By default 'test' and 'prod'
      * environments are available.
      */
     protected $environments;
 
     /**
-     * @var array
+     * @var string[]
      * A list of descriptors used internally by Apigee.
      */
     protected $properties;
@@ -96,7 +98,7 @@ class Organization extends Base
      * Returns the environments available in the organization. By default 'test'
      * and 'prod' environments are available.
      *
-     * @return array
+     * @return string[]
      */
     public function getEnvironments()
     {
@@ -120,7 +122,7 @@ class Organization extends Base
      */
     public function getProperty($name)
     {
-        return isset($this->properties[$name]) ? $this->properties[$name] : null;
+        return array_key_exists($name, $this->properties) ? $this->properties[$name] : null;
     }
 
     /**
@@ -175,9 +177,9 @@ class Organization extends Base
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/organizations');
         $this->name = $config->orgName;

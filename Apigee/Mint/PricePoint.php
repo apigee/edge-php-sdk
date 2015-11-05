@@ -3,6 +3,7 @@ namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
 use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 class PricePoint extends Base\BaseObject
 {
@@ -72,7 +73,7 @@ class PricePoint extends Base\BaseObject
      * @param string $product_id Product Id this PricePoint is in
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($product_id, \Apigee\Util\OrgConfig $config)
+    public function __construct($product_id, OrgConfig $config)
     {
         $base_url = '/mint/organizations/'
             . rawurlencode($config->orgName)
@@ -342,7 +343,7 @@ class PricePoint extends Base\BaseObject
      * @param \Apigee\Mint\Organization $organization
      * @return void
      */
-    public function setOrganization(\Apigee\Mint\Organization $organization)
+    public function setOrganization(Organization $organization)
     {
         $this->organization = $organization;
     }

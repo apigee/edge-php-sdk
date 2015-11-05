@@ -9,10 +9,11 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
-use \Apigee\Exceptions\TooManyAttributesException;
-use \Apigee\Util\DebugData;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\TooManyAttributesException;
+use Apigee\Util\DebugData;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the Developer object in the Management API and allows clients to
@@ -35,7 +36,7 @@ class Developer extends Base
 
     /**
      * The apps associated with the developer.
-     * @var array
+     * @var string[]
      */
     protected $apps;
     /**
@@ -75,7 +76,7 @@ class Developer extends Base
      */
     protected $status;
     /**
-     * @var array
+     * @var string[]
      * Name/value pairs used to extend the default profile.
      */
     protected $attributes;
@@ -105,7 +106,7 @@ class Developer extends Base
     protected $modifiedBy;
 
     /**
-     * @var array
+     * @var string[]
      * Read-only list of company identifiers of which this developer is a
      * member.
      */
@@ -126,7 +127,7 @@ class Developer extends Base
     /**
      * Returns the names of apps associated with the developer.
      *
-     * @return array
+     * @return string[]
      */
     public function getApps()
     {
@@ -146,7 +147,7 @@ class Developer extends Base
     /**
      * Sets/clears the Paging flag.
      *
-     * @param bool $isSet
+     * @param bool $flag
      */
     public function usePaging($flag = true)
     {
@@ -256,7 +257,7 @@ class Developer extends Base
     /**
      * Sets the developer status: 'active' or 'inactive'.
      *
-     * @param string $status
+     * @param string|int|bool $status
      */
     public function setStatus($status)
     {
@@ -307,7 +308,7 @@ class Developer extends Base
     /**
      * Returns the attributes associated with the developer.
      *
-     * @return array
+     * @return string[]
      */
     public function getAttributes()
     {
@@ -328,18 +329,29 @@ class Developer extends Base
      * Returns a list of string identifiers for companies of which this
      * developer is a member.
      *
-     * @return array
+     * @return string[]
      */
     public function getCompanies()
     {
         return $this->companies;
     }
 
+    /**
+     * Returns page size for paged queries.
+     *
+     * @return int
+     */
     public function getPageSize()
     {
         return $this->pageSize;
     }
 
+    /**
+     * Sets page size for paged queries.
+     *
+     * @param int $size
+     * @throws ParameterException
+     */
     public function setPageSize($size)
     {
         $size = intval($size);
@@ -353,9 +365,9 @@ class Developer extends Base
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/developers');
         $this->blankValues();
@@ -382,10 +394,10 @@ class Developer extends Base
     }
 
     /**
-     * Takes the raw KMS response and populates the member variables of the
+     * Takes the raw Edge response and populates the member variables of the
      * passed-in Developer object from it.
      *
-     * @param \Apigee\ManagementAPI\Developer $developer
+     * @param Developer $developer
      * @param array $response
      */
     protected static function loadFromResponse(Developer &$developer, array $response)
@@ -446,27 +458,27 @@ class Developer extends Base
      * If user's email doesn't look valid (must contain @), a
      * ParameterException is thrown.
      *
-     * @param bool|null $force_update
+     * @param bool|null $forceUpdate
      *   If false, assume that this is a new instance.
      *   If true, assume that this is an update to an existing instance.
      *   If null, try an update, and if that fails, try an insert.
-     * @param string|null $old_email
+     * @param string|null $oldEmail
      *   If the developer's email has changed, this field must contain the
      *   previous email value.
      *
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function save($force_update = false, $old_email = null)
+    public function save($forceUpdate = false, $oldEmail = null)
     {
         // See if we need to brute-force this.
-        if ($force_update === null) {
+        if ($forceUpdate === null) {
             try {
-                $this->save(true, $old_email);
+                $this->save(true, $oldEmail);
             } catch (ResponseException $e) {
                 if ($e->getCode() == 404) {
                     // Update failed because dev doesn't exist.
                     // Try insert instead.
-                    $this->save(false, $old_email);
+                    $this->save(false, $oldEmail);
                 } else {
                     // Some other response error.
                     throw $e;
@@ -480,8 +492,8 @@ class Developer extends Base
             throw new ParameterException($message);
         }
 
-        if (empty($old_email)) {
-            $old_email = $this->email;
+        if (empty($oldEmail)) {
+            $oldEmail = $this->email;
         }
 
         $payload = array(
@@ -503,15 +515,15 @@ class Developer extends Base
             }
         }
         $url = null;
-        if ($force_update || $this->createdAt) {
+        if ($forceUpdate || $this->createdAt) {
             if ($this->developerId) {
                 $payload['developerId'] = $this->developerId;
             }
-            $url = rawurlencode($old_email);
+            $url = rawurlencode($oldEmail);
         }
         // Save our desired status for later.
         $cached_status = $this->status;
-        if ($force_update) {
+        if ($forceUpdate) {
             $this->put($url, $payload);
         } else {
             $this->post($url, $payload);
@@ -553,7 +565,7 @@ class Developer extends Base
     /**
      * Returns an array of all developer emails for this org.
      *
-     * @return array
+     * @return string[]
      */
     public function listDevelopers()
     {
@@ -601,7 +613,7 @@ class Developer extends Base
      * a canonical listing of a developer's apps, you should invoke
      * DeveloperApp::getList() or DeveloperApp::getListDetail().
      *
-     * @return array
+     * @return Developer[]
      */
     public function loadAllDevelopers()
     {

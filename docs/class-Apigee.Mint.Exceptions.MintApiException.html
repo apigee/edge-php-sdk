@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -156,7 +175,8 @@ Exception
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Mint.html">Mint</a>\<a href="namespace-Apigee.Mint.Exceptions.html">Exceptions</a><br>
 		
 
-			<b>Located at</b> Mint/Exceptions/MintApiException.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#8-133" title="Go to source code">Mint/Exceptions/MintApiException.php</a>
+		<br>
 	</div>
 
 
@@ -175,7 +195,7 @@ Exception
 
 		<td class="name"><div>
 		<a class="anchor" href="#_factory">#</a>
-		<code>factory( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$re</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#65-81" title="Go to source code">factory</a>( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$re</var></span> )</code>
 
 		<div class="description short">
 			<p>Factory method to create the proper exception class depending on the error.</p>
@@ -214,7 +234,7 @@ Exception
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isMintExceptionCode">#</a>
-		<code>isMintExceptionCode( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$e</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#83-93" title="Go to source code">isMintExceptionCode</a>( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$e</var></span> )</code>
 
 		<div class="description short">
 			<p>Determines if this exception is relative to the Mint API REST call</p>
@@ -246,14 +266,14 @@ Exception
 		<td class="attributes"><code>
 			 public 
 
-			boolean
+			
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$e</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#95-108" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Exceptions.ResponseException.html">Apigee\Exceptions\ResponseException</a></code> <var>$e</var></span> )</code>
 
 		<div class="description short">
 			<p>Class constructor</p>
@@ -269,15 +289,11 @@ Exception
 					<dd></dd>
 				</dl></div>
 
-				<h4>Returns</h4>
-				<div class="list">
-					boolean
-				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code><br><p>if the exception has not a mint
-registered code</p>
+					<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code><br><p>if the exception does not have a Mint
+   registered code</p>
 				</div>
 
 
@@ -299,7 +315,7 @@ registered code</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMintCode">#</a>
-		<code>getMintCode( )</code>
+		<code><a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#110-113" title="Go to source code">getMintCode</a>( )</code>
 
 		<div class="description short">
 			
@@ -329,21 +345,29 @@ registered code</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMintMessage">#</a>
-		<code>getMintMessage( <span> <var>$response_message</var> = <span class="php-keyword1">false</span></span>, <span> <var>$no_code</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#115-132" title="Go to source code">getMintMessage</a>( <span>boolean <var>$response_message</var> = <span class="php-keyword1">false</span></span>, <span>boolean <var>$no_code</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
-			
+			<p>If there is a proper message then it is returned; otherwise NULL is
+returned.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>If there is a proper message then it is returned; otherwise NULL is
+returned.</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$response_message</var></dt>
+					<dd></dd>
+					<dt><var>$no_code</var></dt>
+					<dd></dd>
+				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					string|null<br><p>if there is a proper message then it is returned,
-otherwise NULL is return</p>
+					string|null
 				</div>
 
 
@@ -359,6 +383,7 @@ otherwise NULL is return</p>
 	<tr>
 		<td><code>
 __toString(), 
+__wakeup(), 
 getCode(), 
 getFile(), 
 getLine(), 
@@ -383,7 +408,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_LEGAL_COMPANY_NAME_NOT_SPECIFIED</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#14" title="Go to source code"><b>DEVELOPER_LEGAL_COMPANY_NAME_NOT_SPECIFIED</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -406,7 +432,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_ADDRESS_NOT_SPECIFIED</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#15" title="Go to source code"><b>DEVELOPER_ADDRESS_NOT_SPECIFIED</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -429,7 +456,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>RATE_PLAN_NOT_PUBLISHED</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#16" title="Go to source code"><b>RATE_PLAN_NOT_PUBLISHED</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -452,7 +480,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>START_DATE_EARLIER_THAN_TODAY</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#17" title="Go to source code"><b>START_DATE_EARLIER_THAN_TODAY</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -475,7 +504,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_RATE_PLAN_ACCEPT_ERROR</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#18" title="Go to source code"><b>DEVELOPER_RATE_PLAN_ACCEPT_ERROR</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -498,7 +528,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>START_DATE_EARLIER_THAN_PLAN_START_DATE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#19" title="Go to source code"><b>START_DATE_EARLIER_THAN_PLAN_START_DATE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -521,7 +552,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>START_DATE_LATER_THAN_PLAN_END_DATE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#20" title="Go to source code"><b>START_DATE_LATER_THAN_PLAN_END_DATE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -544,7 +576,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>END_DATE_EARLIER_THAN_START</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#21" title="Go to source code"><b>END_DATE_EARLIER_THAN_START</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -567,7 +600,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>END_DATE_LATER_THAN_PLAN_END_DATE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#22" title="Go to source code"><b>END_DATE_LATER_THAN_PLAN_END_DATE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -590,7 +624,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_ALREADY_ACCEPTED_RATE_PLAN_FOR_PRODUCT</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#23" title="Go to source code"><b>DEVELOPER_ALREADY_ACCEPTED_RATE_PLAN_FOR_PRODUCT</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -613,7 +648,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_ALREADY_ACTIVE_ON_RATE_PLAN</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#24" title="Go to source code"><b>DEVELOPER_ALREADY_ACTIVE_ON_RATE_PLAN</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -636,7 +672,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>RESOURCE_DOES_NOT_EXIST</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#25" title="Go to source code"><b>RESOURCE_DOES_NOT_EXIST</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -659,7 +696,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_HAS_FOLLOWING_OVERLAP_RATE_PLANS</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#26" title="Go to source code"><b>DEVELOPER_HAS_FOLLOWING_OVERLAP_RATE_PLANS</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -682,7 +720,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>DEVELOPER_ON_RATE_PLAN_WITH_START_DATE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#27" title="Go to source code"><b>DEVELOPER_ON_RATE_PLAN_WITH_START_DATE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -705,7 +744,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>PREPAID_DEVELOPER_HAS_NO_BALANCE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#28" title="Go to source code"><b>PREPAID_DEVELOPER_HAS_NO_BALANCE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -728,7 +768,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>ONLY_FUTURE_DEVELOPER_RATE_PLAN_CAN_BE_DELETED</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#29" title="Go to source code"><b>ONLY_FUTURE_DEVELOPER_RATE_PLAN_CAN_BE_DELETED</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -751,7 +792,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>PRODUCT_NOT_PART_OF_ANY_MONETIZATION_PACKAGE</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#30" title="Go to source code"><b>PRODUCT_NOT_PART_OF_ANY_MONETIZATION_PACKAGE</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -774,7 +816,8 @@ getTraceAsString()
 		<td class="attributes"><code>string</code></td>
 		<td class="name">
 			<code>
-<b>NO_CURRENT_PUBLISHABLE_ENTITY</b>			</code>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#31" title="Go to source code"><b>NO_CURRENT_PUBLISHABLE_ENTITY</b></a>
+			</code>
 
 			<div class="description short">
 				
@@ -806,7 +849,8 @@ getTraceAsString()
 		</code></td>
 
 		<td class="name">
-<var>$mintCode</var>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#10" title="Go to source code"><var>$mintCode</var></a>
+
 			<div class="description short">
 				
 			</div>
@@ -830,7 +874,8 @@ getTraceAsString()
 		</code></td>
 
 		<td class="name">
-<var>$mintMessage</var>
+				<a href="source-class-Apigee.Mint.Exceptions.MintApiException.html#12" title="Go to source code"><var>$mintMessage</var></a>
+
 			<div class="description short">
 				
 			</div>
