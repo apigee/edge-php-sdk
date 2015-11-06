@@ -10,6 +10,8 @@ namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ParameterException;
 use Apigee\Exceptions\ResponseException;
+use Apigee\Util\OrgConfig;
+use Psr\Log\NullLogger;
 
 /**
  * Exposes Developer App Analytics data from the Management API.
@@ -27,12 +29,12 @@ class DeveloperAppAnalytics extends Base
     /**
      * Initializes the environment and sets up the OrgConfig object.
      *
-     * @param \Apigee\Util\OrgConfig $config
-     * @param string
+     * @param OrgConfig $config
+     * @param string $env
      *    The environment, such as 'test'or 'prod'. An asterisk wildcard means
      *    all environments.
      */
-    public function __construct(\Apigee\Util\OrgConfig $config, $env = '*')
+    public function __construct(OrgConfig $config, $env = '*')
     {
         $this->init($config, '');
         $this->setEnvironment($env);
@@ -71,7 +73,7 @@ class DeveloperAppAnalytics extends Base
         $tempUrl = '/o/' . rawurlencode($this->config->orgName) . '/environments/' . rawurlencode($this->environment);
         $tempConfig = clone $this->config;
         // Disable logging and all subscribers for this validation attempt.
-        $tempConfig->logger = new \Psr\Log\NullLogger();
+        $tempConfig->logger = new NullLogger();
         $tempConfig->subscribers = array();
         $cachedConfig = $this->config;
         $this->config = $tempConfig;
@@ -102,7 +104,7 @@ class DeveloperAppAnalytics extends Base
      *
      * We used to use a caching class here, but it was non-portable.
      *
-     * @return array
+     * @return string[]
      */
     public function getAllEnvironments()
     {
@@ -202,7 +204,7 @@ class DeveloperAppAnalytics extends Base
     /**
      * Queries Edge to get a list of all environments configured for the org.
      *
-     * @return array
+     * @return string[]
      */
     public function queryEnvironments()
     {
@@ -217,7 +219,7 @@ class DeveloperAppAnalytics extends Base
      * Lists all metrics valid for Developer Apps.
      *
      * @static
-     * @return array
+     * @return string[]
      */
     public static function getMetrics()
     {
@@ -240,7 +242,7 @@ class DeveloperAppAnalytics extends Base
      * Returns a keyed array of allowable time units. Array keys are machine
      * names and values are human-readable names.
      *
-     * @return array
+     * @return string[]
      */
     public static function getTimeUnits()
     {
@@ -253,12 +255,6 @@ class DeveloperAppAnalytics extends Base
             'month' => 'Month',
             'quarter' => 'Quarter',
             'year' => 'Year',
-            // The rest of these are just silly.
-            /*
-            'decade' => 'Decade',
-            'century' => 'Century',
-            'millennium' => 'Millenium'
-            */
         );
     }
 
@@ -268,13 +264,13 @@ class DeveloperAppAnalytics extends Base
      *
      * @static
      * @param string $metric
-     * @param string $time_start
-     * @param string $time_end
-     * @param string $time_unit
-     * @param string $sort_by
-     * @param string $sort_order
+     * @param string $timeStart
+     * @param string $timeEnd
+     * @param string $timeUnit
+     * @param string $sortBy
+     * @param string $sortOrder
      *    Either 'ASC' or 'DESC'.
-     * @return array
+     * @return string[]
      * @throws ParameterException
      */
     protected static function validateParameters($metric, $timeStart, $timeEnd, $timeUnit, $sortBy, $sortOrder)

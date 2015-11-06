@@ -1,6 +1,10 @@
 <?php
 namespace Apigee\Mint\DataStructures;
 
+use Apigee\Util\OrgConfig;
+use Apigee\Mint\Organization;
+use Apigee\Mint\Product;
+
 class RatePlanDetail extends DataStructure
 {
 
@@ -99,7 +103,7 @@ class RatePlanDetail extends DataStructure
      * @param array|null $data
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($data, \Apigee\Util\OrgConfig $config)
+    public function __construct($data, OrgConfig $config)
     {
         if (is_array($data)) {
 
@@ -114,13 +118,13 @@ class RatePlanDetail extends DataStructure
             }
 
             if (isset($data['organization'])) {
-                $organization = new \Apigee\Mint\Organization($config);
+                $organization = new Organization($config);
                 $organization->loadFromRawData($data['organization']);
                 $this->organization = $organization;
             }
 
             if (isset($data['product'])) {
-                $product = new \Apigee\Mint\Product($config);
+                $product = new Product($config);
                 $product->loadFromRawData($data['product']);
                 $this->product = $product;
             }
@@ -151,7 +155,7 @@ class RatePlanDetail extends DataStructure
     }
 
     /**
-     * @return \Apigee\Mint\DataStructures\SupportedCurrency $currency
+     * @return \Apigee\Mint\Organization
      */
     public function getOrganization()
     {

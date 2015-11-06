@@ -1,15 +1,17 @@
 <?php
 namespace Apigee\ManagementAPI;
 
+use Apigee\Util\OrgConfig;
+
 class UserRole extends Base
 {
 
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/userroles');
     }
@@ -18,7 +20,7 @@ class UserRole extends Base
      * Returns a list of all system users associated with a role.
      *
      * @param string $role
-     * @return array
+     * @return string[]
      *    An array of email addresses of the users.
      */
     public function getUsersByRole($role)
@@ -33,7 +35,7 @@ class UserRole extends Base
     /**
      * Adds users to a role.
      *
-     * @param array $users
+     * @param string[] $users
      *    An array of email addresses of the users.
      * @param string $role
      * @return bool
@@ -58,7 +60,7 @@ class UserRole extends Base
     /**
      * Removes users from a role.
      *
-     * @param array $users
+     * @param string[] $users
      *    An array of email addresses of the users.
      * @param string $role
      * @return bool
@@ -82,7 +84,7 @@ class UserRole extends Base
     /**
      * Replaces the users in a role with $users.
      *
-     * @param array $users
+     * @param string[] $users
      *    An array of email addresses of the users.
      * @param string $role
      * @return bool
@@ -118,7 +120,7 @@ class UserRole extends Base
      *
      * @param bool|array $reset
      *    Internal use only. Used to reset internal cache.
-     * @return array
+     * @return string[]
      */
     public function listRoles($reset = false)
     {

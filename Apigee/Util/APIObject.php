@@ -4,6 +4,12 @@ namespace Apigee\Util;
 
 use Apigee\Exceptions\ResponseException;
 use Apigee\Exceptions\IllegalMethodException;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Http\Exception\CurlException;
+use Guzzle\Http\Message\EntityEnclosingRequestInterface;
+use Guzzle\Http\EntityBodyInterface;
 
 /**
  * Base class for API object classes. Handles some of the OrgConfig
@@ -86,7 +92,7 @@ class APIObject
      * @param \Apigee\Util\OrgConfig $config
      * @param string $base_url
      */
-    protected function init(\Apigee\Util\OrgConfig $config, $base_url)
+    protected function init(OrgConfig $config, $base_url)
     {
         $this->config =& $config;
         $base_url = rtrim($config->endpoint, '/') . '/' . ltrim($base_url, '/');
@@ -101,7 +107,7 @@ class APIObject
         }
         $opts['redirect.disable'] = $config->redirect_disable;
 
-        $this->client = new \Guzzle\Http\Client($base_url, $opts);
+        $this->client = new GuzzleClient($base_url, $opts);
         if (is_array($config->subscribers)) {
             foreach ($config->subscribers as $subscriber) {
                 $this->client->addSubscriber($subscriber);
@@ -147,7 +153,7 @@ class APIObject
         return $this->config;
     }
 
-    private function exec(\Guzzle\Http\Message\RequestInterface $request)
+    private function exec(RequestInterface $request)
     {
         $start = microtime(true);
         $this->responseCode = 0;
@@ -161,9 +167,9 @@ class APIObject
         );
         try {
             $response = $request->send();
-        } catch (\Guzzle\Http\Exception\BadResponseException $e) {
+        } catch (BadResponseException $e) {
             $response = $e->getResponse();
-        } catch (\Guzzle\Http\Exception\CurlException $e) {
+        } catch (CurlException $e) {
             // Timeouts etc.
             DebugData::$raw = '';
             DebugData::$code = $e->getErrorNo();
@@ -175,11 +181,12 @@ class APIObject
             $exception = new ResponseException($e->getError(), $e->getErrorNo(), $request->getUrl(), DebugData::$opts);
             $exception->requestObj = $request;
             // Log Exception
-            $headers_array = $request->getHeaders();
-            unset($headers_array['Authorization']);
+            $headerCollection = $request->getHeaders();
+            $headerCollection->offsetUnset('Authorization');
+            $headers_array = $headerCollection->toArray();
             $headerString = '';
-            foreach ($headers_array as $value) {
-                $headerString .= $value->getName() . ': ' . $value . " ";
+            foreach ($headers_array as $name => $value) {
+                $headerString .= $name . ': ' . $value . " ";
             }
             $log_message = '{code_status} ({code}) Request Details:[ {r_method} {r_resource} {r_scheme} {r_headers} ]';
             $httpScheme = strtoupper(str_replace('https', 'http', $request->getScheme()))
@@ -218,7 +225,7 @@ class APIObject
             'response_headers' => $response->getRawHeaders()
         );
 
-        if ($request instanceof \Guzzle\Http\Message\EntityEnclosingRequestInterface) {
+        if ($request instanceof EntityEnclosingRequestInterface) {
             DebugData::$opts['request_body'] = (string)$request->getBody();
         }
         DebugData::$opts['request_type'] = class_implements($request);
@@ -243,9 +250,9 @@ class APIObject
 
             // Create better status to show up in logs
             $status .= ': ' . $request->getMethod() . ' ' . $uri;
-            if ($request instanceof \Guzzle\Http\Message\EntityEnclosingRequestInterface) {
+            if ($request instanceof EntityEnclosingRequestInterface) {
                 $body = $request->getBody();
-                if ($body instanceof \Guzzle\Http\EntityBodyInterface) {
+                if ($body instanceof EntityBodyInterface) {
                     $status .= ' with Content-Length of ' . $body->getContentLength()
                         . ' and Content-Type of ' . $body->getContentType();
                 }
@@ -283,6 +290,7 @@ class APIObject
      * @param string|null $uri
      * @param string $accept_mime_type
      * @param array $custom_headers
+     * @param array $options
      */
     public function get(
         $uri = null,
@@ -307,6 +315,7 @@ class APIObject
      * @param string $content_type
      * @param string $accept_type
      * @param array $custom_headers
+     * @param array $options
      */
     public function post(
         $uri = null,
@@ -356,21 +365,6 @@ class APIObject
         $request = $this->client->delete($uri, $headers, null, $options);
         $this->exec($request);
     }
-
-    /**
-     * Alias of self::httpDelete().
-     *
-     * @deprecated
-     */
-    public function http_delete(
-        $uri = null,
-        $accept = 'application/json; charset=utf-8',
-        array $custom_headers = array(),
-        array $options = array()
-    ) {
-        $this->httpDelete($uri, $accept, $custom_headers, $options);
-    }
-
 
     /**
      * Performs an HTTP PUT on a URI. The result can be read from

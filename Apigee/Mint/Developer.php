@@ -2,16 +2,15 @@
 
 namespace Apigee\Mint;
 
-use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\DataStructures\Payment;
-use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Mint\DataStructures\RevenueReport;
-use Apigee\Mint\DataStructures\TransactionBrokerage;
+use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Types\DeveloperType;
 use Apigee\Mint\Types\DeveloperStatusType;
-use Apigee\Mint\DeveloperBalance;
 use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Util\OrgConfig;
 
 class Developer extends Base\BaseObject
 {
@@ -115,17 +114,12 @@ class Developer extends Base\BaseObject
     private $taxExemptAuthNo;
 
     /**
-     * @var \Apigee\Mint\DataStructures\TransactionBrokerage
-     */
-    private $transactionBrokerages;
-
-    /**
      * @var string
      */
     private $type;
 
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers';
         $this->init($config, $base_url);
@@ -138,9 +132,7 @@ class Developer extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiateNew().
-     *
-     * @return Developer
+     * {@inheritdoc}
      */
     public function instantiateNew()
     {
@@ -155,7 +147,6 @@ class Developer extends Base\BaseObject
         $excluded_properties = array(
             'address',
             'organization',
-            'transactionBrokerages',
             'ratePlan',
             'parentId',
             'developerCategory',
@@ -185,11 +176,6 @@ class Developer extends Base\BaseObject
             $organization = new Organization($this->config);
             $organization->loadFromRawData($data['organization']);
             $this->organization = $organization;
-        }
-        if (isset($data['transactionBrokerages'])) {
-            foreach ($data['transactionBrokerages'] as $trans_brok) {
-                $this->transactionBrokerages[] = new TransactionBrokerage($trans_brok);
-            }
         }
         if (isset($data['ratePlan'])) {
             foreach ($data['ratePlan'] as $rate_plan_data) {
@@ -304,6 +290,8 @@ class Developer extends Base\BaseObject
      *
      * @param array $parameters
      * @param string $address
+     * @param array $headers
+     * @param string $developer_or_company_id
      *
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
@@ -436,15 +424,14 @@ class Developer extends Base\BaseObject
             $this->get($url);
             $ratePlan = new RatePlan(null, $this->config);
             $ratePlan->loadFromRawData($this->responseObj);
-            return $ratePlan;
         } catch (\Exception $e) {
-            if (MintApiException::isMintExceptionCode($e)) {
+            if ($e instanceof ResponseException && MintApiException::isMintExceptionCode($e)) {
                 throw new MintApiException($e);
             } else {
                 throw $e;
             }
         }
-        return $products;
+        return $ratePlan;
     }
 
     /**
@@ -481,7 +468,7 @@ class Developer extends Base\BaseObject
             }
 
         } catch (\Exception $e) {
-            if (MintApiException::isMintExceptionCode($e)) {
+            if ($e instanceof ResponseException && MintApiException::isMintExceptionCode($e)) {
                 throw new MintApiException($e);
             } else {
                 throw $e;
@@ -707,21 +694,6 @@ class Developer extends Base\BaseObject
     public function setTaxExemptAuthNo($tax_exempt_auth_no)
     {
         $this->taxExemptAuthNo = $tax_exempt_auth_no;
-    }
-
-    public function getTransactionBrokerages()
-    {
-        return $this->transactionBrokerages;
-    }
-
-    public function addTransactionBrokerages($transaction_brokerages)
-    {
-        $this->transactionBrokerages[] = $transaction_brokerages;
-    }
-
-    public function clearTransactionBrokerages()
-    {
-        $this->transactionBrokerages = array();
     }
 
     public function getType()

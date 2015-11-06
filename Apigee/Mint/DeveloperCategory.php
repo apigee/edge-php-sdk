@@ -2,6 +2,8 @@
 
 namespace Apigee\Mint;
 
+use Apigee\Util\OrgConfig;
+
 class DeveloperCategory extends Base\BaseObject
 {
 
@@ -25,7 +27,7 @@ class DeveloperCategory extends Base\BaseObject
      * Class constructor
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developer-categories';
         $this->init($config, $base_url);

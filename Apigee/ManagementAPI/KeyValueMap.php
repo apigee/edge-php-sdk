@@ -3,6 +3,8 @@
 namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ResponseException;
+use Apigee\Util\OrgConfig;
+use Psr\Log\NullLogger;
 
 /**
  * The KeyValueMap class implements a general-purpose datastore.
@@ -15,10 +17,10 @@ class KeyValueMap extends Base
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      * @param string $environment
      */
-    public function __construct(\Apigee\Util\OrgConfig $config, $environment = '*')
+    public function __construct(OrgConfig $config, $environment = '*')
     {
         if ($environment == '*') {
             $baseUrl = '/o/' . rawurlencode($config->orgName) . '/keyvaluemaps';
@@ -40,7 +42,7 @@ class KeyValueMap extends Base
     {
         $tempConfig = clone $this->config;
         // Disable logging and all subscribers for this fetch attempt.
-        $tempConfig->logger = new \Psr\Log\NullLogger();
+        $tempConfig->logger = new NullLogger();
         $tempConfig->subscribers = array();
         $cachedConfig = $this->config;
         $this->config = $tempConfig;

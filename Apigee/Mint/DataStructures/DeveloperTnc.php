@@ -3,6 +3,7 @@
 namespace Apigee\Mint\DataStructures;
 
 use Apigee\Mint\Types\DeveloperTncsActionType;
+use Apigee\Mint\TermAndCondition;
 
 class DeveloperTnc extends DataStructure
 {
@@ -53,12 +54,18 @@ class DeveloperTnc extends DataStructure
         $this->id = $id;
     }
 
+    /**
+     * @return TermAndCondition
+     */
     public function getTnc()
     {
         return $this->tnc;
     }
 
-    public function setTnc($tnc)
+    /**
+     * @param TermAndCondition $tnc
+     */
+    public function setTnc(TermAndCondition $tnc)
     {
         $this->tnc = $tnc;
     }

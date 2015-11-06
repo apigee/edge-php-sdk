@@ -129,7 +129,7 @@ class ResponseException extends \Exception
     /**
      * Poor man's replacement for PECL http_build_url().
      *
-     * @param $components
+     * @param array $components
      * @return string
      */
     private static function httpBuildUrl($components)

@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li class="active"><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -174,7 +195,8 @@
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/DeveloperAppAnalytics.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#16-347" title="Go to source code">ManagementAPI/DeveloperAppAnalytics.php</a>
+		<br>
 	</div>
 
 
@@ -193,7 +215,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$env</var> = <span class="php-quote">'*'</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#29-41" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$env</var> = <span class="php-quote">'*'</span></span> )</code>
 
 		<div class="description short">
 			<p>Initializes the environment and sets up the OrgConfig object.</p>
@@ -208,7 +230,7 @@
 					<dt><var>$config</var></dt>
 					<dd></dd>
 					<dt><var>$env</var></dt>
-					<dd><p>environment, such as 'test'or 'prod'. An asterisk wildcard means
+					<dd><p>The environment, such as 'test'or 'prod'. An asterisk wildcard means
    all environments.</p></dd>
 				</dl></div>
 
@@ -231,28 +253,63 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setEnvironment">#</a>
-		<code>setEnvironment( <span>string <var>$env</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#43-60" title="Go to source code">setEnvironment</a>( <span>string <var>$env</var></span> )</code>
 
 		<div class="description short">
-			<p>Validates and sets the environment.</p>
+			<p>Sets the environment.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Validates and sets the environment.</p>
+			<p>Sets the environment.</p>
+
+<p>We avoid validating the environment here because it is rather expensive.
+If validation is needed, call isEnvironmentValid() after setting the
+environment here.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$env</var></dt>
 					<dd><p>environment, such as 'test'or 'prod'. An asterisk wildcard means
-   all environments.</p></dd>
+   all environments. NOTE: API endpoint's handling of asterisks is
+   somewhat bug-prone; use of asterisks is highly discouraged.</p></dd>
 				</dl></div>
 
 
-				<h4>Throws</h4>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEnvironmentValid" id="_isEnvironmentValid">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isEnvironmentValid">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#62-90" title="Go to source code">isEnvironmentValid</a>( )</code>
+
+		<div class="description short">
+			<p>Determines whether the current configured environment is valid.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determines whether the current configured environment is valid.</p>
+
+
+
+				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Apigee.Exceptions.EnvironmentException.html">Apigee\Exceptions\EnvironmentException</a></code>
+					boolean
 				</div>
+
 
 
 
@@ -271,7 +328,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEnvironment">#</a>
-		<code>getEnvironment( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#92-100" title="Go to source code">getEnvironment</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the current environment.</p>
@@ -298,27 +355,29 @@
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAllEnvironments">#</a>
-		<code>getAllEnvironments( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#102-112" title="Go to source code">getAllEnvironments</a>( )</code>
 
 		<div class="description short">
-			<p>Returns a list of all environments for this org.</p>
+			<p>Alias of DeveloperAppAnalytics::queryEnvironments().</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Returns a list of all environments for this org.</p>
+			<p>Alias of DeveloperAppAnalytics::queryEnvironments().</p>
+
+<p>We used to use a caching class here, but it was non-portable.</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -339,7 +398,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getByAppName">#</a>
-		<code>getByAppName( <span>string <var>$developer_id</var></span>, <span>string <var>$app_name</var></span>, <span>string <var>$metric</var></span>, <span>string <var>$time_start</var></span>, <span>string <var>$time_end</var></span>, <span>string <var>$time_unit</var></span>, <span>string <var>$sort_by</var></span>, <span>string <var>$sort_order</var> = <span class="php-quote">'ASC'</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#114-202" title="Go to source code">getByAppName</a>( <span>string <var>$devId</var></span>, <span>string <var>$appName</var></span>, <span>string <var>$metric</var></span>, <span>string <var>$tStart</var></span>, <span>string <var>$tEnd</var></span>, <span>string <var>$tUnit</var></span>, <span>string <var>$sortBy</var></span>, <span>string <var>$sortOrder</var> = <span class="php-quote">'ASC'</span></span> )</code>
 
 		<div class="description short">
 			<p>After ensuring params are valid, fetches analytics data.</p>
@@ -351,17 +410,17 @@
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$developer_id</var></dt>
+					<dt><var>$devId</var></dt>
 					<dd>The ID of the developer who owns the app.</dd>
-					<dt><var>$app_name</var></dt>
+					<dt><var>$appName</var></dt>
 					<dd>The name of the app.</dd>
 					<dt><var>$metric</var></dt>
 					<dd><p>A value of 'message_count', 'message_count-first24hrs',
    'message_count-second24hrs', 'error_count', 'error_count-first24hrs',
    'user_count', 'user_count-first24hrs', 'total_response_time',
    'max_response_time', 'min_response_time', or 'end_point_response_time'.</p></dd>
-					<dt><var>$time_start</var></dt>
-					<dd><p>Expressed as:</p>
+					<dt><var>$tStart</var></dt>
+					<dd><p>Time start, expressed as:</p>
 
 <ul>
      <li>UNIX timestamp</li>
@@ -371,8 +430,8 @@
        It parses them out to a UNIX timestamp if possible, otherwise
        it throws an exception.</li>
    </ul></dd>
-					<dt><var>$time_end</var></dt>
-					<dd><p>Expressed as:</p>
+					<dt><var>$tEnd</var></dt>
+					<dd><p>Time end, expressed as:</p>
 
 <ul>
      <li>UNIX timestamp</li>
@@ -382,12 +441,12 @@
        It parses them out to a UNIX timestamp if possible, otherwise
        it throws an exception.</li>
    </ul></dd>
-					<dt><var>$time_unit</var></dt>
-					<dd><p>A value of 'second', 'minute', 'hour', 'day', 'week', 'month',
-   'quarter', or 'year'.</p></dd>
-					<dt><var>$sort_by</var></dt>
+					<dt><var>$tUnit</var></dt>
+					<dd><p>Time unit: a value of 'second', 'minute', 'hour', 'day', 'week',
+   'month', 'quarter', or 'year'.</p></dd>
+					<dt><var>$sortBy</var></dt>
 					<dd>A comma separated list of the same values as $metric.</dd>
-					<dt><var>$sort_order</var></dt>
+					<dt><var>$sortOrder</var></dt>
 					<dd>Either 'ASC' or 'DESC'.</dd>
 				</dl></div>
 
@@ -407,14 +466,14 @@
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_queryEnvironments">#</a>
-		<code>queryEnvironments( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#204-216" title="Go to source code">queryEnvironments</a>( )</code>
 
 		<div class="description short">
 			<p>Queries Edge to get a list of all environments configured for the org.</p>
@@ -427,7 +486,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -441,14 +500,14 @@
 		<td class="attributes"><code>
 			 public static
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getMetrics">#</a>
-		<code>getMetrics( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#218-239" title="Go to source code">getMetrics</a>( )</code>
 
 		<div class="description short">
 			<p>Lists all metrics valid for Developer Apps.</p>
@@ -461,7 +520,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -475,14 +534,14 @@
 		<td class="attributes"><code>
 			 public static
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTimeUnits">#</a>
-		<code>getTimeUnits( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#241-259" title="Go to source code">getTimeUnits</a>( )</code>
 
 		<div class="description short">
 			<p>Returns a keyed array of allowable time units. Array keys are machine
@@ -497,7 +556,7 @@ names and values are human-readable names.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -511,14 +570,14 @@ names and values are human-readable names.</p>
 		<td class="attributes"><code>
 			 protected static
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validateParameters">#</a>
-		<code>validateParameters( <span>string <var>$metric</var></span>, <span>string <var>$time_start</var></span>, <span>string <var>$time_end</var></span>, <span>string <var>$time_unit</var></span>, <span>string <var>$sort_by</var></span>, <span>string <var>$sort_order</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#261-315" title="Go to source code">validateParameters</a>( <span>string <var>$metric</var></span>, <span>string <var>$timeStart</var></span>, <span>string <var>$timeEnd</var></span>, <span>string <var>$timeUnit</var></span>, <span>string <var>$sortBy</var></span>, <span>string <var>$sortOrder</var></span> )</code>
 
 		<div class="description short">
 			<p>Validates common parameters for analytics API calls, and bundles them
@@ -534,21 +593,21 @@ into an appropriately-structured array to be passed into an HTTP call.</p>
 				<div class="list"><dl>
 					<dt><var>$metric</var></dt>
 					<dd></dd>
-					<dt><var>$time_start</var></dt>
+					<dt><var>$timeStart</var></dt>
 					<dd></dd>
-					<dt><var>$time_end</var></dt>
+					<dt><var>$timeEnd</var></dt>
 					<dd></dd>
-					<dt><var>$time_unit</var></dt>
+					<dt><var>$timeUnit</var></dt>
 					<dd></dd>
-					<dt><var>$sort_by</var></dt>
+					<dt><var>$sortBy</var></dt>
 					<dd></dd>
-					<dt><var>$sort_order</var></dt>
+					<dt><var>$sortOrder</var></dt>
 					<dd>Either 'ASC' or 'DESC'.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 				<h4>Throws</h4>
@@ -573,7 +632,7 @@ into an appropriately-structured array to be passed into an HTTP call.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parseTime">#</a>
-		<code>parseTime( <span>string|integer <var>$time</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#317-346" title="Go to source code">parseTime</a>( <span>string|integer <var>$time</var></span> )</code>
 
 		<div class="description short">
 			<p>Parses an incoming time string or Unix timestamp into an internally-acceptable time format.</p>
@@ -625,7 +684,7 @@ into an appropriately-structured array to be passed into an HTTP call.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 
@@ -655,7 +714,8 @@ into an appropriately-structured array to be passed into an HTTP call.</p>
 		</code></td>
 
 		<td class="name">
-<var>$environment</var>
+				<a href="source-class-Apigee.ManagementAPI.DeveloperAppAnalytics.html#23-27" title="Go to source code"><var>$environment</var></a>
+
 			<div class="description short">
 				<p>The environment of the app, such as 'test'or 'prod'.</p>
 			</div>

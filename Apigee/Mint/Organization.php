@@ -1,7 +1,8 @@
 <?php
 namespace Apigee\Mint;
 
-use \Apigee\Util\APIObject;
+use Apigee\Util\APIObject;
+use Apigee\Util\OrgConfig;
 use Apigee\Util\CacheFactory;
 use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\Types\StatusType;
@@ -12,9 +13,9 @@ use Apigee\Mint\Types\BillingCycleType;
 use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Exceptions\MintApiException;
 
-use \Apigee\Mint\DataStructures\SupportedCurrency;
-use \Apigee\Exceptions\ParameterException;
-use \Apigee\Exceptions\NotImplementedException;
+use Apigee\Mint\DataStructures\SupportedCurrency;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\NotImplementedException;
 
 class Organization extends Base\BaseObject
 {
@@ -62,11 +63,6 @@ class Organization extends Base\BaseObject
      * @var bool
      */
     private $groupOrganization;
-
-    /**
-     * @var bool
-     */
-    private $hasBillingAdjustment;
 
     /**
      * @var bool
@@ -168,7 +164,7 @@ class Organization extends Base\BaseObject
      */
     private $timezone;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations';
         $this->init($config, $base_url);
@@ -308,7 +304,6 @@ class Organization extends Base\BaseObject
         $this->currency = 'USD';
         $this->description = '';
         $this->groupOrganization = false;
-        $this->hasBillingAdjustment = false;
         $this->hasBroker = false;
         $this->hasSelfBilling = false;
         $this->hasSeparateInvoiceForProduct = false;
@@ -381,16 +376,6 @@ class Organization extends Base\BaseObject
         $this->groupOrganization = (bool)$bool;
     }
 
-    public function hasBillingAdjustment()
-    {
-        return $this->hasBillingAdjustment;
-    }
-
-    public function setHasBillingAdjustment($bool = true)
-    {
-        $this->hasBillingAdjustment = (bool)$bool;
-    }
-
     public function hasBroker()
     {
         return $this->hasBroker;
@@ -438,7 +423,7 @@ class Organization extends Base\BaseObject
 
     public function setNettingStmtPerCurrency($bool = true)
     {
-        $this->netting_statement_per_currency = (bool)$bool;
+        $this->nettingStatementPerCurrency = (bool)$bool;
     }
 
     public function getSelfBillingAsExchOrg()

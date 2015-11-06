@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -179,7 +200,8 @@ manipulate it.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/Organization.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Organization.html#13-217" title="Go to source code">ManagementAPI/Organization.php</a>
+		<br>
 	</div>
 
 
@@ -198,7 +220,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code>getName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#77-85" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the internal name of the organization.</p>
@@ -232,7 +254,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDisplayName">#</a>
-		<code>getDisplayName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#87-95" title="Go to source code">getDisplayName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the display name of the organization.</p>
@@ -259,14 +281,14 @@ manipulate it.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEnvironments">#</a>
-		<code>getEnvironments( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#97-106" title="Go to source code">getEnvironments</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the environments available in the organization. By default 'test'
@@ -281,7 +303,7 @@ and 'prod' environments are available.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -302,7 +324,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProperties">#</a>
-		<code>getProperties( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#108-115" title="Go to source code">getProperties</a>( )</code>
 
 		<div class="description short">
 			<p>Returns a list of descriptors used internally by Apigee.</p>
@@ -336,7 +358,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProperty">#</a>
-		<code>getProperty( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#117-126" title="Go to source code">getProperty</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns a named descriptor used internally by Apigee.</p>
@@ -375,7 +397,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getType">#</a>
-		<code>getType( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#128-135" title="Go to source code">getType</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the organization type. Currently 'trial' and 'paid' are valid.</p>
@@ -409,7 +431,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedAt">#</a>
-		<code>getCreatedAt( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#137-145" title="Go to source code">getCreatedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the organization was created.</p>
@@ -443,7 +465,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCreatedBy">#</a>
-		<code>getCreatedBy( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#147-155" title="Go to source code">getCreatedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the Apigee user who created the organization.</p>
@@ -477,7 +499,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLastModifiedAt">#</a>
-		<code>getLastModifiedAt( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#157-165" title="Go to source code">getLastModifiedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the organization was last modified.</p>
@@ -511,7 +533,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLastModifiedBy">#</a>
-		<code>getLastModifiedBy( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#167-175" title="Go to source code">getLastModifiedBy</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username of the Apigee user who last modified the organization.</p>
@@ -545,7 +567,7 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#177-186" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Initializes default values of all member variables.</p>
@@ -580,19 +602,19 @@ and 'prod' environments are available.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code>load( <span>string|null <var>$org</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Organization.html#188-216" title="Go to source code">load</a>( <span>string|null <var>$orgName</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
-			<p>Loads the organization specified by $org.</p>
+			<p>Loads an organization.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Loads the organization specified by $org.</p>
+			<p>Loads an organization.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$org</var></dt>
+					<dt><var>$orgName</var></dt>
 					<dd></dd>
 				</dl></div>
 
@@ -622,7 +644,7 @@ and 'prod' environments are available.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 
@@ -652,7 +674,8 @@ and 'prod' environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$name</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#22-26" title="Go to source code"><var>$name</var></a>
+
 			<div class="description short">
 				<p>The internal name of the organization.</p>
 			</div>
@@ -676,7 +699,8 @@ and 'prod' environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$displayName</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#28-32" title="Go to source code"><var>$displayName</var></a>
+
 			<div class="description short">
 				<p>The dispaly name of the organization.</p>
 			</div>
@@ -696,11 +720,12 @@ and 'prod' environments are available.</p>
 	<tr data-order="environments" id="$environments">
 		<td class="attributes"><code>
 			protected  
-			array
+			string[]
 		</code></td>
 
 		<td class="name">
-<var>$environments</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#34-39" title="Go to source code"><var>$environments</var></a>
+
 			<div class="description short">
 				<p>Environments available in the organization. By default 'test' and 'prod'
 environments are available.</p>
@@ -722,11 +747,12 @@ environments are available.</p>
 	<tr data-order="properties" id="$properties">
 		<td class="attributes"><code>
 			protected  
-			array
+			string[]
 		</code></td>
 
 		<td class="name">
-<var>$properties</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#41-45" title="Go to source code"><var>$properties</var></a>
+
 			<div class="description short">
 				<p>A list of descriptors used internally by Apigee.</p>
 			</div>
@@ -750,7 +776,8 @@ environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$type</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#47-51" title="Go to source code"><var>$type</var></a>
+
 			<div class="description short">
 				<p>Organization type. Currently 'trial' and 'paid' are valid.</p>
 			</div>
@@ -774,7 +801,8 @@ environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdAt</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#53-57" title="Go to source code"><var>$createdAt</var></a>
+
 			<div class="description short">
 				<p>Unix time when the organization was created.</p>
 			</div>
@@ -798,7 +826,8 @@ environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdBy</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#59-63" title="Go to source code"><var>$createdBy</var></a>
+
 			<div class="description short">
 				<p>Username of the Apigee user who created the organization.</p>
 			</div>
@@ -822,7 +851,8 @@ environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$lastModifiedAt</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#65-69" title="Go to source code"><var>$lastModifiedAt</var></a>
+
 			<div class="description short">
 				<p>Unix time when the organization was last modified.</p>
 			</div>
@@ -846,7 +876,8 @@ environments are available.</p>
 		</code></td>
 
 		<td class="name">
-<var>$lastModifiedBy</var>
+				<a href="source-class-Apigee.ManagementAPI.Organization.html#71-75" title="Go to source code"><var>$lastModifiedBy</var></a>
+
 			<div class="description short">
 				<p>Username of the Apigee user who last modified the organization.</p>
 			</div>

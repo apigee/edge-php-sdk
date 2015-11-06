@@ -397,6 +397,8 @@ class Method extends APIObject
     /**
      * Persists the current Method as an array.
      *
+     * @param bool $verbose
+     *
      * @return array
      */
     public function toArray($verbose = true)
@@ -424,7 +426,7 @@ class Method extends APIObject
      * Initializes all member variables.
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param string $apiUuid
+     * @param string $modelId
      * @param string $revisionUuid
      * @param string $resourceUuid
      */

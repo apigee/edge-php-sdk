@@ -2,6 +2,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
+use Apigee\Util\OrgConfig;
 use Apigee\Mint\Types\DeveloperTncsActionType;
 use Apigee\Mint\DataStructures\DeveloperTnc;
 use Apigee\Exceptions\ParameterException;
@@ -21,7 +22,7 @@ class TermAndCondition extends Base\BaseObject
 
     private $version;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/tncs';
         $this->init($config, $base_url);
@@ -33,6 +34,12 @@ class TermAndCondition extends Base\BaseObject
         $this->initValues();
     }
 
+    /**
+     * @param bool $current
+     * @param int $page_size
+     * @return TermAndCondition[]
+     * @throws ParameterException
+     */
     public function getList($current = true, $page_size = 20)
     {
         $url = isset($current) ? '?current=true' : null;
@@ -111,7 +118,13 @@ class TermAndCondition extends Base\BaseObject
         return json_encode($obj);
     }
 
-    public function getAcceptedDevTermsAndConditions($developer_id, $current = null)
+    /**
+     * @param string $developer_id
+     * @param bool $current
+     * @return DeveloperTnc[]
+     * @throws ParameterException
+     */
+    public function getAcceptedDevTermsAndConditions($developer_id, $current = false)
     {
 
         $cache_manager = CacheFactory::getCacheManager(null);
@@ -217,12 +230,15 @@ class TermAndCondition extends Base\BaseObject
         $this->id = $id;
     }
 
+    /**
+     * @return Organization
+     */
     public function getOrganization()
     {
         return $this->organization;
     }
 
-    public function setOrganization($organization)
+    public function setOrganization(Organization $organization)
     {
         $this->organization = $organization;
     }

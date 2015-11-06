@@ -1,6 +1,9 @@
 <?php
 namespace Apigee\Mint;
 
+use Apigee\Mint\DataStructures\Address;
+use Apigee\Util\OrgConfig;
+
 class BankDetail extends Base\BaseObject
 {
 
@@ -11,7 +14,7 @@ class BankDetail extends Base\BaseObject
     private $devEmail;
 
     /**
-     * @var \Apigee\Mint\DataStructures\Address
+     * @var Address
      *     Bank's Addresses
      */
     private $address;
@@ -71,7 +74,7 @@ class BankDetail extends Base\BaseObject
     private $sortCode;
 
 
-    public function __construct($developer_email, \Apigee\Util\OrgConfig $config)
+    public function __construct($developer_email, OrgConfig $config)
     {
         $base_url = '/mint/organizations/'
             . rawurlencode($config->orgName)
@@ -140,27 +143,6 @@ class BankDetail extends Base\BaseObject
         if (isset($data['address']) && is_array($data['address']) && count($data['address']) > 0) {
             $this->address = new DataStructures\Address($data['address']);
         }
-    }
-
-    private static function getSetterMethods($class_name)
-    {
-        $class = new \ReflectionClass($class_name);
-        $setter_methods = array();
-        foreach ($class->getMethods() as $method) {
-            if ($method->getDeclaringClass() != $class) {
-                continue;
-            }
-            $method_name = $method->getName();
-
-            if (strpos($method_name, 'get') !== 0 || $method->getNumberOfParameters() > 0) {
-                continue;
-            }
-
-            if ($method->isProtected() || $method->isPublic()) {
-                $setter_methods[$method_name] = $method;
-            }
-        }
-        return $setter_methods;
     }
 
     public function save($save_method)

@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li class="active"><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -159,6 +180,8 @@ invocation, which makes the actual HTTP calls.</p>
 			<a href="class-Apigee.ManagementAPI.AbstractApp.html">Apigee\ManagementAPI\AbstractApp</a>, 
 			<a href="class-Apigee.ManagementAPI.APIProduct.html">Apigee\ManagementAPI\APIProduct</a>, 
 			<a href="class-Apigee.ManagementAPI.Company.html">Apigee\ManagementAPI\Company</a>, 
+			<a href="class-Apigee.ManagementAPI.CompanyInvitation.html">Apigee\ManagementAPI\CompanyInvitation</a>, 
+			<a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">Apigee\ManagementAPI\CompanyInviteRequest</a>, 
 			<a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>, 
 			<a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">Apigee\ManagementAPI\DeveloperAppAnalytics</a>, 
 			<a href="class-Apigee.ManagementAPI.KeyValueMap.html">Apigee\ManagementAPI\KeyValueMap</a>, 
@@ -185,7 +208,8 @@ invocation, which makes the actual HTTP calls.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/Base.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Base.html#15-91" title="Go to source code">ManagementAPI/Base.php</a>
+		<br>
 	</div>
 
 
@@ -204,7 +228,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDebugData">#</a>
-		<code>getDebugData( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#23-31" title="Go to source code">getDebugData</a>( )</code>
 
 		<div class="description short">
 			<p>Returns debug data from the last API call in a backwards-compatible way.</p>
@@ -238,7 +262,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeAttributes">#</a>
-		<code>writeAttributes( <span>array <var>&amp; $payload</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#33-51" title="Go to source code">writeAttributes</a>( <span>array <var>&amp; $payload</var></span> )</code>
 
 		<div class="description short">
 			<p>Reads the $attributes member of the Base subclass, and adds properly-
@@ -277,7 +301,7 @@ that $this->attributes must be in scope (protected or public).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_readAttributes">#</a>
-		<code>readAttributes( <span>array <var>$response</var></span>, <span>boolean <var>$return</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Base.html#53-90" title="Go to source code">readAttributes</a>( <span>array <var>$response</var></span>, <span>boolean <var>$return</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Reads the response from the Management API and populates the $attributes
@@ -319,7 +343,7 @@ member of the Base subclass. Note that $this->attributes must be in scope
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 

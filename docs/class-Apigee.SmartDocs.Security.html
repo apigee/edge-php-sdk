@@ -63,9 +63,28 @@
 							</ul></li>
 				<li class="active">
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -81,17 +100,14 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-Apigee.SmartDocs.AuthScheme.html">AuthScheme</a></li>
 				<li><a href="class-Apigee.SmartDocs.Doc.html">Doc</a></li>
 				<li><a href="class-Apigee.SmartDocs.Method.html">Method</a></li>
 				<li><a href="class-Apigee.SmartDocs.Model.html">Model</a></li>
-				<li><a href="class-Apigee.SmartDocs.Oauth2Credentials.html">Oauth2Credentials</a></li>
 				<li><a href="class-Apigee.SmartDocs.Resource.html">Resource</a></li>
 				<li><a href="class-Apigee.SmartDocs.Revision.html">Revision</a></li>
 				<li class="active"><a href="class-Apigee.SmartDocs.Security.html">Security</a></li>
-				<li><a href="class-Apigee.SmartDocs.SecurityItem.html">SecurityItem</a></li>
 				<li><a href="class-Apigee.SmartDocs.Template.html">Template</a></li>
-				<li><a href="class-Apigee.SmartDocs.TokenCredentials.html">TokenCredentials</a></li>
+				<li><a href="class-Apigee.SmartDocs.TemplateAuth.html">TemplateAuth</a></li>
 			</ul>
 
 
@@ -134,7 +150,8 @@
 
 
 	<div class="description">
-	<p>Abstraction of the Security subsystem of SmartDocs.</p>
+	<p>Base class for API object classes. Handles some of the OrgConfig
+invocation, which makes the actual HTTP calls.</p>
 	</div>
 
 	<dl class="tree">
@@ -163,11 +180,12 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.SmartDocs.html">SmartDocs</a><br>
-		<b>Package:</b> Apigee\SmartDocs<br>
+		
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> SmartDocs/Security.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.SmartDocs.Security.html#10-116" title="Go to source code">SmartDocs/Security.php</a>
+		<br>
 	</div>
 
 
@@ -186,24 +204,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$modelId</var></span>, <span>string|integer <var>$revisionId</var></span> )</code>
+		<code><a href="source-class-Apigee.SmartDocs.Security.html#13-30" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span>, <span>string <var>$modelId</var></span>, <span>string <var>$revisionId</var></span> )</code>
 
 		<div class="description short">
-			<p>Initializes this object.</p>
+			<p>Initializes the Security object and sets its base URL.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Initializes this object.</p>
+			<p>Initializes the Security object and sets its base URL.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$config</var></dt>
-					<dd></dd>
+					<dd>Contains configuration info for connecting to the Modeling API.</dd>
 					<dt><var>$modelId</var></dt>
-					<dd></dd>
+					<dd>Model name or UUID for which we want security info.</dd>
 					<dt><var>$revisionId</var></dt>
-					<dd></dd>
+					<dd>Revision number or UUID for which we want security info.</dd>
 				</dl></div>
 
 
@@ -213,7 +231,7 @@
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="listItems" id="_listItems">
+	<tr data-order="loadAllSchemes" id="_loadAllSchemes">
 
 		<td class="attributes"><code>
 			 public 
@@ -224,22 +242,140 @@
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_listItems">#</a>
-		<code>listItems( )</code>
+		<a class="anchor" href="#_loadAllSchemes">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Security.html#32-50" title="Go to source code">loadAllSchemes</a>( )</code>
 
 		<div class="description short">
-			<p>Returns all security definitions applicable to the current revision.</p>
+			<p>Loads all schemes associated with the current model + revision.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Returns all security definitions applicable to the current revision.</p>
+			<p>Loads all schemes associated with the current model + revision.</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					array<br>Each member of the array is a subclass of SecurityScheme.
 				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="load" id="_load">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Apigee.SmartDocs.Security.SecurityScheme.html">Apigee\SmartDocs\Security\SecurityScheme</a></code>|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_load">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Security.html#52-70" title="Go to source code">load</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			<p>Loads a security scheme by name, or null if named scheme does not exist.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Loads a security scheme by name, or null if named scheme does not exist.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Apigee.SmartDocs.Security.SecurityScheme.html">Apigee\SmartDocs\Security\SecurityScheme</a></code>|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="save" id="_save">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-Apigee.SmartDocs.Security.SecurityScheme.html">Apigee\SmartDocs\Security\SecurityScheme</a></code>|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_save">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Security.html#72-101" title="Go to source code">save</a>( <span><code><a href="class-Apigee.SmartDocs.Security.SecurityScheme.html">Apigee\SmartDocs\Security\SecurityScheme</a></code> <var>$scheme</var></span>, <span>boolean <var>$is_update</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>Saves security scheme to modeling API.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Saves security scheme to modeling API.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$scheme</var></dt>
+					<dd></dd>
+					<dt><var>$is_update</var></dt>
+					<dd><p>If true, will attempt a PUT; otherwise a POST. Be aware that if a PUT
+  is attempted and the security scheme resource does not exist, the save
+  will fail.</p></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Apigee.SmartDocs.Security.SecurityScheme.html">Apigee\SmartDocs\Security\SecurityScheme</a></code>|null<br><p>On success, returns the saved security scheme. On failure, returns
+  null.</p>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-Apigee.SmartDocs.Security.html#103-115" title="Go to source code">delete</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			<p>Deletes a named security scheme from the Modeling API.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Deletes a named security scheme from the Modeling API.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd>Name of the scheme to be deleted.</dd>
+				</dl></div>
+
 
 
 
@@ -256,7 +392,7 @@
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 

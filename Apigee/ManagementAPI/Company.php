@@ -2,8 +2,9 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the Company object in the Management API and allows clients to
@@ -172,7 +173,7 @@ class Company extends Base
      *
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/companies');
         $this->blankValues();
@@ -211,7 +212,7 @@ class Company extends Base
      * Returns an array of Company objects representing all companies defined
      * for this org.
      *
-     * @return array
+     * @return Company[]
      */
     public function listCompaniesDetail()
     {
@@ -246,20 +247,20 @@ class Company extends Base
     /**
      * Saves this object's properties to the Edge server.
      *
-     * If $is_update is set to true, we assume that this is an update call.
+     * If $isUpdate is set to true, we assume that this is an update call.
      * If it is false, we assume that it is an insert. If null is passed in,
      * we attempt an update, and if it fails we attempt an insert. This is
      * much less efficient, so declaring $is_update as a boolean will yield
      * faster response times.
      *
-     * @param bool|null $force_update
+     * @param bool|null $isUpdate
      * @throws \Apigee\Exceptions\ResponseException
      * @throws \Exception
      */
-    public function save($is_update = false)
+    public function save($isUpdate = false)
     {
         // See if we need to brute-force this.
-        if ($is_update === null) {
+        if ($isUpdate === null) {
             try {
                 $this->save(true);
             } catch (ResponseException $e) {
@@ -287,10 +288,10 @@ class Company extends Base
             }
         }
         $url = null;
-        if ($is_update || $this->createdAt) {
+        if ($isUpdate || $this->createdAt) {
             $url = rawurlencode($this->name);
         }
-        if ($is_update) {
+        if ($isUpdate) {
             $this->put($url, $payload);
         } else {
               $this->post($url, $payload);

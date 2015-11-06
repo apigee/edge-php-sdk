@@ -5,6 +5,7 @@ namespace Apigee\Mint;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Mint\Base\BaseObject;
 use Apigee\Mint\DataStructures\MintCriteria;
+use Apigee\Util\OrgConfig;
 
 class ReportDefinition extends BaseObject
 {
@@ -23,7 +24,7 @@ class ReportDefinition extends BaseObject
 
     private $type;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/report-definitions';
         $this->init($config, $base_url);

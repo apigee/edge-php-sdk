@@ -7,6 +7,7 @@ namespace Apigee\Mint;
 
 use Apigee\Mint\DataStructures\SupportedCurrency;
 use Apigee\Mint\DataStructures\DeveloperBalanceTransaction;
+use Apigee\Util\OrgConfig;
 
 class DeveloperBalance extends Base\BaseObject
 {
@@ -116,13 +117,10 @@ class DeveloperBalance extends Base\BaseObject
 
     /**
      * @param string $dev
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct($dev = null, \Apigee\Util\OrgConfig $config = null)
+    public function __construct($dev, OrgConfig $config)
     {
-        if ($dev == null) {
-            return;
-        }
         $base_url = '/mint/organizations/'
             . $config->orgName
             . '/developers/'
@@ -368,15 +366,15 @@ class DeveloperBalance extends Base\BaseObject
     }
 
     /**
-     * @param mixed $transaction
+     * @param DeveloperBalanceTransaction $transaction
      */
-    public function setTransaction(\Apigee\Mint\DataStructures\DeveloperBalanceTransaction $transaction)
+    public function setTransaction(DeveloperBalanceTransaction $transaction)
     {
         $this->transaction = $transaction;
     }
 
     /**
-     * @return \Apigee\Mint\DataStructures\DeveloperBalanceTransaction
+     * @return DeveloperBalanceTransaction
      */
     public function getTransaction()
     {
