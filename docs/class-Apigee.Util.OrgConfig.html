@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li class="active">
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -88,10 +107,6 @@
 				<li class="active"><a href="class-Apigee.Util.OrgConfig.html">OrgConfig</a></li>
 			</ul>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Apigee.Util.KeyValueStoreInterface.html">KeyValueStoreInterface</a></li>
-			</ul>
 
 
 
@@ -149,7 +164,8 @@
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Util.html">Util</a><br>
 		
 
-			<b>Located at</b> Util/OrgConfig.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.Util.OrgConfig.html#10-198" title="Go to source code">Util/OrgConfig.php</a>
+		<br>
 	</div>
 
 
@@ -168,7 +184,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span>string <var>$org_name</var></span>, <span>string <var>$endpoint</var></span>, <span>string <var>$user</var></span>, <span>string <var>$pass</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+		<code><a href="source-class-Apigee.Util.OrgConfig.html#98-197" title="Go to source code">__construct</a>( <span>string <var>$org_name</var></span>, <span>string <var>$endpoint</var></span>, <span>string <var>$user</var></span>, <span>string <var>$pass</var></span>, <span>array <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
 
 		<div class="description short">
 			<p>Create an instance of OrgConfig.</p>
@@ -177,8 +193,8 @@
 		<div class="description detailed hidden">
 			<p>Create an instance of OrgConfig.</p>
 
-<p>The $options argument is an array containing the fields 'logger', 'user_email',
-'subscribers', 'debug_callbacks', and 'http_options'. </p>
+<p>The $options argument is an array containing the fields 'logger',
+'user_email', 'subscribers', 'debug_callbacks', and 'http_options'.</p>
 
 <p>For example:</p>
 
@@ -189,12 +205,11 @@
   <span class="php-var">$options</span> = <span class="php-keyword1">array</span>(
     <span class="php-quote">'logger'</span> =&gt; <span class="php-var">$logger</span>,
     <span class="php-quote">'user_mail'</span> =&gt; <span class="php-var">$user_mail</span>,
-    <span class="php-quote">'subscribers'</span> =&gt; <span class="php-keyword1">null</span>,
+    <span class="php-quote">'subscribers'</span> =&gt; <span class="php-keyword1">array</span>(),
     <span class="php-quote">'http_options'</span> =&gt; <span class="php-keyword1">array</span>(
       <span class="php-quote">'connection_timeout'</span> =&gt; <span class="php-num">10</span>,
-      <span class="php-quote">'timeout'</span> =&gt; <span class="php-num">50</span>
+      <span class="php-quote">'timeout'</span> =&gt; <span class="php-num">50</span>,
     ),
-    <span class="php-quote">'variable_store'</span> =&gt; <span class="php-keyword1">new</span> Apigee\Drupal\VariableCache()
   );</pre>
 
 
@@ -228,6 +243,47 @@
 
 
 
+	<table class="summary constants" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="LOG_SUBSCRIBER_FORMAT" id="LOG_SUBSCRIBER_FORMAT">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Apigee.Util.OrgConfig.html#15-29" title="Go to source code"><b>LOG_SUBSCRIBER_FORMAT</b></a>
+			</code>
+
+			<div class="description short">
+				<p>A possible format of logs written by Guzzle's LogPlugin.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>A possible format of logs written by Guzzle's LogPlugin.</p>
+
+					<h4>See</h4>
+					<div class="list">
+							\Guzzle\Log\MessageFormatter<br>
+					</div>
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#LOG_SUBSCRIBER_FORMAT" class="anchor">#</a>
+				<code><span class="php-quote">&lt;&lt;&lt;EOF
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+{request}
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+{response}
+--------
+{curl_stderr}
+--------
+Connection time: {connect_time}
+Total transaction time: {total_time}
+EOF</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
 
 
 
@@ -241,7 +297,8 @@
 		</code></td>
 
 		<td class="name">
-<var>$orgName</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#31-35" title="Go to source code"><var>$orgName</var></a>
+
 			<div class="description short">
 				<p>The organization name.</p>
 			</div>
@@ -265,7 +322,8 @@
 		</code></td>
 
 		<td class="name">
-<var>$endpoint</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#37-42" title="Go to source code"><var>$endpoint</var></a>
+
 			<div class="description short">
 				<p>The endpoint URL of the organization.
 This is the URL to which you make API calls.</p>
@@ -284,58 +342,6 @@ This is the URL to which you make API calls.</p>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="user" id="$user">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$user</var>
-			<div class="description short">
-				<p>The username of an authenticated user in the organization
-when making API calls to the endpoint URL.</p>
-			</div>
-
-			<div class="description detailed hidden">
-				<p>The username of an authenticated user in the organization
-when making API calls to the endpoint URL.</p>
-
-			</div>
-		</td>
-		<td class="value">
-			<div>
-				<a href="#$user" class="anchor">#</a>
-				<code></code>
-			</div>
-		</td>
-	</tr>
-	<tr data-order="pass" id="$pass">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$pass</var>
-			<div class="description short">
-				<p>The password of the authenticated user in the organization
-when making API calls to the endpoint URL.</p>
-			</div>
-
-			<div class="description detailed hidden">
-				<p>The password of the authenticated user in the organization
-when making API calls to the endpoint URL.</p>
-
-			</div>
-		</td>
-		<td class="value">
-			<div>
-				<a href="#$pass" class="anchor">#</a>
-				<code></code>
-			</div>
-		</td>
-	</tr>
 	<tr data-order="logger" id="$logger">
 		<td class="attributes"><code>
 			public  
@@ -343,7 +349,8 @@ when making API calls to the endpoint URL.</p>
 		</code></td>
 
 		<td class="name">
-<var>$logger</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#44-50" title="Go to source code"><var>$logger</var></a>
+
 			<div class="description short">
 				<p>A logger that implements the \Psr\Log\LoggerInterface interface.
 See the Apigee\Drupal\WatchdogLogger class for an example that
@@ -371,7 +378,8 @@ implements the Psr\Log\LoggerInterface.</p>
 		</code></td>
 
 		<td class="name">
-<var>$user_mail</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#52-56" title="Go to source code"><var>$user_mail</var></a>
+
 			<div class="description short">
 				<p>The email address of the authenticated user in the organization.</p>
 			</div>
@@ -395,7 +403,8 @@ implements the Psr\Log\LoggerInterface.</p>
 		</code></td>
 
 		<td class="name">
-<var>$subscribers</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#58-65" title="Go to source code"><var>$subscribers</var></a>
+
 			<div class="description short">
 				<p>Array of objects that may subscribe to receive events that various
 objects may fire.
@@ -425,7 +434,8 @@ Symfony\Component\EventDispatcher\EventSubscriberInterface</p>
 		</code></td>
 
 		<td class="name">
-<var>$http_options</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#67-72" title="Go to source code"><var>$http_options</var></a>
+
 			<div class="description short">
 				<p>Array of HTTP options. The only options currently supported are
 'follow_location', 'connection_timeout' and 'timeout'.</p>
@@ -451,7 +461,8 @@ Symfony\Component\EventDispatcher\EventSubscriberInterface</p>
 		</code></td>
 
 		<td class="name">
-<var>$debug_callbacks</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#74-79" title="Go to source code"><var>$debug_callbacks</var></a>
+
 			<div class="description short">
 				<p>Array of callables to be called after each REST transaction. Each
 callback should accept a single array parameter.</p>
@@ -477,7 +488,8 @@ callback should accept a single array parameter.</p>
 		</code></td>
 
 		<td class="name">
-<var>$user_agent</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#81-85" title="Go to source code"><var>$user_agent</var></a>
+
 			<div class="description short">
 				<p>User-Agent information to be added to the standard Guzzle UA header.</p>
 			</div>
@@ -494,54 +506,6 @@ callback should accept a single array parameter.</p>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="variable_store" id="$variable_store">
-		<td class="attributes"><code>
-			public  
-			<code><a href="class-Apigee.Util.KeyValueStoreInterface.html">Apigee\Util\KeyValueStoreInterface</a></code>|null
-		</code></td>
-
-		<td class="name">
-<var>$variable_store</var>
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</td>
-		<td class="value">
-			<div>
-				<a href="#$variable_store" class="anchor">#</a>
-				<code></code>
-			</div>
-		</td>
-	</tr>
-	<tr data-order="tags" id="$tags">
-		<td class="attributes"><code>
-			public  
-			array
-		</code></td>
-
-		<td class="name">
-<var>$tags</var>
-			<div class="description short">
-				<p>These may be used for storing arbitrary metadata</p>
-			</div>
-
-			<div class="description detailed hidden">
-				<p>These may be used for storing arbitrary metadata</p>
-
-			</div>
-		</td>
-		<td class="value">
-			<div>
-				<a href="#$tags" class="anchor">#</a>
-				<code></code>
-			</div>
-		</td>
-	</tr>
 	<tr data-order="referer" id="$referer">
 		<td class="attributes"><code>
 			public  
@@ -549,7 +513,8 @@ callback should accept a single array parameter.</p>
 		</code></td>
 
 		<td class="name">
-<var>$referer</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#87-91" title="Go to source code"><var>$referer</var></a>
+
 			<div class="description short">
 				<p>Optionally holds content to be sent in the Referer HTTP header.</p>
 			</div>
@@ -566,27 +531,28 @@ callback should accept a single array parameter.</p>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="auth" id="$auth">
+	<tr data-order="redirect_disable" id="$redirect_disable">
 		<td class="attributes"><code>
 			public  
-			string
+			boolean
 		</code></td>
 
 		<td class="name">
-<var>$auth</var>
+				<a href="source-class-Apigee.Util.OrgConfig.html#93-96" title="Go to source code"><var>$redirect_disable</var></a>
+
 			<div class="description short">
-				<p>Describes the authorization type. Defaults to 'basic' but can also be 'digest' or 'ntlm'.</p>
+				
 			</div>
 
 			<div class="description detailed hidden">
-				<p>Describes the authorization type. Defaults to 'basic' but can also be 'digest' or 'ntlm'.</p>
+				
 
 			</div>
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$auth" class="anchor">#</a>
-				<code></code>
+				<a href="#$redirect_disable" class="anchor">#</a>
+				<code><span class="php-keyword1">false</span></code>
 			</div>
 		</td>
 	</tr>

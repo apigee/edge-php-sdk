@@ -9,13 +9,16 @@
 
 namespace Apigee\ManagementAPI;
 
+use Apigee\Util\APIObject;
+use Apigee\Util\DebugData;
+
 /**
  * Base class for Management API classes. Handles a bit of the APIClient
  * invocation, which makes the actual HTTP calls.
  *
  * @author djohnson
  */
-class Base extends \Apigee\Util\APIObject
+class Base extends APIObject
 {
     /**
      * Returns debug data from the last API call in a backwards-compatible way.
@@ -24,7 +27,7 @@ class Base extends \Apigee\Util\APIObject
      */
     public function getDebugData()
     {
-        return \Apigee\Util\DebugData::toArray();
+        return DebugData::toArray();
     }
 
     /**
@@ -67,14 +70,14 @@ class Base extends \Apigee\Util\APIObject
 
         if ($has_attributes) {
             if (isset($response['attributes']) && is_array($response['attributes'])) {
-                foreach ($response['attributes'] as $attrib) {
-                    if (!is_array($attrib) || !array_key_exists('name', $attrib) || !array_key_exists('value', $attrib)) {
+                foreach ($response['attributes'] as $attr) {
+                    if (!is_array($attr) || !array_key_exists('name', $attr) || !array_key_exists('value', $attr)) {
                         continue;
                     }
-                    if ($attrib['name'] == 'apiResourcesInfo') {
-                        $attrib['value'] = @json_decode($attrib['value'], true);
+                    if ($attr['name'] == 'apiResourcesInfo') {
+                        $attr['value'] = @json_decode($attr['value'], true);
                     }
-                    $attributes[$attrib['name']] = $attrib['value'];
+                    $attributes[$attr['name']] = $attr['value'];
                 }
             }
         }

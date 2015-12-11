@@ -23,8 +23,6 @@ class Method extends APIObject
     protected $name;
     /** @var string */
     protected $verb;
-    /** @var array */
-    protected $authSchemes;
     /**
      * @var array
      *      May contain the following keys:
@@ -56,6 +54,9 @@ class Method extends APIObject
     /** @var array */
     protected $tags;
 
+    /** @var array */
+    protected $apiSchema;
+
     // Authorship attributes (read-only)
     // Times are in milliseconds after Jan 1, 1970 UTC. Div by 1000 for Unix time.
     /** @var int */
@@ -83,6 +84,14 @@ class Method extends APIObject
     /** @var string */
     protected $apiId;
 
+    /**
+     * @var array
+     *      This is an array of string identifiers, corresponding to security
+     *      schemes defined by the Security object attached to this model's
+     *      revision.
+     */
+    private $security;
+
     /** @var array */
     protected $metadata;
 
@@ -94,7 +103,6 @@ class Method extends APIObject
         $this->id = '';
         $this->name = '';
         $this->verb = '';
-        $this->authSchemes = array();
         $this->body = array();
         $this->response = array();
         $this->samples = array();
@@ -105,6 +113,8 @@ class Method extends APIObject
         $this->customAttributes = array();
         $this->tags = array();
         $this->metadata = array();
+        $this->security = array();
+        $this->apiSchema = array();
 
         $this->createdTime = 0;
         $this->modifiedTime = 0;
@@ -146,14 +156,13 @@ class Method extends APIObject
         $this->verb = $verb;
     }
 
-    public function getAuthSchemes()
+    public function getSecurity()
     {
-        return $this->authSchemes;
+        return $this->security;
     }
-
-    public function setAuthSchemes(array $schemes)
+    public function setSecurity(array $security)
     {
-        $this->authSchemes = $schemes;
+        $this->security = $security;
     }
 
     public function getBody()
@@ -234,9 +243,43 @@ class Method extends APIObject
         return $this->customAttributes;
     }
 
+    public function getCustomAttribute($name)
+    {
+        if (array_key_exists($name, $this->customAttributes)) {
+            return $this->customAttributes[$name];
+        }
+        return null;
+    }
+    public function setCustomAttribute($name, $value)
+    {
+        if ($value === null || $value === '') {
+            if (array_key_exists($name, $this->customAttributes)) {
+                unset($this->customAttributes[$name]);
+            }
+        } elseif ($name !== null && $name !== '' && is_scalar($value)) {
+            $this->customAttributes[strval($name)] = strval($value);
+        } else {
+            if (!is_scalar($value)) {
+                throw new ParameterException('Custom Attribute value must be a scalar.');
+            } else {
+                throw new ParameterException('Custom Attribute name cannot be empty.');
+            }
+        }
+    }
     public function setCustomAttributes(array $attr)
     {
-        $this->customAttributes = $attr;
+        $this->customAttributes = array();
+        foreach ($attr as $key => $value) {
+            if ($value !== null && $value !== '' && $key !== null && $key !== '' && is_scalar($value)) {
+                $this->customAttributes[strval($key)] = strval($value);
+            }
+        }
+    }
+    public function clearCustomAttribute($name)
+    {
+        if (array_key_exists($name, $this->customAttributes)) {
+            unset($this->customAttributes[$name]);
+        }
     }
 
     public function getTags()
@@ -247,6 +290,16 @@ class Method extends APIObject
     public function setTags(array $tags)
     {
         $this->tags = $tags;
+    }
+
+    public function getApiSchema()
+    {
+        return $this->apiSchema;
+    }
+
+    public function setApiSchema(array $schema)
+    {
+        $this->apiSchema = $schema;
     }
 
     public function getCreatedTime()
@@ -313,7 +366,7 @@ class Method extends APIObject
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -344,15 +397,17 @@ class Method extends APIObject
     /**
      * Persists the current Method as an array.
      *
+     * @param bool $verbose
+     *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
 
         $payload_keys = array(
-            'name', 'verb', 'authSchemes', 'body', 'response', 'samples',
+            'name', 'verb', 'security', 'body', 'response', 'samples',
             'displayName', 'description', 'parameters', 'parameterGroups',
-            'customAttributes', 'tags', 'path'
+            'customAttributes', 'tags', 'path', 'apiSchema'
         );
         if ($verbose) {
             $payload_keys = array_merge($payload_keys, array(
@@ -371,7 +426,7 @@ class Method extends APIObject
      * Initializes all member variables.
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param string $apiUuid
+     * @param string $modelId
      * @param string $revisionUuid
      * @param string $resourceUuid
      */
@@ -381,7 +436,11 @@ class Method extends APIObject
         $this->apiRevisionId = $revisionUuid;
         $this->resourceId = $resourceUuid;
         $this->apiId = $modelId;
-        $basePath = '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions/' . rawurlencode($this->apiRevisionId) . '/resources/' . $this->resourceId . '/methods';
+        $basePath = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($this->apiId)
+            . '/revisions/' . rawurlencode($this->apiRevisionId)
+            . '/resources/' . $this->resourceId
+            . '/methods';
         $this->init($config, $basePath);
     }
 
@@ -426,11 +485,18 @@ class Method extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
-        $array_members = array('authSchemes', 'parameters', 'parameterGroups', 'tags', 'samples');
-        $object_members = array('body', 'response', 'customAttributes');
-        $payload = $this->toArray(FALSE);
+        $array_members = array('security', 'parameters', 'parameterGroups', 'tags', 'samples');
+        $object_members = array('body', 'response', 'customAttributes', 'apiSchema');
+        $payload = $this->toArray(false);
+        // Eliminate any customAttributes with empty keys or values.
+        foreach ($payload['customAttributes'] as $key => $value) {
+            if ($value === null || $value === '' || $key === null || $key === '') {
+                unset($payload['customAttributes'][$key]);
+            }
+        }
+
         foreach ($array_members as $key) {
             if (empty($payload[$key])) {
                 $payload[$key] = array();
@@ -465,7 +531,7 @@ class Method extends APIObject
         if (empty($methodUuid)) {
             throw new ParameterException('Cannot delete a method with no Method UUID.');
         }
-        $this->http_delete($methodUuid);
+        $this->httpDelete($methodUuid);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }

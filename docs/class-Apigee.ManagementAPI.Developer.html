@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li class="active"><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -175,7 +196,8 @@ manipulate it.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/Developer.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Developer.html#18-747" title="Go to source code">ManagementAPI/Developer.php</a>
+		<br>
 	</div>
 
 
@@ -187,14 +209,14 @@ manipulate it.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApps">#</a>
-		<code>getApps( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#127-135" title="Go to source code">getApps</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the names of apps associated with the developer.</p>
@@ -207,7 +229,7 @@ manipulate it.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -228,7 +250,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getEmail">#</a>
-		<code>getEmail( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#137-145" title="Go to source code">getEmail</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the email address associated with the developer.</p>
@@ -250,6 +272,75 @@ manipulate it.</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="usePaging" id="_usePaging">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_usePaging">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#147-155" title="Go to source code">usePaging</a>( <span>boolean <var>$flag</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			<p>Sets/clears the Paging flag.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Sets/clears the Paging flag.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$flag</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isPagingEnabled" id="_isPagingEnabled">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isPagingEnabled">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#157-165" title="Go to source code">isPagingEnabled</a>( )</code>
+
+		<div class="description short">
+			<p>Reports current status of the Paging flag.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Reports current status of the Paging flag.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="setEmail" id="_setEmail">
 
 		<td class="attributes"><code>
@@ -262,7 +353,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setEmail">#</a>
-		<code>setEmail( <span>string <var>$email</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#167-175" title="Go to source code">setEmail</a>( <span>string <var>$email</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the email address associated with the developer.</p>
@@ -297,7 +388,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDeveloperId">#</a>
-		<code>getDeveloperId( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#177-185" title="Go to source code">getDeveloperId</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the ID associated with the developer.</p>
@@ -331,7 +422,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFirstName">#</a>
-		<code>getFirstName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#187-195" title="Go to source code">getFirstName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the first name associated with the developer.</p>
@@ -365,7 +456,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFirstName">#</a>
-		<code>setFirstName( <span>string <var>$fname</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#197-205" title="Go to source code">setFirstName</a>( <span>string <var>$fname</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the first name associated with the developer.</p>
@@ -400,7 +491,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getLastName">#</a>
-		<code>getLastName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#207-215" title="Go to source code">getLastName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the last name associated with the developer.</p>
@@ -434,7 +525,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setLastName">#</a>
-		<code>setLastName( <span>string <var>$lname</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#217-225" title="Go to source code">setLastName</a>( <span>string <var>$lname</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the last name associated with the developer.</p>
@@ -469,7 +560,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUserName">#</a>
-		<code>getUserName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#227-235" title="Go to source code">getUserName</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the username associated with the developer.</p>
@@ -503,7 +594,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setUserName">#</a>
-		<code>setUserName( <span>string <var>$uname</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#237-245" title="Go to source code">setUserName</a>( <span>string <var>$uname</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the username associated with the developer.</p>
@@ -538,7 +629,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatus">#</a>
-		<code>getStatus( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#247-255" title="Go to source code">getStatus</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the developer status: 'active' or 'inactive'.</p>
@@ -572,7 +663,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatus">#</a>
-		<code>setStatus( <span>string <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#257-274" title="Go to source code">setStatus</a>( <span>string|integer|boolean <var>$status</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the developer status: 'active' or 'inactive'.</p>
@@ -607,7 +698,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttribute">#</a>
-		<code>getAttribute( <span>string <var>$attr</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#276-289" title="Go to source code">getAttribute</a>( <span>string <var>$attr</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns an attribute associated with the developer, or null if the
@@ -648,7 +739,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAttribute">#</a>
-		<code>setAttribute( <span>string <var>$attr</var></span>, <span>string <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#291-306" title="Go to source code">setAttribute</a>( <span>string <var>$attr</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets an attribute on the developer.</p>
@@ -678,14 +769,14 @@ attribute does not exist.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttributes">#</a>
-		<code>getAttributes( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#308-316" title="Go to source code">getAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the attributes associated with the developer.</p>
@@ -698,7 +789,7 @@ attribute does not exist.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -719,7 +810,7 @@ attribute does not exist.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getModifiedAt">#</a>
-		<code>getModifiedAt( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#318-326" title="Go to source code">getModifiedAt</a>( )</code>
 
 		<div class="description short">
 			<p>Returns the Unix time when the developer was last modified.</p>
@@ -746,14 +837,14 @@ attribute does not exist.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCompanies">#</a>
-		<code>getCompanies( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#328-337" title="Go to source code">getCompanies</a>( )</code>
 
 		<div class="description short">
 			<p>Returns a list of string identifiers for companies of which this
@@ -768,9 +859,82 @@ developer is a member.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPageSize" id="_getPageSize">
+
+		<td class="attributes"><code>
+			 public 
+
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPageSize">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#339-347" title="Go to source code">getPageSize</a>( )</code>
+
+		<div class="description short">
+			<p>Returns page size for paged queries.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Returns page size for paged queries.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					integer
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setPageSize" id="_setPageSize">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setPageSize">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#349-363" title="Go to source code">setPageSize</a>( <span>integer <var>$size</var></span> )</code>
+
+		<div class="description short">
+			<p>Sets page size for paged queries.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Sets page size for paged queries.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$size</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Apigee.Exceptions.ParameterException.html">Apigee\Exceptions\ParameterException</a></code>
+				</div>
 
 
 
@@ -789,7 +953,7 @@ developer is a member.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#365-375" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Initializes default values of all member variables.</p>
@@ -824,7 +988,7 @@ developer is a member.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code>load( <span>string <var>$email</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#377-394" title="Go to source code">load</a>( <span>string <var>$email</var></span> )</code>
 
 		<div class="description short">
 			<p>Loads a developer from the Management API using $email as the unique key.</p>
@@ -832,6 +996,11 @@ developer is a member.</p>
 
 		<div class="description detailed hidden">
 			<p>Loads a developer from the Management API using $email as the unique key.</p>
+
+<p>Note that if using a paging-enabled org, a maximum of 100 apps will be
+returned for a developer. In order to get a canonical listing of a
+developer's apps, you should invoke DeveloperApp::getList() or
+DeveloperApp::getListDetail().</p>
 
 
 				<h4>Parameters</h4>
@@ -860,15 +1029,15 @@ developer is a member.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromResponse">#</a>
-		<code>loadFromResponse( <span><code><a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a></code> <var>&amp; $developer</var></span>, <span>array <var>$response</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#396-428" title="Go to source code">loadFromResponse</a>( <span><code><a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a></code> <var>&amp; $developer</var></span>, <span>array <var>$response</var></span> )</code>
 
 		<div class="description short">
-			<p>Takes the raw KMS response and populates the member variables of the
+			<p>Takes the raw Edge response and populates the member variables of the
 passed-in Developer object from it.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Takes the raw KMS response and populates the member variables of the
+			<p>Takes the raw Edge response and populates the member variables of the
 passed-in Developer object from it.</p>
 
 
@@ -899,7 +1068,7 @@ passed-in Developer object from it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validate">#</a>
-		<code>validate( <span>null|string <var>$email</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#430-452" title="Go to source code">validate</a>( <span>null|string <var>$email</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Attempts to load developer from Management API. Returns true if load was
@@ -945,7 +1114,7 @@ be a developerId.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code>save( <span>boolean|null <var>$force_update</var> = <span class="php-keyword1">false</span></span>, <span>string|null <var>$old_email</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#454-547" title="Go to source code">save</a>( <span>boolean|null <var>$forceUpdate</var> = <span class="php-keyword1">false</span></span>, <span>string|null <var>$oldEmail</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Saves user data to the Management API. This operates as both insert and
@@ -962,11 +1131,11 @@ ParameterException is thrown.</p>
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$force_update</var></dt>
+					<dt><var>$forceUpdate</var></dt>
 					<dd><p>If false, assume that this is a new instance.
   If true, assume that this is an update to an existing instance.
   If null, try an update, and if that fails, try an insert.</p></dd>
-					<dt><var>$old_email</var></dt>
+					<dt><var>$oldEmail</var></dt>
 					<dd><p>If the developer's email has changed, this field must contain the
   previous email value.</p></dd>
 				</dl></div>
@@ -994,7 +1163,7 @@ ParameterException is thrown.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code>delete( <span>null|string <var>$email</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#549-563" title="Go to source code">delete</a>( <span>null|string <var>$email</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Deletes a developer.</p>
@@ -1024,14 +1193,14 @@ ParameterException is thrown.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listDevelopers">#</a>
-		<code>listDevelopers( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#565-606" title="Go to source code">listDevelopers</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of all developer emails for this org.</p>
@@ -1044,7 +1213,7 @@ ParameterException is thrown.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -1058,14 +1227,14 @@ ParameterException is thrown.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			<code><a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>[]</code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadAllDevelopers">#</a>
-		<code>loadAllDevelopers( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#608-661" title="Go to source code">loadAllDevelopers</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of all developers in the org.</p>
@@ -1074,11 +1243,16 @@ ParameterException is thrown.</p>
 		<div class="description detailed hidden">
 			<p>Returns an array of all developers in the org.</p>
 
+<p>Note that if using a paging-enabled org, a maximum of 100 apps will be
+listed for each developer that comes back in this list. In order to get
+a canonical listing of a developer's apps, you should invoke
+DeveloperApp::getList() or DeveloperApp::getListDetail().</p>
+
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					<code><a href="class-Apigee.ManagementAPI.Developer.html">Apigee\ManagementAPI\Developer</a>[]</code>
 				</div>
 
 
@@ -1099,7 +1273,7 @@ ParameterException is thrown.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_validateUser">#</a>
-		<code>validateUser( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#663-689" title="Go to source code">validateUser</a>( )</code>
 
 		<div class="description short">
 			<p>Ensures that current developer's email is valid.</p>
@@ -1136,7 +1310,7 @@ populated based on email.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_blankValues">#</a>
-		<code>blankValues( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#691-710" title="Go to source code">blankValues</a>( )</code>
 
 		<div class="description short">
 			<p>Resets this object's properties to null or to empty arrays based on type.</p>
@@ -1166,7 +1340,7 @@ populated based on email.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code>toArray( <span> <var>$include_debug_data</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#712-731" title="Go to source code">toArray</a>( <span> <var>$include_debug_data</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			<p>Converts this object's properties into an array for external use.</p>
@@ -1200,7 +1374,7 @@ populated based on email.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fromArray">#</a>
-		<code>fromArray( <span> <var>$array</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Developer.html#733-746" title="Go to source code">fromArray</a>( <span> <var>$array</var></span> )</code>
 
 		<div class="description short">
 			<p>Populates this object based on an incoming array generated by the
@@ -1244,7 +1418,7 @@ toArray() method above.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 
@@ -1261,6 +1435,57 @@ toArray() method above.</p>
 
 
 
+	<table class="summary constants" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="MAX_ITEMS_PER_PAGE" id="MAX_ITEMS_PER_PAGE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#27-30" title="Go to source code"><b>MAX_ITEMS_PER_PAGE</b></a>
+			</code>
+
+			<div class="description short">
+				<p>If paging is enabled, how many developers can be retrieved per query?</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>If paging is enabled, how many developers can be retrieved per query?</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#MAX_ITEMS_PER_PAGE" class="anchor">#</a>
+				<code><span class="php-num">1000</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="MAX_ATTRIBUTE_COUNT" id="MAX_ATTRIBUTE_COUNT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name">
+			<code>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#32-35" title="Go to source code"><b>MAX_ATTRIBUTE_COUNT</b></a>
+			</code>
+
+			<div class="description short">
+				<p>If paging is enabled, we cannot exceed this number of attributes.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>If paging is enabled, we cannot exceed this number of attributes.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#MAX_ATTRIBUTE_COUNT" class="anchor">#</a>
+				<code><span class="php-num">20</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
 
 
 
@@ -1270,11 +1495,12 @@ toArray() method above.</p>
 	<tr data-order="apps" id="$apps">
 		<td class="attributes"><code>
 			protected  
-			array
+			string[]
 		</code></td>
 
 		<td class="name">
-<var>$apps</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#37-41" title="Go to source code"><var>$apps</var></a>
+
 			<div class="description short">
 				<p>The apps associated with the developer.</p>
 			</div>
@@ -1298,7 +1524,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$email</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#42-46" title="Go to source code"><var>$email</var></a>
+
 			<div class="description short">
 				<p>The developer's email, used to unique identify the developer in Edge.</p>
 			</div>
@@ -1322,7 +1549,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$developerId</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#47-51" title="Go to source code"><var>$developerId</var></a>
+
 			<div class="description short">
 				<p>Read-only alternate unique ID. Useful when querying developer analytics.</p>
 			</div>
@@ -1346,7 +1574,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$firstName</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#52-56" title="Go to source code"><var>$firstName</var></a>
+
 			<div class="description short">
 				<p>The first name of the developer.</p>
 			</div>
@@ -1370,7 +1599,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$lastName</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#57-61" title="Go to source code"><var>$lastName</var></a>
+
 			<div class="description short">
 				<p>The last name of the developer.</p>
 			</div>
@@ -1394,7 +1624,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$userName</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#62-66" title="Go to source code"><var>$userName</var></a>
+
 			<div class="description short">
 				<p>The developer's username.</p>
 			</div>
@@ -1418,7 +1649,8 @@ toArray() method above.</p>
 		</code></td>
 
 		<td class="name">
-<var>$organizationName</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#67-72" title="Go to source code"><var>$organizationName</var></a>
+
 			<div class="description short">
 				<p>The Apigee organization where the developer is regsitered.
 This property is read-only.</p>
@@ -1444,7 +1676,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$status</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#73-77" title="Go to source code"><var>$status</var></a>
+
 			<div class="description short">
 				<p>The developer status: 'active' or 'inactive'.</p>
 			</div>
@@ -1464,11 +1697,12 @@ This property is read-only.</p>
 	<tr data-order="attributes" id="$attributes">
 		<td class="attributes"><code>
 			protected  
-			array
+			string[]
 		</code></td>
 
 		<td class="name">
-<var>$attributes</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#78-82" title="Go to source code"><var>$attributes</var></a>
+
 			<div class="description short">
 				<p>Name/value pairs used to extend the default profile.</p>
 			</div>
@@ -1492,7 +1726,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdAt</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#83-88" title="Go to source code"><var>$createdAt</var></a>
+
 			<div class="description short">
 				<p>Unix time when the developer was created.
 This property is read-only.</p>
@@ -1518,7 +1753,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$createdBy</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#89-94" title="Go to source code"><var>$createdBy</var></a>
+
 			<div class="description short">
 				<p>Username of the user who created the developer.
 This property is read-only.</p>
@@ -1544,7 +1780,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$modifiedAt</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#95-100" title="Go to source code"><var>$modifiedAt</var></a>
+
 			<div class="description short">
 				<p>Unix time when the developer was last modified.
 This property is read-only.</p>
@@ -1570,7 +1807,8 @@ This property is read-only.</p>
 		</code></td>
 
 		<td class="name">
-<var>$modifiedBy</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#101-106" title="Go to source code"><var>$modifiedBy</var></a>
+
 			<div class="description short">
 				<p>Username of the user who last modified the developer.
 This property is read-only.</p>
@@ -1592,11 +1830,12 @@ This property is read-only.</p>
 	<tr data-order="companies" id="$companies">
 		<td class="attributes"><code>
 			protected  
-			array
+			string[]
 		</code></td>
 
 		<td class="name">
-<var>$companies</var>
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#108-113" title="Go to source code"><var>$companies</var></a>
+
 			<div class="description short">
 				<p>Read-only list of company identifiers of which this developer is a
 member.</p>
@@ -1611,6 +1850,56 @@ member.</p>
 		<td class="value">
 			<div>
 				<a href="#$companies" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="pagingEnabled" id="$pagingEnabled">
+		<td class="attributes"><code>
+			protected  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#115-119" title="Go to source code"><var>$pagingEnabled</var></a>
+
+			<div class="description short">
+				<p>True to require use of paging when querying developers.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>True to require use of paging when querying developers.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$pagingEnabled" class="anchor">#</a>
+				<code><span class="php-keyword1">false</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="pageSize" id="$pageSize">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Apigee.ManagementAPI.Developer.html#121-125" title="Go to source code"><var>$pageSize</var></a>
+
+			<div class="description short">
+				<p>Number of developers fetched per page, if paging is enabled.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Number of developers fetched per page, if paging is enabled.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$pageSize" class="anchor">#</a>
 				<code></code>
 			</div>
 		</td>

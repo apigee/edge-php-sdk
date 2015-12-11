@@ -9,8 +9,4 @@ final class QuotaType
     const SPEND_LIMIT = 'SpendLimit';
     const FEE_EXPOSURE = 'FeeExposure';
     const BALANCE = 'Balance';
-    
-    private function __construct()
-    {
-    }
 }

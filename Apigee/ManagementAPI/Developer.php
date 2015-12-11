@@ -9,9 +9,11 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
-use \Apigee\Util\DebugData;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\TooManyAttributesException;
+use Apigee\Util\DebugData;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the Developer object in the Management API and allows clients to
@@ -23,8 +25,18 @@ class Developer extends Base
 {
 
     /**
+     * If paging is enabled, how many developers can be retrieved per query?
+     */
+    const MAX_ITEMS_PER_PAGE = 1000;
+
+    /**
+     * If paging is enabled, we cannot exceed this number of attributes.
+     */
+    const MAX_ATTRIBUTE_COUNT = 20;
+
+    /**
      * The apps associated with the developer.
-     * @var array
+     * @var string[]
      */
     protected $apps;
     /**
@@ -64,7 +76,7 @@ class Developer extends Base
      */
     protected $status;
     /**
-     * @var array
+     * @var string[]
      * Name/value pairs used to extend the default profile.
      */
     protected $attributes;
@@ -94,16 +106,28 @@ class Developer extends Base
     protected $modifiedBy;
 
     /**
-     * @var array
+     * @var string[]
      * Read-only list of company identifiers of which this developer is a
      * member.
      */
     protected $companies;
 
     /**
+     * @var bool
+     * True to require use of paging when querying developers.
+     */
+    protected $pagingEnabled = false;
+
+    /**
+     * @var int
+     * Number of developers fetched per page, if paging is enabled.
+     */
+    protected $pageSize;
+
+    /**
      * Returns the names of apps associated with the developer.
      *
-     * @return array
+     * @return string[]
      */
     public function getApps()
     {
@@ -118,6 +142,26 @@ class Developer extends Base
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Sets/clears the Paging flag.
+     *
+     * @param bool $flag
+     */
+    public function usePaging($flag = true)
+    {
+        $this->pagingEnabled = (bool)$flag;
+    }
+
+    /**
+     * Reports current status of the Paging flag.
+     *
+     * @return bool
+     */
+    public function isPagingEnabled()
+    {
+        return $this->pagingEnabled;
     }
 
     /**
@@ -213,7 +257,7 @@ class Developer extends Base
     /**
      * Sets the developer status: 'active' or 'inactive'.
      *
-     * @param string $status
+     * @param string|int|bool $status
      */
     public function setStatus($status)
     {
@@ -223,7 +267,8 @@ class Developer extends Base
             $status = 'active';
         }
         if ($status != 'active' && $status != 'inactive') {
-            throw new ParameterException('Status may be either active or inactive; value "' . $status . '" is invalid.');
+            $msg = sprintf('Status may be either active or inactive; value “%s” is invalid', $status);
+            throw new ParameterException($msg);
         }
         $this->status = $status;
     }
@@ -251,13 +296,19 @@ class Developer extends Base
      */
     public function setAttribute($attr, $value)
     {
+        // In paging-enabled environments, there is a hard limit of 20 on the
+        // number of attributes any entity may have.
+        if ($this->pagingEnabled && count($this->attributes) >= self::MAX_ATTRIBUTE_COUNT) {
+            $msg = sprintf('This developer already has %u attributes; cannot add any more.', self::MAX_ATTRIBUTE_COUNT);
+            throw new TooManyAttributesException($msg);
+        }
         $this->attributes[$attr] = $value;
     }
 
     /**
      * Returns the attributes associated with the developer.
      *
-     * @return array
+     * @return string[]
      */
     public function getAttributes()
     {
@@ -278,7 +329,7 @@ class Developer extends Base
      * Returns a list of string identifiers for companies of which this
      * developer is a member.
      *
-     * @return array
+     * @return string[]
      */
     public function getCompanies()
     {
@@ -286,18 +337,50 @@ class Developer extends Base
     }
 
     /**
+     * Returns page size for paged queries.
+     *
+     * @return int
+     */
+    public function getPageSize()
+    {
+        return $this->pageSize;
+    }
+
+    /**
+     * Sets page size for paged queries.
+     *
+     * @param int $size
+     * @throws ParameterException
+     */
+    public function setPageSize($size)
+    {
+        $size = intval($size);
+        if ($size < 2 || $size > self::MAX_ITEMS_PER_PAGE) {
+            $msg = sprintf('Invalid value %d for pageSize; must be between 2 and %u', $size, self::MAX_ITEMS_PER_PAGE);
+            throw new ParameterException($msg);
+        }
+        $this->pageSize = $size;
+    }
+
+    /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/developers');
         $this->blankValues();
+        $this->pageSize = self::MAX_ITEMS_PER_PAGE;
     }
 
     /**
      * Loads a developer from the Management API using $email as the unique key.
+     *
+     * Note that if using a paging-enabled org, a maximum of 100 apps will be
+     * returned for a developer. In order to get a canonical listing of a
+     * developer's apps, you should invoke DeveloperApp::getList() or
+     * DeveloperApp::getListDetail().
      *
      * @param string $email
      *    This can be either the developer's email address or the unique
@@ -311,10 +394,10 @@ class Developer extends Base
     }
 
     /**
-     * Takes the raw KMS response and populates the member variables of the
+     * Takes the raw Edge response and populates the member variables of the
      * passed-in Developer object from it.
      *
-     * @param \Apigee\ManagementAPI\Developer $developer
+     * @param Developer $developer
      * @param array $response
      */
     protected static function loadFromResponse(Developer &$developer, array $response)
@@ -339,8 +422,7 @@ class Developer extends Base
         $developer->modifiedBy = $response['lastModifiedBy'];
         if (array_key_exists('companies', $response)) {
             $developer->companies = $response['companies'];
-        }
-        else {
+        } else {
             $developer->companies = array();
         }
     }
@@ -376,27 +458,27 @@ class Developer extends Base
      * If user's email doesn't look valid (must contain @), a
      * ParameterException is thrown.
      *
-     * @param bool|null $force_update
+     * @param bool|null $forceUpdate
      *   If false, assume that this is a new instance.
      *   If true, assume that this is an update to an existing instance.
      *   If null, try an update, and if that fails, try an insert.
-     * @param string|null $old_email
+     * @param string|null $oldEmail
      *   If the developer's email has changed, this field must contain the
      *   previous email value.
      *
      * @throws \Apigee\Exceptions\ParameterException
      */
-    public function save($force_update = false, $old_email = null)
+    public function save($forceUpdate = false, $oldEmail = null)
     {
         // See if we need to brute-force this.
-        if ($force_update === null) {
+        if ($forceUpdate === null) {
             try {
-                $this->save(true, $old_email);
+                $this->save(true, $oldEmail);
             } catch (ResponseException $e) {
                 if ($e->getCode() == 404) {
                     // Update failed because dev doesn't exist.
                     // Try insert instead.
-                    $this->save(false, $old_email);
+                    $this->save(false, $oldEmail);
                 } else {
                     // Some other response error.
                     throw $e;
@@ -406,11 +488,12 @@ class Developer extends Base
         }
 
         if (!$this->validateUser()) {
-            throw new ParameterException('Developer requires valid-looking email address, firstName, lastName and userName.');
+            $message = 'Developer requires valid-looking email address, firstName, lastName and userName.';
+            throw new ParameterException($message);
         }
 
-        if (empty($old_email)) {
-            $old_email = $this->email;
+        if (empty($oldEmail)) {
+            $oldEmail = $this->email;
         }
 
         $payload = array(
@@ -421,20 +504,26 @@ class Developer extends Base
         );
         if (count($this->attributes) > 0) {
             $payload['attributes'] = array();
+            $i = 0;
             foreach ($this->attributes as $name => $value) {
+                $i++;
+                if ($i > self::MAX_ATTRIBUTE_COUNT && $this->pagingEnabled) {
+                    // This truncation occurs silently; should we throw an exception?
+                    break;
+                }
                 $payload['attributes'][] = array('name' => $name, 'value' => $value);
             }
         }
         $url = null;
-        if ($force_update || $this->createdAt) {
+        if ($forceUpdate || $this->createdAt) {
             if ($this->developerId) {
                 $payload['developerId'] = $this->developerId;
             }
-            $url = rawurlencode($old_email);
+            $url = rawurlencode($oldEmail);
         }
         // Save our desired status for later.
         $cached_status = $this->status;
-        if ($force_update) {
+        if ($forceUpdate) {
             $this->put($url, $payload);
         } else {
             $this->post($url, $payload);
@@ -467,7 +556,7 @@ class Developer extends Base
     public function delete($email = null)
     {
         $email = $email ? : $this->email;
-        $this->http_delete(rawurlencode($email));
+        $this->httpDelete(rawurlencode($email));
         if ($email == $this->email) {
             $this->blankValues();
         }
@@ -476,31 +565,99 @@ class Developer extends Base
     /**
      * Returns an array of all developer emails for this org.
      *
-     * @return array
+     * @return string[]
      */
     public function listDevelopers()
     {
-        $this->get();
-        $developers = $this->responseObj;
+        $developers = array();
+        if ($this->pagingEnabled) {
+            // Scroll through pages, saving the last key on each page.
+            // Each subsequent request asks for a page of results starting
+            // with the last key from the previous page.
+            $lastKey = null;
+            while (true) {
+                $queryString = '?count=' . $this->pageSize;
+                if (isset($lastKey)) {
+                    $queryString .= '&startKey=' . urlencode($lastKey);
+                }
+                $this->get($queryString);
+                $developerSubset = $this->responseObj;
+                $subsetCount = count($developerSubset);
+                if ($subsetCount == 0) {
+                    break;
+                }
+                if (isset($lastKey)) {
+                    // Avoid duplicating the last key, which is the first key
+                    // on this page.
+                    array_shift($developerSubset);
+                }
+                $developers = array_merge($developers, $developerSubset);
+                if ($subsetCount == $this->pageSize) {
+                    $lastKey = end($developerSubset);
+                } else {
+                    break;
+                }
+            }
+        } else {
+            $this->get();
+            $developers = $this->responseObj;
+        }
         return $developers;
     }
 
     /**
      * Returns an array of all developers in the org.
      *
-     * @return array
+     * Note that if using a paging-enabled org, a maximum of 100 apps will be
+     * listed for each developer that comes back in this list. In order to get
+     * a canonical listing of a developer's apps, you should invoke
+     * DeveloperApp::getList() or DeveloperApp::getListDetail().
+     *
+     * @return Developer[]
      */
     public function loadAllDevelopers()
     {
-        $this->get('?expand=true');
-        $developers = $this->responseObj;
-        $out = array();
-        foreach ($developers['developer'] as $dev) {
-            $developer = new Developer($this->config);
-            self::loadFromResponse($developer, $dev);
-            $out[] = $developer;
+        $developers = array();
+        if ($this->pagingEnabled) {
+            $lastKey = null;
+            while (true) {
+                $queryString = '?expand=true&count=' . $this->pageSize;
+                if (isset($lastKey)) {
+                    $queryString .= '&startKey=' . urlencode($lastKey);
+                }
+                $this->get($queryString);
+                $developerSubset = $this->responseObj;
+                $subsetCount = count($developerSubset['developer']);
+                if ($subsetCount == 0) {
+                    break;
+                }
+                if (isset($lastKey)) {
+                    // Avoid duplicating the last key, which is the first key
+                    // on this page.
+                    array_shift($developerSubset['developer']);
+                }
+                foreach ($developerSubset['developer'] as $dev) {
+                    $developer = new Developer($this->config);
+                    self::loadFromResponse($developer, $dev);
+                    $developers[] = $developer;
+                }
+                if ($subsetCount == $this->pageSize) {
+                    $lastDeveloper = end($developerSubset['developer']);
+                    $lastKey = $lastDeveloper['developerId'];
+                } else {
+                    break;
+                }
+            }
+        } else {
+            $this->get('?expand=true');
+            $developerList = $this->responseObj;
+            foreach ($developerList['developer'] as $dev) {
+                $developer = new Developer($this->config);
+                self::loadFromResponse($developer, $dev);
+                $developers[] = $developer;
+            }
         }
-        return $out;
+        return $developers;
     }
 
     /**
@@ -522,7 +679,13 @@ class Developer extends Base
                 $this->lastName = $name[1];
             }
         }
-        return (!empty($this->firstName) && !empty($this->lastName) && !empty($this->userName) && !empty($this->email) && strpos($this->email, '@') > 0);
+        return (
+            !empty($this->firstName)
+            && !empty($this->lastName)
+            && !empty($this->userName)
+            && !empty($this->email)
+            && strpos($this->email, '@') > 0
+        );
     }
 
     /**
@@ -555,6 +718,8 @@ class Developer extends Base
     {
         $properties = array_keys(get_object_vars($this));
         $excluded_properties = array_keys(get_class_vars(get_parent_class($this)));
+        $excluded_properties[] = 'pagingEnabled';
+        $excluded_properties[] = 'pageSize';
         $output = array();
         foreach ($properties as $property) {
             if (!in_array($property, $excluded_properties)) {

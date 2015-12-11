@@ -2,12 +2,15 @@
 
 namespace Apigee\ManagementAPI;
 
-use \Apigee\Exceptions\ResponseException;
-use \Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the Company object in the Management API and allows clients to
  * manipulate it.
+ *
+ * Note: at this time Companies do not support paging.
  *
  * @author djohnson
  */
@@ -151,6 +154,14 @@ class Company extends Base
         return $this->attributes[$name];
     }
 
+    /**
+     * Sets a named attribute.
+     *
+     * @todo If we are in a paged environment, make sure we don't exceed 20 here.
+     *
+     * @param string $name
+     * @param string $value
+     */
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -162,7 +173,7 @@ class Company extends Base
      *
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/o/' . rawurlencode($config->orgName) . '/companies');
         $this->blankValues();
@@ -201,7 +212,7 @@ class Company extends Base
      * Returns an array of Company objects representing all companies defined
      * for this org.
      *
-     * @return array
+     * @return Company[]
      */
     public function listCompaniesDetail()
     {
@@ -220,6 +231,11 @@ class Company extends Base
      * Given a valid internal company name, populates this object with
      * its properties as fetched from the Edge server.
      *
+     * Note that if using a paging-enabled org, a maximum of 100 apps will be
+     * returned for a company. In order to get a canonical listing of a
+     * company's apps, you should invoke CompanyApp::getList() or
+     * CompanyApp::getListDetail().
+     *
      * @param string $name
      */
     public function load($name)
@@ -231,20 +247,20 @@ class Company extends Base
     /**
      * Saves this object's properties to the Edge server.
      *
-     * If $force_update is set to true, we assume that this is an update call.
+     * If $isUpdate is set to true, we assume that this is an update call.
      * If it is false, we assume that it is an insert. If null is passed in,
      * we attempt an update, and if it fails we attempt an insert. This is
-     * much less efficient, so declaring $force_update as a boolean will yield
+     * much less efficient, so declaring $is_update as a boolean will yield
      * faster response times.
      *
-     * @param bool|null $force_update
+     * @param bool|null $isUpdate
      * @throws \Apigee\Exceptions\ResponseException
      * @throws \Exception
      */
-    public function save($force_update = false)
+    public function save($isUpdate = false)
     {
         // See if we need to brute-force this.
-        if ($force_update === null) {
+        if ($isUpdate === null) {
             try {
                 $this->save(true);
             } catch (ResponseException $e) {
@@ -272,13 +288,13 @@ class Company extends Base
             }
         }
         $url = null;
-        if ($force_update || $this->createdAt) {
+        if ($isUpdate || $this->createdAt) {
             $url = rawurlencode($this->name);
         }
-        if ($force_update) {
+        if ($isUpdate) {
             $this->put($url, $payload);
         } else {
-            $this->post($url, $payload);
+              $this->post($url, $payload);
         }
         self::loadFromResponse($this, $this->responseObj);
     }
@@ -298,7 +314,7 @@ class Company extends Base
         if (empty($name)) {
             throw new ParameterException('No company name given.');
         }
-        $this->http_delete(rawurlencode($name));
+        $this->httpDelete(rawurlencode($name));
         if ($name == $this->name) {
             $this->blankValues();
         }
@@ -309,6 +325,8 @@ class Company extends Base
      *
      * Return value is an associative array whose keys are role names, and
      * whose values are arrays of developer emails.
+     *
+     * @todo Validate that pagination does not come into play here.
      *
      * @param null|string $company_name
      * @return array
@@ -334,6 +352,9 @@ class Company extends Base
 
     /**
      * Adds or updates a developer (and the dev's role) on the Edge server.
+     *
+     * When updating an existing developer, specify both the developer's email
+     * and role.
      *
      * @param string $dev_email
      * @param string $role
@@ -369,10 +390,29 @@ class Company extends Base
             throw new ParameterException('No company name given.');
         }
         $url = rawurlencode($company_name) . '/developers/' . rawurlencode($dev_email);
-        $this->http_delete($url);
+        $this->httpDelete($url);
     }
 
     /**
+     * Get all companies which developer is part of.
+     *
+     * You should directly call Developer::getCompanies() instead of calling
+     * this method.
+     *
+     * @deprecated
+     *
+     * @param string $developer_id
+     * @return array
+     */
+    public function getDeveloperCompanies($developer_id)
+    {
+        $developer = new Developer($this->getConfig());
+        $developer->load($developer_id);
+        return $developer->getCompanies();
+    }
+
+
+  /**
      * Parses an Edge response array and populates a given Company object
      * accordingly.
      *
@@ -384,9 +424,11 @@ class Company extends Base
         foreach ($response as $key => $value) {
             if (property_exists($company, $key)) {
                 if ($key == 'attributes') {
-                   foreach ($value as $name_value_pair) {
-                       $company->attributes[$name_value_pair['name']] = isset($name_value_pair['value']) ? $name_value_pair['value'] : "";
-                   }
+                    foreach ($value as $name_value_pair) {
+                        if (isset($name_value_pair['value'])) {
+                            $company->attributes[$name_value_pair['name']] = $name_value_pair['value'];
+                        }
+                    }
                 } else {
                     $company->$key = $value;
                 }
@@ -428,4 +470,34 @@ class Company extends Base
         }
     }
 
+    /**
+     * Return an array of roles for a developer in a company.
+     *
+     * @param string $developerEmail
+     *    The email of the developer.
+     * @param string $companyName
+     *    The name of the company the developer belongs to.
+     * @return string[]
+     *    An array of role names associated with the developer.
+     */
+    public function getDeveloperRoles($developerEmail, $companyName = null)
+    {
+        $companyName = $companyName ?: $this->name;
+        if (empty($companyName)) {
+            throw new ParameterException('No Company name given.');
+        }
+        $url = rawurlencode($companyName) . '/developers';
+        $this->get($url);
+
+        $roles = array();
+        if ($this->responseObj && array_key_exists('developer', $this->responseObj)) {
+            foreach ($this->responseObj['developer'] as $developerInfo) {
+                if ($developerInfo['email'] == $developerEmail) {
+                    $roles = explode(',', $developerInfo['role']);
+                    break;
+                }
+            }
+        }
+        return $roles;
+    }
 }

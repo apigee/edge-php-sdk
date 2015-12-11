@@ -29,9 +29,6 @@ class Revision extends APIObject
     /** @var string */
     protected $changeLog;
 
-    /** @var array */
-    protected $apiSchema;
-
     /** @var string */
     protected $baseUrl;
 
@@ -48,7 +45,7 @@ class Revision extends APIObject
     protected $customAttributes;
 
 
-    /** @var array */
+    /** @var \Apigee\SmartDocs\Resource[] */
     protected $resources;
 
     /** @var int */
@@ -72,12 +69,6 @@ class Revision extends APIObject
     /** @var string */
     protected $apiName;
 
-    /* * @var bool */
-    //protected $isactive;
-
-    /* * @var bool */
-    //protected $isLatest;
-
     /**
      * Restores this Revision object to its pristine state.
      */
@@ -87,7 +78,6 @@ class Revision extends APIObject
         $this->description = '';
         $this->releaseVersion = '';
         $this->changeLog = '';
-        $this->apiSchema = array();
         $this->baseUrl = '';
         $this->params = array();
         $this->paramGroups = array();
@@ -101,8 +91,6 @@ class Revision extends APIObject
         $this->modifiedTime = 0;
         $this->createdBy = '';
         $this->modifiedBy = '';
-        //$this->isactive = '';
-        //$this->isLatest = '';
 
         $this->resources = array();
         $this->apiId = '';
@@ -158,16 +146,6 @@ class Revision extends APIObject
     public function setChangeLog($log)
     {
         $this->changeLog = $log;
-    }
-
-    public function getApiSchema()
-    {
-        return $this->apiSchema;
-    }
-
-    public function setApiSchema(array $schema)
-    {
-        $this->apiSchema = $schema;
     }
 
     public function getBaseUrl()
@@ -244,7 +222,7 @@ class Revision extends APIObject
     /**
      * Takes values from an array and populates a Revision with them.
      *
-     * @param Revision $model
+     * @param Revision $revision
      * @param array $array
      */
     public static function fromArray(Revision $revision, array $array)
@@ -269,12 +247,13 @@ class Revision extends APIObject
     /**
      * Persists the current Revision as an array.
      *
+     * @param bool $verbose
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
         $payload_keys = array(
-            'displayName', 'description', 'releaseVersion', 'changeLog', 'apiSchema',
+            'displayName', 'description', 'releaseVersion', 'changeLog',
             'baseUrl', 'params', 'paramGroups', 'tags', 'customAttributes',
         );
         if ($verbose) {
@@ -306,14 +285,17 @@ class Revision extends APIObject
     {
         $this->blankValues();
         $this->apiId = $modelId;
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/apimodels/' . rawurlencode($this->apiId) . '/revisions');
+        $baseUrl = '/o/' . rawurlencode($config->orgName)
+            . '/apimodels/' . rawurlencode($this->apiId)
+            . '/revisions';
+        $this->init($config, $baseUrl);
     }
 
     /**
      * Returns an array of all revisions for this model. The order of items in
      * the array may be non-deterministic.
      *
-     * @return array
+     * @return Revision[]
      */
     public function listRevisions()
     {
@@ -332,9 +314,12 @@ class Revision extends APIObject
      *
      * @param string|int|null $revisionId
      *        This may be a UUID or a revision number.
+     * @param bool $summaryOnly
+     *        When true, resource objects are returned as stubs without full
+     *        detail.
      * @throws ParameterException
      */
-    public function load($revisionId = null)
+    public function load($revisionId = null, $summaryOnly = false)
     {
         $revisionId = $revisionId ?: $this->id;
         if (empty($revisionId)) {
@@ -343,7 +328,8 @@ class Revision extends APIObject
         if (is_int($revisionId) && $revisionId < 1) {
             throw new ParameterException('Cannot load a revision number less than 1.');
         }
-        $this->get($revisionId . '?expand=true');
+        $queryString = ($summaryOnly ? '' : '?expand=true');
+        $this->get($revisionId . $queryString);
         self::fromArray($this, $this->responseObj);
     }
 
@@ -355,9 +341,9 @@ class Revision extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
-        $payload = $this->toArray(FALSE);
+        $payload = $this->toArray(false);
         $keys = array_keys($payload);
         foreach ($keys as $key) {
             if (empty($payload[$key])) {
@@ -378,7 +364,7 @@ class Revision extends APIObject
     /**
      * Deletes a revision.
      *
-     * @param string|int|null $revisionUuid
+     * @param string|int|null $revisionId
      *        This may be a UUID or a revision number.
      * @throws ParameterException
      */
@@ -388,69 +374,28 @@ class Revision extends APIObject
         if (empty($revisionId)) {
             throw new ParameterException('Cannot delete a revision with no Revision UUID.');
         }
-        $this->http_delete($revisionId);
+        $this->httpDelete($revisionId);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
     }
 
     /**
-     * Imports a model revision from a Swagger URL.
-     *
-     * @param string $modelId
-     * @param string $swaggerUrl
-     */
-    public function importSwagger($swaggerUrl)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=swagger', 'URL=' . $swaggerUrl, 'text/plain; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
-     * Imports a model revision from a WADL document.
-     *
-     * @param string $modelId
-     * @param string $xml
-     */
-    public function importWadl($xml)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=wadl', $xml, 'application/xml; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
-     * Imports a model revision from an Apigee Internal JSON document.
-     *
-     * @param string $modelId
-     * @param string $json
-     */
-    public function importApigeeJson($json)
-    {
-        $this->blankValues();
-        $this->post('?action=import&format=apimodel', $json, 'application/json; charset=utf-8');
-        $response = $this->responseObj;
-        self::fromArray($this, $response);
-    }
-
-    /**
      * Exports a SmartDocs revision as JSON (default) or an XML-based format.
      *
-     * @param string $modelId
-     * @param string $format
+     * @param string $format Export format, either 'wadl' or 'json', defaults
+     *  to 'wadl'.
      * @param int|null $revision
      *
      * @return string
      */
-    public function export($format, $revision = NULL)
+    public function export($format = 'json', $revision = null)
     {
         $revision = $revision ?: 'latest';
         if ($format == 'json' || empty($format)) {
-            $this->get($revision . '?expand=yes');
+            $this->get($revision . '?expand=true');
         } else {
-            $this->get($revision . '?expand=yes&format=' . $format, 'text/xml');
+            // Export format is WADL.
+            $this->get($revision . '?expand=true&format=' . $format, 'text/xml');
         }
         return $this->responseText;
     }

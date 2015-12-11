@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li class="active"><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -136,6 +157,8 @@
 	<div class="description">
 	<p>Abstracts the Company object in the Management API and allows clients to
 manipulate it.</p>
+
+<p>Note: at this time Companies do not support paging.</p>
 	</div>
 
 	<dl class="tree">
@@ -175,7 +198,8 @@ manipulate it.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/Company.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.Company.html#9-499" title="Go to source code">ManagementAPI/Company.php</a>
+		<br>
 	</div>
 
 
@@ -194,7 +218,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code>getName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#60-68" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			<p>Gets the company's internal name</p>
@@ -228,7 +252,7 @@ manipulate it.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code>setName( <span> <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#70-81" title="Go to source code">setName</a>( <span> <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the company's internal name.</p>
@@ -266,7 +290,7 @@ characters, hyphens and underscores only.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDisplayName">#</a>
-		<code>getDisplayName( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#83-91" title="Go to source code">getDisplayName</a>( )</code>
 
 		<div class="description short">
 			<p>Gets the human-readable company name.</p>
@@ -300,7 +324,7 @@ characters, hyphens and underscores only.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDisplayName">#</a>
-		<code>setDisplayName( <span> <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#93-102" title="Go to source code">setDisplayName</a>( <span> <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the human-readable company name. This may consist of any
@@ -337,7 +361,7 @@ characters.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatus">#</a>
-		<code>getStatus( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#104-113" title="Go to source code">getStatus</a>( )</code>
 
 		<div class="description short">
 			<p>Gets the company status as a string. Valid values are 'active' or
@@ -373,7 +397,7 @@ characters.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatus">#</a>
-		<code>setStatus( <span>mixed <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#115-131" title="Go to source code">setStatus</a>( <span>mixed <var>$status</var></span> )</code>
 
 		<div class="description short">
 			<p>Sets the company status. Valid values are 'active' or 'inactive', though
@@ -410,7 +434,7 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttributes">#</a>
-		<code>getAttributes( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#133-141" title="Go to source code">getAttributes</a>( )</code>
 
 		<div class="description short">
 			<p>Returns all defined attributes as an array of key-value pairs.</p>
@@ -444,7 +468,7 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAttribute">#</a>
-		<code>getAttribute( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#143-155" title="Go to source code">getAttribute</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns a named attribute, or null if it does not exist.</p>
@@ -483,16 +507,23 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAttribute">#</a>
-		<code>setAttribute( <span> <var>$name</var></span>, <span> <var>$value</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#157-168" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>Sets a named attribute.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>Sets a named attribute.</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd></dd>
+					<dt><var>$value</var></dt>
+					<dd></dd>
+				</dl></div>
 
 
 
@@ -513,7 +544,7 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#171-180" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Initializes default values of all member variables.</p>
@@ -548,7 +579,7 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_blankValues">#</a>
-		<code>blankValues( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#182-197" title="Go to source code">blankValues</a>( )</code>
 
 		<div class="description short">
 			<p>Sets all member variables to their pristine state.</p>
@@ -578,7 +609,7 @@ boolean or 0|1 values are also accepted.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listCompanies">#</a>
-		<code>listCompanies( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#199-209" title="Go to source code">listCompanies</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of all internal company names defined for this org.</p>
@@ -605,14 +636,14 @@ boolean or 0|1 values are also accepted.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			<code><a href="class-Apigee.ManagementAPI.Company.html">Apigee\ManagementAPI\Company</a>[]</code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listCompaniesDetail">#</a>
-		<code>listCompaniesDetail( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#211-228" title="Go to source code">listCompaniesDetail</a>( )</code>
 
 		<div class="description short">
 			<p>Returns an array of Company objects representing all companies defined
@@ -627,7 +658,7 @@ for this org.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					<code><a href="class-Apigee.ManagementAPI.Company.html">Apigee\ManagementAPI\Company</a>[]</code>
 				</div>
 
 
@@ -648,7 +679,7 @@ for this org.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_load">#</a>
-		<code>load( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#230-245" title="Go to source code">load</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			<p>Given a valid internal company name, populates this object with
@@ -658,6 +689,11 @@ its properties as fetched from the Edge server.</p>
 		<div class="description detailed hidden">
 			<p>Given a valid internal company name, populates this object with
 its properties as fetched from the Edge server.</p>
+
+<p>Note that if using a paging-enabled org, a maximum of 100 apps will be
+returned for a company. In order to get a canonical listing of a
+company's apps, you should invoke CompanyApp::getList() or
+CompanyApp::getListDetail().</p>
 
 
 				<h4>Parameters</h4>
@@ -685,7 +721,7 @@ its properties as fetched from the Edge server.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code>save( <span>boolean|null <var>$force_update</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#247-300" title="Go to source code">save</a>( <span>boolean|null <var>$isUpdate</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Saves this object's properties to the Edge server.</p>
@@ -694,16 +730,16 @@ its properties as fetched from the Edge server.</p>
 		<div class="description detailed hidden">
 			<p>Saves this object's properties to the Edge server.</p>
 
-<p>If $force_update is set to true, we assume that this is an update call.
+<p>If $isUpdate is set to true, we assume that this is an update call.
 If it is false, we assume that it is an insert. If null is passed in,
 we attempt an update, and if it fails we attempt an insert. This is
-much less efficient, so declaring $force_update as a boolean will yield
+much less efficient, so declaring $is_update as a boolean will yield
 faster response times.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$force_update</var></dt>
+					<dt><var>$isUpdate</var></dt>
 					<dd></dd>
 				</dl></div>
 
@@ -731,7 +767,7 @@ faster response times.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code>delete( <span>string|null <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#302-321" title="Go to source code">delete</a>( <span>string|null <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Deletes a company from the org on the Edge server.</p>
@@ -773,7 +809,7 @@ object state is assumed.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listDevelopers">#</a>
-		<code>listDevelopers( <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#323-351" title="Go to source code">listDevelopers</a>( <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Fetches a list of developer emails, organized by role.</p>
@@ -819,7 +855,7 @@ whose values are arrays of developer emails.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateDeveloper">#</a>
-		<code>updateDeveloper( <span>string <var>$dev_email</var></span>, <span>string <var>$role</var> = <span class="php-quote">'developer'</span></span>, <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#353-377" title="Go to source code">updateDeveloper</a>( <span>string <var>$dev_email</var></span>, <span>string <var>$role</var> = <span class="php-quote">'developer'</span></span>, <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Adds or updates a developer (and the dev's role) on the Edge server.</p>
@@ -827,6 +863,9 @@ whose values are arrays of developer emails.</p>
 
 		<div class="description detailed hidden">
 			<p>Adds or updates a developer (and the dev's role) on the Edge server.</p>
+
+<p>When updating an existing developer, specify both the developer's email
+and role.</p>
 
 
 				<h4>Parameters</h4>
@@ -862,7 +901,7 @@ whose values are arrays of developer emails.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeDeveloper">#</a>
-		<code>removeDeveloper( <span>string <var>$dev_email</var></span>, <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#379-394" title="Go to source code">removeDeveloper</a>( <span>string <var>$dev_email</var></span>, <span>null|string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Removes a developer from a company.</p>
@@ -891,6 +930,45 @@ whose values are arrays of developer emails.</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getDeveloperCompanies" id="_getDeveloperCompanies">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDeveloperCompanies">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#396-417" title="Go to source code">getDeveloperCompanies</a>( <span>string <var>$developer_id</var></span> )</code>
+
+		<div class="description short">
+			<p>Get all companies which developer is part of.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get all companies which developer is part of.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$developer_id</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="toArray" id="_toArray">
 
 		<td class="attributes"><code>
@@ -903,7 +981,7 @@ whose values are arrays of developer emails.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code>toArray( )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#444-461" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			<p>Converts this object's properties into an array for external use.</p>
@@ -937,7 +1015,7 @@ whose values are arrays of developer emails.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fromArray">#</a>
-		<code>fromArray( <span> <var>$array</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#463-476" title="Go to source code">fromArray</a>( <span> <var>$array</var></span> )</code>
 
 		<div class="description short">
 			<p>Populates this object based on an incoming array generated by the
@@ -955,6 +1033,47 @@ toArray() method above.</p>
 					<dd></dd>
 				</dl></div>
 
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDeveloperRoles" id="_getDeveloperRoles">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDeveloperRoles">#</a>
+		<code><a href="source-class-Apigee.ManagementAPI.Company.html#478-498" title="Go to source code">getDeveloperRoles</a>( <span>string <var>$developer_email</var></span>, <span>string <var>$company_name</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Return an array of roles for a developer in a company.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return an array of roles for a developer in a company.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$developer_email</var></dt>
+					<dd>The email of the developer.</dd>
+					<dt><var>$company_name</var></dt>
+					<dd>The name of the company the developer belongs to.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>An array of role names associated with the developer.
+				</div>
 
 
 
@@ -981,7 +1100,7 @@ toArray() method above.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 

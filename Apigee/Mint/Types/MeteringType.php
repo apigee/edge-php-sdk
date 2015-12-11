@@ -7,8 +7,4 @@ final class MeteringType extends Type
     const UNIT = 'UNIT'; //Flat rate
     const VOLUME = 'VOLUME';
     const STAIR_STEP = 'STAIR_STEP'; //Bundled
-
-    private function __construct()
-    {
-    }
 }

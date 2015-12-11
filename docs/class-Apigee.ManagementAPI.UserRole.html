@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -86,6 +105,8 @@
 				<li><a href="class-Apigee.ManagementAPI.Base.html">Base</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Company.html">Company</a></li>
 				<li><a href="class-Apigee.ManagementAPI.CompanyApp.html">CompanyApp</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInvitation.html">CompanyInvitation</a></li>
+				<li><a href="class-Apigee.ManagementAPI.CompanyInviteRequest.html">CompanyInviteRequest</a></li>
 				<li><a href="class-Apigee.ManagementAPI.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperApp.html">DeveloperApp</a></li>
 				<li><a href="class-Apigee.ManagementAPI.DeveloperAppAnalytics.html">DeveloperAppAnalytics</a></li>
@@ -175,7 +196,8 @@ invocation, which makes the actual HTTP calls.</p>
 
 				<b>Author:</b>
 				djohnson<br>
-			<b>Located at</b> ManagementAPI/UserRole.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.ManagementAPI.UserRole.html#6-185" title="Go to source code">ManagementAPI/UserRole.php</a>
+		<br>
 	</div>
 
 
@@ -194,7 +216,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#9-17" title="Go to source code">__construct</a>( <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			<p>Initializes default values of all member variables.</p>
@@ -222,14 +244,14 @@ invocation, which makes the actual HTTP calls.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getUsersByRole">#</a>
-		<code>getUsersByRole( <span>string <var>$role</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#19-33" title="Go to source code">getUsersByRole</a>( <span>string <var>$role</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns a list of all system users associated with a role.</p>
@@ -247,7 +269,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array<br>An array of email addresses of the users.
+					string[]<br>An array of email addresses of the users.
 				</div>
 
 
@@ -268,7 +290,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addUsersToRole">#</a>
-		<code>addUsersToRole( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#35-58" title="Go to source code">addUsersToRole</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
 
 		<div class="description short">
 			<p>Adds users to a role.</p>
@@ -309,7 +331,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removeUsersFromRole">#</a>
-		<code>removeUsersFromRole( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#60-82" title="Go to source code">removeUsersFromRole</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
 
 		<div class="description short">
 			<p>Removes users from a role.</p>
@@ -350,7 +372,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRoleUsers">#</a>
-		<code>setRoleUsers( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#84-116" title="Go to source code">setRoleUsers</a>( <span>array <var>$users</var></span>, <span>string <var>$role</var></span> )</code>
 
 		<div class="description short">
 			<p>Replaces the users in a role with $users.</p>
@@ -384,14 +406,14 @@ invocation, which makes the actual HTTP calls.</p>
 		<td class="attributes"><code>
 			 public 
 
-			array
+			string[]
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listRoles">#</a>
-		<code>listRoles( <span>boolean|array <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#118-141" title="Go to source code">listRoles</a>( <span>boolean|array <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			<p>Returns a list of all system roles.</p>
@@ -409,7 +431,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 				<h4>Returns</h4>
 				<div class="list">
-					array
+					string[]
 				</div>
 
 
@@ -430,7 +452,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addRole">#</a>
-		<code>addRole( <span>string <var>$role_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#143-158" title="Go to source code">addRole</a>( <span>string <var>$role_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Adds a role.</p>
@@ -465,7 +487,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_deleteRole">#</a>
-		<code>deleteRole( <span>string <var>$role_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#160-174" title="Go to source code">deleteRole</a>( <span>string <var>$role_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Deletes a role.</p>
@@ -500,7 +522,7 @@ invocation, which makes the actual HTTP calls.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_roleExists">#</a>
-		<code>roleExists( <span>string <var>$role_name</var></span> )</code>
+		<code><a href="source-class-Apigee.ManagementAPI.UserRole.html#176-184" title="Go to source code">roleExists</a>( <span>string <var>$role_name</var></span> )</code>
 
 		<div class="description short">
 			<p>Returns true if the role exists.</p>
@@ -546,7 +568,7 @@ invocation, which makes the actual HTTP calls.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 

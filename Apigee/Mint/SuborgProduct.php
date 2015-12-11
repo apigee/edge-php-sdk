@@ -2,8 +2,8 @@
 namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
-use \Apigee\Exceptions\ParameterException as ParameterException;
-use \Apigee\Util\Log as Log;
+use \Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 class SuborgProduct extends Base\BaseObject
 {
@@ -37,9 +37,13 @@ class SuborgProduct extends Base\BaseObject
      * @param string $product_id Product id
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($product_id, \Apigee\Util\OrgConfig $config)
+    public function __construct($product_id, OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/products/' . rawurlencode($product_id) . '/suborg-products';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/products/'
+            . rawurlencode($product_id)
+            . '/suborg-products';
         $this->init($config, $base_url);
         $this->wrapperTag = 'suborgProduct';
         $this->idField = 'id';

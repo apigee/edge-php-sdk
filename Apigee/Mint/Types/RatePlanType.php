@@ -9,8 +9,4 @@ final class RatePlanType extends Type
     const DEVELOPER = 'DEVELOPER';
     const APPLICATION_CATEGORY = 'APPLICATION_CATEGORY';
     const EXCHANGE_ORGANIZATION = 'EXCHANGE_ORGANIZATION';
-
-    private function __construct()
-    {
-    }
 }
