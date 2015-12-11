@@ -1,6 +1,10 @@
 <?php
 namespace Apigee\Mint\DataStructures;
 
+use Apigee\Util\OrgConfig;
+use Apigee\Mint\Organization;
+use Apigee\Mint\Product;
+
 class RatePlanDetail extends DataStructure
 {
 
@@ -99,7 +103,7 @@ class RatePlanDetail extends DataStructure
      * @param array|null $data
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($data = null, \Apigee\Util\OrgConfig $config)
+    public function __construct($data, OrgConfig $config)
     {
         if (is_array($data)) {
 
@@ -114,13 +118,13 @@ class RatePlanDetail extends DataStructure
             }
 
             if (isset($data['organization'])) {
-                $organization = new \Apigee\Mint\Organization($config);
+                $organization = new Organization($config);
                 $organization->loadFromRawData($data['organization']);
                 $this->organization = $organization;
             }
 
             if (isset($data['product'])) {
-                $product = new \Apigee\Mint\Product($config);
+                $product = new Product($config);
                 $product->loadFromRawData($data['product']);
                 $this->product = $product;
             }
@@ -151,7 +155,7 @@ class RatePlanDetail extends DataStructure
     }
 
     /**
-     * @return \Apigee\Mint\DataStructures\SupportedCurrency $currency
+     * @return \Apigee\Mint\Organization
      */
     public function getOrganization()
     {
@@ -161,199 +165,224 @@ class RatePlanDetail extends DataStructure
     /**
      * @param \Apigee\Mint\DataStructures\SupportedCurrency $currency
      */
-    public function setCurrency($currency) {
+    public function setCurrency($currency)
+    {
         $this->currency = $currency;
     }
 
     /**
      * @return \Apigee\Mint\DataStructures\SupportedCurrency
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->currency;
     }
 
     /**
      * @param int $duration
      */
-    public function setDuration($duration) {
+    public function setDuration($duration)
+    {
         $this->duration = $duration;
     }
 
     /**
      * @return int
      */
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->duration;
     }
 
     /**
      * @param string $durationType
      */
-    public function setDurationType($durationType) {
+    public function setDurationType($durationType)
+    {
         $this->durationType = $durationType;
     }
 
     /**
      * @return string
      */
-    public function getDurationType() {
+    public function getDurationType()
+    {
         return $this->durationType;
     }
 
     /**
      * @param int $freemiumDuration
      */
-    public function setFreemiumDuration($freemiumDuration) {
+    public function setFreemiumDuration($freemiumDuration)
+    {
         $this->freemiumDuration = $freemiumDuration;
     }
 
     /**
      * @return int
      */
-    public function getFreemiumDuration() {
+    public function getFreemiumDuration()
+    {
         return $this->freemiumDuration;
     }
 
     /**
      * @param string $freemiumDurationType
      */
-    public function setFreemiumDurationType($freemiumDurationType) {
-      $this->freemiumDurationType = $freemiumDurationType;
+    public function setFreemiumDurationType($freemiumDurationType)
+    {
+        $this->freemiumDurationType = $freemiumDurationType;
     }
 
     /**
      * @return string
      */
-    public function getFreemiumDurationType() {
+    public function getFreemiumDurationType()
+    {
         return $this->freemiumDurationType;
     }
 
     /**
      * @param int $freemiumUnit
      */
-    public function setFreemiumUnit($freemiumUnit) {
+    public function setFreemiumUnit($freemiumUnit)
+    {
         $this->freemiumUnit = $freemiumUnit;
     }
 
     /**
      * @return int
      */
-    public function getFreemiumUnit() {
+    public function getFreemiumUnit()
+    {
         return $this->freemiumUnit;
     }
 
     /**
      * @param string $id
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
     /**
      * @return string
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @param string $meteringType
      */
-    public function setMeteringType($meteringType) {
+    public function setMeteringType($meteringType)
+    {
         $this->meteringType = $meteringType;
     }
 
     /**
      * @return string
      */
-    public function getMeteringType() {
+    public function getMeteringType()
+    {
         return $this->meteringType;
     }
 
     /**
      * @param \Apigee\Mint\Product $product
      */
-    public function setProduct($product) {
+    public function setProduct($product)
+    {
         $this->product = $product;
     }
 
     /**
      * @return \Apigee\Mint\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @param array $ratePlanRates
      */
-    public function setRatePlanRates($ratePlanRates) {
+    public function setRatePlanRates($ratePlanRates)
+    {
         $this->ratePlanRates = $ratePlanRates;
     }
 
     /**
      * @return array
      */
-    public function getRatePlanRates() {
+    public function getRatePlanRates()
+    {
         return $this->ratePlanRates;
     }
 
     /**
      * @param string $ratingParameter
      */
-    public function setRatingParameter($ratingParameter) {
+    public function setRatingParameter($ratingParameter)
+    {
         $this->ratingParameter = $ratingParameter;
     }
 
     /**
      * @return string
      */
-    public function getRatingParameter() {
+    public function getRatingParameter()
+    {
         return $this->ratingParameter;
     }
 
     /**
      * @param string $ratingParameterUnit
      */
-    public function setRatingParameterUnit($ratingParameterUnit) {
+    public function setRatingParameterUnit($ratingParameterUnit)
+    {
         $this->ratingParameterUnit = $ratingParameterUnit;
     }
 
     /**
      * @return string
      */
-    public function getRatingParameterUnit() {
+    public function getRatingParameterUnit()
+    {
         return $this->ratingParameterUnit;
     }
 
     /**
      * @param string $revenueType
      */
-    public function setRevenueType($revenueType) {
+    public function setRevenueType($revenueType)
+    {
         $this->revenueType = $revenueType;
     }
 
     /**
      * @return string
      */
-    public function getRevenueType() {
+    public function getRevenueType()
+    {
         return $this->revenueType;
     }
 
     /**
      * @param string $type
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
-
-
 }
-

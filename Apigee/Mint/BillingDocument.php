@@ -1,11 +1,12 @@
 <?php
 namespace Apigee\Mint;
 
-use Apigee\Mint\Exceptions\MintApiException as MintApiException;
-use Apigee\Exceptions\ResponseException as ResponseException;
-use Apigee\Mint\Types\MonthType as MonthType;
-use Apigee\Mint\DataStructures\BillingMonth as BillingMonth;
-use Apigee\Exceptions\ParameterException as ParameterException;
+use Apigee\Mint\Exceptions\MintApiException;
+use Apigee\Mint\Types\MonthType;
+use Apigee\Mint\DataStructures\BillingMonth;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Util\OrgConfig;
 
 class BillingDocument extends Base\BaseObject
 {
@@ -119,7 +120,7 @@ class BillingDocument extends Base\BaseObject
 
     private $fileMimeType;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/billing-documents';
         $this->init($config, $base_url);
@@ -132,6 +133,15 @@ class BillingDocument extends Base\BaseObject
         $this->initValues();
     }
 
+    /**
+     * @param string $developer_id
+     * @param string $billing_month
+     * @param string $billing_year
+     * @param bool $received
+     * @param bool $all
+     *
+     * @return BillingDocument[]
+     */
     public function getBillingDocuments($developer_id, $billing_month, $billing_year, $received = true, $all = false)
     {
         $dev_criteria = new \stdClass();
@@ -170,7 +180,10 @@ class BillingDocument extends Base\BaseObject
         return $docs;
     }
 
-    public function listBillingMonths($id = null)
+    /**
+     * @return BillingMonth[]
+     */
+    public function listBillingMonths()
     {
         $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/billing-documents-months';
         $this->setBaseUrl($url);
@@ -189,7 +202,6 @@ class BillingDocument extends Base\BaseObject
     {
         $this->organization = null;
         $this->product = array();
-        $this->sub_org = array();
         $this->developer = array();
         $this->billableDeveloper = null;
         $this->billableExchangeOrg = null;
@@ -326,13 +338,12 @@ class BillingDocument extends Base\BaseObject
             }
 
             $headers = array('accept' => 'application/octet-stream');
-            $options = array();
 
             $url = $this->client->getBaseUrl() . '/' . rawurlencode($this->documentNumber) . '/file';
-            $this->client = new \Guzzle\Http\Client();
-            $this->client->setSslVerification(false, false, 0);
-            $request = $this->client->get($url, $headers, $options);
-            $request->setAuth($this->getConfig()->user, $this->getConfig()->pass);
+            $client = clone $this->client;
+            $client->setBaseUrl(null);
+            $client->setSslVerification(false, false, 0);
+            $request = $client->get($url, $headers);
             $tmp_file = 'php://temp/maxmemory:256000';
             $handle = fopen($tmp_file, 'rw');
             $request->setResponseBody($handle);
@@ -342,11 +353,13 @@ class BillingDocument extends Base\BaseObject
             while (($read = fread($handle, 254)) != null) {
                 $content = !isset($content) ? $read : $content . $read;
             }
+            fclose($handle);
             return array(
                 'content' => $content,
                 'length' => $response->getContentLength(),
             );
         }
+        return null;
     }
 
     /**
@@ -579,7 +592,7 @@ class BillingDocument extends Base\BaseObject
 
     public function setTaxAmount($tax_amount)
     {
-        $this->tax_amount = $tax_amount;
+        $this->taxAmount = $tax_amount;
     }
 
     public function getDueDate()
@@ -589,7 +602,7 @@ class BillingDocument extends Base\BaseObject
 
     public function setDueDate($due_date)
     {
-        $this->due_date = $due_date;
+        $this->dueDate = $due_date;
     }
 
     public function getBatchId()
@@ -621,5 +634,4 @@ class BillingDocument extends Base\BaseObject
     {
         $this->billingDocDate = $date;
     }
-
 }

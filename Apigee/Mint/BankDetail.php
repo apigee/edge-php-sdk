@@ -1,6 +1,9 @@
 <?php
 namespace Apigee\Mint;
 
+use Apigee\Mint\DataStructures\Address;
+use Apigee\Util\OrgConfig;
+
 class BankDetail extends Base\BaseObject
 {
 
@@ -11,7 +14,7 @@ class BankDetail extends Base\BaseObject
     private $devEmail;
 
     /**
-     * @var \Apigee\Mint\DataStructures\Address
+     * @var Address
      *     Bank's Addresses
      */
     private $address;
@@ -71,9 +74,13 @@ class BankDetail extends Base\BaseObject
     private $sortCode;
 
 
-    public function __construct($developer_email, \Apigee\Util\OrgConfig $config)
+    public function __construct($developer_email, OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers/' . rawurldecode($developer_email) . '/bank-details';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/developers/'
+            . rawurldecode($developer_email)
+            . '/bank-details';
         $this->init($config, $base_url);
         $this->devEmail = $developer_email;
         $this->wrapperTag = 'bankDetail';
@@ -138,33 +145,13 @@ class BankDetail extends Base\BaseObject
         }
     }
 
-    private static function getSetterMethods($class_name)
-    {
-        $class = new \ReflectionClass($class_name);
-        $setter_methods = array();
-        foreach ($class->getMethods() as $method) {
-            if ($method->getDeclaringClass() != $class) {
-                continue;
-            }
-            $method_name = $method->getName();
-
-            if (strpos($method_name, 'get') !== 0 || $method->getNumberOfParameters() > 0) {
-                continue;
-            }
-
-            if ($method->isProtected() || $method->isPublic()) {
-                $setter_methods[$method_name] = $method;
-            }
-        }
-        return $setter_methods;
-    }
-
     public function save($save_method)
     {
         if ($this->id == null) {
             $this->post(null, $this->__toString());
         } else {
-            $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id);
+            $baseUrl = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id;
+            $this->setBaseUrl($baseUrl);
             $this->put(null, $this->__toString());
             $this->restoreBaseUrl();
         }
@@ -173,7 +160,7 @@ class BankDetail extends Base\BaseObject
     public function delete()
     {
         $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id);
-        $this->http_delete();
+        $this->httpDelete();
         $this->restoreBaseUrl();
     }
 
@@ -311,5 +298,4 @@ class BankDetail extends Base\BaseObject
         // TODO: validate
         $this->sortCode = $code;
     }
-
 }

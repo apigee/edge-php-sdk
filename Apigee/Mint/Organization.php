@@ -1,9 +1,10 @@
 <?php
 namespace Apigee\Mint;
 
+use Apigee\Util\APIObject;
+use Apigee\Util\OrgConfig;
 use Apigee\Util\CacheFactory;
 use Apigee\Exceptions\ResponseException;
-use Apigee\Mint\DataStructures\BillingMonth;
 use Apigee\Mint\Types\StatusType;
 use Apigee\Mint\Types\TaxModelType;
 use Apigee\Mint\Types\OrgType;
@@ -12,9 +13,9 @@ use Apigee\Mint\Types\BillingCycleType;
 use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Exceptions\MintApiException;
 
-use \Apigee\Mint\DataStructures\SupportedCurrency;
-use \Apigee\Exceptions\ParameterException;
-use \Apigee\Exceptions\NotImplementedException;
+use Apigee\Mint\DataStructures\SupportedCurrency;
+use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\NotImplementedException;
 
 class Organization extends Base\BaseObject
 {
@@ -62,11 +63,6 @@ class Organization extends Base\BaseObject
      * @var bool
      */
     private $groupOrganization;
-
-    /**
-     * @var bool
-     */
-    private $hasBillingAdjustment;
 
     /**
      * @var bool
@@ -168,7 +164,7 @@ class Organization extends Base\BaseObject
      */
     private $timezone;
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations';
         $this->init($config, $base_url);
@@ -224,11 +220,11 @@ class Organization extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        if(isset($data['address'])) {
-          foreach ($data['address'] as $address_data) {
-            $address = new DataStructures\Address($address_data);
-            $this->addresses[] = $address;
-          }
+        if (isset($data['address'])) {
+            foreach ($data['address'] as $address_data) {
+                $address = new DataStructures\Address($address_data);
+                $this->addresses[] = $address;
+            }
         }
 
         if (isset($data['parent'])) {
@@ -238,7 +234,7 @@ class Organization extends Base\BaseObject
         }
 
         $this->taxRegNo = isset($data['taxRegNo']) ? $data['taxRegNo'] : null;
-        $this->regNo = ISSET($data['regNo']) ? $data['regNo'] : null;
+        $this->regNo = isset($data['regNo']) ? $data['regNo'] : null;
 
         $excluded_properties = array('address', 'regNo', 'taxRegNo', 'parent', 'children');
         foreach (array_keys($data) as $property) {
@@ -308,7 +304,6 @@ class Organization extends Base\BaseObject
         $this->currency = 'USD';
         $this->description = '';
         $this->groupOrganization = false;
-        $this->hasBillingAdjustment = false;
         $this->hasBroker = false;
         $this->hasSelfBilling = false;
         $this->hasSeparateInvoiceForProduct = false;
@@ -381,16 +376,6 @@ class Organization extends Base\BaseObject
         $this->groupOrganization = (bool)$bool;
     }
 
-    public function hasBillingAdjustment()
-    {
-        return $this->hasBillingAdjustment;
-    }
-
-    public function setHasBillingAdjustment($bool = true)
-    {
-        $this->hasBillingAdjustment = (bool)$bool;
-    }
-
     public function hasBroker()
     {
         return $this->hasBroker;
@@ -438,7 +423,7 @@ class Organization extends Base\BaseObject
 
     public function setNettingStmtPerCurrency($bool = true)
     {
-        $this->netting_statement_per_currency = (bool)$bool;
+        $this->nettingStatementPerCurrency = (bool)$bool;
     }
 
     public function getSelfBillingAsExchOrg()
@@ -496,10 +481,17 @@ class Organization extends Base\BaseObject
         return $this->country;
     }
 
-    public function setCountry($country)
+    public function setCountry($country_code)
     {
-        Country::validateCountryCode($country);
-        $this->country = $country;
+        // Only set country if it is valid.
+        if (Country::validateCountryCode($country_code)) {
+            $this->country = $country_code;
+        } elseif ($country_code == 'UK') {
+            // Change incorrect United Kingdom 'UK' country code to 'GB'.
+            $this->country = 'GB';
+        } else {
+            APIObject::$logger->error('Invalid country code "' . $country_code . '" passed from Edge MGMT API.');
+        }
     }
 
     public function getCurrency()
@@ -669,12 +661,13 @@ class Organization extends Base\BaseObject
         );
         $url = rawurlencode($id) . '/supported-currencies';
         $cache_manager = CacheFactory::getCacheManager(null);
-        $data = $cache_manager->get('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), null);
+        $cache_id = 'supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false');
+        $data = $cache_manager->get($cache_id, null);
 
-        if ($data == null) {
+        if ($data === null) {
             $this->get($url, 'application/json; charset=utf-8', array(), $options);
             $data = $this->responseObj;
-            $cache_manager->set('supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false'), $data);
+            $cache_manager->set($cache_id, $data);
         }
         $currencies = array();
         foreach ($data['supportedCurrency'] as $currency_item) {

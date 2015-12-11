@@ -8,6 +8,8 @@
  */
 namespace Apigee\ManagementAPI;
 
+use Apigee\Util\OrgConfig;
+
 /**
  * Abstracts the Organization object in the Management API and allows clients to
  * manipulate it.
@@ -30,14 +32,14 @@ class Organization extends Base
     protected $displayName;
 
     /**
-     * @var array
+     * @var string[]
      * Environments available in the organization. By default 'test' and 'prod'
      * environments are available.
      */
     protected $environments;
 
     /**
-     * @var array
+     * @var string[]
      * A list of descriptors used internally by Apigee.
      */
     protected $properties;
@@ -96,7 +98,7 @@ class Organization extends Base
      * Returns the environments available in the organization. By default 'test'
      * and 'prod' environments are available.
      *
-     * @return array
+     * @return string[]
      */
     public function getEnvironments()
     {
@@ -120,7 +122,7 @@ class Organization extends Base
      */
     public function getProperty($name)
     {
-        return isset($this->properties[$name]) ? $this->properties[$name] : null;
+        return array_key_exists($name, $this->properties) ? $this->properties[$name] : null;
     }
 
     /**
@@ -175,36 +177,37 @@ class Organization extends Base
     /**
      * Initializes default values of all member variables.
      *
-     * @param \Apigee\Util\OrgConfig $config
+     * @param OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $this->init($config, '/organizations');
         $this->name = $config->orgName;
     }
 
     /**
-     * Loads the organization specified by $org.
-     * @param string|null $org
+     * Loads an organization.
+     *
+     * @param string|null $orgName
      */
-    public function load($org = null)
+    public function load($orgName = null)
     {
-        $org = $org ? : $this->name;
-        $this->get(rawurlencode($org));
-        $organization = $this->responseObj;
+        $orgName = $orgName ? : $this->name;
+        $this->get(rawurlencode($orgName));
+        $org = $this->responseObj;
 
-        $this->name = $organization['name'];
-        $this->displayName = $organization['displayName'];
-        $this->environments = $organization['environments'];
-        $this->type = $organization['type'];
-        $this->createAt = $organization['createdAt'];
-        $this->createdBy = $organization['createdBy'];
-        $this->lastModifiedAt = $organization['lastModifiedAt'];
-        $this->lastModifiedBy = $organization['lastModifiedBy'];
+        $this->name = $org['name'];
+        $this->displayName = $org['displayName'];
+        $this->environments = $org['environments'];
+        $this->type = $org['type'];
+        $this->createAt = $org['createdAt'];
+        $this->createdBy = $org['createdBy'];
+        $this->lastModifiedAt = $org['lastModifiedAt'];
+        $this->lastModifiedBy = $org['lastModifiedBy'];
         $this->properties = array();
 
-        if (array_key_exists('properties', $organization) && array_key_exists('property', $organization['properties'])) {
-            foreach ($organization['properties']['property'] as $prop) {
+        if (array_key_exists('properties', $org) && array_key_exists('property', $org['properties'])) {
+            foreach ($org['properties']['property'] as $prop) {
                 if (array_key_exists('name', $prop) && array_key_exists('value', $prop)) {
                     $this->properties[$prop['name']] = $prop['value'];
                 }

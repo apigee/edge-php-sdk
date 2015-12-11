@@ -3,6 +3,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Exceptions\ParameterException;
+use Apigee\Util\OrgConfig;
 
 class Product extends Base\BaseObject
 {
@@ -145,7 +146,7 @@ class Product extends Base\BaseObject
      */
     private $brokers = array();
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
 
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/products';
@@ -184,7 +185,7 @@ class Product extends Base\BaseObject
             }
         }
 
-        if (isset($data['pricePoints']) && is_array($data['pricePoints']) && count($data['pricePoints']) > 0) {
+        if (array_key_exists('pricePoints', $data) && is_array($data['pricePoints'])) {
             foreach ($data['pricePoints'] as $price_point_item) {
                 $price_point = new PricePoint($this->id, $this->config);
                 $price_point->loadFromRawData($price_point_item);
@@ -192,7 +193,7 @@ class Product extends Base\BaseObject
             }
         }
 
-        if (isset($data['suborgProducts']) && is_array($data['suborgProducts']) && count($data['suborgProducts']) > 0) {
+        if (array_key_exists('suborgProducts', $data) && is_array($data['suborgProducts'])) {
             foreach ($data['suborgProducts'] as $suborg_product_item) {
                 $suborg_product = new SuborgProduct($this->id, $this->config);
                 $suborg_product->loadFromRawData($suborg_product_item);
@@ -200,13 +201,13 @@ class Product extends Base\BaseObject
             }
         }
 
-        if (isset($data['organization'])) {
+        if (array_key_exists('organization', $data)) {
             $organization = new Organization($this->config);
             $organization->loadFromRawData($data['organization']);
             $this->organization = $organization;
         }
 
-        if (isset($data['developerCategory']) && is_array($data['developerCategory']) && count($data['developerCategory']) > 0) {
+        if (array_key_exists('developerCategory', $data) && is_array($data['developerCategory'])) {
             foreach ($data['developerCategory'] as $cat_item) {
                 $category = new DeveloperCategory($this->config);
                 $category->loadFromRawData($cat_item);
@@ -215,7 +216,7 @@ class Product extends Base\BaseObject
         }
 
         // TODO verify that brokers are Developers
-        if (isset($data['broker']) && is_array($data['broker']) && count($data['broker']) > 0) {
+        if (array_key_exists('broker', $data) && is_array($data['broker'])) {
             foreach ($data['broker'] as $broker_item) {
                 $broker = new Developer($this->config);
                 $broker->loadFromRawData($broker_item);
@@ -227,7 +228,7 @@ class Product extends Base\BaseObject
     protected function initValues()
     {
         $this->name = '';
-        $this->display_name = '';
+        $this->displayName = '';
         $this->description = '';
         $this->environment = '';
         $this->supportsRefund = false;
@@ -367,7 +368,9 @@ class Product extends Base\BaseObject
 
     /**
      * Get Product Price Points
-     * @return array Array of instances of \Apigee\Mint\PricePoint
+     * @param string|null $product_id
+     * @param bool $refresh
+     * @return PricePoint[]
      */
     public function getPricePoints($product_id = null, $refresh = false)
     {

@@ -2,16 +2,15 @@
 
 namespace Apigee\Mint;
 
-use Apigee\Exceptions\ResponseException;
 use Apigee\Mint\DataStructures\Payment;
-use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Mint\DataStructures\RevenueReport;
-use Apigee\Mint\DataStructures\TransactionBrokerage;
+use Apigee\Mint\Exceptions\MintApiException;
 use Apigee\Mint\Types\BillingType;
 use Apigee\Mint\Types\DeveloperType;
 use Apigee\Mint\Types\DeveloperStatusType;
-use Apigee\Mint\DeveloperBalance;
 use Apigee\Exceptions\ParameterException;
+use Apigee\Exceptions\ResponseException;
+use Apigee\Util\OrgConfig;
 
 class Developer extends Base\BaseObject
 {
@@ -115,17 +114,12 @@ class Developer extends Base\BaseObject
     private $taxExemptAuthNo;
 
     /**
-     * @var \Apigee\Mint\DataStructures\TransactionBrokerage
-     */
-    private $transactionBrokerages;
-
-    /**
      * @var string
      */
     private $type;
 
 
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers';
         $this->init($config, $base_url);
@@ -138,9 +132,7 @@ class Developer extends Base\BaseObject
     }
 
     /**
-     * Implements Base\BaseObject::instantiateNew().
-     *
-     * @return Developer
+     * {@inheritdoc}
      */
     public function instantiateNew()
     {
@@ -152,7 +144,13 @@ class Developer extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        $excluded_properties = array('address', 'organization', 'transactionBrokerages', 'ratePlan', 'parentId', 'developerCategory');
+        $excluded_properties = array(
+            'address',
+            'organization',
+            'ratePlan',
+            'parentId',
+            'developerCategory',
+        );
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
                 continue;
@@ -179,15 +177,10 @@ class Developer extends Base\BaseObject
             $organization->loadFromRawData($data['organization']);
             $this->organization = $organization;
         }
-        if (isset($data['transactionBrokerages'])) {
-            foreach ($data['transactionBrokerages'] as $trans_brok) {
-                $this->transactionBrokerages[] = new TransactionBrokerage($trans_brok);
-            }
-        }
         if (isset($data['ratePlan'])) {
-            foreach ($data['ratePlan'] as $dev_rate_plan) {
+            foreach ($data['ratePlan'] as $rate_plan_data) {
                 $dev_rate_plan = new DeveloperRatePlan($this->email, $this->config);
-                $dev_rate_plan->loadFromRawData($dev_rate_plan);
+                $dev_rate_plan->loadFromRawData($rate_plan_data);
                 $this->ratePlan[] = $dev_rate_plan;
             }
         }
@@ -266,28 +259,30 @@ class Developer extends Base\BaseObject
         return $return_objects;
     }
 
-    public function getPrepaidBalance($month = null, $billing_year = null, $currency_id = null)
+    public function getPrepaidBalance($month = null, $billingYear = null, $currencyId = null, $ownerId = null)
     {
-        $month = isset($month) ? $month : date('F', time());
-        $billing_year = isset($billing_year) ? $billing_year : date('Y');
+        $identifier = $ownerId ?: $this->email;
+
+        $month = $month ?: date('F');
+        $billingYear = $billingYear ?: date('Y');
 
         $options = array(
             'query' => array(
                 'billingMonth' => strtoupper($month),
-                'billingYear' => $billing_year,
-                'supportedCurrencyId' => $currency_id,
+                'billingYear' => $billingYear,
+                'supportedCurrencyId' => $currencyId,
             ),
         );
-        $url = rawurlencode($this->email) . '/prepaid-developer-balance';
+        $url = rawurlencode($identifier) . '/prepaid-developer-balance';
         $this->get($url, 'application/json; charset=utf-8', array(), $options);
         $response = $this->responseObj;
-        $return_objects = array();
-        foreach ($response['developerBalance'] as $response_data) {
-            $obj = new DeveloperBalance($this->email, $this->getConfig());
-            $obj->loadFromRawData($response_data);
-            $return_objects[] = $obj;
+        $returnObjects = array();
+        foreach ($response['developerBalance'] as $responseData) {
+            $obj = new DeveloperBalance($identifier, $this->getConfig());
+            $obj->loadFromRawData($responseData);
+            $returnObjects[] = $obj;
         }
-        return $return_objects;
+        return $returnObjects;
     }
 
     /**
@@ -295,40 +290,67 @@ class Developer extends Base\BaseObject
      *
      * @param array $parameters
      * @param string $address
+     * @param array $headers
+     * @param string $developer_or_company_id
      *
      * @return \Apigee\Mint\DataStructures\Payment
      * @throws \Apigee\Exceptions\ResponseException
      */
-    public function createPayment(array $parameters, $address)
+    public function createPayment(array $parameters, $address, array $headers, $developer_or_company_id = null)
     {
-        $id = $this->email;
+        $id = $developer_or_company_id ?: $this->email;
+
         $options = array(
             'query' => $parameters,
         );
         $url = rawurlencode($id) . '/payment';
-        $this->post($url, $address, 'application/xml; charset=utf-8', 'application/json; charset=utf-8', array(), $options);
+        $this->post(
+            $url,
+            $address,
+            'application/xml; charset=utf-8',
+            'application/json; charset=utf-8',
+            $headers,
+            $options
+        );
         if ($this->responseCode == 200) {
             // Make sure the response did not fail, where success value is
             // FALSE from WorldPay.
             // TODO: These error responses need to be payment provider agnostic.
             if (isset($this->responseObj['success']) && !$this->responseObj['success']) {
-                throw new ResponseException('Payment server response unsuccessful', $this->responseCode, $url, $options, $this->responseText);
+                throw new ResponseException(
+                    'Payment server response unsuccessful',
+                    $this->responseCode,
+                    $url,
+                    $options,
+                    $this->responseText
+                );
             }
             $payment = new Payment($this->responseObj);
             return $payment;
         }
-        throw new ResponseException('Payment server response failed', $this->responseCode, $url, $options, $this->responseText);
+        throw new ResponseException(
+            'Payment server response failed',
+            $this->responseCode,
+            $url,
+            $options,
+            $this->responseText
+        );
     }
 
-    public function topUpPrepaidBalance($new_balance)
+    public function topUpPrepaidBalance($new_balance, $developer_or_company_id = null)
     {
-        $url = rawurlencode($this->email) . '/developer-balances';
+        $id = $developer_or_company_id ?: $this->email;
+        $url = rawurlencode($id) . '/developer-balances';
         $this->post($url, $new_balance);
     }
 
     public function getRevenueReport($report)
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/revenue-reports';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/revenue-reports';
         $content_type = 'application/json; charset=utf-8';
         $accept_type = 'application/octet-stream; charset=utf-8';
 
@@ -341,7 +363,11 @@ class Developer extends Base\BaseObject
 
     public function saveReportDefinition($report_def)
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/report-definitions';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/report-definitions';
         $this->setBaseUrl($url);
         $this->post(null, $report_def);
         $this->restoreBaseUrl();
@@ -349,7 +375,11 @@ class Developer extends Base\BaseObject
 
     public function getReportDefinitions()
     {
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($this->email) . '/report-definitions';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($this->email)
+            . '/report-definitions';
         $this->setBaseUrl($url);
         $this->get();
         $this->restoreBaseUrl();
@@ -387,19 +417,21 @@ class Developer extends Base\BaseObject
             }
         }
         try {
-            $url = rawurlencode($developer_id) . '/products/' . rawurlencode($product_id) . '/rate-plan-by-developer-product/';
+            $url = rawurlencode($developer_id)
+                . '/products/'
+                . rawurlencode($product_id)
+                . '/rate-plan-by-developer-product/';
             $this->get($url);
             $ratePlan = new RatePlan(null, $this->config);
             $ratePlan->loadFromRawData($this->responseObj);
-            return $ratePlan;
         } catch (\Exception $e) {
-            if (MintApiException::isMintExceptionCode($e)) {
+            if ($e instanceof ResponseException && MintApiException::isMintExceptionCode($e)) {
                 throw new MintApiException($e);
             } else {
                 throw $e;
             }
         }
-        return $products;
+        return $ratePlan;
     }
 
     /**
@@ -436,7 +468,7 @@ class Developer extends Base\BaseObject
             }
 
         } catch (\Exception $e) {
-            if (MintApiException::isMintExceptionCode($e)) {
+            if ($e instanceof ResponseException && MintApiException::isMintExceptionCode($e)) {
                 throw new MintApiException($e);
             } else {
                 throw $e;
@@ -623,12 +655,12 @@ class Developer extends Base\BaseObject
         $this->phone = $phone;
     }
 
-    function getRatePlan()
+    public function getRatePlan()
     {
         return $this->ratePlan;
     }
 
-    function addRatePlan($rate_plan)
+    public function addRatePlan($rate_plan)
     {
         $this->ratePlan[] = $rate_plan;
     }
@@ -662,21 +694,6 @@ class Developer extends Base\BaseObject
     public function setTaxExemptAuthNo($tax_exempt_auth_no)
     {
         $this->taxExemptAuthNo = $tax_exempt_auth_no;
-    }
-
-    public function getTransactionBrokerages()
-    {
-        return $this->transactionBrokerages;
-    }
-
-    public function addTransactionBrokerages($transaction_brokerages)
-    {
-        $this->transactionBrokerages[] = $transaction_brokerages;
-    }
-
-    public function clearTransactionBrokerages()
-    {
-        $this->transactionBrokerages = array();
     }
 
     public function getType()

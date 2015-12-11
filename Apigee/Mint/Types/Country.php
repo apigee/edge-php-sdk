@@ -33,13 +33,13 @@ final class Country
         'BM' => 'Bermuda',
         'BT' => 'Bhutan',
         'BO' => 'Bolivia',
+        'BQ' => 'Bonaire, Sint Eustatius and Saba',
         'BA' => 'Bosnia and Herzegovina',
         'BW' => 'Botswana',
         'BV' => 'Bouvet Island',
         'BR' => 'Brazil',
-        'BQ' => 'British Antarctic Territory',
         'IO' => 'British Indian Ocean Territory',
-        'VG' => 'British Virgin Islands',
+        'VG' => 'Virgin Islands, British',
         'BN' => 'Brunei',
         'BG' => 'Bulgaria',
         'BF' => 'Burkina Faso',
@@ -47,7 +47,6 @@ final class Country
         'KH' => 'Cambodia',
         'CM' => 'Cameroon',
         'CA' => 'Canada',
-        'CT' => 'Canton and Enderbury Islands',
         'CV' => 'Cape Verde',
         'KY' => 'Cayman Islands',
         'CF' => 'Central African Republic',
@@ -55,11 +54,11 @@ final class Country
         'CL' => 'Chile',
         'CN' => 'China',
         'CX' => 'Christmas Island',
-        'CC' => 'Cocos [Keeling] Islands',
+        'CC' => 'Cocos Islands',
         'CO' => 'Colombia',
         'KM' => 'Comoros',
-        'CG' => 'Congo - Brazzaville',
-        'CD' => 'Congo - Kinshasa',
+        'CG' => 'Congo Republic',
+        'CD' => 'Congo, Democratic Republic of the',
         'CK' => 'Cook Islands',
         'CR' => 'Costa Rica',
         'HR' => 'Croatia',
@@ -72,7 +71,6 @@ final class Country
         'DM' => 'Dominica',
         'DO' => 'Dominican Republic',
         'NQ' => 'Dronning Maud Land',
-        'DD' => 'East Germany',
         'EC' => 'Ecuador',
         'EG' => 'Egypt',
         'SV' => 'El Salvador',
@@ -88,7 +86,6 @@ final class Country
         'GF' => 'French Guiana',
         'PF' => 'French Polynesia',
         'TF' => 'French Southern Territories',
-        'FQ' => 'French Southern and Antarctic Territories',
         'GA' => 'Gabon',
         'GM' => 'Gambia',
         'GE' => 'Georgia',
@@ -108,7 +105,7 @@ final class Country
         'HT' => 'Haiti',
         'HM' => 'Heard Island and McDonald Islands',
         'HN' => 'Honduras',
-        'HK' => 'Hong Kong SAR China',
+        'HK' => 'Hong Kong',
         'HU' => 'Hungary',
         'IS' => 'Iceland',
         'IN' => 'India',
@@ -122,7 +119,6 @@ final class Country
         'JM' => 'Jamaica',
         'JP' => 'Japan',
         'JE' => 'Jersey',
-        'JT' => 'Johnston Island',
         'JO' => 'Jordan',
         'KZ' => 'Kazakhstan',
         'KE' => 'Kenya',
@@ -138,7 +134,7 @@ final class Country
         'LI' => 'Liechtenstein',
         'LT' => 'Lithuania',
         'LU' => 'Luxembourg',
-        'MO' => 'Macau SAR China',
+        'MO' => 'Macao',
         'MK' => 'Macedonia',
         'MG' => 'Madagascar',
         'MW' => 'Malawi',
@@ -151,10 +147,8 @@ final class Country
         'MR' => 'Mauritania',
         'MU' => 'Mauritius',
         'YT' => 'Mayotte',
-        'FX' => 'Metropolitan France',
         'MX' => 'Mexico',
         'FM' => 'Micronesia',
-        'MI' => 'Midway Islands',
         'MD' => 'Moldova',
         'MC' => 'Monaco',
         'MN' => 'Mongolia',
@@ -162,12 +156,11 @@ final class Country
         'MS' => 'Montserrat',
         'MA' => 'Morocco',
         'MZ' => 'Mozambique',
-        'MM' => 'Myanmar [Burma]',
+        'MM' => 'Myanmar',
         'NA' => 'Namibia',
         'NR' => 'Nauru',
         'NP' => 'Nepal',
         'NL' => 'Netherlands',
-        'AN' => 'Netherlands Antilles',
         'NT' => 'Neutral Zone',
         'NC' => 'New Caledonia',
         'NZ' => 'New Zealand',
@@ -177,19 +170,16 @@ final class Country
         'NU' => 'Niue',
         'NF' => 'Norfolk Island',
         'KP' => 'North Korea',
-        'VD' => 'North Vietnam',
         'MP' => 'Northern Mariana Islands',
         'NO' => 'Norway',
         'OM' => 'Oman',
         'PC' => 'Pacific Islands Trust Territory',
         'PK' => 'Pakistan',
         'PW' => 'Palau',
-        'PS' => 'Palestinian Territories',
+        'PS' => 'Palestine',
         'PA' => 'Panama',
-        'PZ' => 'Panama Canal Zone',
         'PG' => 'Papua New Guinea',
         'PY' => 'Paraguay',
-        'YD' => 'People\'s Democratic Republic of Yemen',
         'PE' => 'Peru',
         'PH' => 'Philippines',
         'PN' => 'Pitcairn Islands',
@@ -213,7 +203,6 @@ final class Country
         'SA' => 'Saudi Arabia',
         'SN' => 'Senegal',
         'RS' => 'Serbia',
-        'CS' => 'Serbia and Montenegro',
         'SC' => 'Seychelles',
         'SL' => 'Sierra Leone',
         'SG' => 'Singapore',
@@ -249,8 +238,7 @@ final class Country
         'TC' => 'Turks and Caicos Islands',
         'TV' => 'Tuvalu',
         'UM' => 'U.S. Minor Outlying Islands',
-        'UK' => 'United Kingdom',
-        'PU' => 'U.S. Miscellaneous Pacific Islands',
+//        'UK' => 'United Kingdom',
         'VI' => 'U.S. Virgin Islands',
         'UG' => 'Uganda',
         'UA' => 'Ukraine',
@@ -263,7 +251,6 @@ final class Country
         'VA' => 'Vatican City',
         'VE' => 'Venezuela',
         'VN' => 'Vietnam',
-        'WK' => 'Wake Island',
         'WF' => 'Wallis and Futuna',
         'EH' => 'Western Sahara',
         'YE' => 'Yemen',
@@ -276,10 +263,15 @@ final class Country
 
     public static function getCountryName($iso_code)
     {
+        // United Kingdom country code is GB but Monetization API has UK as
+        // the country code list at least for a few more versions.
+        if ($iso_code == 'UK') {
+            return 'GB';
+        }
         if (array_key_exists($iso_code, self::$iso_codes)) {
             return self::$iso_codes[$iso_code];
         }
-        throw new ParameterException('Nonexistent country ISO code \'' . $iso_code . '\'');
+        throw new ParameterException('Nonexistent country ISO code ‘' . $iso_code . '’');
     }
 
     public static function getCountryIsoCode($country_name)
@@ -290,14 +282,21 @@ final class Country
         if (array_key_exists($country_name, self::$countries)) {
             return self::$countries[$country_name];
         }
-        throw new ParameterException('Nonexistent country \'' . $country_name . '\'');
+        throw new ParameterException('Nonexistent country ‘' . $country_name . '’');
     }
 
+    /**
+     * Validate country code.
+     *
+     * @param string $iso_code The two digit country code.
+     * @return bool True if country code is valid, false if not.
+     */
     public static function validateCountryCode($iso_code)
     {
         if (!array_key_exists($iso_code, self::$iso_codes)) {
-            throw new ParameterException('Nonexistent country ISO code \'' . $iso_code . '\'');
+            return FALSE;
         }
+        return TRUE;
     }
 
     // TODO
@@ -309,5 +308,4 @@ final class Country
     {
         return self::$iso_codes;
     }
-
 }

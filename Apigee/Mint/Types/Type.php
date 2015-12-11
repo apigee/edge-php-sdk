@@ -49,8 +49,7 @@ abstract class Type
         if (in_array($value, self::$concreteTypes[$type])) {
             return $value;
         } else {
-            throw new ParameterException('Value type \'' . $value . '\' is not defined in type \'' . $type . '\'');
+            throw new ParameterException('Value type ‘' . $value . '’ is not defined in type ‘' . $type . '’');
         }
     }
-
 }

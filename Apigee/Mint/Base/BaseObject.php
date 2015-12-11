@@ -49,7 +49,7 @@ abstract class BaseObject extends APIObject
      *
      * @return \Apigee\Mint\Base\BaseObject
      */
-    public abstract function instantiateNew();
+    abstract public function instantiateNew();
 
     /**
      * Given an associative array from the raw JSON response, populates the
@@ -59,21 +59,21 @@ abstract class BaseObject extends APIObject
      * @param bool $reset
      * @return void
      */
-    public abstract function loadFromRawData($data, $reset = false);
+    abstract public function loadFromRawData($data, $reset = false);
 
     /**
      * Returns all member variables to their default values.
      *
      * @return void
      */
-    protected abstract function initValues();
+    abstract protected function initValues();
 
     /**
      * Returns a JSON representation of the object.
      *
      * @return string
      */
-    public abstract function __toString();
+    abstract public function __toString();
 
     /**
      * Returns a listing of this class of objects.
@@ -200,7 +200,7 @@ abstract class BaseObject extends APIObject
         }
         $url = rawurlencode($this->{$this->id_field});
         // Will throw a ResponseException in case we get a non-200 response.
-        $this->http_delete($url);
+        $this->httpDelete($url);
         // Presuming delete was successful, erase any org values here.
         $this->initValues();
     }
@@ -214,6 +214,5 @@ abstract class BaseObject extends APIObject
             return false;
         }
         return true;
-
     }
 }

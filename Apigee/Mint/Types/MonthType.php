@@ -16,8 +16,4 @@ final class MonthType extends Type
     const OCTOBER = 'OCTOBER';
     const NOVEMBER = 'NOVEMBER';
     const DECEMBER = 'DECEMBER';
-
-    private function __construct()
-    {
-    }
 }

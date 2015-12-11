@@ -58,145 +58,165 @@ class SupportedCurrency extends DataStructure
      */
     private $minimumRecurringAmount = 0;
 
-  /**
-   * @param float $creditLimit
-   */
-  public function setCreditLimit($creditLimit) {
-    $this->creditLimit = $creditLimit;
-  }
+    /**
+     * @param float $creditLimit
+     */
+    public function setCreditLimit($creditLimit)
+    {
+        $this->creditLimit = $creditLimit;
+    }
 
-  /**
-   * @return float
-   */
-  public function getCreditLimit() {
-    return $this->creditLimit;
-  }
+    /**
+     * @return float
+     */
+    public function getCreditLimit()
+    {
+        return $this->creditLimit;
+    }
 
-  /**
-   * @param string $description
-   */
-  public function setDescription($description) {
-    $this->description = $description;
-  }
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-  /**
-   * @return string
-   */
-  public function getDescription() {
-    return $this->description;
-  }
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-  /**
-   * @param string $displayName
-   */
-  public function setDisplayName($displayName) {
-    $this->displayName = $displayName;
-  }
+    /**
+     * @param string $displayName
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
+    }
 
-  /**
-   * @return string
-   */
-  public function getDisplayName() {
-    return $this->displayName;
-  }
+    /**
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName;
+    }
 
-  /**
-   * @param string $id
-   */
-  public function setId($id) {
-    $this->id = $id;
-  }
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
-  /**
-   * @return string
-   */
-  public function getId() {
-    return $this->id;
-  }
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  /**
-   * @param float $minimumRecurringAmount
-   */
-  public function setMinimumRecurringAmount($minimumRecurringAmount) {
-    $this->minimumRecurringAmount = $minimumRecurringAmount;
-  }
+    /**
+     * @param float $minimumRecurringAmount
+     */
+    public function setMinimumRecurringAmount($minimumRecurringAmount)
+    {
+        $this->minimumRecurringAmount = $minimumRecurringAmount;
+    }
 
-  /**
-   * @return float
-   */
-  public function getMinimumRecurringAmount() {
-    return $this->minimumRecurringAmount;
-  }
+    /**
+     * @return float
+     */
+    public function getMinimumRecurringAmount()
+    {
+        return $this->minimumRecurringAmount;
+    }
 
-  /**
-   * @param string $name
-   */
-  public function setName($name) {
-    $this->name = $name;
-  }
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
-  /**
-   * @return string
-   */
-  public function getName() {
-    return $this->name;
-  }
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-  /**
-   * @param \Apigee\Mint\Organization $organization
-   */
-  public function setOrganization($organization) {
-    $this->organization = $organization;
-  }
+    /**
+     * @param \Apigee\Mint\Organization $organization
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
+    }
 
-  /**
-   * @return \Apigee\Mint\Organization
-   */
-  public function getOrganization() {
-    return $this->organization;
-  }
+    /**
+     * @return \Apigee\Mint\Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
 
-  /**
-   * @param string $status
-   */
-  public function setStatus($status) {
-    $this->status = $status;
-  }
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
 
-  /**
-   * @return string
-   */
-  public function getStatus() {
-    return $this->status;
-  }
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
-  /**
-   * @param mixed $var
-   */
-  public function setVar($var) {
-    $this->var = $var;
-  }
+    /**
+     * @param mixed $var
+     */
+    public function setVar($var)
+    {
+        $this->var = $var;
+    }
 
-  /**
-   * @return mixed
-   */
-  public function getVar() {
-    return $this->var;
-  }
+    /**
+     * @return mixed
+     */
+    public function getVar()
+    {
+        return $this->var;
+    }
 
-  /**
-   * @param boolean $virtualCurrency
-   */
-  public function setVirtualCurrency($virtualCurrency) {
-    $this->virtualCurrency = $virtualCurrency;
-  }
+    /**
+     * @param boolean $virtualCurrency
+     */
+    public function setVirtualCurrency($virtualCurrency)
+    {
+        $this->virtualCurrency = $virtualCurrency;
+    }
 
-  /**
-   * @return boolean
-   */
-  public function isVirtualCurrency() {
-    return $this->virtualCurrency;
-  }
+    /**
+     * @return boolean
+     */
+    public function isVirtualCurrency()
+    {
+        return $this->virtualCurrency;
+    }
 
 
     /**
@@ -218,5 +238,4 @@ class SupportedCurrency extends DataStructure
     {
         return json_encode($this);
     }
-
 }

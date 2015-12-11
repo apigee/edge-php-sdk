@@ -75,84 +75,96 @@ class RatePlanRate extends DataStructure
     /**
      * @param int $endUnit
      */
-    public function setEndUnit($endUnit) {
+    public function setEndUnit($endUnit)
+    {
         $this->endUnit = $endUnit;
     }
 
     /**
      * @return int
      */
-    public function getEndUnit() {
+    public function getEndUnit()
+    {
         return $this->endUnit;
     }
 
     /**
      * @param string $id
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
     /**
      * @return string
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @param float $rate
      */
-    public function setRate($rate) {
+    public function setRate($rate)
+    {
         $this->rate = $rate;
     }
 
     /**
      * @return float
      */
-    public function getRate() {
+    public function getRate()
+    {
         return $this->rate;
     }
 
     /**
      * @param string $revshare
      */
-    public function setRevshare($revshare) {
+    public function setRevshare($revshare)
+    {
         $this->revshare = $revshare;
     }
 
     /**
      * @return string
      */
-    public function getRevshare() {
+    public function getRevshare()
+    {
         return $this->revshare;
     }
 
     /**
      * @param int $startUnit
      */
-    public function setStartUnit($startUnit) {
+    public function setStartUnit($startUnit)
+    {
         $this->startUnit = $startUnit;
     }
 
     /**
      * @return int
      */
-    public function getStartUnit() {
+    public function getStartUnit()
+    {
         return $this->startUnit;
     }
 
     /**
      * @param string $type
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 }

@@ -3,6 +3,7 @@
 namespace Apigee\Mint;
 
 use Apigee\Util\CacheFactory;
+use Apigee\Util\OrgConfig;
 use Apigee\Exceptions\ParameterException;
 
 class MonetizationPackage extends Base\BaseObject
@@ -60,7 +61,7 @@ class MonetizationPackage extends Base\BaseObject
      * Class constructor
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct(\Apigee\Util\OrgConfig $config)
+    public function __construct(OrgConfig $config)
     {
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/monetization-packages';
         $this->init($config, $base_url);
@@ -189,7 +190,11 @@ class MonetizationPackage extends Base\BaseObject
                 'allAvailable' => 'true',
             ),
         );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/developers/' . rawurlencode($developer_id) . '/monetization-packages';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/developers/'
+            . rawurlencode($developer_id)
+            . '/monetization-packages';
         $this->setBaseUrl($url);
         $this->get(null, 'application/json; charset=utf-8', array(), $options);
         $this->restoreBaseUrl();
@@ -352,7 +357,7 @@ class MonetizationPackage extends Base\BaseObject
     /**
      * Remove all product from this package
      */
-    public function clear_products()
+    public function clearProducts()
     {
         $this->products = array();
     }

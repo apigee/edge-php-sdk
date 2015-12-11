@@ -2,7 +2,7 @@
 
 namespace Apigee\ManagementAPI;
 
-use Apigee\Exceptions\ParameterException as ParameterException;
+use Apigee\Util\OrgConfig;
 
 /**
  * Abstracts the Developer App object in the Management API and allows clients
@@ -31,9 +31,9 @@ class CompanyApp extends AbstractApp
      * Initializes this object
      *
      * @param \Apigee\Util\OrgConfig $config
-     * @param mixed $developer
+     * @param mixed $company
      */
-    public function __construct(\Apigee\Util\OrgConfig $config, $company)
+    public function __construct(OrgConfig $config, $company)
     {
         $this->ownerIdentifierField = 'companyName';
         if ($company instanceof Company) {
@@ -50,23 +50,23 @@ class CompanyApp extends AbstractApp
     /**
      * {@inheritDoc}
      */
-    public function getListDetail($company_name = null)
+    public function getListDetail($companyName = null)
     {
-        $company_name = $company_name ? : $this->companyName;
+        $allApps = array();
+        $companyName = $companyName ? : $this->companyName;
 
+        // Per-company app listing paging is not enabled at this time.
         $this->get('?expand=true');
         $list = $this->responseObj;
+        if (array_key_exists('app', $list)) {
+            foreach ($list['app'] as $response) {
+                $app = new CompanyApp($this->getConfig(), $companyName);
+                self::loadFromResponse($app, $response, $companyName);
+                $allApps[] = $app;
+            }
+        }
 
-        $app_list = array();
-        if (!array_key_exists('app', $list) || empty($list['app'])) {
-            return $app_list;
-        }
-        foreach ($list['app'] as $response) {
-            $app = new CompanyApp($this->getConfig(), $company_name);
-            self::loadFromResponse($app, $response, $company_name);
-            $app_list[] = $app;
-        }
-        return $app_list;
+        return $allApps;
     }
 
     /**
@@ -79,21 +79,26 @@ class CompanyApp extends AbstractApp
     }
 
     /**
-     * Set properties specific to DeveloperApps right after they are loaded.
-     *
-     * @param AbstractApp $obj
-     * @param array $response
+     * {@inheritdoc}
      */
-    public static function afterLoad(AbstractApp &$obj, array $response, $owner_identifier)
+    public static function afterLoad(AbstractApp &$obj, array $response, $ownerIdentifier)
     {
         $obj->companyName = $response['companyName'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function alterAttributes(array &$payload)
     {
-        $this->attributes['Company'] = $this->companyName;
+        if (!$this->pagingEnabled || count($this->attributes) < self::MAX_ATTRIBUTE_COUNT) {
+            $this->attributes['Company'] = $this->companyName;
+        }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAppProperties($class = __CLASS__)
     {
         $properties = parent::getAppProperties(__CLASS__);

@@ -2,11 +2,11 @@
 
 namespace Apigee\Mint;
 
-use \DateTime;
-use \DateTimeZone;
+use DateTime;
+use DateTimeZone;
 
 use Apigee\Util\CacheFactory;
-
+use Apigee\Util\OrgConfig;
 use Apigee\Exceptions\ParameterException;
 
 class RatePlan extends Base\BaseObject
@@ -55,7 +55,7 @@ class RatePlan extends Base\BaseObject
      * com.apigee.mint.model.Developer
      * @var \Apigee\Mint\Developer
      */
-    private $developer;
+    private $developerId;
 
     /**
      * com.apigee.mint.model.DeveloperCategory
@@ -210,7 +210,7 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Rate plan details
-     * @var array Array must elements must be instances of Apigee\Mint\DataStructures\RatePlanRate
+     * @var DataStructures\RatePlanDetail[]
      */
     private $ratePlanDetails = array();
 
@@ -225,14 +225,22 @@ class RatePlan extends Base\BaseObject
      */
     public $id;
 
+    private $companyId;
+
+    private $isCompanyPlan;
+
     /**
      * Class constructor
      * @param string $m_package_id Monetization Package id
      * @param \Apigee\Util\OrgConfig $config
      */
-    public function __construct($m_package_id, \Apigee\Util\OrgConfig $config)
+    public function __construct($m_package_id, OrgConfig $config)
     {
-        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/monetization-packages/' . rawurlencode($m_package_id) . '/rate-plans';
+        $base_url = '/mint/organizations/'
+            . rawurlencode($config->orgName)
+            . '/monetization-packages/'
+            . rawurlencode($m_package_id)
+            . '/rate-plans';
         $this->init($config, $base_url);
         $this->mPackageId = $m_package_id;
 
@@ -246,7 +254,7 @@ class RatePlan extends Base\BaseObject
 
     public function getList($page_num = null, $page_size = 20, $current = true, $all_available = true)
     {
-        if (!isset($this->developer)) {
+        if (!isset($this->developerId)) {
             return parent::getList();
         }
 
@@ -256,7 +264,13 @@ class RatePlan extends Base\BaseObject
                 'allAvailable' => $all_available ? 'true' : 'false',
             ),
         );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/monetization-packages/' . rawurlencode($this->mPackageId) . '/developers/' . rawurlencode($this->developer->getEmail()) . '/rate-plans';
+        $url = '/mint/organizations/'
+            . rawurlencode($this->config->orgName)
+            . '/monetization-packages/'
+            . rawurlencode($this->mPackageId)
+            . '/developers/'
+            . rawurlencode($this->developerId)
+            . '/rate-plans';
         $this->setBaseUrl($url);
         $this->get(null, 'application/json; charset=utf-8', array(), $options);
         $this->restoreBaseUrl();
@@ -310,8 +324,7 @@ class RatePlan extends Base\BaseObject
             $setter_method = 'set' . ucfirst($property);
             if (method_exists($this, $setter_method)) {
                 $this->$setter_method($data[$property]);
-            }
-            else {
+            } else {
                 self::$logger->notice('No setter method was found for property "' . $property . '"');
             }
         }
@@ -343,7 +356,7 @@ class RatePlan extends Base\BaseObject
         if (isset($data['developer'])) {
             $dev = new Developer($this->config);
             $dev->loadFromRawData($data['developer']);
-            $this->developer = $dev;
+            $this->developerId = $dev->getEmail();
         }
 
         //@TODO Implement load of developerCategory
@@ -373,7 +386,9 @@ class RatePlan extends Base\BaseObject
         $this->currency = null;
         $this->childRatePlan = null;
         $this->parentRatePlan = null;
-        $this->developer = null;
+        $this->developerId = null;
+        $this->companyId = null;
+        $this->isCompanyPlan = false;
         $this->developerCategory = null;
         $this->developers = array();
         $this->applicationCategory = null;
@@ -466,12 +481,12 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get com.apigee.mint.model.Developer
-     * @return \Apigee\Mint\Developer
+     * Get Company or Developer ID.
+     * @return integer The company or developer ID.
      */
-    public function getDeveloper()
+    public function getDeveloperId()
     {
-        return $this->developer;
+        return $this->developerId;
     }
 
     /**
@@ -619,32 +634,12 @@ class RatePlan extends Base\BaseObject
     }
 
     /**
-     * Get start date as a string in GMT
-     * @deprecated Use getStartDateTime() instead
-     * @return string The start date
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
      * Get start date as a DateTime object in org's timezone.
      * @return \DateTime The start date
      */
     public function getStartDateTime()
     {
         return $this->convertToDateTime($this->startDate);
-    }
-
-    /**
-     * Get end date as a string in GMT
-     * @deprecated Use getEndDateTime() instead
-     * @return string The end date
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
     }
 
     /**
@@ -735,7 +730,8 @@ class RatePlan extends Base\BaseObject
         } else {
             $rate_plan_details = array();
             foreach ($this->ratePlanDetails as &$rate_plan_detail) {
-                if (isset($rate_plan_detail->product) && $rate_plan_detail->product->getId() == $product->getId()) {
+                $detail_product = $rate_plan_detail->getProduct();
+                if (isset($detail_product) && $detail_product->getId() == $product->getId()) {
                     $rate_plan_details[] = $rate_plan_detail;
                 }
             }
@@ -748,7 +744,7 @@ class RatePlan extends Base\BaseObject
      * Set Advance
      * @param boolean $advance
      */
-    public function  setAdvance($advance)
+    public function setAdvance($advance)
     {
         $this->advance = $advance;
     }
@@ -806,11 +802,21 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Set com.apigee.mint.model.Developer
-     * @param \Apigee\Mint\Developer $developer
+     * @param string $company_id
      */
-    public function setDeveloper(Developer $developer)
+    public function setCompanyId($company_id)
     {
-        $this->developer = $developer;
+        $this->companyId = $company_id;
+        $this->isCompanyPlan = true;
+    }
+
+    /**
+     * Set com.apigee.mint.model.Developer
+     * @param \Apigee\Mint\Developer $developerId
+     */
+    public function setDeveloperId($developerId)
+    {
+        $this->developerId = $developerId;
     }
 
     /**
@@ -859,20 +865,21 @@ class RatePlan extends Base\BaseObject
 
     /**
      * Set Rate plan type.
-     * @param string $type Possible values: STANDARD|DEVELOPER_CATEGORY|DEVELOPER|APPLICATION_CATEGORY|EXCHANGE_ORGANIZATION
+     * @param string $type
+     *    Possible values: STANDARD|DEVELOPER_CATEGORY|DEVELOPER|APPLICATION_CATEGORY|EXCHANGE_ORGANIZATION
      * @throws \Apigee\Exceptions\ParameterException
      */
     public function setType($type)
     {
         $type = strtoupper($type);
-        if (!in_array($type, array(
-            'STANDARD',
-            'DEVELOPER_CATEGORY',
-            'DEVELOPER',
-            'APPLICATION_CATEGORY',
-            'EXCHANGE_ORGANIZATION'
-        ))
-        ) {
+        $validTypes = array(
+          'STANDARD',
+          'DEVELOPER_CATEGORY',
+          'DEVELOPER',
+          'APPLICATION_CATEGORY',
+          'EXCHANGE_ORGANIZATION',
+        );
+        if (!in_array($type, $validTypes)) {
             throw new ParameterException('Invalid type of RatePlan: ' . $type);
         }
         $this->type = $type;
@@ -1113,7 +1120,7 @@ class RatePlan extends Base\BaseObject
             if ($ratePlanDetails->getOrganization()->getParent() == null) {
                 $is_group_plan = false;
                 break;
-            } else if ($ratePlanDetails->getOrganization()->getParent()->getId() != $this->organization->getId()) {
+            } elseif ($ratePlanDetails->getOrganization()->getParent()->getId() != $this->organization->getId()) {
                 $is_group_plan = false;
                 break;
             }
@@ -1147,18 +1154,17 @@ class RatePlan extends Base\BaseObject
         $plan_end_date = $this->getEndDateTime();
 
         // If plan end date is not set, return FALSE.
-        if(is_null($plan_end_date)) {
-            return FALSE;
+        if (is_null($plan_end_date)) {
+            return false;
         }
 
         $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
         $today = new DateTime('today', $org_timezone);
 
-        if($plan_end_date < $today) {
-            return TRUE;
-        } else {
-            return FALSE;
+        if ($plan_end_date < $today) {
+            return true;
         }
+        return false;
     }
 
     /**
@@ -1167,13 +1173,13 @@ class RatePlan extends Base\BaseObject
      * To get the proper date, the date needs to be converted from
      * UTC time to the org's timezone.
      *
-     * @param $date_string The date in the Edge API format of 'Y-m-d H:i:s'
+     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'
      * @return \DateTime The date as a DateTime object or NULL if not set.
      */
     private function convertToDateTime($date_string)
     {
-        if(empty($date_string)) {
-            return NULL;
+        if (empty($date_string)) {
+            return null;
         }
         $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
         $utc_timezone = new DateTimeZone('UTC');
@@ -1181,12 +1187,11 @@ class RatePlan extends Base\BaseObject
         // Get UTC datetime of date string.
         $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
 
-        if($date_utc == FALSE) {
-            return NULL;
+        if ($date_utc == false) {
+            return null;
         }
 
         // Convert to org's timezone.
         return  $date_utc->setTimezone($org_timezone);
     }
 }
-

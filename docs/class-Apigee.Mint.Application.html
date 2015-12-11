@@ -63,9 +63,28 @@
 							</ul></li>
 				<li>
 					<a href="namespace-Apigee.SmartDocs.html">
-						SmartDocs					</a>
+						SmartDocs<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.SmartDocs.Security.html">
+						Security					</a>
 
 						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Apigee.test.html">
+						test<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Apigee.test.ManagementAPI.html">
+						ManagementAPI					</a>
+
+						</li>
+							</ul></li>
 				<li>
 					<a href="namespace-Apigee.Util.html">
 						Util					</a>
@@ -84,15 +103,12 @@
 				<li class="active"><a href="class-Apigee.Mint.Application.html">Application</a></li>
 				<li><a href="class-Apigee.Mint.ApplicationCategory.html">ApplicationCategory</a></li>
 				<li><a href="class-Apigee.Mint.BankDetail.html">BankDetail</a></li>
-				<li><a href="class-Apigee.Mint.BillingAdjustment.html">BillingAdjustment</a></li>
 				<li><a href="class-Apigee.Mint.BillingDocument.html">BillingDocument</a></li>
 				<li><a href="class-Apigee.Mint.Developer.html">Developer</a></li>
 				<li><a href="class-Apigee.Mint.DeveloperBalance.html">DeveloperBalance</a></li>
 				<li><a href="class-Apigee.Mint.DeveloperCategory.html">DeveloperCategory</a></li>
 				<li><a href="class-Apigee.Mint.DeveloperRatePlan.html">DeveloperRatePlan</a></li>
 				<li><a href="class-Apigee.Mint.DeveloperRateplanCounter.html">DeveloperRateplanCounter</a></li>
-				<li><a href="class-Apigee.Mint.DeveloperSubscription.html">DeveloperSubscription</a></li>
-				<li><a href="class-Apigee.Mint.DeveloperSubscriptionDetail.html">DeveloperSubscriptionDetail</a></li>
 				<li><a href="class-Apigee.Mint.Limit.html">Limit</a></li>
 				<li><a href="class-Apigee.Mint.ManagementAPIOrganization.html">ManagementAPIOrganization</a></li>
 				<li><a href="class-Apigee.Mint.MonetizationPackage.html">MonetizationPackage</a></li>
@@ -104,7 +120,6 @@
 				<li><a href="class-Apigee.Mint.ReportDefinition.html">ReportDefinition</a></li>
 				<li><a href="class-Apigee.Mint.SuborgProduct.html">SuborgProduct</a></li>
 				<li><a href="class-Apigee.Mint.TermAndCondition.html">TermAndCondition</a></li>
-				<li><a href="class-Apigee.Mint.Transaction.html">Transaction</a></li>
 			</ul>
 
 
@@ -188,7 +203,8 @@ id_field in their constructor.</p>
 		<b>Namespace:</b> <a href="namespace-Apigee.html">Apigee</a>\<a href="namespace-Apigee.Mint.html">Mint</a><br>
 		<b>Package:</b> Apigee\Mint\Base<br>
 
-			<b>Located at</b> Mint/Application.php		<br>
+			<b>Located at</b> <a href="source-class-Apigee.Mint.Application.html#9-299" title="Go to source code">Mint/Application.php</a>
+		<br>
 	</div>
 
 
@@ -207,7 +223,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code>__construct( <span> <var>$developer_email</var></span>, <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#68-82" title="Go to source code">__construct</a>( <span> <var>$developer_email</var></span>, <span><code><a href="class-Apigee.Util.OrgConfig.html">Apigee\Util\OrgConfig</a></code> <var>$config</var></span> )</code>
 
 		<div class="description short">
 			
@@ -237,14 +253,14 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_initValues">#</a>
-		<code>initValues( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#84-99" title="Go to source code">initValues</a>( )</code>
 
 		<div class="description short">
-			<p>Implements Base\BaseObject::initValues().</p>
+			<p>Returns all member variables to their default values.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Implements Base\BaseObject::initValues().</p>
+			<p>Returns all member variables to their default values.</p>
 
 
 
@@ -260,27 +276,29 @@ id_field in their constructor.</p>
 		<td class="attributes"><code>
 			 public 
 
-			<code><a href="class-Apigee.Mint.Application.html">Apigee\Mint\Application</a></code>|<code><a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a></code>
+			<code><a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_instantiateNew">#</a>
-		<code>instantiateNew( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#101-107" title="Go to source code">instantiateNew</a>( )</code>
 
 		<div class="description short">
-			<p>Implements Base\BaseObject::instantiateNew().</p>
+			<p>Creates a blank instance of <strong>CLASS</strong> with the same constructor parameters
+as the class that is doing the instantiation.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Implements Base\BaseObject::instantiateNew().</p>
+			<p>Creates a blank instance of <strong>CLASS</strong> with the same constructor parameters
+as the class that is doing the instantiation.</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Apigee.Mint.Application.html">Apigee\Mint\Application</a></code>|<code><a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a></code>
+					<code><a href="class-Apigee.Mint.Base.BaseObject.html">Apigee\Mint\Base\BaseObject</a></code>
 				</div>
 
 
@@ -301,14 +319,16 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadFromRawData">#</a>
-		<code>loadFromRawData( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#109-151" title="Go to source code">loadFromRawData</a>( <span>array <var>$data</var></span>, <span>boolean <var>$reset</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
-			<p>Implements Base\BaseObject::loadFromRawData().</p>
+			<p>Given an associative array from the raw JSON response, populates the
+object with that data.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Implements Base\BaseObject::loadFromRawData().</p>
+			<p>Given an associative array from the raw JSON response, populates the
+object with that data.</p>
 
 
 				<h4>Parameters</h4>
@@ -338,14 +358,14 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code>__toString( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#153-176" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
-			<p>Implements Base\BaseObject::__toString().</p>
+			<p>Returns a JSON representation of the object.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Implements Base\BaseObject::__toString().</p>
+			<p>Returns a JSON representation of the object.</p>
 
 
 
@@ -372,7 +392,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDescription">#</a>
-		<code>getDescription( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#184-187" title="Go to source code">getDescription</a>( )</code>
 
 		<div class="description short">
 			
@@ -402,7 +422,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDescription">#</a>
-		<code>setDescription( <span> <var>$desc</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#189-192" title="Go to source code">setDescription</a>( <span> <var>$desc</var></span> )</code>
 
 		<div class="description short">
 			
@@ -432,7 +452,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getId">#</a>
-		<code>getId( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#194-197" title="Go to source code">getId</a>( )</code>
 
 		<div class="description short">
 			
@@ -462,7 +482,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setId">#</a>
-		<code>setId( <span> <var>$id</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#199-202" title="Go to source code">setId</a>( <span> <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -492,7 +512,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getKey">#</a>
-		<code>getKey( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#204-207" title="Go to source code">getKey</a>( )</code>
 
 		<div class="description short">
 			
@@ -522,7 +542,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setKey">#</a>
-		<code>setKey( <span> <var>$key</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#209-212" title="Go to source code">setKey</a>( <span> <var>$key</var></span> )</code>
 
 		<div class="description short">
 			
@@ -552,7 +572,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code>getName( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#214-217" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			
@@ -582,7 +602,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code>setName( <span> <var>$name</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#219-222" title="Go to source code">setName</a>( <span> <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -612,7 +632,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProducts">#</a>
-		<code>getProducts( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#224-227" title="Go to source code">getProducts</a>( )</code>
 
 		<div class="description short">
 			
@@ -642,7 +662,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addProduct">#</a>
-		<code>addProduct( <span> <var>$product</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#229-240" title="Go to source code">addProduct</a>( <span> <var>$product</var></span> )</code>
 
 		<div class="description short">
 			
@@ -672,7 +692,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_clearProducts">#</a>
-		<code>clearProducts( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#242-245" title="Go to source code">clearProducts</a>( )</code>
 
 		<div class="description short">
 			
@@ -702,7 +722,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getRedirectUrl">#</a>
-		<code>getRedirectUrl( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#247-250" title="Go to source code">getRedirectUrl</a>( )</code>
 
 		<div class="description short">
 			
@@ -732,7 +752,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setRedirectUrl">#</a>
-		<code>setRedirectUrl( <span> <var>$url</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#252-258" title="Go to source code">setRedirectUrl</a>( <span> <var>$url</var></span> )</code>
 
 		<div class="description short">
 			
@@ -762,7 +782,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSecret">#</a>
-		<code>getSecret( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#260-263" title="Go to source code">getSecret</a>( )</code>
 
 		<div class="description short">
 			
@@ -792,7 +812,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSecret">#</a>
-		<code>setSecret( <span> <var>$secret</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#265-268" title="Go to source code">setSecret</a>( <span> <var>$secret</var></span> )</code>
 
 		<div class="description short">
 			
@@ -822,7 +842,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStatus">#</a>
-		<code>getStatus( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#270-273" title="Go to source code">getStatus</a>( )</code>
 
 		<div class="description short">
 			
@@ -852,7 +872,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setStatus">#</a>
-		<code>setStatus( <span> <var>$status</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#275-278" title="Go to source code">setStatus</a>( <span> <var>$status</var></span> )</code>
 
 		<div class="description short">
 			
@@ -882,7 +902,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOrganization">#</a>
-		<code>getOrganization( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#280-283" title="Go to source code">getOrganization</a>( )</code>
 
 		<div class="description short">
 			
@@ -912,7 +932,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setOrganization">#</a>
-		<code>setOrganization( <span> <var>$organization</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#285-288" title="Go to source code">setOrganization</a>( <span> <var>$organization</var></span> )</code>
 
 		<div class="description short">
 			
@@ -942,7 +962,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getApplicationCategory">#</a>
-		<code>getApplicationCategory( )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#290-293" title="Go to source code">getApplicationCategory</a>( )</code>
 
 		<div class="description short">
 			
@@ -972,7 +992,7 @@ id_field in their constructor.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setApplicationCategory">#</a>
-		<code>setApplicationCategory( <span> <var>$application_category</var></span> )</code>
+		<code><a href="source-class-Apigee.Mint.Application.html#295-298" title="Go to source code">setApplicationCategory</a>( <span> <var>$application_category</var></span> )</code>
 
 		<div class="description short">
 			
@@ -1011,7 +1031,7 @@ id_field in their constructor.</p>
 			<a href="class-Apigee.Util.APIObject.html#_get">get()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_getConfig">getConfig()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_head">head()</a>, 
-			<a href="class-Apigee.Util.APIObject.html#_http_delete">http_delete()</a>, 
+			<a href="class-Apigee.Util.APIObject.html#_httpDelete">httpDelete()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_init">init()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_post">post()</a>, 
 			<a href="class-Apigee.Util.APIObject.html#_preparePayload">preparePayload()</a>, 

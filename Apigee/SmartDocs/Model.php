@@ -36,11 +36,19 @@ class Model extends APIObject
     /** @var int */
     private $latestRevisionNumber;
 
-    /** @var array */
+    /** @var string[] */
     private $tags;
 
-    /** @var array */
+    /** @var string[] */
     private $customAttributes;
+
+    /**
+     * @var string[]
+     *      This is an array of string identifiers, corresponding to security
+     *      schemes defined by the Security object attached to this model's
+     *      revision.
+     */
+    private $security;
 
     /**
      * @var array
@@ -67,6 +75,7 @@ class Model extends APIObject
         $this->description = '';
         $this->tags = array();
         $this->customAttributes = array();
+        $this->security = array();
         $this->metadata = array();
 
         $this->createdTime = 0;
@@ -144,27 +153,46 @@ class Model extends APIObject
         $this->tags = $tags;
     }
 
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+    public function setSecurity(array $security)
+    {
+        $this->security = $security;
+    }
+
     public function getCustomAttribute($name)
     {
         if (array_key_exists($name, $this->customAttributes)) {
             return $this->customAttributes[$name];
         }
-        return NULL;
+        return null;
     }
     public function setCustomAttribute($name, $value)
     {
-        if (empty($value)) {
+        if ($value === null || $value === '') {
             if (array_key_exists($name, $this->customAttributes)) {
                 unset($this->customAttributes[$name]);
             }
-        }
-        else {
-            $this->customAttributes[$name] = $value;
+        } elseif ($name !== null && $name !== '' && is_scalar($value)) {
+            $this->customAttributes[strval($name)] = strval($value);
+        } else {
+            if (!is_scalar($value)) {
+                throw new ParameterException('Custom Attribute value must be a scalar.');
+            } else {
+                throw new ParameterException('Custom Attribute name cannot be empty.');
+            }
         }
     }
     public function setCustomAttributes(array $attr)
     {
-        $this->customAttributes = $attr;
+        $this->customAttributes = array();
+        foreach ($attr as $key => $value) {
+            if ($value !== null && $value !== '' && $key !== null && $key !== '' && is_scalar($value)) {
+                $this->customAttributes[strval($key)] = strval($value);
+            }
+        }
     }
     public function clearCustomAttribute($name)
     {
@@ -184,16 +212,19 @@ class Model extends APIObject
         if (array_key_exists($name, $this->metadata)) {
             return $this->metadata[$name];
         }
-        return NULL;
+        return null;
     }
 
-    public function getActiveRevision() {
+    public function getActiveRevision()
+    {
         return $this->activeRevision;
     }
-    public function setActiveRevision(Revision $revision) {
+    public function setActiveRevision(Revision $revision)
+    {
         $this->activeRevision = $revision;
     }
-    public function clearActiveRevision() {
+    public function clearActiveRevision()
+    {
         $this->activeRevision = null;
     }
 
@@ -222,7 +253,7 @@ class Model extends APIObject
      *
      * @return array
      */
-    public function toArray($verbose = TRUE)
+    public function toArray($verbose = true)
     {
         $payload_keys = array('name', 'displayName', 'description', 'tags', 'customAttributes');
         if ($verbose) {
@@ -294,9 +325,15 @@ class Model extends APIObject
      *
      * @param bool $update
      */
-    public function save($update = FALSE)
+    public function save($update = false)
     {
         $payload = $this->toArray();
+        // Eliminate any customAttributes with empty keys or values.
+        foreach ($payload['customAttributes'] as $key => $value) {
+            if ($value === null || $value === '' || $key === null || $key === '') {
+                unset($payload['customAttributes'][$key]);
+            }
+        }
         if (empty($payload['customAttributes'])) {
             $payload['customAttributes'] = new \stdClass;
         }
@@ -323,8 +360,82 @@ class Model extends APIObject
         if (empty($modelId)) {
             throw new ParameterException('Cannot delete a model with no ID.');
         }
-        $this->http_delete($modelId);
+        $this->httpDelete($modelId);
         // TODO: should we do this, or call blankValues()?
         self::fromArray($this, $this->responseObj);
+    }
+
+    /**
+     * Import a model from a file.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $document The text to import into the model.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     * or 'apimodel'.
+     * @param string $content_type is the mime type, which valid values depend
+     * on the document format:
+     *   wadl: 'application/xml'
+     *   swagger: 'application/yaml' or 'application/json'
+     *   apimodel: 'application/json'
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     * from this object.
+     *
+     * @throws ParameterException
+     *
+     * @return int Revision number of newly created revision.
+     */
+    public function importFile($document, $document_format, $content_type, $modelId = null)
+    {
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+            throw new ParameterException('Cannot import a model with no ID.');
+        }
+
+        $this->post($modelId . '/import/file?format=' . $document_format, $document, $content_type);
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
+    }
+
+    /**
+     * Import a model from a URL.
+     *
+     * The file is passed into the method as a string. Note that you do not have
+     * to create a revision first, this method will automagically create the
+     * revision for you.
+     *
+     * Note that Swagger 1.2 cannot be expressed as in a single-file format, so
+     * importFile can only be used with Swagger 2.0.  For Swagger 1.2, use
+     * importUrl() instead.
+     *
+     * @param string $url The URL to get the model from.
+     * @param string $document_format The format, either 'wadl', 'swagger',
+     *    or 'apimodel'.
+     * @param null|string $modelId The model id, if not passed will be the modelId
+     *    from this object.
+     *
+     * @throws ParameterException, RequestException
+     *
+     * @return int Revision number of newly created revision.
+     */
+    public function importUrl($url, $document_format, $modelId = null)
+    {
+        $modelId = $modelId ?: $this->id;
+        if (empty($modelId)) {
+            throw new ParameterException('Cannot import a model with no ID.');
+        }
+
+        $payload = "URL=" . $url;
+        $this->post($modelId . '/import/url?format=' . $document_format, $payload, 'text/plain');
+        $revision = $this->responseObj['revisionNumber'];
+        $this->latestRevisionNumber = $revision;
+        return $revision;
     }
 }
