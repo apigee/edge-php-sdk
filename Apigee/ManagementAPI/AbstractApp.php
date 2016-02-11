@@ -827,7 +827,15 @@ abstract class AbstractApp extends Base
             // Look for the first member of the array that is approved.
             $m_now = time() * 1000;
             foreach ($credentials as $c) {
-                if ($c['status'] == 'approved' && ($c['expiresAt'] == -1 || $c['expiresAt'] > $m_now)) {
+                // Check if key is expired.
+                $is_expired = FALSE;
+                if(isset($c['expiresAt'])) {
+                    // If a key is not set to -1, and the expiration is less than time now it is expired.
+                    if($c['expiresAt'] != -1 && $c['expiresAt'] < $m_now) {
+                        $is_expired = TRUE;
+                    }
+                }
+                if ($c['status'] == 'approved' && !$is_expired) {
                     $credential = $c;
                     break;
                 }
@@ -841,7 +849,12 @@ abstract class AbstractApp extends Base
             $obj->consumerSecret = $credential['consumerSecret'];
             $obj->credentialScopes = $credential['scopes'];
             $obj->credentialStatus = $credential['status'];
-            $obj->credentialExpiresAt = $credential['expiresAt'];
+            if(isset($credential['expiresAt'])) {
+                $obj->credentialExpiresAt = $credential['expiresAt'];
+            } else {
+                // Set to -1 for never expire if property does not exist.
+                $obj->credentialExpiresAt = -1;
+            }
             $obj->credentialIssuedAt = 0;
             if (isset($credential['issuedAt'])) {
                 $obj->credentialIssuedAt = $credential['issuedAt'];
