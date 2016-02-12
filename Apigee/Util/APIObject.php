@@ -10,6 +10,7 @@ use Guzzle\Http\Exception\BadResponseException;
 use Guzzle\Http\Exception\CurlException;
 use Guzzle\Http\Message\EntityEnclosingRequestInterface;
 use Guzzle\Http\EntityBodyInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Base class for API object classes. Handles some of the OrgConfig
