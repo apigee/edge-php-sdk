@@ -776,8 +776,8 @@ abstract class AbstractApp extends Base
      */
     protected static function loadFromResponse(AbstractApp &$obj, array $response, $ownerIdentifier = null)
     {
-        $obj->accessType = $response['accessType'];
-        $obj->appFamily = (isset($response['appFamily']) ? $response['appFamily'] : null);
+        $obj->accessType = (array_key_exists('accessType', $response) ? $response['accessType'] : null);
+        $obj->appFamily = (array_key_exists('appFamily', $response) ? $response['appFamily'] : null);
         $obj->appId = $response['appId'];
         $obj->callbackUrl = $response['callbackUrl'];
         $obj->createdAt = $response['createdAt'];
