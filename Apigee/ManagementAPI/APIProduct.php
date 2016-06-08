@@ -214,7 +214,7 @@ class APIProduct extends Base
     public function delete($name = null)
     {
         $name = $name ? : $this->name;
-        $this->delete(rawurlencode($name));
+        $this->httpDelete(rawurlencode($name));
         if ($name == $this->name) {
             $this->blankValues();
         }
