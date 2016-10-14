@@ -164,7 +164,7 @@ class Company extends Base
      */
     public function setAttribute($name, $value)
     {
-        $this->attributes[$name] = $value;
+        $this->attributes[$name] = (string)$value;
     }
     // TODO: other accessors
 
@@ -461,14 +461,22 @@ class Company extends Base
      *
      * @param $array
      */
-    public function fromArray($array)
+    public function fromArray(array $array)
     {
         foreach ($array as $key => $value) {
             if (property_exists($this, $key) && $key != 'debugData') {
-                $this->$key = $value;
+                // Explicitly cast all attribute values to string.
+                if ($key == 'attributes' && is_array($array['attributes'])) {
+                    $attribute_names = array_keys($array['attributes']);
+                    foreach ($attribute_names as $attribute_name) {
+                        $array['attributes'][$attribute_name] = (string)$array['attributes'][$attribute_name];
+                    }
+                }
+                $this->{$key} = $value;
             }
         }
     }
+
 
     /**
      * Return an array of roles for a developer in a company.
