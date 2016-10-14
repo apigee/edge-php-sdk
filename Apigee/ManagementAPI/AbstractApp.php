@@ -294,7 +294,7 @@ abstract class AbstractApp extends Base
             $message = sprintf('This app already has %u attributes; cannot add any more', self::MAX_ATTRIBUTE_COUNT);
             throw new TooManyAttributesException($message);
         }
-        $this->attributes[$attr] = $value;
+        $this->attributes[$attr] = (string)$value;
     }
 
     /**
@@ -1519,10 +1519,17 @@ abstract class AbstractApp extends Base
      *
      * @param $array
      */
-    public function fromArray($array)
+    public function fromArray(array $array)
     {
         foreach ($array as $key => $value) {
             if (property_exists($this, $key) && $key != 'debugData') {
+                // Explicitly cast all attribute values to string.
+                if ($key == 'attributes' && is_array($array['attributes'])) {
+                    $attribute_names = array_keys($array['attributes']);
+                    foreach ($attribute_names as $attribute_name) {
+                        $array['attributes'][$attribute_name] = (string)$array['attributes'][$attribute_name];
+                    }
+                }
                 $this->{$key} = $value;
             }
         }
