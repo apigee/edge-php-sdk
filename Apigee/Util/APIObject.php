@@ -190,7 +190,7 @@ class APIObject
      *
      * @return \Apigee\Util\OrgConfig
      * @see OrgConfig
-     * @see Apigee\ManagementAPI\Base
+     * @see \Apigee\ManagementAPI\Base
      */
     public function getConfig()
     {
@@ -205,8 +205,8 @@ class APIObject
         $request_headers = $request->getRawHeaders();
         // Mask authorization for logs.
         $request_headers = preg_replace(
-            '!\nAuthorization: (Basic|Digest) [^\r\n]+\r!i',
-            "\nAuthorization: $1 [**masked**]\r",
+            '!\n(Authentication|Authorization): (Basic|Digest|Bearer) [^\r\n]+\r!i',
+            "\n$1: $2 [**masked**]\r",
             $request_headers
         );
         try {

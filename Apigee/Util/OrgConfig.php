@@ -192,7 +192,6 @@ EOF;
         }
 
         if ($use_saml) {
-            //echo $this->accessToken;
             $request_options['headers']['Authorization'] = array('Bearer ' . $this->accessToken);
         } else {
             $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
@@ -247,7 +246,7 @@ EOF;
         $cache_file = "$cache_dir/$hash";
         // See if we have an unexpired token cached for this user/pass combo.
         if (file_exists($cache_file) && is_readable($cache_file)) {
-            $contents = json_decode($cache_file, true);
+            $contents = json_decode(file_get_contents($cache_file), true);
             if (is_array($contents) && array_key_exists('token', $contents) && array_key_exists('expiry', $contents)) {
                 // If token is not expired, return it.
                 // Require fetching a new token 10 seconds before old one expires,
