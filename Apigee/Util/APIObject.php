@@ -112,6 +112,13 @@ class APIObject
                 }
             }
         }
+        if (is_array($config->curl_options) && !empty($config->curl_options)) {
+          foreach ($config->curl_options as $key => $value) {
+            if (!array_key_exists(GuzzleClient::CURL_OPTIONS, $opts) || !array_key_exists($key, $opts[GuzzleClient::CURL_OPTIONS])) {
+              $opts[GuzzleClient::CURL_OPTIONS][$key] = $value;
+            }
+          }
+        }
         $opts['redirect.disable'] = $config->redirect_disable;
 
         $this->client = new GuzzleClient($base_url, $opts);

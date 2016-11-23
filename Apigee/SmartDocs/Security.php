@@ -32,45 +32,48 @@ class Security extends APIObject
     /**
      * Loads all schemes associated with the current model + revision.
      *
+     * @throws ResponseException
+     *
      * @return array
      *   Each member of the array is a subclass of SecurityScheme.
      */
     public function loadAllSchemes()
     {
         $scheme_objects = array();
-        try {
-            $this->get();
-            $schemes = $this->responseObj;
-            foreach ($schemes as $scheme_array) {
-                $scheme_objects[] = SecurityScheme::fromArray($scheme_array);
-            }
-        } catch (ResponseException $e) {
+        $this->get();
+        $schemes = $this->responseObj;
+        foreach ($schemes as $scheme_array) {
+            $scheme_objects[] = SecurityScheme::fromArray($scheme_array);
         }
+
         return $scheme_objects;
     }
 
     /**
-     * Loads a security scheme by name, or null if named scheme does not exist.
+     * Loads a security scheme by name.
+     *
+     * @throws ResponseException
      *
      * @param string $name
      *
-     * @return SecurityScheme|null
+     * @return SecurityScheme
      */
     public function load($name)
     {
         $scheme = null;
-        try {
-            $this->get(rawurlencode($name));
-            if (array_key_exists('type', $this->responseObj)) {
-                $scheme = SecurityScheme::fromArray($this->responseObj);
-            }
-        } catch (ResponseException $e) {
+
+        $this->get(rawurlencode($name));
+        if (array_key_exists('type', $this->responseObj)) {
+            $scheme = SecurityScheme::fromArray($this->responseObj);
         }
+
         return $scheme;
     }
 
     /**
      * Saves security scheme to modeling API.
+     *
+     * @throws ResponseException
      *
      * @param SecurityScheme $scheme
      * @param bool $is_update
@@ -78,9 +81,8 @@ class Security extends APIObject
      *   is attempted and the security scheme resource does not exist, the save
      *   will fail.
      *
-     * @return SecurityScheme|null
-     *   On success, returns the saved security scheme. On failure, returns
-     *   null.
+     * @return SecurityScheme
+     *   On success, returns the saved security scheme.
      */
     public function save(SecurityScheme $scheme, $is_update = false)
     {
@@ -92,25 +94,20 @@ class Security extends APIObject
             $method = 'post';
             $path = null;
         }
-        try {
-            $this->$method($path, $payload);
-            return SecurityScheme::fromArray($this->responseObj);
-        } catch (ResponseException $e) {
-            return null;
-        }
+        $this->$method($path, $payload);
+        return SecurityScheme::fromArray($this->responseObj);
     }
 
     /**
      * Deletes a named security scheme from the Modeling API.
+     *
+     * @throws ResponseException
      *
      * @param string $name
      *   Name of the scheme to be deleted.
      */
     public function delete($name)
     {
-        try {
-            $this->httpDelete(rawurlencode($name));
-        } catch (ResponseException $e) {
-        }
+        $this->httpDelete(rawurlencode($name));
     }
 }

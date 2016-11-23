@@ -121,8 +121,8 @@ class DeveloperAppAnalytics extends Base
      * @param string $metric
      *    A value of 'message_count', 'message_count-first24hrs',
      *    'message_count-second24hrs', 'error_count', 'error_count-first24hrs',
-     *    'user_count', 'user_count-first24hrs', 'total_response_time',
-     *    'max_response_time', 'min_response_time', or 'end_point_response_time'.
+     *    'total_response_time', 'max_response_time', 'min_response_time', or
+     *    'end_point_response_time'.
      * @param string $tStart
      *    Time start, expressed as:
      *    <ul>
@@ -229,8 +229,6 @@ class DeveloperAppAnalytics extends Base
             'message_count-second24hrs' => 'Message Count - Second 24 Hours',
             'error_count' => 'Error Count',
             'error_count-first24hrs' => 'Error Count - First 24 Hours',
-            'user_count' => 'User Count',
-            'user_count-first24hrs' => 'User Count - First 24 Hours',
             'total_response_time' => 'Total Response Time',
             'max_response_time' => 'Maximum Response Time',
             'min_response_time' => 'Minimum Response Time',

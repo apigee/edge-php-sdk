@@ -105,13 +105,13 @@ class DeveloperApp extends AbstractApp
      */
     public function listAllApps()
     {
-        $url = '/o/' . rawurlencode($this->config->orgName);
+        $url = '/o/' . rawurlencode($this->config->orgName) . '/apps';
         $this->setBaseUrl($url);
         $appList = array();
         if ($this->pagingEnabled) {
             $lastKey = null;
             while (true) {
-                $queryString = 'expand=true&rows=' . $this->pageSize;
+                $queryString = '?expand=true&rows=' . $this->pageSize;
                 if (isset($lastKey)) {
                     $queryString .= '&lastKey=' . urlencode($lastKey);
                 }
@@ -156,7 +156,7 @@ class DeveloperApp extends AbstractApp
                 }
             }
         } else {
-            $this->get('apps?expand=true');
+            $this->get('?expand=true');
             $response = $this->responseObj;
             $this->restoreBaseUrl();
             foreach ($response['app'] as $appDetail) {
