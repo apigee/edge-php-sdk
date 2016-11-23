@@ -156,6 +156,8 @@ EOF;
             $this->logger = new NullLogger();
         }
 
+        $this->curl_options = (array_key_exists('curl_options', $options) ? $options['curl_options'] : array());
+
         $use_saml = array_key_exists('saml', $options) && is_array($options['saml']);
         $saml_info = $use_saml ? $options['saml'] : array();
         $saml_error = null;
@@ -169,7 +171,6 @@ EOF;
         }
 
         $request_options = (array_key_exists('http_options', $options) ? $options['http_options'] : array());
-        $curl_options = (array_key_exists('curl_options', $options) ? $options['curl_options'] : array());
 
         // Work around old bug in client implementations, wherein a key of
         // "connection_timeout" was passed instead of "connect_timeout".
@@ -231,8 +232,6 @@ EOF;
         $this->http_options = $request_options;
         $this->user_mail = array_key_exists('user_mail', $options) ? $options['user_mail'] : null;
         $this->subscribers = $subscribers;
-        $this->http_options = $request_options;
-        $this->curl_options = $curl_options;
         $this->debug_callbacks = array_key_exists('debug_callbacks', $options) ? $options['debug_callbacks'] : array();
         $this->user_agent = array_key_exists('user_agent', $options) ? $options['user_agent'] : null;
         if ($saml_error) {
@@ -274,7 +273,15 @@ EOF;
         }
         unset($rq_opts['headers']);
         $rq_opts['auth'] = array($saml_info['key'], $saml_info['secret']);
-        $client = new GuzzleClient();
+
+        $opts = array();
+        if (is_array($this->curl_options) && !empty($this->curl_options)) {
+            foreach ($this->curl_options as $key => $value) {
+                $opts[GuzzleClient::CURL_OPTIONS][$key] = $value;
+            }
+        }
+
+        $client = new GuzzleClient(null, $opts);
         if (isset($this->user_agent)) {
             $client->setUserAgent($this->user_agent);
         }

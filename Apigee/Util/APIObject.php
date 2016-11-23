@@ -107,19 +107,19 @@ class APIObject
         $opts = array();
         if (is_array($config->http_options) && !empty($config->http_options)) {
             foreach ($config->http_options as $key => $value) {
-                if (!array_key_exists('request.options', $opts) || !array_key_exists($key, $opts['request.options'])) {
-                    $opts['request.options'][$key] = $value;
+                if (!isset($opts[GuzzleClient::REQUEST_OPTIONS][$key])) {
+                    $opts[GuzzleClient::REQUEST_OPTIONS][$key] = $value;
                 }
             }
         }
         if (is_array($config->curl_options) && !empty($config->curl_options)) {
-          foreach ($config->curl_options as $key => $value) {
-            if (!array_key_exists(GuzzleClient::CURL_OPTIONS, $opts) || !array_key_exists($key, $opts[GuzzleClient::CURL_OPTIONS])) {
-              $opts[GuzzleClient::CURL_OPTIONS][$key] = $value;
+            foreach ($config->curl_options as $key => $value) {
+                if (!isset($opts[GuzzleClient::CURL_OPTIONS][$key])) {
+                    $opts[GuzzleClient::CURL_OPTIONS][$key] = $value;
+                }
             }
-          }
         }
-        $opts['redirect.disable'] = $config->redirect_disable;
+        $opts[GuzzleClient::DISABLE_REDIRECTS] = $config->redirect_disable;
 
         $this->client = new GuzzleClient($base_url, $opts);
         if (is_array($config->subscribers)) {
