@@ -256,6 +256,7 @@ EOF;
                 }
             }
         }
+        $this->logger->info('Bearer token cache miss; attempting a re-fetch.');
         // Create directory for token to be cached in, if it doesn't exist yet.
         if (!is_dir($cache_dir)) {
             @mkdir($cache_dir, 0777, true);
