@@ -1,10 +1,15 @@
 <?php
 namespace Apigee\Util;
 
+use Apigee\Exceptions\SamlResponseException;
+use Guzzle\Http\Message\RequestInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Guzzle\Log\PsrLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
+use Guzzle\Http\Client as GuzzleClient;
+use Guzzle\Http\Exception\RequestException;
+use Guzzle\Http\Exception\BadResponseException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -102,6 +107,11 @@ EOF;
     public $redirect_disable = false;
 
     /**
+     * @var string
+     */
+    public $accessToken = '';
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger',
@@ -121,6 +131,11 @@ EOF;
      *       'connection_timeout' => 10,
      *       'timeout' => 50,
      *     ),
+     *     'saml' => array(
+     *        'endpoint' => 'https://login.apigee.com/oauth/token',
+     *        'key' => 'abc',
+     *        'secret' => '123',
+     *     ),
      *   );
      * </pre>
      *
@@ -135,8 +150,27 @@ EOF;
         $this->orgName = $org_name;
         $this->endpoint = $endpoint;
 
+        if (array_key_exists('logger', $options) && $options['logger'] instanceof LoggerInterface) {
+            $this->logger = $options['logger'];
+        } else {
+            $this->logger = new NullLogger();
+        }
+
+        $this->curl_options = (array_key_exists('curl_options', $options) ? $options['curl_options'] : array());
+
+        $use_saml = array_key_exists('saml', $options) && is_array($options['saml']);
+        $saml_info = $use_saml ? $options['saml'] : array();
+        $saml_error = null;
+        if ($use_saml) {
+            try {
+                $this->accessToken = $this->getAccessTokenWithPasswordGrant($user, $pass, $saml_info);
+            } catch (SamlResponseException $saml_error) {
+                // We know we are broken. $saml_error will be thrown at the end of the constructor.
+                $use_saml = false;
+            }
+        }
+
         $request_options = (array_key_exists('http_options', $options) ? $options['http_options'] : array());
-        $curl_options = (array_key_exists('curl_options', $options) ? $options['curl_options'] : array());
 
         // Work around old bug in client implementations, wherein a key of
         // "connection_timeout" was passed instead of "connect_timeout".
@@ -157,12 +191,16 @@ EOF;
             unset($request_options['follow_location']);
         }
 
-        $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
-        if ($auth != 'basic' && $auth != 'digest') {
-            $auth = 'basic';
+        if ($use_saml) {
+            $request_options['headers']['Authorization'] = array('Bearer ' . $this->accessToken);
+        } else {
+            $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
+            if ($auth != 'basic' && $auth != 'digest') {
+                $auth = 'basic';
+            }
+            $request_options['auth'] = array($user, $pass, $auth);
         }
 
-        $request_options['auth'] = array($user, $pass, $auth);
         if (array_key_exists('referer', $options)) {
             $request_options['headers']['Referer'] = $options['referer'];
         }
@@ -190,17 +228,132 @@ EOF;
                 }
             }
         }
-
-        if (array_key_exists('logger', $options) && $options['logger'] instanceof LoggerInterface) {
-            $this->logger = $options['logger'];
-        } else {
-            $this->logger = new NullLogger();
-        }
+        $this->http_options = $request_options;
         $this->user_mail = array_key_exists('user_mail', $options) ? $options['user_mail'] : null;
         $this->subscribers = $subscribers;
-        $this->http_options = $request_options;
-        $this->curl_options = $curl_options;
         $this->debug_callbacks = array_key_exists('debug_callbacks', $options) ? $options['debug_callbacks'] : array();
         $this->user_agent = array_key_exists('user_agent', $options) ? $options['user_agent'] : null;
+        if ($saml_error) {
+            $saml_error->orgConfig = $this;
+            throw $saml_error;
+        }
+    }
+
+    protected function getAccessTokenWithPasswordGrant($user, $pass, $saml_info)
+    {
+        $hash = md5(serialize(func_get_args()));
+        $cache_dir = sys_get_temp_dir() . '/edge-access-tokens';
+        $cache_file = "$cache_dir/$hash";
+        // See if we have an unexpired token cached for this user/pass combo.
+        if (file_exists($cache_file) && is_readable($cache_file)) {
+            $contents = json_decode(file_get_contents($cache_file), true);
+            if (is_array($contents) && array_key_exists('token', $contents) && array_key_exists('expiry', $contents)) {
+                // If token is not expired, return it.
+                // Require fetching a new token 10 seconds before old one expires,
+                // to avoid unexpected failures mid-transaction.
+                if ($contents['expiry'] < time() - 10) {
+                    return $contents['token'];
+                }
+            }
+        }
+        $this->logger->info('Bearer token cache miss; attempting a re-fetch.');
+        // Create directory for token to be cached in, if it doesn't exist yet.
+        if (!is_dir($cache_dir)) {
+            @mkdir($cache_dir, 0777, true);
+        }
+        $rq_opts = $this->http_options;
+        // Reset headers to a reasonable subset.
+        $headers = array(
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authentication' => 'Basic ' . base64_encode($saml_info['key'] . ":" . $saml_info['secret']),
+        );
+        if (is_array($rq_opts['headers']) && array_key_exists('Referer', $rq_opts['headers'])) {
+            $headers['Referer'] = $rq_opts['headers']['Referer'];
+        }
+        unset($rq_opts['headers']);
+        $rq_opts['auth'] = array($saml_info['key'], $saml_info['secret']);
+
+        $opts = array();
+        if (is_array($this->curl_options) && !empty($this->curl_options)) {
+            foreach ($this->curl_options as $key => $value) {
+                $opts[GuzzleClient::CURL_OPTIONS][$key] = $value;
+            }
+        }
+
+        $client = new GuzzleClient(null, $opts);
+        if (isset($this->user_agent)) {
+            $client->setUserAgent($this->user_agent);
+        }
+        $parameters = array(
+            'grant_type' => 'password',
+            'username' => $user,
+            'password' => $pass,
+            'client_id' => $saml_info['key'],
+            'client_secret' => $saml_info['secret'],
+        );
+        $payload = http_build_query($parameters);
+
+        // Default value if auth server does not return a response.
+        $response_body = null;
+        $request = null;
+
+        // Now make the HTTP request.
+        try {
+            $request = $client->post($saml_info['endpoint'], $headers, $payload);
+            $response = $request->send();
+        } catch (RequestException $e) {
+            if ($e instanceof BadResponseException) {
+                // Server responded. Grab the response body, if any.
+                $response_body = $e->getResponse()->__toString();
+            }
+            $ex = new SamlResponseException(
+                'Cannot fetch bearer token',
+                $e->getCode(),
+                $saml_info['endpoint'],
+                $payload,
+                $response_body
+            );
+            if ($e instanceof BadResponseException) {
+                $ex->responseObj = $e->getResponse();
+            }
+            if ($request instanceof RequestInterface) {
+                // Mask all credentials in the logs.
+                $parameters2 = $parameters;
+                foreach (array_keys($parameters2) as $key) {
+                    $parameters2[$key] = '**masked**';
+                }
+                $request->setBody(http_build_query($parameters2));
+                $request->setHeader('Authentication', '**masked**');
+                $ex->requestObj = $request;
+            }
+            throw $ex;
+        }
+
+        $token_details = json_decode($response->getBody(true), true);
+        if (!is_array($token_details)
+            || !array_key_exists('access_token', $token_details)
+            || !array_key_exists('expires_in', $token_details)
+        ) {
+            $ex = new SamlResponseException(
+                'Invalid JSON returned from bearer token fetch',
+                0,
+                $saml_info['endpoint'],
+                $payload,
+                $response_body
+            );
+            $ex->requestObj = $request;
+            $ex->responseObj = $response;
+            throw $ex;
+        }
+        $token_cache_info = array(
+            'token' => $token_details['access_token'],
+            'expiry' => time() + $token_details['expires_in'],
+        );
+        // 128 = JSON_PRETTY_PRINT. If PHP is not new enough to recognize this value,
+        // it will just be ignored. This is purely optional but it might help in
+        // debugging.
+        file_put_contents($cache_file, json_encode($token_cache_info, 128));
+        return $token_details['access_token'];
     }
 }
