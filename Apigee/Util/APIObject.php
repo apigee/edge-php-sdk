@@ -230,7 +230,12 @@ class APIObject
             $headers_array = $headerCollection->toArray();
             $headerString = '';
             foreach ($headers_array as $name => $value) {
-                $headerString .= $name . ': ' . $value . " ";
+                if (!is_array($value)) {
+                    $value = array($value);
+                }
+                foreach ($value as $v) {
+                    $headerString .= $name . ': ' . $v . " ";
+                }
             }
             $log_message = '{code_status} ({code}) Request Details:[ {r_method} {r_resource} {r_scheme} {r_headers} ]';
             $httpScheme = strtoupper(str_replace('https', 'http', $request->getScheme()))
