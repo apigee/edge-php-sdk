@@ -192,7 +192,7 @@ EOF;
         }
 
         if ($use_saml) {
-            $request_options['headers']['Authorization'] = array('Bearer ' . $this->accessToken);
+            $request_options['headers']['Authorization'] = 'Bearer ' . $this->accessToken;
         } else {
             $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
             if ($auth != 'basic' && $auth != 'digest') {
@@ -239,11 +239,47 @@ EOF;
         }
     }
 
-    protected function getAccessTokenWithPasswordGrant($user, $pass, $saml_info)
+    /**
+     * Returns the temp dir where access tokens are cached.
+     *
+     * @return string
+     */
+    private static function getTokenCacheDir()
     {
-        $hash = md5(serialize(func_get_args()));
-        $cache_dir = sys_get_temp_dir() . '/edge-access-tokens';
-        $cache_file = "$cache_dir/$hash";
+        return sys_get_temp_dir() . '/edge-access-tokens';
+    }
+
+    /**
+     * Clears the bearer token cache.
+     */
+    public static function clearBearerTokenCache()
+    {
+        $cache_dir = self::getTokenCacheDir();
+        if ($dh = opendir($cache_dir)) {
+            while (($file = readdir($dh)) !== false) {
+                if (is_file($file) && strlen($file) == 32) {
+                    @unlink($file);
+                }
+            }
+            closedir($dh);
+        }
+    }
+
+    /**
+     * Fetches a bearer token for use with subsequent requests.
+     *
+     * @param string $user
+     * @param string $pass
+     * @param array $saml_info
+     *
+     * @return string
+     *
+     * @throws SamlResponseException
+     */
+    protected function getAccessTokenWithPasswordGrant($user, $pass, array $saml_info)
+    {
+        $cache_dir = self::getTokenCacheDir();
+        $cache_file = $cache_dir . '/' . md5(serialize(func_get_args()));
         // See if we have an unexpired token cached for this user/pass combo.
         if (file_exists($cache_file) && is_readable($cache_file)) {
             $contents = json_decode(file_get_contents($cache_file), true);
@@ -303,13 +339,15 @@ EOF;
             $request = $client->post($saml_info['endpoint'], $headers, $payload);
             $response = $request->send();
         } catch (RequestException $e) {
+            $error_code = $e->getCode();
             if ($e instanceof BadResponseException) {
                 // Server responded. Grab the response body, if any.
                 $response_body = $e->getResponse()->__toString();
+                $error_code = $e->getResponse()->getStatusCode();
             }
             $ex = new SamlResponseException(
                 'Cannot fetch bearer token',
-                $e->getCode(),
+                $error_code,
                 $saml_info['endpoint'],
                 $payload,
                 $response_body
