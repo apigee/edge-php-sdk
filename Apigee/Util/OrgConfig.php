@@ -112,6 +112,11 @@ EOF;
     public $accessToken = '';
 
     /**
+     * @var CredentialStorageInterface
+     */
+    private $credentialStorage;
+
+    /**
      * Create an instance of OrgConfig.
      *
      * <p>The $options argument is an array containing the fields 'logger',
@@ -158,6 +163,13 @@ EOF;
 
         $this->curl_options = (array_key_exists('curl_options', $options) ? $options['curl_options'] : array());
 
+
+        if (isset($options['credential_storage']) && $options['credential_storage'] instanceof CredentialStorageInterface) {
+            $this->credentialStorage = $options['credential_storage'];
+        } else {
+            $this->credentialStorage = new FilesystemCredentialStorage();
+        }
+
         $use_saml = array_key_exists('saml', $options) && is_array($options['saml']);
         $saml_info = $use_saml ? $options['saml'] : array();
         $saml_error = null;
@@ -192,7 +204,7 @@ EOF;
         }
 
         if ($use_saml) {
-            $request_options['headers']['Authorization'] = array('Bearer ' . $this->accessToken);
+            $request_options['headers']['Authorization'] = 'Bearer ' . $this->accessToken;
         } else {
             $auth = (array_key_exists('auth', $options) ? $options['auth'] : 'basic');
             if ($auth != 'basic' && $auth != 'digest') {
@@ -239,14 +251,24 @@ EOF;
         }
     }
 
-    protected function getAccessTokenWithPasswordGrant($user, $pass, $saml_info)
+    /**
+     * Fetches a bearer token for use with subsequent requests.
+     *
+     * @param string $user
+     * @param string $pass
+     * @param array $saml_info
+     *
+     * @return string
+     *
+     * @throws SamlResponseException
+     */
+    protected function getAccessTokenWithPasswordGrant($user, $pass, array $saml_info)
     {
-        $hash = md5(serialize(func_get_args()));
-        $cache_dir = sys_get_temp_dir() . '/edge-access-tokens';
-        $cache_file = "$cache_dir/$hash";
-        // See if we have an unexpired token cached for this user/pass combo.
-        if (file_exists($cache_file) && is_readable($cache_file)) {
-            $contents = json_decode(file_get_contents($cache_file), true);
+        $identifier = md5(serialize(func_get_args()));
+        $token_details = $this->credentialStorage->read($identifier);
+
+        if ($token_details !== false) {
+            $contents = json_decode($token_details);
             if (is_array($contents) && array_key_exists('token', $contents) && array_key_exists('expiry', $contents)) {
                 // If token is not expired, return it.
                 // Require fetching a new token 10 seconds before old one expires,
@@ -257,10 +279,6 @@ EOF;
             }
         }
         $this->logger->info('Bearer token cache miss; attempting a re-fetch.');
-        // Create directory for token to be cached in, if it doesn't exist yet.
-        if (!is_dir($cache_dir)) {
-            @mkdir($cache_dir, 0777, true);
-        }
         $rq_opts = $this->http_options;
         // Reset headers to a reasonable subset.
         $headers = array(
@@ -303,13 +321,15 @@ EOF;
             $request = $client->post($saml_info['endpoint'], $headers, $payload);
             $response = $request->send();
         } catch (RequestException $e) {
+            $error_code = $e->getCode();
             if ($e instanceof BadResponseException) {
                 // Server responded. Grab the response body, if any.
                 $response_body = $e->getResponse()->__toString();
+                $error_code = $e->getResponse()->getStatusCode();
             }
             $ex = new SamlResponseException(
                 'Cannot fetch bearer token',
-                $e->getCode(),
+                $error_code,
                 $saml_info['endpoint'],
                 $payload,
                 $response_body
@@ -353,7 +373,7 @@ EOF;
         // 128 = JSON_PRETTY_PRINT. If PHP is not new enough to recognize this value,
         // it will just be ignored. This is purely optional but it might help in
         // debugging.
-        file_put_contents($cache_file, json_encode($token_cache_info, 128));
+        $this->credentialStorage->write($identifier, json_encode($token_cache_info, 128));
         return $token_details['access_token'];
     }
 }
