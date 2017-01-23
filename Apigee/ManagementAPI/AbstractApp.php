@@ -105,7 +105,11 @@ abstract class AbstractApp extends Base
      * The description of the app.
      */
     protected $description;
-
+    /**
+     * @var array
+     * The raw credentials for the app.
+     */
+    protected $credentials;
     /**
      * @var array
      * The status of the consumer key for each API Product: 'approved' or 'pending'.
@@ -449,6 +453,15 @@ abstract class AbstractApp extends Base
     public function setConsumerSecret($secret)
     {
         $this->consumerSecret = $secret;
+    }
+
+    /**
+     * Returns the credentials for this app.
+     * @return array
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
     }
 
     /**
@@ -824,6 +837,10 @@ abstract class AbstractApp extends Base
             $credential = null;
             // Sort credentials by issuedAt descending.
             usort($credentials, array(__CLASS__, 'sortCredentials'));
+
+            // Store all retrieved credentials in the object.
+            $obj->credentials = $credentials;
+
             // Look for the first member of the array that is approved.
             $m_now = time() * 1000;
             foreach ($credentials as $c) {
@@ -870,6 +887,16 @@ abstract class AbstractApp extends Base
             $obj->credentialAttributes = array();
             foreach ($credential['attributes'] as $attribute) {
                 $obj->credentialAttributes[$attribute['name']] = $attribute['value'];
+            }
+
+            // transform credential attribute hash.
+            foreach ($obj->credentials as $c) {
+                $credAttrs = array();
+                foreach ($c['attributes'] as $attribute) {
+                    $credAttrs[$attribute['name']] = $attribute['value'];
+                }
+                // overwrite
+                $c['attributes'] = $credAttrs;
             }
 
             // Some apps may be misconfigured and need to be populated with their apiproducts based on credential.
