@@ -367,6 +367,13 @@ class Company extends Base
         if (empty($company_name)) {
             throw new ParameterException('No company name given.');
         }
+
+        // Remove the developer from the company first, before we update.
+        // This is a workaround for the issue described in CORESERV-849, and will
+        // prevent multiple roles from being created, resolving the issue described
+        // in DEVSOL-2400.
+        $this->removeDeveloper($dev_email, $company_name);
+
         $payload = array('developer' => array(
             array(
                 'email' => $dev_email,
