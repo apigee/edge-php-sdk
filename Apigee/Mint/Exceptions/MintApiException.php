@@ -76,7 +76,7 @@ class MintApiException extends \Exception
         } elseif (MintApiException::isMintExceptionCode($re)) {
             return new MintApiException($re);
         } else {
-            throw new ParameterException('Not a registered mint exception.', $re);
+            throw new ParameterException('Not a registered mint exception.', $re->getCode(), $re);
         }
     }
 
