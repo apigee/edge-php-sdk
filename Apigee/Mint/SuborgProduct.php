@@ -186,7 +186,7 @@ class SuborgProduct extends Base\BaseObject
     public function getList($page_num = null, $page_size = 20)
     {
 
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('suborg_product:' . $this->productId, null);
         if (!isset($data)) {
             $this->get();

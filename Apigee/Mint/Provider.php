@@ -116,7 +116,7 @@ class Provider extends Base\BaseObject
     public function getList($page_num = null, $page_size = 20)
     {
         /*
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('payment_providers', null);
         if (!isset($data)) {
           $return_objects = parent::getList($page_num, $page_size);

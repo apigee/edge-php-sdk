@@ -51,13 +51,15 @@ class CacheFactory
     }
 
     /**
-     * Returns the default cache manager if there is one,
-     * otherwise it returns null
+     * Returns the default cache manager.
      *
      * @return CacheManager
      */
     public static function getDefault()
     {
+        if (self::$default_cache_manager === null) {
+          self::$default_cache_manager = self::CACHE_MGR_CLASS;
+        };
         return self::$default_cache_manager;
     }
 

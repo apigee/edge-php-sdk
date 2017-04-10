@@ -43,7 +43,7 @@ class TermAndCondition extends Base\BaseObject
     public function getList($current = true, $page_size = 20)
     {
         $url = isset($current) ? '?current=true' : null;
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('tncs:' . $current, null);
         if (!isset($data)) {
             $this->get($url);
@@ -127,7 +127,7 @@ class TermAndCondition extends Base\BaseObject
     public function getAcceptedDevTermsAndConditions($developer_id, $current = false)
     {
 
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('developer_accepted_tncs:' . $developer_id, null);
         if (!isset($data)) {
             $url = '/mint/organizations/'
