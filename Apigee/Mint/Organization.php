@@ -203,7 +203,7 @@ class Organization extends Base\BaseObject
         if (!isset($id)) {
             $id = $this->config->orgName;
         }
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('mint_organization:' . $id, null);
         if (!isset($data)) {
             $url = rawurlencode($id);
@@ -660,7 +660,7 @@ class Organization extends Base\BaseObject
             )
         );
         $url = rawurlencode($id) . '/supported-currencies';
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $cache_id = 'supported-currencies:' . $id . '/include_children=' . ($include_children ? 'true' : 'false');
         $data = $cache_manager->get($cache_id, null);
 
@@ -730,7 +730,7 @@ class Organization extends Base\BaseObject
         if (!isset($id)) {
             $id = $this->config->orgName;
         }
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('mint_organization-family:' . $id, null);
         if (!isset($data)) {
             $url = rawurlencode($id) . '/organization-family';

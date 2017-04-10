@@ -379,7 +379,7 @@ class MonetizationPackage extends Base\BaseObject
         if (!isset($id)) {
             throw new ParameterException('No object identifier was specified.');
         }
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $data = $cache_manager->get('package:' . $id, null);
         if (!isset($data)) {
             $url = rawurlencode($id);

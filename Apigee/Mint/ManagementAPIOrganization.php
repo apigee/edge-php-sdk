@@ -16,7 +16,7 @@ class ManagementAPIOrganization extends EdgeOrganization
     {
 
         $org = isset($org) ? $org : $this->name;
-        $cache_manager = CacheFactory::getCacheManager(null);
+        $cache_manager = CacheFactory::getCacheManager();
         $organization = $cache_manager->get('mngmt_organization:' . $org, null);
         if (!isset($organization)) {
             $url = rawurlencode($org);
