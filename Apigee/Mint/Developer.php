@@ -10,6 +10,7 @@ use Apigee\Mint\Types\DeveloperType;
 use Apigee\Mint\Types\DeveloperStatusType;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Exceptions\ResponseException;
+use Apigee\Util\CacheFactory;
 use Apigee\Util\OrgConfig;
 
 class Developer extends Base\BaseObject
@@ -245,18 +246,22 @@ class Developer extends Base\BaseObject
 
     public function getAcceptedRatePlans()
     {
+      $cache_manager = CacheFactory::getCacheManager();
+      $data = $cache_manager->get('developer_accepted_rateplan:' . $this->getId(), NULL);
+      if (!isset($data)) {
         $url = rawurlencode($this->email) . '/developer-accepted-rateplans';
         $this->get($url);
-        $response = $this->responseObj;
+        $data = $this->responseObj;
+        $cache_manager->set('developer_accepted_rateplan:' . $this->getId(), $data);
+      }
 
-        $return_objects = array();
-        foreach ($response['developerRatePlan'] as $response_data) {
-            $developerRatePlan = new DeveloperRatePlan($this->getEmail(), $this->config);
-            $developerRatePlan->loadFromRawData($response_data);
-            $return_objects[] = $developerRatePlan;
-
-        }
-        return $return_objects;
+      $return_objects = array();
+      foreach ($data['developerRatePlan'] as $response_data) {
+        $developerRatePlan = new DeveloperRatePlan($this->getEmail(), $this->config);
+        $developerRatePlan->loadFromRawData($response_data);
+        $return_objects[] = $developerRatePlan;
+      }
+      return $return_objects;
     }
 
     public function getPrepaidBalance($month = null, $billingYear = null, $currencyId = null, $ownerId = null)
