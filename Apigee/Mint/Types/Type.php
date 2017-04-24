@@ -11,10 +11,10 @@ abstract class Type
     private static $concreteTypes = array();
 
     /**
-     * This method verifies that $value is declared as a constant in the
-     * subclass, if it declared then the value of the constant is returned otherwise
-     * a ParameterException is thrown. This function should be used to validate that
-     * a variable holding a type value is assigned a value type.
+     * This method verifies that constant is declared in the subclass and
+     * if it declared then the value of the constant is returned otherwise
+     * a ParameterException is thrown. This function should be used to validate
+     * that a variable holding a type value is assigned a value type.
      *
      * Example:
      *
@@ -33,23 +33,23 @@ abstract class Type
      * ?>
      * </code>
      *
-     * @param string $value
+     * @param string $constant
      *   Name of the constant to be searched.
      * @throws ParameterException
      *   Value type not found in class type
      * @return string the value of the constant
      */
-    public static function get($value)
+    public static function get($constant)
     {
         $type = get_called_class();
         if (!array_key_exists($type, self::$concreteTypes)) {
             $class = new ReflectionClass($type);
             self::$concreteTypes[$type] = $class->getConstants();
         }
-        if (in_array($value, self::$concreteTypes[$type])) {
-            return $value;
+        if (array_key_exists($constant, self::$concreteTypes[$type])) {
+            return self::$concreteTypes[$type][$constant];
         } else {
-            throw new ParameterException('Value type ‘' . $value . '’ is not defined in type ‘' . $type . '’');
+            throw new ParameterException('Value type ‘' . $constant . '’ is not defined in type ‘' . $type . '’');
         }
     }
 }
