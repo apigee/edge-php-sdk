@@ -361,12 +361,12 @@ class DeveloperRatePlan extends Base\BaseObject
 
     public function setStartDate($start_date)
     {
-        $this->startDate = $start_date;
+        $this->startDate = $this->convertToUTC($start_date);
     }
 
     public function setEndDate($end_date)
     {
-        $this->endDate = $end_date;
+        $this->convertToUTC($end_date);
     }
 
     public function setId($id)
@@ -381,12 +381,12 @@ class DeveloperRatePlan extends Base\BaseObject
 
     public function setRenewalDate($renewal_date)
     {
-        $this->renewalDate = $renewal_date;
+        $this->renewalDate = $this->convertToUTC($renewal_date);
     }
 
     public function setNextRecurringFeeDate($next_recurring_fee_date)
     {
-        $this->nextRecurringFeeDate = $next_recurring_fee_date;
+        $this->nextRecurringFeeDate = $this->convertToUTC($next_recurring_fee_date);
     }
 
     public function setDeveloperId($dev)
@@ -395,15 +395,35 @@ class DeveloperRatePlan extends Base\BaseObject
     }
 
     /**
-     * Convert date string to DateTime object in proper timezone.
+     * Convert date string to DateTime object in organisation's timezone.
      *
      * To get the proper date, the date needs to be converted from
      * UTC time to the org's timezone.
      *
-     * @param $date_string string The date in the Edge API format of 'Y-m-d H:i:s'
-     * @return \DateTime The date as a DateTime object or NULL if not set.
+     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
+     *
+     * @return \DateTime|null The date as a DateTime object or NULL if not set
+     * or in case of an error occurred.
+     *
+     * @deprecated
      */
     private function convertToDateTime($date_string)
+    {
+        return $this->convertToOrgTimezone($date_string);
+    }
+
+    /**
+     * Convert date string to DateTime object in organisation's timezone.
+     *
+     * To get the proper date, the date needs to be converted from
+     * UTC time to the org's timezone.
+     *
+     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
+     *
+     * @return \DateTime|null The date as a DateTime object or NULL if not set
+     * or in case of an error occurred.
+     */
+    private function convertToOrgTimezone($date_string)
     {
         if (empty($date_string)) {
             return null;
@@ -412,13 +432,40 @@ class DeveloperRatePlan extends Base\BaseObject
         $utc_timezone = new DateTimeZone('UTC');
 
         // Get UTC datetime of date string.
-        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
+        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string,
+          $utc_timezone);
 
-        if ($date_utc == false) {
-            return null;
+        if ($date_utc == FALSE) {
+            return NULL;
         }
 
         // Convert to org's timezone.
-        return  $date_utc->setTimezone($org_timezone);
+        return $date_utc->setTimezone($org_timezone);
     }
+
+    /**
+     * Convert a date string to DateTime object in UTC timezone.
+     *
+     * Helper function for date setter callbacks.
+     *
+     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
+     *
+     * @return \DateTime|null The date as a DateTime object or NULL if not set
+     * or in case of an error occurred.
+     */
+    private function convertToUTC($date_string)
+    {
+        $utc_timezone = new DateTimeZone('UTC');
+        $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
+        $date_string .= ' 00:00:00';
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $org_timezone);
+
+        if ($date == false) {
+            return null;
+        }
+
+        $date->setTimezone($utc_timezone);
+        return $date;
+    }
+
 }
