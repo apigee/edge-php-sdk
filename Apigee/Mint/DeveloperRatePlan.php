@@ -364,9 +364,25 @@ class DeveloperRatePlan extends Base\BaseObject
         $this->startDate = $this->convertToUTC($start_date);
     }
 
+    /**
+     * @param string $format Format accepted by date().
+     */
+    public function setStartDateFromFormat($start_date, $format)
+    {
+        $this->startDate = $this->convertToUTC($start_date, $format);
+    }
+
     public function setEndDate($end_date)
     {
         $this->convertToUTC($end_date);
+    }
+
+    /**
+     * @param string $format Format accepted by date().
+     */
+    public function setEndDateFromFormat($end_date, $format)
+    {
+        $this->convertToUTC($end_date, $format);
     }
 
     public function setId($id)
@@ -384,9 +400,25 @@ class DeveloperRatePlan extends Base\BaseObject
         $this->renewalDate = $this->convertToUTC($renewal_date);
     }
 
+    /**
+     * @param string $format Format accepted by date().
+     */
+    public function setRenewalDateFromFormat($renewal_date, $format)
+    {
+        $this->renewalDate = $this->convertToUTC($renewal_date, $format);
+    }
+
     public function setNextRecurringFeeDate($next_recurring_fee_date)
     {
         $this->nextRecurringFeeDate = $this->convertToUTC($next_recurring_fee_date);
+    }
+
+    /**
+     * @param string $format Format accepted by date().
+     */
+    public function setNextRecurringFeeDateFromFormat($next_recurring_fee_date, $format)
+    {
+        $this->nextRecurringFeeDate = $this->convertToUTC($next_recurring_fee_date, $format);
     }
 
     public function setDeveloperId($dev)
@@ -432,8 +464,7 @@ class DeveloperRatePlan extends Base\BaseObject
         $utc_timezone = new DateTimeZone('UTC');
 
         // Get UTC datetime of date string.
-        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string,
-          $utc_timezone);
+        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
 
         if ($date_utc == FALSE) {
             return NULL;
@@ -448,17 +479,22 @@ class DeveloperRatePlan extends Base\BaseObject
      *
      * Helper function for date setter callbacks.
      *
+     * @param string $format Format accepted by date(), default is the Edge API
+     * format of 'Y-m-d H:i:s'.
      * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
      *
      * @return \DateTime|null The date as a DateTime object or NULL if not set
      * or in case of an error occurred.
      */
-    private function convertToUTC($date_string)
+    private function convertToUTC($date_string, $format = NULL)
     {
         $utc_timezone = new DateTimeZone('UTC');
         $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
         $date_string .= ' 00:00:00';
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $org_timezone);
+        if ($format == NULL) {
+            $format = 'Y-m-d H:i:s';
+        }
+        $date = DateTime::createFromFormat($format, $date_string, $org_timezone);
 
         if ($date == false) {
             return null;
