@@ -1,4 +1,5 @@
 <?php
+
 namespace Apigee\Mint;
 
 use DateTime;
@@ -29,17 +30,22 @@ class DeveloperRatePlan extends Base\BaseObject
      */
     const STATUS_ENDED = 'Ended';
 
+    /**
+     * Edge API date format.
+     */
+    const DATE_FORMAT = 'Y-m-d H:i:s';
+
     private $developer_or_company_id;
 
     /**
      * @var string
-     * Format YYYY-MM-DD
+     * Format yyyy-MM-dd hh:mm:ss
      */
     private $startDate;
 
     /**
      * @var string
-     * Format YYYY-MM-DD
+     * Format yyyy-MM-dd hh:mm:ss
      */
     private $endDate;
 
@@ -57,7 +63,7 @@ class DeveloperRatePlan extends Base\BaseObject
 
     /**
      * @var string
-     * Format YYYY-MM-DD
+     * Format yyyy-MM-dd hh:mm:ss
      */
     private $renewalDate;
 
@@ -132,6 +138,15 @@ class DeveloperRatePlan extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
+
+        if (isset($data['ratePlan']) && is_array($data['ratePlan']) && count($data['ratePlan']) > 0) {
+            if (isset($data['ratePlan']['monetizationPackage']['id'])) {
+                $m_package_id = $data['ratePlan']['monetizationPackage']['id'];
+                $this->ratePlan = new RatePlan($m_package_id, $this->config);
+                $this->ratePlan->loadFromRawData($data['ratePlan']);
+            }
+        }
+
         $excluded_properties = array('ratePlan', 'developer');
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
@@ -145,14 +160,6 @@ class DeveloperRatePlan extends Base\BaseObject
                 $this->$setter_method($data[$property]);
             } else {
                 self::$logger->notice('No setter method was found for property "' . $property . '"');
-            }
-        }
-
-        if (isset($data['ratePlan']) && is_array($data['ratePlan']) && count($data['ratePlan']) > 0) {
-            if (isset($data['ratePlan']['monetizationPackage']['id'])) {
-                $m_package_id = $data['ratePlan']['monetizationPackage']['id'];
-                $this->ratePlan = new RatePlan($m_package_id, $this->config);
-                $this->ratePlan->loadFromRawData($data['ratePlan']);
             }
         }
     }
@@ -359,30 +366,30 @@ class DeveloperRatePlan extends Base\BaseObject
 
     /* Setters */
 
-    public function setStartDate($start_date)
+    /**
+     * @param string $start_date Date string.
+     * @param string $format Format of the date string. Any acceptable format by date(), default is the Edge API
+     * format, 'Y-m-d H:i:s'.
+     * @param string|null $timezone Timezone of the date string. One of the supported timezone names or
+     * an offset value (+0200). Default is the timezone of the organisation.
+     */
+    public function setStartDate($start_date, $format = self::DATE_FORMAT, $timezone = null)
     {
-        $this->startDate = $this->convertToUTC($start_date);
+        $date = $this->convertToOrgTimezone($start_date, $format, $timezone);
+        $this->startDate = $date->format(self::DATE_FORMAT);
     }
 
     /**
-     * @param string $format Format accepted by date().
+     * @param string $end_date Date string.
+     * @param string $format Format of the date string. Any acceptable format by date(), default is the Edge API
+     * format, 'Y-m-d H:i:s'.
+     * @param string|null $timezone Timezone of the date string. One of the supported timezone names or
+     * an offset value (+0200). Default is the timezone of the organisation.
      */
-    public function setStartDateFromFormat($start_date, $format)
+    public function setEndDate($end_date, $format = self::DATE_FORMAT, $timezone = null)
     {
-        $this->startDate = $this->convertToUTC($start_date, $format);
-    }
-
-    public function setEndDate($end_date)
-    {
-        $this->convertToUTC($end_date);
-    }
-
-    /**
-     * @param string $format Format accepted by date().
-     */
-    public function setEndDateFromFormat($end_date, $format)
-    {
-        $this->convertToUTC($end_date, $format);
+        $date = $this->convertToOrgTimezone($end_date, $format, $timezone);
+        $this->endDate = $date->format(self::DATE_FORMAT);
     }
 
     public function setId($id)
@@ -395,30 +402,30 @@ class DeveloperRatePlan extends Base\BaseObject
         $this->ratePlan = $rate_plan;
     }
 
-    public function setRenewalDate($renewal_date)
+    /**
+     * @param string $renewal_date Date string.
+     * @param string $format Format of the date string. Any acceptable format by date(), default is the Edge API
+     * format, 'Y-m-d H:i:s'.
+     * @param string|null $timezone Timezone of the date string. One of the supported timezone names or
+     * an offset value (+0200). Default is the timezone of the organisation.
+     */
+    public function setRenewalDate($renewal_date, $format = self::DATE_FORMAT, $timezone = null)
     {
-        $this->renewalDate = $this->convertToUTC($renewal_date);
+        $date = $this->convertToOrgTimezone($renewal_date, $format, $timezone);
+        $this->renewalDate = $date->format(self::DATE_FORMAT);
     }
 
     /**
-     * @param string $format Format accepted by date().
+     * @param string $next_recurring_fee_date Date string.
+     * @param string $format Format of the date string. Any acceptable format by date(), default is the Edge API
+     * format, 'Y-m-d H:i:s'.
+     * @param string|null $timezone Timezone of the date string. One of the supported timezone names or
+     * an offset value (+0200). Default is the timezone of the organisation.
      */
-    public function setRenewalDateFromFormat($renewal_date, $format)
+    public function setNextRecurringFeeDate($next_recurring_fee_date, $format = self::DATE_FORMAT, $timezone = null)
     {
-        $this->renewalDate = $this->convertToUTC($renewal_date, $format);
-    }
-
-    public function setNextRecurringFeeDate($next_recurring_fee_date)
-    {
-        $this->nextRecurringFeeDate = $this->convertToUTC($next_recurring_fee_date);
-    }
-
-    /**
-     * @param string $format Format accepted by date().
-     */
-    public function setNextRecurringFeeDateFromFormat($next_recurring_fee_date, $format)
-    {
-        $this->nextRecurringFeeDate = $this->convertToUTC($next_recurring_fee_date, $format);
+        $date = $this->convertToOrgTimezone($next_recurring_fee_date, $format, $timezone);
+        $this->nextRecurringFeeDate = $date->format(self::DATE_FORMAT);
     }
 
     public function setDeveloperId($dev)
@@ -436,71 +443,48 @@ class DeveloperRatePlan extends Base\BaseObject
      *
      * @return \DateTime|null The date as a DateTime object or NULL if not set
      * or in case of an error occurred.
-     *
-     * @deprecated
      */
     private function convertToDateTime($date_string)
     {
-        return $this->convertToOrgTimezone($date_string);
+        $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
+        return DateTime::createFromFormat(self::DATE_FORMAT, $date_string, $org_timezone);
     }
 
     /**
      * Convert date string to DateTime object in organisation's timezone.
      *
-     * To get the proper date, the date needs to be converted from
-     * UTC time to the org's timezone.
+     * @param string $date_string Date string.
+     * @param string $format Format of the date string. Any acceptable format by date(), default is the Edge API
+     * format, 'Y-m-d H:i:s'.
+     * @param string|null $timezone Timezone of the date string. One of the supported timezone names or
+     * an offset value (+0200). Default is the timezone of the organisation.
      *
-     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
+     * @return \DateTime|null The date as a DateTime object or NULL if date string could not be parsed.
      *
-     * @return \DateTime|null The date as a DateTime object or NULL if not set
-     * or in case of an error occurred.
+     * @throws \Exception
      */
-    private function convertToOrgTimezone($date_string)
+    private function convertToOrgTimezone($date_string, $format = self::DATE_FORMAT, $timezone = null)
     {
-        if (empty($date_string)) {
-            return null;
+        if ($timezone == null) {
+            $timezone = $this->getRatePlan()->getOrganization()->getTimezone();
         }
+        $source_timezone = new DateTimeZone($timezone);
         $org_timezone = new DateTimeZone($this->getRatePlan()->getOrganization()->getTimezone());
-        $utc_timezone = new DateTimeZone('UTC');
-
-        // Get UTC datetime of date string.
-        $date_utc = DateTime::createFromFormat('Y-m-d H:i:s', $date_string, $utc_timezone);
-
-        if ($date_utc == FALSE) {
-            return NULL;
-        }
-
-        // Convert to org's timezone.
-        return $date_utc->setTimezone($org_timezone);
-    }
-
-    /**
-     * Convert a date string to DateTime object in UTC timezone.
-     *
-     * Helper function for date setter callbacks.
-     *
-     * @param string $format Format accepted by date(), default is the Edge API
-     * format of 'Y-m-d H:i:s'.
-     * @param string $date_string The date in the Edge API format of 'Y-m-d H:i:s'.
-     *
-     * @return \DateTime|null The date as a DateTime object or NULL if not set
-     * or in case of an error occurred.
-     */
-    private function convertToUTC($date_string, $format = NULL)
-    {
-        $utc_timezone = new DateTimeZone('UTC');
-        $org_timezone = new DateTimeZone($this->getOrganization()->getTimezone());
-        $date_string .= ' 00:00:00';
-        if ($format == NULL) {
-            $format = 'Y-m-d H:i:s';
-        }
-        $date = DateTime::createFromFormat($format, $date_string, $org_timezone);
+        $date = DateTime::createFromFormat($format, $date_string, $source_timezone);
 
         if ($date == false) {
             return null;
         }
 
-        $date->setTimezone($utc_timezone);
+        if ($source_timezone != $org_timezone) {
+            $date->setTimezone($org_timezone);
+        }
+
+        // Get the beginning of the day.
+        $date->sub(new \DateInterval('PT' . $date->format('H') . 'H'));
+        $date->sub(new \DateInterval('PT' . $date->format('i') . 'M'));
+        $date->sub(new \DateInterval('PT' . $date->format('s') . 'S'));
+
         return $date;
     }
 
