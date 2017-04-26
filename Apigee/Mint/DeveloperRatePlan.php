@@ -480,7 +480,7 @@ class DeveloperRatePlan extends Base\BaseObject
             $date->setTimezone($org_timezone);
         }
 
-        // Get the beginning of the day.
+        // It should be midnight.
         $date->sub(new \DateInterval('PT' . $date->format('H') . 'H'));
         $date->sub(new \DateInterval('PT' . $date->format('i') . 'M'));
         $date->sub(new \DateInterval('PT' . $date->format('s') . 'S'));
