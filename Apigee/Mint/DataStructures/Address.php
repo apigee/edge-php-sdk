@@ -23,11 +23,6 @@ class Address extends DataStructure
         }
     }
 
-    public function __toString()
-    {
-        return json_encode($this);
-    }
-
     public function setAddress1($address1)
     {
         $this->address1 = $address1;
@@ -66,8 +61,7 @@ class Address extends DataStructure
         } elseif ($country_code == 'UK') {
             // Change incorrect United Kingdom 'UK' country code to 'GB'.
             $this->country = 'GB';
-        }
-        else {
+        } else {
             APIObject::$logger->error('Invalid country code "' . $country_code . '" passed from Edge MGMT API.');
         }
     }

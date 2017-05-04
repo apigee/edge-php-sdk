@@ -1,4 +1,5 @@
 <?php
+
 namespace Apigee\Mint\DataStructures;
 
 use ReflectionClass;
@@ -106,5 +107,35 @@ class DataStructure
             APIObject::$logger->warning(sprintf($warning, $name, $class_name));
             return null;
         }
+    }
+
+    public function __toString()
+    {
+        $data = array();
+        $reflect = new \ReflectionClass($this);
+        /** @var \ReflectionProperty $property */
+        foreach ($reflect->getProperties() as $property) {
+            $method_name = 'get' . ucfirst($property->getName());
+            $value = null;
+            if (method_exists($this, $method_name)) {
+                $value = $this->{$method_name}();
+            }
+            // Additional check for getters of boolean properties.
+            // Ex.: $this->isBoolean; $this->isBoolean();
+            elseif (method_exists($this, $property->getName())) {
+                $value = $this->{$property->getName()}();
+            }
+
+            if (is_object($value)) {
+                if (method_exists($value, '__toString')) {
+                    $value = json_decode((string)$value, true);
+                } else {
+                    $value = null;
+                }
+            }
+
+            $data[$property->getName()] = $value;
+        }
+        return json_encode($data);
     }
 }
