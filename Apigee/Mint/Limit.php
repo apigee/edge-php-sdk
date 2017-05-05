@@ -4,6 +4,9 @@ namespace Apigee\Mint;
 use Apigee\Exceptions\ParameterException;
 use Apigee\Util\OrgConfig;
 
+/**
+ * @deprecated
+ */
 class Limit extends Base\BaseObject
 {
 
@@ -129,6 +132,7 @@ class Limit extends Base\BaseObject
 
     public function __construct(OrgConfig $config)
     {
+        trigger_error('The Apigee\Mint\Limit class is deprecated and nonfunctional.', E_USER_WARNING);
         $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/limits';
         $this->init($config, $base_url);
 
@@ -141,30 +145,8 @@ class Limit extends Base\BaseObject
 
     public function getDeveloperLimits($developer_id, $package_id = null, $halt = null)
     {
-        $query = array('dev' => $developer_id);
-        if (isset($package_id)) {
-            $query['pkg'] = $package_id;
-        }
-        if (isset($halt)) {
-            $query['halt'] = ($halt ? 'true' : 'false');
-        }
-
-        $options = array(
-            'query' => $query,
-        );
-        $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/limits';
-        $this->setBaseUrl($url);
-        $this->get(null, 'application/json; charset=utf-8', array(), $options);
-        $this->restoreBaseUrl();
-
-        $response = $this->responseObj;
-        $limits = array();
-        foreach ($response[$this->wrapperTag] as $limit_item) {
-            $limit = new Limit($this->config);
-            $limit->loadFromRawData($limit_item);
-            $limits[] = $limit;
-        }
-        return $limits;
+        trigger_error('The Apigee\Mint\Limit class is deprecated and nonfunctional.', E_USER_WARNING);
+        return array();
     }
 
     /**
