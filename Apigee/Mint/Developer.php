@@ -2,6 +2,7 @@
 
 namespace Apigee\Mint;
 
+use Apigee\ManagementAPI\Developer as ManagementDeveloper;
 use Apigee\Mint\DataStructures\Payment;
 use Apigee\Mint\DataStructures\RevenueReport;
 use Apigee\Mint\Exceptions\MintApiException;
@@ -19,7 +20,7 @@ class Developer extends Base\BaseObject
     /**
      * @var double
      */
-    private $approxTaxRate;
+    private $mintApproxTaxRate;
 
     /**
      * @var array
@@ -34,7 +35,7 @@ class Developer extends Base\BaseObject
     /**
      * @var string
      */
-    private $billingType;
+    private $mintBillingType;
 
     /**
      * @var string
@@ -44,12 +45,12 @@ class Developer extends Base\BaseObject
     /**
      * @var bool
      */
-    private $broker;
+    private $mintIsBroker;
 
     /**
      * @var \Apigee\Mint\DeveloperCategory
      */
-    private $developerCategory;
+    private $mintDeveloperCategory;
 
     private $developerRole;
 
@@ -62,7 +63,7 @@ class Developer extends Base\BaseObject
     /**
      * @var boolean
      */
-    private $hasSelfBilling;
+    private $mintHasSelfBilling;
 
     /**
      * @var string
@@ -72,7 +73,7 @@ class Developer extends Base\BaseObject
     /**
      * @var string
      */
-    private $legalName;
+    private $mintDeveloperLegalName;
 
     /**
      * @var string
@@ -82,7 +83,7 @@ class Developer extends Base\BaseObject
     /**
      * @var string
      */
-    private $registrationId;
+    private $mintRegistrationId;
 
     /**
      * @var \Apigee\Mint\Organization
@@ -97,7 +98,7 @@ class Developer extends Base\BaseObject
     /**
      * @var string
      */
-    private $phone;
+    private $mintDeveloperPhone;
 
     /**
      * @var \Apigee\Mint\DeveloperRatePlan
@@ -112,12 +113,12 @@ class Developer extends Base\BaseObject
     /**
      * @var string
      */
-    private $taxExemptAuthNo;
+    private $mintTaxExemptAuthNo;
 
     /**
      * @var string
      */
-    private $type;
+    private $mintDeveloperType;
 
 
     public function __construct(OrgConfig $config)
@@ -193,33 +194,86 @@ class Developer extends Base\BaseObject
         if (isset($data['developerCategory'])) {
             $dev_cat = new DeveloperCategory($this->config);
             $dev_cat->loadFromRawData($data['developerCategory']);
-            $this->developerCategory = $dev_cat;
+            $this->mintDeveloperCategory = $dev_cat;
         }
     }
 
     protected function initValues()
     {
         $this->addresses = array();
-        $this->billingType = 'PREPAID';
-        $this->broker = false;
+        $this->mintBillingType = 'PREPAID';
+        $this->mintIsBroker = false;
         $this->email = null;
-        $this->legalName = null;
+        $this->mintDeveloperLegalName = null;
         $this->name = null;
-        $this->registrationId = null;
+        $this->mintRegistrationId = null;
         $this->status = 'ACTIVE';
-        $this->type = 'UNTRUSTED';
+        $this->mintDeveloperType = 'UNTRUSTED';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save($save_method = 'auto')
+    {
+        $developer = new ManagementDeveloper($this->config);
+        $developer->load($this->getId());
+        $reflect = new \ReflectionClass($this);
+        foreach ($reflect->getProperties() as $property) {
+            if (strpos($property->getName(), 'mint') !== 0) {
+                continue;
+            }
+            // Generate valid attribute name from property name.
+            $property_name_parts = preg_split('/(?=[A-Z])/', $property->getName());
+            $property_name_parts = array_map('strtoupper', $property_name_parts);
+            $attribute_name = implode('_', $property_name_parts);
+            // Make sure that reflection can access to protected properties.
+            $property->setAccessible(true);
+            $value = $property->getValue($this);
+            // Skip null values and object with undefined __toString methods.
+            if ($value == null || (is_object($value) && !method_exists($value, '__toString'))) {
+                continue;
+            }
+            $developer->setAttribute($attribute_name, $property->getValue($this));
+        }
+        // Take special care of MINT_DEVELOPER_ADDRESS attribute.
+        if (!empty($this->addresses)) {
+            if (count($this->addresses) == 1) {
+                $developer->setAttribute('MINT_DEVELOPER_ADDRESS', (string)$this->addresses[0]);
+            } else {
+                $json_encoded_parts = array();
+                foreach ($this->addresses as $address) {
+                    $json_encoded_parts[] = (string)$address;
+                }
+                $developer->setAttribute('MINT_DEVELOPER_ADDRESS', json_encode($json_encoded_parts));
+            }
+        }
+        $developer->save();
     }
 
     public function __toString()
     {
         $obj = array();
-        $obj['address'] = $this->addresses;
+        $obj['address'] = null;
+        if (!empty($this->addresses)) {
+            if (count($this->addresses) == 1) {
+                $obj['address'] = json_decode((string)$this->addresses[0], true);
+            } else {
+                $json_encoded_parts = array();
+                foreach ($this->addresses as $address) {
+                    $json_encoded_parts[] = json_decode((string)$address, true);
+                }
+                $obj['address'] = $json_encoded_parts;
+            }
+        }
         $obj['organization'] = array('id' => $this->organization->getId());
 
         $properties = array_keys(get_object_vars($this));
         $excluded_properties = array_keys(get_class_vars(get_parent_class($this)));
+        $excluded_properties[] = 'addresses';
+        $excluded_properties[] = 'organization';
         foreach ($properties as $property) {
-            if ($property == 'address' || $property == 'organization' || in_array($property, $excluded_properties)) {
+            if (in_array($property, $excluded_properties)) {
                 continue;
             }
             if (isset($this->$property)) {
@@ -228,7 +282,6 @@ class Developer extends Base\BaseObject
         }
         return json_encode($obj);
     }
-
 
     public function getApplications()
     {
@@ -488,12 +541,12 @@ class Developer extends Base\BaseObject
 
     public function getApproxTaxRate()
     {
-        return $this->approxTaxRate;
+        return $this->mintApproxTaxRate;
     }
 
     public function setApproxTaxRate($approx_tax_rate)
     {
-        $this->approxTaxRate = $approx_tax_rate;
+        $this->mintApproxTaxRate = $approx_tax_rate;
     }
 
     public function getAddresses()
@@ -523,12 +576,12 @@ class Developer extends Base\BaseObject
 
     public function getBillingType()
     {
-        return $this->billingType;
+        return $this->mintBillingType;
     }
 
     public function setBillingType($type)
     {
-        $this->billingType = BillingType::get($type);
+        $this->mintBillingType = BillingType::get($type);
     }
 
     /**
@@ -536,7 +589,7 @@ class Developer extends Base\BaseObject
      */
     public function getDeveloperCategory()
     {
-        return $this->developerCategory;
+        return $this->mintDeveloperCategory;
     }
 
     /**
@@ -544,7 +597,7 @@ class Developer extends Base\BaseObject
      */
     public function setDeveloperCategory(DeveloperCategory $dev_category)
     {
-        $this->developerCategory = $dev_category;
+        $this->mintDeveloperCategory = $dev_category;
     }
 
     public function getDeveloperRole()
@@ -559,12 +612,12 @@ class Developer extends Base\BaseObject
 
     public function isBroker()
     {
-        return $this->broker;
+        return $this->mintIsBroker;
     }
 
     public function setBroker($bool = true)
     {
-        $this->broker = (bool)$bool;
+        $this->mintIsBroker = (bool)$bool;
     }
 
     public function getEmail()
@@ -580,12 +633,12 @@ class Developer extends Base\BaseObject
 
     public function hasSelfBilling()
     {
-        return $this->hasSelfBilling;
+        return $this->mintHasSelfBilling;
     }
 
     public function setHasSelfBilling($has_self_billing)
     {
-        $this->hasSelfBilling = $has_self_billing;
+        $this->mintHasSelfBilling = $has_self_billing;
     }
 
     public function getId()
@@ -600,12 +653,12 @@ class Developer extends Base\BaseObject
 
     public function getLegalName()
     {
-        return $this->legalName;
+        return $this->mintDeveloperLegalName;
     }
 
     public function setLegalName($name)
     {
-        $this->legalName = $name;
+        $this->mintDeveloperLegalName = $name;
     }
 
     public function getName()
@@ -652,12 +705,12 @@ class Developer extends Base\BaseObject
 
     public function getPhone()
     {
-        return $this->phone;
+        return $this->mintDeveloperPhone;
     }
 
     public function setPhone($phone)
     {
-        $this->phone = $phone;
+        $this->mintDeveloperPhone = $phone;
     }
 
     public function getRatePlan()
@@ -672,7 +725,7 @@ class Developer extends Base\BaseObject
 
     public function getRegistrationId()
     {
-        return $this->registrationId;
+        return $this->mintRegistrationId;
     }
 
     public function setRegistrationId($id)
@@ -693,21 +746,21 @@ class Developer extends Base\BaseObject
 
     public function getTaxExemptAuthNo()
     {
-        return $this->taxExemptAuthNo;
+        return $this->mintTaxExemptAuthNo;
     }
 
     public function setTaxExemptAuthNo($tax_exempt_auth_no)
     {
-        $this->taxExemptAuthNo = $tax_exempt_auth_no;
+        $this->mintTaxExemptAuthNo = $tax_exempt_auth_no;
     }
 
     public function getType()
     {
-        return $this->type;
+        return $this->mintDeveloperType;
     }
 
     public function setType($type)
     {
-        $this->type = DeveloperType::get($type);
+        $this->mintDeveloperType = DeveloperType::get($type);
     }
 }
