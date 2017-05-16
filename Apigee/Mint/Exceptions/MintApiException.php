@@ -67,7 +67,9 @@ class MintApiException extends \Exception
      *
      * @param ResponseException $re The response exception from the Edge API
      *
-     * @return MintApiException MintApiException or a subclass of MintApiException
+     * @return MintApiException|ResponseException MintApiException or a
+     * subclass of MintApiException or the original ResponseException if
+     * problem seems to be unrelated to Monetization API.
      */
     public static function factory(ResponseException $re)
     {
@@ -75,9 +77,8 @@ class MintApiException extends \Exception
             return new InsufficientFundsException($re);
         } elseif (MintApiException::isMintExceptionCode($re)) {
             return new MintApiException($re);
-        } else {
-            throw new ParameterException('Not a registered mint exception.', $re->getCode(), $re);
         }
+        return $re;
     }
 
     /**
