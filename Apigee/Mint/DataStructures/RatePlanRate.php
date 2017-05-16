@@ -1,4 +1,5 @@
 <?php
+
 namespace Apigee\Mint\DataStructures;
 
 class RatePlanRate extends DataStructure
@@ -54,22 +55,6 @@ class RatePlanRate extends DataStructure
                 }
             }
         }
-    }
-
-    public function __toString()
-    {
-        $obj = array();
-        $properties = array_keys(get_object_vars($this));
-        foreach ($properties as $property) {
-            if (isset($this->$property)) {
-                if (is_object($this->$property)) {
-                    $obj[$property] = json_decode((string)$this->$property, true);
-                } else {
-                    $obj[$property] = $this->$property;
-                }
-            }
-        }
-        return json_encode($obj);
     }
 
     /**

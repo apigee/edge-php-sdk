@@ -236,6 +236,9 @@ class SupportedCurrency extends DataStructure
 
     public function __toString()
     {
-        return json_encode($this);
+        $json = parent::__toString();
+        $obj = json_decode($json, true);
+        $obj['organization'] = array('id' => $this->organization->getId());
+        return json_encode($obj);
     }
 }
