@@ -374,7 +374,7 @@ class Company extends Base
         // in DEVSOL-2400.
         try {
             $this->removeDeveloper($dev_email, $company_name);
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             //Ignore the delete since we ideally want to update.
         }
 
