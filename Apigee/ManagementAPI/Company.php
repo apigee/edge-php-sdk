@@ -372,7 +372,11 @@ class Company extends Base
         // This is a workaround for the issue described in CORESERV-849, and will
         // prevent multiple roles from being created, resolving the issue described
         // in DEVSOL-2400.
-        $this->removeDeveloper($dev_email, $company_name);
+        try {
+            $this->removeDeveloper($dev_email, $company_name);
+        }catch(\Exception $e){
+            //Ignore the delete since we ideally want to update.
+        }
 
         $payload = array('developer' => array(
             array(
