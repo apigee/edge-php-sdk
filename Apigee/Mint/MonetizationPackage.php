@@ -166,6 +166,7 @@ class MonetizationPackage extends Base\BaseObject
                 if (is_object($this->{$property})) {
                     $obj[$property] = json_decode((string)$this->{$property}, true);
                 } elseif (is_array($this->{$property})) {
+                    $obj[$property] = array();
                     foreach ($this->{$property} as $item) {
                         $obj[$property][] = (string)$item;
                     }
@@ -174,7 +175,7 @@ class MonetizationPackage extends Base\BaseObject
                 }
             }
         }
-        // Only serialize id of products and add them under product key.
+        // Only serialize product ids and add them under product key.
         foreach ($this->products as $product) {
             /** @var Product $product */
             $obj['product'][] = (object) array('id' => $product->getId());
