@@ -151,9 +151,9 @@ abstract class BaseObject extends APIObject
         }
 
         $reflect = new \ReflectionClass($this);
-        $id_field_fetter = 'get' . ucfirst($this->idField);
-        if ($reflect->hasMethod($id_field_fetter)) {
-            $id_field_value =$this->{$id_field_fetter}();
+        $id_field_getter = 'get' . ucfirst($this->idField);
+        if ($reflect->hasMethod($id_field_getter)) {
+            $id_field_value = $this->{$id_field_getter}();
             if (!isset($id_field_value)) {
                 // If the ID for this object type is auto-generated, and the ID field
                 // itself is empty, force an object create.
@@ -161,11 +161,10 @@ abstract class BaseObject extends APIObject
                     $save_method = 'create';
                 } else {
                     // Under these circumstances,
-                    throw new ParameterException(sprintf('No object identifier (%s) was specified.',  $this->idField));
+                    throw new ParameterException(sprintf('No object identifier (%s) was specified.', $this->idField));
                 }
             }
-        }
-        else {
+        } else {
             throw new \Exception(sprintf("Unable to access private %s property's value."));
         }
 
@@ -188,7 +187,7 @@ abstract class BaseObject extends APIObject
                 }
             }
         } else {
-            $url = rawurlencode($this->{$this->idField});
+            $url = rawurlencode($this->{$id_field_getter}());
             $this->put($url, $payload);
             $response = $this->responseObj;
             // Reload object from response data in case any auto-generated fields
