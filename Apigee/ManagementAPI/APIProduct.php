@@ -10,6 +10,7 @@
  *
  * @author djohnson
  */
+
 namespace Apigee\ManagementAPI;
 
 use Apigee\Exceptions\ParameterException;
@@ -152,7 +153,7 @@ class APIProduct extends Base
      */
     public function load($name = null, $response = null)
     {
-        $name = $name ? : $this->name;
+        $name = $name ?: $this->name;
         if (!isset($response)) {
             $this->get(rawurlencode($name));
             $response = $this->responseObj;
@@ -213,7 +214,7 @@ class APIProduct extends Base
      */
     public function delete($name = null)
     {
-        $name = $name ? : $this->name;
+        $name = $name ?: $this->name;
         $this->httpDelete(rawurlencode($name));
         if ($name == $this->name) {
             $this->blankValues();
@@ -460,12 +461,12 @@ class APIProduct extends Base
         return null;
     }
 
-  /**
-   * Returns the name to be displayed in the User Interface to developers
-   * registering for API access.
-   *
-   * @return string
-   */
+    /**
+     * Returns the name to be displayed in the User Interface to developers
+     * registering for API access.
+     *
+     * @return string
+     */
     public function getDisplayName()
     {
         return $this->displayName;
@@ -485,6 +486,126 @@ class APIProduct extends Base
             return $this->attributes['description'];
         }
         return null;
+    }
+
+    /**
+     * @param array $apiResources
+     */
+    public function setApiResources($apiResources)
+    {
+        $this->apiResources = $apiResources;
+    }
+
+    /**
+     * @param int $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @param string $createdBy
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    }
+
+    /**
+     * @param int $modifiedAt
+     */
+    public function setModifiedAt($modifiedAt)
+    {
+        $this->modifiedAt = $modifiedAt;
+    }
+
+    /**
+     * @param string $modifiedBy
+     */
+    public function setModifiedBy($modifiedBy)
+    {
+        $this->modifiedBy = $modifiedBy;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param string $displayName
+     */
+    public function setDisplayName($displayName)
+    {
+        $this->displayName = $displayName;
+    }
+
+    /**
+     * @param array $environments
+     */
+    public function setEnvironments($environments)
+    {
+        $this->environments = $environments;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param array $proxies
+     */
+    public function setProxies($proxies)
+    {
+        $this->proxies = $proxies;
+    }
+
+    /**
+     * @param int $quota
+     */
+    public function setQuota($quota)
+    {
+        $this->quota = $quota;
+    }
+
+    /**
+     * @param int $quotaInterval
+     */
+    public function setQuotaInterval($quotaInterval)
+    {
+        $this->quotaInterval = $quotaInterval;
+    }
+
+    /**
+     * @param string $quotaTimeUnit
+     */
+    public function setQuotaTimeUnit($quotaTimeUnit)
+    {
+        $this->quotaTimeUnit = $quotaTimeUnit;
+    }
+
+    /**
+     * @param array $scopes
+     */
+    public function setScopes($scopes)
+    {
+        $this->scopes = $scopes;
+    }
+
+    /**
+     * @param array $attributes
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
     }
 
     /**
