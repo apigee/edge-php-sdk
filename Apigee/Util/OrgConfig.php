@@ -268,12 +268,12 @@ EOF;
         $token_details = $this->credentialStorage->read($identifier);
 
         if ($token_details !== false) {
-            $contents = json_decode($token_details);
+            $contents = json_decode($token_details, TRUE);
             if (is_array($contents) && array_key_exists('token', $contents) && array_key_exists('expiry', $contents)) {
                 // If token is not expired, return it.
                 // Require fetching a new token 10 seconds before old one expires,
                 // to avoid unexpected failures mid-transaction.
-                if ($contents['expiry'] < time() - 10) {
+                if (time() < $contents['expiry'] - 10) {
                     return $contents['token'];
                 }
             }
@@ -340,8 +340,9 @@ EOF;
             if ($request instanceof RequestInterface) {
                 // Mask all credentials in the logs.
                 $parameters2 = $parameters;
-                foreach (array_keys($parameters2) as $key) {
-                    $parameters2[$key] = '**masked**';
+                $keys2mask = array('password', 'client_secret');
+                foreach ($keys2mask as $key) {
+                    $parameters2[$key] = 'XXXXXXX';
                 }
                 $request->setBody(http_build_query($parameters2));
                 $request->setHeader('Authentication', '**masked**');
