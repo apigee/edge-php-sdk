@@ -212,15 +212,13 @@ class DeveloperApp extends AbstractApp
         $response = $this->responseObj;
         if (array_key_exists('developerId', $response)) {
             $ownerId = $this->getDeveloperMailById($response['developerId']);
-            $obj =& $this;
             $resetEligible = true;
         } else {
             $ownerId = $response['companyName'];
-            $obj = new CompanyApp($this->getConfig(), $ownerId);
             $resetEligible = false;
         }
 
-        self::loadFromResponse($obj, $response, $ownerId);
+        self::loadFromResponse($this, $response, $ownerId);
         // Must load developer to get email
         if ($resetDeveloper && $resetEligible) {
             $resetBaseUrl = '/o/'
@@ -230,7 +228,7 @@ class DeveloperApp extends AbstractApp
                 . '/apps';
             $this->setBaseUrl($resetBaseUrl);
         }
-        return $obj;
+        return $this;
     }
 
     /**
