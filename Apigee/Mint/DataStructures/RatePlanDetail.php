@@ -114,7 +114,7 @@ class RatePlanDetail extends DataStructure
             }
 
             if (isset($data['currency'])) {
-                $this->currency = new SupportedCurrency($data['currency']);
+                $this->currency = new SupportedCurrency($data['currency'], $config);
             }
 
             if (isset($data['organization'])) {

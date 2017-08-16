@@ -2,6 +2,9 @@
 
 namespace Apigee\Mint\DataStructures;
 
+use Apigee\Mint\Organization;
+use Apigee\Util\OrgConfig;
+
 class SupportedCurrency extends DataStructure
 {
 
@@ -222,13 +225,25 @@ class SupportedCurrency extends DataStructure
     /**
      * Constructor
      * @param array $data
+     * @param OrgConfig $config
+     *   Required to load data which only contains organization as an array.
      */
-    public function __construct($data = null)
+    public function __construct($data = null, OrgConfig $config = NULL)
     {
         if (is_array($data)) {
             foreach (array_keys(get_object_vars($this)) as $var) {
                 if (isset($data[$var])) {
-                    $this->$var = $data[$var];
+                    if ($var == 'organization' && !is_object($data[$var])) {
+                        if ($config == NULL) {
+                            throw new \Exception('OrgConfig can not be null.');
+                        }
+                        $org = new Organization($config);
+                        $org->loadFromRawData($data[$var]);
+                        $this->{$var} = $org;
+                    }
+                    else {
+                        $this->{$var} = $data[$var];
+                    }
                 }
             }
         }

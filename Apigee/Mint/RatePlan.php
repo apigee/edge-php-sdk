@@ -2,6 +2,7 @@
 
 namespace Apigee\Mint;
 
+use Apigee\Mint\DataStructures\SupportedCurrency;
 use DateTime;
 use DateTimeZone;
 
@@ -215,12 +216,6 @@ class RatePlan extends Base\BaseObject
     private $ratePlanDetails = array();
 
     /**
-     * Monetization Package id
-     * @var string
-     */
-    private $mPackageId;
-
-    /**
      * @var string
      */
     public $id;
@@ -242,10 +237,25 @@ class RatePlan extends Base\BaseObject
             . rawurlencode($m_package_id)
             . '/rate-plans';
         $this->init($config, $base_url);
-        $this->mPackageId = $m_package_id;
 
         $this->wrapperTag = 'ratePlan';
         $this->idField = 'id';
+        // Load the organisation.
+        $org = new Organization($config);
+        $org->load();
+        $this->organization = $org;
+        // Load the Monetization package.
+        $package = new MonetizationPackage($config);
+        $package->load($m_package_id);
+        $this->monetizationPackage = $package;
+        // Load the default supported currency of this organisation.
+        foreach ($org->listSupportedCurrencies() as $currency) {
+            /** @var SupportedCurrency $currency */
+            if ($currency->getName() == $org->getCurrency()) {
+                $this->currency = $currency;
+                break;
+            }
+        }
 
         $this->initValues();
     }
@@ -267,7 +277,7 @@ class RatePlan extends Base\BaseObject
         $url = '/mint/organizations/'
             . rawurlencode($this->config->orgName)
             . '/monetization-packages/'
-            . rawurlencode($this->mPackageId)
+            . rawurlencode($this->monetizationPackage->getId())
             . '/developers/'
             . rawurlencode($this->developerId)
             . '/rate-plans';
@@ -290,7 +300,7 @@ class RatePlan extends Base\BaseObject
 
     public function instantiateNew()
     {
-        return new RatePlan($this->mPackageId, $this->config);
+        return new RatePlan($this->monetizationPackage->getId(), $this->config);
     }
 
     public function loadFromRawData($data, $reset = false)
@@ -302,7 +312,6 @@ class RatePlan extends Base\BaseObject
 
         $excluded_properties = array(
             'org',
-            'mPackageId',
             'organization',
             'monetizationPackage',
             'currency',
@@ -344,11 +353,11 @@ class RatePlan extends Base\BaseObject
         }
 
         if (isset($data['currency'])) {
-            $this->currency = new DataStructures\SupportedCurrency($data['currency']);
+            $this->currency = new DataStructures\SupportedCurrency($data['currency'], $this->config);
         }
 
         if (isset($data['parentRatePlan'])) {
-            $rate_plan = new RatePlan($this->mPackageId, $this->config);
+            $rate_plan = new RatePlan($this->monetizationPackage->getId(), $this->config);
             $rate_plan->loadFromRawData($data['parentRatePlan']);
             $this->setParentRatePlan($rate_plan);
         }
@@ -381,9 +390,6 @@ class RatePlan extends Base\BaseObject
     protected function initValues()
     {
         $this->advance = false;
-        $this->organization = null;
-        $this->monetizationPackage = null;
-        $this->currency = null;
         $this->childRatePlan = null;
         $this->parentRatePlan = null;
         $this->developerId = null;
@@ -398,29 +404,53 @@ class RatePlan extends Base\BaseObject
         $this->displayName = '';
         $this->description = '';
         $this->setUpFee = 0;
-        $this->recurringFee = 0;
-        $this->frequencyDuration = 0;
-        $this->frequencyDurationType = '';
-        $this->recurringType = '';
+        $this->recurringFee = null;
+        $this->frequencyDuration = null;
+        $this->frequencyDurationType = null;
+        $this->recurringType = null;
         $this->recurringStartUnit = 0;
         $this->prorate = false;
         $this->earlyTerminationFee = 0;
-        $this->startDate = '';
-        $this->endDate = '';
-        $this->freemiumDuration = 0;
-        $this->freemiumUnit = 0;
-        $this->freemiumDurationType = '';
+        $this->startDate = null;
+        $this->endDate = null;
+        $this->freemiumDuration = null;
+        $this->freemiumUnit = null;
+        $this->freemiumDurationType = null;
         $this->published = false;
-        $this->contractDuration = 0;
-        $this->contractDurationType = '';
+        $this->contractDuration = null;
+        $this->contractDurationType = null;
         $this->keepOriginalStartDate = false;
         $this->ratePlanDetails = array();
+        $this->paymentDueDays = 0;
     }
 
     public function __toString()
     {
-        // @TODO Make right implementation
-        return json_encode($this);
+        $obj = array();
+        $properties = array_keys(get_object_vars($this));
+        $excluded_properties = array('monetizationPackage', 'currency', 'organization', 'isCompanyPlan');
+        $excluded_properties = array_merge($excluded_properties, array_keys(get_class_vars(get_parent_class($this))));
+        foreach ($properties as $property) {
+            if (in_array($property, $excluded_properties)) {
+                continue;
+            }
+            if (isset($this->{$property})) {
+                if (is_object($this->{$property})) {
+                    $obj[$property] = json_decode((string)$this->{$property}, true);
+                } elseif (is_array($this->{$property})) {
+                    $obj[$property] = array();
+                    foreach ($this->{$property} as $item) {
+                        $obj[$property][] = (string)$item;
+                    }
+                } else {
+                    $obj[$property] = $this->{$property};
+                }
+            }
+        }
+        $obj['currency'] = (object)array('id' => $this->currency->getId());
+        $obj['monetizationPackage'] = (object)array('id' => $this->monetizationPackage->getId());
+        $obj['organization'] = (object)array('id' => $this->organization->getId());
+        return json_encode($obj);
     }
 
     // getters
@@ -741,6 +771,18 @@ class RatePlan extends Base\BaseObject
     //setters
 
     /**
+     * Set Rateplan Id
+     *
+     * User by loadFromRawData().
+     *
+     * @var string $id
+     */
+    private function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Set Advance
      * @param boolean $advance
      */
@@ -873,11 +915,11 @@ class RatePlan extends Base\BaseObject
     {
         $type = strtoupper($type);
         $validTypes = array(
-          'STANDARD',
-          'DEVELOPER_CATEGORY',
-          'DEVELOPER',
-          'APPLICATION_CATEGORY',
-          'EXCHANGE_ORGANIZATION',
+            'STANDARD',
+            'DEVELOPER_CATEGORY',
+            'DEVELOPER',
+            'APPLICATION_CATEGORY',
+            'EXCHANGE_ORGANIZATION',
         );
         if (!in_array($type, $validTypes)) {
             throw new ParameterException('Invalid type of RatePlan: ' . $type);
@@ -1107,12 +1149,6 @@ class RatePlan extends Base\BaseObject
         return $this->id;
     }
 
-    // Used in data load invoked by $this->loadFromRawData()
-    private function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function isGroupPlan()
     {
         $is_group_plan = true;
@@ -1192,6 +1228,6 @@ class RatePlan extends Base\BaseObject
         }
 
         // Convert to org's timezone.
-        return  $date_utc->setTimezone($org_timezone);
+        return $date_utc->setTimezone($org_timezone);
     }
 }

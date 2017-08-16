@@ -1,4 +1,5 @@
 <?php
+
 namespace Apigee\Mint;
 
 use Apigee\Util\APIObject;
@@ -671,7 +672,7 @@ class Organization extends Base\BaseObject
         }
         $currencies = array();
         foreach ($data['supportedCurrency'] as $currency_item) {
-            $currencies[] = new SupportedCurrency($currency_item);
+            $currencies[] = new SupportedCurrency($currency_item, $this->config);
         }
         return $currencies;
     }

@@ -112,7 +112,7 @@ class DeveloperBalance extends Base\BaseObject
      * @var string
      */
     private $cachedBaseUrl;
-  
+
     private $transaction;
 
     /**
@@ -159,7 +159,7 @@ class DeveloperBalance extends Base\BaseObject
         if ($reset) {
             $this->initValues();
         }
-        $excluded_properties = array('supportedCurrency','transaction');
+        $excluded_properties = array('supportedCurrency', 'transaction');
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
                 continue;
@@ -175,7 +175,7 @@ class DeveloperBalance extends Base\BaseObject
             }
         }
         if (isset($data['supportedCurrency'])) {
-            $this->supportedCurrency = new SupportedCurrency($data['supportedCurrency']);
+            $this->supportedCurrency = new SupportedCurrency($data['supportedCurrency'], $this->config);
         }
         if (isset($data['transaction'])) {
             $this->transaction = new DeveloperBalanceTransaction($data['transaction']);
@@ -380,6 +380,7 @@ class DeveloperBalance extends Base\BaseObject
     {
         return $this->transaction;
     }
+
     /**
      * @param $currencyId
      *
