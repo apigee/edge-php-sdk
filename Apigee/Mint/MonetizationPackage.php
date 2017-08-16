@@ -175,6 +175,38 @@ class MonetizationPackage extends Base\BaseObject
      */
 
     /**
+     * List all rate plans in package.
+     *
+     * @param bool $current
+     *   Set it to FALSE to get draft or expired rate plans as well.
+     * @param bool $showPrivate
+     *   Set it to TRUE to get private rate plans as well.
+     *
+     * @return array
+     */
+    public function listRatePlans($current = true, $showPrivate = false)
+    {
+        $options = array(
+            'query' => array(
+                'current' => $current,
+                'showPrivate' => $showPrivate,
+            ),
+        );
+        $this->get(rawurlencode($this->id) . '/rate-plans', 'application/json; charset=utf-8', array(), $options);
+        $response = $this->responseObj;
+        $return_objects = array();
+        if (isset($response['ratePlan'])) {
+            $obj = new RatePlan($this->id, $this->config);
+            foreach ($response['ratePlan'] as $response_data) {
+                $cloned = clone $obj;
+                $cloned->loadFromRawData($response_data);
+                $return_objects[] = $cloned;
+            }
+        }
+        return $return_objects;
+    }
+
+    /**
      * Fetches packages with published rate plans which are available to a
      * developer.
      *
