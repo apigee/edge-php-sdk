@@ -122,7 +122,7 @@ class DeveloperAppAnalytics extends Base
      *    A value of 'message_count', 'message_count-first24hrs',
      *    'message_count-second24hrs', 'error_count', 'error_count-first24hrs',
      *    'total_response_time', 'max_response_time', 'min_response_time', or
-     *    'end_point_response_time'.
+     *    'target_response_time'.
      * @param string $tStart
      *    Time start, expressed as:
      *    <ul>
@@ -232,7 +232,7 @@ class DeveloperAppAnalytics extends Base
             'total_response_time' => 'Total Response Time',
             'max_response_time' => 'Maximum Response Time',
             'min_response_time' => 'Minimum Response Time',
-            'end_point_response_time' => 'Endpoint Response Time'
+            'target_response_time' => 'Target Response Time'
         );
     }
 
