@@ -120,6 +120,10 @@ class Developer extends Base\BaseObject
      */
     private $mintDeveloperType;
 
+    /**
+     * @var string[]
+     */
+    private $customAttributes;
 
     public function __construct(OrgConfig $config)
     {
@@ -152,6 +156,7 @@ class Developer extends Base\BaseObject
             'ratePlan',
             'parentId',
             'developerCategory',
+            'customAttributes',
         );
         foreach (array_keys($data) as $property) {
             if (in_array($property, $excluded_properties)) {
@@ -196,6 +201,11 @@ class Developer extends Base\BaseObject
             $dev_cat->loadFromRawData($data['developerCategory']);
             $this->mintDeveloperCategory = $dev_cat;
         }
+        if (array_key_exists('customAttributes', $data) && is_array($data['customAttributes'])) {
+            foreach ($data['customAttributes'] as $attribute) {
+                $this->customAttributes[$attribute['name']] = @$attribute['value'];
+            }
+        }
     }
 
     protected function initValues()
@@ -209,6 +219,7 @@ class Developer extends Base\BaseObject
         $this->mintRegistrationId = null;
         $this->status = 'ACTIVE';
         $this->mintDeveloperType = 'UNTRUSTED';
+        $this->customAttributes = array();
     }
 
     /**
@@ -247,6 +258,9 @@ class Developer extends Base\BaseObject
                 }
                 $developer->setAttribute('MINT_DEVELOPER_ADDRESS', json_encode($json_encoded_parts));
             }
+        }
+        foreach ($this->customAttributes as $key => $value) {
+            $developer->setAttribute($key, $value);
         }
         $developer->save();
     }
@@ -299,22 +313,22 @@ class Developer extends Base\BaseObject
 
     public function getAcceptedRatePlans()
     {
-      $cache_manager = CacheFactory::getCacheManager();
-      $data = $cache_manager->get('developer_accepted_rateplan:' . $this->getId(), NULL);
-      if (!isset($data)) {
-        $url = rawurlencode($this->email) . '/developer-accepted-rateplans';
-        $this->get($url);
-        $data = $this->responseObj;
-        $cache_manager->set('developer_accepted_rateplan:' . $this->getId(), $data);
-      }
+        $cache_manager = CacheFactory::getCacheManager();
+        $data = $cache_manager->get('developer_accepted_rateplan:' . $this->getId(), null);
+        if (!isset($data)) {
+            $url = rawurlencode($this->email) . '/developer-accepted-rateplans';
+            $this->get($url);
+            $data = $this->responseObj;
+            $cache_manager->set('developer_accepted_rateplan:' . $this->getId(), $data);
+        }
 
-      $return_objects = array();
-      foreach ($data['developerRatePlan'] as $response_data) {
-        $developerRatePlan = new DeveloperRatePlan($this->getEmail(), $this->config);
-        $developerRatePlan->loadFromRawData($response_data);
-        $return_objects[] = $developerRatePlan;
-      }
-      return $return_objects;
+        $return_objects = array();
+        foreach ($data['developerRatePlan'] as $response_data) {
+            $developerRatePlan = new DeveloperRatePlan($this->getEmail(), $this->config);
+            $developerRatePlan->loadFromRawData($response_data);
+            $return_objects[] = $developerRatePlan;
+        }
+        return $return_objects;
     }
 
     public function getPrepaidBalance($month = null, $billingYear = null, $currencyId = null, $ownerId = null)
@@ -762,5 +776,41 @@ class Developer extends Base\BaseObject
     public function setType($type)
     {
         $this->mintDeveloperType = DeveloperType::get($type);
+    }
+
+    /**
+     * Returns an attribute associated with the developer, or null if the
+     * attribute does not exist.
+     *
+     * @param string $attr
+     * @return string|null
+     */
+    public function getCustomAttribute($attr)
+    {
+        if (array_key_exists($attr, $this->customAttributes)) {
+            return $this->customAttributes[$attr];
+        }
+        return null;
+    }
+
+    /**
+     * Sets an attribute on the developer.
+     *
+     * @param string $attr
+     * @param string $value
+     */
+    public function setCustomAttribute($attr, $value)
+    {
+        $this->customAttributes[$attr] = (string)$value;
+    }
+
+    /**
+     * Returns the attributes associated with the developer.
+     *
+     * @return string[]
+     */
+    public function getCustomAttributes()
+    {
+        return $this->customAttributes;
     }
 }
