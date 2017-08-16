@@ -520,7 +520,7 @@ class Company extends Base
             $url = rawurlencode($companyName) . '/developers';
             $this->get($url);
             if (is_array($this->responseObj) && array_key_exists('developer', $this->responseObj)) {
-                $developers = $this->responseObj['developers'];
+                $developers = $this->responseObj['developer'];
             } else {
                 $developers = array();
             }
