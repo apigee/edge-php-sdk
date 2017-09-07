@@ -154,11 +154,7 @@ class DeveloperAppAnalytics extends Base
     public function getByAppName($devId, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC')
     {
         $params = self::validateParameters($metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder);
-
-        if (!empty($devId)) {
-            $org = $this->config->orgName;
-            $params['filter'] = "(developer eq '$org@@@$devId')";
-        }
+      
         $params['developer_app'] = $appName;
 
         $url = 'apps?';
