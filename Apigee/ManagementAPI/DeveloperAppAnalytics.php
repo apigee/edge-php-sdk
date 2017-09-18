@@ -8,8 +8,6 @@
 
 namespace Apigee\ManagementAPI;
 
-use Psr\Log\NullLogger;
-
 /**
  * Exposes Developer App Analytics data from the Management API.
  *
