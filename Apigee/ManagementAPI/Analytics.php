@@ -186,7 +186,7 @@ class Analytics extends Base
         if (count($metricItems) == 0) {
             throw new ParameterException('Missing metric.');
         }
-        $validMetrics = array_keys(self::getMetrics());
+        $validMetrics = array_keys(static::getMetrics());
         foreach ($metricItems as $metricItem) {
             if (!in_array($metricItem, $validMetrics)) {
                 throw new ParameterException('Invalid metric.');
@@ -201,14 +201,14 @@ class Analytics extends Base
                 throw new ParameterException('Invalid sort-by metric.');
             }
         }
-        if (!in_array($timeUnit, array_keys(self::getTimeUnits()))) {
+        if (!in_array($timeUnit, array_keys(static::getTimeUnits()))) {
             throw new ParameterException('Invalid time unit.');
         }
         $sortOrder = strtoupper($sortOrder);
         if ($sortOrder != 'ASC' && $sortOrder != 'DESC') {
             throw new ParameterException('Invalid sort order.');
         }
-        $timeRange = self::parseTime($timeStart) . '~' . self::parseTime($timeEnd);
+        $timeRange = static::parseTime($timeStart) . '~' . static::parseTime($timeEnd);
         $payload = array(
             'timeRange' => $timeRange,
             'timeUnit' => $timeUnit,
