@@ -97,7 +97,7 @@ abstract class AbstractApp extends Base
     protected $scopes;
     /**
      * @var string
-     * Status of the app: 'approved' or 'unapproved'.
+     * Status of the app: 'approved' or 'revoked'.
      */
     protected $status;
     /**
@@ -1041,7 +1041,8 @@ abstract class AbstractApp extends Base
         $payload = array(
             'accessType' => $this->getAccessType(),
             'name' => $this->getName(),
-            'callbackUrl' => $this->getCallbackUrl()
+            'callbackUrl' => $this->getCallbackUrl(),
+            'status' => $this->getStatus(),
         );
 
         // Twiddle with attributes. If we are in a paging-enabled environment,
