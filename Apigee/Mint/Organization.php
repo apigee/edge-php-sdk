@@ -699,13 +699,11 @@ class Organization extends Base\BaseObject
                 'billingYear' => $year
             );
 
-            $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/prepaid-balance-reports';
-            $content_type = 'application/json; charset=utf-8';
-            $accept_type = 'application/octet-stream; charset=utf-8';
-            $this->setBaseUrl($url);
-            $this->post(null, $data, $content_type, $accept_type);
-            $this->restoreBaseUrl();
-            $response = $this->responseText;
+          $url = rawurlencode($this->config->orgName) . '/prepaid-balance-reports';
+          $content_type = 'application/json; charset=utf-8';
+          $accept_type = 'application/octet-stream; charset=utf-8';
+          $this->post($url, $data, $content_type, $accept_type);
+          $response = $this->responseText;
         } catch (ResponseException $re) {
             if (MintApiException::isMintExceptionCode($re)) {
                 throw new MintApiException($re);

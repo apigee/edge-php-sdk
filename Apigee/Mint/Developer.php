@@ -418,19 +418,13 @@ class Developer extends Base\BaseObject
 
     public function getRevenueReport($report)
     {
-        $url = '/mint/organizations/'
-            . rawurlencode($this->config->orgName)
-            . '/developers/'
-            . rawurlencode($this->email)
-            . '/revenue-reports';
-        $content_type = 'application/json; charset=utf-8';
-        $accept_type = 'application/octet-stream; charset=utf-8';
+      $url = rawurlencode($this->email) . '/revenue-reports';
+      $content_type = 'application/json; charset=utf-8';
+      $accept_type = 'application/octet-stream; charset=utf-8';
 
-        $this->setBaseUrl($url);
-        $this->post(null, $report, $content_type, $accept_type);
-        $this->restoreBaseUrl();
-        $response = $this->responseText;
-        return $response;
+      $this->post($url, $report, $content_type, $accept_type);
+      $response = $this->responseText;
+      return $response;
     }
 
     public function saveReportDefinition($report_def)
