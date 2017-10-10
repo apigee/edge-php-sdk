@@ -489,11 +489,19 @@ class Developer extends Base\BaseObject
             }
         }
         try {
+            // The /{developer}/products/{product_id}/rate-plan-by-developer-product/
+            // resource is under /developer, so we do a GET call to get RatePlan
+            // object.
             $url = rawurlencode($developer_id)
                 . '/products/'
                 . rawurlencode($product_id)
                 . '/rate-plan-by-developer-product/';
             $this->get($url);
+
+            // We do not need to make any calls to RatePlan resources, so we
+            // pass in a null m_package_id parameter, then use loadFromRawData
+            // to create a RatePlan object from the returned response from
+            // rate-plan-by-developer-product call above.
             $ratePlan = new RatePlan(null, $this->config);
             $ratePlan->loadFromRawData($this->responseObj);
         } catch (\Exception $e) {
