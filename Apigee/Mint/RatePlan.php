@@ -228,6 +228,12 @@ class RatePlan extends Base\BaseObject
      * Class constructor
      * @param string $m_package_id Monetization Package id
      * @param \Apigee\Util\OrgConfig $config
+     *
+     * NOTE: This constructor is used by Developer.getRatePlanByProduct()
+     * in order to use the loadFromRawData() method, since there is a
+     * resource under /developer that returns back RatePlan JSON.  Since that
+     * method is only using this object to covert JSON into a RatePlan object,
+     * the m_package_id parameter passed in is NULL.
      */
     public function __construct($m_package_id, OrgConfig $config)
     {
@@ -248,6 +254,14 @@ class RatePlan extends Base\BaseObject
         $package = new MonetizationPackage($config);
         $package->load($m_package_id);
         $this->monetizationPackage = $package;
+
+        // If the package id is passed in, load it. If not, do not
+        // make any calls to the API during construction.
+        if(isset($m_package_id) and ($m_package_id != '')) {
+          $package->load($m_package_id);
+          $this->monetizationPackage = $package;
+        }
+
         // Load the default supported currency of this organisation.
         foreach ($org->listSupportedCurrencies() as $currency) {
             /** @var SupportedCurrency $currency */
