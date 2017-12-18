@@ -274,7 +274,7 @@ class Organization extends Base\BaseObject
             throw new ParameterException("Missing organization name");
         }
         $url = rawurlencode($id) . '/sync-organization?childEntities=true';
-        $this->get($url);
+        $this->get($url,'text/plain');
         return $this->responseText;
     }
 
