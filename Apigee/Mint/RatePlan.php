@@ -252,8 +252,6 @@ class RatePlan extends Base\BaseObject
         $this->organization = $org;
         // Load the Monetization package.
         $package = new MonetizationPackage($config);
-        $package->load($m_package_id);
-        $this->monetizationPackage = $package;
 
         // If the package id is passed in, load it. If not, do not
         // make any calls to the API during construction.
