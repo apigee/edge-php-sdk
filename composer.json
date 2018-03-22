@@ -27,7 +27,6 @@
         "phpdocumentor/reflection-docblock": "^3.0 || ^4.0",
         "psr/cache": "^1.0",
         "psr/http-message": "^1.0",
-        "sensiolabs/security-checker": "^4.1",
         "symfony/property-access": "^3.2 || ^4.0",
         "symfony/property-info": "^3.2 || ^4.0",
         "symfony/serializer": "^3.2 || ^4.0"
@@ -44,7 +43,8 @@
         "phpmetrics/phpmetrics": "^2.3",
         "phpunit/phpunit": "^6.4.0",
         "sebastian/comparator": "^2.1",
-        "vimeo/psalm": "^0.3.89"
+        "vimeo/psalm": "^0.3.89",
+        "sensiolabs/security-checker": "^4.1"
     },
     "conflict": {
         "phpdocumentor/type-resolver": "<0.2.1",
