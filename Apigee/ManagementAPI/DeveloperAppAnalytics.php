@@ -119,8 +119,6 @@ class DeveloperAppAnalytics extends Base
      *    do not pass in this parameter you will get analytics for any app
      *    in the org with this app name, since app name is not unique across
      *    developers.
-     * @param bool $is_company
-     *    If TRUE get app for company, otherwise for developer.
      * @param string $appName
      *    The name of the app.
      * @param string $metric
@@ -154,6 +152,8 @@ class DeveloperAppAnalytics extends Base
      *    A comma separated list of the same values as $metric.
      * @param string $sortOrder
      *    Either 'ASC' or 'DESC'.
+     * @param bool $is_company
+     *    If TRUE get app for company, otherwise for developer.
      *
      * @return array
      *   An array of analytic data points.
@@ -161,7 +161,7 @@ class DeveloperAppAnalytics extends Base
      * @throws \Apigee\Exceptions\ParameterException
      *   Thrown in case of an invalid parameter.
      */
-    public function getByAppName($devEmailOrCompany, $is_company, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC')
+    public function getByAppName($devEmailOrCompany, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC', $is_company = FALSE)
     {
         $params = self::validateParameters($metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder);
 
