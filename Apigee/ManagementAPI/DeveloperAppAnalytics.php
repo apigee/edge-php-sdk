@@ -115,7 +115,7 @@ class DeveloperAppAnalytics extends Base
      * After ensuring params are valid, fetches analytics data.
      *
      * @param string $devEmailOrCompany
-     *    The ID of the developer or company name that owns the app.  If you
+     *    The email of the developer or company name that owns the app. If you
      *    do not pass in this parameter you will get analytics for any app
      *    in the org with this app name, since app name is not unique across
      *    developers.
@@ -156,6 +156,10 @@ class DeveloperAppAnalytics extends Base
      *    Either 'ASC' or 'DESC'.
      *
      * @return array
+     *   An array of analytic data points.
+     *
+     * @throws \Apigee\Exceptions\ParameterException
+     *   Thrown in case of an invalid parameter.
      */
     public function getByAppName($devEmailOrCompany, $is_company, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC')
     {
