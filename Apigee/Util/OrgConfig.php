@@ -22,6 +22,7 @@ class OrgConfig
      * @see \Guzzle\Log\MessageFormatter
      */
     const LOG_SUBSCRIBER_FORMAT = <<<EOF
+{method} {resource}
 >>>>>>>>
 {request}
 <<<<<<<<
