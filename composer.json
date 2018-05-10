@@ -44,6 +44,9 @@
         "phpunit/phpunit": "3.7.*",
         "symfony/yaml": ">=2.1"
     },
+    "suggest": {
+        "apigee/apigee-client-php" : "The new, actively maintained and supported version of this library."
+    },
     "autoload": {
         "psr-0": {
             "Apigee": "./"
