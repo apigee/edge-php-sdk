@@ -114,8 +114,8 @@ class DeveloperAppAnalytics extends Base
     /**
      * After ensuring params are valid, fetches analytics data.
      *
-     * @param string $devIdOrCompanyName
-     *    The ID of the developer or company name that owns the app.  If you
+     * @param string $devEmailOrCompany
+     *    The email of the developer or company name that owns the app. If you
      *    do not pass in this parameter you will get analytics for any app
      *    in the org with this app name, since app name is not unique across
      *    developers.
@@ -152,20 +152,27 @@ class DeveloperAppAnalytics extends Base
      *    A comma separated list of the same values as $metric.
      * @param string $sortOrder
      *    Either 'ASC' or 'DESC'.
+     * @param bool $is_company
+     *    If TRUE get app for company, otherwise for developer.
      *
      * @return array
+     *   An array of analytic data points.
+     *
+     * @throws \Apigee\Exceptions\ParameterException
+     *   Thrown in case of an invalid parameter.
      */
-    public function getByAppName($devIdOrCompanyName, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC')
+    public function getByAppName($devEmailOrCompany, $appName, $metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder = 'ASC', $is_company = FALSE)
     {
         $params = self::validateParameters($metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder);
 
         // We need to filter analytics by the developer or company name. If we do not
         // we will get back data for all apps with the app name, since they are not
         // unique.  For example, two developers can make an app named "test".
-        if (!empty($devIdOrCompanyName)) {
-            $org = $this->config->orgName;
-            $params['filter'] = "(developer eq '$org@@@$devIdOrCompanyName')";
+        if (!empty($devEmailOrCompany)) {
+            $filter_property = $is_company ? 'developer' : 'developer_email';
+            $params['filter'] = "({$filter_property} eq '{$devEmailOrCompany}')";
         }
+
         $params['developer_app'] = $appName;
 
         $url = 'apps?';
