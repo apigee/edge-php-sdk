@@ -369,9 +369,37 @@ class Developer extends Base
      */
     public function __construct(OrgConfig $config)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/developers');
+        $this->organizationName = $config->orgName;
+        $this->init($config, '/o/' . rawurlencode($this->organizationName) . '/developers');
         $this->blankValues();
         $this->pageSize = self::MAX_ITEMS_PER_PAGE;
+    }
+
+    /**
+     * Gets the static cache.
+     *
+     * @param string $organization
+     *   The requested organization.
+     * @param bool $reset
+     *   Resets the static cache for the requested organization.
+     *
+     * @return array
+     *   Returns the static cache for the requested organization.
+     */
+    protected static function &getStaticCache($organization, $reset = false)
+    {
+        static $data = array();
+
+        // Initialize static caches.
+        if (!array_key_exists($organization, $data) || $reset) {
+            $data[$organization] = array(
+                'developers' => array(),
+                'all_cached' => false,
+                'all_expanded' => false,
+            );
+        }
+
+        return $data[$organization];
     }
 
     /**
@@ -385,12 +413,27 @@ class Developer extends Base
      * @param string $email
      *    This can be either the developer's email address or the unique
      *    developerId.
+     * @param bool $reset
+     *   Whether to reset static cache or not.
      */
-    public function load($email)
+    public function load($email, $reset = false)
     {
-        $this->get(rawurlencode($email));
-        $developer = $this->responseObj;
-        self::loadFromResponse($this, $developer);
+        // Reset only one developer.
+        if ($reset) {
+          self::resetCache($this->organizationName, array($email));
+        }
+
+        $cache = &static::getStaticCache($this->organizationName);
+
+        if (!array_key_exists($email, $cache['developers']) || $cache['developers'][$email] === null) {
+            $this->get(rawurlencode($email));
+            $developer = $this->responseObj;
+            self::loadFromResponse($this, $developer);
+            $cache['developers'][$email] = $this;
+        } else {
+            $developer = $cache['developers'][$email]->toArray();
+            self::loadFromResponse($this, $developer);
+        }
     }
 
     /**
@@ -408,18 +451,21 @@ class Developer extends Base
         $developer->firstName = $response['firstName'];
         $developer->lastName = $response['lastName'];
         $developer->userName = $response['userName'];
-        $developer->organizationName = $response['organizationName'];
         $developer->status = $response['status'];
         $developer->attributes = array();
         if (array_key_exists('attributes', $response) && is_array($response['attributes'])) {
-            foreach ($response['attributes'] as $attribute) {
-                $developer->attributes[$attribute['name']] = @$attribute['value'];
+            foreach ($response['attributes'] as $key => $attribute) {
+                if (is_array($attribute)) {
+                    $developer->attributes[$attribute['name']] = @$attribute['value'];
+                } else {
+                    $developer->attributes[$key]= $attribute;
+                }
             }
         }
         $developer->createdAt = $response['createdAt'];
         $developer->createdBy = $response['createdBy'];
-        $developer->modifiedAt = $response['lastModifiedAt'];
-        $developer->modifiedBy = $response['lastModifiedBy'];
+        $developer->modifiedAt = array_key_exists('lastModifiedAt', $response) ? $response['lastModifiedAt'] : $response['modifiedAt'];
+        $developer->modifiedBy = array_key_exists('lastModifiedBy', $response) ? $response['lastModifiedBy'] : $response['modifiedBy'];;
         if (array_key_exists('companies', $response)) {
             $developer->companies = $response['companies'];
         } else {
@@ -467,6 +513,9 @@ class Developer extends Base
      *   previous email value.
      *
      * @throws \Apigee\Exceptions\ParameterException
+     *   In case of an invalid email, firstName, lastName or userName parameter.
+     * @throws \Apigee\Exceptions\ResponseException
+     *   If there was a response error other than 404.
      */
     public function save($forceUpdate = false, $oldEmail = null)
     {
@@ -529,6 +578,11 @@ class Developer extends Base
             $this->post($url, $payload);
         }
         self::loadFromResponse($this, $this->responseObj);
+
+        // Update static cache.
+        $cache = &static::getStaticCache($this->organizationName);
+        $cache['developers'][$this->email] = $this;
+
         // We must cache the DebugData from the developer-save call so that
         // we can make it available to clients AFTER the "action" call below.
         $responseData = DebugData::toArray();
@@ -557,6 +611,9 @@ class Developer extends Base
     {
         $email = $email ? : $this->email;
         $this->httpDelete(rawurlencode($email));
+
+        static::resetCache($this->organizationName, array($email));
+
         if ($email == $this->email) {
             $this->blankValues();
         }
@@ -565,10 +622,19 @@ class Developer extends Base
     /**
      * Returns an array of all developer emails for this org.
      *
+     * @param bool $reset
+     *   Whether to reset the static cache for the developers list or not.
+     *
      * @return string[]
      */
-    public function listDevelopers()
+    public function listDevelopers($reset = false)
     {
+        // Get cached data.
+        $cache = &static::getStaticCache($this->organizationName, $reset);
+        if ($cache['all_cached']) {
+          return array_keys($cache['developers']);
+        }
+
         $developers = array();
         if ($this->pagingEnabled) {
             // Scroll through pages, saving the last key on each page.
@@ -602,6 +668,13 @@ class Developer extends Base
             $this->get();
             $developers = $this->responseObj;
         }
+
+        // Update static cache.
+        $new_developers = array_diff($developers, array_keys($cache['developers']));
+        $cache['developers'] += array_fill_keys($new_developers, null);
+        $cache['all_cached'] = true;
+        $cache['all_expanded'] = empty($new_developers);
+
         return $developers;
     }
 
@@ -613,11 +686,19 @@ class Developer extends Base
      * a canonical listing of a developer's apps, you should invoke
      * DeveloperApp::getList() or DeveloperApp::getListDetail().
      *
+     * @param bool $reset
+     *   Whether to reset the static cache for the developers list or not.
+     *
      * @return Developer[]
      */
-    public function loadAllDevelopers()
+    public function loadAllDevelopers($reset = false)
     {
-        $developers = array();
+        $cache = &static::getStaticCache($this->organizationName, $reset);
+
+        if ($cache['all_cached'] && $cache['all_expanded']) {
+          return $cache['developers'];
+        }
+
         if ($this->pagingEnabled) {
             $lastKey = null;
             while (true) {
@@ -639,7 +720,7 @@ class Developer extends Base
                 foreach ($developerSubset['developer'] as $dev) {
                     $developer = new Developer($this->config);
                     self::loadFromResponse($developer, $dev);
-                    $developers[] = $developer;
+                    $cache['developers'][$developer->email] = $developer;
                 }
                 if ($subsetCount == $this->pageSize) {
                     $lastDeveloper = end($developerSubset['developer']);
@@ -654,10 +735,13 @@ class Developer extends Base
             foreach ($developerList['developer'] as $dev) {
                 $developer = new Developer($this->config);
                 self::loadFromResponse($developer, $dev);
-                $developers[] = $developer;
+                $cache['developers'][$developer->email] = $developer;
             }
         }
-        return $developers;
+
+        $cache['all_cached'] = true;
+        $cache['all_expanded'] = true;
+        return $cache['developers'];
     }
 
     /**
@@ -699,7 +783,6 @@ class Developer extends Base
         $this->firstName = null;
         $this->lastName = null;
         $this->userName = null;
-        $this->organizationName = null;
         $this->status = null;
         $this->attributes = array();
         $this->createdAt = null;
@@ -750,5 +833,29 @@ class Developer extends Base
                 $this->{$key} = $value;
             }
         }
+    }
+
+    /**
+     * Resets the internal static developers cache.
+     *
+     * @param string $organization
+     *   The name of the organization for the cache needs to be cleared.
+     * @param array|null $ids
+     *   (optional) If specified, the cache is reset for the developers with the
+     *   given ids only.
+     */
+    public static function resetCache($organization, $ids = array())
+    {
+        $cache = &static::getStaticCache($organization);
+        if (empty($ids)) {
+          $cache['developers'] = array();
+          $cache['all_expanded'] = false;
+        }
+        else {
+            foreach ($ids as $id) {
+                unset($cache['developers'][$id]);
+            }
+        }
+        $cache['all_cached'] = false;
     }
 }
