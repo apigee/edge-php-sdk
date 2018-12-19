@@ -165,12 +165,21 @@ class DeveloperAppAnalytics extends Base
     {
         $params = self::validateParameters($metric, $tStart, $tEnd, $tUnit, $sortBy, $sortOrder);
 
-        // We need to filter analytics by the developer or company name. If we do not
-        // we will get back data for all apps with the app name, since they are not
-        // unique.  For example, two developers can make an app named "test".
         if (!empty($devEmailOrCompany)) {
-            $filter_property = $is_company ? 'developer' : 'developer_email';
-            $params['filter'] = "({$filter_property} eq '{$devEmailOrCompany}')";
+            // We need to filter analytics by the developer or company name. If we do not
+            // we will get back data for all apps with the app name, since they are not
+            // unique.  For example, two developers can make an app named "test".
+            if ($is_company) {
+                // There isn't a "company" attribute to filter by, but the analytics
+                // data stores the company data under "developer" dimension in the
+                // format {orgName}@@@{CompanyName}.
+                $org = $this->config->orgName;
+                $params['filter'] = "(developer eq '{$org}@@@{$devEmailOrCompany}')";
+            }
+            else {
+                // It is a developer, filter by email address.
+                $params['filter'] = "(developer_email eq '{$devEmailOrCompany}')";
+            }
         }
 
         $params['developer_app'] = $appName;
