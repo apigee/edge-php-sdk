@@ -139,7 +139,7 @@ class DeveloperRatePlan extends Base\BaseObject
             $this->initValues();
         }
 
-        if (isset($data['ratePlan']) && is_array($data['ratePlan']) && count($data['ratePlan']) > 0) {
+        if (isset($data['ratePlan']) && is_array($data['ratePlan']) && !empty($data['ratePlan'])) {
             if (isset($data['ratePlan']['monetizationPackage']['id'])) {
                 $m_package_id = $data['ratePlan']['monetizationPackage']['id'];
                 $this->ratePlan = new RatePlan($m_package_id, $this->config);

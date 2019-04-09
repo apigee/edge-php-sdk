@@ -295,7 +295,7 @@ class DeveloperAppAnalytics extends Base
     protected static function validateParameters($metric, $timeStart, $timeEnd, $timeUnit, $sortBy, $sortOrder)
     {
         $metricItems = preg_split('!\s*,\s*!', $metric);
-        if (count($metricItems) == 0) {
+        if (empty($metricItems)) {
             throw new ParameterException('Missing metric.');
         }
         $validMetrics = array_keys(self::getMetrics());
@@ -305,7 +305,7 @@ class DeveloperAppAnalytics extends Base
             }
         }
         $sortByItems = preg_split('!\s*,\s*!', $sortBy);
-        if (count($sortByItems) == 0) {
+        if (empty($sortByItems)) {
             throw new ParameterException('Missing sort-by metric');
         }
         foreach ($sortByItems as $sortByItem) {

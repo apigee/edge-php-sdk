@@ -222,7 +222,7 @@ class Resource extends APIObject
         foreach ($payload_keys as $key) {
             $payload[$key] = $this->$key;
         }
-        if ($verbose && count($this->methods) > 0) {
+        if ($verbose && !empty($this->methods)) {
             $payload['methods'] = array();
             foreach ($this->methods as $method) {
                 $payload['methods'][] = $method->toArray();

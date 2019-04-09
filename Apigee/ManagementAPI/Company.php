@@ -281,7 +281,7 @@ class Company extends Base
             'status' => $this->status,
             'attributes' => array()
         );
-        if (count($this->attributes) > 0) {
+        if (!empty($this->attributes)) {
             $payload['attributes'] = array();
             foreach ($this->attributes as $name => $value) {
                 $payload['attributes'][] = array('name' => $name, 'value' => $value);

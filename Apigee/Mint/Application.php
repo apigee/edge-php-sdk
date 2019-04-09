@@ -129,7 +129,7 @@ class Application extends Base\BaseObject
                 self::$logger->notice('No setter method was found for property "' . $property . '"');
             }
         }
-        if (isset($data['product']) && is_array($data['product']) && count($data['product']) > 0) {
+        if (isset($data['product']) && is_array($data['product']) && !empty($data['product'])) {
             foreach ($data['product'] as $product_item) {
                 $product = new Product($this->config);
                 $product->loadFromRawData($product_item);
