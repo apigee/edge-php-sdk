@@ -139,8 +139,11 @@ class TermAndCondition extends Base\BaseObject
                 $url .= '?current=true';
             }
             $this->setBaseUrl($url);
-            $this->get();
-            $this->restoreBaseUrl();
+            try {
+              $this->get();
+            } finally {
+              $this->restoreBaseUrl();
+            }
             $data = $this->responseObj;
             $cache_manager->set('developer_accepted_tncs:' . $developer_id, $data);
         }
@@ -213,8 +216,11 @@ class TermAndCondition extends Base\BaseObject
             . rawurlencode($id)
             . '/developer-tncs';
         $this->setBaseUrl($url);
-        $this->post(null, $tnc->__toString());
-        $this->restoreBaseUrl();
+        try {
+          $this->post(null, $tnc->__toString());
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $tnc = new DeveloperTnc($this->responseObj);
         return $tnc;
     }

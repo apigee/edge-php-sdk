@@ -242,8 +242,11 @@ class MonetizationPackage extends Base\BaseObject
             . rawurlencode($developer_id)
             . '/monetization-packages';
         $this->setBaseUrl($url);
-        $this->get(null, 'application/json; charset=utf-8', array(), $options);
-        $this->restoreBaseUrl();
+        try {
+          $this->get(null, 'application/json; charset=utf-8', array(), $options);
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $response = $this->responseObj;
 
         $return_objects = array();

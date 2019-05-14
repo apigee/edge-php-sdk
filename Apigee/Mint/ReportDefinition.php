@@ -111,8 +111,11 @@ class ReportDefinition extends BaseObject
             . rawurlencode($id)
             . '/report-definitions';
         $this->setBaseUrl($url);
-        $this->get();
-        $this->restoreBaseUrl();
+        try {
+          $this->get();
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $data = $this->responseObj;
         $revenue_reports = array();
         foreach ($data['reportDefinition'] as $report) {

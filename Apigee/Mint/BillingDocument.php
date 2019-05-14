@@ -172,8 +172,11 @@ class BillingDocument extends Base\BaseObject
         $accept_type = 'application/json; charset=utf-8';
 
         $this->setBaseUrl($url);
-        $this->post(null, json_encode($comm_criteria), $content_type, $accept_type, $options);
-        $this->restoreBaseUrl();
+        try {
+          $this->post(null, json_encode($comm_criteria), $content_type, $accept_type, $options);
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $response = $this->responseObj;
         $docs = array();
         foreach ($response[$this->wrapper_tag] as $doc) {
@@ -191,8 +194,11 @@ class BillingDocument extends Base\BaseObject
     {
         $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/billing-documents-months';
         $this->setBaseUrl($url);
-        $this->get();
-        $this->restoreBaseUrl();
+        try {
+          $this->get();
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $data = $this->responseObj;
 
         $months = array();
@@ -387,8 +393,11 @@ class BillingDocument extends Base\BaseObject
                 'documentNumber' => $bill_doc_number
             );
             $this->setBaseUrl($url);
-            $this->post(null, $mintCriteria);
-            $this->restoreBaseUrl();
+            try {
+              $this->post(null, $mintCriteria);
+            } finally {
+              $this->restoreBaseUrl();
+            }
             $response = $this->responseObj;
 
             foreach ($response[$this->wrapper_tag] as $doc) {
