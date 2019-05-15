@@ -232,8 +232,11 @@ class DeveloperAppAnalytics extends Base
     {
         $env_url = '/o/' . rawurlencode($this->config->orgName) . '/environments';
         $this->setBaseUrl($env_url);
-        $this->get();
-        $this->restoreBaseUrl();
+        try {
+            $this->get();
+        } finally {
+            $this->restoreBaseUrl();
+        }
         return $this->responseObj;
     }
 

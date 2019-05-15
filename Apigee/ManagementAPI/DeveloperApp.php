@@ -82,18 +82,21 @@ class DeveloperApp extends AbstractApp
             . '/apps';
         $this->setBaseUrl($newBaseUrl);
 
-        // Per-developer app listing paging is not enabled at this time.
-        $this->get('?expand=true');
-        $list = $this->responseObj;
-        if (array_key_exists('app', $list)) {
-            foreach ($list['app'] as $response) {
-                $app = new DeveloperApp($this->getConfig(), $developerMail);
-                self::loadFromResponse($app, $response, $developerMail);
-                $allApps[] = $app;
+        try {
+            // Per-developer app listing paging is not enabled at this time.
+            $this->get('?expand=true');
+            $list = $this->responseObj;
+            if (array_key_exists('app', $list)) {
+                foreach ($list['app'] as $response) {
+                    $app = new DeveloperApp($this->getConfig(), $developerMail);
+                    self::loadFromResponse($app, $response, $developerMail);
+                    $allApps[] = $app;
+                }
             }
+        } finally {
+            $this->restoreBaseUrl();
         }
 
-        $this->restoreBaseUrl();
         return $allApps;
     }
 
@@ -115,7 +118,11 @@ class DeveloperApp extends AbstractApp
                 if (isset($lastKey)) {
                     $queryString .= '&lastKey=' . urlencode($lastKey);
                 }
-                $this->get($queryString);
+                try {
+                    $this->get($queryString);
+                } finally {
+                    $this->restoreBaseUrl();
+                }
                 $appSubset = $this->responseObj;
                 if (!array_key_exists('app', $appSubset)) {
                     break;
@@ -156,9 +163,12 @@ class DeveloperApp extends AbstractApp
                 }
             }
         } else {
-            $this->get('?expand=true');
-            $response = $this->responseObj;
-            $this->restoreBaseUrl();
+            try {
+                $this->get('?expand=true');
+                $response = $this->responseObj;
+            } finally {
+                $this->restoreBaseUrl();
+            }
             foreach ($response['app'] as $appDetail) {
                 if (array_key_exists('developerId', $appDetail)) {
                     $ownerId = $this->getDeveloperMailById($appDetail['developerId']);
@@ -207,8 +217,11 @@ class DeveloperApp extends AbstractApp
 
         $url = '/o/' . rawurlencode($this->config->orgName) . '/apps';
         $this->setBaseUrl($url);
-        $this->get($appId);
-        $this->restoreBaseUrl();
+        try {
+            $this->get($appId);
+        } finally {
+            $this->restoreBaseUrl();
+        }
         $response = $this->responseObj;
         if (array_key_exists('developerId', $response)) {
             $ownerId = $this->getDeveloperMailById($response['developerId']);
