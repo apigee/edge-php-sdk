@@ -502,7 +502,7 @@ class Developer extends Base
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
         );
-        if (count($this->attributes) > 0) {
+        if (!empty($this->attributes)) {
             $payload['attributes'] = array();
             $i = 0;
             foreach ($this->attributes as $name => $value) {

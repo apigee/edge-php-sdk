@@ -833,7 +833,7 @@ abstract class AbstractApp extends Base
     protected static function loadCredentials(AbstractApp &$obj, array $credentials)
     {
         // Find the credential with the max issuedAt attribute which isn't expired.
-        if (count($credentials) > 0) {
+        if (!empty($credentials)) {
             $credential = null;
             // Sort credentials by issuedAt descending.
             usort($credentials, array(__CLASS__, 'sortCredentials'));
@@ -900,7 +900,7 @@ abstract class AbstractApp extends Base
             }
 
             // Some apps may be misconfigured and need to be populated with their apiproducts based on credential.
-            if (count($obj->apiProducts) == 0) {
+            if (empty($obj->apiProducts)) {
                 $obj->apiProducts = array();
                 foreach ($obj->credentialApiProducts as $product) {
                     $obj->apiProducts[] = $product['apiproduct'];
@@ -1101,7 +1101,7 @@ abstract class AbstractApp extends Base
                 $this->httpDelete($delete_uri);
             }
             // api-product additions can happen in a batch.
-            if (count($diff->to_add) > 0) {
+            if (!empty($diff->to_add)) {
                 $this->post($key_uri, array('apiProducts' => $diff->to_add));
             }
         } else {
@@ -1120,7 +1120,7 @@ abstract class AbstractApp extends Base
 
         $credential_response = null;
 
-        if (count($response['credentials']) > 0) {
+        if (!empty($response['credentials'])) {
             $current_credential = null;
             // Find credential -- it should have the maximum issuedAt date.
             $max_issued_at = -1;
@@ -1146,7 +1146,7 @@ abstract class AbstractApp extends Base
             }
 
             // If any credential attributes are present, save them
-            if ($current_credential && count($this->credentialAttributes) > 0) {
+            if ($current_credential && !empty($this->credentialAttributes)) {
                 $payload = $current_credential;
                 $payload['attributes'] = array();
                 foreach ($this->credentialAttributes as $name => $val) {

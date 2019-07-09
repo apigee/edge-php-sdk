@@ -266,7 +266,7 @@ class Revision extends APIObject
         foreach ($payload_keys as $key) {
             $payload[$key] = $this->$key;
         }
-        if ($verbose && count($this->resources) > 0) {
+        if ($verbose && !empty($this->resources)) {
             $payload['resources'] = array();
             foreach ($this->resources as $resource) {
                 $payload['resources'][] = $resource->toArray();

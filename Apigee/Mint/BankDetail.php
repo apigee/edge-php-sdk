@@ -140,7 +140,7 @@ class BankDetail extends Base\BaseObject
             }
         }
 
-        if (isset($data['address']) && is_array($data['address']) && count($data['address']) > 0) {
+        if (isset($data['address']) && is_array($data['address']) && !empty($data['address'])) {
             $this->address = new DataStructures\Address($data['address']);
         }
     }

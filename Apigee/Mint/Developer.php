@@ -173,7 +173,7 @@ class Developer extends Base\BaseObject
             }
         }
         $this->id = $data['id'];
-        if (isset($data['address']) && is_array($data['address']) && count($data['address']) > 0) {
+        if (isset($data['address']) && is_array($data['address']) && !empty($data['address'])) {
             foreach ($data['address'] as $addr_item) {
                 $this->addresses[] = new DataStructures\Address($addr_item);
             }
