@@ -35,6 +35,7 @@ class CompanyApp extends AbstractApp
      */
     public function __construct(OrgConfig $config, $company)
     {
+        $this->blankValues();
         $this->ownerIdentifierField = 'companyName';
         if ($company instanceof Company) {
             $this->companyName = $company->getName();
@@ -44,7 +45,6 @@ class CompanyApp extends AbstractApp
         }
         $baseUrl = '/o/' . rawurlencode($config->orgName) . '/companies/' . $this->companyName . '/apps';
         $this->init($config, $baseUrl);
-        $this->blankValues();
     }
 
     /**
