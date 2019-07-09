@@ -14,8 +14,8 @@ in the same way as the Apigee Developer Services portal.
 
 The Edge PHP SDK has the following prerequisites:
 
-* PHP 5.3.3 or greater. This is required due to the SDK’s use of PHP namespaces
-  and closures, which were not available in 5.2 or earlier.
+* PHP 7.1 or greater. This is required due to the SDK’s use of PHP namespaces
+  and closures, and finally block.
 * JSON support built into PHP. This is enabled in almost all default builds of
   PHP. Certain Linux distributions (such as Debian) may ship with JSON-C
   instead of the standard JSON, due to licensing restrictions; this is also
