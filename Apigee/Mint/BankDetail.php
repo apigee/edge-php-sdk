@@ -152,16 +152,22 @@ class BankDetail extends Base\BaseObject
         } else {
             $baseUrl = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id;
             $this->setBaseUrl($baseUrl);
-            $this->put(null, $this->__toString());
-            $this->restoreBaseUrl();
+            try {
+              $this->put(null, $this->__toString());
+            } finally {
+              $this->restoreBaseUrl();
+            }
         }
     }
 
     public function delete()
     {
         $this->setBaseUrl('/mint/organizations/' . rawurlencode($this->config->orgName) . '/bank-details/' . $this->id);
-        $this->httpDelete();
-        $this->restoreBaseUrl();
+        try {
+          $this->httpDelete();
+        } finally {
+          $this->restoreBaseUrl();
+        }
     }
 
     public function __toString()

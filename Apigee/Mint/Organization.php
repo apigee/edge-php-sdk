@@ -184,8 +184,11 @@ class Organization extends Base\BaseObject
     public function listOrganizationIdentifiers()
     {
         $this->setBaseUrl('/organizations');
-        $this->get();
-        $this->restoreBaseUrl();
+        try {
+          $this->get();
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $list = $this->responseObj;
         return $list;
     }
@@ -699,12 +702,10 @@ class Organization extends Base\BaseObject
                 'billingYear' => $year
             );
 
-            $url = '/mint/organizations/' . rawurlencode($this->config->orgName) . '/prepaid-balance-reports';
+            $url = rawurlencode($this->config->orgName) . '/prepaid-balance-reports';
             $content_type = 'application/json; charset=utf-8';
             $accept_type = 'application/octet-stream; charset=utf-8';
-            $this->setBaseUrl($url);
-            $this->post(null, $data, $content_type, $accept_type);
-            $this->restoreBaseUrl();
+            $this->post($url, $data, $content_type, $accept_type);
             $response = $this->responseText;
         } catch (ResponseException $re) {
             if (MintApiException::isMintExceptionCode($re)) {

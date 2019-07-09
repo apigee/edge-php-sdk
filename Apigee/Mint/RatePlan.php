@@ -294,8 +294,11 @@ class RatePlan extends Base\BaseObject
             . rawurlencode($this->developerId)
             . '/rate-plans';
         $this->setBaseUrl($url);
-        $this->get(null, 'application/json; charset=utf-8', array(), $options);
-        $this->restoreBaseUrl();
+        try {
+          $this->get(null, 'application/json; charset=utf-8', array(), $options);
+        } finally {
+          $this->restoreBaseUrl();
+        }
         $response = $this->responseObj;
 
         $return_objects = array();
