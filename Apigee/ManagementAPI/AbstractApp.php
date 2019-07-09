@@ -1113,7 +1113,7 @@ abstract class AbstractApp extends Base
         }
 
         // Let subclasses fiddle with the payload here
-        self::preSave($payload, $this);
+        static::preSave($payload, $this);
 
         $this->post($url, $payload);
         $response = $this->responseObj;
