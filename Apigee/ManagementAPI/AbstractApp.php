@@ -1041,8 +1041,7 @@ abstract class AbstractApp extends Base
         $payload = array(
             'accessType' => $this->getAccessType(),
             'name' => $this->getName(),
-            'callbackUrl' => $this->getCallbackUrl(),
-            'status' => $this->getStatus(),
+            'callbackUrl' => $this->getCallbackUrl()
         );
 
         // Twiddle with attributes. If we are in a paging-enabled environment,
