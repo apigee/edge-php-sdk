@@ -369,7 +369,8 @@ class Developer extends Base
      */
     public function __construct(OrgConfig $config)
     {
-        $this->init($config, '/o/' . rawurlencode($config->orgName) . '/developers');
+        $this->organizationName = $config->orgName;
+        $this->init($config, '/o/' . rawurlencode($this->organizationName) . '/developers');
         $this->blankValues();
         $this->pageSize = self::MAX_ITEMS_PER_PAGE;
     }
@@ -408,18 +409,21 @@ class Developer extends Base
         $developer->firstName = $response['firstName'];
         $developer->lastName = $response['lastName'];
         $developer->userName = $response['userName'];
-        $developer->organizationName = $response['organizationName'];
         $developer->status = $response['status'];
         $developer->attributes = array();
         if (array_key_exists('attributes', $response) && is_array($response['attributes'])) {
-            foreach ($response['attributes'] as $attribute) {
-                $developer->attributes[$attribute['name']] = @$attribute['value'];
+            foreach ($response['attributes'] as $key => $attribute) {
+                if (is_array($attribute)) {
+                    $developer->attributes[$attribute['name']] = array_key_exists('value', $attribute) ? $attribute['value'] : null;
+                } else {
+                    $developer->attributes[$key]= $attribute;
+                }
             }
         }
         $developer->createdAt = $response['createdAt'];
         $developer->createdBy = $response['createdBy'];
-        $developer->modifiedAt = $response['lastModifiedAt'];
-        $developer->modifiedBy = $response['lastModifiedBy'];
+        $developer->modifiedAt = array_key_exists('lastModifiedAt', $response) ? $response['lastModifiedAt'] : $response['modifiedAt'];
+        $developer->modifiedBy = array_key_exists('lastModifiedBy', $response) ? $response['lastModifiedBy'] : $response['modifiedBy'];;
         if (array_key_exists('companies', $response)) {
             $developer->companies = $response['companies'];
         } else {
@@ -467,6 +471,9 @@ class Developer extends Base
      *   previous email value.
      *
      * @throws \Apigee\Exceptions\ParameterException
+     *   In case of an invalid email, firstName, lastName or userName parameter.
+     * @throws \Apigee\Exceptions\ResponseException
+     *   If there was a response error other than 404.
      */
     public function save($forceUpdate = false, $oldEmail = null)
     {
@@ -699,7 +706,6 @@ class Developer extends Base
         $this->firstName = null;
         $this->lastName = null;
         $this->userName = null;
-        $this->organizationName = null;
         $this->status = null;
         $this->attributes = array();
         $this->createdAt = null;

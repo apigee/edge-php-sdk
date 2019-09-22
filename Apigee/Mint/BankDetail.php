@@ -145,7 +145,7 @@ class BankDetail extends Base\BaseObject
         }
     }
 
-    public function save($save_method)
+    public function save($save_method = 'auto')
     {
         if ($this->id == null) {
             $this->post(null, $this->__toString());

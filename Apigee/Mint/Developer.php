@@ -138,6 +138,17 @@ class Developer extends Base\BaseObject
     }
 
     /**
+     * Upon unserialization re-initialize the object.
+     */
+    public function __wakeup()
+    {
+        // Re-initialize the organization configuration.
+        $config = devconnect_default_org_config($this->config->orgName);
+        $base_url = '/mint/organizations/' . rawurlencode($config->orgName) . '/developers';
+        $this->init($config, $base_url);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function instantiateNew()
